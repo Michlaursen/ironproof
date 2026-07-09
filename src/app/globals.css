@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
+/*
+ * Placeholder brand system — institutional / sovereign dark palette.
+ * Swap these values once final brand colors and fonts are provided;
+ * every component below reads from these tokens, not hardcoded hex.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0d12;
+  --surface: #12161d;
+  --surface-2: #181d26;
+  --foreground: #eef1f5;
+  --muted: #8b93a3;
+  --border: #232936;
+  --accent: #5b8def;
+  --accent-foreground: #061019;
+  --seal: #c9a24b;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-seal: var(--seal);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
 }
