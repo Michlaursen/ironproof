@@ -1,4 +1,6 @@
+import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
+import { SolutionDiagram } from "./solution-diagram";
 
 const STEPS = [
   {
@@ -20,17 +22,19 @@ const STEPS = [
 
 export function Solution() {
   return (
-    <section id="solution" className="border-b border-border">
+    <section id="solution" className="scroll-mt-20 border-b border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
-        <SectionHeading
-          eyebrow="The solution"
-          title="IronProof turns trust into evidence."
-          description="When something fails, IronProof produces a counterexample showing the risk. When something passes, it issues a signed proof artifact that can be verified later — independently, and offline."
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="The solution"
+            title="IronProof turns trust into evidence."
+            description="When something fails, IronProof produces a counterexample showing the risk. When something passes, it issues a signed proof artifact that can be verified later — independently, and offline."
+          />
+        </Reveal>
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {STEPS.map((s) => (
-            <div key={s.step} className="relative pl-6">
+          {STEPS.map((s, i) => (
+            <Reveal key={s.step} delay={i * 0.08} className="relative pl-6">
               <span className="absolute left-0 top-1 font-mono text-xs text-accent">
                 {s.step}
               </span>
@@ -42,11 +46,15 @@ export function Solution() {
                   {s.body}
                 </p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-16 rounded-lg border border-border bg-surface p-8">
+        <Reveal className="mt-16 rounded-lg border border-border bg-surface p-8">
+          <SolutionDiagram />
+        </Reveal>
+
+        <Reveal className="mt-8 rounded-lg border border-border bg-surface p-8">
           <p className="text-lg text-foreground text-balance">
             Most cybersecurity tools say:{" "}
             <span className="text-muted">
@@ -61,7 +69,7 @@ export function Solution() {
               receipt you can verify later.&rdquo;
             </span>
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

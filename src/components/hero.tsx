@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { IconSeal } from "./icons";
+import { Reveal } from "./reveal";
 
 export function Hero() {
   return (
@@ -6,7 +8,7 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--surface)_0%,_var(--background)_60%)]" />
 
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 sm:py-32 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div>
+        <Reveal y={12}>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-6">
             Verifiable security infrastructure
           </p>
@@ -41,9 +43,11 @@ export function Hero() {
             <span className="text-foreground">&ldquo;probably secure&rdquo;</span>{" "}
             to <span className="text-foreground">&ldquo;provably secure.&rdquo;</span>
           </p>
-        </div>
+        </Reveal>
 
-        <ProofArtifactCard />
+        <Reveal delay={0.15} y={12}>
+          <ProofArtifactCard />
+        </Reveal>
       </div>
     </section>
   );
@@ -51,13 +55,13 @@ export function Hero() {
 
 function ProofArtifactCard() {
   return (
-    <div className="relative mx-auto w-full max-w-sm rounded-xl border border-border bg-surface p-6 shadow-2xl shadow-black/40">
+    <div className="proof-scan relative mx-auto w-full max-w-sm rounded-xl border border-border bg-surface p-6 shadow-2xl shadow-black/40">
       <div className="flex items-center justify-between border-b border-border pb-4">
         <span className="font-mono text-xs uppercase tracking-[0.15em] text-muted">
           Proof Artifact
         </span>
         <span className="flex items-center gap-1.5 rounded-full bg-seal/10 px-2.5 py-1 font-mono text-[11px] font-medium text-seal">
-          <span className="h-1.5 w-1.5 rounded-full bg-seal" />
+          <IconSeal className="h-3 w-3" />
           VERIFIED
         </span>
       </div>
