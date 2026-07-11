@@ -93,6 +93,22 @@ export function IconGlobe({ className }: IconProps) {
   );
 }
 
+export function IconMenu({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
+
+export function IconClose({ className }: IconProps) {
+  return (
+    <svg {...base} className={className}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
 export function IconCircuit({ className }: IconProps) {
   return (
     <svg {...base} className={className}>

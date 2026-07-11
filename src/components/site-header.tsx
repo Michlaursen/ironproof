@@ -1,5 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { IconClose, IconMenu } from "./icons";
 
 const NAV_LINKS = [
   { href: "#products", label: "Product" },
@@ -9,6 +13,8 @@ const NAV_LINKS = [
 ];
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -34,13 +40,42 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <Link
-          href="#contact"
-          className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-        >
-          Request a demo
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="#contact"
+            className="rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
+          >
+            Request a demo
+          </Link>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-foreground md:hidden"
+          >
+            {open ? <IconClose className="h-4 w-4" /> : <IconMenu className="h-4 w-4" />}
+          </button>
+        </div>
       </div>
+
+      {open ? (
+        <nav className="border-t border-border bg-background md:hidden">
+          <div className="mx-auto flex max-w-6xl flex-col px-6 py-2">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-border py-3.5 text-sm text-muted last:border-b-0 hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </nav>
+      ) : null}
     </header>
   );
 }

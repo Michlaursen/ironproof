@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ironproof.ai"),
   title: "IronProof — Provable security for AI and critical software",
   description:
     "IronProof is the proof layer for high-trust organizations deploying AI agents, AI-generated code, and modernized software. We verify what systems are allowed to do, prove whether violations are possible, and seal the result as portable evidence.",
@@ -21,6 +22,13 @@ export const metadata: Metadata = {
     description:
       "From AI risk to machine-checkable proof. IronProof verifies critical code and AI actions before trust is given.",
     type: "website",
+    url: "https://ironproof.ai",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IronProof — Provable security for AI and critical software",
+    description:
+      "From AI risk to machine-checkable proof. IronProof verifies critical code and AI actions before trust is given.",
   },
 };
 
