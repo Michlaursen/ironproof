@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const NAV_LINKS = [
@@ -13,8 +14,11 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="#"
-          className="font-mono text-base font-semibold tracking-tight text-foreground"
+          className="flex items-center gap-2.5 font-mono text-base font-semibold tracking-tight text-foreground"
         >
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-foreground p-1">
+            <Image src="/logo.png" alt="IronProof" width={20} height={20} priority />
+          </span>
           IRON<span className="text-accent">PROOF</span>
         </Link>
 
