@@ -1,15 +1,23 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import type { Locale, SiteContent } from "@/content";
 import { IconVerify } from "./icons";
 
 const HUBSPOT_PORTAL_ID = "343262416";
-const HUBSPOT_FORM_ID = "e9072082-8533-4d98-93d4-e02054dc1d37";
-const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`;
+const HUBSPOT_FORM_ID: Record<Locale, string> = {
+  en: "e9072082-8533-4d98-93d4-e02054dc1d37",
+  fr: "6e706d61-db4e-4786-aa1f-50962240d7af",
+};
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function DemoRequestForm() {
+type DemoRequestFormProps = {
+  content: SiteContent["finalCta"]["form"];
+  locale: Locale;
+};
+
+export function DemoRequestForm({ content, locale }: DemoRequestFormProps) {
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -18,9 +26,11 @@ export function DemoRequestForm() {
 
     const form = event.currentTarget;
     const data = new FormData(form);
+    const formId = HUBSPOT_FORM_ID[locale];
+    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`;
 
     try {
-      const response = await fetch(HUBSPOT_ENDPOINT, {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -50,11 +60,9 @@ export function DemoRequestForm() {
       <div className="flex flex-col items-center gap-3 rounded-lg border border-border bg-surface p-8 text-center">
         <IconVerify className="h-6 w-6 text-accent" />
         <p className="text-base font-medium text-foreground">
-          Request received.
+          {content.successTitle}
         </p>
-        <p className="text-sm text-muted">
-          We&rsquo;ll be in touch shortly.
-        </p>
+        <p className="text-sm text-muted">{content.successBody}</p>
       </div>
     );
   }
@@ -68,14 +76,14 @@ export function DemoRequestForm() {
         <input
           name="firstname"
           type="text"
-          placeholder="First name"
+          placeholder={content.firstName}
           required
           className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
         />
         <input
           name="lastname"
           type="text"
-          placeholder="Last name"
+          placeholder={content.lastName}
           required
           className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
         />
@@ -83,20 +91,20 @@ export function DemoRequestForm() {
       <input
         name="email"
         type="email"
-        placeholder="Work email"
+        placeholder={content.email}
         required
         className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
       />
       <input
         name="company"
         type="text"
-        placeholder="Company"
+        placeholder={content.company}
         required
         className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
       />
       <textarea
         name="message"
-        placeholder="What are you looking to verify?"
+        placeholder={content.message}
         rows={3}
         className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
       />
@@ -106,16 +114,16 @@ export function DemoRequestForm() {
         disabled={status === "submitting"}
         className="rounded-md bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
       >
-        {status === "submitting" ? "Sending…" : "Request a demo"}
+        {status === "submitting" ? content.submitting : content.submit}
       </button>
 
       {status === "error" ? (
         <p className="text-sm text-rose-400">
-          Something went wrong — please email{" "}
-          <a href="mailto:hello@ironproof.ai" className="underline">
-            hello@ironproof.ai
-          </a>{" "}
-          directly.
+          {content.errorPre}
+          <a href={`mailto:${content.errorLinkLabel}`} className="underline">
+            {content.errorLinkLabel}
+          </a>
+          {content.errorPost}
         </p>
       ) : null}
     </form>

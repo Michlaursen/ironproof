@@ -1,8 +1,11 @@
 import Link from "next/link";
+import type { SiteContent } from "@/content";
 import { IconSeal } from "./icons";
 import { Reveal } from "./reveal";
 
-export function Hero() {
+type HeroProps = { content: SiteContent["hero"] };
+
+export function Hero({ content }: HeroProps) {
   return (
     <section className="relative overflow-hidden border-b border-border">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--surface)_0%,_var(--background)_60%)]" />
@@ -10,17 +13,13 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 sm:py-32 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <Reveal y={12}>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-6">
-            Verifiable security infrastructure
+            {content.eyebrow}
           </p>
           <h1 className="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl lg:text-6xl">
-            Provable security for AI and critical software.
+            {content.headline}
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted text-balance">
-            IronProof is the proof layer for high-trust organizations
-            deploying AI agents, AI-generated code, and modernized software.
-            We verify what systems are allowed to do, prove whether
-            violations are possible, and seal the result as portable
-            evidence.
+            {content.subhead}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -28,50 +27,53 @@ export function Hero() {
               href="#contact"
               className="rounded-md bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
             >
-              Request a demo
+              {content.ctaPrimary}
             </Link>
             <Link
               href="#solution"
               className="rounded-md border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent"
             >
-              See how it works
+              {content.ctaSecondary}
             </Link>
           </div>
 
           <p className="mt-12 text-sm text-muted">
-            IronProof moves organizations from{" "}
-            <span className="text-foreground">&ldquo;probably secure&rdquo;</span>{" "}
-            to <span className="text-foreground">&ldquo;provably secure.&rdquo;</span>
+            {content.taglinePre}
+            <span className="text-foreground">{content.taglineQuote1}</span>
+            {content.taglineMid}
+            <span className="text-foreground">{content.taglineQuote2}</span>
           </p>
         </Reveal>
 
         <Reveal delay={0.15} y={12}>
-          <ProofArtifactCard />
+          <ProofArtifactCard content={content.proofCard} />
         </Reveal>
       </div>
     </section>
   );
 }
 
-function ProofArtifactCard() {
+function ProofArtifactCard({
+  content,
+}: {
+  content: SiteContent["hero"]["proofCard"];
+}) {
   return (
     <div className="proof-scan relative mx-auto w-full max-w-sm rounded-xl border border-border bg-surface p-6 shadow-2xl shadow-black/40">
       <div className="flex items-center justify-between border-b border-border pb-4">
         <span className="font-mono text-xs uppercase tracking-[0.15em] text-muted">
-          Proof Artifact
+          {content.label}
         </span>
         <span className="flex items-center gap-1.5 rounded-full bg-seal/10 px-2.5 py-1 font-mono text-[11px] font-medium text-seal">
           <IconSeal className="h-3 w-3" />
-          VERIFIED
+          {content.status}
         </span>
       </div>
 
       <dl className="mt-4 space-y-3 font-mono text-xs">
-        <Row label="Scope" value="defined input space" />
-        <Row label="Rule set" value="policy-v3.2" />
-        <Row label="Result" value="no violation found" accent />
-        <Row label="Sealing" value="post-quantum signature" />
-        <Row label="Verifier" value="offline / public key" />
+        {content.rows.map((row, i) => (
+          <Row key={row.label} label={row.label} value={row.value} accent={i === 2} />
+        ))}
       </dl>
 
       <div className="mt-5 rounded-md border border-border bg-surface-2 p-3">
@@ -82,10 +84,7 @@ function ProofArtifactCard() {
         </p>
       </div>
 
-      <p className="mt-4 text-[11px] text-muted">
-        Independently verifiable, even offline — without trusting the
-        original system.
-      </p>
+      <p className="mt-4 text-[11px] text-muted">{content.footnote}</p>
     </div>
   );
 }

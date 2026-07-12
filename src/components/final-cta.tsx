@@ -1,33 +1,37 @@
 import Link from "next/link";
+import type { Locale, SiteContent } from "@/content";
 import { DemoRequestForm } from "./demo-request-form";
 import { Reveal } from "./reveal";
 
-export function FinalCta() {
+type FinalCtaProps = {
+  content: SiteContent["finalCta"];
+  locale: Locale;
+};
+
+export function FinalCta({ content, locale }: FinalCtaProps) {
   return (
     <section id="contact" className="scroll-mt-20 border-b border-border">
       <div className="mx-auto max-w-4xl px-6 py-24 text-center">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-6">
-            In a world of AI uncertainty
+            {content.eyebrow}
           </p>
           <h2 className="text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-4xl">
-            IronProof gives institutions something rare: evidence.
+            {content.title}
           </h2>
-          <p className="mt-6 text-lg text-muted">
-            IronProof is not selling trust. IronProof is selling proof.
-          </p>
+          <p className="mt-6 text-lg text-muted">{content.subhead}</p>
 
           <div className="mt-10">
-            <DemoRequestForm />
+            <DemoRequestForm content={content.form} locale={locale} />
           </div>
 
           <p className="mt-6 text-sm text-muted">
-            Looking to become a design partner instead? Email us at{" "}
+            {content.designPartnerPre}
             <Link
-              href="mailto:hello@ironproof.ai"
+              href={`mailto:${content.designPartnerEmail}`}
               className="text-accent hover:underline"
             >
-              hello@ironproof.ai
+              {content.designPartnerEmail}
             </Link>
             .
           </p>

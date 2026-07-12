@@ -1,12 +1,32 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
   return [
     {
       url: "https://ironproof.ai",
-      lastModified: new Date(),
+      lastModified,
       changeFrequency: "weekly",
       priority: 1,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai",
+          fr: "https://ironproof.ai/fr",
+        },
+      },
+    },
+    {
+      url: "https://ironproof.ai/fr",
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 1,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai",
+          fr: "https://ironproof.ai/fr",
+        },
+      },
     },
   ];
 }

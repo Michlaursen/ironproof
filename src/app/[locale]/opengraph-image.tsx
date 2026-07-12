@@ -1,13 +1,20 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { getContent, isLocale } from "@/content";
 
 export const alt =
-  "IronProof — Provable security for AI and critical software";
+  "IronProof — Provable security for AI and critical software / Sécurité prouvable pour l’IA et les logiciels critiques";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image() {
+type Props = { params: Promise<{ locale: string }> };
+
+export default async function Image({ params }: Props) {
+  const { locale: rawLocale } = await params;
+  const locale = isLocale(rawLocale) ? rawLocale : "en";
+  const content = getContent(locale);
+
   const logoData = await readFile(join(process.cwd(), "public/logo.png"), "base64");
   const logoSrc = `data:image/png;base64,${logoData}`;
 
@@ -59,20 +66,20 @@ export default async function Image() {
               color: "#5b8def",
             }}
           >
-            Verifiable security infrastructure
+            {content.hero.eyebrow}
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 64,
+              fontSize: 56,
               fontWeight: 600,
               lineHeight: 1.15,
               letterSpacing: -1.5,
               color: "#eef1f5",
-              maxWidth: 980,
+              maxWidth: 1000,
             }}
           >
-            Provable security for AI and critical software.
+            {content.hero.headline}
           </div>
         </div>
 
@@ -107,9 +114,9 @@ export default async function Image() {
                 display: "flex",
               }}
             />
-            VERIFIED
+            {content.hero.proofCard.status}
           </div>
-          <span>Sealed, independently verifiable proof artifacts</span>
+          <span>{content.solution.diagram.proofArtifactValue}</span>
         </div>
       </div>
     ),

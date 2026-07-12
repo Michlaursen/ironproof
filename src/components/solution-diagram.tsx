@@ -1,3 +1,4 @@
+import type { SiteContent } from "@/content";
 import { IconEyeOff, IconRule, IconSeal, IconVerify } from "./icons";
 
 function DiagramBox({
@@ -65,33 +66,35 @@ function OutcomeBox({
   );
 }
 
-export function SolutionDiagram() {
+type SolutionDiagramProps = { content: SiteContent["solution"]["diagram"] };
+
+export function SolutionDiagram({ content }: SolutionDiagramProps) {
   return (
     <div className="flex flex-col gap-4 md:flex-row md:items-center">
       <DiagramBox
         icon={IconRule}
-        title="Rules"
-        subtitle="Security, compliance & governance constraints"
+        title={content.rulesTitle}
+        subtitle={content.rulesSubtitle}
       />
       <Arrow />
       <DiagramBox
         icon={IconVerify}
-        title="Verification"
-        subtitle="Checked over the defined input space"
+        title={content.verificationTitle}
+        subtitle={content.verificationSubtitle}
         accent
       />
       <Arrow />
       <div className="flex flex-1 flex-col gap-3">
         <OutcomeBox
           icon={IconEyeOff}
-          label="Violation possible"
-          value="Counterexample"
+          label={content.counterexampleLabel}
+          value={content.counterexampleValue}
           tone="warn"
         />
         <OutcomeBox
           icon={IconSeal}
-          label="No violation found"
-          value="Sealed proof artifact"
+          label={content.proofArtifactLabel}
+          value={content.proofArtifactValue}
           tone="seal"
         />
       </div>

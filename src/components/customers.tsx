@@ -1,31 +1,19 @@
+import type { SiteContent } from "@/content";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
-const SEGMENTS = [
-  "Banks",
-  "Insurance companies",
-  "Government agencies",
-  "Critical infrastructure operators",
-  "Telecoms",
-  "Healthcare administration platforms",
-  "Modernization partners",
-  "Enterprise SaaS deploying AI agents",
-  "Cybersecurity & compliance teams",
-];
+type CustomersProps = { content: SiteContent["customers"] };
 
-export function Customers() {
+export function Customers({ content }: CustomersProps) {
   return (
     <section className="border-b border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
-          <SectionHeading
-            eyebrow="Built for"
-            title="High-trust institutions where &ldquo;trust me&rdquo; is not enough."
-          />
+          <SectionHeading eyebrow={content.eyebrow} title={content.title} />
         </Reveal>
 
         <div className="mt-12 flex flex-wrap gap-3">
-          {SEGMENTS.map((segment, i) => (
+          {content.segments.map((segment, i) => (
             <Reveal
               key={segment}
               delay={i * 0.04}
