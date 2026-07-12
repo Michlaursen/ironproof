@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DemoRequestForm } from "./demo-request-form";
 import { Reveal } from "./reveal";
 
 export function FinalCta() {
@@ -16,20 +17,20 @@ export function FinalCta() {
             IronProof is not selling trust. IronProof is selling proof.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="mailto:hello@ironproof.ai"
-              className="rounded-md bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-            >
-              Request a demo
-            </Link>
-            <Link
-              href="mailto:hello@ironproof.ai"
-              className="rounded-md border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent"
-            >
-              Become a design partner
-            </Link>
+          <div className="mt-10">
+            <DemoRequestForm />
           </div>
+
+          <p className="mt-6 text-sm text-muted">
+            Looking to become a design partner instead? Email us at{" "}
+            <Link
+              href="mailto:hello@ironproof.ai"
+              className="text-accent hover:underline"
+            >
+              hello@ironproof.ai
+            </Link>
+            .
+          </p>
         </Reveal>
       </div>
     </section>
