@@ -22,10 +22,10 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
           <Image
             src="/header-lockup.png"
             alt="IronProof"
-            width={1470}
-            height={227}
+            width={1451}
+            height={298}
             priority
-            className="h-6 w-auto"
+            className="h-6 w-auto md:h-8"
           />
         </Link>
 
