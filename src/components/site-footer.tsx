@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { SiteContent } from "@/content";
 
 type SiteFooterProps = { content: SiteContent["footer"] };
@@ -8,9 +9,13 @@ export function SiteFooter({ content }: SiteFooterProps) {
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <p className="font-mono text-sm font-semibold text-foreground">
-              IRON<span className="text-accent">PROOF</span>
-            </p>
+            <Image
+              src="/ironproof-wordmark-white-transparent.png"
+              alt="IronProof"
+              width={1600}
+              height={320}
+              className="h-5 w-auto"
+            />
             <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">
               {content.description}
             </p>

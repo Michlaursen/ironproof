@@ -18,14 +18,15 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link
-          href="#"
-          className="flex items-center gap-2.5 font-mono text-base font-semibold tracking-tight text-foreground"
-        >
-          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-foreground p-1">
-            <Image src="/logo.png" alt="IronProof" width={20} height={20} priority />
-          </span>
-          IRON<span className="text-accent">PROOF</span>
+        <Link href="#" className="flex items-center">
+          <Image
+            src="/header-lockup.png"
+            alt="IronProof"
+            width={1470}
+            height={227}
+            priority
+            className="h-6 w-auto"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
