@@ -33,6 +33,39 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ironproof.ai/#organization",
+      name: "IronProof",
+      url: "https://ironproof.ai",
+      logo: "https://ironproof.ai/icon.png",
+      description:
+        "IronProof is a Canadian cybersecurity and AI assurance company building verifiable security infrastructure for AI agents, AI-generated code, and critical software.",
+      slogan:
+        'IronProof moves organizations from "probably secure" to "provably secure."',
+      email: "hello@ironproof.ai",
+      areaServed: "Global",
+      knowsAbout: [
+        "AI governance",
+        "Formal verification",
+        "AI agent security",
+        "Software supply chain security",
+        "Post-quantum cryptography",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ironproof.ai/#website",
+      name: "IronProof",
+      url: "https://ironproof.ai",
+      publisher: { "@id": "https://ironproof.ai/#organization" },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -44,6 +77,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <div className="bg-grid" aria-hidden="true" />
         {children}
         <Analytics />

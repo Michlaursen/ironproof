@@ -1,0 +1,26 @@
+# IronProof
+
+> IronProof is verifiable security infrastructure for AI and software — a proof layer that helps organizations prove what AI systems and critical software are allowed to do, whether they can violate defined rules, and seal the result as independently verifiable evidence.
+
+IronProof moves organizations from "probably secure" to "provably secure." It is positioned around mathematical/formal verification, not heuristic risk scoring: when a rule can be violated, IronProof produces a counterexample; when it can't (within the defined scope), IronProof issues a signed, sealed proof artifact that can be verified later, offline, using public keys only — without trusting or re-accessing the original system.
+
+IronProof is a Canadian company built for high-trust, regulated, and sovereign environments: banks, insurers, government agencies, critical infrastructure operators, telecoms, healthcare administration platforms, and enterprise SaaS companies deploying AI agents.
+
+## Products
+
+- **IronProof Cobalt** — verifies migrated, refactored, or AI-generated code and produces proof artifacts when code meets defined properties. Used for legacy modernization, AI-generated code review, regulated software changes, and security-sensitive code paths.
+- **IronProof VERDICT** — verifies high-risk AI agent actions (approvals, refunds, credits, transfers, permission changes) before execution, checking them against governance rules and producing sealed evidence of what was allowed, denied, or proven safe.
+- **IronProof Core** — the underlying proof engine that transforms policies, constraints, code behavior, and action rules into machine-checkable verification logic. Powers both Cobalt and VERDICT.
+
+## Key differentiators
+
+- Mathematical proof over a defined input space, not probabilistic risk scoring.
+- Counterexamples when a violation is possible; signed certificates/proof artifacts when it isn't.
+- Post-quantum sealed proof artifacts, designed as future-resistant evidence.
+- Offline, independently verifiable proof — no dependency on the original vendor/system.
+- Sovereign deployment posture, compatible with air-gapped and high-control environments.
+
+## Contact
+
+- Website: https://ironproof.ai
+- Email: hello@ironproof.ai
