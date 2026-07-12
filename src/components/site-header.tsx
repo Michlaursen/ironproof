@@ -13,7 +13,7 @@ type SiteHeaderProps = {
 
 export function SiteHeader({ content, locale }: SiteHeaderProps) {
   const [open, setOpen] = useState(false);
-  const otherLocaleHref = locale === "en" ? "/fr" : "/";
+  const otherLocaleHref = locale === "en" ? "/fr" : "/en";
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
@@ -42,12 +42,20 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
+          {/*
+            Plain <a>, not next/link: switching locale means crossing to a
+            different param value of the [locale] segment that also renders
+            the root <html> layout. Client-side soft navigation between two
+            such instances renders Next's not-found boundary despite the
+            server returning a valid 200 (reproduced consistently in prod
+            builds). A full page load always resolves correctly.
+          */}
+          <a
             href={otherLocaleHref}
             className="hidden rounded-md border border-border px-2.5 py-1.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-foreground md:inline-flex"
           >
             {content.langSwitchLabel}
-          </Link>
+          </a>
 
           <Link
             href="#contact"
@@ -81,13 +89,13 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
                 {link.label}
               </Link>
             ))}
-            <Link
+            <a
               href={otherLocaleHref}
               onClick={() => setOpen(false)}
               className="py-3.5 text-sm text-muted hover:text-foreground"
             >
               {content.langSwitchLabel}
-            </Link>
+            </a>
           </div>
         </nav>
       ) : null}
