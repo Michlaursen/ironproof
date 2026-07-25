@@ -14,6 +14,7 @@ export const fr: SiteContent = {
       { href: "#use-cases", label: "Cas d’usage" },
       { href: "#sovereignty", label: "Souveraineté" },
       { href: "#proof-points", label: "Preuves" },
+      { href: "https://lab.ironproof.ai", label: "Laboratoire" },
     ],
     cta: "Demander une démo",
     langSwitchLabel: "EN",
@@ -42,6 +43,23 @@ export const fr: SiteContent = {
       footnote:
         "Vérifiable de façon indépendante, même hors ligne — sans avoir à faire confiance au système d’origine.",
     },
+  },
+  lab: {
+    eyebrow: "Laboratoire de preuve",
+    title: "Ne nous croyez pas sur parole. Inspectez la preuve.",
+    description:
+      "Entrez dans le laboratoire IronProof pour explorer de véritables obligations de preuve, mettre les politiques à l’épreuve, inspecter les contre-exemples et reproduire vous-même les résultats.",
+    cta: "Entrer dans le laboratoire",
+    previewLabel: "INSTRUMENT EN DIRECT",
+    previewTitle: "Action d’un agent IA au seuil de preuve",
+    previewStatus: "SÉCURITÉ PROUVÉE",
+    obligationLabel: "Obligation de preuve",
+    obligation:
+      "Aucun état accessible ne peut débourser plus que le montant approuvé.",
+    verdictLabel: "Verdict du solveur",
+    verdict: "unsat",
+    evidenceLabel: "Preuve",
+    evidence: "scellée · reproductible · vérifiable indépendamment",
   },
   problem: {
     eyebrow: "Le problème",

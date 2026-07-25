@@ -29,11 +29,13 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
           {content.nav.map((link) => (
             <Link
               key={link.href}
               href={link.href}
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
               className="text-sm text-muted transition-colors hover:text-foreground"
             >
               {link.label}
@@ -52,7 +54,7 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
           */}
           <a
             href={otherLocaleHref}
-            className="hidden rounded-md border border-border px-2.5 py-1.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-foreground md:inline-flex"
+            className="hidden rounded-md border border-border px-2.5 py-1.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-foreground lg:inline-flex"
           >
             {content.langSwitchLabel}
           </a>
@@ -69,7 +71,7 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-foreground md:hidden"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-foreground lg:hidden"
           >
             {open ? <IconClose className="h-4 w-4" /> : <IconMenu className="h-4 w-4" />}
           </button>
@@ -77,12 +79,14 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
       </div>
 
       {open ? (
-        <nav className="border-t border-border bg-background md:hidden">
+        <nav className="border-t border-border bg-background lg:hidden">
           <div className="mx-auto flex max-w-6xl flex-col px-6 py-2">
             {content.nav.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
                 onClick={() => setOpen(false)}
                 className="border-b border-border py-3.5 text-sm text-muted last:border-b-0 hover:text-foreground"
               >
