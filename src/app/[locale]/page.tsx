@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getContent, isLocale } from "@/content";
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
+import { ProofLab } from "@/components/proof-lab";
 import { Problem } from "@/components/problem";
 import { Solution } from "@/components/solution";
 import { Products } from "@/components/products";
@@ -27,6 +28,7 @@ export default async function Home({ params }: PageProps) {
       <SiteHeader locale={locale} content={content.header} />
       <main className="flex-1">
         <Hero content={content.hero} />
+        <ProofLab content={content.lab} />
         <Problem content={content.problem} />
         <Solution content={content.solution} />
         <Products content={content.products} />

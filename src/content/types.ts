@@ -26,6 +26,21 @@ export type SiteContent = {
       footnote: string;
     };
   };
+  lab: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    cta: string;
+    previewLabel: string;
+    previewTitle: string;
+    previewStatus: string;
+    obligationLabel: string;
+    obligation: string;
+    verdictLabel: string;
+    verdict: string;
+    evidenceLabel: string;
+    evidence: string;
+  };
   problem: {
     eyebrow: string;
     title: string;
