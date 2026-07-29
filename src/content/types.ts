@@ -98,6 +98,11 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     items: { stat: string; label: string }[];
+    papers: {
+      eyebrow: string;
+      note: string;
+      items: { id: string; title: string; href: string }[];
+    };
   };
   finalCta: {
     eyebrow: string;

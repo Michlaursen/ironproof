@@ -226,6 +226,36 @@ export const fr: SiteContent = {
       { stat: "0", label: "Accès fournisseur requis pour la vérification hors ligne" },
       { stat: "CA", label: "Posture de déploiement souverain canadien" },
     ],
+    papers: {
+      eyebrow: "Recherche publiée",
+      note: "Quatre prépublications sur arXiv (cs.CR). Lisez la méthode, vérifiez les chiffres, contredisez-nous publiquement.",
+      items: [
+        {
+          id: "arXiv:2604.05292",
+          title:
+            "Broken by Default: A Formal Verification Study of Security Vulnerabilities in AI-Generated Code",
+          href: "https://arxiv.org/abs/2604.05292",
+        },
+        {
+          id: "arXiv:2604.06712",
+          title:
+            "Broken Quantum: A Systematic Formal Verification Study of Security Vulnerabilities Across the Open-Source Quantum Computing Simulator Ecosystem",
+          href: "https://arxiv.org/abs/2604.06712",
+        },
+        {
+          id: "arXiv:2604.12172",
+          title:
+            "COBALT-TLA: A Neuro-Symbolic Verification Loop for Cross-Chain Bridge Vulnerability Discovery",
+          href: "https://arxiv.org/abs/2604.12172",
+        },
+        {
+          id: "arXiv:2604.20496",
+          title:
+            "Mythos and the Unverified Cage: Z3-Based Pre-Deployment Verification for Frontier-Model Sandbox Infrastructure",
+          href: "https://arxiv.org/abs/2604.20496",
+        },
+      ],
+    },
   },
   finalCta: {
     eyebrow: "Dans un monde d’incertitude face à l’IA",
