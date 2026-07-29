@@ -3,7 +3,7 @@ import type { SiteContent } from "@/content";
 import { IconArrowUpRight, IconSeal } from "./icons";
 import { Reveal } from "./reveal";
 
-const LAB_URL = "https://lab.ironproof.ai";
+const LAB_URL = "https://ironproof-lab.vercel.app";
 
 type ProofLabProps = {
   content: SiteContent["lab"];
