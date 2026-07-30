@@ -371,13 +371,10 @@ export const en: SiteContent = {
       "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
   },
   finalCta: {
-    eyebrow: "In a world of AI uncertainty",
-    title: "IronProof gives institutions something rare: evidence.",
-    subhead: "IronProof is not selling trust. IronProof is selling proof.",
-    offerLabel: "Entry engagement",
-    offerName: "Transaction Boundary Certificate",
-    offerBody:
-      "We take one money-moving workflow, encode the boundary it must never cross, prove no reachable state crosses it, and seal the certificate. Your auditor verifies it offline. Recertification is triggered by your release, not by our calendar.",
+    title: "Start with one money-moving workflow",
+    description:
+      "Choose a refund, payment, disbursement or beneficiary-change workflow. We define the transaction boundary, test it for violations and deliver a proof artifact your team can verify independently.",
+    ctaSecondary: "Inspect a sample certificate",
     designPartnerPre: "Looking to become a design partner instead? Email us at ",
     designPartnerEmail: "hello@ironproof.ai",
     form: {
@@ -385,8 +382,8 @@ export const en: SiteContent = {
       lastName: "Last name",
       email: "Work email",
       company: "Company",
-      message: "What are you looking to verify?",
-      submit: "Request a demo",
+      message: "Which workflow do you want to evaluate?",
+      submit: "Evaluate a workflow",
       submitting: "Sending…",
       successTitle: "Request received.",
       successBody: "We’ll be in touch shortly.",

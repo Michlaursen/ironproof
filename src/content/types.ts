@@ -122,12 +122,9 @@ export type SiteContent = {
     quoteHref: string;
   };
   finalCta: {
-    eyebrow: string;
     title: string;
-    subhead: string;
-    offerLabel: string;
-    offerName: string;
-    offerBody: string;
+    description: string;
+    ctaSecondary: string;
     designPartnerPre: string;
     designPartnerEmail: string;
     form: {

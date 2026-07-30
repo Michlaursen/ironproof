@@ -385,13 +385,10 @@ export const fr: SiteContent = {
       "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
   },
   finalCta: {
-    eyebrow: "Dans un monde d’incertitude face à l’IA",
-    title: "IronProof offre aux institutions quelque chose de rare : la preuve.",
-    subhead: "IronProof ne vend pas la confiance. IronProof vend la preuve.",
-    offerLabel: "Mandat d’entrée",
-    offerName: "Certificat de frontière transactionnelle",
-    offerBody:
-      "Nous prenons un seul flux qui déplace de l’argent, encodons la frontière qu’il ne doit jamais franchir, prouvons qu’aucun état atteignable ne la franchit, et scellons le certificat. Votre auditeur le vérifie hors ligne. La recertification est déclenchée par votre mise en production, pas par notre calendrier.",
+    title: "Commencez par un seul flux qui déplace de l’argent",
+    description:
+      "Choisissez un flux de remboursement, de paiement, de décaissement ou de changement de bénéficiaire. Nous définissons la frontière transactionnelle, la testons pour y trouver des violations et livrons un artefact de preuve que votre équipe peut vérifier de façon indépendante.",
+    ctaSecondary: "Inspecter un certificat exemple",
     designPartnerPre:
       "Vous préférez devenir partenaire de conception ? Écrivez-nous à ",
     designPartnerEmail: "hello@ironproof.ai",
@@ -400,8 +397,8 @@ export const fr: SiteContent = {
       lastName: "Nom",
       email: "Courriel professionnel",
       company: "Entreprise",
-      message: "Que cherchez-vous à vérifier ?",
-      submit: "Demander une démo",
+      message: "Quel flux souhaitez-vous évaluer ?",
+      submit: "Évaluer un flux",
       submitting: "Envoi en cours…",
       successTitle: "Demande reçue.",
       successBody: "Nous vous reviendrons sous peu.",
