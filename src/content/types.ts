@@ -21,7 +21,9 @@ export type SiteContent = {
     proofCard: {
       label: string;
       status: string;
-      rows: { label: string; value: string }[];
+      /* accent marks the two rows a reader should land on first: the decision
+         itself and the solver verdict behind it. */
+      rows: { label: string; value: string; accent?: boolean }[];
       footnote: string;
     };
   };

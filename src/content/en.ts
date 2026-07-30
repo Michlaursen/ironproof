@@ -41,14 +41,31 @@ export const en: SiteContent = {
       label: "Proof Artifact",
       status: "SEALED",
       rows: [
-        { label: "Scope", value: "policy · defined input space" },
-        { label: "Obligation", value: "no reachable violation" },
-        { label: "Solver", value: "unsat" },
+        { label: "Decision", value: "REFUND ALLOWED", accent: true },
+        { label: "Policy", value: "Merchant Refund Policy · v3.2" },
+        { label: "Agent authority", value: "Refunds ≤ $1,000 · active" },
+        {
+          label: "Transaction state",
+          value: "$640 requested · $1,820 monthly total",
+        },
+        {
+          label: "Boundary check",
+          value: "within per-action and cumulative limits",
+        },
+        {
+          label: "Justification",
+          value: "policy satisfied · authority valid · approval not required",
+        },
+        {
+          label: "Proof verdict",
+          value: "UNSAT · no reachable violation",
+          accent: true,
+        },
         { label: "Seal", value: "Ed25519 + ML-DSA-65" },
-        { label: "Verifier", value: "offline · public key" },
+        { label: "Verifier", value: "offline · trusted public key" },
       ],
       footnote:
-        "SHA3-512 hashed, dual-signed under FIPS 204. Re-checkable without network access — and without trusting IronProof.",
+        "The policy, authority, transaction state and proof verdict are sealed together. Verify the artifact offline using a trusted public key — without access to an IronProof dashboard.",
     },
   },
   attributions: {

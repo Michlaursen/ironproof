@@ -43,14 +43,38 @@ export const fr: SiteContent = {
       label: "Artefact de preuve",
       status: "SCELLÉ",
       rows: [
-        { label: "Portée", value: "politique · espace d’entrée défini" },
-        { label: "Obligation", value: "aucune violation atteignable" },
-        { label: "Solveur", value: "unsat" },
+        { label: "Décision", value: "REMBOURSEMENT AUTORISÉ", accent: true },
+        {
+          label: "Politique",
+          value: "Politique de remboursement marchand · v3.2",
+        },
+        {
+          label: "Autorité de l’agent",
+          value: "Remboursements ≤ 1 000 $ · active",
+        },
+        {
+          label: "État transactionnel",
+          value: "640 $ demandés · 1 820 $ cumulés ce mois",
+        },
+        {
+          label: "Contrôle de frontière",
+          value: "dans les limites par action et cumulatives",
+        },
+        {
+          label: "Justification",
+          value:
+            "politique satisfaite · autorité valide · approbation non requise",
+        },
+        {
+          label: "Verdict de preuve",
+          value: "UNSAT · aucune violation atteignable",
+          accent: true,
+        },
         { label: "Sceau", value: "Ed25519 + ML-DSA-65" },
-        { label: "Vérificateur", value: "hors ligne · clé publique" },
+        { label: "Vérificateur", value: "hors ligne · clé publique de confiance" },
       ],
       footnote:
-        "Empreinte SHA3-512, double signature sous FIPS 204. Revérifiable sans accès réseau — et sans faire confiance à IronProof.",
+        "La politique, l’autorité, l’état transactionnel et le verdict de preuve sont scellés ensemble. Vérifiez l’artefact hors ligne avec une clé publique de confiance — sans accès à un tableau de bord IronProof.",
     },
   },
   attributions: {
