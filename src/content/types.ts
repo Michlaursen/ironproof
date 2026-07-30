@@ -103,10 +103,9 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     description: string;
-    record: { stat: string; label: string; note: string }[];
+    points: { title: string; body: string }[];
     papers: {
       eyebrow: string;
-      note: string;
       items: { id: string; title: string; href: string }[];
     };
   };

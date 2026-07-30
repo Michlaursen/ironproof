@@ -306,45 +306,26 @@ export const en: SiteContent = {
     ],
   },
   corpus: {
-    eyebrow: "The record",
-    title: "Everything we claim is either published or reproducible.",
+    eyebrow: "Research",
+    title: "Why the proof can be challenged",
     description:
-      "The strongest thing a verification company can do is make itself falsifiable. Read the methods, run the suite, check the numbers, and disagree with us in public.",
-    record: [
+      "A verification company should expose the parts most likely to fail: the model, the translation, the verifier and the assumptions.",
+    points: [
       {
-        stat: "3",
-        label: "CVEs assigned",
-        note: "libyang, pupnp and Zephyr RTOS. Two carry public identifiers you can look up: CVE-2026-44673 (CVSS 7.5) and CVE-2026-41682.",
+        title: "Machine-checked translation",
+        body: "Lean 4 checks that the runtime policy compiler and solver encoding represent the same decision logic.",
       },
       {
-        stat: "28",
-        label: "Coordinated disclosures filed",
-        note: "Reported through vendor channels, on a 90-day clock.",
+        title: "Reproducible verification",
+        body: "The verification suite can be rerun end to end, including successful proofs and failure cases.",
       },
       {
-        stat: "8",
-        label: "Third-party public attributions",
-        note: "IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK and libmodbus credit us by name in their own trees.",
-      },
-      {
-        stat: "Lean 4",
-        label: "Encoder fidelity, kernel-checked",
-        note: "The decider and the Z3 encoder are proven equivalent by a machine-checked theorem, generated from the real solver AST rather than transcribed by hand — the same discipline AWS applies to Cedar.",
-      },
-      {
-        stat: "1",
-        label: "Command reproduces the suite",
-        note: "reproduce.sh --verify re-derives the verification results end to end.",
-      },
-      {
-        stat: "4",
-        label: "Preprints on arXiv (cs.CR)",
-        note: "Methods, datasets and failure cases published in the open.",
+        title: "Published methods",
+        body: "Four security preprints disclose the methods, datasets, limitations and failure cases.",
       },
     ],
     papers: {
       eyebrow: "Published research",
-      note: "Four preprints on arXiv (cs.CR). Read the methods, check the numbers, disagree with us in public.",
       items: [
         {
           id: "arXiv:2604.05292",

@@ -318,45 +318,26 @@ export const fr: SiteContent = {
     ],
   },
   corpus: {
-    eyebrow: "Le dossier",
-    title: "Tout ce que nous affirmons est publié ou reproductible.",
+    eyebrow: "Recherche",
+    title: "Pourquoi la preuve peut être contestée",
     description:
-      "La chose la plus forte qu’une entreprise de vérification puisse faire, c’est se rendre réfutable. Lisez les méthodes, lancez la suite, contrôlez les chiffres, et contredisez-nous en public.",
-    record: [
+      "Une entreprise de vérification devrait exposer les parties les plus susceptibles de faillir : le modèle, la traduction, le vérificateur et les hypothèses.",
+    points: [
       {
-        stat: "3",
-        label: "CVE assignées",
-        note: "libyang, pupnp et Zephyr RTOS. Deux portent un identifiant public que vous pouvez consulter : CVE-2026-44673 (CVSS 7,5) et CVE-2026-41682.",
+        title: "Traduction vérifiée par machine",
+        body: "Lean 4 contrôle que le compilateur de politique du runtime et l’encodage pour le solveur représentent la même logique de décision.",
       },
       {
-        stat: "28",
-        label: "Divulgations coordonnées déposées",
-        note: "Signalées par les canaux des éditeurs, sur un cycle de 90 jours.",
+        title: "Vérification reproductible",
+        body: "La suite de vérification peut être rejouée de bout en bout, preuves réussies et cas d’échec compris.",
       },
       {
-        stat: "8",
-        label: "Attributions publiques par des tiers",
-        note: "IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK et libmodbus nous créditent nommément dans leurs propres arbres.",
-      },
-      {
-        stat: "Lean 4",
-        label: "Fidélité de l’encodeur, vérifiée par noyau",
-        note: "Le décideur et l’encodeur Z3 sont prouvés équivalents par un théorème vérifié machine, engendré depuis le vrai AST du solveur plutôt que transcrit à la main — la discipline qu’AWS applique à Cedar.",
-      },
-      {
-        stat: "1",
-        label: "Commande rejoue la suite",
-        note: "reproduce.sh --verify redérive les résultats de vérification de bout en bout.",
-      },
-      {
-        stat: "4",
-        label: "Prépublications sur arXiv (cs.CR)",
-        note: "Méthodes, jeux de données et cas d’échec publiés à découvert.",
+        title: "Méthodes publiées",
+        body: "Quatre prépublications en sécurité exposent les méthodes, les jeux de données, les limites et les cas d’échec.",
       },
     ],
     papers: {
       eyebrow: "Recherche publiée",
-      note: "Quatre prépublications sur arXiv (cs.CR). Lisez les méthodes, contrôlez les chiffres, contredisez-nous en public.",
       items: [
         {
           id: "arXiv:2604.05292",

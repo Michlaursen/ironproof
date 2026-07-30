@@ -9,7 +9,7 @@ type CorpusProps = { content: SiteContent["corpus"] };
 export function Corpus({ content }: CorpusProps) {
   return (
     <section id="corpus" className="scroll-mt-20 border-b border-border">
-      <div className="mx-auto max-w-6xl px-6 py-24">
+      <div className="mx-auto max-w-6xl px-6 py-20">
         <Reveal>
           <SectionHeading
             eyebrow={content.eyebrow}
@@ -18,35 +18,29 @@ export function Corpus({ content }: CorpusProps) {
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {content.record.map((item, i) => (
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {content.points.map((point, i) => (
             <Reveal
-              key={item.label}
-              delay={Math.min(i, 3) * 0.06}
+              key={point.title}
+              delay={i * 0.06}
               className="flex flex-col rounded-lg border border-border bg-surface p-6"
             >
-              <p className="font-mono text-2xl font-semibold text-accent">
-                {item.stat}
-              </p>
-              <p className="mt-2 text-sm font-medium text-foreground">
-                {item.label}
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-muted">
-                {item.note}
+              <h3 className="text-base font-semibold text-foreground">
+                {point.title}
+              </h3>
+              <p className="mt-2.5 text-sm leading-relaxed text-muted">
+                {point.body}
               </p>
             </Reveal>
           ))}
         </div>
 
-        <Reveal className="mt-14 rounded-lg border border-border bg-surface p-6 sm:p-8">
+        <Reveal className="mt-10 rounded-lg border border-border bg-surface p-6 sm:p-8">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
             {content.papers.eyebrow}
           </p>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted">
-            {content.papers.note}
-          </p>
 
-          <ul className="mt-6 divide-y divide-border border-t border-border">
+          <ul className="mt-5 divide-y divide-border border-t border-border">
             {content.papers.items.map((paper) => (
               <li key={paper.id}>
                 <Link
