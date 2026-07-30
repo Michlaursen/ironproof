@@ -2,11 +2,14 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "IronProof — La preuve qui survit au fournisseur",
+    title:
+      "IronProof | Autorisation vérifiable pour les workflows financiers propulsés par l’IA",
     description:
-      "IronProof prouve ce que les agents IA, le code critique et la cryptographie ont le droit de faire, puis scelle le résultat en artefact post-quantique qu’un tiers revérifie hors ligne — sans avoir à nous faire confiance.",
+      "IronProof vérifie les limites transactionnelles avant qu’un agent IA exécute un remboursement, un paiement, un décaissement ou un changement de bénéficiaire, puis produit une preuve vérifiable indépendamment par les équipes de risque, de conformité et d’audit.",
+    // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
+    // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Tous les fournisseurs de sécurité vous demandent de croire leur verdict. IronProof vous remet une preuve scellée que vous revérifiez hors ligne, des années plus tard, sans nous.",
+      "IronProof vérifie les limites transactionnelles avant qu’un agent IA exécute un remboursement, un paiement, un décaissement ou un changement de bénéficiaire, puis produit une preuve vérifiable indépendamment par les équipes de risque, de conformité et d’audit.",
   },
   header: {
     nav: [
