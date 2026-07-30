@@ -19,9 +19,6 @@ export function SiteFooter({ content }: SiteFooterProps) {
             <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">
               {content.description}
             </p>
-            <p className="mt-3 font-mono text-xs text-seal">
-              {content.tagline}
-            </p>
           </div>
 
           <div className="text-sm text-muted">
@@ -37,7 +34,15 @@ export function SiteFooter({ content }: SiteFooterProps) {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-border pt-6 text-xs text-muted">
+        {/*
+          Given its own row above the copyright so it reads as the page signing
+          off, not as another line of footer boilerplate.
+        */}
+        <p className="mt-12 border-t border-border pt-8 text-lg font-medium text-balance text-foreground sm:text-xl">
+          {content.closing}
+        </p>
+
+        <div className="mt-8 text-xs text-muted">
           © {new Date().getFullYear()} {content.copyright}
         </div>
       </div>

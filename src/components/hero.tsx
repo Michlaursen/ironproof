@@ -18,9 +18,13 @@ export function Hero({ content }: HeroProps) {
           <h1 className="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl lg:text-6xl">
             {content.headline}
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted text-balance">
-            {content.subhead}
-          </p>
+          <div className="mt-6 max-w-xl space-y-4">
+            {content.body.map((paragraph) => (
+              <p key={paragraph} className="text-lg text-muted">
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
@@ -30,18 +34,20 @@ export function Hero({ content }: HeroProps) {
               {content.ctaPrimary}
             </Link>
             <Link
-              href="#solution"
+              href="#artifact"
               className="rounded-md border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent"
             >
               {content.ctaSecondary}
             </Link>
           </div>
 
-          <p className="mt-12 text-sm text-muted">
-            {content.taglinePre}
-            <span className="text-foreground">{content.taglineQuote1}</span>
-            {content.taglineMid}
-            <span className="text-foreground">{content.taglineQuote2}</span>
+          <p className="mt-10 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-muted">
+            {content.trustLine.map((item, i) => (
+              <span key={item} className="flex items-center gap-2">
+                {i > 0 ? <span aria-hidden="true">·</span> : null}
+                {item}
+              </span>
+            ))}
           </p>
         </Reveal>
 
@@ -70,9 +76,20 @@ function ProofArtifactCard({
         </span>
       </div>
 
-      <dl className="mt-4 space-y-3 font-mono text-xs">
-        {content.rows.map((row, i) => (
-          <Row key={row.label} label={row.label} value={row.value} accent={i === 2} />
+      {/*
+        Rows stack label-over-value rather than sitting side by side. The card
+        keeps its original width, and these values ("policy satisfied ·
+        authority valid · approval not required") do not fit beside a label at
+        that width — side by side they squeeze the label and wrap mid-phrase.
+      */}
+      <dl className="mt-4 space-y-2.5 font-mono text-xs">
+        {content.rows.map((row) => (
+          <Row
+            key={row.label}
+            label={row.label}
+            value={row.value}
+            accent={row.accent}
+          />
         ))}
       </dl>
 
@@ -99,9 +116,17 @@ function Row({
   accent?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4">
-      <dt className="text-muted">{label}</dt>
-      <dd className={accent ? "text-accent" : "text-foreground"}>{value}</dd>
+    <div className="min-w-0">
+      <dt className="text-[10px] uppercase tracking-[0.1em] text-muted">
+        {label}
+      </dt>
+      <dd
+        className={`mt-0.5 leading-relaxed break-words ${
+          accent ? "font-medium text-accent" : "text-foreground"
+        }`}
+      >
+        {value}
+      </dd>
     </div>
   );
 }

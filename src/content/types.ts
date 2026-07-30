@@ -12,19 +12,28 @@ export type SiteContent = {
   hero: {
     eyebrow: string;
     headline: string;
-    subhead: string;
+    body: string[];
     ctaPrimary: string;
     ctaSecondary: string;
-    taglinePre: string;
-    taglineQuote1: string;
-    taglineMid: string;
-    taglineQuote2: string;
+    /* Split into items only so the line wraps cleanly on narrow columns —
+       rendered inline with · separators, the visible text is one line. */
+    trustLine: string[];
     proofCard: {
       label: string;
       status: string;
-      rows: { label: string; value: string }[];
+      /* accent marks the two rows a reader should land on first: the decision
+         itself and the solver verdict behind it. */
+      rows: { label: string; value: string; accent?: boolean }[];
       footnote: string;
     };
+  };
+  attributions: {
+    title: string;
+    subtitle: string;
+    items: { org: string; body: string; cta: string; href: string }[];
+    summary: string;
+    linkLabel: string;
+    linkHref: string;
   };
   lab: {
     eyebrow: string;
@@ -32,77 +41,90 @@ export type SiteContent = {
     description: string;
     cta: string;
     previewLabel: string;
-    previewTitle: string;
-    previewStatus: string;
-    obligationLabel: string;
-    obligation: string;
-    verdictLabel: string;
-    verdict: string;
-    evidenceLabel: string;
-    evidence: string;
+    policyLabel: string;
+    policy: string[];
+    transactionLabel: string;
+    transaction: string[];
+    safeLabel: string;
+    safeVerdict: string;
+    safeBody: string;
+    failLabel: string;
+    failVerdict: string;
+    failBody: string;
   };
   problem: {
     eyebrow: string;
     title: string;
-    description: string;
-    points: { title: string; body: string }[];
+    body: string[];
+    layers: { name: string; role: string }[];
+    /* Same shape as a layer on purpose — it reads as the fifth item in the
+       row, which is the argument the section is making. */
+    conclusion: { name: string; role: string };
   };
   solution: {
     eyebrow: string;
     title: string;
     description: string;
     steps: { step: string; title: string; body: string }[];
-    diagram: {
-      rulesTitle: string;
-      rulesSubtitle: string;
-      verificationTitle: string;
-      verificationSubtitle: string;
-      counterexampleLabel: string;
-      counterexampleValue: string;
-      proofArtifactLabel: string;
-      proofArtifactValue: string;
-    };
-    quoteIntro1: string;
-    quote1: string;
-    quoteIntro2: string;
-    quote2: string;
   };
   products: {
     eyebrow: string;
     title: string;
-    items: {
+    description: string;
+    capabilities: { title: string; body: string }[];
+    finalLine: string;
+  };
+  artifact: {
+    eyebrow: string;
+    title: string;
+    blocks: { num: string; title: string; body: string }[];
+    finalLine: string;
+  };
+  comparison: {
+    eyebrow: string;
+    title: string;
+    /* For the four existing controls, `secondary` is what they do NOT
+       establish. On the IronProof row it is what the artifact additionally
+       preserves — same slot, opposite polarity, which is the point. */
+    rows: {
       name: string;
-      tag: string;
-      description: string;
-      items: string[];
+      primary: string;
+      secondary: string;
+      isUs?: boolean;
     }[];
   };
   sovereignty: {
     eyebrow: string;
     title: string;
     description: string;
-    tagline: string;
     features: { title: string; body: string }[];
   };
-  useCases: {
+  corpus: {
     eyebrow: string;
     title: string;
-    items: string[];
+    description: string;
+    points: { title: string; body: string }[];
+    papers: {
+      eyebrow: string;
+      items: { id: string; title: string; href: string }[];
+    };
   };
-  customers: {
+  sector: {
     eyebrow: string;
     title: string;
-    segments: string[];
-  };
-  proofPoints: {
-    eyebrow: string;
-    title: string;
-    items: { stat: string; label: string }[];
+    description: string;
+    buyersLabel: string;
+    buyers: string;
+    engagementLabel: string;
+    engagement: string;
+    quote: string;
+    quoteSource: string;
+    quoteHref: string;
   };
   finalCta: {
-    eyebrow: string;
     title: string;
-    subhead: string;
+    description: string;
+    ctaSecondary: string;
     designPartnerPre: string;
     designPartnerEmail: string;
     form: {
@@ -122,7 +144,9 @@ export type SiteContent = {
   };
   footer: {
     description: string;
-    tagline: string;
+    /* The closing line of the page. Lives here rather than in the final CTA so
+       it signs off instead of competing with the form for attention. */
+    closing: string;
     country: string;
     copyright: string;
   };

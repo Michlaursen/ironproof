@@ -67,7 +67,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   if (!isLocale(locale)) notFound();
 
   const content = getContent(locale);
-  const slogan = `${content.hero.taglinePre}${content.hero.taglineQuote1}${content.hero.taglineMid}${content.hero.taglineQuote2}`;
+  // The hero's four-part tagline was replaced by a single headline; the
+  // structured-data slogan now reads from that rather than reassembling copy
+  // that no longer exists.
+  const slogan = content.hero.headline;
 
   const jsonLd = {
     "@context": "https://schema.org",

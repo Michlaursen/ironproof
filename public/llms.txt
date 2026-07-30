@@ -1,24 +1,31 @@
 # IronProof
 
-> IronProof is verifiable security infrastructure for AI and software — a proof layer that helps organizations prove what AI systems and critical software are allowed to do, whether they can violate defined rules, and seal the result as independently verifiable evidence.
+> IronProof provides verifiable authorization and decision evidence for money-moving AI workflows. It verifies that a specific financial action — a refund, payment, disbursement or beneficiary change — stays inside the customer's written policy, agent authority and transaction state before execution, and preserves the authorization basis as evidence a third party can verify independently.
 
-IronProof moves organizations from "probably secure" to "provably secure." It is positioned around mathematical/formal verification, not heuristic risk scoring: when a rule can be violated, IronProof produces a counterexample; when it can't (within the defined scope), IronProof issues a signed, sealed proof artifact that can be verified later, offline, using public keys only — without trusting or re-accessing the original system.
+The written policy is compiled into mathematics by the same deterministic compiler the runtime uses, so the proof runs against that model rather than against a checklist. When an action can violate a rule or a cumulative limit, IronProof returns the counterexample. When it cannot, it issues a single-use execution grant and seals the decision, the justification and the proof result into an artifact that can be re-verified offline with a trusted public key — without an IronProof dashboard.
 
-IronProof is a Canadian company built for high-trust, regulated, and sovereign environments: banks, insurers, government agencies, critical infrastructure operators, telecoms, healthcare administration platforms, and enterprise SaaS companies deploying AI agents.
+IronProof is a Canadian company. It starts with back-office AI agents in Canadian financial services; the primary buyers are technology risk, operational risk and compliance teams.
 
-## Products
+## Product
 
-- **IronProof Cobalt** — verifies migrated, refactored, or AI-generated code and produces proof artifacts when code meets defined properties. Used for legacy modernization, AI-generated code review, regulated software changes, and security-sensitive code paths.
-- **IronProof VERDICT** — verifies high-risk AI agent actions (approvals, refunds, credits, transfers, permission changes) before execution, checking them against governance rules and producing sealed evidence of what was allowed, denied, or proven safe.
-- **IronProof Core** — the underlying proof engine that transforms policies, constraints, code behavior, and action rules into machine-checkable verification logic. Powers both Cobalt and VERDICT.
+- **IronProof Actions** — the authorization layer for money-moving AI agents. It captures the decision context (policy version, agent authority, requested action, cumulative state), proves whether the action stays inside the customer-defined transaction boundary, issues a single-use execution grant bound to that exact decision and to the policy in force, and preserves why the action was allowed or denied in a sealed artifact.
 
 ## Key differentiators
 
-- Mathematical proof over a defined input space, not probabilistic risk scoring.
-- Counterexamples when a violation is possible; signed certificates/proof artifacts when it isn't.
-- Post-quantum sealed proof artifacts, designed as future-resistant evidence.
-- Offline, independently verifiable proof — no dependency on the original vendor/system.
-- Sovereign deployment posture, compatible with air-gapped and high-control environments.
+- Verification happens **before** execution, not in logs after the fact.
+- The proof covers sequences, not only the request at hand: no sequence of actions the agent can take escapes the boundary.
+- The policy is written by the customer, not by IronProof, and the artifact records that.
+- Nothing executes without spending a grant — the gate is the only entrance, structurally.
+- Evidence is verifiable offline by the customer's own auditor, and supports classical and post-quantum signatures.
+- Can run locally or air-gapped, so policies, system context and decision evidence stay under the institution's control.
+
+## Public technical record
+
+Eight independent organizations credit IronProof or its founder by name in their own public source trees: IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK and libmodbus. Four security preprints on arXiv (cs.CR) disclose the methods, datasets, limitations and failure cases. A Lean 4 theorem checks that the runtime policy compiler and the solver encoding represent the same decision logic, and the verification suite can be rerun end to end.
+
+## Limits worth stating
+
+Proofs are relative to the declared model and its assumptions — the solver checks all states that model represents, not the world. IronProof is early, and is onboarding its first design partners.
 
 ## Contact
 
