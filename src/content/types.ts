@@ -144,7 +144,6 @@ export type SiteContent = {
   };
   footer: {
     description: string;
-    tagline: string;
     country: string;
     copyright: string;
   };

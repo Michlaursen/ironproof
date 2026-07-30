@@ -394,8 +394,7 @@ export const en: SiteContent = {
   },
   footer: {
     description:
-      "IronProof builds verifiable security infrastructure for AI and critical software. We prove what agents, code and cryptography are allowed to do, and seal the result as post-quantum evidence that a third party re-verifies offline — without trusting us.",
-    tagline: "Verifiable security for AI and critical software.",
+      "Verifiable authorization and decision evidence for money-moving AI workflows.",
     country: "Canada",
     copyright: "IronProof. All rights reserved.",
   },

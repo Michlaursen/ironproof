@@ -19,9 +19,6 @@ export function SiteFooter({ content }: SiteFooterProps) {
             <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">
               {content.description}
             </p>
-            <p className="mt-3 font-mono text-xs text-seal">
-              {content.tagline}
-            </p>
           </div>
 
           <div className="text-sm text-muted">

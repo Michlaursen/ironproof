@@ -3,8 +3,10 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { getContent, isLocale } from "@/content";
 
+// Surfaces publicly as og:image:alt and twitter:image:alt, so it carries the
+// positioning wherever the page is shared. Mirrors the two meta titles.
 export const alt =
-  "IronProof — Provable security for AI and critical software / Sécurité prouvable pour l’IA et les logiciels critiques";
+  "IronProof — Verifiable authorization for AI financial workflows / Autorisation vérifiable pour les workflows financiers propulsés par l’IA";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

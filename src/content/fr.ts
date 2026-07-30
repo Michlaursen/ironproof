@@ -20,7 +20,7 @@ export const fr: SiteContent = {
       { href: "#corpus", label: "Recherche" },
       { href: "https://lab.ironproof.ai", label: "Proof Lab" },
     ],
-    cta: "Évaluer un workflow",
+    cta: "Évaluer un flux",
     langSwitchLabel: "EN",
   },
   hero: {
@@ -32,7 +32,7 @@ export const fr: SiteContent = {
       "Pour chaque décision, il consigne la politique appliquée, l’autorité de l’agent sous cette politique, l’état de la transaction, et une justification vérifiable expliquant pourquoi l’action a été permise ou refusée.",
       "La preuve qui en résulte se vérifie de façon indépendante par les équipes de risque, de conformité et d’audit — sans dépendre d’un tableau de bord IronProof.",
     ],
-    ctaPrimary: "Évaluer un flux qui déplace de l’argent",
+    ctaPrimary: "Évaluer un flux",
     ctaSecondary: "Inspecter un certificat exemple",
     trustLine: [
       "Politique contrôlée par le client",
@@ -409,8 +409,7 @@ export const fr: SiteContent = {
   },
   footer: {
     description:
-      "IronProof bâtit de l’infrastructure de sécurité vérifiable pour l’IA et les logiciels critiques. Nous prouvons ce que les agents, le code et la cryptographie ont le droit de faire, et scellons le résultat en preuve post-quantique qu’un tiers revérifie hors ligne — sans nous faire confiance.",
-    tagline: "Sécurité vérifiable pour l’IA et les logiciels critiques.",
+      "Autorisation vérifiable et preuve décisionnelle pour les flux financiers propulsés par l’IA.",
     country: "Canada",
     copyright: "IronProof. Tous droits réservés.",
   },
