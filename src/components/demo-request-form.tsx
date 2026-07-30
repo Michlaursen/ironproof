@@ -41,10 +41,6 @@ export function DemoRequestForm({ content, locale }: DemoRequestFormProps) {
             { name: "company", value: data.get("company") },
             { name: "message", value: data.get("message") },
           ],
-          context: {
-            pageUri: window.location.href,
-            pageName: document.title,
-          },
         }),
       });
 
