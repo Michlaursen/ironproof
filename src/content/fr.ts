@@ -20,7 +20,7 @@ export const fr: SiteContent = {
       { href: "#corpus", label: "Recherche" },
       { href: "https://lab.ironproof.ai", label: "Proof Lab" },
     ],
-    cta: "Demander une démo",
+    cta: "Évaluer un workflow",
     langSwitchLabel: "EN",
   },
   hero: {
