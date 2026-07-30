@@ -31,6 +31,8 @@ export type SiteContent = {
     title: string;
     subtitle: string;
     items: { org: string; body: string; cta: string; href: string }[];
+    alsoLabel: string;
+    also: { org: string; href: string }[];
     summary: string;
     linkLabel: string;
     linkHref: string;
@@ -66,20 +68,6 @@ export type SiteContent = {
     title: string;
     description: string;
     steps: { step: string; title: string; body: string }[];
-    diagram: {
-      rulesTitle: string;
-      rulesSubtitle: string;
-      verificationTitle: string;
-      verificationSubtitle: string;
-      counterexampleLabel: string;
-      counterexampleValue: string;
-      proofArtifactLabel: string;
-      proofArtifactValue: string;
-    };
-    quoteIntro1: string;
-    quote1: string;
-    quoteIntro2: string;
-    quote2: string;
   };
   products: {
     eyebrow: string;

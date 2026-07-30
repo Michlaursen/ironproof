@@ -100,8 +100,16 @@ export const fr: SiteContent = {
         href: "https://github.com/openela-main/libyang",
       },
     ],
+    alsoLabel: "Nous créditent aussi nommément",
+    also: [
+      { org: "GnuPG", href: "https://github.com/gpg/libksba/commit/c44cc98460ea42e393214dc6e23ff746196baefd" },
+      { org: "OFFIS · DCMTK", href: "https://github.com/DCMTK/dcmtk/commit/63b0bae751f62ed1b384141fa0fd032c98af57aa" },
+      { org: "IBM", href: "https://github.com/IBM/sarama/commit/b01879002b37abe3b44a957615d982847a44da94" },
+      { org: "libmodbus", href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175" },
+      { org: "Mozilla", href: "https://bugzilla.mozilla.org/show_bug.cgi?id=2027434" },
+    ],
     summary:
-      "3 CVE assignées · 28 divulgations coordonnées · 4 prépublications en sécurité",
+      "8 organisations nous créditent publiquement · 3 CVE assignées · 28 divulgations coordonnées · 4 prépublications en sécurité",
     linkLabel: "Consulter le dossier technique complet",
     linkHref: "#corpus",
   },
@@ -153,41 +161,31 @@ export const fr: SiteContent = {
   },
   solution: {
     eyebrow: "Comment ça marche",
-    title: "IronProof transforme un verdict en artefact.",
+    title: "Comment IronProof autorise une action d’IA",
     description:
-      "Vous définissez ce qui ne doit jamais arriver. IronProof cherche dans tout l’espace d’entrée défini un état qui l’enfreint. S’il en existe un, vous recevez le contre-exemple. S’il n’en existe aucun, vous recevez une preuve scellée qui garde son sens longtemps après la fin du mandat.",
+      "Votre politique écrite est compilée en mathématiques — par le même compilateur déterministe qu’utilise le runtime. La preuve porte sur ce modèle, pas sur une liste de contrôles.",
     steps: [
       {
         step: "01",
-        title: "Encoder la frontière",
-        body: "Les règles de sécurité, de conformité et de gouvernance qu’une action d’agent, un chemin de code ou une implémentation cryptographique ne doit jamais franchir — écrites une fois, compilées de façon déterministe.",
+        title: "Capturer le contexte de la décision",
+        body: "Consigner la version de la politique, l’autorité de l’agent, l’état transactionnel et l’action demandée.",
       },
       {
         step: "02",
-        title: "Prouver, pas échantillonner",
-        body: "Un solveur cherche tout état atteignable qui viole la règle sur toute la portée déclarée. Ni fuzzing, ni tests, ni score de confiance : une recherche exhaustive sur l’espace que vous avez défini.",
+        title: "Prouver la frontière",
+        body: "Déterminer si l’action peut violer une règle définie par le client ou une limite cumulative. La politique compilée devient des contraintes et un solveur parcourt tout l’espace défini — unsat signifie qu’aucun état en violation n’existe, sat renvoie le contre-exemple.",
       },
       {
         step: "03",
+        title: "Autoriser ou bloquer l’exécution",
+        body: "N’émettre un jeton d’exécution à usage unique que lorsque l’action est prouvée à l’intérieur de la frontière. Le jeton est lié à cette action exacte et à la politique en vigueur ; rien ne s’exécute sans le dépenser.",
+      },
+      {
+        step: "04",
         title: "Sceller la preuve",
-        body: "Un contre-exemple quand une violation existe. Quand il n’y en a aucune, un artefact haché en SHA3-512 et doublement signé Ed25519 + ML-DSA-65 — portable, contrôlable hors ligne, post-quantique.",
+        body: "Conserver la décision, la justification et le résultat de preuve dans un artefact vérifiable indépendamment.",
       },
     ],
-    diagram: {
-      rulesTitle: "Frontière",
-      rulesSubtitle: "Règles de sécurité, conformité et gouvernance",
-      verificationTitle: "Preuve",
-      verificationSubtitle: "Exhaustive sur l’espace d’entrée défini",
-      counterexampleLabel: "Violation atteignable",
-      counterexampleValue: "Contre-exemple",
-      proofArtifactLabel: "Aucune violation n’existe",
-      proofArtifactValue: "Artefact scellé",
-    },
-    quoteIntro1: "La plupart des outils de sécurité disent : ",
-    quote1: "« On a regardé le système et il a l’air sûr. »",
-    quoteIntro2: "IronProof dit : ",
-    quote2:
-      "« Voici les règles. Voici la preuve qu’aucun état de cette portée ne les enfreint. Voici un artefact scellé que vous pourrez recontrôler dans dix ans sans nous. »",
   },
   products: {
     eyebrow: "Produit",

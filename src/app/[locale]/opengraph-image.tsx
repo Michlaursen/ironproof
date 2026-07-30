@@ -116,7 +116,12 @@ export default async function Image({ params }: Props) {
             />
             {content.hero.proofCard.status}
           </div>
-          <span>{content.solution.diagram.proofArtifactValue}</span>
+          {/*
+            Was solution.diagram.proofArtifactValue. The diagram went away with
+            the four-step rewrite; the card's own label says the same thing and
+            is the object the badge belongs to.
+          */}
+          <span>{content.hero.proofCard.label}</span>
         </div>
       </div>
     ),

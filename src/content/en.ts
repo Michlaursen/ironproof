@@ -91,8 +91,16 @@ export const en: SiteContent = {
         href: "https://github.com/openela-main/libyang",
       },
     ],
+    alsoLabel: "Also credited by name",
+    also: [
+      { org: "GnuPG", href: "https://github.com/gpg/libksba/commit/c44cc98460ea42e393214dc6e23ff746196baefd" },
+      { org: "OFFIS · DCMTK", href: "https://github.com/DCMTK/dcmtk/commit/63b0bae751f62ed1b384141fa0fd032c98af57aa" },
+      { org: "IBM", href: "https://github.com/IBM/sarama/commit/b01879002b37abe3b44a957615d982847a44da94" },
+      { org: "libmodbus", href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175" },
+      { org: "Mozilla", href: "https://bugzilla.mozilla.org/show_bug.cgi?id=2027434" },
+    ],
     summary:
-      "3 assigned CVEs · 28 coordinated disclosures · 4 security preprints",
+      "8 organizations credit us publicly · 3 assigned CVEs · 28 coordinated disclosures · 4 security preprints",
     linkLabel: "Review the full technical record",
     linkHref: "#corpus",
   },
@@ -143,41 +151,31 @@ export const en: SiteContent = {
   },
   solution: {
     eyebrow: "How it works",
-    title: "IronProof turns a verdict into an artifact.",
+    title: "How IronProof authorizes an AI action",
     description:
-      "You define what must never happen. IronProof searches the entire defined input space for a state that breaks it. If one exists, you get the counterexample. If none does, you get sealed evidence that keeps its meaning long after the engagement ends.",
+      "Your written policy is compiled into mathematics — by the same deterministic compiler the runtime uses. The proof runs against that model, not against a checklist.",
     steps: [
       {
         step: "01",
-        title: "Encode the boundary",
-        body: "The security, compliance and governance rules an AI action, a code path or a cryptographic implementation must never cross — written once, compiled deterministically.",
+        title: "Capture the decision context",
+        body: "Record the policy version, agent authority, transaction state and requested action.",
       },
       {
         step: "02",
-        title: "Prove it, don’t sample it",
-        body: "A solver looks for any reachable state that violates the rule across the whole defined scope. Not fuzzing, not testing, not a confidence score: an exhaustive search over the space you declared.",
+        title: "Prove the boundary",
+        body: "Determine whether the action can violate any customer-defined rule or cumulative limit. The compiled policy becomes constraints and a solver searches the entire defined space — unsat means no violating state exists, sat returns the counterexample.",
       },
       {
         step: "03",
+        title: "Allow or block execution",
+        body: "Issue a single-use execution grant only when the action is proven inside the boundary. The grant is bound to that exact action and to the policy in force; nothing executes without spending it.",
+      },
+      {
+        step: "04",
         title: "Seal the evidence",
-        body: "A counterexample when a violation exists. When none does, an artifact hashed SHA3-512 and dual-signed Ed25519 + ML-DSA-65 — portable, offline-checkable, post-quantum.",
+        body: "Preserve the decision, justification and proof result in an independently verifiable artifact.",
       },
     ],
-    diagram: {
-      rulesTitle: "Boundary",
-      rulesSubtitle: "Security, compliance & governance rules",
-      verificationTitle: "Proof",
-      verificationSubtitle: "Exhaustive over the defined input space",
-      counterexampleLabel: "Violation reachable",
-      counterexampleValue: "Counterexample",
-      proofArtifactLabel: "No violation exists",
-      proofArtifactValue: "Sealed artifact",
-    },
-    quoteIntro1: "Most security tools say: ",
-    quote1: "“We looked at the system and it seems safe.”",
-    quoteIntro2: "IronProof says: ",
-    quote2:
-      "“Here are the rules. Here is the proof that no state in this scope breaks them. Here is a sealed artifact you can re-check in ten years without us.”",
   },
   products: {
     eyebrow: "Product",
