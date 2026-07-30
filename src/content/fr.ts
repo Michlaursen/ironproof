@@ -83,7 +83,7 @@ export const fr: SiteContent = {
     ],
     cveLabel: "Les CVE derrière",
     cveNote:
-      "Trois assignées. Deux portent un identifiant public que vous pouvez consulter tout de suite — et les deux tombent sur le même code que les crédits ci-dessus, c’est ainsi qu’on distingue une divulgation d’une affirmation.",
+      "Deux portent un identifiant public que vous pouvez consulter tout de suite — et les deux tombent sur le même code que les crédits ci-dessus, c’est ainsi qu’on distingue une divulgation d’une affirmation. Une troisième est déposée chez Zephyr et n’est pas encore publiée : on l’affiche pour ce qu’elle est.",
     cves: [
       {
         id: "CVE-2026-44673",
@@ -105,15 +105,15 @@ export const fr: SiteContent = {
       },
       {
         id: "Zephyr RTOS",
-        product: "Troisième CVE assignée",
-        kind: "Signalée par le processus de sécurité Zephyr",
-        severity: "Corrigée et livrée",
-        body: "Assignée et corrigée en amont. Nous n’imprimons pas d’identifiant ici tant que nous n’avons pas revérifié lequel c’est — mettre le mauvais numéro de CVE sur cette page annulerait l’intérêt des deux autres.",
-        status: "Identifiant en attente de revérification",
+        product: "Avis déposé, pas encore publié",
+        kind: "CWE-190, par le processus de sécurité Zephyr",
+        severity: "Corrigé en amont",
+        body: "GitHub émet un identifiant d’avis dès le dépôt du signalement, mais il reste privé au rapporteur et aux mainteneurs jusqu’à publication — le nôtre ne mène donc nulle part pour vous aujourd’hui. Nous préférons laisser cette carte maigre plutôt que d’imprimer une référence que vous ne pouvez pas ouvrir.",
+        status: "Identifiant retenu tant qu’il ne résout pas publiquement",
       },
     ],
     footnote:
-      "3 CVE assignées · 28 divulgations coordonnées déposées · 4 prépublications sur arXiv. Chaque chiffre de cette page renvoie à quelque chose que vous pouvez ouvrir.",
+      "2 CVE à identifiant public · 3 crédits de tiers · 28 divulgations coordonnées déposées · 4 prépublications sur arXiv. Chaque chiffre de cette page renvoie à quelque chose que vous pouvez ouvrir — on a retiré ceux qui n’y renvoyaient pas.",
   },
   lab: {
     eyebrow: "Laboratoire de preuve",
@@ -226,7 +226,7 @@ export const fr: SiteContent = {
         name: "IronProof Cobalt-AI",
         tag: "Code et contrats intelligents",
         description:
-          "Prouve des propriétés du code — hérité, réusiné, généré par IA ou en chaîne. C’est la surface derrière nos 3 CVE assignées et les correctifs intégrés par wolfSSL, VideoLAN et Red Hat.",
+          "Prouve des propriétés du code — hérité, réusiné, généré par IA ou en chaîne. C’est la surface derrière nos CVE publiées et les correctifs intégrés par wolfSSL, VideoLAN et Red Hat.",
         items: [
           "Assurance du code généré par IA",
           "Audits de preuve pour la modernisation d’applications héritées",
@@ -531,9 +531,9 @@ export const fr: SiteContent = {
       "La chose la plus forte qu’une entreprise de vérification puisse faire, c’est se rendre réfutable. Lisez les méthodes, lancez la suite, contrôlez les chiffres, et contredisez-nous en public.",
     record: [
       {
-        stat: "3",
-        label: "CVE assignées",
-        note: "libyang, libupnp, Zephyr RTOS — toutes corrigées en amont.",
+        stat: "2",
+        label: "CVE à identifiant public",
+        note: "CVE-2026-44673 (libyang, CVSS 7,5) et CVE-2026-41682 (pupnp). Un troisième avis est déposé chez Zephyr et pas encore publié ; on le compte à part plutôt que d’arrondir.",
       },
       {
         stat: "28",

@@ -85,7 +85,7 @@ export const en: SiteContent = {
     ],
     cveLabel: "The CVEs behind them",
     cveNote:
-      "Three assigned. Two carry a public identifier you can look up right now — and both land on the same code as the credits above, which is how you tell a disclosure from a claim.",
+      "Two carry a public identifier you can look up right now — and both land on the same code as the credits above, which is how you tell a disclosure from a claim. A third is filed with Zephyr and has not been published yet, so we show it as what it is.",
     cves: [
       {
         id: "CVE-2026-44673",
@@ -107,15 +107,15 @@ export const en: SiteContent = {
       },
       {
         id: "Zephyr RTOS",
-        product: "Third assigned CVE",
-        kind: "Reported through the Zephyr security process",
-        severity: "Fixed and shipped",
-        body: "Assigned and patched upstream. We are not printing an identifier here until we have re-verified which one it is — putting the wrong CVE number on this page would undo the point of the other two.",
-        status: "Identifier pending re-verification",
+        product: "Advisory filed, not yet published",
+        kind: "CWE-190, through the Zephyr security process",
+        severity: "Fixed upstream",
+        body: "GitHub mints an advisory identifier the moment a report is filed, but it stays private to the reporter and the maintainers until publication — so ours resolves to nothing for you today. We would rather leave this card thin than print a reference you cannot open.",
+        status: "Identifier withheld until it resolves publicly",
       },
     ],
     footnote:
-      "3 CVEs assigned · 28 coordinated disclosures filed · 4 preprints on arXiv. Every number on this page is traceable to something you can open.",
+      "2 CVEs with public identifiers · 3 third-party credits · 28 coordinated disclosures filed · 4 preprints on arXiv. Every number on this page is traceable to something you can open — we removed the ones that weren't.",
   },
   lab: {
     eyebrow: "Proof Laboratory",
@@ -228,7 +228,7 @@ export const en: SiteContent = {
         name: "IronProof Cobalt-AI",
         tag: "Code & smart contracts",
         description:
-          "Proves properties of code — legacy, refactored, AI-generated or on-chain. The surface behind our 3 assigned CVEs and the fixes shipped by wolfSSL, VideoLAN and Red Hat.",
+          "Proves properties of code — legacy, refactored, AI-generated or on-chain. The surface behind our published CVEs and the fixes shipped by wolfSSL, VideoLAN and Red Hat.",
         items: [
           "AI-generated code assurance",
           "Legacy modernization proof audits",
@@ -496,9 +496,9 @@ export const en: SiteContent = {
       "The strongest thing a verification company can do is make itself falsifiable. Read the methods, run the suite, check the numbers, and disagree with us in public.",
     record: [
       {
-        stat: "3",
-        label: "CVEs assigned",
-        note: "libyang, libupnp, Zephyr RTOS — all patched upstream.",
+        stat: "2",
+        label: "CVEs with public identifiers",
+        note: "CVE-2026-44673 (libyang, CVSS 7.5) and CVE-2026-41682 (pupnp). A third advisory is filed with Zephyr and not yet published; we count it separately rather than round up.",
       },
       {
         stat: "28",
