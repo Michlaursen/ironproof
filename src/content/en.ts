@@ -2,227 +2,498 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "IronProof — Provable security for AI and critical software",
+    title: "IronProof — Proof that outlives the vendor",
     description:
-      "IronProof is the proof layer for high-trust organizations deploying AI agents, AI-generated code, and modernized software. We verify what systems are allowed to do, prove whether violations are possible, and seal the result as portable evidence.",
+      "IronProof proves what AI agents, critical code and cryptography are allowed to do, then seals the result as a post-quantum artifact that a third party re-verifies offline — without trusting IronProof.",
     ogDescription:
-      "From AI risk to machine-checkable proof. IronProof verifies critical code and AI actions before trust is given.",
+      "Every security vendor asks you to trust their verdict. IronProof hands you a sealed proof you can re-verify offline, years later, without us.",
   },
   header: {
     nav: [
+      { href: "#evidence", label: "Evidence" },
+      { href: "#artifact", label: "The artifact" },
       { href: "#products", label: "Product" },
-      { href: "#use-cases", label: "Use Cases" },
-      { href: "#sovereignty", label: "Sovereignty" },
-      { href: "#proof-points", label: "Proof" },
+      { href: "#comparison", label: "Compare" },
+      { href: "#corpus", label: "Research" },
       { href: "https://lab.ironproof.ai", label: "Proof Lab" },
     ],
     cta: "Request a demo",
     langSwitchLabel: "FR",
   },
   hero: {
-    eyebrow: "Verifiable security infrastructure",
-    headline: "Provable security for AI and critical software.",
+    eyebrow: "Verifiable security infrastructure · Canada",
+    headline: "Proof that outlives the vendor.",
     subhead:
-      "IronProof is the proof layer for high-trust organizations deploying AI agents, AI-generated code, and modernized software. We verify what systems are allowed to do, prove whether violations are possible, and seal the result as portable evidence.",
+      "Every security tool asks you to keep trusting it. IronProof proves what AI agents, critical code and cryptography can and cannot do — then seals the result as an artifact a third party re-verifies offline, years later, with nothing but a public key.",
     ctaPrimary: "Request a demo",
-    ctaSecondary: "See how it works",
-    taglinePre: "IronProof moves organizations from ",
-    taglineQuote1: "“probably secure”",
+    ctaSecondary: "Inspect a real proof",
+    taglinePre: "IronProof moves institutions from ",
+    taglineQuote1: "“trust our verdict”",
     taglineMid: " to ",
-    taglineQuote2: "“provably secure.”",
+    taglineQuote2: "“verify it yourself, offline.”",
     proofCard: {
       label: "Proof Artifact",
-      status: "VERIFIED",
+      status: "SEALED",
       rows: [
-        { label: "Scope", value: "defined input space" },
-        { label: "Rule set", value: "policy-v3.2" },
-        { label: "Result", value: "no violation found" },
-        { label: "Sealing", value: "post-quantum signature" },
-        { label: "Verifier", value: "offline / public key" },
+        { label: "Scope", value: "policy · defined input space" },
+        { label: "Obligation", value: "no reachable violation" },
+        { label: "Solver", value: "unsat" },
+        { label: "Seal", value: "Ed25519 + ML-DSA-65" },
+        { label: "Verifier", value: "offline · public key" },
       ],
       footnote:
-        "Independently verifiable, even offline — without trusting the original system.",
+        "SHA3-512 hashed, dual-signed under FIPS 204. Re-checkable without network access — and without trusting IronProof.",
     },
+  },
+  attributions: {
+    eyebrow: "Independently verifiable",
+    title:
+      "Not testimonials. Maintainers who shipped our fixes and named us in their source tree.",
+    description:
+      "We are early, and we would rather you hear it here than find it in diligence. What we can show is a harder kind of proof than a customer quote: three independent open-source projects — none of them ours, none of them paid — that credit us by name at a public URL you can open right now.",
+    items: [
+      {
+        org: "wolfSSL",
+        where: "Release 5.9.2 — June 23, 2026",
+        quote:
+          "Hardening fixes in wolfSSL_strnstr and mp_get_digit. Thanks to Dominik Blain / COBALT Security for the bug report.",
+        context:
+          "A TLS library deployed across embedded, IoT, automotive and avionics systems. Being named in a vendor's release notes is recognition, not self-declaration.",
+        href: "https://github.com/wolfSSL/wolfssl/blob/master/README.md",
+        linkLabel: "Read the release notes",
+      },
+      {
+        org: "VideoLAN · VLC",
+        where: "A file in the source tree carries our founder's name",
+        quote:
+          "0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
+        context:
+          "Port bounds validation in pupnp's parse_hostport(), authored upstream by the pupnp maintainer and carried into VLC. Referenced advisory: GHSA-q522-6w45-4j58.",
+        href: "https://github.com/videolan/vlc/blob/master/contrib/src/upnp/0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
+        linkLabel: "Open the patch file",
+      },
+      {
+        org: "Red Hat · OpenELA",
+        where: "libyang — RHEL-177019",
+        quote:
+          "Reported-by: Dominik Blain <dominik@qreativelab.io>, Cobalt AI",
+        context:
+          "Two memory corruptions reachable from a malformed LYB input. OpenELA is the enterprise Linux consortium founded by Oracle, SUSE and CIQ.",
+        href: "https://github.com/openela-main/libyang",
+        linkLabel: "See the patch source",
+      },
+    ],
+    footnote:
+      "3 CVEs assigned · 28 coordinated disclosures filed · 4 preprints on arXiv. Every number on this page is traceable to something you can open.",
   },
   lab: {
     eyebrow: "Proof Laboratory",
-    title: "Don’t take our word for it. Inspect the proof.",
+    title: "Don’t take our word for it. Try to break it.",
     description:
-      "Enter the IronProof Lab to explore real proof obligations, challenge the policies, inspect counterexamples, and reproduce the evidence yourself.",
+      "The Lab runs real proof obligations in your browser. Change the policy, push the agent past its limit, and watch the solver produce a counterexample — or refuse to find one. The instrument is the argument.",
     cta: "Enter the Proof Lab",
     previewLabel: "LIVE INSTRUMENT",
     previewTitle: "AI agent action through the proof gate",
     previewStatus: "PROVEN SAFE",
     obligationLabel: "Proof obligation",
-    obligation: "No reachable state can disburse more than the approved amount.",
+    obligation:
+      "No reachable state can disburse more than the approved amount — proven over the whole defined input space, not sampled.",
     verdictLabel: "Solver verdict",
     verdict: "unsat",
     evidenceLabel: "Evidence",
     evidence: "sealed · reproducible · independently verifiable",
   },
   problem: {
-    eyebrow: "The problem",
-    title: "AI is acting faster than organizations can verify.",
+    eyebrow: "The gap",
+    title: "The category exists. The evidence doesn’t travel.",
     description:
-      "AI agents now touch workflows involving approvals, refunds, permissions, customer records, code changes, and regulated decisions. Traditional audits, logs, and policy documents cannot prove whether a system can violate a rule before it acts.",
+      "Proving software correct is no longer exotic. AWS proves its own cloud, Certora proves smart contracts, Imandra proves algorithms, Galois has done government-grade assurance for 25 years. The open question is no longer whether code can be proven — it is who you still have to trust once the work is done.",
     points: [
       {
-        title: "AI is becoming operational",
-        body: "AI agents now approve, refund, credit, discount, transfer, modify records, change permissions, trigger workflows, and write code — not just answer questions.",
+        title: "AI is acting, not answering",
+        body: "Agents now approve, refund, credit, transfer, change permissions and write production code. The decision happens in milliseconds; the review happens in weeks, if at all.",
       },
       {
-        title: "Logs and policies are not enough",
-        body: "Most governance tools observe, log, score, or review after the fact. They do not prove whether a system can violate a rule before it acts.",
+        title: "Every verdict lives in the vendor’s system",
+        body: "A dashboard, a cloud service, an engagement report, a PDF. End the contract and the assurance leaves with it. What reaches your regulator is a screenshot and a promise.",
       },
       {
-        title: "Modernization widens the gap",
-        body: "Organizations are accepting AI-generated code into production faster than they can verify it. Software is moving faster than trust can be checked.",
+        title: "Auditors are asking for the artifact",
+        body: "OSFI technology and cyber expectations, the CSE post-quantum roadmap, internal audit committees. What survives scrutiny is a record a third party can check independently — years later, without the vendor in the room.",
       },
     ],
   },
   solution: {
-    eyebrow: "The solution",
-    title: "IronProof turns trust into evidence.",
+    eyebrow: "How it works",
+    title: "IronProof turns a verdict into an artifact.",
     description:
-      "When something fails, IronProof produces a counterexample showing the risk. When something passes, it issues a signed proof artifact that can be verified later — independently, and offline.",
+      "You define what must never happen. IronProof searches the entire defined input space for a state that breaks it. If one exists, you get the counterexample. If none does, you get sealed evidence that keeps its meaning long after the engagement ends.",
     steps: [
       {
         step: "01",
-        title: "Define the rules",
-        body: "Encode the security, compliance, and governance rules an AI system or piece of software must never violate.",
+        title: "Encode the boundary",
+        body: "The security, compliance and governance rules an AI action, a code path or a cryptographic implementation must never cross — written once, compiled deterministically.",
       },
       {
         step: "02",
-        title: "Verify the behavior",
-        body: "IronProof checks whether the software or AI action can violate those rules — mathematically, over the defined input space.",
+        title: "Prove it, don’t sample it",
+        body: "A solver looks for any reachable state that violates the rule across the whole defined scope. Not fuzzing, not testing, not a confidence score: an exhaustive search over the space you declared.",
       },
       {
         step: "03",
-        title: "Receive the evidence",
-        body: "A counterexample when a violation is possible. A signed proof artifact, certificate, or receipt when it isn't.",
+        title: "Seal the evidence",
+        body: "A counterexample when a violation exists. When none does, an artifact hashed SHA3-512 and dual-signed Ed25519 + ML-DSA-65 — portable, offline-checkable, post-quantum.",
       },
     ],
     diagram: {
-      rulesTitle: "Rules",
-      rulesSubtitle: "Security, compliance & governance constraints",
-      verificationTitle: "Verification",
-      verificationSubtitle: "Checked over the defined input space",
-      counterexampleLabel: "Violation possible",
+      rulesTitle: "Boundary",
+      rulesSubtitle: "Security, compliance & governance rules",
+      verificationTitle: "Proof",
+      verificationSubtitle: "Exhaustive over the defined input space",
+      counterexampleLabel: "Violation reachable",
       counterexampleValue: "Counterexample",
-      proofArtifactLabel: "No violation found",
-      proofArtifactValue: "Sealed proof artifact",
+      proofArtifactLabel: "No violation exists",
+      proofArtifactValue: "Sealed artifact",
     },
-    quoteIntro1: "Most cybersecurity tools say: ",
+    quoteIntro1: "Most security tools say: ",
     quote1: "“We looked at the system and it seems safe.”",
     quoteIntro2: "IronProof says: ",
     quote2:
-      "“Here are the rules. Here is the proof that the system cannot break them within this scope. And here is a sealed receipt you can verify later.”",
+      "“Here are the rules. Here is the proof that no state in this scope breaks them. Here is a sealed artifact you can re-check in ten years without us.”",
   },
   products: {
     eyebrow: "Product",
-    title: "One proof engine. Multiple high-trust use cases.",
+    title: "One proof engine. Four surfaces where it matters.",
+    description:
+      "The same engine, pointed at four places where being wrong is expensive. Every surface produces the same deliverable: a counterexample, or a sealed artifact.",
     items: [
       {
-        name: "IronProof Cobalt",
-        tag: "Software modernization",
+        name: "IronProof Core",
+        tag: "Proof engine",
         description:
-          "Verifies migrated, refactored, or AI-generated code and produces proof artifacts when the code meets defined properties.",
+          "The ontology engine. Z3 and Spacer over a typed digital twin: it synthesizes the invariant itself, then proves no trajectory escapes it. Most tools check a rule you wrote. Core finds the rule that has to hold.",
         items: [
-          "Legacy modernization",
-          "AI-generated code review",
-          "Regulated software changes",
-          "High-risk refactoring",
-          "Security-sensitive code paths",
+          "Symbolic invariant synthesis",
+          "Encoder fidelity machine-checked in Lean 4",
+          "Counterexample on every failure",
+          "Post-quantum sealed artifacts",
+          "Offline third-party verification",
         ],
       },
       {
-        name: "IronProof VERDICT",
+        name: "IronProof Actions",
         tag: "AI agent governance",
         description:
-          "Verifies high-risk AI agent actions before execution, checks them against governance rules, and creates sealed evidence of what was allowed, denied, or proven safe.",
+          "Judges a high-risk agent action before it executes. The gate is the only entrance — structurally, not by convention: nothing runs without spending a single-use grant minted only on the proven-safe branch.",
         items: [
-          "AI agents in regulated workflows",
-          "Approvals, refunds, credits, transfers",
-          "Policy enforcement",
-          "Audit trails",
-          "Enterprise AI governance",
+          "Pre-execution verification, not after-the-fact logs",
+          "Approvals, refunds, credits, transfers, limits",
+          "Single-use execution grants bound to the policy in force",
+          "Sealed record of what was allowed, denied and proven",
+          "Runs air-gapped — no network in the proof core",
         ],
       },
       {
-        name: "IronProof Core",
-        tag: "Proof infrastructure",
+        name: "IronProof Cobalt-AI",
+        tag: "Code & smart contracts",
         description:
-          "The underlying proof engine. Transforms policies, constraints, code behavior, and action rules into machine-checkable verification logic.",
+          "Proves properties of code — legacy, refactored, AI-generated or on-chain. The surface behind our 3 assigned CVEs and the fixes shipped by wolfSSL, VideoLAN and Red Hat.",
         items: [
-          "Policy-to-machine-checkable controls",
-          "Formal verification engine",
-          "Powers Cobalt and VERDICT",
-          "Sealed, portable proof artifacts",
-          "Offline, independently verifiable",
+          "AI-generated code assurance",
+          "Legacy modernization proof audits",
+          "Smart contracts & cross-chain bridge analysis",
+          "Memory-safety classes (CWE-190 / 131 / 195)",
+          "Coordinated disclosure, publicly credited",
+        ],
+      },
+      {
+        name: "IronProof Cobalt-PQC",
+        tag: "Cryptography",
+        description:
+          "Proves the absence of timing side channels in cryptographic implementations, and audits the post-quantum migration itself — the one deadline nobody can renegotiate.",
+        items: [
+          "Constant-time verification (IEEE-754 timing)",
+          "ML-DSA / FIPS 204 implementations",
+          "Post-quantum inventory and CBOM",
+          "Harvest-now-decrypt-later exposure",
+          "Published research across the ecosystem",
         ],
       },
     ],
   },
-  sovereignty: {
-    eyebrow: "Sovereignty",
-    title: "Built for sovereign and air-gapped environments.",
+  artifact: {
+    eyebrow: "Walk through the artifact",
+    title: "Every field in the artifact does a job.",
     description:
-      "IronProof is designed for institutions that cannot send sensitive systems, code, data, or decisions into uncontrolled environments. Proof artifacts can be sealed and independently verified without relying on the original system.",
-    tagline: "Sécurité vérifiable pour l’IA et les logiciels.",
+      "Open a sealed IronProof artifact and pull it apart. There are eight parts, and each one is there because an engineer, an auditor or a regulator reading it has a decision to make. A report tells you what we concluded. An artifact lets you check it.",
+    stats: [
+      {
+        stat: "8",
+        label: "Annotated fields",
+        note: "Each one deliberately different from what a report gives you.",
+      },
+      {
+        stat: "2",
+        label: "Signatures per entry",
+        note: "Ed25519 and ML-DSA-65 — both must verify, or the entry fails.",
+      },
+      {
+        stat: "0",
+        label: "Vendor access required",
+        note: "The public keys ship inside the artifact. Verification is offline.",
+      },
+    ],
+    fileLabel: "verdict_dossier.json — merchant refund policy v3.2",
+    fileMeta: "sceal_dossier_version 1.1 · dual-signed · chained",
+    parts: [
+      {
+        num: "01",
+        field: "target · policy_owner",
+        anchor: "Who wrote the rule",
+        claim: "The customer owns the policy. We only prove it.",
+        body: "The artifact records, in its own body, that the rule being proven was written by the customer and not by us. A verification company that authors the rules it then grades itself against is marking its own homework, and the artifact makes that impossible to hide.",
+        statusQuo:
+          "The vendor defines the property and the pass criteria, so a green result partly measures the vendor’s own choices.",
+        code: [
+          { key: "target", value: "\"Acme Store — refund / credit / discount policy v3.2\"" },
+          {
+            key: "policy_owner",
+            value: "\"merchant (customer-authored, not written by Ironproof)\"",
+            tone: "ok",
+          },
+        ],
+      },
+      {
+        num: "02",
+        field: "theorem",
+        anchor: "The obligation, in solver form",
+        claim: "The actual theorem, not a paraphrase of it.",
+        body: "Two obligations, both discharged: the base case says the system starts inside the invariant, the inductive step says no single action can leave it. Together they cover every reachable sequence — not a sample of them. The formula is in the artifact, so you can re-run it rather than believe our summary of it.",
+        statusQuo:
+          "Reports describe the property in English. The prose and the formula that was actually checked can drift apart, and nobody finds out.",
+        code: [
+          { key: "theorem", value: "\"INIT => INV ; INV & step => INV'\"" },
+          { key: "discharge", value: "\"both UNSAT under spec-compiled gate\"", tone: "ok" },
+        ],
+      },
+      {
+        num: "03",
+        field: "meaning",
+        anchor: "Plain language, beside the maths",
+        claim: "The sentence a risk officer can read, next to the formula it came from.",
+        body: "The artifact carries a plain-language reading of the theorem — not instead of the formula, beside it. The engineer checks the maths; the risk committee reads the sentence; both are looking at the same sealed object, so they cannot be told different stories.",
+        statusQuo:
+          "You get one or the other: prose nobody can check, or a formula nobody reads. The gap between them is where overclaims live.",
+        code: [
+          {
+            key: "meaning",
+            value:
+              "\"no sequence of refund/credit/discount actions the agent can take exceeds the merchant’s limits\"",
+          },
+        ],
+      },
+      {
+        num: "04",
+        field: "solver_in_proof",
+        anchor: "Named solver, pinned version",
+        claim: "Which prover, which version — recorded in the evidence.",
+        body: "A proof is only as reproducible as the tool that produced it. The artifact names the solver and pins its version, so the run can be repeated years later on the same tooling, and so a solver bug disclosed tomorrow can be mapped to every artifact it touched.",
+        statusQuo:
+          "A green checkmark with no solver, no version and no obligation. Nothing to reproduce, nothing to recall.",
+        code: [
+          { key: "solver_in_proof", value: "\"z3 4.16.0\"", tone: "ok" },
+          { key: "artifact_sha3_512", value: "\"ca5628f661854813be35…\"", tone: "muted" },
+        ],
+      },
+      {
+        num: "05",
+        field: "independent_engine_count",
+        anchor: "Corroboration by independent engines",
+        claim: "More than one engine had to agree.",
+        body: "The verdict is corroborated by independent reasoning engines, and the count travels with the artifact. One tool’s opinion is a data point; agreement between engines that fail differently is evidence. When they disagree, the artifact says so rather than picking the convenient answer.",
+        statusQuo:
+          "A single tool’s output, presented as fact. Its blind spots become your blind spots, silently.",
+        code: [
+          { key: "corroborating_engines", value: "[ … ]" },
+          { key: "independent_engine_count", value: "2", tone: "ok" },
+        ],
+      },
+      {
+        num: "06",
+        field: "content_hash · prev_hash · entry_hash",
+        anchor: "Append-only chain",
+        claim: "Editing the past breaks the chain, loudly.",
+        body: "Every entry hashes its own content, carries the hash of the one before it, and seals both. Change a value after the fact and the chain no longer closes — verification fails with a content-hash mismatch instead of quietly accepting the new version. Tamper detection is a property of the format, not a promise in a contract.",
+        statusQuo:
+          "A PDF that can be re-exported, or a dashboard row that can be updated in place with no trace.",
+        code: [
+          { key: "content_hash", value: "\"8a42d3e9bff6c0037bc7…\"", tone: "muted" },
+          { key: "prev_hash", value: "\"000000000000000000…\"", tone: "muted" },
+          { key: "entry_hash", value: "\"e2bc96d69a59406606f0…\"", tone: "muted" },
+        ],
+      },
+      {
+        num: "07",
+        field: "signature_scheme · public_keys",
+        anchor: "Dual signature, post-quantum",
+        claim: "Both signatures must verify. The keys ship with the artifact.",
+        body: "Each entry is signed classically with Ed25519 and post-quantum with ML-DSA-65 under FIPS 204, in a mode where both must verify or the entry is rejected. The public keys are inside the file, so checking it needs no account, no network and no cooperation from us — including after we are gone.",
+        statusQuo:
+          "Verification means logging into the vendor’s dashboard, or trusting a PDF signature that expires with its certificate authority.",
+        code: [
+          { key: "classical", value: "\"Ed25519\"" },
+          { key: "post_quantum", value: "\"ML-DSA-65\"", tone: "ok" },
+          { key: "mode", value: "\"dual (both must verify)\"", tone: "ok" },
+        ],
+      },
+      {
+        num: "08",
+        field: "claim (when a check did not run)",
+        anchor: "A skip never reads as a pass",
+        claim: "When we could not check something, the artifact says so in the same field that would have said “verified”.",
+        body: "If the prover or the checker is absent, the artifact does not fall silent and it does not go green. It records the gap in the same place a success would have been written. This is the failure mode that matters most in our field — a green summary sitting on top of something that never ran — and we designed the format so it cannot happen quietly.",
+        statusQuo:
+          "A check that did not run is indistinguishable from a check that found nothing. Both render as green.",
+        code: [
+          {
+            key: "claim",
+            value:
+              "\"NOT RUN — prover and/or checker absent. This is a gap, not a pass.\"",
+            tone: "warn",
+          },
+          { key: "obligations_checked", value: "0", tone: "warn" },
+        ],
+      },
+    ],
+    tableTitle: "Side by side",
+    tableColumns: {
+      row: "In the deliverable",
+      us: "IronProof artifact",
+      them: "Typical report or dashboard",
+    },
+    tableRows: [
+      { row: "Names who authored the policy", us: "yes", them: "no" },
+      { row: "Ships the checked formula, not a paraphrase", us: "yes", them: "no" },
+      { row: "Plain-language reading beside the formula", us: "yes", them: "sometimes" },
+      { row: "Names the solver and pins its version", us: "yes", them: "no" },
+      { row: "Records corroboration by independent engines", us: "yes", them: "no" },
+      { row: "Tampering breaks verification", us: "yes", them: "no" },
+      { row: "Post-quantum signature (FIPS 204)", us: "yes", them: "no" },
+      { row: "Verifiable offline, without the vendor", us: "yes", them: "no" },
+      { row: "A skipped check cannot render as a pass", us: "yes", them: "no" },
+      { row: "Still meaningful after the vendor is gone", us: "yes", them: "no" },
+    ],
+  },
+  comparison: {
+    eyebrow: "Honest comparison",
+    title: "Where does the proof live once the work is done?",
+    description:
+      "We are not the only people who can prove software correct, and we will not pretend otherwise. Certora, Imandra, Galois, Trail of Bits and AWS all do serious work — on their home ground, better than we do. The difference is what you are still holding after the engagement ends.",
+    columns: {
+      vendor: "Vendor",
+      strength: "Strongest at",
+      location: "Where the proof lives",
+      survives: "Survives the vendor?",
+    },
+    rows: [
+      {
+        vendor: "Certora",
+        strength: "Smart contracts, continuous property checking",
+        location: "Their dashboard",
+        survives: "No",
+      },
+      {
+        vendor: "Imandra",
+        strength: "Algorithm and code logic, neurosymbolic reasoning",
+        location: "Their cloud service",
+        survives: "No",
+      },
+      {
+        vendor: "Galois",
+        strength: "Government-grade high assurance, 25 years of it",
+        location: "An engagement report",
+        survives: "No",
+      },
+      {
+        vendor: "Trail of Bits",
+        strength: "Expert audit at scale, open-source tooling",
+        location: "A PDF report",
+        survives: "No",
+      },
+      {
+        vendor: "AWS",
+        strength: "Provable security inside its own cloud",
+        location: "Inside AWS",
+        survives: "No",
+      },
+      {
+        vendor: "IronProof",
+        strength: "Portable evidence for AI actions, code and cryptography",
+        location: "A sealed artifact you hold",
+        survives: "Yes — offline, public key, post-quantum",
+        isUs: true,
+      },
+    ],
+    footnote:
+      "Read this table the right way. On volume of published research, Trail of Bits and Galois are ahead of us by an order of magnitude. On smart-contract coverage, Certora is the incumbent and it is not close. We are not claiming to be better at their job. We are claiming a different deliverable: evidence that does not depend on our continued existence.",
+  },
+  sovereignty: {
+    eyebrow: "Sovereignty & durability",
+    title: "Built for institutions that cannot export their systems — or their trust.",
+    description:
+      "The proof core runs with no network access. Nothing about your systems, your code or your decisions has to leave your control in order to be proven, and nothing has to come back to us in order to be checked.",
+    tagline: "Sécurité vérifiable pour l’IA et les logiciels critiques.",
     features: [
       {
-        title: "Post-quantum sealing",
-        body: "Proof artifacts are sealed using post-quantum cryptographic principles — future-resistant evidence.",
+        title: "Post-quantum seal",
+        body: "Artifacts are hashed SHA3-512 and dual-signed Ed25519 + ML-DSA-65 under FIPS 204. Evidence sealed today stays checkable after a cryptographically relevant quantum computer exists.",
       },
       {
         title: "Offline verification",
-        body: "A verifier can check the proof artifact later using public keys only, without access to the original system.",
+        body: "A verifier needs the artifact and a public key. No network, no account, no call home. Tampering shows up as a content-hash mismatch, not as silence.",
       },
       {
-        title: "Sovereign deployment",
-        body: "Sovereign, local, private, and compatible with air-gapped or high-control environments.",
+        title: "Sovereign & air-gapped deployment",
+        body: "Local, private, and compatible with air-gapped environments. Canadian-operated, for institutions that treat data residency and vendor concentration as a risk to be documented.",
       },
     ],
   },
-  useCases: {
-    eyebrow: "Use cases",
-    title: "Where proof matters most.",
-    items: [
-      "AI agent governance",
-      "AI-generated code assurance",
-      "Legacy modernization proof audits",
-      "Regulated workflow verification",
-      "Critical software security",
-      "Policy-to-machine-checkable controls",
-      "Post-quantum sealed audit evidence",
-      "Public sector and dual-use assurance",
-    ],
-  },
-  customers: {
-    eyebrow: "Built for",
-    title: "High-trust institutions where “trust me” is not enough.",
-    segments: [
-      "Banks",
-      "Insurance companies",
-      "Government agencies",
-      "Critical infrastructure operators",
-      "Telecoms",
-      "Healthcare administration platforms",
-      "Modernization partners",
-      "Enterprise SaaS deploying AI agents",
-      "Cybersecurity & compliance teams",
-    ],
-  },
-  proofPoints: {
-    eyebrow: "Proof, not promises",
-    title: "Evidence you can independently verify.",
-    items: [
-      { stat: "3", label: "CVEs assigned" },
-      { stat: "0", label: "False positives proven" },
-      { stat: "100%", label: "Mathematical verification over defined input space" },
-      { stat: "PQ", label: "Post-quantum sealed proof artifacts" },
-      { stat: "0", label: "Vendor access required for offline verification" },
-      { stat: "CA", label: "Sovereign Canadian deployment posture" },
+  corpus: {
+    eyebrow: "The record",
+    title: "Everything we claim is either published or reproducible.",
+    description:
+      "The strongest thing a verification company can do is make itself falsifiable. Read the methods, run the suite, check the numbers, and disagree with us in public.",
+    record: [
+      {
+        stat: "3",
+        label: "CVEs assigned",
+        note: "libyang, libupnp, Zephyr RTOS — all patched upstream.",
+      },
+      {
+        stat: "28",
+        label: "Coordinated disclosures filed",
+        note: "Reported through vendor channels, on a 90-day clock.",
+      },
+      {
+        stat: "3",
+        label: "Third-party public attributions",
+        note: "wolfSSL, VideoLAN and Red Hat / OpenELA credit us by name.",
+      },
+      {
+        stat: "Lean 4",
+        label: "Encoder fidelity, kernel-checked",
+        note: "The decider and the Z3 encoder are proven equivalent by a machine-checked theorem, generated from the real solver AST rather than transcribed by hand — the same discipline AWS applies to Cedar.",
+      },
+      {
+        stat: "1",
+        label: "Command reproduces the suite",
+        note: "reproduce.sh --verify re-derives the verification results end to end.",
+      },
+      {
+        stat: "4",
+        label: "Preprints on arXiv (cs.CR)",
+        note: "Methods, datasets and failure cases published in the open.",
+      },
     ],
     papers: {
       eyebrow: "Published research",
@@ -254,11 +525,41 @@ export const en: SiteContent = {
         },
       ],
     },
+    honesty: {
+      label: "What we do not claim",
+      body: "IronProof is pre-revenue and onboarding its first design partners. We put that here rather than let you find it in diligence — a company selling proof cannot be evasive about its own record. What is proven today is the engine and the seal: they run, they are reproducible, and third parties have verified their output. What is not yet proven is commercial traction. We will tell you which is which, every time.",
+    },
+  },
+  sector: {
+    eyebrow: "Where we start",
+    title: "Canadian financial services. Back-office AI agents that move money.",
+    description:
+      "Accounts payable, refunds, disbursements, beneficiary changes, cumulative limits, payments held for human approval. The buyer is risk, compliance and internal audit — not the development team. We are deliberately starting narrow, because a wedge without named accounts is just a category.",
+    quote:
+      "They do not use it to replace human judgment or to fully automate critical decisions given the significant financial, legal and reputational consequences.",
+    quoteSource: "Bank of Canada — Financial System Survey, May 2026",
+    quoteHref:
+      "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
+    afterQuote:
+      "That is the blocker we remove. Not with a promise — with an artifact the institution’s own auditor re-verifies without calling us. The same survey flags concentration among a small number of third-party AI and cloud providers as a stability risk: portable proof answers that concern better than geography does.",
+    alsoLabel: "The engine also runs against",
+    also: [
+      "Critical infrastructure operators",
+      "Government and defence-adjacent programs",
+      "Telecommunications",
+      "Healthcare administration platforms",
+      "Modernization and integration partners",
+      "Enterprise SaaS deploying AI agents",
+    ],
   },
   finalCta: {
     eyebrow: "In a world of AI uncertainty",
-    title: "IronProof gives institutions something rare: evidence.",
+    title: "Bring us the decision you cannot afford to get wrong.",
     subhead: "IronProof is not selling trust. IronProof is selling proof.",
+    offerLabel: "Entry engagement",
+    offerName: "Transaction Boundary Certificate",
+    offerBody:
+      "We take one money-moving workflow, encode the boundary it must never cross, prove no reachable state crosses it, and seal the certificate. Your auditor verifies it offline. Recertification is triggered by your release, not by our calendar.",
     designPartnerPre: "Looking to become a design partner instead? Email us at ",
     designPartnerEmail: "hello@ironproof.ai",
     form: {
@@ -278,8 +579,8 @@ export const en: SiteContent = {
   },
   footer: {
     description:
-      "IronProof builds verifiable security infrastructure for AI and critical software. Our platform helps high-trust organizations prove whether AI agents, AI-generated code, and modernized systems comply with defined security and governance rules.",
-    tagline: "Sécurité vérifiable pour l’IA et les logiciels.",
+      "IronProof builds verifiable security infrastructure for AI and critical software. We prove what agents, code and cryptography are allowed to do, and seal the result as post-quantum evidence that a third party re-verifies offline — without trusting us.",
+    tagline: "Sécurité vérifiable pour l’IA et les logiciels critiques.",
     country: "Canada",
     copyright: "IronProof. All rights reserved.",
   },

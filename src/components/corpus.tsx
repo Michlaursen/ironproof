@@ -4,32 +4,41 @@ import { IconArrowUpRight } from "./icons";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
-type ProofPointsProps = { content: SiteContent["proofPoints"] };
+type CorpusProps = { content: SiteContent["corpus"] };
 
-export function ProofPoints({ content }: ProofPointsProps) {
+export function Corpus({ content }: CorpusProps) {
   return (
-    <section id="proof-points" className="scroll-mt-20 border-b border-border bg-surface">
+    <section id="corpus" className="scroll-mt-20 border-b border-border">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
-          <SectionHeading eyebrow={content.eyebrow} title={content.title} />
+          <SectionHeading
+            eyebrow={content.eyebrow}
+            title={content.title}
+            description={content.description}
+          />
         </Reveal>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {content.items.map((point, i) => (
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {content.record.map((item, i) => (
             <Reveal
-              key={point.label}
-              delay={i * 0.06}
-              className="rounded-lg border border-border bg-surface-2 p-6"
+              key={item.label}
+              delay={Math.min(i, 3) * 0.06}
+              className="flex flex-col rounded-lg border border-border bg-surface p-6"
             >
-              <p className="font-mono text-3xl font-semibold text-accent">
-                {point.stat}
+              <p className="font-mono text-2xl font-semibold text-accent">
+                {item.stat}
               </p>
-              <p className="mt-2 text-sm text-muted">{point.label}</p>
+              <p className="mt-2 text-sm font-medium text-foreground">
+                {item.label}
+              </p>
+              <p className="mt-2 text-xs leading-relaxed text-muted">
+                {item.note}
+              </p>
             </Reveal>
           ))}
         </div>
 
-        <Reveal className="mt-16 rounded-lg border border-border bg-surface-2 p-6 sm:p-8">
+        <Reveal className="mt-14 rounded-lg border border-border bg-surface p-6 sm:p-8">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
             {content.papers.eyebrow}
           </p>
@@ -57,6 +66,15 @@ export function ProofPoints({ content }: ProofPointsProps) {
               </li>
             ))}
           </ul>
+        </Reveal>
+
+        <Reveal className="mt-8 max-w-3xl rounded-lg border border-border border-l-2 border-l-seal/70 bg-surface-2 p-6 sm:p-7">
+          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-seal">
+            {content.honesty.label}
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-muted">
+            {content.honesty.body}
+          </p>
         </Reveal>
       </div>
     </section>

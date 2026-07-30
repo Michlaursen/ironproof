@@ -30,7 +30,7 @@ export function Hero({ content }: HeroProps) {
               {content.ctaPrimary}
             </Link>
             <Link
-              href="#solution"
+              href="#artifact"
               className="rounded-md border border-border px-6 py-3 text-sm font-medium text-foreground transition-colors hover:border-accent"
             >
               {content.ctaSecondary}

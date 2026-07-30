@@ -1,9 +1,9 @@
 import type { SiteContent } from "@/content";
-import { IconCircuit, IconRule, IconVerify } from "./icons";
+import { IconCircuit, IconLock, IconRule, IconVerify } from "./icons";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
-const ICONS = [IconCircuit, IconVerify, IconRule];
+const ICONS = [IconCircuit, IconVerify, IconRule, IconLock];
 
 type ProductsProps = { content: SiteContent["products"] };
 
@@ -12,10 +12,14 @@ export function Products({ content }: ProductsProps) {
     <section id="products" className="scroll-mt-20 border-b border-border bg-surface">
       <div className="mx-auto max-w-6xl px-6 py-24">
         <Reveal>
-          <SectionHeading eyebrow={content.eyebrow} title={content.title} />
+          <SectionHeading
+            eyebrow={content.eyebrow}
+            title={content.title}
+            description={content.description}
+          />
         </Reveal>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-2">
           {content.items.map((product, i) => {
             const Icon = ICONS[i];
             return (

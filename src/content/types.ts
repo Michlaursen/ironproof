@@ -26,6 +26,20 @@ export type SiteContent = {
       footnote: string;
     };
   };
+  attributions: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: {
+      org: string;
+      where: string;
+      quote: string;
+      context: string;
+      href: string;
+      linkLabel: string;
+    }[];
+    footnote: string;
+  };
   lab: {
     eyebrow: string;
     title: string;
@@ -70,12 +84,52 @@ export type SiteContent = {
   products: {
     eyebrow: string;
     title: string;
+    description: string;
     items: {
       name: string;
       tag: string;
       description: string;
       items: string[];
     }[];
+  };
+  artifact: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    stats: { stat: string; label: string; note: string }[];
+    fileLabel: string;
+    fileMeta: string;
+    parts: {
+      num: string;
+      field: string;
+      anchor: string;
+      claim: string;
+      body: string;
+      statusQuo: string;
+      code: { key: string; value: string; tone?: "ok" | "warn" | "muted" }[];
+    }[];
+    tableTitle: string;
+    tableColumns: { row: string; us: string; them: string };
+    tableRows: { row: string; us: string; them: string }[];
+  };
+  comparison: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    columns: {
+      vendor: string;
+      strength: string;
+      location: string;
+      survives: string;
+    };
+    rows: {
+      vendor: string;
+      strength: string;
+      location: string;
+      survives: string;
+      isUs?: boolean;
+    }[];
+    footnote: string;
   };
   sovereignty: {
     eyebrow: string;
@@ -84,30 +138,39 @@ export type SiteContent = {
     tagline: string;
     features: { title: string; body: string }[];
   };
-  useCases: {
+  corpus: {
     eyebrow: string;
     title: string;
-    items: string[];
-  };
-  customers: {
-    eyebrow: string;
-    title: string;
-    segments: string[];
-  };
-  proofPoints: {
-    eyebrow: string;
-    title: string;
-    items: { stat: string; label: string }[];
+    description: string;
+    record: { stat: string; label: string; note: string }[];
     papers: {
       eyebrow: string;
       note: string;
       items: { id: string; title: string; href: string }[];
     };
+    honesty: {
+      label: string;
+      body: string;
+    };
+  };
+  sector: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    quote: string;
+    quoteSource: string;
+    quoteHref: string;
+    afterQuote: string;
+    alsoLabel: string;
+    also: string[];
   };
   finalCta: {
     eyebrow: string;
     title: string;
     subhead: string;
+    offerLabel: string;
+    offerName: string;
+    offerBody: string;
     designPartnerPre: string;
     designPartnerEmail: string;
     form: {

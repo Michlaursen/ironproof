@@ -21,6 +21,18 @@ export function FinalCta({ content, locale }: FinalCtaProps) {
           </h2>
           <p className="mt-6 text-lg text-muted">{content.subhead}</p>
 
+          <div className="mx-auto mt-10 max-w-2xl rounded-lg border border-border bg-surface p-6 text-left sm:p-7">
+            <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
+              {content.offerLabel}
+            </p>
+            <h3 className="mt-3 text-lg font-semibold text-foreground">
+              {content.offerName}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted">
+              {content.offerBody}
+            </p>
+          </div>
+
           <div className="mt-10">
             <DemoRequestForm content={content.form} locale={locale} />
           </div>
