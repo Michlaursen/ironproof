@@ -410,6 +410,8 @@ export const fr: SiteContent = {
   footer: {
     description:
       "Autorisation vérifiable et preuve décisionnelle pour les flux financiers propulsés par l’IA.",
+    closing:
+      "IronProof offre aux institutions quelque chose de rare : la preuve.",
     country: "Canada",
     copyright: "IronProof. Tous droits réservés.",
   },

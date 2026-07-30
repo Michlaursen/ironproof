@@ -395,6 +395,7 @@ export const en: SiteContent = {
   footer: {
     description:
       "Verifiable authorization and decision evidence for money-moving AI workflows.",
+    closing: "IronProof gives institutions something rare: evidence.",
     country: "Canada",
     copyright: "IronProof. All rights reserved.",
   },

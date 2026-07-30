@@ -144,6 +144,9 @@ export type SiteContent = {
   };
   footer: {
     description: string;
+    /* The closing line of the page. Lives here rather than in the final CTA so
+       it signs off instead of competing with the form for attention. */
+    closing: string;
     country: string;
     copyright: string;
   };
