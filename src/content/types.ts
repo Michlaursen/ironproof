@@ -41,14 +41,16 @@ export type SiteContent = {
     description: string;
     cta: string;
     previewLabel: string;
-    previewTitle: string;
-    previewStatus: string;
-    obligationLabel: string;
-    obligation: string;
-    verdictLabel: string;
-    verdict: string;
-    evidenceLabel: string;
-    evidence: string;
+    policyLabel: string;
+    policy: string[];
+    transactionLabel: string;
+    transaction: string[];
+    safeLabel: string;
+    safeVerdict: string;
+    safeBody: string;
+    failLabel: string;
+    failVerdict: string;
+    failBody: string;
   };
   problem: {
     eyebrow: string;

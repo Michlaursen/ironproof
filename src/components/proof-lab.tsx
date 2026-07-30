@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { SiteContent } from "@/content";
-import { IconArrowUpRight, IconSeal } from "./icons";
+import { IconArrowUpRight } from "./icons";
 import { Reveal } from "./reveal";
 
 const LAB_URL = "https://lab.ironproof.ai";
@@ -39,46 +39,33 @@ export function ProofLab({ content }: ProofLabProps) {
             <div className="relative min-h-80 border-t border-border bg-[#f6f7f8] p-5 text-[#14171a] sm:p-8 lg:border-t-0 lg:border-l">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(20,23,26,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,23,26,0.045)_1px,transparent_1px)] bg-[size:28px_28px]" />
               <div className="relative mx-auto max-w-xl overflow-hidden rounded-lg border border-[#d9dde1] bg-white shadow-xl shadow-black/10">
-                <div className="flex items-center justify-between border-b border-[#d9dde1] px-4 py-3">
+                <div className="border-b border-[#d9dde1] px-4 py-3">
                   <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#5b6570]">
                     {content.previewLabel}
                   </span>
-                  <span className="flex items-center gap-1.5 rounded-full bg-[#0a7d3c]/10 px-2 py-1 font-mono text-[10px] font-semibold text-[#0a7d3c]">
-                    <IconSeal className="h-3 w-3" />
-                    {content.previewStatus}
-                  </span>
                 </div>
 
-                <div className="p-4 sm:p-5">
-                  <h3 className="text-sm font-semibold">{content.previewTitle}</h3>
-                  <div className="mt-4 rounded-md bg-[#f0f2f4] p-4 font-mono text-[11px] leading-relaxed text-[#39424c]">
-                    <span className="text-[#5b6570]">
-                      {content.obligationLabel}
-                    </span>
-                    <br />
-                    assert inv(pending, disbursed, approvals)
-                    <br />
-                    check-sat
+                <div className="space-y-4 p-4 sm:p-5">
+                  <Block label={content.policyLabel} items={content.policy} />
+                  <Block
+                    label={content.transactionLabel}
+                    items={content.transaction}
+                  />
+
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <Outcome
+                      label={content.safeLabel}
+                      verdict={content.safeVerdict}
+                      body={content.safeBody}
+                      tone="allow"
+                    />
+                    <Outcome
+                      label={content.failLabel}
+                      verdict={content.failVerdict}
+                      body={content.failBody}
+                      tone="block"
+                    />
                   </div>
-
-                  <dl className="mt-4 grid gap-3 text-xs sm:grid-cols-2">
-                    <div className="rounded-md border border-[#d9dde1] p-3">
-                      <dt className="text-[#5b6570]">{content.verdictLabel}</dt>
-                      <dd className="mt-1 font-mono font-semibold text-[#0a7d3c]">
-                        {content.verdict}
-                      </dd>
-                    </div>
-                    <div className="rounded-md border border-[#d9dde1] p-3">
-                      <dt className="text-[#5b6570]">{content.evidenceLabel}</dt>
-                      <dd className="mt-1 font-mono text-[10px] leading-relaxed">
-                        {content.evidence}
-                      </dd>
-                    </div>
-                  </dl>
-
-                  <p className="mt-4 text-[11px] leading-relaxed text-[#5b6570]">
-                    {content.obligation}
-                  </p>
                 </div>
               </div>
             </div>
@@ -86,5 +73,65 @@ export function ProofLab({ content }: ProofLabProps) {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function Block({ label, items }: { label: string; items: string[] }) {
+  return (
+    <div>
+      <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#5b6570]">
+        {label}
+      </p>
+      <ul className="mt-2 rounded-md bg-[#f0f2f4] p-3 font-mono text-[11px] leading-relaxed text-[#39424c]">
+        {items.map((item) => (
+          <li key={item} className="flex items-start gap-2">
+            <span aria-hidden="true" className="text-[#98a2ae]">
+              ·
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/*
+  Both outcomes are shown side by side on purpose: the section's claim is that
+  the engine either authorizes or names the blocking condition, so showing only
+  the green state would demonstrate half of it.
+*/
+function Outcome({
+  label,
+  verdict,
+  body,
+  tone,
+}: {
+  label: string;
+  verdict: string;
+  body: string;
+  tone: "allow" | "block";
+}) {
+  const allow = tone === "allow";
+  const color = allow ? "#0a7d3c" : "#b42318";
+
+  return (
+    <div
+      className="rounded-md border p-3"
+      style={{ borderColor: `${color}40`, backgroundColor: `${color}0d` }}
+    >
+      <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#5b6570]">
+        {label}
+      </p>
+      <p
+        className="mt-1.5 font-mono text-[11px] font-semibold"
+        style={{ color }}
+      >
+        {verdict}
+      </p>
+      <p className="mt-1.5 text-[11px] leading-relaxed text-[#39424c]">
+        {body}
+      </p>
+    </div>
   );
 }
