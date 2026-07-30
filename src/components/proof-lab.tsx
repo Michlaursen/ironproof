@@ -3,7 +3,13 @@ import type { SiteContent } from "@/content";
 import { IconArrowUpRight } from "./icons";
 import { Reveal } from "./reveal";
 
-const LAB_URL = "https://lab.ironproof.ai";
+/*
+  Points at the Vercel deployment, not lab.ironproof.ai: the subdomain
+  resolves to Vercel but no project claims it, so it serves
+  DEPLOYMENT_NOT_FOUND with no TLS certificate at all. Swap back once the
+  domain is attached to the ironproof-lab project.
+*/
+const LAB_URL = "https://ironproof-lab.vercel.app";
 
 type ProofLabProps = {
   content: SiteContent["lab"];

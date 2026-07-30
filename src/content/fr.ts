@@ -18,7 +18,7 @@ export const fr: SiteContent = {
       { href: "#products", label: "Produit" },
       { href: "#comparison", label: "Comparer" },
       { href: "#corpus", label: "Recherche" },
-      { href: "https://lab.ironproof.ai", label: "Proof Lab" },
+      { href: "https://ironproof-lab.vercel.app", label: "Proof Lab" },
     ],
     cta: "Évaluer un flux",
     langSwitchLabel: "EN",
