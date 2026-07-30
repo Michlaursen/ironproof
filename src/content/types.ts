@@ -83,22 +83,8 @@ export type SiteContent = {
   artifact: {
     eyebrow: string;
     title: string;
-    description: string;
-    stats: { stat: string; label: string; note: string }[];
-    fileLabel: string;
-    fileMeta: string;
-    parts: {
-      num: string;
-      field: string;
-      anchor: string;
-      claim: string;
-      body: string;
-      statusQuo: string;
-      code: { key: string; value: string; tone?: "ok" | "warn" | "muted" }[];
-    }[];
-    tableTitle: string;
-    tableColumns: { row: string; us: string; them: string };
-    tableRows: { row: string; us: string; them: string }[];
+    blocks: { num: string; title: string; body: string }[];
+    finalLine: string;
   };
   comparison: {
     eyebrow: string;

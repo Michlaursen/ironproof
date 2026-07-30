@@ -163,7 +163,7 @@ export const en: SiteContent = {
       {
         step: "02",
         title: "Prove the boundary",
-        body: "Determine whether the action can violate any customer-defined rule or cumulative limit. The compiled policy becomes constraints and a solver searches the entire defined space — unsat means no violating state exists, sat returns the counterexample.",
+        body: "Determine whether the action can violate any customer-defined rule or cumulative limit. The compiled policy becomes constraints and a solver checks all states represented by the defined model and assumptions — unsat means no violating state exists, sat returns the counterexample.",
       },
       {
         step: "03",
@@ -238,167 +238,32 @@ export const en: SiteContent = {
     ],
   },
   artifact: {
-    eyebrow: "Walk through the artifact",
-    title: "Every field in the artifact does a job.",
-    description:
-      "Open a sealed IronProof artifact and pull it apart. There are eight parts, and each one is there because an engineer, an auditor or a regulator reading it has a decision to make. A report tells you what we concluded. An artifact lets you check it.",
-    stats: [
-      {
-        stat: "8",
-        label: "Annotated fields",
-        note: "Each one deliberately different from what a report gives you.",
-      },
-      {
-        stat: "2",
-        label: "Signatures per entry",
-        note: "Ed25519 and ML-DSA-65, and both must verify or the entry fails. SHA3-512 is the third primitive in the seal, but it hashes — it does not sign.",
-      },
-      {
-        stat: "0",
-        label: "Vendor access required",
-        note: "The public keys ship inside the artifact. Verification is offline.",
-      },
-    ],
-    fileLabel: "verdict_dossier.json — merchant refund policy v3.2",
-    fileMeta: "sceal_dossier_version 1.1 · dual-signed · chained",
-    parts: [
+    eyebrow: "The artifact",
+    title: "What the proof artifact preserves",
+    blocks: [
       {
         num: "01",
-        field: "target · policy_owner",
-        anchor: "Who wrote the rule",
-        claim: "The customer owns the policy. We only prove it.",
-        body: "The artifact records, in its own body, that the rule being proven was written by the customer and not by us. A verification company that authors the rules it then grades itself against is marking its own homework, and the artifact makes that impossible to hide.",
-        statusQuo:
-          "The vendor defines the property and the pass criteria, so a green result partly measures the vendor’s own choices.",
-        code: [
-          { key: "target", value: "\"Acme Store — refund / credit / discount policy v3.2\"" },
-          {
-            key: "policy_owner",
-            value: "\"merchant (customer-authored, not written by Ironproof)\"",
-            tone: "ok",
-          },
-        ],
+        title: "Policy and authority",
+        body: "The exact policy version and the agent’s authority under it.",
       },
       {
         num: "02",
-        field: "theorem",
-        anchor: "The obligation, in solver form",
-        claim: "The actual theorem, not a paraphrase of it.",
-        body: "Two obligations, both discharged: the base case says the system starts inside the invariant, the inductive step says no single action can leave it. Together they cover every reachable sequence — not a sample of them. The formula is in the artifact, so you can re-run it rather than believe our summary of it.",
-        statusQuo:
-          "Reports describe the property in English. The prose and the formula that was actually checked can drift apart, and nobody finds out.",
-        code: [
-          { key: "theorem", value: "\"INIT => INV ; INV & step => INV'\"" },
-          { key: "discharge", value: "\"both UNSAT under spec-compiled gate\"", tone: "ok" },
-        ],
+        title: "Transaction state",
+        body: "The requested action, cumulative limits, approvals and relevant context.",
       },
       {
         num: "03",
-        field: "meaning",
-        anchor: "Plain language, beside the maths",
-        claim: "The sentence a risk officer can read, next to the formula it came from.",
-        body: "The artifact carries a plain-language reading of the theorem — not instead of the formula, beside it. The engineer checks the maths; the risk committee reads the sentence; both are looking at the same sealed object, so they cannot be told different stories.",
-        statusQuo:
-          "You get one or the other: prose nobody can check, or a formula nobody reads. The gap between them is where overclaims live.",
-        code: [
-          {
-            key: "meaning",
-            value:
-              "\"no sequence of refund/credit/discount actions the agent can take exceeds the merchant’s limits\"",
-          },
-        ],
+        title: "Decision and justification",
+        body: "Why the action was allowed or denied, with the proof result or counterexample.",
       },
       {
         num: "04",
-        field: "solver_in_proof",
-        anchor: "Named solver, pinned version",
-        claim: "Which prover, which version — recorded in the evidence.",
-        body: "A proof is only as reproducible as the tool that produced it. The artifact names the solver and pins its version, so the run can be repeated years later on the same tooling, and so a solver bug disclosed tomorrow can be mapped to every artifact it touched.",
-        statusQuo:
-          "A green checkmark with no solver, no version and no obligation. Nothing to reproduce, nothing to recall.",
-        code: [
-          { key: "solver_in_proof", value: "\"z3 4.16.0\"", tone: "ok" },
-          { key: "artifact_sha3_512", value: "\"ca5628f661854813be35…\"", tone: "muted" },
-        ],
-      },
-      {
-        num: "05",
-        field: "independent_engine_count",
-        anchor: "Corroboration by independent engines",
-        claim: "More than one engine had to agree.",
-        body: "The verdict is corroborated by independent reasoning engines, and the count travels with the artifact. One tool’s opinion is a data point; agreement between engines that fail differently is evidence. When they disagree, the artifact says so rather than picking the convenient answer.",
-        statusQuo:
-          "A single tool’s output, presented as fact. Its blind spots become your blind spots, silently.",
-        code: [
-          { key: "corroborating_engines", value: "[ … ]" },
-          { key: "independent_engine_count", value: "2", tone: "ok" },
-        ],
-      },
-      {
-        num: "06",
-        field: "content_hash · prev_hash · entry_hash",
-        anchor: "Append-only chain",
-        claim: "Editing the past breaks the chain, loudly.",
-        body: "Every entry hashes its own content, carries the hash of the one before it, and seals both. Change a value after the fact and the chain no longer closes — verification fails with a content-hash mismatch instead of quietly accepting the new version. Tamper detection is a property of the format, not a promise in a contract.",
-        statusQuo:
-          "A PDF that can be re-exported, or a dashboard row that can be updated in place with no trace.",
-        code: [
-          { key: "content_hash", value: "\"8a42d3e9bff6c0037bc7…\"", tone: "muted" },
-          { key: "prev_hash", value: "\"000000000000000000…\"", tone: "muted" },
-          { key: "entry_hash", value: "\"e2bc96d69a59406606f0…\"", tone: "muted" },
-        ],
-      },
-      {
-        num: "07",
-        field: "signature_scheme · public_keys",
-        anchor: "Dual signature, post-quantum",
-        claim: "Both signatures must verify. The keys ship with the artifact.",
-        body: "Each entry is signed classically with Ed25519 and post-quantum with ML-DSA-65 under FIPS 204, in a mode where both must verify or the entry is rejected. The public keys are inside the file, so checking it needs no account, no network and no cooperation from us — including after we are gone.",
-        statusQuo:
-          "Verification means logging into the vendor’s dashboard, or trusting a PDF signature that expires with its certificate authority.",
-        code: [
-          { key: "classical", value: "\"Ed25519\"" },
-          { key: "post_quantum", value: "\"ML-DSA-65\"", tone: "ok" },
-          { key: "mode", value: "\"dual (both must verify)\"", tone: "ok" },
-        ],
-      },
-      {
-        num: "08",
-        field: "claim (when a check did not run)",
-        anchor: "A skip never reads as a pass",
-        claim: "When we could not check something, the artifact says so in the same field that would have said “verified”.",
-        body: "If the prover or the checker is absent, the artifact does not fall silent and it does not go green. It records the gap in the same place a success would have been written. This is the failure mode that matters most in our field — a green summary sitting on top of something that never ran — and we designed the format so it cannot happen quietly.",
-        statusQuo:
-          "A check that did not run is indistinguishable from a check that found nothing. Both render as green.",
-        code: [
-          {
-            key: "claim",
-            value:
-              "\"NOT RUN — prover and/or checker absent. This is a gap, not a pass.\"",
-            tone: "warn",
-          },
-          { key: "obligations_checked", value: "0", tone: "warn" },
-        ],
+        title: "Seal and verification",
+        body: "The artifact is tamper-evident and can be verified offline using a trusted public key.",
       },
     ],
-    tableTitle: "Side by side",
-    tableColumns: {
-      row: "In the deliverable",
-      us: "IronProof artifact",
-      them: "Typical report or dashboard",
-    },
-    tableRows: [
-      { row: "Names who authored the policy", us: "yes", them: "no" },
-      { row: "Ships the checked formula, not a paraphrase", us: "yes", them: "no" },
-      { row: "Plain-language reading beside the formula", us: "yes", them: "sometimes" },
-      { row: "Names the solver and pins its version", us: "yes", them: "no" },
-      { row: "Records corroboration by independent engines", us: "yes", them: "no" },
-      { row: "Tampering breaks verification", us: "yes", them: "no" },
-      { row: "Post-quantum signature (FIPS 204)", us: "yes", them: "no" },
-      { row: "Verifiable offline, without the vendor", us: "yes", them: "no" },
-      { row: "A skipped check cannot render as a pass", us: "yes", them: "no" },
-      { row: "Still meaningful after the vendor is gone", us: "yes", them: "no" },
-    ],
+    finalLine:
+      "A report gives you a conclusion. The artifact preserves the authorization basis behind it.",
   },
   comparison: {
     eyebrow: "Honest comparison",

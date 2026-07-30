@@ -173,7 +173,7 @@ export const fr: SiteContent = {
       {
         step: "02",
         title: "Prouver la frontière",
-        body: "Déterminer si l’action peut violer une règle définie par le client ou une limite cumulative. La politique compilée devient des contraintes et un solveur parcourt tout l’espace défini — unsat signifie qu’aucun état en violation n’existe, sat renvoie le contre-exemple.",
+        body: "Déterminer si l’action peut violer une règle définie par le client ou une limite cumulative. La politique compilée devient des contraintes et un solveur contrôle tous les états représentés par le modèle et les hypothèses définis — unsat signifie qu’aucun état en violation n’existe, sat renvoie le contre-exemple.",
       },
       {
         step: "03",
@@ -248,201 +248,32 @@ export const fr: SiteContent = {
     ],
   },
   artifact: {
-    eyebrow: "Anatomie de l’artefact",
-    title: "Chaque champ de l’artefact a une raison d’être.",
-    description:
-      "Ouvrez un artefact IronProof scellé et démontez-le. Il compte huit parties, et chacune est là parce qu’un ingénieur, un auditeur ou un régulateur qui le lit a une décision à prendre. Un rapport vous dit ce que nous avons conclu. Un artefact vous laisse le vérifier.",
-    stats: [
-      {
-        stat: "8",
-        label: "Champs annotés",
-        note: "Chacun délibérément différent de ce qu’un rapport vous donne.",
-      },
-      {
-        stat: "2",
-        label: "Signatures par entrée",
-        note: "Ed25519 et ML-DSA-65, et les deux doivent valider sinon l’entrée échoue. SHA3-512 est la troisième primitive du sceau, mais elle hache — elle ne signe pas.",
-      },
-      {
-        stat: "0",
-        label: "Accès fournisseur requis",
-        note: "Les clés publiques voyagent dans l’artefact. La vérification est hors ligne.",
-      },
-    ],
-    fileLabel: "verdict_dossier.json — politique de remboursement marchand v3.2",
-    fileMeta: "sceal_dossier_version 1.1 · doublement signé · chaîné",
-    parts: [
+    eyebrow: "L’artefact",
+    title: "Ce que l’artefact de preuve conserve",
+    blocks: [
       {
         num: "01",
-        field: "target · policy_owner",
-        anchor: "Qui a écrit la règle",
-        claim: "Le client possède la politique. Nous ne faisons que la prouver.",
-        body: "L’artefact enregistre, dans son propre corps, que la règle prouvée a été écrite par le client et non par nous. Une entreprise de vérification qui rédige les règles sur lesquelles elle se note ensuite corrige sa propre copie, et l’artefact rend cette confusion impossible à cacher.",
-        statusQuo:
-          "Le fournisseur définit la propriété et le critère de réussite : un résultat vert mesure donc en partie ses propres choix.",
-        code: [
-          {
-            key: "target",
-            value: "\"Acme Store — politique remboursement / crédit / rabais v3.2\"",
-          },
-          {
-            key: "policy_owner",
-            value: "\"merchant (customer-authored, not written by Ironproof)\"",
-            tone: "ok",
-          },
-        ],
+        title: "Politique et autorité",
+        body: "La version exacte de la politique et l’autorité de l’agent sous celle-ci.",
       },
       {
         num: "02",
-        field: "theorem",
-        anchor: "L’obligation, en forme de solveur",
-        claim: "Le vrai théorème, pas une paraphrase.",
-        body: "Deux obligations, toutes deux déchargées : le cas de base dit que le système démarre à l’intérieur de l’invariant, le pas inductif dit qu’aucune action seule ne peut en sortir. Ensemble, ils couvrent toutes les séquences atteignables — pas un échantillon. La formule est dans l’artefact : vous pouvez la relancer au lieu de croire notre résumé.",
-        statusQuo:
-          "Les rapports décrivent la propriété en français. La prose et la formule réellement contrôlée peuvent diverger, et personne ne s’en aperçoit.",
-        code: [
-          { key: "theorem", value: "\"INIT => INV ; INV & step => INV'\"" },
-          {
-            key: "discharge",
-            value: "\"both UNSAT under spec-compiled gate\"",
-            tone: "ok",
-          },
-        ],
+        title: "État transactionnel",
+        body: "L’action demandée, les limites cumulatives, les approbations et le contexte pertinent.",
       },
       {
         num: "03",
-        field: "meaning",
-        anchor: "Langage clair, à côté des maths",
-        claim:
-          "La phrase qu’un responsable des risques peut lire, à côté de la formule d’où elle vient.",
-        body: "L’artefact porte une lecture en langage clair du théorème — pas à la place de la formule, à côté. L’ingénieur contrôle les maths ; le comité de risque lit la phrase ; les deux regardent le même objet scellé, donc on ne peut pas leur raconter deux histoires différentes.",
-        statusQuo:
-          "Vous obtenez l’un ou l’autre : de la prose invérifiable, ou une formule que personne ne lit. C’est dans cet écart que vivent les surclaims.",
-        code: [
-          {
-            key: "meaning",
-            value:
-              "\"aucune séquence d’actions de remboursement / crédit / rabais que l’agent peut prendre ne dépasse les limites du marchand\"",
-          },
-        ],
+        title: "Décision et justification",
+        body: "Pourquoi l’action a été permise ou refusée, avec le résultat de preuve ou le contre-exemple.",
       },
       {
         num: "04",
-        field: "solver_in_proof",
-        anchor: "Solveur nommé, version figée",
-        claim: "Quel prouveur, quelle version — inscrit dans la preuve.",
-        body: "Une preuve n’est reproductible que dans la mesure où l’outil qui l’a produite l’est. L’artefact nomme le solveur et fige sa version, pour que le calcul puisse être refait des années plus tard sur le même outillage, et pour qu’un bogue de solveur divulgué demain puisse être rattaché à chaque artefact qu’il a touché.",
-        statusQuo:
-          "Une coche verte, sans solveur, sans version, sans obligation. Rien à reproduire, rien à rappeler.",
-        code: [
-          { key: "solver_in_proof", value: "\"z3 4.16.0\"", tone: "ok" },
-          {
-            key: "artifact_sha3_512",
-            value: "\"ca5628f661854813be35…\"",
-            tone: "muted",
-          },
-        ],
-      },
-      {
-        num: "05",
-        field: "independent_engine_count",
-        anchor: "Corroboration par moteurs indépendants",
-        claim: "Plus d’un moteur devait être d’accord.",
-        body: "Le verdict est corroboré par des moteurs de raisonnement indépendants, et le compte voyage avec l’artefact. L’avis d’un seul outil est une donnée ; l’accord entre des moteurs qui échouent différemment est une preuve. Quand ils divergent, l’artefact le dit au lieu de retenir la réponse qui arrange.",
-        statusQuo:
-          "La sortie d’un seul outil, présentée comme un fait. Ses angles morts deviennent les vôtres, en silence.",
-        code: [
-          { key: "corroborating_engines", value: "[ … ]" },
-          { key: "independent_engine_count", value: "2", tone: "ok" },
-        ],
-      },
-      {
-        num: "06",
-        field: "content_hash · prev_hash · entry_hash",
-        anchor: "Chaîne en ajout seul",
-        claim: "Modifier le passé casse la chaîne, bruyamment.",
-        body: "Chaque entrée hache son propre contenu, porte l’empreinte de celle qui précède, et scelle les deux. Changez une valeur après coup et la chaîne ne ferme plus : la vérification échoue sur une divergence d’empreinte au lieu d’accepter discrètement la nouvelle version. La détection d’altération est une propriété du format, pas une promesse dans un contrat.",
-        statusQuo:
-          "Un PDF qu’on peut réexporter, ou une ligne de tableau de bord qu’on met à jour sur place sans laisser de trace.",
-        code: [
-          { key: "content_hash", value: "\"8a42d3e9bff6c0037bc7…\"", tone: "muted" },
-          { key: "prev_hash", value: "\"000000000000000000…\"", tone: "muted" },
-          { key: "entry_hash", value: "\"e2bc96d69a59406606f0…\"", tone: "muted" },
-        ],
-      },
-      {
-        num: "07",
-        field: "signature_scheme · public_keys",
-        anchor: "Double signature, post-quantique",
-        claim:
-          "Les deux signatures doivent valider. Les clés voyagent avec l’artefact.",
-        body: "Chaque entrée est signée classiquement en Ed25519 et en post-quantique en ML-DSA-65 sous FIPS 204, dans un mode où les deux doivent valider sinon l’entrée est rejetée. Les clés publiques sont dans le fichier : le contrôler ne demande ni compte, ni réseau, ni coopération de notre part — y compris après notre disparition.",
-        statusQuo:
-          "Vérifier veut dire se connecter au tableau de bord du fournisseur, ou faire confiance à une signature PDF qui expire avec son autorité de certification.",
-        code: [
-          { key: "classical", value: "\"Ed25519\"" },
-          { key: "post_quantum", value: "\"ML-DSA-65\"", tone: "ok" },
-          { key: "mode", value: "\"dual (both must verify)\"", tone: "ok" },
-        ],
-      },
-      {
-        num: "08",
-        field: "claim (quand un contrôle n’a pas tourné)",
-        anchor: "Un saut ne se lit jamais comme une réussite",
-        claim:
-          "Quand nous n’avons pas pu contrôler quelque chose, l’artefact le dit dans le champ même qui aurait dit « vérifié ».",
-        body: "Si le prouveur ou le vérificateur est absent, l’artefact ne se tait pas et ne passe pas au vert. Il inscrit le manque à l’endroit exact où une réussite aurait été écrite. C’est le mode de panne qui compte le plus dans notre métier — un résumé vert posé au-dessus de quelque chose qui n’a jamais tourné — et nous avons conçu le format pour qu’il ne puisse pas se produire en silence.",
-        statusQuo:
-          "Un contrôle qui n’a pas tourné est indiscernable d’un contrôle qui n’a rien trouvé. Les deux s’affichent en vert.",
-        code: [
-          {
-            key: "claim",
-            value:
-              "\"NOT RUN — prover and/or checker absent. This is a gap, not a pass.\"",
-            tone: "warn",
-          },
-          { key: "obligations_checked", value: "0", tone: "warn" },
-        ],
+        title: "Sceau et vérification",
+        body: "L’artefact révèle toute altération et se vérifie hors ligne avec une clé publique de confiance.",
       },
     ],
-    tableTitle: "Côte à côte",
-    tableColumns: {
-      row: "Dans le livrable",
-      us: "Artefact IronProof",
-      them: "Rapport ou tableau de bord habituel",
-    },
-    tableRows: [
-      { row: "Nomme l’auteur de la politique", us: "oui", them: "non" },
-      {
-        row: "Livre la formule contrôlée, pas une paraphrase",
-        us: "oui",
-        them: "non",
-      },
-      {
-        row: "Lecture en langage clair à côté de la formule",
-        us: "oui",
-        them: "parfois",
-      },
-      { row: "Nomme le solveur et fige sa version", us: "oui", them: "non" },
-      {
-        row: "Consigne la corroboration par moteurs indépendants",
-        us: "oui",
-        them: "non",
-      },
-      { row: "L’altération fait échouer la vérification", us: "oui", them: "non" },
-      { row: "Signature post-quantique (FIPS 204)", us: "oui", them: "non" },
-      { row: "Vérifiable hors ligne, sans le fournisseur", us: "oui", them: "non" },
-      {
-        row: "Un contrôle sauté ne peut pas s’afficher comme réussi",
-        us: "oui",
-        them: "non",
-      },
-      {
-        row: "Garde son sens après la disparition du fournisseur",
-        us: "oui",
-        them: "non",
-      },
-    ],
+    finalLine:
+      "Un rapport vous donne une conclusion. L’artefact conserve le fondement de l’autorisation qui la soutient.",
   },
   comparison: {
     eyebrow: "Comparaison honnête",
