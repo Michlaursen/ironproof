@@ -38,6 +38,17 @@ export type SiteContent = {
       href: string;
       linkLabel: string;
     }[];
+    cveLabel: string;
+    cveNote: string;
+    cves: {
+      id: string;
+      href?: string;
+      product: string;
+      kind: string;
+      severity: string;
+      body: string;
+      status: string;
+    }[];
     footnote: string;
   };
   lab: {
@@ -147,10 +158,6 @@ export type SiteContent = {
       eyebrow: string;
       note: string;
       items: { id: string; title: string; href: string }[];
-    };
-    honesty: {
-      label: string;
-      body: string;
     };
   };
   sector: {

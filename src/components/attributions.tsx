@@ -60,6 +60,23 @@ export function Attributions({ content }: AttributionsProps) {
           ))}
         </div>
 
+        <Reveal className="mt-16 border-t border-border pt-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+            {content.cveLabel}
+          </p>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+            {content.cveNote}
+          </p>
+        </Reveal>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          {content.cves.map((cve, i) => (
+            <Reveal key={cve.id} delay={i * 0.08}>
+              <CveCard cve={cve} />
+            </Reveal>
+          ))}
+        </div>
+
         <Reveal className="mt-10">
           <p className="font-mono text-xs leading-relaxed text-muted">
             {content.footnote}
@@ -67,5 +84,67 @@ export function Attributions({ content }: AttributionsProps) {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/*
+  Two of the three CVEs carry a public identifier and link out to NVD; the third
+  deliberately does not, so the card renders as a plain <div>. Keeping the body
+  in one place means the linked and unlinked variants can never drift apart.
+*/
+function CveCard({
+  cve,
+}: {
+  cve: SiteContent["attributions"]["cves"][number];
+}) {
+  const body = (
+    <>
+      <div className="flex items-start justify-between gap-3">
+        <span
+          className={`font-mono text-sm font-medium break-all ${
+            cve.href ? "text-accent" : "text-muted"
+          }`}
+        >
+          {cve.id}
+        </span>
+        {cve.href ? (
+          <IconArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+        ) : null}
+      </div>
+
+      <h4 className="mt-3 text-base font-semibold text-foreground">
+        {cve.product}
+      </h4>
+      <p className="mt-1.5 font-mono text-[11px] leading-relaxed text-muted">
+        {cve.kind}
+      </p>
+      <p className="mt-3 font-mono text-xs text-seal">{cve.severity}</p>
+
+      <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
+        {cve.body}
+      </p>
+
+      <span className="mt-5 border-t border-border pt-4 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+        {cve.status}
+      </span>
+    </>
+  );
+
+  const shell =
+    "group flex h-full flex-col rounded-lg border border-border bg-surface-2 p-6 transition-colors";
+
+  if (!cve.href) {
+    return <div className={shell}>{body}</div>;
+  }
+
+  return (
+    <Link
+      href={cve.href}
+      target="_blank"
+      rel="noreferrer"
+      className={`${shell} hover:border-accent/70`}
+    >
+      {body}
+    </Link>
   );
 }

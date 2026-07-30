@@ -67,15 +67,6 @@ export function Corpus({ content }: CorpusProps) {
             ))}
           </ul>
         </Reveal>
-
-        <Reveal className="mt-8 max-w-3xl rounded-lg border border-border border-l-2 border-l-seal/70 bg-surface-2 p-6 sm:p-7">
-          <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-seal">
-            {content.honesty.label}
-          </p>
-          <p className="mt-3 text-sm leading-relaxed text-muted">
-            {content.honesty.body}
-          </p>
-        </Reveal>
       </div>
     </section>
   );

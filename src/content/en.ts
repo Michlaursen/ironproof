@@ -83,6 +83,37 @@ export const en: SiteContent = {
         linkLabel: "See the patch source",
       },
     ],
+    cveLabel: "The CVEs behind them",
+    cveNote:
+      "Three assigned. Two carry a public identifier you can look up right now — and both land on the same code as the credits above, which is how you tell a disclosure from a claim.",
+    cves: [
+      {
+        id: "CVE-2026-44673",
+        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-44673",
+        product: "libyang · CESNET",
+        kind: "CWE-190 — integer overflow → heap buffer overflow",
+        severity: "CVSS 7.5 · High",
+        body: "lyb_read_string() in src/parser_lyb.c overflows the heap on a crafted LYB blob. Every libyang consumer is reachable — NETCONF servers, sysrepo, and the Red Hat Enterprise Linux 8, 9 and 10 packages.",
+        status: "Patched upstream in 5.2.15",
+      },
+      {
+        id: "CVE-2026-41682",
+        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-41682",
+        product: "pupnp · UPnP SDK",
+        kind: "Signed-to-unsigned conversion → SSRF",
+        severity: "CVSS 6.9 · Medium",
+        body: "A port that overflows the atoi() cast in parse_uri() is silently truncated, so a request resolves somewhere other than where it was addressed. This is the fix VideoLAN carried into VLC.",
+        status: "Patched upstream in 1.18.5",
+      },
+      {
+        id: "Zephyr RTOS",
+        product: "Third assigned CVE",
+        kind: "Reported through the Zephyr security process",
+        severity: "Fixed and shipped",
+        body: "Assigned and patched upstream. We are not printing an identifier here until we have re-verified which one it is — putting the wrong CVE number on this page would undo the point of the other two.",
+        status: "Identifier pending re-verification",
+      },
+    ],
     footnote:
       "3 CVEs assigned · 28 coordinated disclosures filed · 4 preprints on arXiv. Every number on this page is traceable to something you can open.",
   },
@@ -235,7 +266,7 @@ export const en: SiteContent = {
       {
         stat: "2",
         label: "Signatures per entry",
-        note: "Ed25519 and ML-DSA-65 — both must verify, or the entry fails.",
+        note: "Ed25519 and ML-DSA-65, and both must verify or the entry fails. SHA3-512 is the third primitive in the seal, but it hashes — it does not sign.",
       },
       {
         stat: "0",
@@ -442,7 +473,7 @@ export const en: SiteContent = {
     title: "Built for institutions that cannot export their systems — or their trust.",
     description:
       "The proof core runs with no network access. Nothing about your systems, your code or your decisions has to leave your control in order to be proven, and nothing has to come back to us in order to be checked.",
-    tagline: "Sécurité vérifiable pour l’IA et les logiciels critiques.",
+    tagline: "Verifiable security for AI and critical software.",
     features: [
       {
         title: "Post-quantum seal",
@@ -525,10 +556,6 @@ export const en: SiteContent = {
         },
       ],
     },
-    honesty: {
-      label: "What we do not claim",
-      body: "IronProof is pre-revenue and onboarding its first design partners. We put that here rather than let you find it in diligence — a company selling proof cannot be evasive about its own record. What is proven today is the engine and the seal: they run, they are reproducible, and third parties have verified their output. What is not yet proven is commercial traction. We will tell you which is which, every time.",
-    },
   },
   sector: {
     eyebrow: "Where we start",
@@ -554,7 +581,7 @@ export const en: SiteContent = {
   },
   finalCta: {
     eyebrow: "In a world of AI uncertainty",
-    title: "Bring us the decision you cannot afford to get wrong.",
+    title: "IronProof gives institutions something rare: evidence.",
     subhead: "IronProof is not selling trust. IronProof is selling proof.",
     offerLabel: "Entry engagement",
     offerName: "Transaction Boundary Certificate",
@@ -580,7 +607,7 @@ export const en: SiteContent = {
   footer: {
     description:
       "IronProof builds verifiable security infrastructure for AI and critical software. We prove what agents, code and cryptography are allowed to do, and seal the result as post-quantum evidence that a third party re-verifies offline — without trusting us.",
-    tagline: "Sécurité vérifiable pour l’IA et les logiciels critiques.",
+    tagline: "Verifiable security for AI and critical software.",
     country: "Canada",
     copyright: "IronProof. All rights reserved.",
   },

@@ -18,14 +18,29 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="#" className="flex items-center">
+        <Link href="#" className="flex items-center gap-2.5 md:gap-3">
+          {/*
+            Vector, not the raster crop: the PNG carries a baked-in near-black
+            background, and neither colour-keying nor `screen` blending removes
+            it cleanly — keying ate the brushed-metal shading, and screen lifted
+            the header's translucent backdrop into a visible box. The SVG is the
+            same mark with a silver gradient and a real transparent background.
+          */}
           <Image
-            src="/header-lockup.png"
-            alt="IronProof"
-            width={1451}
-            height={298}
+            src="/ironproof-mark-metallic.svg"
+            alt=""
+            width={512}
+            height={512}
             priority
-            className="h-6 w-auto md:h-8"
+            className="h-8 w-8 md:h-10 md:w-10"
+          />
+          <Image
+            src="/ironproof-wordmark-white-transparent.png"
+            alt="IronProof"
+            width={1600}
+            height={320}
+            priority
+            className="h-3.5 w-auto md:h-4"
           />
         </Link>
 

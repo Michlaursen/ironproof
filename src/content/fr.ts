@@ -81,6 +81,37 @@ export const fr: SiteContent = {
         linkLabel: "Voir la source du correctif",
       },
     ],
+    cveLabel: "Les CVE derrière",
+    cveNote:
+      "Trois assignées. Deux portent un identifiant public que vous pouvez consulter tout de suite — et les deux tombent sur le même code que les crédits ci-dessus, c’est ainsi qu’on distingue une divulgation d’une affirmation.",
+    cves: [
+      {
+        id: "CVE-2026-44673",
+        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-44673",
+        product: "libyang · CESNET",
+        kind: "CWE-190 — débordement d’entier → dépassement de tampon en tas",
+        severity: "CVSS 7,5 · Élevée",
+        body: "lyb_read_string() dans src/parser_lyb.c déborde le tas sur un bloc LYB forgé. Tout consommateur de libyang est atteignable — serveurs NETCONF, sysrepo, et les paquets Red Hat Enterprise Linux 8, 9 et 10.",
+        status: "Corrigé en amont dans 5.2.15",
+      },
+      {
+        id: "CVE-2026-41682",
+        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-41682",
+        product: "pupnp · SDK UPnP",
+        kind: "Conversion signé vers non signé → SSRF",
+        severity: "CVSS 6,9 · Moyenne",
+        body: "Un port qui déborde la conversion atoi() dans parse_uri() est tronqué en silence, si bien qu’une requête aboutit ailleurs qu’à l’adresse visée. C’est le correctif que VideoLAN a repris dans VLC.",
+        status: "Corrigé en amont dans 1.18.5",
+      },
+      {
+        id: "Zephyr RTOS",
+        product: "Troisième CVE assignée",
+        kind: "Signalée par le processus de sécurité Zephyr",
+        severity: "Corrigée et livrée",
+        body: "Assignée et corrigée en amont. Nous n’imprimons pas d’identifiant ici tant que nous n’avons pas revérifié lequel c’est — mettre le mauvais numéro de CVE sur cette page annulerait l’intérêt des deux autres.",
+        status: "Identifiant en attente de revérification",
+      },
+    ],
     footnote:
       "3 CVE assignées · 28 divulgations coordonnées déposées · 4 prépublications sur arXiv. Chaque chiffre de cette page renvoie à quelque chose que vous pouvez ouvrir.",
   },
@@ -233,7 +264,7 @@ export const fr: SiteContent = {
       {
         stat: "2",
         label: "Signatures par entrée",
-        note: "Ed25519 et ML-DSA-65 — les deux doivent valider, sinon l’entrée échoue.",
+        note: "Ed25519 et ML-DSA-65, et les deux doivent valider sinon l’entrée échoue. SHA3-512 est la troisième primitive du sceau, mais elle hache — elle ne signe pas.",
       },
       {
         stat: "0",
@@ -560,10 +591,6 @@ export const fr: SiteContent = {
         },
       ],
     },
-    honesty: {
-      label: "Ce que nous n’affirmons pas",
-      body: "IronProof n’a pas encore de revenus et accueille ses premiers partenaires de conception. Nous l’écrivons ici plutôt que de vous laisser le découvrir en diligence — une entreprise qui vend de la preuve ne peut pas être évasive sur son propre dossier. Ce qui est prouvé aujourd’hui, c’est le moteur et le sceau : ils fonctionnent, ils sont reproductibles, et des tiers en ont vérifié la sortie. Ce qui n’est pas encore prouvé, c’est la traction commerciale. Nous vous dirons toujours lequel est lequel.",
-    },
   },
   sector: {
     eyebrow: "Par où nous commençons",
@@ -589,10 +616,9 @@ export const fr: SiteContent = {
     ],
   },
   finalCta: {
-    eyebrow: "Dans un monde d’incertitude sur l’IA",
-    title:
-      "Apportez-nous la décision que vous ne pouvez pas vous permettre de rater.",
-    subhead: "IronProof ne vend pas de la confiance. IronProof vend de la preuve.",
+    eyebrow: "Dans un monde d’incertitude face à l’IA",
+    title: "IronProof offre aux institutions quelque chose de rare : la preuve.",
+    subhead: "IronProof ne vend pas la confiance. IronProof vend la preuve.",
     offerLabel: "Mandat d’entrée",
     offerName: "Certificat de frontière transactionnelle",
     offerBody:
