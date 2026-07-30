@@ -73,6 +73,30 @@ export const en: SiteContent = {
     subtitle: "Evidence you can inspect outside our website.",
     items: [
       {
+        org: "IBM",
+        body: "Names Cobalt AI in the sarama commit that carries the fix.",
+        cta: "View commit",
+        href: "https://github.com/IBM/sarama/commit/b01879002b37abe3b44a957615d982847a44da94",
+      },
+      {
+        org: "GnuPG",
+        body: "Two libksba commits credit our report, shipped in release 1.7.0.",
+        cta: "View commit",
+        href: "https://github.com/gpg/libksba/commit/c44cc98460ea42e393214dc6e23ff746196baefd",
+      },
+      {
+        org: "Mozilla",
+        body: "Our report is recorded and resolved in Mozilla’s public bug tracker.",
+        cta: "View bug record",
+        href: "https://bugzilla.mozilla.org/show_bug.cgi?id=2027434",
+      },
+      {
+        org: "Red Hat · OpenELA",
+        body: "Public libyang patches credit Dominik Blain and Cobalt AI for reporting two memory-corruption issues.",
+        cta: "View patch record",
+        href: "https://github.com/openela-main/libyang",
+      },
+      {
         org: "wolfSSL",
         body: "Security fixes publicly credited in the wolfSSL 5.9.2 release notes.",
         cta: "View release notes",
@@ -85,19 +109,17 @@ export const en: SiteContent = {
         href: "https://github.com/videolan/vlc/blob/master/contrib/src/upnp/0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
       },
       {
-        org: "Red Hat · OpenELA",
-        body: "Public libyang patches credit Dominik Blain and Cobalt AI for reporting two memory-corruption issues.",
-        cta: "View patch record",
-        href: "https://github.com/openela-main/libyang",
+        org: "OFFIS · DCMTK",
+        body: "Three commits thank Dominik Blain for the report.",
+        cta: "View commit",
+        href: "https://github.com/DCMTK/dcmtk/commit/63b0bae751f62ed1b384141fa0fd032c98af57aa",
       },
-    ],
-    alsoLabel: "Also credited by name",
-    also: [
-      { org: "GnuPG", href: "https://github.com/gpg/libksba/commit/c44cc98460ea42e393214dc6e23ff746196baefd" },
-      { org: "OFFIS · DCMTK", href: "https://github.com/DCMTK/dcmtk/commit/63b0bae751f62ed1b384141fa0fd032c98af57aa" },
-      { org: "IBM", href: "https://github.com/IBM/sarama/commit/b01879002b37abe3b44a957615d982847a44da94" },
-      { org: "libmodbus", href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175" },
-      { org: "Mozilla", href: "https://bugzilla.mozilla.org/show_bug.cgi?id=2027434" },
+      {
+        org: "libmodbus",
+        body: "The fix commit names Qreativelab formal verification as the reporter.",
+        cta: "View commit",
+        href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
+      },
     ],
     summary:
       "8 organizations credit us publicly · 3 assigned CVEs · 28 coordinated disclosures · 4 security preprints",
@@ -300,9 +322,9 @@ export const en: SiteContent = {
         note: "Reported through vendor channels, on a 90-day clock.",
       },
       {
-        stat: "3",
+        stat: "8",
         label: "Third-party public attributions",
-        note: "wolfSSL, VideoLAN and Red Hat / OpenELA credit us by name.",
+        note: "IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK and libmodbus credit us by name in their own trees.",
       },
       {
         stat: "Lean 4",

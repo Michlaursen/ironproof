@@ -17,7 +17,7 @@ export function Attributions({ content }: AttributionsProps) {
           <SectionHeading title={content.title} description={content.subtitle} />
         </Reveal>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {content.items.map((item, i) => (
             <Reveal key={item.org} delay={i * 0.07}>
               <Link
@@ -41,29 +41,6 @@ export function Attributions({ content }: AttributionsProps) {
           ))}
         </div>
 
-        {/*
-          Five more organizations credit us by name in their own trees. They
-          get a name and a link rather than a card: the three above are the
-          most legible to a non-technical reader, and eight cards would stop
-          being a strip.
-        */}
-        <Reveal className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-            {content.alsoLabel}
-          </span>
-          {content.also.map((item) => (
-            <Link
-              key={item.org}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group inline-flex items-center gap-1 rounded-full border border-border px-3.5 py-1.5 text-sm text-muted transition-colors hover:border-accent/70 hover:text-foreground"
-            >
-              {item.org}
-              <IconArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          ))}
-        </Reveal>
 
         <Reveal className="mt-10 flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-border pt-8">
           <p className="font-mono text-xs text-muted">{content.summary}</p>

@@ -31,8 +31,6 @@ export type SiteContent = {
     title: string;
     subtitle: string;
     items: { org: string; body: string; cta: string; href: string }[];
-    alsoLabel: string;
-    also: { org: string; href: string }[];
     summary: string;
     linkLabel: string;
     linkHref: string;
