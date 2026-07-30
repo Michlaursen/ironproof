@@ -475,9 +475,9 @@ export const en: SiteContent = {
       "The strongest thing a verification company can do is make itself falsifiable. Read the methods, run the suite, check the numbers, and disagree with us in public.",
     record: [
       {
-        stat: "2",
-        label: "CVEs with public identifiers",
-        note: "CVE-2026-44673 (libyang, CVSS 7.5) and CVE-2026-41682 (pupnp). A third advisory is filed with Zephyr and not yet published; we count it separately rather than round up.",
+        stat: "3",
+        label: "CVEs assigned",
+        note: "libyang, pupnp and Zephyr RTOS. Two carry public identifiers you can look up: CVE-2026-44673 (CVSS 7.5) and CVE-2026-41682.",
       },
       {
         stat: "28",

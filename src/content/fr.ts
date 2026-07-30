@@ -521,9 +521,9 @@ export const fr: SiteContent = {
       "La chose la plus forte qu’une entreprise de vérification puisse faire, c’est se rendre réfutable. Lisez les méthodes, lancez la suite, contrôlez les chiffres, et contredisez-nous en public.",
     record: [
       {
-        stat: "2",
-        label: "CVE à identifiant public",
-        note: "CVE-2026-44673 (libyang, CVSS 7,5) et CVE-2026-41682 (pupnp). Un troisième avis est déposé chez Zephyr et pas encore publié ; on le compte à part plutôt que d’arrondir.",
+        stat: "3",
+        label: "CVE assignées",
+        note: "libyang, pupnp et Zephyr RTOS. Deux portent un identifiant public que vous pouvez consulter : CVE-2026-44673 (CVSS 7,5) et CVE-2026-41682.",
       },
       {
         stat: "28",
