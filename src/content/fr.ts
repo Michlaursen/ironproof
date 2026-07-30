@@ -126,30 +126,30 @@ export const fr: SiteContent = {
     ],
     safeLabel: "Résultat autorisé",
     safeVerdict: "REMBOURSEMENT AUTORISÉ",
-    safeBody: "Aucune violation de politique atteignable.",
+    safeBody:
+      "Aucune violation de la politique n’est atteignable dans le périmètre défini.",
     failLabel: "Résultat bloqué",
     failVerdict: "REMBOURSEMENT BLOQUÉ",
     failBody: "Affiche la règle exacte violée et le contre-exemple.",
   },
   problem: {
     eyebrow: "L’écart",
-    title: "La catégorie existe. C’est la preuve qui ne voyage pas.",
-    description:
-      "Prouver du logiciel n’a plus rien d’exotique. AWS prouve son propre nuage, Certora prouve les contrats intelligents, Imandra prouve les algorithmes, Galois fait de la haute assurance gouvernementale depuis 25 ans. La question ouverte n’est plus de savoir si le code peut être prouvé — c’est de savoir qui il faut encore croire une fois le travail terminé.",
-    points: [
-      {
-        title: "L’IA agit, elle ne répond plus",
-        body: "Les agents approuvent, remboursent, créditent, virent, modifient des permissions et écrivent du code de production. La décision prend quelques millisecondes ; la revue prend des semaines, quand elle a lieu.",
-      },
-      {
-        title: "Chaque verdict vit dans le système du fournisseur",
-        body: "Un tableau de bord, un service infonuagique, un rapport de mandat, un PDF. Mettez fin au contrat et l’assurance part avec lui. Ce qui arrive chez votre régulateur, c’est une capture d’écran et une promesse.",
-      },
-      {
-        title: "Les auditeurs réclament l’artefact",
-        body: "Attentes technologiques et cyber du BSIF, feuille de route post-quantique du CST, comités d’audit interne. Ce qui résiste à l’examen, c’est un enregistrement qu’un tiers peut contrôler seul — des années plus tard, sans le fournisseur dans la pièce.",
-      },
+    title: "Ce que les contrôles existants ne peuvent toujours pas prouver",
+    body: [
+      "L’identité confirme quel agent agit. Les permissions définissent son accès général. Les garde-fous encadrent son comportement. Les journaux consignent ce qui s’est passé.",
+      "Aucun d’eux, seul, ne prouve qu’une action financière précise était autorisée sous la politique, l’autorité et l’état transactionnel exacts en vigueur au moment de la décision.",
+      "IronProof comble cet écart avant l’exécution et conserve le fondement de l’autorisation comme preuve vérifiable indépendamment.",
     ],
+    layers: [
+      { name: "Identité", role: "Qui agit" },
+      { name: "Permissions", role: "Ce à quoi il accède" },
+      { name: "Garde-fous", role: "Comment il devrait se comporter" },
+      { name: "Journaux", role: "Ce qui s’est passé" },
+    ],
+    conclusion: {
+      name: "IronProof",
+      role: "Pourquoi cette action a été permise ou refusée",
+    },
   },
   solution: {
     eyebrow: "Comment ça marche",

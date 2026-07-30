@@ -55,8 +55,11 @@ export type SiteContent = {
   problem: {
     eyebrow: string;
     title: string;
-    description: string;
-    points: { title: string; body: string }[];
+    body: string[];
+    layers: { name: string; role: string }[];
+    /* Same shape as a layer on purpose — it reads as the fifth item in the
+       row, which is the argument the section is making. */
+    conclusion: { name: string; role: string };
   };
   solution: {
     eyebrow: string;

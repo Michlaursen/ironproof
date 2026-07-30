@@ -124,23 +124,22 @@ export const en: SiteContent = {
   },
   problem: {
     eyebrow: "The gap",
-    title: "The category exists. The evidence doesn’t travel.",
-    description:
-      "Proving software correct is no longer exotic. AWS proves its own cloud, Certora proves smart contracts, Imandra proves algorithms, Galois has done government-grade assurance for 25 years. The open question is no longer whether code can be proven — it is who you still have to trust once the work is done.",
-    points: [
-      {
-        title: "AI is acting, not answering",
-        body: "Agents now approve, refund, credit, transfer, change permissions and write production code. The decision happens in milliseconds; the review happens in weeks, if at all.",
-      },
-      {
-        title: "Every verdict lives in the vendor’s system",
-        body: "A dashboard, a cloud service, an engagement report, a PDF. End the contract and the assurance leaves with it. What reaches your regulator is a screenshot and a promise.",
-      },
-      {
-        title: "Auditors are asking for the artifact",
-        body: "OSFI technology and cyber expectations, the CSE post-quantum roadmap, internal audit committees. What survives scrutiny is a record a third party can check independently — years later, without the vendor in the room.",
-      },
+    title: "What existing controls still cannot prove",
+    body: [
+      "Identity confirms which agent is acting. Permissions define its general access. Guardrails shape its behavior. Logs record what happened.",
+      "None of them, alone, proves that a specific financial action was authorized under the exact policy, authority and transaction state in force at decision time.",
+      "IronProof fills that gap before execution and preserves the authorization basis as independently verifiable evidence.",
     ],
+    layers: [
+      { name: "Identity", role: "Who is acting" },
+      { name: "Permissions", role: "What it can access" },
+      { name: "Guardrails", role: "How it should behave" },
+      { name: "Logs", role: "What happened" },
+    ],
+    conclusion: {
+      name: "IronProof",
+      role: "Why this action was allowed or denied",
+    },
   },
   solution: {
     eyebrow: "How it works",
