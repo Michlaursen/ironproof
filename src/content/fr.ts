@@ -78,74 +78,32 @@ export const fr: SiteContent = {
     },
   },
   attributions: {
-    eyebrow: "Vérifiable indépendamment",
-    title:
-      "Pas des témoignages. Des mainteneurs qui ont intégré nos correctifs et nous nomment dans leur arbre source.",
-    description:
-      "Nous sommes au début, et nous préférons que vous l’appreniez ici plutôt qu’en diligence. Ce que nous pouvons montrer est d’une nature plus solide qu’une citation de client : trois projets libres indépendants — aucun à nous, aucun payé — qui nous créditent nommément à une adresse publique que vous pouvez ouvrir tout de suite.",
+    title: "Dossier technique public",
+    subtitle: "Des preuves que vous pouvez examiner en dehors de notre site.",
     items: [
       {
         org: "wolfSSL",
-        where: "Version 5.9.2 — 23 juin 2026",
-        quote:
-          "Hardening fixes in wolfSSL_strnstr and mp_get_digit. Thanks to Dominik Blain / COBALT Security for the bug report.",
-        context:
-          "Bibliothèque TLS déployée en embarqué, IoT, automobile et avionique. Être nommé dans les notes de version d’un éditeur, c’est une reconnaissance, pas une auto-déclaration.",
+        body: "Correctifs de sécurité crédités publiquement dans les notes de version wolfSSL 5.9.2.",
+        cta: "Voir les notes de version",
         href: "https://github.com/wolfSSL/wolfssl/blob/master/README.md",
-        linkLabel: "Lire les notes de version",
       },
       {
         org: "VideoLAN · VLC",
-        where: "Un fichier de l’arbre source porte le nom de notre fondateur",
-        quote: "0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
-        context:
-          "Validation des bornes de port dans parse_hostport() de pupnp, écrite en amont par le mainteneur de pupnp puis reprise dans VLC. Avis de sécurité référencé : GHSA-q522-6w45-4j58.",
+        body: "Un correctif de vulnérabilité portant le nom de Dominik Blain est conservé dans l’arbre source public de VLC.",
+        cta: "Voir le correctif",
         href: "https://github.com/videolan/vlc/blob/master/contrib/src/upnp/0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
-        linkLabel: "Ouvrir le fichier de correctif",
       },
       {
         org: "Red Hat · OpenELA",
-        where: "libyang — RHEL-177019",
-        quote: "Reported-by: Dominik Blain <dominik@qreativelab.io>, Cobalt AI",
-        context:
-          "Deux corruptions mémoire atteignables depuis une entrée LYB malformée. OpenELA est le consortium Linux entreprise fondé par Oracle, SUSE et CIQ.",
+        body: "Des correctifs libyang publics créditent Dominik Blain et Cobalt AI pour le signalement de deux corruptions mémoire.",
+        cta: "Voir le dossier de correctif",
         href: "https://github.com/openela-main/libyang",
-        linkLabel: "Voir la source du correctif",
       },
     ],
-    cveLabel: "Les CVE derrière",
-    cveNote:
-      "Deux portent un identifiant public que vous pouvez consulter tout de suite — et les deux tombent sur le même code que les crédits ci-dessus, c’est ainsi qu’on distingue une divulgation d’une affirmation. Une troisième est déposée chez Zephyr et n’est pas encore publiée : on l’affiche pour ce qu’elle est.",
-    cves: [
-      {
-        id: "CVE-2026-44673",
-        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-44673",
-        product: "libyang · CESNET",
-        kind: "CWE-190 — débordement d’entier → dépassement de tampon en tas",
-        severity: "CVSS 7,5 · Élevée",
-        body: "lyb_read_string() dans src/parser_lyb.c déborde le tas sur un bloc LYB forgé. Tout consommateur de libyang est atteignable — serveurs NETCONF, sysrepo, et les paquets Red Hat Enterprise Linux 8, 9 et 10.",
-        status: "Corrigé en amont dans 5.2.15",
-      },
-      {
-        id: "CVE-2026-41682",
-        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-41682",
-        product: "pupnp · SDK UPnP",
-        kind: "Conversion signé vers non signé → SSRF",
-        severity: "CVSS 6,9 · Moyenne",
-        body: "Un port qui déborde la conversion atoi() dans parse_uri() est tronqué en silence, si bien qu’une requête aboutit ailleurs qu’à l’adresse visée. C’est le correctif que VideoLAN a repris dans VLC.",
-        status: "Corrigé en amont dans 1.18.5",
-      },
-      {
-        id: "Zephyr RTOS",
-        product: "Avis déposé, pas encore publié",
-        kind: "CWE-190, par le processus de sécurité Zephyr",
-        severity: "Corrigé en amont",
-        body: "GitHub émet un identifiant d’avis dès le dépôt du signalement, mais il reste privé au rapporteur et aux mainteneurs jusqu’à publication — le nôtre ne mène donc nulle part pour vous aujourd’hui. Nous préférons laisser cette carte maigre plutôt que d’imprimer une référence que vous ne pouvez pas ouvrir.",
-        status: "Identifiant retenu tant qu’il ne résout pas publiquement",
-      },
-    ],
-    footnote:
-      "2 CVE à identifiant public · 3 crédits de tiers · 28 divulgations coordonnées déposées · 4 prépublications sur arXiv. Chaque chiffre de cette page renvoie à quelque chose que vous pouvez ouvrir — on a retiré ceux qui n’y renvoyaient pas.",
+    summary:
+      "3 CVE assignées · 28 divulgations coordonnées · 4 prépublications en sécurité",
+    linkLabel: "Consulter le dossier technique complet",
+    linkHref: "#corpus",
   },
   lab: {
     eyebrow: "Laboratoire de preuve",

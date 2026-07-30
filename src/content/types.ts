@@ -28,29 +28,12 @@ export type SiteContent = {
     };
   };
   attributions: {
-    eyebrow: string;
     title: string;
-    description: string;
-    items: {
-      org: string;
-      where: string;
-      quote: string;
-      context: string;
-      href: string;
-      linkLabel: string;
-    }[];
-    cveLabel: string;
-    cveNote: string;
-    cves: {
-      id: string;
-      href?: string;
-      product: string;
-      kind: string;
-      severity: string;
-      body: string;
-      status: string;
-    }[];
-    footnote: string;
+    subtitle: string;
+    items: { org: string; body: string; cta: string; href: string }[];
+    summary: string;
+    linkLabel: string;
+    linkHref: string;
   };
   lab: {
     eyebrow: string;

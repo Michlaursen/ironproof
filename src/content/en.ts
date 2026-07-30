@@ -69,76 +69,32 @@ export const en: SiteContent = {
     },
   },
   attributions: {
-    eyebrow: "Independently verifiable",
-    title:
-      "Not testimonials. Maintainers who shipped our fixes and named us in their source tree.",
-    description:
-      "We are early, and we would rather you hear it here than find it in diligence. What we can show is a harder kind of proof than a customer quote: three independent open-source projects — none of them ours, none of them paid — that credit us by name at a public URL you can open right now.",
+    title: "Public technical record",
+    subtitle: "Evidence you can inspect outside our website.",
     items: [
       {
         org: "wolfSSL",
-        where: "Release 5.9.2 — June 23, 2026",
-        quote:
-          "Hardening fixes in wolfSSL_strnstr and mp_get_digit. Thanks to Dominik Blain / COBALT Security for the bug report.",
-        context:
-          "A TLS library deployed across embedded, IoT, automotive and avionics systems. Being named in a vendor's release notes is recognition, not self-declaration.",
+        body: "Security fixes publicly credited in the wolfSSL 5.9.2 release notes.",
+        cta: "View release notes",
         href: "https://github.com/wolfSSL/wolfssl/blob/master/README.md",
-        linkLabel: "Read the release notes",
       },
       {
         org: "VideoLAN · VLC",
-        where: "A file in the source tree carries our founder's name",
-        quote:
-          "0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
-        context:
-          "Port bounds validation in pupnp's parse_hostport(), authored upstream by the pupnp maintainer and carried into VLC. Referenced advisory: GHSA-q522-6w45-4j58.",
+        body: "A vulnerability fix carrying Dominik Blain’s name is preserved in VLC’s public source tree.",
+        cta: "View patch",
         href: "https://github.com/videolan/vlc/blob/master/contrib/src/upnp/0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
-        linkLabel: "Open the patch file",
       },
       {
         org: "Red Hat · OpenELA",
-        where: "libyang — RHEL-177019",
-        quote:
-          "Reported-by: Dominik Blain <dominik@qreativelab.io>, Cobalt AI",
-        context:
-          "Two memory corruptions reachable from a malformed LYB input. OpenELA is the enterprise Linux consortium founded by Oracle, SUSE and CIQ.",
+        body: "Public libyang patches credit Dominik Blain and Cobalt AI for reporting two memory-corruption issues.",
+        cta: "View patch record",
         href: "https://github.com/openela-main/libyang",
-        linkLabel: "See the patch source",
       },
     ],
-    cveLabel: "The CVEs behind them",
-    cveNote:
-      "Two carry a public identifier you can look up right now — and both land on the same code as the credits above, which is how you tell a disclosure from a claim. A third is filed with Zephyr and has not been published yet, so we show it as what it is.",
-    cves: [
-      {
-        id: "CVE-2026-44673",
-        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-44673",
-        product: "libyang · CESNET",
-        kind: "CWE-190 — integer overflow → heap buffer overflow",
-        severity: "CVSS 7.5 · High",
-        body: "lyb_read_string() in src/parser_lyb.c overflows the heap on a crafted LYB blob. Every libyang consumer is reachable — NETCONF servers, sysrepo, and the Red Hat Enterprise Linux 8, 9 and 10 packages.",
-        status: "Patched upstream in 5.2.15",
-      },
-      {
-        id: "CVE-2026-41682",
-        href: "https://nvd.nist.gov/vuln/detail/CVE-2026-41682",
-        product: "pupnp · UPnP SDK",
-        kind: "Signed-to-unsigned conversion → SSRF",
-        severity: "CVSS 6.9 · Medium",
-        body: "A port that overflows the atoi() cast in parse_uri() is silently truncated, so a request resolves somewhere other than where it was addressed. This is the fix VideoLAN carried into VLC.",
-        status: "Patched upstream in 1.18.5",
-      },
-      {
-        id: "Zephyr RTOS",
-        product: "Advisory filed, not yet published",
-        kind: "CWE-190, through the Zephyr security process",
-        severity: "Fixed upstream",
-        body: "GitHub mints an advisory identifier the moment a report is filed, but it stays private to the reporter and the maintainers until publication — so ours resolves to nothing for you today. We would rather leave this card thin than print a reference you cannot open.",
-        status: "Identifier withheld until it resolves publicly",
-      },
-    ],
-    footnote:
-      "2 CVEs with public identifiers · 3 third-party credits · 28 coordinated disclosures filed · 4 preprints on arXiv. Every number on this page is traceable to something you can open — we removed the ones that weren't.",
+    summary:
+      "3 assigned CVEs · 28 coordinated disclosures · 4 security preprints",
+    linkLabel: "Review the full technical record",
+    linkHref: "#corpus",
   },
   lab: {
     eyebrow: "Proof Laboratory",
