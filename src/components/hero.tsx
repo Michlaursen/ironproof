@@ -18,9 +18,13 @@ export function Hero({ content }: HeroProps) {
           <h1 className="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl lg:text-6xl">
             {content.headline}
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted text-balance">
-            {content.subhead}
-          </p>
+          <div className="mt-6 max-w-xl space-y-4">
+            {content.body.map((paragraph) => (
+              <p key={paragraph} className="text-lg text-muted">
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <Link
@@ -37,11 +41,13 @@ export function Hero({ content }: HeroProps) {
             </Link>
           </div>
 
-          <p className="mt-12 text-sm text-muted">
-            {content.taglinePre}
-            <span className="text-foreground">{content.taglineQuote1}</span>
-            {content.taglineMid}
-            <span className="text-foreground">{content.taglineQuote2}</span>
+          <p className="mt-10 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-muted">
+            {content.trustLine.map((item, i) => (
+              <span key={item} className="flex items-center gap-2">
+                {i > 0 ? <span aria-hidden="true">·</span> : null}
+                {item}
+              </span>
+            ))}
           </p>
         </Reveal>
 

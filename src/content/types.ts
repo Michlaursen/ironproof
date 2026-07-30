@@ -12,13 +12,12 @@ export type SiteContent = {
   hero: {
     eyebrow: string;
     headline: string;
-    subhead: string;
+    body: string[];
     ctaPrimary: string;
     ctaSecondary: string;
-    taglinePre: string;
-    taglineQuote1: string;
-    taglineMid: string;
-    taglineQuote2: string;
+    /* Split into items only so the line wraps cleanly on narrow columns —
+       rendered inline with · separators, the visible text is one line. */
+    trustLine: string[];
     proofCard: {
       label: string;
       status: string;

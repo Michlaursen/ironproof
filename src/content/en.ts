@@ -21,16 +21,20 @@ export const en: SiteContent = {
     langSwitchLabel: "FR",
   },
   hero: {
-    eyebrow: "Verifiable security infrastructure · Canada",
-    headline: "Proof that outlives the vendor.",
-    subhead:
-      "Every security tool asks you to keep trusting it. IronProof proves what AI agents, critical code and cryptography can and cannot do — then seals the result as an artifact a third party re-verifies offline, years later, with nothing but a public key.",
-    ctaPrimary: "Request a demo",
-    ctaSecondary: "Inspect a real proof",
-    taglinePre: "IronProof moves institutions from ",
-    taglineQuote1: "“trust our verdict”",
-    taglineMid: " to ",
-    taglineQuote2: "“verify it yourself, offline.”",
+    eyebrow: "Verifiable authorization for AI-driven financial workflows",
+    headline: "Prove the transaction boundary before an AI agent moves money.",
+    body: [
+      "IronProof verifies that refunds, payments, disbursements and beneficiary changes remain inside your customer-authored policy before execution.",
+      "For every decision, it records the policy applied, the agent’s authority under that policy, the transaction state, and a verifiable justification for why the action was allowed or denied.",
+      "The resulting evidence can be verified independently by risk, compliance and audit teams — without relying on an IronProof dashboard.",
+    ],
+    ctaPrimary: "Evaluate a money-moving workflow",
+    ctaSecondary: "Inspect a sample certificate",
+    trustLine: [
+      "Customer-controlled policy",
+      "Pre-execution verification",
+      "Sovereign and air-gapped deployment available",
+    ],
     proofCard: {
       label: "Proof Artifact",
       status: "SEALED",

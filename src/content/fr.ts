@@ -21,16 +21,21 @@ export const fr: SiteContent = {
     langSwitchLabel: "EN",
   },
   hero: {
-    eyebrow: "Infrastructure de sécurité vérifiable · Canada",
-    headline: "La preuve qui survit au fournisseur.",
-    subhead:
-      "Tous les outils de sécurité vous demandent de continuer à leur faire confiance. IronProof prouve ce que les agents IA, le code critique et la cryptographie peuvent et ne peuvent pas faire — puis scelle le résultat en artefact qu’un tiers revérifie hors ligne, des années plus tard, avec une simple clé publique.",
-    ctaPrimary: "Demander une démo",
-    ctaSecondary: "Inspecter une vraie preuve",
-    taglinePre: "IronProof fait passer les institutions de ",
-    taglineQuote1: "« croyez notre verdict »",
-    taglineMid: " à ",
-    taglineQuote2: "« vérifiez-le vous-même, hors ligne ».",
+    eyebrow: "Autorisation vérifiable pour les flux financiers pilotés par l’IA",
+    headline:
+      "Prouvez la frontière transactionnelle avant qu’un agent IA ne déplace de l’argent.",
+    body: [
+      "IronProof vérifie que les remboursements, paiements, décaissements et changements de bénéficiaire restent à l’intérieur de la politique rédigée par le client, avant exécution.",
+      "Pour chaque décision, il consigne la politique appliquée, l’autorité de l’agent sous cette politique, l’état de la transaction, et une justification vérifiable expliquant pourquoi l’action a été permise ou refusée.",
+      "La preuve qui en résulte se vérifie de façon indépendante par les équipes de risque, de conformité et d’audit — sans dépendre d’un tableau de bord IronProof.",
+    ],
+    ctaPrimary: "Évaluer un flux qui déplace de l’argent",
+    ctaSecondary: "Inspecter un certificat exemple",
+    trustLine: [
+      "Politique contrôlée par le client",
+      "Vérification avant exécution",
+      "Déploiement souverain et en isolement réseau disponible",
+    ],
     proofCard: {
       label: "Artefact de preuve",
       status: "SCELLÉ",
