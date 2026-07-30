@@ -276,59 +276,36 @@ export const fr: SiteContent = {
       "Un rapport vous donne une conclusion. L’artefact conserve le fondement de l’autorisation qui la soutient.",
   },
   comparison: {
-    eyebrow: "Comparaison honnête",
-    title: "Où vit la preuve une fois le travail terminé ?",
-    description:
-      "Nous ne sommes pas les seuls à savoir prouver du logiciel, et nous n’allons pas prétendre le contraire. Certora, Imandra, Galois, Trail of Bits et AWS font un travail sérieux — sur leur terrain, meilleur que le nôtre. La différence, c’est ce qui vous reste en main une fois le mandat terminé.",
-    columns: {
-      vendor: "Fournisseur",
-      strength: "Le plus fort en",
-      location: "Où vit la preuve",
-      survives: "Survit au fournisseur ?",
-    },
+    eyebrow: "Comparer",
+    title: "Ce que chaque contrôle prouve",
     rows: [
       {
-        vendor: "Certora",
-        strength: "Contrats intelligents, contrôle continu de propriétés",
-        location: "Leur tableau de bord",
-        survives: "Non",
+        name: "Gestion des identités et des accès",
+        primary: "Prouve qui est l’agent et à quels systèmes il peut accéder.",
+        secondary: "Ne prouve pas que cette transaction précise est autorisée.",
       },
       {
-        vendor: "Imandra",
-        strength:
-          "Logique d’algorithmes et de code, raisonnement neuro-symbolique",
-        location: "Leur service infonuagique",
-        survives: "Non",
+        name: "Garde-fous",
+        primary: "Encadrent le comportement du modèle et bloquent les schémas dangereux connus.",
+        secondary: "N’établissent pas le fondement complet d’autorisation d’une action financière.",
       },
       {
-        vendor: "Galois",
-        strength: "Haute assurance de niveau gouvernemental, depuis 25 ans",
-        location: "Un rapport de mandat",
-        survives: "Non",
+        name: "Journaux et observabilité",
+        primary: "Consignent ce qui s’est passé pendant ou après l’exécution.",
+        secondary: "Ne prouvent pas que l’action était valide avant l’exécution.",
       },
       {
-        vendor: "Trail of Bits",
-        strength: "Audit expert à grande échelle, outillage libre",
-        location: "Un rapport PDF",
-        survives: "Non",
+        name: "Rapports d’audit",
+        primary: "Fournissent une conclusion d’expert à un instant donné.",
+        secondary: "Ne conservent généralement pas une preuve rejouable au moment de la décision.",
       },
       {
-        vendor: "AWS",
-        strength: "Sécurité prouvable à l’intérieur de son propre nuage",
-        location: "Dans AWS",
-        survives: "Non",
-      },
-      {
-        vendor: "IronProof",
-        strength:
-          "Preuve portable pour les actions IA, le code et la cryptographie",
-        location: "Un artefact scellé que vous détenez",
-        survives: "Oui — hors ligne, clé publique, post-quantique",
+        name: "IronProof",
+        primary: "Prouve si l’action précise est à l’intérieur de la politique, de l’autorité et de l’état transactionnel en vigueur, avant l’exécution.",
+        secondary: "Conserve le fondement de l’autorisation comme preuve vérifiable indépendamment.",
         isUs: true,
       },
     ],
-    footnote:
-      "Lisez ce tableau correctement. Sur le volume de recherche publiée, Trail of Bits et Galois nous devancent d’un ordre de grandeur. Sur la couverture des contrats intelligents, Certora est l’acteur en place et ce n’est même pas serré. Nous ne prétendons pas faire leur métier mieux qu’eux. Nous revendiquons un livrable différent : une preuve qui ne dépend pas de notre survie.",
   },
   sovereignty: {
     eyebrow: "Souveraineté et durabilité",

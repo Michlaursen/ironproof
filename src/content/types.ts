@@ -89,21 +89,15 @@ export type SiteContent = {
   comparison: {
     eyebrow: string;
     title: string;
-    description: string;
-    columns: {
-      vendor: string;
-      strength: string;
-      location: string;
-      survives: string;
-    };
+    /* For the four existing controls, `secondary` is what they do NOT
+       establish. On the IronProof row it is what the artifact additionally
+       preserves — same slot, opposite polarity, which is the point. */
     rows: {
-      vendor: string;
-      strength: string;
-      location: string;
-      survives: string;
+      name: string;
+      primary: string;
+      secondary: string;
       isUs?: boolean;
     }[];
-    footnote: string;
   };
   sovereignty: {
     eyebrow: string;
