@@ -264,23 +264,22 @@ export const en: SiteContent = {
     ],
   },
   sovereignty: {
-    eyebrow: "Sovereignty & durability",
-    title: "Built for institutions that cannot export their systems — or their trust.",
+    eyebrow: "Sovereignty",
+    title: "Built for environments that cannot export data or trust",
     description:
-      "The proof core runs with no network access. Nothing about your systems, your code or your decisions has to leave your control in order to be proven, and nothing has to come back to us in order to be checked.",
-    tagline: "Verifiable security for AI and critical software.",
+      "IronProof can run locally or air-gapped, so transaction policies, system context and decision evidence remain under the institution’s control.",
     features: [
       {
-        title: "Post-quantum seal",
-        body: "Artifacts are hashed SHA3-512 and dual-signed Ed25519 + ML-DSA-65 under FIPS 204. Evidence sealed today stays checkable after a cryptographically relevant quantum computer exists.",
+        title: "Local deployment",
+        body: "The proof core can operate without network access.",
       },
       {
-        title: "Offline verification",
-        body: "A verifier needs the artifact and a public key. No network, no account, no call home. Tampering shows up as a content-hash mismatch, not as silence.",
+        title: "Independent verification",
+        body: "The customer’s auditor can verify the artifact offline without an IronProof dashboard.",
       },
       {
-        title: "Sovereign & air-gapped deployment",
-        body: "Local, private, and compatible with air-gapped environments. Canadian-operated, for institutions that treat data residency and vendor concentration as a risk to be documented.",
+        title: "Durable evidence",
+        body: "Artifacts are tamper-evident and support classical and post-quantum signatures.",
       },
     ],
   },

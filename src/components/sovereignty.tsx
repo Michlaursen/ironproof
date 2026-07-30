@@ -1,9 +1,9 @@
 import type { SiteContent } from "@/content";
-import { IconGlobe, IconLock, IconSeal } from "./icons";
+import { IconLock, IconSeal, IconVerify } from "./icons";
 import { Reveal } from "./reveal";
 import { SectionHeading } from "./section-heading";
 
-const ICONS = [IconSeal, IconLock, IconGlobe];
+const ICONS = [IconLock, IconVerify, IconSeal];
 
 type SovereigntyProps = { content: SiteContent["sovereignty"] };
 
@@ -18,9 +18,6 @@ export function Sovereignty({ content }: SovereigntyProps) {
               title={content.title}
               description={content.description}
             />
-            <p className="mt-6 font-mono text-sm text-seal">
-              {content.tagline}
-            </p>
           </Reveal>
 
           <div className="space-y-4">

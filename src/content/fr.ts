@@ -275,24 +275,23 @@ export const fr: SiteContent = {
     ],
   },
   sovereignty: {
-    eyebrow: "Souveraineté et durabilité",
+    eyebrow: "Souveraineté",
     title:
-      "Conçu pour les institutions qui ne peuvent exporter ni leurs systèmes, ni leur confiance.",
+      "Conçu pour les environnements qui ne peuvent exporter ni données ni confiance",
     description:
-      "Le cœur de preuve fonctionne sans accès réseau. Rien de vos systèmes, de votre code ou de vos décisions n’a besoin de quitter votre contrôle pour être prouvé, et rien n’a besoin de nous revenir pour être contrôlé.",
-    tagline: "Sécurité vérifiable pour l’IA et les logiciels critiques.",
+      "IronProof peut fonctionner localement ou en isolement réseau, de sorte que les politiques transactionnelles, le contexte système et la preuve de décision restent sous le contrôle de l’institution.",
     features: [
       {
-        title: "Sceau post-quantique",
-        body: "Les artefacts sont hachés en SHA3-512 et doublement signés Ed25519 + ML-DSA-65 sous FIPS 204. Une preuve scellée aujourd’hui reste contrôlable après l’arrivée d’un ordinateur quantique cryptographiquement pertinent.",
+        title: "Déploiement local",
+        body: "Le cœur de preuve peut fonctionner sans accès réseau.",
       },
       {
-        title: "Vérification hors ligne",
-        body: "Un vérificateur a besoin de l’artefact et d’une clé publique. Aucun réseau, aucun compte, aucun appel maison. Une altération se manifeste par une divergence d’empreinte, pas par un silence.",
+        title: "Vérification indépendante",
+        body: "L’auditeur du client peut vérifier l’artefact hors ligne, sans tableau de bord IronProof.",
       },
       {
-        title: "Déploiement souverain et isolé",
-        body: "Local, privé, compatible avec les environnements en isolement réseau. Opéré au Canada, pour des institutions qui traitent la résidence des données et la concentration fournisseur comme un risque à documenter.",
+        title: "Preuve durable",
+        body: "Les artefacts révèlent toute altération et prennent en charge les signatures classiques et post-quantiques.",
       },
     ],
   },

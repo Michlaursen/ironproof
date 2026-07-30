@@ -99,7 +99,6 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     description: string;
-    tagline: string;
     features: { title: string; body: string }[];
   };
   corpus: {
