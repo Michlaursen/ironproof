@@ -189,63 +189,30 @@ export const fr: SiteContent = {
   },
   products: {
     eyebrow: "Produit",
-    title: "Un seul moteur de preuve. Quatre surfaces où ça compte.",
+    title:
+      "La couche d’autorisation pour les agents IA qui déplacent de l’argent",
     description:
-      "Le même moteur, pointé vers quatre endroits où se tromper coûte cher. Chaque surface produit le même livrable : un contre-exemple, ou un artefact scellé.",
-    items: [
+      "IronProof Actions évalue chaque action financière à haut risque avant son exécution, au regard de la politique, de l’autorité et de l’état transactionnel en vigueur.",
+    capabilities: [
       {
-        name: "IronProof Core",
-        tag: "Moteur de preuve",
-        description:
-          "Le moteur d’ontologie. Z3 et Spacer sur un jumeau numérique typé : il synthétise lui-même l’invariant, puis prouve qu’aucune trajectoire ne s’en échappe. La plupart des outils vérifient une règle que vous avez écrite. Core trouve la règle qui doit tenir.",
-        items: [
-          "Synthèse symbolique d’invariant",
-          "Fidélité de l’encodeur vérifiée par noyau en Lean 4",
-          "Contre-exemple à chaque échec",
-          "Artefacts scellés en post-quantique",
-          "Vérification hors ligne par un tiers",
-        ],
+        title: "Contexte au moment de la décision",
+        body: "Capture la version de la politique — rédigée par le client, pas par nous — l’autorité de l’agent sous celle-ci, l’action demandée et l’état cumulatif dans lequel elle arrive.",
       },
       {
-        name: "IronProof Actions",
-        tag: "Gouvernance des agents IA",
-        description:
-          "Juge une action d’agent à haut risque avant son exécution. La porte est la seule entrée — structurellement, pas par convention : rien ne s’exécute sans dépenser un jeton à usage unique, émis uniquement sur la branche prouvée sûre.",
-        items: [
-          "Vérification avant exécution, pas des journaux après coup",
-          "Approbations, remboursements, crédits, virements, limites",
-          "Jetons d’exécution à usage unique liés à la politique en vigueur",
-          "Registre scellé de ce qui a été permis, refusé et prouvé",
-          "Fonctionne en isolement réseau — zéro réseau dans le cœur de preuve",
-        ],
+        title: "Contrôle formel de la frontière",
+        body: "Prouve si l’action reste à l’intérieur de la frontière transactionnelle définie par le client — et qu’aucune séquence d’actions que l’agent peut enchaîner ne s’en échappe, pas seulement la requête du moment.",
       },
       {
-        name: "IronProof Cobalt-AI",
-        tag: "Code et contrats intelligents",
-        description:
-          "Prouve des propriétés du code — hérité, réusiné, généré par IA ou en chaîne. C’est la surface derrière nos CVE publiées et les correctifs intégrés par wolfSSL, VideoLAN et Red Hat.",
-        items: [
-          "Assurance du code généré par IA",
-          "Audits de preuve pour la modernisation d’applications héritées",
-          "Contrats intelligents et analyse de ponts inter-chaînes",
-          "Classes de sûreté mémoire (CWE-190 / 131 / 195)",
-          "Divulgation coordonnée, créditée publiquement",
-        ],
+        title: "Jeton d’exécution à usage unique",
+        body: "Seule une action prouvée reçoit un jeton, lié à cette décision exacte et à la politique en vigueur. Rien ne s’exécute sans le dépenser.",
       },
       {
-        name: "IronProof Cobalt-PQC",
-        tag: "Cryptographie",
-        description:
-          "Prouve l’absence de canaux auxiliaires temporels dans les implémentations cryptographiques, et audite la migration post-quantique elle-même — la seule échéance que personne ne peut renégocier.",
-        items: [
-          "Vérification de temps constant (temporisation IEEE-754)",
-          "Implémentations ML-DSA / FIPS 204",
-          "Inventaire post-quantique et CBOM",
-          "Exposition « récolter maintenant, déchiffrer plus tard »",
-          "Recherche publiée sur l’écosystème",
-        ],
+        title: "Preuve vérifiable",
+        body: "Conserve pourquoi l’action a été permise ou refusée dans un artefact scellé que votre propre auditeur peut contrôler hors ligne.",
       },
     ],
+    finalLine:
+      "Commencez par un seul flux : remboursements, décaissements, paiements ou changements de bénéficiaire.",
   },
   artifact: {
     eyebrow: "L’artefact",

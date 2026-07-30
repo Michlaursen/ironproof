@@ -179,63 +179,29 @@ export const en: SiteContent = {
   },
   products: {
     eyebrow: "Product",
-    title: "One proof engine. Four surfaces where it matters.",
+    title: "The authorization layer for money-moving AI agents",
     description:
-      "The same engine, pointed at four places where being wrong is expensive. Every surface produces the same deliverable: a counterexample, or a sealed artifact.",
-    items: [
+      "IronProof Actions evaluates each high-risk financial action before execution against the policy, authority and transaction state in force.",
+    capabilities: [
       {
-        name: "IronProof Core",
-        tag: "Proof engine",
-        description:
-          "The ontology engine. Z3 and Spacer over a typed digital twin: it synthesizes the invariant itself, then proves no trajectory escapes it. Most tools check a rule you wrote. Core finds the rule that has to hold.",
-        items: [
-          "Symbolic invariant synthesis",
-          "Encoder fidelity machine-checked in Lean 4",
-          "Counterexample on every failure",
-          "Post-quantum sealed artifacts",
-          "Offline third-party verification",
-        ],
+        title: "Decision-time context",
+        body: "Captures the policy version — customer-authored, not written by us — the agent’s authority under it, the requested action and the cumulative state it lands in.",
       },
       {
-        name: "IronProof Actions",
-        tag: "AI agent governance",
-        description:
-          "Judges a high-risk agent action before it executes. The gate is the only entrance — structurally, not by convention: nothing runs without spending a single-use grant minted only on the proven-safe branch.",
-        items: [
-          "Pre-execution verification, not after-the-fact logs",
-          "Approvals, refunds, credits, transfers, limits",
-          "Single-use execution grants bound to the policy in force",
-          "Sealed record of what was allowed, denied and proven",
-          "Runs air-gapped — no network in the proof core",
-        ],
+        title: "Formal boundary check",
+        body: "Proves whether the action remains inside the customer-defined transaction boundary — and that no sequence of actions the agent can take escapes it, not only the request in front of it.",
       },
       {
-        name: "IronProof Cobalt-AI",
-        tag: "Code & smart contracts",
-        description:
-          "Proves properties of code — legacy, refactored, AI-generated or on-chain. The surface behind our published CVEs and the fixes shipped by wolfSSL, VideoLAN and Red Hat.",
-        items: [
-          "AI-generated code assurance",
-          "Legacy modernization proof audits",
-          "Smart contracts & cross-chain bridge analysis",
-          "Memory-safety classes (CWE-190 / 131 / 195)",
-          "Coordinated disclosure, publicly credited",
-        ],
+        title: "Single-use execution grant",
+        body: "Only a proven action receives a grant, bound to that exact decision and to the policy in force. Nothing executes without spending it.",
       },
       {
-        name: "IronProof Cobalt-PQC",
-        tag: "Cryptography",
-        description:
-          "Proves the absence of timing side channels in cryptographic implementations, and audits the post-quantum migration itself — the one deadline nobody can renegotiate.",
-        items: [
-          "Constant-time verification (IEEE-754 timing)",
-          "ML-DSA / FIPS 204 implementations",
-          "Post-quantum inventory and CBOM",
-          "Harvest-now-decrypt-later exposure",
-          "Published research across the ecosystem",
-        ],
+        title: "Verifiable evidence",
+        body: "Preserves why the action was allowed or denied in a sealed artifact your own auditor can check offline.",
       },
     ],
+    finalLine:
+      "Start with one workflow: refunds, disbursements, payments or beneficiary changes.",
   },
   artifact: {
     eyebrow: "The artifact",

@@ -73,12 +73,8 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     description: string;
-    items: {
-      name: string;
-      tag: string;
-      description: string;
-      items: string[];
-    }[];
+    capabilities: { title: string; body: string }[];
+    finalLine: string;
   };
   artifact: {
     eyebrow: string;
