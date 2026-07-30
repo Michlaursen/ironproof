@@ -113,12 +113,13 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     description: string;
+    buyersLabel: string;
+    buyers: string;
+    engagementLabel: string;
+    engagement: string;
     quote: string;
     quoteSource: string;
     quoteHref: string;
-    afterQuote: string;
-    alsoLabel: string;
-    also: string[];
   };
   finalCta: {
     eyebrow: string;

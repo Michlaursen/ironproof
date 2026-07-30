@@ -369,25 +369,20 @@ export const fr: SiteContent = {
   sector: {
     eyebrow: "Par où nous commençons",
     title:
-      "Services financiers canadiens. Les agents IA d’arrière-guichet qui déplacent de l’argent.",
+      "Les flux qui déplacent de l’argent, dans les services financiers canadiens",
     description:
-      "Comptes fournisseurs, remboursements, décaissements, changements de bénéficiaire, limites cumulatives, paiements en attente d’approbation humaine. L’acheteur, c’est le risque, la conformité et l’audit interne — pas l’équipe de développement. Nous commençons délibérément étroit, parce qu’un créneau sans comptes nommés n’est encore qu’une catégorie.",
+      "Nous commençons par les agents IA d’arrière-guichet qui émettent des remboursements, des paiements, des décaissements ou des changements de bénéficiaire, sous des limites et des règles d’approbation définies.",
+    buyersLabel: "Acheteurs principaux",
+    buyers:
+      "Les équipes de risque technologique, de risque opérationnel et de conformité.",
+    engagementLabel: "Mandat initial",
+    engagement:
+      "Choisir un flux, définir la frontière transactionnelle et produire un artefact de preuve vérifiable indépendamment.",
     quote:
       "Elles ne l’utilisent pas pour remplacer le jugement humain ni pour automatiser entièrement des décisions critiques, compte tenu des conséquences financières, juridiques et réputationnelles importantes.",
     quoteSource: "Banque du Canada — Enquête sur le système financier, mai 2026",
     quoteHref:
       "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
-    afterQuote:
-      "C’est ce blocage que nous levons. Pas avec une promesse — avec un artefact que l’auditeur de l’institution revérifie sans nous appeler. La même enquête signale la concentration autour d’un petit nombre de fournisseurs d’IA et d’infonuagique comme un risque de stabilité : une preuve portable répond mieux à cette inquiétude que la géographie.",
-    alsoLabel: "Le moteur s’applique aussi à",
-    also: [
-      "Exploitants d’infrastructures critiques",
-      "Programmes gouvernementaux et connexes à la défense",
-      "Télécommunications",
-      "Plateformes d’administration de la santé",
-      "Partenaires de modernisation et d’intégration",
-      "Logiciels d’entreprise déployant des agents IA",
-    ],
   },
   finalCta: {
     eyebrow: "Dans un monde d’incertitude face à l’IA",

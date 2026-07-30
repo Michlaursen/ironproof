@@ -356,25 +356,19 @@ export const en: SiteContent = {
   },
   sector: {
     eyebrow: "Where we start",
-    title: "Canadian financial services. Back-office AI agents that move money.",
+    title: "Money-moving workflows in Canadian financial services",
     description:
-      "Accounts payable, refunds, disbursements, beneficiary changes, cumulative limits, payments held for human approval. The buyer is risk, compliance and internal audit — not the development team. We are deliberately starting narrow, because a wedge without named accounts is just a category.",
+      "We start with back-office AI agents that issue refunds, payments, disbursements or beneficiary changes under defined limits and approval rules.",
+    buyersLabel: "Primary buyers",
+    buyers: "Technology risk, operational risk and compliance teams.",
+    engagementLabel: "Initial engagement",
+    engagement:
+      "Select one workflow, define the transaction boundary and produce an independently verifiable proof artifact.",
     quote:
       "They do not use it to replace human judgment or to fully automate critical decisions given the significant financial, legal and reputational consequences.",
     quoteSource: "Bank of Canada — Financial System Survey, May 2026",
     quoteHref:
       "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
-    afterQuote:
-      "That is the blocker we remove. Not with a promise — with an artifact the institution’s own auditor re-verifies without calling us. The same survey flags concentration among a small number of third-party AI and cloud providers as a stability risk: portable proof answers that concern better than geography does.",
-    alsoLabel: "The engine also runs against",
-    also: [
-      "Critical infrastructure operators",
-      "Government and defence-adjacent programs",
-      "Telecommunications",
-      "Healthcare administration platforms",
-      "Modernization and integration partners",
-      "Enterprise SaaS deploying AI agents",
-    ],
   },
   finalCta: {
     eyebrow: "In a world of AI uncertainty",
