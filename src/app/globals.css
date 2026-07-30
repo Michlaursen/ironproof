@@ -101,3 +101,77 @@ body {
     display: none;
   }
 }
+
+/* HubSpot embedded form (contact section) — restyled to match the
+   site's inputs/buttons, since HubSpot's default form CSS ships with
+   its own fonts, colors and spacing. */
+.hubspot-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.hubspot-form .hs-form-field {
+  margin: 0;
+}
+.hubspot-form .hs-form-field label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.hubspot-form .input {
+  margin: 0;
+}
+.hubspot-form input[type="text"],
+.hubspot-form input[type="email"],
+.hubspot-form textarea,
+.hubspot-form select {
+  width: 100% !important;
+  box-sizing: border-box;
+  border-radius: 0.375rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--foreground);
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+.hubspot-form input[type="text"]:focus,
+.hubspot-form input[type="email"]:focus,
+.hubspot-form textarea:focus,
+.hubspot-form select:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.hubspot-form ul.hs-error-msgs {
+  list-style: none;
+  margin: 0.375rem 0 0;
+  padding: 0;
+  font-size: 0.8125rem;
+  color: #fb7185;
+}
+.hubspot-form .hs-form-booleancheckbox-display,
+.hubspot-form .legal-consent-container {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.hubspot-form .hs-button {
+  border-radius: 0.375rem;
+  background: var(--accent);
+  color: var(--accent-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.hubspot-form .hs-button:hover {
+  opacity: 0.9;
+}
+.hubspot-form .hs_error_rollup {
+  display: none;
+}
+.hubspot-form .grecaptcha-badge {
+  margin-top: 0.5rem;
+}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { Locale, SiteContent } from "@/content";
 import { IconVerify } from "./icons";
 
@@ -9,8 +9,58 @@ const HUBSPOT_FORM_ID: Record<Locale, string> = {
   en: "e9072082-8533-4d98-93d4-e02054dc1d37",
   fr: "6e706d61-db4e-4786-aa1f-50962240d7af",
 };
+const HUBSPOT_EMBED_SRC = "https://js.hsforms.net/forms/embed/v2.js";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type HubspotFormCreateOptions = {
+  portalId: string;
+  formId: string;
+  target: string;
+  locale?: string;
+  onFormSubmitted?: () => void;
+  onFormReady?: () => void;
+};
+
+declare global {
+  interface Window {
+    hbspt?: {
+      forms: {
+        create: (options: HubspotFormCreateOptions) => void;
+      };
+    };
+  }
+}
+
+let hubspotScriptPromise: Promise<void> | null = null;
+
+function loadHubspotScript(): Promise<void> {
+  if (window.hbspt) return Promise.resolve();
+  if (hubspotScriptPromise) return hubspotScriptPromise;
+
+  hubspotScriptPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector(
+      `script[src="${HUBSPOT_EMBED_SRC}"]`,
+    );
+    if (existing) {
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", () =>
+        reject(new Error("Failed to load HubSpot forms script")),
+      );
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = HUBSPOT_EMBED_SRC;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () =>
+      reject(new Error("Failed to load HubSpot forms script"));
+    document.body.appendChild(script);
+  });
+
+  return hubspotScriptPromise;
+}
+
+type Status = "loading" | "ready" | "success" | "error";
 
 type DemoRequestFormProps = {
   content: SiteContent["finalCta"]["form"];
@@ -18,42 +68,39 @@ type DemoRequestFormProps = {
 };
 
 export function DemoRequestForm({ content, locale }: DemoRequestFormProps) {
-  const [status, setStatus] = useState<Status>("idle");
+  const [status, setStatus] = useState<Status>("loading");
+  const rawId = useId().replace(/:/g, "");
+  const targetId = `hubspot-form-${rawId}`;
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setStatus("submitting");
+  useEffect(() => {
+    let cancelled = false;
 
-    const form = event.currentTarget;
-    const data = new FormData(form);
-    const formId = HUBSPOT_FORM_ID[locale];
-    const endpoint = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${formId}`;
-
-    try {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fields: [
-            { name: "firstname", value: data.get("firstname") },
-            { name: "lastname", value: data.get("lastname") },
-            { name: "email", value: data.get("email") },
-            { name: "company", value: data.get("company") },
-            { name: "message", value: data.get("message") },
-          ],
-          context: {
-            pageUri: window.location.href,
-            pageName: document.title,
+    loadHubspotScript()
+      .then(() => {
+        if (cancelled || !window.hbspt || !containerRef.current) return;
+        containerRef.current.innerHTML = "";
+        window.hbspt.forms.create({
+          portalId: HUBSPOT_PORTAL_ID,
+          formId: HUBSPOT_FORM_ID[locale],
+          target: `#${targetId}`,
+          locale: locale === "fr" ? "fr" : "en",
+          onFormReady: () => {
+            if (!cancelled) setStatus("ready");
           },
-        }),
+          onFormSubmitted: () => {
+            if (!cancelled) setStatus("success");
+          },
+        });
+      })
+      .catch(() => {
+        if (!cancelled) setStatus("error");
       });
 
-      if (!response.ok) throw new Error("Submission failed");
-      setStatus("success");
-    } catch {
-      setStatus("error");
-    }
-  }
+    return () => {
+      cancelled = true;
+    };
+  }, [locale, targetId]);
 
   if (status === "success") {
     return (
@@ -68,54 +115,13 @@ export function DemoRequestForm({ content, locale }: DemoRequestFormProps) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mx-auto flex max-w-xl flex-col gap-4 text-left"
-    >
-      <div className="grid gap-4 sm:grid-cols-2">
-        <input
-          name="firstname"
-          type="text"
-          placeholder={content.firstName}
-          required
-          className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
-        />
-        <input
-          name="lastname"
-          type="text"
-          placeholder={content.lastName}
-          required
-          className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
-        />
-      </div>
-      <input
-        name="email"
-        type="email"
-        placeholder={content.email}
-        required
-        className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
+    <div className="mx-auto max-w-xl text-left">
+      <div
+        id={targetId}
+        ref={containerRef}
+        className="hubspot-form"
+        style={status === "loading" ? { minHeight: "18rem" } : undefined}
       />
-      <input
-        name="company"
-        type="text"
-        placeholder={content.company}
-        required
-        className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
-      />
-      <textarea
-        name="message"
-        placeholder={content.message}
-        rows={3}
-        className="rounded-md border border-border bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
-      />
-
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="rounded-md bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
-      >
-        {status === "submitting" ? content.submitting : content.submit}
-      </button>
 
       {status === "error" ? (
         <p className="text-sm text-rose-400">
@@ -126,6 +132,6 @@ export function DemoRequestForm({ content, locale }: DemoRequestFormProps) {
           {content.errorPost}
         </p>
       ) : null}
-    </form>
+    </div>
   );
 }
