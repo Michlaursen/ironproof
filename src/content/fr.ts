@@ -71,10 +71,10 @@ export const fr: SiteContent = {
           accent: true,
         },
         { label: "Sceau", value: "Ed25519 + ML-DSA-65" },
-        { label: "Vérificateur", value: "hors ligne · clé publique de confiance" },
+        { label: "Vérificateur", value: "hors ligne · implémentation indépendante" },
       ],
       footnote:
-        "La politique, l’autorité, l’état transactionnel et le verdict de preuve sont scellés ensemble. Vérifiez l’artefact hors ligne avec une clé publique de confiance — sans accès à un tableau de bord IronProof.",
+        "La politique, l’autorité, l’état transactionnel et le verdict de preuve sont scellés ensemble. Le format est publié : l’artefact se contrôle avec un vérificateur que nous n’avons pas écrit — hors ligne, sans compte et sans une ligne de notre code.",
     },
   },
   attributions: {
@@ -195,7 +195,7 @@ export const fr: SiteContent = {
       {
         step: "02",
         title: "Prouver la frontière",
-        body: "Déterminer si l’action peut violer une règle définie par le client ou une limite cumulative. La politique compilée devient des contraintes et un solveur contrôle tous les états représentés par le modèle et les hypothèses définis — unsat signifie qu’aucun état en violation n’existe, sat renvoie le contre-exemple.",
+        body: "Déterminer si l’action peut violer une règle définie par le client ou une limite cumulative. La décision est déterministe — les mêmes entrées donnent toujours le même verdict, sans solveur dans le chemin d’exécution et sans branche de dépassement de délai. Le solveur intervient plus tôt et ailleurs : il certifie la politique sur tout son espace d’action, de sorte qu’une politique qui n’admet rien est détectée avant d’être mise en service.",
       },
       {
         step: "03",
@@ -258,7 +258,7 @@ export const fr: SiteContent = {
       {
         num: "04",
         title: "Sceau et vérification",
-        body: "L’artefact révèle toute altération et se vérifie hors ligne avec une clé publique de confiance.",
+        body: "L’artefact révèle toute altération. Le format étant publié, une implémentation indépendante peut recalculer chaque empreinte et chaque signature — sans une ligne de code IronProof.",
       },
     ],
     finalLine:
@@ -309,11 +309,11 @@ export const fr: SiteContent = {
       },
       {
         title: "Vérification indépendante",
-        body: "L’auditeur du client peut vérifier l’artefact hors ligne, sans tableau de bord IronProof.",
+        body: "L’auditeur du client peut recontrôler l’artefact avec un second vérificateur écrit indépendamment — hors ligne, sans tableau de bord IronProof.",
       },
       {
         title: "Preuve durable",
-        body: "Les artefacts révèlent toute altération et prennent en charge les signatures classiques et post-quantiques.",
+        body: "Chaque artefact porte une signature classique et une signature post-quantique (Ed25519 + ML-DSA-65, FIPS 204), et son horodatage est borné des deux côtés — un sceau ne peut pas être reculé dans le temps.",
       },
     ],
   },

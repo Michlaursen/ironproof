@@ -62,10 +62,10 @@ export const en: SiteContent = {
           accent: true,
         },
         { label: "Seal", value: "Ed25519 + ML-DSA-65" },
-        { label: "Verifier", value: "offline · trusted public key" },
+        { label: "Verifier", value: "offline · independent implementation" },
       ],
       footnote:
-        "The policy, authority, transaction state and proof verdict are sealed together. Verify the artifact offline using a trusted public key — without access to an IronProof dashboard.",
+        "The policy, authority, transaction state and proof verdict are sealed together. The wire format is published, so the artifact can be checked by a verifier we did not write — offline, with no account and no IronProof code.",
     },
   },
   attributions: {
@@ -185,7 +185,7 @@ export const en: SiteContent = {
       {
         step: "02",
         title: "Prove the boundary",
-        body: "Determine whether the action can violate any customer-defined rule or cumulative limit. The compiled policy becomes constraints and a solver checks all states represented by the defined model and assumptions — unsat means no violating state exists, sat returns the counterexample.",
+        body: "Determine whether the action can violate any customer-defined rule or cumulative limit. The decision is deterministic — the same inputs always yield the same verdict, with no solver in the execution path and no timeout branch. The solver runs earlier and elsewhere: it certifies the policy across its entire action space, so a policy that admits nothing is caught before it ever runs.",
       },
       {
         step: "03",
@@ -247,7 +247,7 @@ export const en: SiteContent = {
       {
         num: "04",
         title: "Seal and verification",
-        body: "The artifact is tamper-evident and can be verified offline using a trusted public key.",
+        body: "The artifact is tamper-evident. Because the wire format is published, an independent implementation can re-check every hash and signature — no IronProof code involved.",
       },
     ],
     finalLine:
@@ -297,11 +297,11 @@ export const en: SiteContent = {
       },
       {
         title: "Independent verification",
-        body: "The customer’s auditor can verify the artifact offline without an IronProof dashboard.",
+        body: "The customer’s auditor can re-check the artifact with a second, independently written verifier — offline, without an IronProof dashboard.",
       },
       {
         title: "Durable evidence",
-        body: "Artifacts are tamper-evident and support classical and post-quantum signatures.",
+        body: "Every artifact carries both a classical and a post-quantum signature (Ed25519 + ML-DSA-65, FIPS 204), and its timestamp is bounded from both sides — a seal cannot be moved backwards in time.",
       },
     ],
   },
