@@ -4,6 +4,7 @@ import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
 import { ProofExplorer } from "./proof-explorer";
 import { VerifyArtifact } from "./verify-artifact";
+import { Credibility } from "./credibility";
 import { CtaForm } from "./cta-form";
 
 /*
@@ -15,20 +16,20 @@ export function Landing() {
   return (
     <div className="flex flex-1 flex-col">
       {/* NAV */}
-      <header className="relative z-20 flex items-center justify-between px-6 py-6 md:px-14">
-        <a href="#top" className="flex items-center gap-3">
+      <header className="relative z-20 flex items-center gap-8 px-6 py-6 md:px-14">
+        <a href="#top" className="flex shrink-0 items-center gap-3">
           <IronProofLogo width={26} height={35} />
           <span className="track-logo metal-text text-sm font-medium">IRONPROOF</span>
         </a>
-        <nav className="track-mid hidden items-center gap-5 text-xs text-neutral-500 md:flex">
-          <a href="#platform" className="transition hover:text-neutral-200">PLATFORM</a>
-          <a href="#speed" className="transition hover:text-neutral-200">SPEED</a>
-          <a href="#compare" className="transition hover:text-neutral-200">VS TESTING</a>
-          <a href="#try" className="transition hover:text-neutral-200">TRY IT</a>
-          <a href="#verify" className="transition hover:text-neutral-200">VERIFY</a>
+        <nav className="track-mid hidden flex-1 items-center justify-between pl-10 text-xs md:flex lg:pl-24">
+          <a href="#platform" className="metal-text transition hover:opacity-70">PLATFORM</a>
+          <a href="#speed" className="metal-text transition hover:opacity-70">SPEED</a>
+          <a href="#compare" className="metal-text transition hover:opacity-70">VS TESTING</a>
+          <a href="#try" className="metal-text transition hover:opacity-70">TRY IT</a>
+          <a href="#verify" className="metal-text transition hover:opacity-70">VERIFY</a>
           <a
             href="#contact"
-            className="chip-metal px-5 py-2.5 text-neutral-200 transition hover:text-white"
+            className="chip-metal metal-text px-5 py-2.5 transition hover:opacity-80"
           >
             REQUEST ACCESS
           </a>
@@ -510,6 +511,9 @@ export function Landing() {
             </div>
           </div>
         </section>
+
+        {/* PUBLIC TECHNICAL RECORD */}
+        <Credibility />
 
         {/* CTA */}
         <section id="contact" className="relative z-10 border-t border-neutral-900 px-6 py-32 md:px-14">
