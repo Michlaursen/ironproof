@@ -29,7 +29,7 @@ export function Landing() {
           <a href="#verify" className="metal-text transition hover:opacity-70">VERIFY</a>
           <a
             href="#contact"
-            className="chip-metal metal-text px-5 py-2.5 transition hover:opacity-80"
+            className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
           >
             REQUEST ACCESS
           </a>

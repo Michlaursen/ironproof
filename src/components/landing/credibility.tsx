@@ -56,12 +56,6 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   },
 ];
 
-// CVE count = 3, per Dom (USER_STATEMENT 2026-08-16 — the real number). This
-// supersedes commit 1da2c7d (2026-07-30), which had lowered it to "2 with public
-// identifiers" when the 3rd (Zephyr) advisory was still unpublished.
-const SUMMARY =
-  "8 organizations credit us publicly · 3 assigned CVEs · 28 coordinated disclosures · 4 security preprints";
-
 const PAPERS: { id: string; title: string; href: string }[] = [
   {
     id: "arXiv:2604.05292",
@@ -130,10 +124,6 @@ export function Credibility() {
           </a>
         ))}
       </div>
-
-      <p className="fade-up mx-auto mt-10 max-w-3xl text-center text-sm font-light text-neutral-500">
-        {SUMMARY}
-      </p>
 
       {/* Published research */}
       <div className="fade-up mt-16">
