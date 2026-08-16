@@ -56,11 +56,11 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   },
 ];
 
-// NOTE: "3 assigned CVEs" was retired by commit 1da2c7d (verified: only 2 carry
-// a public identifier — CVE-2026-44673 libyang, CVE-2026-41682 pupnp; the Zephyr
-// advisory is unpublished). en.ts:125 still carries the old wording — flag to Miguel.
+// CVE count = 3, per Dom (USER_STATEMENT 2026-08-16 — the real number). This
+// supersedes commit 1da2c7d (2026-07-30), which had lowered it to "2 with public
+// identifiers" when the 3rd (Zephyr) advisory was still unpublished.
 const SUMMARY =
-  "8 organizations credit us publicly · 2 CVEs with public identifiers · 28 coordinated disclosures · 4 security preprints";
+  "8 organizations credit us publicly · 3 assigned CVEs · 28 coordinated disclosures · 4 security preprints";
 
 const PAPERS: { id: string; title: string; href: string }[] = [
   {
