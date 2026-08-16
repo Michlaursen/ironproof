@@ -28,6 +28,8 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-seal: var(--seal);
+  --color-ink: #050506;
+  --color-panel: #0a0a0c;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-cormorant);
   --font-mono: var(--font-jetbrains);
@@ -169,4 +171,36 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Scroll-reveal — driven by <FadeUpInit /> adding .in via IntersectionObserver */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Verdict / seal pop-in */
+@keyframes sealPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.seal-pop { animation: sealPop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.verdict-pop { animation: sealPop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1); }
+
+/* Active state for preset / tab buttons */
+.preset-btn.active {
+  background: linear-gradient(180deg, #fff, #d0d0d4);
+  color: #050506;
 }
