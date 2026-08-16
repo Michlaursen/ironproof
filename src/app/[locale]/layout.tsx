@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { getContent, isLocale, locales } from "@/content";
 import { IronProofLogoDefs } from "@/components/ironproof-logo";
+import { WaveCanvas } from "@/components/wave-canvas";
 import "../globals.css";
 
 const inter = Inter({
@@ -121,6 +122,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <div className="bg-grid" aria-hidden="true" />
+        <WaveCanvas />
         <IronProofLogoDefs />
         {children}
         <Analytics />
