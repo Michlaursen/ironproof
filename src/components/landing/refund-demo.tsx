@@ -89,7 +89,7 @@ export function RefundDemo() {
   };
 
   return (
-    <section id="try" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
+    <section id="try" className="relative z-10 edge-t px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-10 text-center">
           <p className="track-mid mb-4 text-xs text-neutral-400">TRY IT</p>

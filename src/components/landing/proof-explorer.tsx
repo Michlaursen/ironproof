@@ -66,7 +66,7 @@ export function ProofExplorer() {
   const [tab, setTab] = useState<TabKey>("code");
 
   return (
-    <section id="explorer" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
+    <section id="explorer" className="relative z-10 edge-t px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-12 text-center">
           <p className="track-mid mb-4 text-xs text-neutral-400">PROOF EXPLORER · NS-001</p>

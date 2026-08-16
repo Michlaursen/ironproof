@@ -122,6 +122,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <div className="bg-grid" aria-hidden="true" />
+        <div className="bg-depth" aria-hidden="true" />
         <WaveCanvas />
         <IronProofLogoDefs />
         {children}

@@ -94,7 +94,7 @@ function ExternalArrow() {
 
 export function Credibility() {
   return (
-    <section id="record" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
+    <section id="record" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="fade-up mb-16 text-center">
         <p className="track-mid mb-4 text-xs text-neutral-400">PUBLIC TECHNICAL RECORD</p>
         <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">

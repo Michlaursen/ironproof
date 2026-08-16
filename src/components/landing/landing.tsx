@@ -39,6 +39,7 @@ export function Landing() {
       <main className="flex-1">
         {/* HERO */}
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
+          <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
             <div className="order-2 flex flex-col items-center md:order-1">
               <IronProofLogo width={210} height={280} className="drop-shadow-2xl" />
@@ -84,7 +85,7 @@ export function Landing() {
 
         {/* PLATFORM */}
         <section id="platform" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="fade-up mb-20 text-center">
+          <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">THE PLATFORM</p>
             <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
               Mathematically Proven.
@@ -130,7 +131,7 @@ export function Landing() {
         </section>
 
         {/* SPEED */}
-        <section id="speed" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
+        <section id="speed" className="relative z-10 edge-t px-6 py-28 md:px-14">
           <div className="mx-auto max-w-6xl">
             <div className="fade-up mb-16 text-center">
               <p className="track-mid mb-4 text-xs text-neutral-400">AT MACHINE SPEED</p>
@@ -301,14 +302,14 @@ export function Landing() {
 
         {/* HOW IT WORKS */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 text-center">
+          <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
             <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
               How IronProof Authorizes
               <br />
               an AI Action
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
               Your written policy is compiled into mathematics — by the same deterministic compiler
               the runtime uses. The proof runs against that model, not a checklist.
             </p>
@@ -374,7 +375,7 @@ export function Landing() {
         </section>
 
         {/* THE MODEL DOES NOT CONTROL AUTHORIZATION */}
-        <section className="relative z-10 border-t border-neutral-900 px-6 py-24 md:px-14">
+        <section className="relative z-10 edge-t px-6 py-24 md:px-14">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="icon-metal">
@@ -399,7 +400,7 @@ export function Landing() {
         <VerifyArtifact />
 
         {/* WHERE WE START */}
-        <section id="start" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
+        <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 text-center">
             <p className="track-mid mb-4 text-xs text-neutral-400">WHERE WE START</p>
             <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
@@ -463,15 +464,15 @@ export function Landing() {
         </section>
 
         {/* SOVEREIGNTY */}
-        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 text-center">
+        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">SOVEREIGNTY</p>
             <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
               Built for environments that
               <br />
               cannot export data or trust
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
               IronProof can run locally or air-gapped, so policies, system context and decision
               evidence remain under the institution&apos;s control.
             </p>
@@ -516,7 +517,7 @@ export function Landing() {
         <Credibility />
 
         {/* CTA */}
-        <section id="contact" className="relative z-10 border-t border-neutral-900 px-6 py-32 md:px-14">
+        <section id="contact" className="relative z-10 edge-t px-6 py-32 md:px-14">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <IronProofLogo width={54} height={72} className="mx-auto mb-10" title="IronProof mark" />
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
@@ -532,7 +533,7 @@ export function Landing() {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative z-10 border-t border-neutral-900 px-6 py-10 md:px-14">
+      <footer className="relative z-10 edge-t px-6 py-10 md:px-14">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <span className="track-logo metal-text">IRONPROOF</span>
           <span className="font-light">
