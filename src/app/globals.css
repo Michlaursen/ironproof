@@ -1,19 +1,20 @@
 @import "tailwindcss";
 
 /*
- * Placeholder brand system — institutional / sovereign dark palette.
- * Swap these values once final brand colors and fonts are provided;
- * every component below reads from these tokens, not hardcoded hex.
+ * IronProof brand system — dark metallic / chrome (2026-08).
+ * Ported from the reference landing (ironproof-landing-local). No blue accent:
+ * the previous placeholder --accent (#5b8def) is retired in favour of a bright
+ * chrome silver. Every component reads these tokens, not hardcoded hex.
  */
 :root {
-  --background: #0a0d12;
-  --surface: #12161d;
-  --surface-2: #181d26;
-  --foreground: #eef1f5;
-  --muted: #8b93a3;
-  --border: #232936;
-  --accent: #5b8def;
-  --accent-foreground: #061019;
+  --background: #050506;
+  --surface: #0a0a0c;
+  --surface-2: #101014;
+  --foreground: #e9ecf3;
+  --muted: #8b8b92;
+  --border: #1c1c20;
+  --accent: #e8ebf5;
+  --accent-foreground: #050506;
   --seal: #c9a24b;
 }
 
@@ -27,8 +28,11 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-seal: var(--seal);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #050506;
+  --color-panel: #0a0a0c;
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-cormorant);
+  --font-mono: var(--font-jetbrains);
 }
 
 html {
@@ -38,7 +42,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
 }
 
 ::selection {
@@ -100,4 +104,103 @@ body {
     animation: none;
     display: none;
   }
+}
+
+/* ============================================================
+ * Metallic / chrome utilities — ported verbatim from the
+ * reference landing. Fixed light values by design (they render
+ * a brushed-metal look, independent of the theme tokens).
+ * ============================================================ */
+
+.metal-text {
+  background: linear-gradient(180deg, #fff 0%, #eaeaee 18%, #fff 34%, #9a9aa2 52%, #c8c8cf 66%, #fff 82%, #7c7c84 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(220, 225, 255, 0.12));
+}
+
+.metal-shine {
+  background: linear-gradient(110deg, #7c7c84 0%, #fff 20%, #c4c4cc 30%, #fff 45%, #8a8a92 60%, #fff 78%, #9a9aa2 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 16px rgba(220, 225, 255, 0.18));
+  animation: sweep 7s linear infinite;
+}
+@keyframes sweep {
+  0% { background-position: 200% 0; }
+  100% { background-position: -50% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .metal-shine { animation: none; }
+}
+
+.track-wide { letter-spacing: 0.5em; }
+.track-mid { letter-spacing: 0.28em; }
+.track-logo { letter-spacing: 0.42em; }
+
+.hairline {
+  background: linear-gradient(90deg, transparent, rgba(230, 235, 255, 0.4), transparent);
+  box-shadow: 0 0 8px rgba(200, 210, 255, 0.15);
+}
+
+.icon-metal {
+  color: #e8ebf5;
+  filter: drop-shadow(0 0 6px rgba(200, 210, 255, 0.4));
+}
+
+.card-premium {
+  background: linear-gradient(160deg, #0d0d10 0%, #070709 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 50px -20px rgba(0, 0, 0, 0.8);
+}
+.card-premium:hover {
+  border-color: rgba(220, 225, 255, 0.18);
+}
+
+.chip-metal {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.num-badge {
+  background: linear-gradient(180deg, #fff, #8a8a92);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Scroll-reveal — driven by <FadeUpInit /> adding .in via IntersectionObserver */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.fade-up.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Verdict / seal pop-in */
+@keyframes sealPop {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.seal-pop { animation: sealPop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.verdict-pop { animation: sealPop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1); }
+
+/* Active state for preset / tab buttons */
+.preset-btn.active {
+  background: linear-gradient(180deg, #fff, #d0d0d4);
+  color: #050506;
 }
