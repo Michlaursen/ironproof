@@ -96,13 +96,13 @@ export function Credibility() {
   return (
     <section id="record" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
       <div className="fade-up mb-16 text-center">
-        <p className="track-mid mb-4 text-xs text-neutral-600">PUBLIC TECHNICAL RECORD</p>
+        <p className="track-mid mb-4 text-xs text-neutral-400">PUBLIC TECHNICAL RECORD</p>
         <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
           Credited in the open,
           <br />
           by the projects themselves
         </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+        <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
           Evidence you can inspect outside our website — real upstream commits, patches and bug
           records that name the work.
         </p>
@@ -118,8 +118,8 @@ export function Credibility() {
             className="card-premium group flex flex-col p-6 transition"
           >
             <h3 className="metal-text mb-2 font-serif text-xl">{item.org}</h3>
-            <p className="flex-1 text-sm font-light leading-relaxed text-neutral-500">{item.body}</p>
-            <span className="track-mid mt-5 inline-flex items-center gap-2 text-[11px] text-neutral-400 transition group-hover:text-white">
+            <p className="flex-1 text-sm font-light leading-relaxed text-neutral-300">{item.body}</p>
+            <span className="track-mid mt-5 inline-flex items-center gap-2 text-xs text-neutral-400 transition group-hover:text-white">
               {item.cta}
               <ExternalArrow />
             </span>
@@ -129,7 +129,7 @@ export function Credibility() {
 
       {/* Published research */}
       <div className="fade-up mt-16">
-        <p className="track-mid mb-6 text-center text-xs text-neutral-600">PUBLISHED RESEARCH</p>
+        <p className="track-mid mb-6 text-center text-xs text-neutral-400">PUBLISHED RESEARCH</p>
         <div className="mx-auto max-w-4xl space-y-3">
           {PAPERS.map((paper) => (
             <a

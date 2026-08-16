@@ -37,6 +37,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Larger base so the whole rem-scaled design reads bigger (Miguel: too small). */
+  font-size: 112.5%;
 }
 
 body {
@@ -113,20 +115,21 @@ body {
  * ============================================================ */
 
 .metal-text {
-  background: linear-gradient(180deg, #fff 0%, #eaeaee 18%, #fff 34%, #9a9aa2 52%, #c8c8cf 66%, #fff 82%, #7c7c84 100%);
+  /* Brighter floor — no thin/dark bands (Miguel: white too thin). */
+  background: linear-gradient(180deg, #ffffff 0%, #f2f3f7 26%, #d8dbe4 50%, #f2f3f7 74%, #cfd3de 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(220, 225, 255, 0.12));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(220, 225, 255, 0.22));
 }
 
 .metal-shine {
-  background: linear-gradient(110deg, #7c7c84 0%, #fff 20%, #c4c4cc 30%, #fff 45%, #8a8a92 60%, #fff 78%, #9a9aa2 100%);
+  background: linear-gradient(110deg, #c6cad4 0%, #ffffff 22%, #e4e7ee 38%, #ffffff 55%, #d2d6e0 72%, #ffffff 88%, #dfe2ea 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 16px rgba(220, 225, 255, 0.18));
+  filter: drop-shadow(0 0 18px rgba(220, 225, 255, 0.26));
   animation: sweep 7s linear infinite;
 }
 @keyframes sweep {

@@ -69,11 +69,11 @@ export function ProofExplorer() {
     <section id="explorer" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-12 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-600">PROOF EXPLORER · NS-001</p>
+          <p className="track-mid mb-4 text-xs text-neutral-400">PROOF EXPLORER · NS-001</p>
           <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
             A Real CVE — Proven, Then Closed
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
             An actual integer-overflow flaw in <span className="metal-text">net-snmp</span> (asn1.c,
             CWE-190). Walk the real cycle: the code, the Z3 proof that a bypass exists, the exact
             bytes that trigger it, and the re-proof that the fix closes it for every input.
@@ -97,11 +97,11 @@ export function ProofExplorer() {
           <div className="bg-black/40 p-6 md:p-8">
             {tab === "code" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
+                <p className="track-mid mb-4 text-xs text-neutral-300">
                   net-snmp · snmplib/asn1.c · asn_parse_objid() &nbsp;—&nbsp; CWE-190 + CWE-20
                 </p>
                 <CodeBlock src={CODE_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
+                <p className="mt-5 text-sm font-light text-neutral-300">
                   The 64-bit <span className="font-mono text-neutral-300">u_long</span> silently
                   wraps (mod 2<sup>64</sup>) while it accumulates. The bound is then compared against
                   the <span className="metal-text">wrapped</span> value — not the true one.
@@ -111,11 +111,11 @@ export function ProofExplorer() {
 
             {tab === "proof" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
+                <p className="track-mid mb-4 text-xs text-neutral-300">
                   OBLIGATION NS-001-P1 · Z3 · BitVec 64 · the BUG
                 </p>
                 <CodeBlock src={PROOF_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
+                <p className="mt-5 text-sm font-light text-neutral-300">
                   Gate rule <span className="text-neutral-300">R2</span>: this BUG obligation (SAT)
                   is paired with a FIX obligation that must return UNSAT (tab 4) — a verdict that
                   cannot be red would mean nothing in green.
@@ -125,11 +125,11 @@ export function ProofExplorer() {
 
             {tab === "poc" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
+                <p className="track-mid mb-4 text-xs text-neutral-300">
                   WITNESS · the exact bytes that trigger it
                 </p>
                 <CodeBlock src={POC_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
+                <p className="mt-5 text-sm font-light text-neutral-300">
                   A remote SNMP GET/SET/GETNEXT carrying this crafted OID makes{" "}
                   <span className="font-mono text-neutral-300">asn_parse_objid()</span> accept the
                   subidentifier as <span className="font-mono text-neutral-300">0</span> while its
@@ -140,11 +140,11 @@ export function ProofExplorer() {
 
             {tab === "reprove" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
+                <p className="track-mid mb-4 text-xs text-neutral-300">
                   OBLIGATION NS-001-P4 · Z3 · BitVec 64 · the FIX
                 </p>
                 <CodeBlock src={REPROVE_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
+                <p className="mt-5 text-sm font-light text-neutral-300">
                   With the guard, <span className="text-neutral-300">
                     &quot;some input bypasses the check&quot;
                   </span>{" "}
@@ -157,7 +157,7 @@ export function ProofExplorer() {
           </div>
 
           <div className="border-t border-white/5 p-6 md:p-8">
-            <p className="track-mid mb-3 text-[10px] text-neutral-500">
+            <p className="track-mid mb-3 text-xs text-neutral-300">
               WHAT THIS PROVES — AND WHAT IT DOES NOT (declared, gate rule R3)
             </p>
             <div className="grid gap-4 text-sm md:grid-cols-2">
@@ -170,8 +170,8 @@ export function ProofExplorer() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <span className="mt-0.5 text-neutral-600">○</span>
-                <p className="font-light text-neutral-500">
+                <span className="mt-0.5 text-neutral-400">○</span>
+                <p className="font-light text-neutral-300">
                   <span className="text-neutral-300">Not proven here —</span> reachability of{" "}
                   <span className="font-mono">asn_parse_objid()</span> from a given network path, and
                   full fidelity of this model to every line of net-snmp source. A proof is only as
@@ -181,7 +181,7 @@ export function ProofExplorer() {
             </div>
           </div>
         </div>
-        <p className="fade-up mt-4 text-center text-xs text-neutral-600">
+        <p className="fade-up mt-4 text-center text-xs text-neutral-400">
           Faithful to the Z3 obligations in the IronProof proof set (NS-001).
         </p>
       </div>

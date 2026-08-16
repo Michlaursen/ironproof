@@ -37,7 +37,7 @@ export function CtaForm() {
         </button>
       </form>
       {submitted ? (
-        <p className="mt-5 text-sm text-neutral-500">Thank you — we&apos;ll be in touch shortly.</p>
+        <p className="mt-5 text-sm text-neutral-300">Thank you — we&apos;ll be in touch shortly.</p>
       ) : null}
     </>
   );
