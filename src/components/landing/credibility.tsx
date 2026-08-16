@@ -40,7 +40,9 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
     org: "VideoLAN · VLC",
     body: "A vulnerability fix carrying Dominik Blain’s name is preserved in VLC’s public source tree.",
     cta: "View patch",
-    href: "https://github.com/videolan/vlc/blob/master/contrib/src/upnp/0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
+    // Pinned SHA (not blob/master): VLC upstreamed upnp and dropped the local patch,
+    // so master 404s. 30d1805 is the last commit where the file exists (verified 200).
+    href: "https://github.com/videolan/vlc/blob/30d180596d6884d3d03bd03515b483933bd02cd6/contrib/src/upnp/0006-uri.c-Dominik-Blain-s-fix-for-vulnerability.patch",
   },
   {
     org: "OFFIS · DCMTK",
