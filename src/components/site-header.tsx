@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import type { Locale, SiteContent } from "@/content";
 import { IconClose, IconMenu } from "./icons";
+import { IronProofLogo } from "./ironproof-logo";
 
 type SiteHeaderProps = {
   content: SiteContent["header"];
@@ -18,23 +18,11 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="#" className="flex items-center gap-2">
-          <Image
-            src="/ironproof_logo_transparent.png"
-            alt=""
-            width={512}
-            height={512}
-            priority
-            className="h-7 w-7 md:h-9 md:w-9"
-          />
-          <Image
-            src="/ironproof-wordmark-white-transparent.png"
-            alt="IronProof"
-            width={1600}
-            height={320}
-            priority
-            className="h-4 w-auto md:h-5"
-          />
+        <Link href="#" className="flex items-center gap-2.5">
+          <IronProofLogo className="h-7 w-auto md:h-9" />
+          <span className="track-logo metal-text text-sm font-medium md:text-base">
+            IRONPROOF
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex xl:gap-8">
