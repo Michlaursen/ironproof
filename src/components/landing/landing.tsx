@@ -1,4 +1,5 @@
 import { IronProofLogo } from "@/components/ironproof-logo";
+import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
@@ -16,25 +17,7 @@ export function Landing() {
   return (
     <div className="flex flex-1 flex-col">
       {/* NAV */}
-      <header className="relative z-20 flex items-center gap-8 px-6 py-6 md:px-14">
-        <a href="#top" className="flex shrink-0 items-center gap-3">
-          <IronProofLogo width={26} height={35} />
-          <span className="track-logo metal-text text-sm font-medium">IRONPROOF</span>
-        </a>
-        <nav className="track-mid hidden flex-1 items-center justify-between pl-10 text-xs md:flex lg:pl-24">
-          <a href="#platform" className="metal-text transition hover:opacity-70">PLATFORM</a>
-          <a href="#speed" className="metal-text transition hover:opacity-70">SPEED</a>
-          <a href="#compare" className="metal-text transition hover:opacity-70">VS TESTING</a>
-          <a href="#try" className="metal-text transition hover:opacity-70">TRY IT</a>
-          <a href="#verify" className="metal-text transition hover:opacity-70">VERIFY</a>
-          <a
-            href="#contact"
-            className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-          >
-            REQUEST ACCESS
-          </a>
-        </nav>
-      </header>
+      <LandingHeader />
 
       <main className="flex-1">
         {/* HERO */}

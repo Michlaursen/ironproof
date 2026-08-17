@@ -73,6 +73,16 @@ body {
   }
 }
 
+/* Keyboard focus — visible ring on every interactive element (a11y). */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+summary:focus-visible {
+  outline: 2px solid rgba(220, 225, 255, 0.6);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* Faint fixed grid texture, sits behind all content */
 .bg-grid {
   position: fixed;
@@ -201,6 +211,19 @@ body {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(220, 225, 255, 0.16), transparent);
+}
+
+.edge-b {
+  position: relative;
+}
+.edge-b::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 225, 255, 0.14), transparent);
 }
 
 /* Soft radial halo used behind hero / key headings. */
