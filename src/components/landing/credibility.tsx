@@ -121,7 +121,9 @@ export function Credibility() {
             <p className="flex-1 text-sm font-light leading-relaxed text-neutral-300">{item.body}</p>
             <span className="track-mid mt-5 inline-flex items-center gap-2 text-xs text-neutral-400 transition group-hover:text-white">
               {item.cta}
-              <ExternalArrow />
+              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                <ExternalArrow />
+              </span>
             </span>
           </a>
         ))}

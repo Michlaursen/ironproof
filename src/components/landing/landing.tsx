@@ -64,6 +64,13 @@ export function Landing() {
                   EXPLORE PLATFORM
                 </a>
               </div>
+              <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500">
+                <span className="track-mid">INDEPENDENTLY VERIFIABLE</span>
+                <span className="text-neutral-700">·</span>
+                <span className="track-mid">POST-QUANTUM SEALED</span>
+                <span className="text-neutral-700">·</span>
+                <span className="track-mid">RUNS AIR-GAPPED</span>
+              </div>
             </div>
           </div>
         </section>

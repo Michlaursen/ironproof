@@ -78,6 +78,10 @@ export function ProofExplorer() {
             CWE-190). Walk the real cycle: the code, the Z3 proof that a bypass exists, the exact
             bytes that trigger it, and the re-proof that the fix closes it for every input.
           </p>
+          <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-400">
+            <span className="metal-text">The same proof engine</span> certifies your money-moving
+            policies before an agent can act — this is that engine, shown on a public bug.
+          </p>
         </div>
 
         <div className="fade-up card-premium overflow-hidden">
