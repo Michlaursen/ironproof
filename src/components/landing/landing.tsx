@@ -33,7 +33,7 @@ export function Landing() {
                 className="drop-shadow-2xl"
                 title="IronProof monogram"
               />
-              <span className="track-logo metal-shine mt-6 text-lg font-medium md:text-xl">
+              <span className="track-logo iron-text mt-6 text-2xl font-semibold md:text-4xl">
                 IRONPROOF
               </span>
             </div>
@@ -539,7 +539,10 @@ export function Landing() {
         <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
-            <ProofSeal size={148} className="mx-auto mb-10" />
+            <div className="mb-10 flex items-center justify-center gap-8">
+              <IronProofLogo width={111} height={148} title="IronProof monogram" />
+              <ProofSeal size={148} />
+            </div>
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
               Prove your infrastructure.
             </h2>
@@ -557,7 +560,7 @@ export function Landing() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <div className="flex items-center gap-3">
             <IronProofLogo width={20} height={27} />
-            <span className="track-logo metal-text">IRONPROOF</span>
+            <span className="track-logo iron-text font-semibold">IRONPROOF</span>
           </div>
           <span className="font-light">
             Automated formal verification for critical software and infrastructure.

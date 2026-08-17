@@ -80,10 +80,6 @@ export function ProofExplorer() {
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
             A real, assigned vulnerability in <span className="metal-text">libyang</span>{" "}
             (CVE-2026-44673, CVSS 7.5) — the YANG library behind NETCONF and sysrepo network config.
-            An attacker-controlled length field overflows 32-bit arithmetic, so the parser allocates
-            a near-empty buffer and then writes far past it — a heap overflow. Watch the full cycle:
-            the code, the proof an undersizing input exists, the exact input that triggers it, and the
-            re-proof that a 64-bit fix closes it for every possible length.
           </p>
           <p className="mx-auto mt-6 max-w-3xl text-xl font-light leading-snug text-neutral-200 md:text-2xl">
             <span className="metal-text">The same proof engine</span> certifies your money-moving

@@ -20,7 +20,7 @@ export function LandingHeader() {
       <div className="relative z-20 flex items-center gap-8 px-6 py-6 md:px-14">
         <a href="#top" className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
           <IronProofLogo width={26} height={35} />
-          <span className="track-logo metal-text text-sm font-medium">IRONPROOF</span>
+          <span className="track-logo iron-text text-base font-semibold">IRONPROOF</span>
         </a>
 
         {/* Desktop nav */}
