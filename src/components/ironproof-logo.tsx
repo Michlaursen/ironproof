@@ -23,36 +23,38 @@ export function IronProofLogoDefs() {
       aria-hidden="true"
     >
       <defs>
+        {/* Forged-iron palette — same tonal range as .iron-text (bright specular
+         * edges, mid steel, dark iron valley). Deeper darks than the old chrome. */}
         <linearGradient id="chromeA" x1="0" y1="0" x2="1" y2="0.6">
           <stop offset="0" stopColor="#ffffff" />
-          <stop offset="0.25" stopColor="#e8e8ee" />
-          <stop offset="0.5" stopColor="#9c9ca4" />
-          <stop offset="0.72" stopColor="#e2e2e8" />
-          <stop offset="1" stopColor="#6e6e76" />
+          <stop offset="0.22" stopColor="#dfe3ea" />
+          <stop offset="0.5" stopColor="#83888f" />
+          <stop offset="0.72" stopColor="#c3c7d0" />
+          <stop offset="1" stopColor="#4a4e56" />
         </linearGradient>
         <linearGradient id="chromeDark" x1="0" y1="0" x2="1" y2="0.7">
-          <stop offset="0" stopColor="#8a8a92" />
-          <stop offset="0.5" stopColor="#3c3c40" />
-          <stop offset="1" stopColor="#181819" />
+          <stop offset="0" stopColor="#7f848d" />
+          <stop offset="0.5" stopColor="#34373e" />
+          <stop offset="1" stopColor="#101013" />
         </linearGradient>
         <linearGradient id="chromeHi" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#ffffff" />
-          <stop offset="0.5" stopColor="#f2f2f6" />
-          <stop offset="1" stopColor="#b8b8c0" />
+          <stop offset="0.5" stopColor="#eef1f6" />
+          <stop offset="1" stopColor="#9498a0" />
         </linearGradient>
         <linearGradient id="pChrome" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#ffffff" />
-          <stop offset="0.35" stopColor="#d4d4dc" />
-          <stop offset="0.7" stopColor="#8e8e96" />
-          <stop offset="1" stopColor="#f0f0f4" />
+          <stop offset="0.35" stopColor="#c3c7d0" />
+          <stop offset="0.7" stopColor="#6c717b" />
+          <stop offset="1" stopColor="#eef1f6" />
         </linearGradient>
         <linearGradient id="pChromeDark" x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#a0a0a8" />
-          <stop offset="0.5" stopColor="#48484c" />
-          <stop offset="1" stopColor="#202022" />
+          <stop offset="0" stopColor="#9498a0" />
+          <stop offset="0.5" stopColor="#3a3d44" />
+          <stop offset="1" stopColor="#141518" />
         </linearGradient>
         <filter id="logoGlow" x="-30%" y="-30%" width="160%" height="160%">
-          <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#c8d0ff" floodOpacity="0.25" />
+          <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#aeb6c8" floodOpacity="0.22" />
         </filter>
         <g id="ipLogo" filter="url(#logoGlow)">
           <path d="M138 40 L150 62 L150 340 L128 372 L118 300 L120 120 Z" fill="url(#chromeA)" />
