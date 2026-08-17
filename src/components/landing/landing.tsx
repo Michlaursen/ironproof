@@ -524,9 +524,12 @@ export function Landing() {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative z-10 edge-t px-6 py-10 md:px-14">
+      <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
-          <span className="track-logo metal-text">IRONPROOF</span>
+          <div className="flex items-center gap-3">
+            <IronProofLogo width={20} height={27} />
+            <span className="track-logo metal-text">IRONPROOF</span>
+          </div>
           <span className="font-light">
             Automated formal verification for critical software and infrastructure.
           </span>
