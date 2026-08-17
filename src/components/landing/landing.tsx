@@ -487,9 +487,9 @@ export function Landing() {
                 <rect x="3" y="4" width="18" height="12" rx="1" />
                 <path d="M8 20 h8 M12 16 v4" />
               </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Local deployment</h3>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Local &amp; air-gapped</h3>
               <p className="font-light leading-relaxed text-neutral-300">
-                The proof core can operate without network access.
+                The proof core can operate fully air-gapped — no network access required.
               </p>
             </div>
             <div className="card-premium fade-up p-10">
