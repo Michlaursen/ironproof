@@ -38,7 +38,9 @@ export function Landing() {
               </div>
             </div>
             <div className="fade-up order-1 md:order-2">
-              <p className="track-wide mb-6 text-xs text-neutral-300 md:text-sm">IRONPROOF</p>
+              <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
+                PROVABLE SECURITY INFRASTRUCTURE
+              </p>
               <h1 className="metal-shine mb-6 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl sm:leading-[0.95] md:text-7xl">
                 Prove what&apos;s allowed.
                 <br />
