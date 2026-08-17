@@ -274,6 +274,21 @@ summary:focus-visible {
 .seal-pop { animation: sealPop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1); }
 .verdict-pop { animation: sealPop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1); }
 
+/* Signature seal — slow rotation of the primitive ring. */
+.seal-spin {
+  animation: seal-rotate 26s linear infinite;
+}
+@keyframes seal-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seal-spin {
+    animation: none;
+  }
+}
+
 /* Active state for preset / tab buttons */
 .preset-btn.active {
   background: linear-gradient(180deg, #fff, #d0d0d4);

@@ -1,5 +1,6 @@
 import { IronProofLogo } from "@/components/ironproof-logo";
 import { LandingHeader } from "./landing-header";
+import { ProofSeal } from "./proof-seal";
 import { FadeUpInit } from "./fade-up-init";
 import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
@@ -32,7 +33,7 @@ export function Landing() {
             </div>
             <div className="fade-up order-1 md:order-2">
               <p className="track-wide mb-6 text-xs text-neutral-300 md:text-sm">IRONPROOF</p>
-              <h1 className="metal-shine mb-6 font-serif text-5xl font-medium leading-[0.95] md:text-7xl">
+              <h1 className="metal-shine mb-6 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl sm:leading-[0.95] md:text-7xl">
                 Prove what&apos;s allowed.
                 <br />
                 Block everything else.
@@ -70,7 +71,7 @@ export function Landing() {
         <section id="platform" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">THE PLATFORM</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               Mathematically Proven.
               <br />
               Not Merely Tested.
@@ -78,7 +79,7 @@ export function Landing() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="card-premium fade-up p-10">
-              <div className="metal-shine mb-4 font-serif text-4xl">01</div>
+              <div className="metal-text mb-4 font-serif text-4xl">01</div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Rules Into Math</h3>
               <p className="font-light leading-relaxed text-neutral-300">
                 Turn critical policies, specifications and contracts into formal constraints — then
@@ -86,7 +87,7 @@ export function Landing() {
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <div className="metal-shine mb-4 font-serif text-4xl">02</div>
+              <div className="metal-text mb-4 font-serif text-4xl">02</div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Exhaustive, Not Sampled</h3>
               <p className="font-light leading-relaxed text-neutral-300">
                 Testing checks a handful of cases. IronProof reasons exhaustively over the formally
@@ -94,7 +95,7 @@ export function Landing() {
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <div className="metal-shine mb-4 font-serif text-4xl">03</div>
+              <div className="metal-text mb-4 font-serif text-4xl">03</div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Infrastructure Grade</h3>
               <p className="mb-4 font-light leading-relaxed text-neutral-300">
                 Built for critical systems where failure is not an option.
@@ -118,7 +119,7 @@ export function Landing() {
           <div className="mx-auto max-w-6xl">
             <div className="fade-up mb-16 text-center">
               <p className="track-mid mb-4 text-xs text-neutral-400">AT MACHINE SPEED</p>
-              <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
                 Formal Proof Used to
                 <br />
                 Take Months. Not Anymore.
@@ -199,7 +200,7 @@ export function Landing() {
           <div className="mx-auto max-w-6xl">
             <div className="fade-up mb-16 text-center">
               <p className="track-mid mb-4 text-xs text-neutral-400">THE DIFFERENCE</p>
-              <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
                 Testing vs. Proving
               </h2>
               <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
@@ -287,7 +288,7 @@ export function Landing() {
         <section id="how" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               How IronProof Authorizes
               <br />
               an AI Action
@@ -358,7 +359,7 @@ export function Landing() {
         </section>
 
         {/* THE MODEL DOES NOT CONTROL AUTHORIZATION */}
-        <section className="relative z-10 edge-t px-6 py-24 md:px-14">
+        <section className="relative z-10 edge-t px-6 py-32 md:px-14">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="icon-metal">
@@ -386,7 +387,7 @@ export function Landing() {
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 text-center">
             <p className="track-mid mb-4 text-xs text-neutral-400">WHERE WE START</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               Money-moving workflows in
               <br />
               Canadian financial services
@@ -450,7 +451,7 @@ export function Landing() {
         <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">SOVEREIGNTY</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               Built for environments that
               <br />
               cannot export data or trust
@@ -500,9 +501,10 @@ export function Landing() {
         <Credibility />
 
         {/* CTA */}
-        <section id="contact" className="relative z-10 edge-t px-6 py-32 md:px-14">
-          <div className="fade-up mx-auto max-w-3xl text-center">
-            <IronProofLogo width={54} height={72} className="mx-auto mb-10" title="IronProof mark" />
+        <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
+          <div className="halo" aria-hidden="true" />
+          <div className="fade-up relative mx-auto max-w-3xl text-center">
+            <ProofSeal size={148} className="mx-auto mb-10" />
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
               Prove your infrastructure.
             </h2>

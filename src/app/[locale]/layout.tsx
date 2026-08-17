@@ -116,7 +116,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       lang={locale}
       className={`${inter.variable} ${cormorant.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col overflow-x-hidden bg-background text-foreground">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -93,7 +93,7 @@ export function RefundDemo() {
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-10 text-center">
           <p className="track-mid mb-4 text-xs text-neutral-400">TRY IT</p>
-          <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+          <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
             Prove a Refund Decision
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">

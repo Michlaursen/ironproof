@@ -70,7 +70,7 @@ export function ProofExplorer() {
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-12 text-center">
           <p className="track-mid mb-4 text-xs text-neutral-400">PROOF EXPLORER · NS-001</p>
-          <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+          <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
             A Real CVE — Proven, Then Closed
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
