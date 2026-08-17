@@ -85,7 +85,7 @@ export function ProofExplorer() {
             the code, the proof an undersizing input exists, the exact input that triggers it, and the
             re-proof that a 64-bit fix closes it for every possible length.
           </p>
-          <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-400">
+          <p className="mx-auto mt-6 max-w-3xl text-xl font-light leading-snug text-neutral-200 md:text-2xl">
             <span className="metal-text">The same proof engine</span> certifies your money-moving
             policies before an agent can act — this is that engine, shown here on a real, assigned CVE.
           </p>

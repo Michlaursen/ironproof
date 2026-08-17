@@ -26,9 +26,16 @@ export function Landing() {
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
-            <div className="order-2 flex flex-col items-center gap-4 md:order-1 md:-translate-y-4">
-              <ProofArtifact kind="allowed" />
-              <ProofArtifact kind="blocked" />
+            <div className="order-2 flex flex-col items-center md:order-1">
+              <IronProofLogo
+                width={210}
+                height={280}
+                className="drop-shadow-2xl"
+                title="IronProof monogram"
+              />
+              <span className="track-logo metal-shine mt-6 text-lg font-medium md:text-xl">
+                IRONPROOF
+              </span>
             </div>
             <div className="fade-up order-1 md:order-2">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
@@ -72,6 +79,14 @@ export function Landing() {
                 <span className="track-mid">RUNS AIR-GAPPED</span>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* PROOF ARTIFACTS — allowed + blocked, side by side, just above the credited-by strip */}
+        <section className="relative z-10 px-6 pb-12 pt-2 md:px-14">
+          <div className="fade-up mx-auto grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
+            <ProofArtifact kind="allowed" />
+            <ProofArtifact kind="blocked" />
           </div>
         </section>
 
