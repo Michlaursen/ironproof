@@ -26,15 +26,40 @@ export function Landing() {
           <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
             <div className="order-2 flex justify-center md:order-1">
-              <div className="proof-scan card-premium relative flex flex-col items-center px-10 py-14 sm:px-14 sm:py-16">
-                <IronProofLogo width={190} height={253} className="relative drop-shadow-2xl" />
-                <span className="track-logo metal-shine relative mt-6 text-lg font-medium md:text-xl">
-                  IRONPROOF
-                </span>
-                <div className="hairline relative mt-6 h-px w-24" />
-                <p className="track-mid relative mt-4 text-xs text-neutral-400">
-                  ED25519 · ML-DSA-65 · FIPS 204
-                </p>
+              <div className="proof-scan card-premium relative w-full max-w-sm px-8 py-8">
+                <div className="relative flex items-center justify-between">
+                  <span className="track-mid text-xs text-neutral-400">PROOF ARTIFACT</span>
+                  <span className="font-mono text-xs text-neutral-400">finance/refund@v3</span>
+                </div>
+                <div className="relative mt-8 flex flex-col items-center text-center">
+                  <svg
+                    width="52"
+                    height="52"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#c8ffd8"
+                    strokeWidth="1.4"
+                    style={{ filter: "drop-shadow(0 0 8px rgba(150,255,180,0.35))" }}
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M8 12 l3 3 l5 -6" />
+                  </svg>
+                  <h3 className="metal-text mt-4 font-serif text-3xl">ALLOWED</h3>
+                  <p className="mt-2 text-sm text-neutral-300">
+                    $640 refund — no reachable policy violation
+                  </p>
+                </div>
+                <div className="hairline relative my-6 h-px w-full" />
+                <div className="relative flex items-center gap-3">
+                  <ProofSeal size={46} />
+                  <div className="text-left">
+                    <p className="track-mid text-xs text-neutral-400">SEALED</p>
+                    <p className="font-mono text-xs text-neutral-300">
+                      Ed25519 + ML-DSA-65 · FIPS 204
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="fade-up order-1 md:order-2">
@@ -72,6 +97,18 @@ export function Landing() {
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* CREDITED-BY STRIP */}
+        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
+          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <span className="track-mid text-xs text-neutral-500">PUBLICLY CREDITED BY</span>
+            {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
+              <span key={o} className="metal-text text-sm font-medium">
+                {o}
+              </span>
+            ))}
           </div>
         </section>
 
