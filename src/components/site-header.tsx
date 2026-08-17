@@ -20,7 +20,7 @@ export function SiteHeader({ content, locale }: SiteHeaderProps) {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="#" className="flex items-center gap-2.5">
           <IronProofLogo className="h-7 w-auto md:h-9" />
-          <span className="track-logo metal-text text-sm font-medium md:text-base">
+          <span className="track-logo iron-text text-base font-semibold md:text-lg">
             IRONPROOF
           </span>
         </Link>

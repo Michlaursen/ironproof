@@ -26,9 +26,16 @@ export function Landing() {
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
-            <div className="order-2 flex flex-col items-center gap-4 md:order-1 md:-translate-y-4">
-              <ProofArtifact kind="allowed" />
-              <ProofArtifact kind="blocked" />
+            <div className="order-2 flex flex-col items-center md:order-1">
+              <IronProofLogo
+                width={210}
+                height={280}
+                className="drop-shadow-2xl"
+                title="IronProof monogram"
+              />
+              <span className="track-logo iron-text mt-6 text-2xl font-semibold md:text-4xl">
+                IRONPROOF
+              </span>
             </div>
             <div className="fade-up order-1 md:order-2">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
@@ -72,6 +79,14 @@ export function Landing() {
                 <span className="track-mid">RUNS AIR-GAPPED</span>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* PROOF ARTIFACTS — allowed + blocked, side by side, just above the credited-by strip */}
+        <section className="relative z-10 px-6 pb-12 pt-2 md:px-14">
+          <div className="fade-up mx-auto grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
+            <ProofArtifact kind="allowed" />
+            <ProofArtifact kind="blocked" />
           </div>
         </section>
 
@@ -524,7 +539,10 @@ export function Landing() {
         <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
-            <ProofSeal size={148} className="mx-auto mb-10" />
+            <div className="mb-10 flex items-center justify-center gap-8">
+              <IronProofLogo width={111} height={148} title="IronProof monogram" />
+              <ProofSeal size={148} />
+            </div>
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
               Prove your infrastructure.
             </h2>
@@ -542,7 +560,7 @@ export function Landing() {
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <div className="flex items-center gap-3">
             <IronProofLogo width={20} height={27} />
-            <span className="track-logo metal-text">IRONPROOF</span>
+            <span className="track-logo iron-text font-semibold">IRONPROOF</span>
           </div>
           <span className="font-light">
             Automated formal verification for critical software and infrastructure.

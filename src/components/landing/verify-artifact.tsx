@@ -1,114 +1,62 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 
 /*
- * VERIFY A PROOF — paste an artifact, IronProof re-checks its structure in the
- * browser. Ported from the reference landing: structural validation only; the
- * full Ed25519 + ML-DSA-65 check runs offline against the published wire format.
+ * VERIFY A PROOF — the REAL thing. Paste (or load) a sealed Sceal dossier and
+ * it is verified entirely in your browser: Ed25519 + ML-DSA-65 (FIPS 204)
+ * signatures and the SHA3-512 chain, in pure JavaScript, no server, no IronProof
+ * code. The verifier is vendored verbatim from ironproof/sceal/verifier-web
+ * (src/lib/sceal). Demo dossiers (real, plus deliberately tampered) live in
+ * /public/sceal so anyone can watch a forgery get rejected.
  */
 
-const SAMPLE = `{
-  "policy": "finance/refund@v3",
-  "verdict": "allowed",
-  "timestamp": "2025-05-14T09:31:00Z",
-  "ed25519": "3f9a1c7d4e2b8a55c0d1e6f7a9b3c2d4c71d",
-  "mldsa": "8e2b40af1c3d5e7f9a0b2c4d6e8f0a1b40af"
-}`;
-
-type Artifact = {
-  policy?: unknown;
-  verdict?: unknown;
-  ed25519?: unknown;
-  mldsa?: unknown;
+type VerifyResult = {
+  status: "VERIFIED" | "FAILED" | "CANNOT_VERIFY";
+  failures: string[];
+  reason?: string;
+  nEntries?: number;
+  nAnchors?: number;
+  toolchain?: { liboqs?: string; liboqsPython?: string; canonicalForm?: string } | null;
 };
 
-function Row({ label, value, good }: { label: string; value: string; good: boolean }) {
-  return (
-    <div className="flex items-center gap-3 font-mono text-xs">
-      <span>
-        {good ? (
-          <span className="icon-metal">✓</span>
-        ) : (
-          <span style={{ color: "#ffb4b4" }}>✕</span>
-        )}
-      </span>
-      <span className="text-neutral-300">{label}</span>
-      <span className="ml-auto break-all text-neutral-300">{value}</span>
-    </div>
-  );
-}
-
-function Shell({ children }: { children: ReactNode }) {
-  return <div className="chip-metal space-y-3 p-5">{children}</div>;
-}
+const DEMOS = {
+  verified: "/sceal/demo-verified.json",
+  tampered: "/sceal/demo-tampered-content.json",
+} as const;
 
 export function VerifyArtifact() {
   const [input, setInput] = useState("");
-  const [result, setResult] = useState<ReactNode>(null);
+  const [result, setResult] = useState<VerifyResult | null>(null);
+  const [busy, setBusy] = useState(false);
 
-  function verify(raw: string) {
-    const trimmed = raw.trim();
-    if (!trimmed) {
-      setResult(
-        <Shell>
-          <p className="text-sm text-neutral-400">
-            Paste an artifact or click <span className="metal-text">Load sample</span> to try it.
-          </p>
-        </Shell>,
-      );
-      return;
-    }
-
-    let data: Artifact;
+  async function load(which: keyof typeof DEMOS) {
     try {
-      data = JSON.parse(trimmed) as Artifact;
+      const res = await fetch(DEMOS[which]);
+      const text = await res.text();
+      setInput(text);
+      setResult(null);
     } catch {
-      setResult(
-        <div className="chip-metal p-5" style={{ borderColor: "rgba(255,150,150,0.3)" }}>
-          <p className="mb-1 font-serif text-lg text-neutral-200">✕ INVALID ARTIFACT</p>
-          <p className="text-sm text-neutral-300">
-            Not valid JSON — could not parse the artifact structure.
-          </p>
-        </div>,
-      );
-      return;
+      setResult({ status: "CANNOT_VERIFY", reason: "could not load the demo dossier", failures: [] });
     }
+  }
 
-    const hasPolicy = typeof data.policy === "string" && data.policy.length > 0;
-    const hasVerdict = data.verdict === "allowed" || data.verdict === "blocked";
-    const hasEd = typeof data.ed25519 === "string" && data.ed25519.length >= 8;
-    const hasMl = typeof data.mldsa === "string" && data.mldsa.length >= 8;
-    const allGood = hasPolicy && hasVerdict && hasEd && hasMl;
-
-    setResult(
-      <Shell>
-        <p className={`mb-2 font-serif text-2xl ${allGood ? "metal-text" : "text-neutral-200"}`}>
-          {allGood ? "✓ STRUCTURE VALID" : "⚠ INCOMPLETE ARTIFACT"}
-        </p>
-        <Row label="policy" value={hasPolicy ? String(data.policy) : "missing"} good={hasPolicy} />
-        <Row
-          label="verdict"
-          value={hasVerdict ? String(data.verdict) : "missing/invalid"}
-          good={hasVerdict}
-        />
-        <Row
-          label="ed25519"
-          value={hasEd ? String(data.ed25519).slice(0, 10) + "…" : "missing"}
-          good={hasEd}
-        />
-        <Row
-          label="ml-dsa-65"
-          value={hasMl ? String(data.mldsa).slice(0, 10) + "…" : "missing"}
-          good={hasMl}
-        />
-        <p className="border-t border-white/5 pt-2 text-xs text-neutral-400">
-          {allGood
-            ? "Structure matches the published wire format. Run the offline verifier to confirm signatures cryptographically."
-            : "Some required fields are missing — this artifact would be rejected."}
-        </p>
-      </Shell>,
-    );
+  async function verify() {
+    if (busy) return;
+    setBusy(true);
+    setResult(null);
+    try {
+      const mod = (await import("@/lib/sceal/canon.js")) as {
+        report: (text: string) => VerifyResult;
+      };
+      // let the "verifying" state paint before the CPU-bound ML-DSA check
+      await new Promise((r) => setTimeout(r, 30));
+      setResult(mod.report(input));
+    } catch {
+      setResult({ status: "CANNOT_VERIFY", reason: "the verifier failed to run", failures: [] });
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -117,52 +65,115 @@ export function VerifyArtifact() {
         <div className="fade-up mb-12 text-center">
           <p className="track-mid mb-4 text-xs text-neutral-400">VERIFY A PROOF</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-            Check an Artifact Yourself
+            Check a Real Proof Yourself
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-            Paste a proof artifact — IronProof re-checks its structure and signatures. No dashboard,
-            no trust required.
+            Load a real sealed dossier and verify it right here — Ed25519 + ML-DSA-65 signatures and
+            the SHA3-512 chain, entirely in your browser. Then load a tampered one and watch it get
+            rejected. No dashboard, no server, no trust required.
           </p>
         </div>
 
         <div className="fade-up card-premium relative overflow-hidden p-8">
-          <label htmlFor="artifactInput" className="track-mid mb-3 block text-xs text-neutral-300">
-            PROOF ARTIFACT
-          </label>
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+            <label htmlFor="artifactInput" className="track-mid text-xs text-neutral-400">
+              SEALED DOSSIER
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => load("verified")}
+                className="chip-metal track-mid px-4 py-2 text-xs text-neutral-200 transition hover:text-white"
+              >
+                LOAD A REAL PROOF
+              </button>
+              <button
+                type="button"
+                onClick={() => load("tampered")}
+                className="chip-metal track-mid px-4 py-2 text-xs text-neutral-200 transition hover:text-white"
+              >
+                LOAD A TAMPERED ONE
+              </button>
+            </div>
+          </div>
+
           <textarea
             id="artifactInput"
-            rows={5}
+            rows={6}
             value={input}
-            onChange={(e) => setInput(e.target.value)}
-            placeholder={
-              'paste artifact JSON, e.g. {"policy":"finance/refund","verdict":"allowed","ed25519":"3f9a…c71d","mldsa":"8e2b…40af"}'
-            }
-            className="w-full resize-none rounded-sm border border-white/10 bg-black/50 px-4 py-3 font-mono text-xs text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
+            onChange={(e) => {
+              setInput(e.target.value);
+              if (result) setResult(null);
+            }}
+            placeholder="paste a sealed Sceal dossier (JSON) — or use the buttons above"
+            className="w-full resize-none rounded-[5px] border border-white/10 bg-black/50 px-4 py-3 font-mono text-xs text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
           />
+
           <div className="mt-4 flex flex-wrap gap-3">
             <button
               type="button"
-              onClick={() => verify(input)}
-              className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+              onClick={verify}
+              disabled={busy || input.trim().length === 0}
+              className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white disabled:cursor-not-allowed disabled:opacity-50"
             >
-              VERIFY ARTIFACT
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setInput(SAMPLE);
-                verify(SAMPLE);
-              }}
-              className="chip-metal track-mid px-7 py-3 text-xs text-neutral-200 transition hover:text-white"
-            >
-              LOAD SAMPLE
+              {busy ? "VERIFYING…" : "VERIFY IN YOUR BROWSER"}
             </button>
           </div>
-          {result ? <div className="seal-pop mt-6">{result}</div> : null}
+
+          {result ? (
+            <div className="seal-pop mt-6">
+              {result.status === "VERIFIED" ? (
+                <div className="chip-metal p-5">
+                  <p className="metal-text mb-2 font-serif text-2xl">✓ VERIFIED</p>
+                  <p className="text-sm font-light text-neutral-300">
+                    Both signatures check out — <span className="text-neutral-200">Ed25519</span> and{" "}
+                    <span className="text-neutral-200">ML-DSA-65</span> (dual: both must pass) — over
+                    a SHA3-512 chain of {result.nEntries ?? 0} sealed entries. Nothing was altered.
+                  </p>
+                  {result.toolchain?.liboqs ? (
+                    <p className="mt-2 font-mono text-xs text-neutral-500">
+                      sealed by liboqs {result.toolchain.liboqs}
+                    </p>
+                  ) : null}
+                </div>
+              ) : result.status === "FAILED" ? (
+                <div className="chip-metal p-5" style={{ borderColor: "rgba(255,150,150,0.3)" }}>
+                  <p className="mb-2 font-serif text-2xl text-neutral-100">✕ REJECTED</p>
+                  <p className="mb-3 text-sm font-light text-neutral-300">
+                    The dossier does not verify — the proof caught it:
+                  </p>
+                  <ul className="space-y-1.5">
+                    {result.failures.map((f, i) => (
+                      <li key={i} className="flex gap-2 font-mono text-xs text-neutral-300">
+                        <span style={{ color: "#ffb4b4" }}>✕</span>
+                        <span className="break-all">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <div className="chip-metal p-5">
+                  <p className="mb-1 font-serif text-lg text-neutral-200">⚠ CANNOT VERIFY</p>
+                  <p className="text-sm text-neutral-300">
+                    {result.reason ?? "This input is not a sealed dossier."}
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : null}
+
           <p className="mt-5 text-xs text-neutral-400">
-            This demo checks artifact structure in your browser. Full cryptographic verification
-            (Ed25519 + ML-DSA-65) runs offline against the published wire format — no IronProof code
-            required.
+            Runs entirely in your browser — pure-JavaScript Ed25519 + ML-DSA-65 (FIPS 204) + SHA3-512,
+            no server and no IronProof code. The wire format is published, so anyone can write a
+            second verifier:{" "}
+            <a
+              href="/sceal/SPEC_CANON.md"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="metal-text underline decoration-white/20 underline-offset-4 transition hover:decoration-white/60"
+            >
+              read the spec →
+            </a>
           </p>
         </div>
       </div>
