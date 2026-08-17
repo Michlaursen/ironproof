@@ -71,16 +71,23 @@ export function ProofExplorer() {
         <div className="fade-up mb-12 text-center">
           <p className="track-mid mb-4 text-xs text-neutral-400">PROOF EXPLORER · NS-001</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-            A Real CVE — Proven, Then Closed
+            We Mathematically Prove
+            <br />
+            a Critical Vulnerability
           </h2>
+          <p className="metal-text mx-auto mt-5 font-serif text-2xl md:text-3xl">
+            Proven, then closed. Here&apos;s the proof.
+          </p>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-            An actual integer-overflow flaw in <span className="metal-text">net-snmp</span> (asn1.c,
-            CWE-190). Walk the real cycle: the code, the Z3 proof that a bypass exists, the exact
-            bytes that trigger it, and the re-proof that the fix closes it for every input.
+            A real integer-overflow flaw in <span className="metal-text">net-snmp</span> (asn1.c,
+            CWE-190): an over-long input silently overflows a 64-bit counter, so a safety check
+            compares against the wrong value and lets a bad input through. Watch the full cycle — the
+            code, the mathematical proof that a bypass exists, the exact bytes that trigger it, and
+            the re-proof that the fix closes it for every possible input.
           </p>
           <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-400">
             <span className="metal-text">The same proof engine</span> certifies your money-moving
-            policies before an agent can act — this is that engine, shown on a public bug.
+            policies before an agent can act — this is that engine, shown here on a real flaw.
           </p>
         </div>
 
