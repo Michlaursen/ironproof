@@ -143,7 +143,7 @@ export function VerifyArtifact() {
             <button
               type="button"
               onClick={() => verify(input)}
-              className="track-mid bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+              className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
             >
               VERIFY ARTIFACT
             </button>

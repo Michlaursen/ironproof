@@ -25,11 +25,17 @@ export function Landing() {
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
-            <div className="order-2 flex flex-col items-center md:order-1">
-              <IronProofLogo width={210} height={280} className="drop-shadow-2xl" />
-              <span className="track-logo metal-shine mt-6 text-lg font-medium md:text-xl">
-                IRONPROOF
-              </span>
+            <div className="order-2 flex justify-center md:order-1">
+              <div className="proof-scan card-premium relative flex flex-col items-center px-10 py-14 sm:px-14 sm:py-16">
+                <IronProofLogo width={190} height={253} className="relative drop-shadow-2xl" />
+                <span className="track-logo metal-shine relative mt-6 text-lg font-medium md:text-xl">
+                  IRONPROOF
+                </span>
+                <div className="hairline relative mt-6 h-px w-24" />
+                <p className="track-mid relative mt-4 text-xs text-neutral-400">
+                  ED25519 · ML-DSA-65 · FIPS 204
+                </p>
+              </div>
             </div>
             <div className="fade-up order-1 md:order-2">
               <p className="track-wide mb-6 text-xs text-neutral-300 md:text-sm">IRONPROOF</p>
@@ -52,7 +58,7 @@ export function Landing() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#try"
-                  className="track-mid bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+                  className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
                   TRY A PROOF
                 </a>

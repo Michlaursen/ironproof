@@ -36,7 +36,7 @@ export function LandingHeader() {
           ))}
           <a
             href="#contact"
-            className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+            className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
           >
             REQUEST ACCESS
           </a>
@@ -71,7 +71,7 @@ export function LandingHeader() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="track-mid mt-5 bg-gradient-to-b from-white to-neutral-300 px-5 py-3.5 text-center font-semibold text-ink shadow-lg shadow-white/10"
+              className="track-mid mt-5 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-3.5 text-center font-semibold text-ink shadow-lg shadow-white/10"
             >
               REQUEST ACCESS
             </a>
