@@ -8,19 +8,19 @@
 const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   {
     org: "IBM",
-    body: "Names Cobalt AI in the sarama commit that carries the fix.",
+    body: "The sarama fix commit reads: “Thanks to Dominik Blain of Cobalt AI for reporting.”",
     cta: "View commit",
     href: "https://github.com/IBM/sarama/commit/b01879002b37abe3b44a957615d982847a44da94",
   },
   {
     org: "GnuPG",
-    body: "Two libksba commits credit our report, shipped in release 1.7.0.",
+    body: "Two libksba commits carry “Reported-by: Dominik Blain”, shipped in release 1.7.0.",
     cta: "View commit",
     href: "https://github.com/gpg/libksba/commit/c44cc98460ea42e393214dc6e23ff746196baefd",
   },
   {
     org: "Mozilla",
-    body: "Our report is recorded and resolved in Mozilla’s public bug tracker.",
+    body: "Reported by Dominik Blain — recorded and resolved in Mozilla’s public bug tracker (NSS, CWE-195).",
     cta: "View bug record",
     href: "https://bugzilla.mozilla.org/show_bug.cgi?id=2027434",
   },
@@ -32,7 +32,7 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   },
   {
     org: "wolfSSL",
-    body: "Security fixes publicly credited in the wolfSSL 5.9.2 release notes.",
+    body: "Security fixes credited to Dominik Blain in the wolfSSL 5.9.2 release notes.",
     cta: "View release notes",
     href: "https://github.com/wolfSSL/wolfssl/blob/master/README.md",
   },
@@ -52,7 +52,7 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   },
   {
     org: "libmodbus",
-    body: "The fix commit names Qreativelab formal verification as the reporter.",
+    body: "The fix commit reads: “Reported by Dominik Blain — Qreativelab Formal Verification.”",
     cta: "View commit",
     href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
   },
