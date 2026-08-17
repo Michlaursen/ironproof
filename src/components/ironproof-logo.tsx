@@ -53,6 +53,19 @@ export function IronProofLogoDefs() {
           <stop offset="0.5" stopColor="#3a3d44" />
           <stop offset="1" stopColor="#141518" />
         </linearGradient>
+        {/* Moving specular glint — same sweeping sheen as .iron-text, confined to
+         * the mark silhouette. SMIL (not CSS) so it clones across every <use>. */}
+        <linearGradient id="ironGlint" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#ffffff" stopOpacity="0.9" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id="ipLogoClip">
+          <path d="M138 40 L150 62 L150 340 L128 372 L118 300 L120 120 Z" />
+          <path d="M120 130 L74 150 L120 185 Z" />
+          <path d="M158 40 L170 62 L170 120 L178 300 L162 366 L158 340 Z" />
+          <path d="M170 118 L240 152 L240 232 L184 272 L170 254 Z" />
+        </clipPath>
         <filter id="logoGlow" x="-30%" y="-30%" width="160%" height="160%">
           <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#aeb6c8" floodOpacity="0.22" />
         </filter>
@@ -73,6 +86,18 @@ export function IronProofLogoDefs() {
           />
           <path fill="url(#pChromeDark)" d="M240 152 L240 232 L226 238 L228 178 Z" opacity="0.85" />
           <path fill="url(#chromeHi)" d="M170 118 L240 152 L230 158 L176 136 L170 130 Z" opacity="0.9" />
+          <g clipPath="url(#ipLogoClip)" style={{ mixBlendMode: "screen" }}>
+            <rect x="0" y="24" width="64" height="372" fill="url(#ironGlint)">
+              <animateTransform
+                attributeName="transform"
+                type="translate"
+                from="-90 0"
+                to="300 0"
+                dur="7.5s"
+                repeatCount="indefinite"
+              />
+            </rect>
+          </g>
         </g>
       </defs>
     </svg>
