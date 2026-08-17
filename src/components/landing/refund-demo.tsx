@@ -89,14 +89,14 @@ export function RefundDemo() {
   };
 
   return (
-    <section id="try" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
+    <section id="try" className="relative z-10 edge-t px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-10 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-600">TRY IT</p>
-          <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+          <p className="track-mid mb-4 text-xs text-neutral-400">TRY IT</p>
+          <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
             Prove a Refund Decision
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
             A tiny example policy. Try a preset — or move the sliders — and IronProof proves
             whether the action is inside the rules, or shows the exact rule it breaks.
           </p>
@@ -123,7 +123,7 @@ export function RefundDemo() {
           {/* Inputs */}
           <div className="card-premium space-y-7 p-8">
             <div>
-              <p className="track-mid mb-4 text-xs text-neutral-500">EXAMPLE POLICY</p>
+              <p className="track-mid mb-4 text-xs text-neutral-300">EXAMPLE POLICY</p>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-3">
                   <span className="icon-metal">◆</span>
@@ -199,7 +199,7 @@ export function RefundDemo() {
 
           {/* Verdict */}
           <div className="card-premium flex flex-col p-8">
-            <p className="track-mid mb-4 text-xs text-neutral-500">PROOF RESULT</p>
+            <p className="track-mid mb-4 text-xs text-neutral-300">PROOF RESULT</p>
             <div
               key={tick}
               className="verdict-pop flex flex-1 flex-col items-center justify-center py-8 text-center"
@@ -214,7 +214,7 @@ export function RefundDemo() {
               >
                 {violated ? "REFUND BLOCKED" : "REFUND ALLOWED"}
               </h3>
-              <p className="max-w-xs font-light text-neutral-500">
+              <p className="max-w-xs font-light text-neutral-300">
                 {violated
                   ? "Not allowed — a policy rule is violated. Here is the counterexample:"
                   : "No reachable policy violation."}
@@ -225,7 +225,7 @@ export function RefundDemo() {
                 </div>
               ) : null}
             </div>
-            <p className="mt-2 text-center text-[11px] text-neutral-600">
+            <p className="mt-2 text-center text-xs text-neutral-400">
               Deterministic verdict — same inputs always yield the same result.
             </p>
           </div>

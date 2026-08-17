@@ -113,7 +113,7 @@ export function WaveCanvas() {
   return (
     <canvas
       ref={ref}
-      className="pointer-events-none fixed inset-0 z-0"
+      className="pointer-events-none fixed inset-0 z-0 opacity-70"
       aria-hidden="true"
     />
   );

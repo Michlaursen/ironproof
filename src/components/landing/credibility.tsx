@@ -8,19 +8,19 @@
 const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   {
     org: "IBM",
-    body: "Names Cobalt AI in the sarama commit that carries the fix.",
+    body: "The sarama fix commit reads: “Thanks to Dominik Blain of Cobalt AI for reporting.”",
     cta: "View commit",
     href: "https://github.com/IBM/sarama/commit/b01879002b37abe3b44a957615d982847a44da94",
   },
   {
     org: "GnuPG",
-    body: "Two libksba commits credit our report, shipped in release 1.7.0.",
+    body: "Two libksba commits carry “Reported-by: Dominik Blain”, shipped in release 1.7.0.",
     cta: "View commit",
     href: "https://github.com/gpg/libksba/commit/c44cc98460ea42e393214dc6e23ff746196baefd",
   },
   {
     org: "Mozilla",
-    body: "Our report is recorded and resolved in Mozilla’s public bug tracker.",
+    body: "Reported by Dominik Blain — recorded and resolved in Mozilla’s public bug tracker (NSS, CWE-195).",
     cta: "View bug record",
     href: "https://bugzilla.mozilla.org/show_bug.cgi?id=2027434",
   },
@@ -32,7 +32,7 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   },
   {
     org: "wolfSSL",
-    body: "Security fixes publicly credited in the wolfSSL 5.9.2 release notes.",
+    body: "Security fixes credited to Dominik Blain in the wolfSSL 5.9.2 release notes.",
     cta: "View release notes",
     href: "https://github.com/wolfSSL/wolfssl/blob/master/README.md",
   },
@@ -52,7 +52,7 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
   },
   {
     org: "libmodbus",
-    body: "The fix commit names Qreativelab formal verification as the reporter.",
+    body: "The fix commit reads: “Reported by Dominik Blain — Qreativelab Formal Verification.”",
     cta: "View commit",
     href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
   },
@@ -94,15 +94,15 @@ function ExternalArrow() {
 
 export function Credibility() {
   return (
-    <section id="record" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
+    <section id="record" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="fade-up mb-16 text-center">
-        <p className="track-mid mb-4 text-xs text-neutral-600">PUBLIC TECHNICAL RECORD</p>
-        <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+        <p className="track-mid mb-4 text-xs text-neutral-400">PUBLIC TECHNICAL RECORD</p>
+        <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
           Credited in the open,
           <br />
           by the projects themselves
         </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+        <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
           Evidence you can inspect outside our website — real upstream commits, patches and bug
           records that name the work.
         </p>
@@ -118,10 +118,12 @@ export function Credibility() {
             className="card-premium group flex flex-col p-6 transition"
           >
             <h3 className="metal-text mb-2 font-serif text-xl">{item.org}</h3>
-            <p className="flex-1 text-sm font-light leading-relaxed text-neutral-500">{item.body}</p>
-            <span className="track-mid mt-5 inline-flex items-center gap-2 text-[11px] text-neutral-400 transition group-hover:text-white">
+            <p className="flex-1 text-sm font-light leading-relaxed text-neutral-300">{item.body}</p>
+            <span className="track-mid mt-5 inline-flex items-center gap-2 text-xs text-neutral-400 transition group-hover:text-white">
               {item.cta}
-              <ExternalArrow />
+              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                <ExternalArrow />
+              </span>
             </span>
           </a>
         ))}
@@ -129,7 +131,7 @@ export function Credibility() {
 
       {/* Published research */}
       <div className="fade-up mt-16">
-        <p className="track-mid mb-6 text-center text-xs text-neutral-600">PUBLISHED RESEARCH</p>
+        <p className="track-mid mb-6 text-center text-xs text-neutral-400">PUBLISHED RESEARCH</p>
         <div className="mx-auto max-w-4xl space-y-3">
           {PAPERS.map((paper) => (
             <a

@@ -1,4 +1,7 @@
 import { IronProofLogo } from "@/components/ironproof-logo";
+import { LandingHeader } from "./landing-header";
+import { ProofSeal } from "./proof-seal";
+import { ProofArtifact } from "./proof-artifact";
 import { FadeUpInit } from "./fade-up-init";
 import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
@@ -16,39 +19,22 @@ export function Landing() {
   return (
     <div className="flex flex-1 flex-col">
       {/* NAV */}
-      <header className="relative z-20 flex items-center gap-8 px-6 py-6 md:px-14">
-        <a href="#top" className="flex shrink-0 items-center gap-3">
-          <IronProofLogo width={26} height={35} />
-          <span className="track-logo metal-text text-sm font-medium">IRONPROOF</span>
-        </a>
-        <nav className="track-mid hidden flex-1 items-center justify-between pl-10 text-xs md:flex lg:pl-24">
-          <a href="#platform" className="metal-text transition hover:opacity-70">PLATFORM</a>
-          <a href="#speed" className="metal-text transition hover:opacity-70">SPEED</a>
-          <a href="#compare" className="metal-text transition hover:opacity-70">VS TESTING</a>
-          <a href="#try" className="metal-text transition hover:opacity-70">TRY IT</a>
-          <a href="#verify" className="metal-text transition hover:opacity-70">VERIFY</a>
-          <a
-            href="#contact"
-            className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-          >
-            REQUEST ACCESS
-          </a>
-        </nav>
-      </header>
+      <LandingHeader />
 
       <main className="flex-1">
         {/* HERO */}
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
+          <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
-            <div className="order-2 flex flex-col items-center md:order-1">
-              <IronProofLogo width={210} height={280} className="drop-shadow-2xl" />
-              <span className="track-logo metal-shine mt-6 text-lg font-medium md:text-xl">
-                IRONPROOF
-              </span>
+            <div className="order-2 flex flex-col items-center gap-4 md:order-1 md:-translate-y-4">
+              <ProofArtifact kind="allowed" />
+              <ProofArtifact kind="blocked" />
             </div>
             <div className="fade-up order-1 md:order-2">
-              <p className="track-wide mb-6 text-xs text-neutral-500 md:text-sm">IRONPROOF</p>
-              <h1 className="metal-shine mb-6 font-serif text-5xl font-medium leading-[0.95] md:text-7xl">
+              <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
+                PROVABLE SECURITY INFRASTRUCTURE
+              </p>
+              <h1 className="metal-shine mb-6 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl sm:leading-[0.95] md:text-7xl">
                 Prove what&apos;s allowed.
                 <br />
                 Block everything else.
@@ -59,7 +45,7 @@ export function Landing() {
                 before it ever runs.
               </p>
               <div className="hairline mb-6 h-px w-full max-w-md" />
-              <p className="mb-10 max-w-lg text-base font-light text-neutral-500">
+              <p className="mb-10 max-w-lg text-base font-light text-neutral-300">
                 Automated formal verification for critical software — starting where a wrong action
                 moves money: AI agents issuing refunds, payments and disbursements in Canadian
                 financial services.
@@ -67,7 +53,7 @@ export function Landing() {
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#try"
-                  className="track-mid bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+                  className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
                   TRY A PROOF
                 </a>
@@ -78,15 +64,34 @@ export function Landing() {
                   EXPLORE PLATFORM
                 </a>
               </div>
+              <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500">
+                <span className="track-mid">INDEPENDENTLY VERIFIABLE</span>
+                <span className="text-neutral-700">·</span>
+                <span className="track-mid">POST-QUANTUM SEALED</span>
+                <span className="text-neutral-700">·</span>
+                <span className="track-mid">RUNS AIR-GAPPED</span>
+              </div>
             </div>
+          </div>
+        </section>
+
+        {/* CREDITED-BY STRIP */}
+        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
+          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <span className="track-mid text-xs text-neutral-500">PUBLICLY CREDITED BY</span>
+            {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
+              <span key={o} className="metal-text text-sm font-medium">
+                {o}
+              </span>
+            ))}
           </div>
         </section>
 
         {/* PLATFORM */}
         <section id="platform" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="fade-up mb-20 text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-600">THE PLATFORM</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+          <div className="fade-up mb-16 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">THE PLATFORM</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               Mathematically Proven.
               <br />
               Not Merely Tested.
@@ -94,34 +99,34 @@ export function Landing() {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="card-premium fade-up p-10">
-              <div className="metal-shine mb-4 font-serif text-4xl">01</div>
+              <div className="metal-text mb-4 font-serif text-4xl">01</div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Rules Into Math</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
+              <p className="font-light leading-relaxed text-neutral-300">
                 Turn critical policies, specifications and contracts into formal constraints — then
                 prove whether the modeled system can violate them.
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <div className="metal-shine mb-4 font-serif text-4xl">02</div>
+              <div className="metal-text mb-4 font-serif text-4xl">02</div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Exhaustive, Not Sampled</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
+              <p className="font-light leading-relaxed text-neutral-300">
                 Testing checks a handful of cases. IronProof reasons exhaustively over the formally
                 defined state space.
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <div className="metal-shine mb-4 font-serif text-4xl">03</div>
+              <div className="metal-text mb-4 font-serif text-4xl">03</div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Infrastructure Grade</h3>
-              <p className="mb-4 font-light leading-relaxed text-neutral-500">
+              <p className="mb-4 font-light leading-relaxed text-neutral-300">
                 Built for critical systems where failure is not an option.
               </p>
               <div className="flex flex-wrap gap-2">
                 {["AEROSPACE", "FINANCE", "DEFENSE", "SMART CONTRACTS"].map((t) => (
-                  <span key={t} className="chip-metal track-mid px-3 py-1 text-[10px] text-neutral-300">
+                  <span key={t} className="chip-metal track-mid px-3 py-1 text-xs text-neutral-300">
                     {t}
                   </span>
                 ))}
-                <span className="chip-metal track-mid px-3 py-1 text-[10px] text-white">
+                <span className="chip-metal track-mid px-3 py-1 text-xs text-white">
                   HEALTHCARE
                 </span>
               </div>
@@ -130,50 +135,50 @@ export function Landing() {
         </section>
 
         {/* SPEED */}
-        <section id="speed" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
+        <section id="speed" className="relative z-10 edge-t px-6 py-28 md:px-14">
           <div className="mx-auto max-w-6xl">
             <div className="fade-up mb-16 text-center">
-              <p className="track-mid mb-4 text-xs text-neutral-600">AT MACHINE SPEED</p>
-              <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+              <p className="track-mid mb-4 text-xs text-neutral-400">AT MACHINE SPEED</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
                 Formal Proof Used to
                 <br />
                 Take Months. Not Anymore.
               </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
                 Classic formal verification meant PhDs writing proofs by hand for months. IronProof
                 runs the same rigor automatically — at machine speed, on every change.
               </p>
             </div>
             <div className="fade-up grid items-stretch gap-6 md:grid-cols-2">
               <div className="card-premium p-10">
-                <p className="track-mid mb-6 text-[10px] text-neutral-600">
+                <p className="track-mid mb-6 text-xs text-neutral-400">
                   BEFORE — TRADITIONAL FORMAL VERIFICATION
                 </p>
                 <div className="space-y-5">
                   <div className="flex items-center gap-4">
-                    <span className="text-xl text-neutral-600">✕</span>
+                    <span className="text-xl text-neutral-400">✕</span>
                     <div>
                       <p className="text-neutral-300">Timeline</p>
-                      <p className="font-serif text-3xl text-neutral-500">Weeks to months</p>
+                      <p className="font-serif text-3xl text-neutral-300">Weeks to months</p>
                     </div>
                   </div>
                   <div className="h-px bg-white/5" />
                   <div className="flex items-start gap-4">
-                    <span className="mt-0.5 text-neutral-600">✕</span>
-                    <p className="font-light text-neutral-500">
+                    <span className="mt-0.5 text-neutral-400">✕</span>
+                    <p className="font-light text-neutral-300">
                       Hand-written proofs by scarce specialists
                     </p>
                   </div>
                   <div className="flex items-start gap-4">
-                    <span className="mt-0.5 text-neutral-600">✕</span>
-                    <p className="font-light text-neutral-500">
+                    <span className="mt-0.5 text-neutral-400">✕</span>
+                    <p className="font-light text-neutral-300">
                       Re-done manually every time the code changes
                     </p>
                   </div>
                 </div>
               </div>
               <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
-                <p className="track-mid mb-6 text-[10px] text-neutral-500">
+                <p className="track-mid mb-6 text-xs text-neutral-300">
                   WITH IRONPROOF — AUTOMATED
                 </p>
                 <div className="space-y-5">
@@ -204,7 +209,7 @@ export function Landing() {
                 </div>
               </div>
             </div>
-            <p className="fade-up mt-6 text-center text-xs text-neutral-600">
+            <p className="fade-up mt-6 text-center text-xs text-neutral-400">
               Formal guarantees. Without the traditional proof cycle.
             </p>
           </div>
@@ -214,11 +219,11 @@ export function Landing() {
         <section id="compare" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
           <div className="mx-auto max-w-6xl">
             <div className="fade-up mb-16 text-center">
-              <p className="track-mid mb-4 text-xs text-neutral-600">THE DIFFERENCE</p>
-              <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+              <p className="track-mid mb-4 text-xs text-neutral-400">THE DIFFERENCE</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
                 Testing vs. Proving
               </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
                 Testing samples a few cases and hopes the rest hold. Proving reasons over every
                 case — so nothing is left to chance.
               </p>
@@ -232,28 +237,28 @@ export function Landing() {
                   </svg>
                   <h3 className="font-serif text-3xl text-neutral-400">Testing</h3>
                 </div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-600">SAMPLES A FEW CASES</p>
+                <p className="track-mid mb-4 text-xs text-neutral-400">SAMPLES A FEW CASES</p>
                 <TestingDots />
                 <ul className="space-y-3 text-sm">
-                  <li className="flex gap-3 text-neutral-500">
-                    <span className="mt-0.5 text-neutral-600">○</span> Checks the cases someone
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="mt-0.5 text-neutral-400">○</span> Checks the cases someone
                     thought of
                   </li>
-                  <li className="flex gap-3 text-neutral-500">
-                    <span className="mt-0.5 text-neutral-600">○</span> Edge cases slip through
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="mt-0.5 text-neutral-400">○</span> Edge cases slip through
                     unnoticed
                   </li>
-                  <li className="flex gap-3 text-neutral-500">
-                    <span className="mt-0.5 text-neutral-600">○</span> &quot;Passed&quot; means{" "}
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="mt-0.5 text-neutral-400">○</span> &quot;Passed&quot; means{" "}
                     <span className="italic">probably</span> fine
                   </li>
-                  <li className="flex gap-3 text-neutral-500">
-                    <span className="mt-0.5 text-neutral-600">○</span> Coverage stops where
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="mt-0.5 text-neutral-400">○</span> Coverage stops where
                     imagination stops
                   </li>
                 </ul>
                 <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
-                  <span className="track-mid text-xs text-neutral-600">CONFIDENCE</span>
+                  <span className="track-mid text-xs text-neutral-400">CONFIDENCE</span>
                   <span className="font-serif text-2xl text-neutral-400">Partial</span>
                 </div>
               </div>
@@ -265,7 +270,7 @@ export function Landing() {
                   </svg>
                   <h3 className="metal-text font-serif text-3xl">Proving</h3>
                 </div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">REASONS OVER EVERY CASE</p>
+                <p className="track-mid mb-4 text-xs text-neutral-300">REASONS OVER EVERY CASE</p>
                 <ProvingDots />
                 <ul className="space-y-3 text-sm">
                   <li className="flex gap-3 text-neutral-300">
@@ -286,7 +291,7 @@ export function Landing() {
                   </li>
                 </ul>
                 <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
-                  <span className="track-mid text-xs text-neutral-500">CONFIDENCE</span>
+                  <span className="track-mid text-xs text-neutral-300">CONFIDENCE</span>
                   <span className="metal-text text-right font-serif text-lg">
                     Mathematical guarantee within the model
                   </span>
@@ -301,14 +306,14 @@ export function Landing() {
 
         {/* HOW IT WORKS */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-600">HOW IT WORKS</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+          <div className="fade-up mb-16 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               How IronProof Authorizes
               <br />
               an AI Action
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
               Your written policy is compiled into mathematics — by the same deterministic compiler
               the runtime uses. The proof runs against that model, not a checklist.
             </p>
@@ -322,7 +327,7 @@ export function Landing() {
                 </svg>
               </div>
               <h3 className="metal-text mb-2 font-serif text-xl">Capture context</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-500">
+              <p className="text-sm font-light leading-relaxed text-neutral-300">
                 Record the policy version, agent authority, transaction state and requested action.
               </p>
             </div>
@@ -335,7 +340,7 @@ export function Landing() {
                 </svg>
               </div>
               <h3 className="metal-text mb-2 font-serif text-xl">Prove the boundary</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-500">
+              <p className="text-sm font-light leading-relaxed text-neutral-300">
                 The policy is certified across its entire action space beforehand — so the runtime
                 verdict is instant and deterministic, with no solver in the path. A machine-checked
                 theorem proves this fast path decides exactly like the full formal model — for every
@@ -351,7 +356,7 @@ export function Landing() {
                 </svg>
               </div>
               <h3 className="metal-text mb-2 font-serif text-xl">Allow or block</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-500">
+              <p className="text-sm font-light leading-relaxed text-neutral-300">
                 A single-use execution grant is issued only when the action is proven inside the
                 boundary — anything unproven is blocked.
               </p>
@@ -365,7 +370,7 @@ export function Landing() {
                 </svg>
               </div>
               <h3 className="metal-text mb-2 font-serif text-xl">Seal the evidence</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-500">
+              <p className="text-sm font-light leading-relaxed text-neutral-300">
                 Preserve the decision, justification and proof result in an independently verifiable
                 artifact.
               </p>
@@ -374,7 +379,7 @@ export function Landing() {
         </section>
 
         {/* THE MODEL DOES NOT CONTROL AUTHORIZATION */}
-        <section className="relative z-10 border-t border-neutral-900 px-6 py-24 md:px-14">
+        <section className="relative z-10 edge-t px-6 py-32 md:px-14">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="icon-metal">
@@ -385,7 +390,7 @@ export function Landing() {
                 THE MODEL DOES NOT CONTROL AUTHORIZATION
               </span>
             </div>
-            <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-500">
+            <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-300">
               Prompts can influence what an agent requests. They cannot change what the agent is
               allowed to do.
             </p>
@@ -399,15 +404,15 @@ export function Landing() {
         <VerifyArtifact />
 
         {/* WHERE WE START */}
-        <section id="start" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
+        <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-600">WHERE WE START</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">WHERE WE START</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               Money-moving workflows in
               <br />
               Canadian financial services
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
               We start with back-office AI agents that issue refunds, payments, disbursements or
               beneficiary changes under defined limits and approval rules.
             </p>
@@ -419,7 +424,7 @@ export function Landing() {
                 <path d="M3 20 a6 6 0 0 1 12 0 M16 6 a3 3 0 0 1 0 5 M21 20 a5 5 0 0 0 -5 -5" />
               </svg>
               <h3 className="metal-text mb-3 font-serif text-2xl">Primary buyers</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
+              <p className="font-light leading-relaxed text-neutral-300">
                 Technology risk, operational risk and compliance teams.
               </p>
             </div>
@@ -429,7 +434,7 @@ export function Landing() {
                 <path d="M4 14 h10 M4 18 h7" />
               </svg>
               <h3 className="metal-text mb-3 font-serif text-2xl">Initial engagement</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
+              <p className="font-light leading-relaxed text-neutral-300">
                 Select one workflow, define the transaction boundary and produce an independently
                 verifiable proof artifact.
               </p>
@@ -463,15 +468,15 @@ export function Landing() {
         </section>
 
         {/* SOVEREIGNTY */}
-        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl border-t border-neutral-900 px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-600">SOVEREIGNTY</p>
-            <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-16 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">SOVEREIGNTY</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               Built for environments that
               <br />
               cannot export data or trust
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
               IronProof can run locally or air-gapped, so policies, system context and decision
               evidence remain under the institution&apos;s control.
             </p>
@@ -482,9 +487,9 @@ export function Landing() {
                 <rect x="3" y="4" width="18" height="12" rx="1" />
                 <path d="M8 20 h8 M12 16 v4" />
               </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Local deployment</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
-                The proof core can operate without network access.
+              <h3 className="metal-text mb-3 font-serif text-2xl">Local &amp; air-gapped</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                The proof core can operate fully air-gapped — no network access required.
               </p>
             </div>
             <div className="card-premium fade-up p-10">
@@ -493,7 +498,7 @@ export function Landing() {
                 <circle cx="12" cy="12" r="9" />
               </svg>
               <h3 className="metal-text mb-3 font-serif text-2xl">Independent verification</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
+              <p className="font-light leading-relaxed text-neutral-300">
                 Your auditor re-checks the artifact with a second, independently written verifier —
                 offline, no IronProof dashboard.
               </p>
@@ -504,7 +509,7 @@ export function Landing() {
                 <path d="M12 7 v5 l3 3" />
               </svg>
               <h3 className="metal-text mb-3 font-serif text-2xl">Durable evidence</h3>
-              <p className="font-light leading-relaxed text-neutral-500">
+              <p className="font-light leading-relaxed text-neutral-300">
                 Classical + post-quantum signature (Ed25519 + ML-DSA-65, FIPS 204), timestamp
                 bounded from both sides — a seal cannot move backwards in time.
               </p>
@@ -516,9 +521,10 @@ export function Landing() {
         <Credibility />
 
         {/* CTA */}
-        <section id="contact" className="relative z-10 border-t border-neutral-900 px-6 py-32 md:px-14">
-          <div className="fade-up mx-auto max-w-3xl text-center">
-            <IronProofLogo width={54} height={72} className="mx-auto mb-10" title="IronProof mark" />
+        <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
+          <div className="halo" aria-hidden="true" />
+          <div className="fade-up relative mx-auto max-w-3xl text-center">
+            <ProofSeal size={148} className="mx-auto mb-10" />
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
               Prove your infrastructure.
             </h2>
@@ -532,9 +538,12 @@ export function Landing() {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative z-10 border-t border-neutral-900 px-6 py-10 md:px-14">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-600 md:flex-row">
-          <span className="track-logo metal-text">IRONPROOF</span>
+      <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
+          <div className="flex items-center gap-3">
+            <IronProofLogo width={20} height={27} />
+            <span className="track-logo metal-text">IRONPROOF</span>
+          </div>
           <span className="font-light">
             Automated formal verification for critical software and infrastructure.
           </span>

@@ -37,12 +37,29 @@
 
 html {
   scroll-behavior: smooth;
+  /* Larger base so the whole rem-scaled design reads bigger (Miguel: too small). */
+  font-size: 112.5%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Inter, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Layered depth — cool radial glow from the top + soft floor vignette.
+ * Sits behind the grid and the particle canvas so pure #050506 never reads flat. */
+.bg-depth {
+  position: fixed;
+  inset: 0;
+  z-index: -9;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 78% at 50% -12%, rgba(122, 140, 205, 0.12), transparent 58%),
+    radial-gradient(100% 100% at 50% 118%, rgba(0, 0, 0, 0.55), transparent 68%);
 }
 
 ::selection {
@@ -55,6 +72,31 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* Keyboard focus — visible ring on every interactive element (a11y). */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+summary:focus-visible {
+  outline: 2px solid rgba(220, 225, 255, 0.6);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Very faint film grain — kills gradient banding, adds "expensive" depth. */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: -8;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Staggered reveal — cards in a grid cascade instead of popping all at once. */
+.fade-up.card-premium:nth-child(2) { transition-delay: 0.07s; }
+.fade-up.card-premium:nth-child(3) { transition-delay: 0.14s; }
+.fade-up.card-premium:nth-child(4) { transition-delay: 0.21s; }
 
 /* Faint fixed grid texture, sits behind all content */
 .bg-grid {
@@ -113,20 +155,21 @@ body {
  * ============================================================ */
 
 .metal-text {
-  background: linear-gradient(180deg, #fff 0%, #eaeaee 18%, #fff 34%, #9a9aa2 52%, #c8c8cf 66%, #fff 82%, #7c7c84 100%);
+  /* Brighter floor — no thin/dark bands (Miguel: white too thin). */
+  background: linear-gradient(180deg, #ffffff 0%, #f2f3f7 26%, #d8dbe4 50%, #f2f3f7 74%, #cfd3de 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 14px rgba(220, 225, 255, 0.12));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(220, 225, 255, 0.22));
 }
 
 .metal-shine {
-  background: linear-gradient(110deg, #7c7c84 0%, #fff 20%, #c4c4cc 30%, #fff 45%, #8a8a92 60%, #fff 78%, #9a9aa2 100%);
+  background: linear-gradient(110deg, #c6cad4 0%, #ffffff 22%, #e4e7ee 38%, #ffffff 55%, #d2d6e0 72%, #ffffff 88%, #dfe2ea 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 16px rgba(220, 225, 255, 0.18));
+  filter: drop-shadow(0 0 18px rgba(220, 225, 255, 0.26));
   animation: sweep 7s linear infinite;
 }
 @keyframes sweep {
@@ -152,18 +195,111 @@ body {
 }
 
 .card-premium {
-  background: linear-gradient(160deg, #0d0d10 0%, #070709 100%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  background: linear-gradient(160deg, #0e0e12 0%, #070709 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 50px -20px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Top-lit gradient edge — brushed-metal contour that catches light and fades down. */
+.card-premium::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.32),
+    rgba(228, 233, 255, 0.06) 34%,
+    rgba(228, 233, 255, 0.02) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 .card-premium:hover {
-  border-color: rgba(220, 225, 255, 0.18);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 30px 64px -22px rgba(0, 0, 0, 0.92),
+    0 0 30px -6px rgba(150, 170, 255, 0.14);
+}
+.card-premium:hover::before {
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.52),
+    rgba(228, 233, 255, 0.1) 38%,
+    rgba(228, 233, 255, 0.03) 100%
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-premium { transition: border-color 0.3s ease; }
+  .card-premium:hover { transform: none; }
+}
+
+/* Luminous section divider — replaces flat neutral borders where used. */
+.edge-t {
+  position: relative;
+}
+.edge-t::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 225, 255, 0.16), transparent);
+}
+
+.edge-b {
+  position: relative;
+}
+.edge-b::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 225, 255, 0.14), transparent);
+}
+
+/* Soft radial halo used behind hero / key headings. */
+.halo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(60% 50% at 50% 40%, rgba(150, 170, 255, 0.10), transparent 70%);
 }
 
 .chip-metal {
+  position: relative;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  border-radius: 5px;
+}
+/* Same top-lit contour as the cards, subtler — cohesion across the metal system. */
+.chip-metal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.26),
+    rgba(228, 233, 255, 0.05) 60%,
+    rgba(228, 233, 255, 0.02) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .num-badge {
@@ -198,6 +334,21 @@ body {
 }
 .seal-pop { animation: sealPop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1); }
 .verdict-pop { animation: sealPop 0.45s cubic-bezier(0.2, 1.4, 0.4, 1); }
+
+/* Signature seal — slow rotation of the primitive ring. */
+.seal-spin {
+  animation: seal-rotate 26s linear infinite;
+}
+@keyframes seal-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seal-spin {
+    animation: none;
+  }
+}
 
 /* Active state for preset / tab buttons */
 .preset-btn.active {

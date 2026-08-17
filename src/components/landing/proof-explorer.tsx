@@ -3,10 +3,11 @@
 import { useState } from "react";
 
 /*
- * PROOF EXPLORER — a real CVE (net-snmp asn1.c, CWE-190) walked through four
- * tabs: the code, the Z3 proof the bypass exists (SAT), the witness bytes, and
- * the re-proof the fix closes it (UNSAT). Code blocks are kept as exact
- * monospace strings; prose keeps the reference landing's wording verbatim.
+ * PROOF EXPLORER — a real, ASSIGNED CVE (libyang CVE-2026-44673, CWE-190 -> CWE-122)
+ * walked through four tabs: the code, the Z3 proof an undersizing input exists (SAT),
+ * the exact witness, and the re-proof that a 64-bit fix closes it (UNSAT).
+ * Faithful to the hardened Cobalt proof (cobalt-ai/cobalt_libyang_lyb001_finding.py):
+ * BUG obligation SAT + two FIX obligations UNSAT, non-vacuous. Not overclaimed (R3).
  */
 
 type TabKey = "code" | "proof" | "poc" | "reprove";
@@ -18,41 +19,39 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "reprove", label: "4 · RE-PROVE" },
 ];
 
-const CODE_SRC = `u_long subidentifier = 0;
-while (*bufp & 0x80) {                  /* continuation bit set          */
-    subidentifier = (subidentifier << 7)
-                  + (*bufp++ & ~0x80);  /* accumulate 7 bits — NO guard   */
-    length--;
-}
-subidentifier = (subidentifier << 7) + (*bufp++ & ~0x80);
+const CODE_SRC = `// libyang · src/parser_lyb.c · lyb_read_string()
+// str_len is a 32-bit length read straight from the LYB blob — attacker-controlled.
 
-if (subidentifier > (u_long) MAX_SUBID) /* check runs AFTER the wrap      */
-    return NULL;`;
+L288  *str = malloc(str_len + 1);       /* (str_len + 1) wraps to 0 in uint32      */
+L293  lyb_read(*str, str_len * 8, in);  /* str_len * 8 also wraps — no 64-bit guard */
+L296  (*str)[str_len] = '\\0';           /* write at [str_len] — far out of bounds   */`;
 
-const PROOF_SRC = `sub[0] = 0
-for i in 0..9:  sub[i+1] = (sub[i] << 7) + byte[i]      (mod 2^64)
-assert  ULE(sub[10], 0xFFFFFFFF)             # does a bypass exist?
+const PROOF_SRC = `str_len : BitVec 32              # attacker-controlled length field
 
-input      = 82 80 80 80 80 80 80 80 80 00   (10-byte over-long BER)
-true value = 2 x 128^9 = 2^64  >>  MAX_SUBID
+# BUG obligation LYB-b1 — can the buffer be smaller than the data?
+alloc = str_len + 1             # 32-bit, exactly as written
+assert  ULT(alloc, str_len)     # does an undersizing input exist?
 
-Z3  ->  SAT      a bypassing input EXISTS — the bug is real`;
+witness   str_len = 0xFFFFFFFF   ->   alloc = 0x00000000   (wrapped)
 
-const POC_SRC = `OID subidentifier = 82 80 80 80 80 80 80 80 80 00
+Z3  ->  SAT      an undersizing input EXISTS — the overflow is real`;
 
-  iter  1:  sub = 0x0000000000000002
-  iter  9:  sub = 0x0200000000000000
-  iter 10:  sub = 0x0000000000000000   <- wrapped to zero (mod 2^64)
+const POC_SRC = `LYB blob · string length field (4 bytes, little-endian)
 
-  MAX_SUBID check:  0 > 0xFFFFFFFF  ->  false  ->  BYPASSED`;
+  str_len = FF FF FF FF   =   0xFFFFFFFF
 
-const REPROVE_SRC = `# guard the accumulation (reject over-long encodings /
-# check the top bits before each shift), then re-run:
+  L288  malloc(0xFFFFFFFF + 1)  ->  malloc(0)   (wrapped)  ->  ~0-byte buffer
+  L296  buf[0xFFFFFFFF] = 0                                 ->  heap write ~4 GB out of bounds
 
-for a bounded (<= 4-byte, RFC-limit) encoding:
-    assert  UGT(sub, 0xFFFFFFFFFFFFFFFF)      # can it overflow 64-bit?
+  reached in-memory (LY_IN_MEMORY) via lyd_parse_data() — NETCONF / sysrepo`;
 
-Z3  ->  UNSAT    no input overflows — bounded, provably`;
+const REPROVE_SRC = `# fix: widen to 64-bit before the arithmetic, then re-run for ALL str_len:
+#   malloc((uint64_t)str_len + 1)   ·   lyb_read(*str, (uint64_t)str_len * 8, in)
+
+for every 32-bit str_len:
+    assert  ULE( (uint64_t)str_len + 1, str_len )   # can it still undersize?
+
+Z3  ->  UNSAT    no input undersizes — bounded, provably, over all 2^32 lengths`;
 
 function CodeBlock({ src }: { src: string }) {
   return (
@@ -66,17 +65,29 @@ export function ProofExplorer() {
   const [tab, setTab] = useState<TabKey>("code");
 
   return (
-    <section id="explorer" className="relative z-10 border-y border-neutral-900 px-6 py-28 md:px-14">
+    <section id="explorer" className="relative z-10 edge-t px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-12 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-600">PROOF EXPLORER · NS-001</p>
-          <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
-            A Real CVE — Proven, Then Closed
+          <p className="track-mid mb-4 text-xs text-neutral-400">PROOF EXPLORER · CVE-2026-44673</p>
+          <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+            We Mathematically Prove
+            <br />
+            a Critical Vulnerability
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
-            An actual integer-overflow flaw in <span className="metal-text">net-snmp</span> (asn1.c,
-            CWE-190). Walk the real cycle: the code, the Z3 proof that a bypass exists, the exact
-            bytes that trigger it, and the re-proof that the fix closes it for every input.
+          <p className="metal-text mx-auto mt-5 font-serif text-2xl md:text-3xl">
+            Proven, then closed. Here&apos;s the proof.
+          </p>
+          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
+            A real, assigned vulnerability in <span className="metal-text">libyang</span>{" "}
+            (CVE-2026-44673, CVSS 7.5) — the YANG library behind NETCONF and sysrepo network config.
+            An attacker-controlled length field overflows 32-bit arithmetic, so the parser allocates
+            a near-empty buffer and then writes far past it — a heap overflow. Watch the full cycle:
+            the code, the proof an undersizing input exists, the exact input that triggers it, and the
+            re-proof that a 64-bit fix closes it for every possible length.
+          </p>
+          <p className="mx-auto mt-5 max-w-2xl text-sm text-neutral-400">
+            <span className="metal-text">The same proof engine</span> certifies your money-moving
+            policies before an agent can act — this is that engine, shown here on a real, assigned CVE.
           </p>
         </div>
 
@@ -97,92 +108,103 @@ export function ProofExplorer() {
           <div className="bg-black/40 p-6 md:p-8">
             {tab === "code" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
-                  net-snmp · snmplib/asn1.c · asn_parse_objid() &nbsp;—&nbsp; CWE-190 + CWE-20
+                <p className="track-mid mb-4 text-[10px] text-neutral-400">
+                  libyang · src/parser_lyb.c · lyb_read_string() &nbsp;—&nbsp; CWE-190 -&gt; CWE-122
                 </p>
                 <CodeBlock src={CODE_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
-                  The 64-bit <span className="font-mono text-neutral-300">u_long</span> silently
-                  wraps (mod 2<sup>64</sup>) while it accumulates. The bound is then compared against
-                  the <span className="metal-text">wrapped</span> value — not the true one.
+                <p className="mt-5 text-sm font-light text-neutral-400">
+                  <span className="font-mono text-neutral-300">str_len</span> comes straight from the
+                  LYB blob, unchecked. With <span className="metal-text">str_len = 0xFFFFFFFF</span>,{" "}
+                  <span className="font-mono text-neutral-300">(str_len + 1)</span> wraps to 0: the
+                  parser allocates almost nothing, then writes str_len bytes into it — integer
+                  overflow to heap overflow (CWE-190 → CWE-122).
                 </p>
               </div>
             ) : null}
 
             {tab === "proof" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
-                  OBLIGATION NS-001-P1 · Z3 · BitVec 64 · the BUG
+                <p className="track-mid mb-4 text-[10px] text-neutral-400">
+                  OBLIGATION LYB-b1 · Z3 · BitVec 32 · the BUG
                 </p>
                 <CodeBlock src={PROOF_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
-                  Gate rule <span className="text-neutral-300">R2</span>: this BUG obligation (SAT)
-                  is paired with a FIX obligation that must return UNSAT (tab 4) — a verdict that
-                  cannot be red would mean nothing in green.
+                <p className="mt-5 text-sm font-light text-neutral-400">
+                  Gate rule <span className="text-neutral-300">R2</span>: this BUG obligation (SAT) is
+                  paired with FIX obligations that must return UNSAT (tab 4). A verdict that cannot be
+                  red would mean nothing in green.
                 </p>
               </div>
             ) : null}
 
             {tab === "poc" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
-                  WITNESS · the exact bytes that trigger it
+                <p className="track-mid mb-4 text-[10px] text-neutral-400">
+                  WITNESS · the exact input that triggers it
                 </p>
                 <CodeBlock src={POC_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
-                  A remote SNMP GET/SET/GETNEXT carrying this crafted OID makes{" "}
-                  <span className="font-mono text-neutral-300">asn_parse_objid()</span> accept the
-                  subidentifier as <span className="font-mono text-neutral-300">0</span> while its
-                  true value is 2<sup>64</sup> — OID confusion, ACL bypass, wrong MIB traversal.
+                <p className="mt-5 text-sm font-light text-neutral-400">
+                  A crafted LYB blob makes{" "}
+                  <span className="font-mono text-neutral-300">lyb_read_string()</span> allocate a
+                  near-empty buffer, then write about 4 GB past it — heap corruption (DoS; RCE
+                  potential if the heap is groomable). Reported to CESNET, the libyang maintainer;
+                  assigned <span className="metal-text">CVE-2026-44673</span>.
                 </p>
               </div>
             ) : null}
 
             {tab === "reprove" ? (
               <div>
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">
-                  OBLIGATION NS-001-P4 · Z3 · BitVec 64 · the FIX
+                <p className="track-mid mb-4 text-[10px] text-neutral-400">
+                  OBLIGATIONS LYB-f1 / LYB-f2 · Z3 · the FIX
                 </p>
                 <CodeBlock src={REPROVE_SRC} />
-                <p className="mt-5 text-sm font-light text-neutral-500">
-                  With the guard, <span className="text-neutral-300">
-                    &quot;some input bypasses the check&quot;
+                <p className="mt-5 text-sm font-light text-neutral-400">
+                  With 64-bit arithmetic, <span className="text-neutral-300">
+                    &quot;some length undersizes the buffer&quot;
                   </span>{" "}
-                  is UNSAT for <span className="metal-text">all</span> inputs. Green only because red
-                  was reachable — and is now closed. Cross-checked independently in{" "}
-                  <span className="text-neutral-300">Lean</span> (kernel + bv_decide).
+                  is UNSAT for <span className="metal-text">every</span> input. Green only because red
+                  was reachable — and the fix obligations are non-vacuous: revert to 32-bit and the
+                  counterexample returns.
                 </p>
               </div>
             ) : null}
           </div>
 
           <div className="border-t border-white/5 p-6 md:p-8">
-            <p className="track-mid mb-3 text-[10px] text-neutral-500">
+            <p className="track-mid mb-3 text-[10px] text-neutral-400">
               WHAT THIS PROVES — AND WHAT IT DOES NOT (declared, gate rule R3)
             </p>
             <div className="grid gap-4 text-sm md:grid-cols-2">
               <div className="flex gap-3">
                 <span className="icon-metal mt-0.5">✓</span>
                 <p className="font-light text-neutral-400">
-                  <span className="text-neutral-200">Proven —</span> the 64-bit accumulation model
-                  admits a bypassing input (SAT); the guarded model admits none (UNSAT); both
-                  re-provable in Lean, an independent kernel.
+                  <span className="text-neutral-200">Proven —</span> the 32-bit model admits an
+                  undersizing input (SAT); the 64-bit-widened model admits none (UNSAT); both fix
+                  obligations are non-vacuous — reverting the fix re-exhibits the counterexample.
                 </p>
               </div>
               <div className="flex gap-3">
-                <span className="mt-0.5 text-neutral-600">○</span>
-                <p className="font-light text-neutral-500">
+                <span className="mt-0.5 text-neutral-500">○</span>
+                <p className="font-light text-neutral-400">
                   <span className="text-neutral-300">Not proven here —</span> reachability of{" "}
-                  <span className="font-mono">asn_parse_objid()</span> from a given network path, and
-                  full fidelity of this model to every line of net-snmp source. A proof is only as
-                  strong as the model — which is why we name it.
+                  <span className="font-mono">lyb_read_string()</span> from a given network path, and
+                  that this exact fix is the upstream libyang patch. It is a sufficient,
+                  proven-correct fix — not necessarily the one deployed.
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <p className="fade-up mt-4 text-center text-xs text-neutral-600">
-          Faithful to the Z3 obligations in the IronProof proof set (NS-001).
+        <p className="fade-up mt-4 text-center text-xs text-neutral-400">
+          Faithful to the Cobalt proof set (LYB-001) — reported to CESNET / libyang.{" "}
+          <a
+            href="https://www.cve.org/CVERecord?id=CVE-2026-44673"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="metal-text underline decoration-white/20 underline-offset-4 transition hover:decoration-white/60"
+          >
+            View the published CVE-2026-44673 →
+          </a>
         </p>
       </div>
     </section>

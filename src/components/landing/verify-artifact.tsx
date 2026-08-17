@@ -33,7 +33,7 @@ function Row({ label, value, good }: { label: string; value: string; good: boole
           <span style={{ color: "#ffb4b4" }}>✕</span>
         )}
       </span>
-      <span className="text-neutral-500">{label}</span>
+      <span className="text-neutral-300">{label}</span>
       <span className="ml-auto break-all text-neutral-300">{value}</span>
     </div>
   );
@@ -67,7 +67,7 @@ export function VerifyArtifact() {
       setResult(
         <div className="chip-metal p-5" style={{ borderColor: "rgba(255,150,150,0.3)" }}>
           <p className="mb-1 font-serif text-lg text-neutral-200">✕ INVALID ARTIFACT</p>
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-neutral-300">
             Not valid JSON — could not parse the artifact structure.
           </p>
         </div>,
@@ -102,7 +102,7 @@ export function VerifyArtifact() {
           value={hasMl ? String(data.mldsa).slice(0, 10) + "…" : "missing"}
           good={hasMl}
         />
-        <p className="border-t border-white/5 pt-2 text-[11px] text-neutral-600">
+        <p className="border-t border-white/5 pt-2 text-xs text-neutral-400">
           {allGood
             ? "Structure matches the published wire format. Run the offline verifier to confirm signatures cryptographically."
             : "Some required fields are missing — this artifact would be rejected."}
@@ -115,18 +115,18 @@ export function VerifyArtifact() {
     <section id="verify" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
       <div className="mx-auto max-w-4xl">
         <div className="fade-up mb-12 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-600">VERIFY A PROOF</p>
-          <h2 className="metal-shine font-serif text-4xl font-medium md:text-6xl">
+          <p className="track-mid mb-4 text-xs text-neutral-400">VERIFY A PROOF</p>
+          <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
             Check an Artifact Yourself
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-500">
+          <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
             Paste a proof artifact — IronProof re-checks its structure and signatures. No dashboard,
             no trust required.
           </p>
         </div>
 
         <div className="fade-up card-premium relative overflow-hidden p-8">
-          <label htmlFor="artifactInput" className="track-mid mb-3 block text-xs text-neutral-500">
+          <label htmlFor="artifactInput" className="track-mid mb-3 block text-xs text-neutral-300">
             PROOF ARTIFACT
           </label>
           <textarea
@@ -143,7 +143,7 @@ export function VerifyArtifact() {
             <button
               type="button"
               onClick={() => verify(input)}
-              className="track-mid bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+              className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
             >
               VERIFY ARTIFACT
             </button>
@@ -159,7 +159,7 @@ export function VerifyArtifact() {
             </button>
           </div>
           {result ? <div className="seal-pop mt-6">{result}</div> : null}
-          <p className="mt-5 text-[11px] text-neutral-600">
+          <p className="mt-5 text-xs text-neutral-400">
             This demo checks artifact structure in your browser. Full cryptographic verification
             (Ed25519 + ML-DSA-65) runs offline against the published wire format — no IronProof code
             required.

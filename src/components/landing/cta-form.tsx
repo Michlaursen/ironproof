@@ -2,42 +2,69 @@
 
 import { useState } from "react";
 
+type State = "idle" | "loading" | "done" | "error";
+
 /*
- * Request-access form. Client-side only for now (matches the reference landing:
- * clears the field and shows a thank-you). Wire to a real endpoint later.
+ * Request-access form — posts the lead to /api/request-access (server-side
+ * validated, destination configured via env). Shows loading / success / error.
  */
 export function CtaForm() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [state, setState] = useState<State>("idle");
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (state === "loading") return;
+    setState("loading");
+    try {
+      const res = await fetch("/api/request-access", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) {
+        setEmail("");
+        setState("done");
+      } else {
+        setState("error");
+      }
+    } catch {
+      setState("error");
+    }
+  }
 
   return (
     <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setEmail("");
-          setSubmitted(true);
-        }}
-        className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row"
-      >
+      <form onSubmit={onSubmit} className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row">
         <input
           type="email"
           required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (state !== "idle") setState("idle");
+          }}
           placeholder="work@company.com"
           aria-label="Work email"
-          className="flex-1 border border-white/10 bg-black/50 px-5 py-3.5 text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
+          className="flex-1 rounded-[5px] border border-white/10 bg-black/50 px-5 py-3.5 text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
         />
         <button
           type="submit"
-          className="track-mid bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+          disabled={state === "loading"}
+          className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white disabled:cursor-not-allowed disabled:opacity-60"
         >
-          REQUEST ACCESS
+          {state === "loading" ? "SENDING…" : "REQUEST ACCESS"}
         </button>
       </form>
-      {submitted ? (
-        <p className="mt-5 text-sm text-neutral-500">Thank you — we&apos;ll be in touch shortly.</p>
+      {state === "done" ? (
+        <p className="mt-5 text-sm text-neutral-300">
+          Thank you — request received. We&apos;ll be in touch shortly.
+        </p>
+      ) : null}
+      {state === "error" ? (
+        <p className="mt-5 text-sm" style={{ color: "#ffb4b4" }}>
+          Something went wrong — check the email and try again, or write to hello@ironproof.ai.
+        </p>
       ) : null}
     </>
   );
