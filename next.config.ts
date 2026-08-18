@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
     root: path.resolve(__dirname),
   },
   async rewrites() {
-    return [{ source: "/", destination: "/en" }];
+    return [
+      { source: "/", destination: "/en" },
+      { source: "/provable-ai", destination: "/en/provable-ai" },
+    ];
   },
 };
 
