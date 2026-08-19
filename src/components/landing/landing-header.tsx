@@ -4,21 +4,32 @@ import { useState } from "react";
 import { IronProofLogo } from "@/components/ironproof-logo";
 import { IconMenu, IconClose } from "@/components/icons";
 
-const LINKS: { href: string; label: string }[] = [
-  { href: "#platform", label: "PLATFORM" },
-  { href: "#speed", label: "SPEED" },
-  { href: "#compare", label: "VS TESTING" },
-  { href: "#try", label: "TRY IT" },
-  { href: "#verify", label: "VERIFY" },
-];
+type Variant = "home" | "sub";
 
-export function LandingHeader() {
+// In-page anchors resolve to the home route from a sub-page ("/#platform") and
+// stay in-page on home ("#platform"). "/provable-ai" is always an absolute route.
+function links(variant: Variant): { href: string; label: string }[] {
+  const p = variant === "sub" ? "/" : "";
+  return [
+    { href: `${p}#platform`, label: "PLATFORM" },
+    { href: `${p}#speed`, label: "SPEED" },
+    { href: `${p}#compare`, label: "VS TESTING" },
+    { href: "/provable-ai", label: "PROVABLE AI" },
+    { href: `${p}#verify`, label: "VERIFY" },
+  ];
+}
+
+export function LandingHeader({ variant = "home" }: { variant?: Variant }) {
   const [open, setOpen] = useState(false);
+  const LINKS = links(variant);
+  const logoHref = variant === "sub" ? "/" : "#top";
+  const contactHref = variant === "sub" ? "/#contact" : "#contact";
+  const isActive = (href: string) => variant === "sub" && href === "/provable-ai";
 
   return (
     <header className="edge-b sticky top-0 z-40 bg-[#050506]/60 backdrop-blur-md">
       <div className="relative z-20 flex items-center gap-8 px-6 py-6 md:px-14">
-        <a href="#top" className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
+        <a href={logoHref} className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
           <IronProofLogo width={26} height={35} />
           <span className="track-logo iron-text text-base font-semibold">IRONPROOF</span>
         </a>
@@ -29,13 +40,16 @@ export function LandingHeader() {
             <a
               key={l.href}
               href={l.href}
-              className="metal-text rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40"
+              aria-current={isActive(l.href) ? "page" : undefined}
+              className={`rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
+                isActive(l.href) ? "metal-shine" : "metal-text"
+              }`}
             >
               {l.label}
             </a>
           ))}
           <a
-            href="#contact"
+            href={contactHref}
             className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
           >
             REQUEST ACCESS
@@ -62,14 +76,17 @@ export function LandingHeader() {
               <a
                 key={l.href}
                 href={l.href}
+                aria-current={isActive(l.href) ? "page" : undefined}
                 onClick={() => setOpen(false)}
-                className="track-mid metal-text border-b border-white/5 py-4 text-sm"
+                className={`track-mid border-b border-white/5 py-4 text-sm ${
+                  isActive(l.href) ? "metal-shine" : "metal-text"
+                }`}
               >
                 {l.label}
               </a>
             ))}
             <a
-              href="#contact"
+              href={contactHref}
               onClick={() => setOpen(false)}
               className="track-mid mt-5 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-3.5 text-center font-semibold text-ink shadow-lg shadow-white/10"
             >
