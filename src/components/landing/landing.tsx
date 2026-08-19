@@ -136,7 +136,7 @@ export function Landing() {
                 Built for critical systems where failure is not an option.
               </p>
               <div className="flex flex-wrap gap-2">
-                {["AEROSPACE", "FINANCE", "DEFENSE", "SMART CONTRACTS"].map((t) => (
+                {["AEROSPACE", "DEFENSE", "RAIL", "FINANCE"].map((t) => (
                   <span key={t} className="chip-metal track-mid px-3 py-1 text-xs text-neutral-300">
                     {t}
                   </span>
