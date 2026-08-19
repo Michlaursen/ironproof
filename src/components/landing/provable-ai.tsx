@@ -9,9 +9,11 @@ import { IconEyeOff, IconVerify, IconSeal, IconRule, IconGlobe } from "@/compone
  * "What is Provable AI?" — the category page reached from the nav.
  * English copy inline (phase 1, same as the landing); the /fr route resolves
  * to the same component until the i18n content is reconnected with Miguel.
- * Every claim is mapped to the real state: capabilities marked BUILT exist in
- * the engine today; the public offline verifier is marked COMING. No traction
- * claims, no latency numbers, never "we prove all vulnerabilities".
+ * Every claim is mapped to the real state: capabilities marked BUILT exist
+ * today — including the public offline verifier (PR #10, merged) and the
+ * publicly anchored root of trust (attested across two independent names,
+ * 2026-08-18). No traction claims, no latency numbers, never "we prove all
+ * vulnerabilities".
  */
 
 function Pill({ kind }: { kind: "built" | "coming" | "roadmap" }) {
@@ -406,8 +408,13 @@ export function ProvableAI() {
               },
               {
                 t: "Public offline verifier + canonical spec",
-                s: "the “verify it yourself” endpoint",
-                p: "coming" as const,
+                s: "the “verify it yourself” endpoint — a sealed dossier checks byte-for-byte with no network and no Ironproof code",
+                p: "built" as const,
+              },
+              {
+                t: "Publicly anchored root of trust",
+                s: "the signing root is published at two independent names you can look up yourself — substituting it means changing both",
+                p: "built" as const,
               },
             ].map((m) => (
               <div
