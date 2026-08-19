@@ -326,8 +326,13 @@ export function ProvableAI() {
                 pill: null,
               },
               {
-                t: "Composition has a frontier",
-                b: "The scalar axes of structuring — amount, time, number of accounts, combined action types — are proven closed. Money that hops through intermediary entities (graph layering) and non-scalar patterns like velocity are harder, and honestly named as open.",
+                t: "Composition has a frontier — and it moved",
+                b: "Six axes of structuring are proven closed, each an inductive invariant that holds over every sequence rather than a large sample: amount, time, number of accounts, combined action types, money routed through intermediary entities — at arbitrary hop depth — and velocity, proven with all four amount controls in force, because the burst is the case they all approve.",
+                pill: null,
+              },
+              {
+                t: "A proof cannot source what you cannot see",
+                b: "The layering proof closes the route on one condition: that value can be attributed to its origin. Whether that attribution is obtainable across institutions is a question for data and for law, not for a solver — a different question, with a different owner. Concurrent origins sharing an intermediary, a blended pool attributed pro rata, and rate measured per entity across accounts stay open. Behavioural anomaly — “unusual for this customer” — is not a threshold property at all, and nothing here addresses it.",
                 pill: "roadmap" as const,
               },
             ].map((l) => (
