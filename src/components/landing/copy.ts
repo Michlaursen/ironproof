@@ -78,7 +78,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
         },
       ],
       gradeBody: "Built for critical systems where failure is not an option.",
-      sectors: ["AEROSPACE", "FINANCE", "DEFENSE", "SMART CONTRACTS"],
+      sectors: ["AEROSPACE", "DEFENSE", "RAIL", "FINANCE"],
       sectorLast: "HEALTHCARE",
     },
     cta: {
@@ -125,7 +125,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
         },
       ],
       gradeBody: "Conçu pour les systèmes critiques où l'échec n'est pas une option.",
-      sectors: ["AÉROSPATIALE", "FINANCE", "DÉFENSE", "CONTRATS INTELLIGENTS"],
+      sectors: ["AÉROSPATIALE", "DÉFENSE", "FERROVIAIRE", "FINANCE"],
       sectorLast: "SANTÉ",
     },
     cta: {
