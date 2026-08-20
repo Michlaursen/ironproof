@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond, JetBrains_Mono } from "next/font/google";
+import { Inter, EB_Garamond, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { notFound } from "next/navigation";
 import { getContent, isLocale, locales } from "@/content";
@@ -12,8 +12,13 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+// EB Garamond and not Cormorant: Cormorant places its diacritics far too high
+// and does not centre the circumflex, which shows on every accented French
+// title (/fr carries 78 accented strings). Measured 2026-08-19 across the whole
+// Cormorant family -- Garamond, plain, and Infant all share the defect, so this
+// is not a weight or a subset issue. Same garalde register, correct accents.
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -114,7 +119,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   return (
     <html
       lang={locale}
-      className={`${inter.variable} ${cormorant.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${ebGaramond.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col overflow-x-hidden bg-background text-foreground">
         <script
