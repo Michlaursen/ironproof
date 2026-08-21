@@ -53,9 +53,9 @@ export function Landing() {
               </p>
               <div className="hairline mb-6 h-px w-full max-w-md" />
               <p className="mb-10 max-w-lg text-base font-light text-neutral-300">
-                Automated formal verification for critical software — starting where a wrong action
-                moves money: AI agents issuing refunds, payments and disbursements in Canadian
-                financial services.
+                Automated formal verification for critical software — for actions nobody can
+                undo. We start where a wrong one moves money: AI agents issuing refunds, payments
+                and disbursements in Canadian financial services.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
