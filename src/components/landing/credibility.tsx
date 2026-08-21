@@ -51,8 +51,15 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
     href: "https://github.com/DCMTK/dcmtk/commit/63b0bae751f62ed1b384141fa0fd032c98af57aa",
   },
   {
+    org: "pupnp · CVE-2026-41682",
+    body:
+      "The pupnp advisory credits the COBALT static analyzer and Dominik Blain for the finding. CWE-195, signed-to-unsigned conversion in parse_uri().",
+    cta: "View advisory",
+    href: "https://github.com/pupnp/pupnp/security/advisories/GHSA-q522-6w45-4j58",
+  },
+  {
     org: "libmodbus",
-    body: "The fix commit reads: “Reported by Dominik Blain — Qreativelab Formal Verification.”",
+    body: "The fix commit credits Dominik Blain and Cobalt formal verification as the reporter.",
     cta: "View commit",
     href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
   },

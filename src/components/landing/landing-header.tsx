@@ -11,11 +11,11 @@ type Variant = "home" | "sub";
 function links(variant: Variant): { href: string; label: string }[] {
   const p = variant === "sub" ? "/" : "";
   return [
-    { href: `${p}#platform`, label: "PLATFORM" },
-    { href: `${p}#speed`, label: "SPEED" },
-    { href: `${p}#compare`, label: "VS TESTING" },
+    { href: `${p}#how`, label: "HOW IT WORKS" },
+    { href: `${p}#start`, label: "AI AGENTS" },
+    { href: "/proof", label: "PROOF" },
+    { href: `${p}#verify`, label: "EVIDENCE" },
     { href: "/provable-ai", label: "PROVABLE AI" },
-    { href: `${p}#verify`, label: "VERIFY" },
   ];
 }
 
