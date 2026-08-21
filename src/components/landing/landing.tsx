@@ -42,9 +42,9 @@ export function Landing() {
                 PROVABLE SECURITY INFRASTRUCTURE
               </p>
               <h1 className="metal-shine mb-6 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl sm:leading-[0.95] md:text-7xl">
-                Prove what&apos;s allowed.
+                If it isn&apos;t authorized, it never executes.
                 <br />
-                Block everything else.
+                Every decision comes with verifiable proof.
               </h1>
               <p className="mb-6 max-w-xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
                 IronProof verifies every critical action{" "}
