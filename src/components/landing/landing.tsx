@@ -50,15 +50,16 @@ export function Landing() {
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
-                IronProof verifies every critical action{" "}
-                <span className="metal-text">mathematically</span> — and blocks anything unproven
-                before it ever runs.
+                IronProof{" "}
+                <span className="metal-text">mathematically</span> verifies critical actions
+                against formally defined policy — and blocks unauthorized actions before they
+                execute.
               </p>
               <div className="hairline mb-6 h-px w-full max-w-md" />
               <p className="mb-10 max-w-lg text-base font-light text-neutral-300">
-                Automated formal verification for critical software — for actions nobody can
-                undo. We start where a wrong one moves money: AI agents issuing refunds, payments
-                and disbursements in Canadian financial services.
+                Automated formal verification for high-consequence software. We start where a
+                wrong action can move money: AI agents issuing refunds, payments, and
+                disbursements in financial services.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
