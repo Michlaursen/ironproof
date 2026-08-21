@@ -43,14 +43,14 @@ export function Landing() {
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
                   If it isn&apos;t authorized, it never executes.
                 </span>
-                <span className="mt-3 block text-xl font-light text-neutral-300 sm:text-2xl md:text-3xl">
+                <span className="mt-6 block text-xl font-light text-neutral-300 sm:text-2xl md:text-3xl">
                   Deterministic authorization. Independently verifiable proof.
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
                 IronProof verifies high-impact agent actions against{" "}
                 <span className="metal-text">formally defined policy</span> before execution — and
-                produces independently verifiable proof of every decision.
+                produces independently verifiable evidence of every decision.
               </p>
               <div className="hairline mb-6 h-px w-full max-w-md" />
               <p className="mb-10 max-w-lg text-base font-light text-neutral-300">
@@ -115,7 +115,7 @@ export function Landing() {
           <div className="grid gap-6 md:grid-cols-3">
             <div className="card-premium fade-up p-10">
               <div className="metal-text mb-4 font-serif text-4xl">01</div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Policy Into Math</h3>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Policy Into Mathematics</h3>
               <p className="font-light leading-relaxed text-neutral-300">
                 Your written authorization policy is compiled into mathematics by a deterministic
                 compiler — the same one the runtime uses.
@@ -255,8 +255,8 @@ export function Landing() {
                 software delivery loop.
               </h2>
               <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-                Classic formal verification meant PhDs writing proofs by hand for months. IronProof
-                runs the same rigor automatically — at machine speed, on every change.
+                IronProof automates proof obligations and re-verification so formally defined
+                properties can be checked continuously as systems change.
               </p>
             </div>
             <div className="fade-up grid items-stretch gap-6 md:grid-cols-2">
@@ -357,16 +357,8 @@ export function Landing() {
                     thought of
                   </li>
                   <li className="flex gap-3 text-neutral-300">
-                    <span className="mt-0.5 text-neutral-400">○</span> Edge cases slip through
-                    unnoticed
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
                     <span className="mt-0.5 text-neutral-400">○</span> &quot;Passed&quot; means{" "}
                     <span className="italic">probably</span> fine
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="mt-0.5 text-neutral-400">○</span> Coverage stops where
-                    imagination stops
                   </li>
                 </ul>
                 <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
@@ -497,7 +489,7 @@ export function Landing() {
           </div>
         </section>
 
-        {/* THE MODEL DOES NOT CONTROL AUTHORIZATION */}
+        {/* THE AGENT DOES NOT CONTROL AUTHORIZATION */}
         <section className="relative z-10 edge-t px-6 py-32 md:px-14">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
@@ -506,7 +498,7 @@ export function Landing() {
                 <path d="M9 12 l2 2 l4 -4" />
               </svg>
               <span className="track-mid metal-text text-xs">
-                THE MODEL DOES NOT CONTROL AUTHORIZATION
+                THE AGENT DOES NOT CONTROL AUTHORIZATION
               </span>
             </div>
             <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-300">
@@ -580,9 +572,9 @@ export function Landing() {
               Published research &middot; Assigned CVEs &middot; Public upstream acknowledgements
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              {["CVE-2026-41682", "libyang", "libupnp", "Zephyr RTOS"].map((c) => (
-                <span key={c} className="chip-metal track-mid px-3 py-1 text-xs text-neutral-300">
-                  {c}
+              {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
+                <span key={o} className="chip-metal track-mid px-3 py-1 text-xs text-neutral-300">
+                  {o}
                 </span>
               ))}
             </div>
@@ -623,7 +615,7 @@ export function Landing() {
             <span className="track-logo iron-text font-semibold">IRONPROOF</span>
           </div>
           <span className="font-light">
-            Automated formal verification for critical software and infrastructure.
+            Deterministic authorization. Independently verifiable proof.
           </span>
         </div>
       </footer>
