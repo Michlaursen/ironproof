@@ -13,7 +13,7 @@ function links(variant: Variant): { href: string; label: string }[] {
   return [
     { href: `${p}#how`, label: "HOW IT WORKS" },
     { href: `${p}#start`, label: "AI AGENTS" },
-    { href: `${p}#platform`, label: "PROOF" },
+    { href: "/proof", label: "PROOF" },
     { href: `${p}#verify`, label: "EVIDENCE" },
     { href: "/provable-ai", label: "PROVABLE AI" },
   ];
