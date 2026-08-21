@@ -3,13 +3,13 @@ import type { SiteContent } from "./types";
 export const fr: SiteContent = {
   meta: {
     title:
-      "IronProof | Autorisation vérifiable pour les workflows financiers propulsés par l’IA",
+      "IronProof | Autorisation vérifiable pour les actions IA irréversibles",
     description:
-      "IronProof vérifie les limites transactionnelles avant qu’un agent IA exécute un remboursement, un paiement, un décaissement ou un changement de bénéficiaire, puis produit une preuve vérifiable indépendamment par les équipes de risque, de conformité et d’audit.",
+      "IronProof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "IronProof vérifie les limites transactionnelles avant qu’un agent IA exécute un remboursement, un paiement, un décaissement ou un changement de bénéficiaire, puis produit une preuve vérifiable indépendamment par les équipes de risque, de conformité et d’audit.",
+      "IronProof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
   },
   header: {
     nav: [
@@ -24,15 +24,15 @@ export const fr: SiteContent = {
     langSwitchLabel: "EN",
   },
   hero: {
-    eyebrow: "Autorisation vérifiable pour les flux financiers pilotés par l’IA",
+    eyebrow: "Autorisation vérifiable pour les actions IA irréversibles",
     headline:
-      "Prouvez la frontière transactionnelle avant qu’un agent IA ne déplace de l’argent.",
+      "Prouvez ce qu’un agent IA ne peut pas faire — avant qu’il agisse.",
     body: [
-      "IronProof vérifie que les remboursements, paiements, décaissements et changements de bénéficiaire restent à l’intérieur de la politique rédigée par le client, avant exécution.",
+      "Certaines actions ne se défont pas. IronProof vérifie qu’un agent reste à l’intérieur de la politique que vous avez écrite avant qu’il s’exécute — remboursements, paiements et changements de bénéficiaire aujourd’hui, et le même contrôle pour un dossier supprimé, une donnée qui sort ou du code qui part en production.",
       "Pour chaque décision, il consigne la politique appliquée, l’autorité de l’agent sous cette politique, l’état de la transaction, et une justification vérifiable expliquant pourquoi l’action a été permise ou refusée.",
       "La preuve qui en résulte se vérifie de façon indépendante par les équipes de risque, de conformité et d’audit — sans dépendre d’un tableau de bord IronProof.",
     ],
-    ctaPrimary: "Évaluer un flux",
+    ctaPrimary: "Évaluer le flux qui vous inquiète",
     ctaSecondary: "Inspecter un certificat exemple",
     trustLine: [
       "Politique contrôlée par le client",
@@ -212,9 +212,9 @@ export const fr: SiteContent = {
   products: {
     eyebrow: "Produit",
     title:
-      "La couche d’autorisation pour les agents IA qui déplacent de l’argent",
+      "La couche d’autorisation pour les agents IA qui agissent",
     description:
-      "IronProof Actions évalue chaque action financière à haut risque avant son exécution, au regard de la politique, de l’autorité et de l’état transactionnel en vigueur.",
+      "IronProof Actions évalue chaque action irréversible avant son exécution, au regard de la politique, de l’autorité et de l’état en vigueur. L’argent est notre point de départ ; le contrôle, lui, n’en dépend pas.",
     capabilities: [
       {
         title: "Contexte au moment de la décision",
@@ -234,7 +234,7 @@ export const fr: SiteContent = {
       },
     ],
     finalLine:
-      "Commencez par un seul flux : remboursements, décaissements, paiements ou changements de bénéficiaire.",
+      "Commencez par un seul flux — celui sur lequel personne ne veut se tromper.",
   },
   artifact: {
     eyebrow: "L’artefact",
