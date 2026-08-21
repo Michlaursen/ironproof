@@ -93,7 +93,9 @@ export function Landing() {
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            <span className="track-mid text-xs text-neutral-500">SECURITY RESEARCH PUBLICLY CREDITED BY</span>
+            <span className="track-mid text-xs text-neutral-500">
+              SECURITY RESEARCH BY DOMINIK BLAIN &amp; COBALT &mdash; CREDITED BY
+            </span>
             {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
               <span key={o} className="metal-text text-sm font-medium">
                 {o}
@@ -569,7 +571,9 @@ export function Landing() {
               Same proof engine. Proven on real vulnerabilities.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              Published research &middot; Assigned CVEs &middot; Public upstream acknowledgements
+              Findings by <span className="metal-text">Dominik Blain</span> and Cobalt, credited
+              on the projects&apos; own repositories &mdash; published research, assigned CVEs and
+              public upstream acknowledgements.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
               <a
