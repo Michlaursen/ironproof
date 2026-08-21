@@ -116,7 +116,7 @@ export const en: SiteContent = {
       },
       {
         org: "libmodbus",
-        body: "The fix commit names Qreativelab formal verification as the reporter.",
+        body: "The fix commit credits Dominik Blain and Cobalt formal verification as the reporter.",
         cta: "View commit",
         href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
       },

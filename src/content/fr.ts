@@ -125,7 +125,7 @@ export const fr: SiteContent = {
       },
       {
         org: "libmodbus",
-        body: "Le commit du correctif nomme la vérification formelle Qreativelab comme rapporteur.",
+        body: "Le commit du correctif crédite Dominik Blain et la vérification formelle Cobalt comme rapporteur.",
         cta: "Voir le commit",
         href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
       },
