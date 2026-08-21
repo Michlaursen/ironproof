@@ -149,10 +149,6 @@ export function Landing() {
               <br />
               authorization becomes infrastructure.
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              We start with back-office AI agents that issue refunds, payments, disbursements or
-              beneficiary changes under defined limits and approval rules.
-            </p>
             <div className="fade-up mx-auto mt-10 grid max-w-4xl gap-4 text-left sm:grid-cols-3">
               {[
                 { a: "Refund", v: "ALLOW", w: "$640 — inside the daily cap, second approver on record" },
