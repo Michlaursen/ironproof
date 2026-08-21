@@ -149,29 +149,50 @@ export function Landing() {
               <br />
               authorization becomes infrastructure.
             </h2>
-            <div className="fade-up mx-auto mt-10 grid max-w-4xl gap-4 text-left sm:grid-cols-3">
+            <p className="track-mid mx-auto mt-6 text-xs text-neutral-400">
+              WHAT THE AGENT ASKED FOR &mdash; AND WHAT HAPPENED
+            </p>
+            <div className="fade-up mx-auto mt-8 grid max-w-5xl gap-4 text-left sm:grid-cols-3">
               {[
-                { a: "Refund", v: "ALLOW", w: "$640 — inside the daily cap, second approver on record" },
-                { a: "Payment", v: "BLOCK", w: "payee added four hours ago — outside the authorized set" },
-                { a: "Beneficiary change", v: "BLOCK", w: "no second approver on record" },
+                {
+                  ask: "Refund $640 to a payee already on file",
+                  v: "ALLOW",
+                  why: "Under the $1,000 daily cap. Two approvers on record.",
+                },
+                {
+                  ask: "Pay $12,000 to a payee added four hours ago",
+                  v: "BLOCK",
+                  why: "That payee is not in the authorized set.",
+                },
+                {
+                  ask: "Change the beneficiary on a live account",
+                  v: "BLOCK",
+                  why: "Policy requires two approvers. One signed.",
+                },
               ].map((r) => (
-                <div key={r.a} className="card-premium p-6">
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <span className="metal-text font-serif text-lg">{r.a}</span>
+                <div key={r.ask} className="card-premium flex flex-col p-6">
+                  <p className="track-mid mb-3 text-[10px] text-neutral-500">THE AGENT ASKS</p>
+                  <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{r.ask}</p>
+                  <div className="mt-auto border-t border-white/5 pt-4">
                     <span
                       className={
                         r.v === "ALLOW"
-                          ? "track-mid rounded-[4px] border border-emerald-400/30 px-2 py-1 text-[10px] text-emerald-300"
-                          : "track-mid rounded-[4px] border border-red-400/30 px-2 py-1 text-[10px] text-red-300"
+                          ? "track-mid rounded-[4px] border border-emerald-400/30 px-2.5 py-1 text-[10px] text-emerald-300"
+                          : "track-mid rounded-[4px] border border-red-400/30 px-2.5 py-1 text-[10px] text-red-300"
                       }
                     >
                       {r.v}
                     </span>
+                    <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">
+                      {r.why}
+                    </p>
                   </div>
-                  <p className="text-sm font-light leading-relaxed text-neutral-400">{r.w}</p>
                 </div>
               ))}
             </div>
+            <p className="mx-auto mt-6 text-xs text-neutral-500">
+              Illustrative decisions under a sample policy.
+            </p>
           </div>
           <div className="mb-8 grid gap-6 md:grid-cols-2">
             <div className="card-premium fade-up p-10">
