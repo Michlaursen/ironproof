@@ -572,6 +572,14 @@ export function Landing() {
               Published research &middot; Assigned CVEs &middot; Public upstream acknowledgements
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <a
+                href="https://github.com/pupnp/pupnp/security/advisories/GHSA-q522-6w45-4j58"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chip-metal track-mid px-3 py-1 text-xs text-neutral-200 transition hover:text-white"
+              >
+                CVE-2026-41682
+              </a>
               {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
                 <span key={o} className="chip-metal track-mid px-3 py-1 text-xs text-neutral-300">
                   {o}

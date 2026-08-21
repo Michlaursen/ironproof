@@ -51,6 +51,13 @@ const RECORD: { org: string; body: string; cta: string; href: string }[] = [
     href: "https://github.com/DCMTK/dcmtk/commit/63b0bae751f62ed1b384141fa0fd032c98af57aa",
   },
   {
+    org: "pupnp · CVE-2026-41682",
+    body:
+      "The pupnp advisory reads: “found by COBALT static analyzer (Dominik Blain, QreativeLab) on 2026-04-17.” CWE-195, signed-to-unsigned conversion in parse_uri().",
+    cta: "View advisory",
+    href: "https://github.com/pupnp/pupnp/security/advisories/GHSA-q522-6w45-4j58",
+  },
+  {
     org: "libmodbus",
     body: "The fix commit reads: “Reported by Dominik Blain — Qreativelab Formal Verification.”",
     cta: "View commit",
