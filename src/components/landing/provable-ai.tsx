@@ -327,7 +327,7 @@ export function ProvableAI() {
               },
               {
                 t: "Composition has a frontier — and it moved",
-                b: "Six axes of structuring are proven closed, each an inductive invariant that holds over every sequence rather than a large sample: amount, time, number of accounts, combined action types, money routed through intermediary entities — at arbitrary hop depth — and velocity, proven with all four amount controls in force, because the burst is the case they all approve.",
+                b: "Six axes of structuring are proven closed over every sequence rather than a large sample: amount, time — at arbitrary window width — number of accounts — at unbounded fan-out width — combined action types, money routed through intermediary entities at arbitrary hop depth, and velocity, proven with all four amount controls in force, because the burst is the case they all approve. Five rest on an inductive invariant the solver had to discover; the fixed-window result closes by direct contradiction instead. We say which is which rather than let one word cover both.",
                 pill: null,
               },
               {
