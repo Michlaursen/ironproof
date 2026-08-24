@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1128px; height:191px; overflow:hidden; }
+
+.banner { position:relative; width:1128px; height:191px;
+  background:radial-gradient(ellipse 130% 150% at 50% -18%, #0a0a0c 0%, #050506 60%);
+  font-family:'Inter', -apple-system, sans-serif; -webkit-font-smoothing:antialiased; overflow:hidden; }
+.depth { position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(120% 78% at 50% -12%, rgba(122,140,205,0.12), transparent 58%),
+    radial-gradient(100% 100% at 50% 118%, rgba(0,0,0,0.55), transparent 68%); }
+#dots { position:absolute; inset:0; pointer-events:none; }
+.topline { position:absolute; top:0; left:0; right:0; height:1px; z-index:5;
+  background:linear-gradient(90deg, transparent, rgba(232,235,245,0.24) 50%, transparent); }
+
+.mark { position:absolute; left:42%; top:50%; transform:translate(-50%,-50%); z-index:3;
+  height:124px; filter:drop-shadow(0 0 18px rgba(200,208,255,0.14)); }
+.mark svg { height:100%; width:auto; display:block; }
+
+.block { position:absolute; left:52%; top:50%; transform:translateY(-50%); z-index:4; width:508px; }
+.eyebrow { font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:500;
+  letter-spacing:0.40em; text-transform:uppercase; margin-bottom:7px;
+  background:linear-gradient(180deg,#ffffff 0%,#dfe2ea 30%,#8b8e99 52%,#eef0f6 66%,#6f727c 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,0.5)); }
+.headline { font-family:'Cormorant Garamond', Georgia, serif; font-weight:500;
+  font-size:35px; line-height:1.0; letter-spacing:0.005em; white-space:nowrap;
+  background:linear-gradient(176deg,#ffffff 0%,#eaecf2 26%,#b9bcc6 50%,#f2f4f9 60%,#9a9da7 82%,#d7dae2 100%);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent;
+  filter:drop-shadow(0 2px 8px rgba(180,190,220,0.10)); }
+.rule { height:1px; width:100%; margin:12px 0 9px;
+  background:linear-gradient(90deg, rgba(232,235,245,0.32), rgba(232,235,245,0.04)); }
+.subline { font-family:'Inter', sans-serif; font-size:13.5px; font-weight:400;
+  letter-spacing:0.01em; color:#9aa0ad; white-space:nowrap; }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="depth"></div>
+  <canvas id="dots" width="2256" height="382"></canvas>
+  <div class="topline"></div>
+
+  <div class="mark">
+    <svg viewBox="180 120 160 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cA" x1="0" y1="0" x2="1" y2="0.6">
+          <stop offset="0" stop-color="#ffffff"/><stop offset="0.25" stop-color="#e8e8ee"/><stop offset="0.5" stop-color="#9c9ca4"/><stop offset="0.72" stop-color="#e2e2e8"/><stop offset="1" stop-color="#6e6e76"/>
+        </linearGradient>
+        <linearGradient id="cDark" x1="0" y1="0" x2="1" y2="0.7">
+          <stop offset="0" stop-color="#8a8a92"/><stop offset="0.5" stop-color="#3c3c40"/><stop offset="1" stop-color="#181819"/>
+        </linearGradient>
+        <linearGradient id="cHi" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#ffffff"/><stop offset="0.5" stop-color="#f2f2f6"/><stop offset="1" stop-color="#b8b8c0"/>
+        </linearGradient>
+        <linearGradient id="pC" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#d4d4dc"/><stop offset="0.7" stop-color="#8e8e96"/><stop offset="1" stop-color="#f0f0f4"/>
+        </linearGradient>
+        <linearGradient id="pCDark" x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#a0a0a8"/><stop offset="0.5" stop-color="#48484c"/><stop offset="1" stop-color="#202022"/>
+        </linearGradient>
+        <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#c8d0ff" flood-opacity="0.3"/>
+        </filter>
+      </defs>
+      <g transform="translate(143,106) scale(0.75)" filter="url(#glow)">
+        <path d="M138 40 L150 62 L150 340 L128 372 L118 300 L120 120 Z" fill="url(#cA)"/>
+        <path d="M120 120 L118 300 L128 372 L138 340 L138 40 Z" fill="url(#cDark)" opacity="0.92"/>
+        <path d="M140 60 L145 60 L143 330 L140 330 Z" fill="#ffffff" opacity="0.65"/>
+        <path d="M120 130 L74 150 L120 185 Z" fill="url(#cA)"/>
+        <path d="M74 150 L120 185 L120 130 Z" fill="url(#cDark)"/>
+        <path d="M151 55 L157 55 L157 355 L154 372 L151 355 Z" fill="#060608"/>
+        <path d="M158 40 L170 62 L170 120 L178 300 L162 366 L158 340 Z" fill="url(#cHi)"/>
+        <path d="M158 40 L158 340 L162 366 L178 300 L170 120 L170 62 Z" fill="url(#cA)" opacity="0.6"/>
+        <path d="M160 62 L166 62 L172 300 L165 300 Z" fill="#ffffff" opacity="0.55"/>
+        <path fill-rule="evenodd" fill="url(#pC)" d="M170 118 L240 152 L240 232 L184 272 L170 254 Z M186 158 L218 173 L218 214 L192 232 L180 224 L180 166 Z"/>
+        <path fill="url(#pCDark)" d="M240 152 L240 232 L226 238 L228 178 Z" opacity="0.85"/>
+        <path fill="url(#cHi)" d="M170 118 L240 152 L230 158 L176 136 L170 130 Z" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="block">
+    <div class="eyebrow">IRONPROOF</div>
+    <div class="headline">Provable Security Infrastructure</div>
+    <div class="rule"></div>
+    <div class="subline">Automated formal verification for critical software and infrastructure.</div>
+  </div>
+</div>
+
+<script>
+const c = document.getElementById('dots'), x = c.getContext('2d');
+const W = c.width, H = c.height;
+function rnd(a,b){ return a + (b-a)*Math.random(); }
+for (let line=0; line<40; line++){
+  const baseY = H*0.60 + line*H*0.014;
+  const amp   = H*(0.10 + 0.16*Math.random());
+  const phase = Math.random()*Math.PI*2;
+  const span  = W*0.52;
+  const step  = 5 + Math.random()*4;
+  for (let px=0; px<span; px+=step){
+    const t = px/span;
+    const y = baseY - amp*Math.sin(t*2.1 + phase) - t*H*0.30;
+    const fade = Math.pow(1 - t, 1.5);
+    if (Math.random() > fade*0.95) continue;
+    const r = rnd(0.6, 2.2);
+    x.beginPath();
+    x.arc(px + rnd(-2,2), y + rnd(-3,3), r, 0, 6.283);
+    x.fillStyle = 'rgba(226,230,242,' + (0.10 + 0.55*fade*Math.random()).toFixed(3) + ')';
+    x.fill();
+  }
+}
+</script>
+</body>
+</html>

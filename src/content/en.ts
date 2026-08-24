@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "IronProof | Verifiable Authorization for AI Financial Workflows",
+    title: "IronProof | Verifiable Authorization for Irreversible AI Actions",
     description:
-      "IronProof verifies transaction boundaries before AI agents execute refunds, payments, disbursements or beneficiary changes, producing evidence that risk, compliance and audit teams can verify independently.",
+      "IronProof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "IronProof verifies transaction boundaries before AI agents execute refunds, payments, disbursements or beneficiary changes, producing evidence that risk, compliance and audit teams can verify independently.",
+      "IronProof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
   },
   header: {
     nav: [
@@ -23,14 +23,14 @@ export const en: SiteContent = {
     langSwitchLabel: "FR",
   },
   hero: {
-    eyebrow: "Verifiable authorization for AI-driven financial workflows",
-    headline: "Prove the transaction boundary before an AI agent moves money.",
+    eyebrow: "Verifiable authorization for irreversible AI actions",
+    headline: "Prove what an AI agent cannot do — before it acts.",
     body: [
-      "IronProof verifies that refunds, payments, disbursements and beneficiary changes remain inside your customer-authored policy before execution.",
+      "Some actions cannot be undone. IronProof verifies that an agent stays inside the policy you wrote before it executes — refunds, payments and beneficiary changes today, and the same check for records deleted, data leaving or code shipped to production.",
       "For every decision, it records the policy applied, the agent’s authority under that policy, the transaction state, and a verifiable justification for why the action was allowed or denied.",
       "The resulting evidence can be verified independently by risk, compliance and audit teams — without relying on an IronProof dashboard.",
     ],
-    ctaPrimary: "Evaluate a money-moving workflow",
+    ctaPrimary: "Evaluate the workflow that worries you",
     ctaSecondary: "Inspect a sample certificate",
     trustLine: [
       "Customer-controlled policy",
@@ -116,7 +116,7 @@ export const en: SiteContent = {
       },
       {
         org: "libmodbus",
-        body: "The fix commit names Qreativelab formal verification as the reporter.",
+        body: "The fix commit credits Dominik Blain and Cobalt formal verification as the reporter.",
         cta: "View commit",
         href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
       },
@@ -201,9 +201,9 @@ export const en: SiteContent = {
   },
   products: {
     eyebrow: "Product",
-    title: "The authorization layer for money-moving AI agents",
+    title: "The authorization layer for AI agents that act",
     description:
-      "IronProof Actions evaluates each high-risk financial action before execution against the policy, authority and transaction state in force.",
+      "IronProof Actions evaluates each irreversible action before execution against the policy, authority and state in force. Money is where we start; the check does not depend on it.",
     capabilities: [
       {
         title: "Decision-time context",
@@ -223,7 +223,7 @@ export const en: SiteContent = {
       },
     ],
     finalLine:
-      "Start with one workflow: refunds, disbursements, payments or beneficiary changes.",
+      "Start with one workflow — the one nobody wants to be wrong about.",
   },
   artifact: {
     eyebrow: "The artifact",

@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/", destination: "/en" },
       { source: "/provable-ai", destination: "/en/provable-ai" },
+      { source: "/proof", destination: "/en/proof" },
     ];
   },
 };
