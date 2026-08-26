@@ -37,14 +37,11 @@ export function Landing() {
             </div>
             <div className="fade-up order-1 md:order-2">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
-                PROVABLE AUTHORIZATION FOR AI AGENTS
+                PROVABLE SECURITY INFRASTRUCTURE FOR AI AGENTS AND CRITICAL SYSTEMS
               </p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
                   If it isn&apos;t authorized, it never executes.
-                </span>
-                <span className="mt-6 block text-xl font-light text-neutral-300 sm:text-2xl md:text-3xl">
-                  Deterministic authorization. Independently verifiable proof.
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
@@ -90,7 +87,7 @@ export function Landing() {
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <span className="track-mid text-xs text-neutral-500">
-              SECURITY RESEARCH BY DOMINIK BLAIN &amp; COBALT &mdash; CREDITED BY
+              SECURITY RESEARCH BY IRONPROOF &mdash; CREDITED BY
             </span>
             {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
               <span key={o} className="metal-text text-sm font-medium">
