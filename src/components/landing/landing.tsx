@@ -23,19 +23,19 @@ export function Landing() {
         {/* HERO */}
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
-          <div className="mx-auto grid w-full max-w-7xl items-center gap-12 md:grid-cols-2">
-            <div className="order-2 flex flex-col items-center md:order-1">
+          <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-12 md:grid-cols-2">
+            <div className="flex flex-col items-center">
               <IronProofLogo
                 width={210}
                 height={280}
-                className="drop-shadow-2xl"
+                className="h-[200px] w-[150px] drop-shadow-2xl md:h-[280px] md:w-[210px]"
                 title="IronProof monogram"
               />
-              <span className="track-logo iron-text mt-6 text-2xl font-semibold md:text-4xl">
+              <span className="track-logo iron-text mt-4 text-2xl font-semibold md:mt-6 md:text-4xl">
                 IRONPROOF
               </span>
             </div>
-            <div className="fade-up order-1 md:order-2">
+            <div className="fade-up">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
                 PROVABLE SECURITY INFRASTRUCTURE FOR AI AGENTS AND CRITICAL SYSTEMS
               </p>
@@ -44,7 +44,7 @@ export function Landing() {
                   If it isn&apos;t authorized, it never executes.
                 </span>
               </h1>
-              <p className="mb-6 max-w-xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
+              <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
                 IronProof verifies high-impact agent actions against{" "}
                 <span className="metal-text">formally defined policy</span> before execution — and
                 produces independently verifiable evidence of every decision.
