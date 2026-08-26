@@ -52,11 +52,7 @@ export function Landing() {
                 <span className="metal-text">formally defined policy</span> before execution — and
                 produces independently verifiable evidence of every decision.
               </p>
-              <div className="hairline mb-6 h-px w-full max-w-md" />
-              <p className="mb-10 max-w-lg text-base font-light text-neutral-300">
-                We start where a wrong action moves money: refunds, payments, disbursements
-                and beneficiary changes in financial services.
-              </p>
+              <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
                 <a
                   href="#try"
@@ -142,12 +138,13 @@ export function Landing() {
           </div>
         </section>
 
-        {/* WHERE WE START */}
+        {/* WHEN THE AGENT CAN MOVE MONEY */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-400">WHERE WE START</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               When the agent can move money,
+              <br />
+              grant access or delete records,
               <br />
               authorization becomes infrastructure.
             </h2>
