@@ -44,7 +44,7 @@ export function Landing() {
                   If it isn&apos;t authorized, it never executes.
                 </span>
               </h1>
-              <p className="mb-6 max-w-xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
+              <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
                 IronProof verifies high-impact agent actions against{" "}
                 <span className="metal-text">formally defined policy</span> before execution — and
                 produces independently verifiable evidence of every decision.
