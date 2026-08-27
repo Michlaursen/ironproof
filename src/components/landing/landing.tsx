@@ -5,6 +5,7 @@ import { ProofArtifact } from "./proof-artifact";
 import { FadeUpInit } from "./fade-up-init";
 import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
+import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
 import { CtaForm } from "./cta-form";
 
@@ -410,6 +411,9 @@ export function Landing() {
 
         {/* TRY IT */}
         <RefundDemo />
+
+        {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
+        <Counterexample />
 
         {/* HOW IT WORKS */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
