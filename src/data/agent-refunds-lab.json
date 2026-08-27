@@ -1,0 +1,427 @@
+{
+  "captured_by": "ontology/capture_agent_refunds.py",
+  "solver": "z3 4.16.0",
+  "removed_clause": "refunded_total + amount <= refund_authority",
+  "scenario": [
+    {
+      "action": "open_ticket",
+      "params": {}
+    },
+    {
+      "action": "verify_customer",
+      "params": {
+        "v": true
+      }
+    },
+    {
+      "action": "refund",
+      "params": {
+        "amount": 600
+      }
+    },
+    {
+      "action": "refund",
+      "params": {
+        "amount": 600
+      }
+    }
+  ],
+  "coverage": {
+    "declared": true,
+    "status": "MESUREE",
+    "document": "FICTIONAL EXAMPLE -- no real policy document is cited here. Placeholder title in a demonstration schema; a real certificate carries the customer's own document, with its version and effective date.",
+    "clauses_total": 8,
+    "clauses_encoded": 5,
+    "clauses_not_encoded": 3,
+    "encoded": [
+      {
+        "id": "2.1",
+        "text": "An agent issues refunds only on an open ticket.",
+        "binds": [
+          {
+            "constraint": "status == 'open'",
+            "where": [
+              "pre:escalate_to_human",
+              "pre:refund",
+              "pre:resolve",
+              "pre:verify_customer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2.2",
+        "text": "An agent issues a refund only after the customer's identity has been verified, and a ticket is never resolved for an unverified customer.",
+        "binds": [
+          {
+            "constraint": "customer_verified",
+            "where": [
+              "pre:refund",
+              "pre:resolve"
+            ]
+          },
+          {
+            "constraint": "not (status == 'resolved') or customer_verified",
+            "where": [
+              "invariant"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2.3",
+        "text": "A refund amount is strictly positive.",
+        "binds": [
+          {
+            "constraint": "amount > 0",
+            "where": [
+              "pre:refund"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3.1",
+        "text": "No single refund exceeds the agent's refund authority.",
+        "binds": [
+          {
+            "constraint": "amount <= refund_authority",
+            "where": [
+              "pre:refund"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "3.2",
+        "text": "The total refunded on a ticket never exceeds the agent's refund authority -- a sequence of individually authorized refunds cannot cross it.",
+        "binds": [
+          {
+            "constraint": "refunded_total + amount <= refund_authority",
+            "where": [
+              "pre:refund"
+            ]
+          },
+          {
+            "constraint": "refunded_total <= refund_authority",
+            "where": [
+              "invariant"
+            ]
+          }
+        ]
+      }
+    ],
+    "not_encoded": [
+      {
+        "id": "4.1",
+        "text": "Refunds are returned to the original payment instrument.",
+        "why_not": "the model carries an amount, not a payment object; representing the instrument needs a symbolic per-payment instance, and claiming coverage here would cover the clause a chargeback dispute turns on"
+      },
+      {
+        "id": "4.2",
+        "text": "A refund is issued within five business days of the request.",
+        "why_not": "a deadline: this model carries no clock, nothing in it distinguishes five days from an instant"
+      },
+      {
+        "id": "4.3",
+        "text": "The agent that issues a refund is never the one that approves it.",
+        "why_not": "the model counts escalations, it does not carry the identity of the actors -- separation of duties is an access-control property, outside this object"
+      }
+    ],
+    "model_constraints_total": 17,
+    "model_constraints_unclaimed": [
+      {
+        "constraint": "status == 'new'",
+        "where": [
+          "init:Ticket",
+          "pre:open_ticket"
+        ]
+      }
+    ],
+    "model_constraints_mechanical_unclaimed": 9,
+    "method": "every clause->constraint link is resolved against the compiled model; a link naming a constraint the model does not contain refuses the certificate rather than degrading this report",
+    "method_limits": [
+      "the compiler that produced the verification conditions from this schema is NOT verified; this report removes guesswork about WHAT was modelled, not trust in the compiler that modelled it",
+      "a clause counted as encoded means its text points at a constraint that is really in the proved object -- it does not mean a human agreed the constraint captures the clause's intent"
+    ]
+  },
+  "proof_correct": {
+    "schema_file": "agent_refunds.json",
+    "ontology": "support-agent-refunds",
+    "version": "v1.0",
+    "owner": "written by the customer (the merchant owns this schema, not IronProof)",
+    "note": "Model of an AI support agent that issues refunds on a customer ticket. refund_authority is the maximum an agent may return to one customer without a human approver. The rule that matters is CUMULATIVE: refunded_total <= refund_authority. A gate that only checks the CURRENT refund lets through a sequence of individually authorized refunds whose total crosses the authority. Everything stays in LIA -- the fragment Spacer decides. Routing a refund back to the original payment instrument is out of scope for this model: it needs a symbolic payment object, still on the roadmap.",
+    "state_vars": "refund_authority:Int, refunded_total:Int, escalations:Int, status:Status{new|open|resolved}, customer_verified:Bool",
+    "actions": [
+      "open_ticket",
+      "verify_customer",
+      "refund",
+      "escalate_to_human",
+      "resolve"
+    ],
+    "invariants": [
+      "refunded_total <= refund_authority",
+      "not (status == 'resolved') or customer_verified"
+    ],
+    "verdict_token": "unsat",
+    "verdict": "SAFE",
+    "synthesized_invariant": "And(Or(customer_verified, Not(status >= 2)),   Not(refunded_total + -1*refund_authority >= 1))",
+    "obligation_file": "agent_refunds_obligation.smt2",
+    "obligation_sha3_512": "552b6f6b8a73ad97023f9d64abc3e819276459a24e4e0efb2a610a9ebc75185e9b0f35a2d29d6b42a489b9dbd081c8a97039cc73f157810e875c708df2a973d8",
+    "fresh_process_result": "unsat",
+    "reproduced": true,
+    "solver": "z3 4.16.0"
+  },
+  "proof_broken": {
+    "schema_file": "agent_refunds_broken.json",
+    "ontology": "support-agent-refunds",
+    "version": "v1.0-broken",
+    "owner": "written by the customer (the merchant owns this schema, not IronProof)",
+    "note": "SAME ontology, ONE precondition removed. The refund gate still checks the CURRENT refund (amount <= refund_authority); it no longer checks the TOTAL (refunded_total + amount <= refund_authority). Each refund stays inside the agent's authority and clears its own gate. The total does not. This is exactly the pattern a per-action check cannot see.",
+    "state_vars": "refund_authority:Int, refunded_total:Int, escalations:Int, status:Status{new|open|resolved}, customer_verified:Bool",
+    "actions": [
+      "open_ticket",
+      "verify_customer",
+      "refund",
+      "escalate_to_human",
+      "resolve"
+    ],
+    "invariants": [
+      "refunded_total <= refund_authority",
+      "not (status == 'resolved') or customer_verified"
+    ],
+    "verdict_token": "sat",
+    "verdict": "UNSAFE",
+    "synthesized_invariant": "",
+    "obligation_file": "agent_refunds_broken_obligation.smt2",
+    "obligation_sha3_512": "bf9047953218b242d6b37511c9121180f2fcff7bc3a8b5bfcce34dffe6ae97b98771ea7fa75987ccfe3b1e04f848a7ff96f162d0b1923b92858b2fe74b037865",
+    "fresh_process_result": "sat",
+    "reproduced": true,
+    "solver": "z3 4.16.0"
+  },
+  "bmc": {
+    "found": true,
+    "horizon": 4,
+    "initial_state": {
+      "refund_authority": 1000,
+      "refunded_total": 0,
+      "escalations": 0,
+      "status": "new",
+      "customer_verified": false
+    },
+    "steps": [
+      {
+        "n": 1,
+        "action": "open_ticket",
+        "params": {},
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 0,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": false
+        }
+      },
+      {
+        "n": 2,
+        "action": "verify_customer",
+        "params": {
+          "v": true
+        },
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 0,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        }
+      },
+      {
+        "n": 3,
+        "action": "refund",
+        "params": {
+          "amount": 1000
+        },
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 1000,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        }
+      },
+      {
+        "n": 4,
+        "action": "refund",
+        "params": {
+          "amount": 1
+        },
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 1001,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        }
+      }
+    ],
+    "violated_invariants": [
+      "refunded_total <= refund_authority"
+    ],
+    "method": "bounded model checking, shortest horizon first -- Z3 chose the actions and the amounts, not us"
+  },
+  "gates_correct": {
+    "policy": "policy as written",
+    "schema_file": "agent_refunds.json",
+    "steps": [
+      {
+        "action": "open_ticket",
+        "params": {},
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 0,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": false
+        },
+        "refunded_before": 0,
+        "refunded_after": 0
+      },
+      {
+        "action": "verify_customer",
+        "params": {
+          "v": true
+        },
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 0,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        },
+        "refunded_before": 0,
+        "refunded_after": 0
+      },
+      {
+        "action": "refund",
+        "params": {
+          "amount": 600
+        },
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 600,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        },
+        "refunded_before": 0,
+        "refunded_after": 600
+      },
+      {
+        "action": "refund",
+        "params": {
+          "amount": 600
+        },
+        "allowed": false,
+        "failed_preconditions": [
+          "refunded_total + amount <= refund_authority"
+        ],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 600,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        },
+        "refunded_before": 600,
+        "refunded_after": 600
+      }
+    ],
+    "refunded_total": 600,
+    "refund_authority": 1000,
+    "authority_breached": false,
+    "blocked_at": "refund"
+  },
+  "gates_broken": {
+    "policy": "policy with the cumulative clause removed",
+    "schema_file": "agent_refunds_broken.json",
+    "steps": [
+      {
+        "action": "open_ticket",
+        "params": {},
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 0,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": false
+        },
+        "refunded_before": 0,
+        "refunded_after": 0
+      },
+      {
+        "action": "verify_customer",
+        "params": {
+          "v": true
+        },
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 0,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        },
+        "refunded_before": 0,
+        "refunded_after": 0
+      },
+      {
+        "action": "refund",
+        "params": {
+          "amount": 600
+        },
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 600,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        },
+        "refunded_before": 0,
+        "refunded_after": 600
+      },
+      {
+        "action": "refund",
+        "params": {
+          "amount": 600
+        },
+        "allowed": true,
+        "failed_preconditions": [],
+        "state_after": {
+          "refund_authority": 1000,
+          "refunded_total": 1200,
+          "escalations": 0,
+          "status": "open",
+          "customer_verified": true
+        },
+        "refunded_before": 600,
+        "refunded_after": 1200
+      }
+    ],
+    "refunded_total": 1200,
+    "refund_authority": 1000,
+    "authority_breached": true,
+    "blocked_at": null
+  }
+}
