@@ -569,7 +569,8 @@ export function Landing() {
               Same proof engine. Proven on real vulnerabilities.
             </h2>
             <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              Findings by <span className="metal-text">Dominik Blain</span> and Cobalt, credited
+              Findings by <span className="metal-text">Dominik Blain</span>{" "}
+              and Cobalt, credited
               on the projects&apos; own repositories &mdash; published research, assigned CVEs and
               public upstream acknowledgements.
             </p>
