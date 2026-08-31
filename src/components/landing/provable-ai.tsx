@@ -4,6 +4,7 @@ import { ProofSeal } from "./proof-seal";
 import { FadeUpInit } from "./fade-up-init";
 import { CtaForm } from "./cta-form";
 import { IconEyeOff, IconVerify, IconSeal, IconRule, IconGlobe } from "@/components/icons";
+import { defaultLocale, type Locale } from "@/content";
 
 /*
  * "What is Provable AI?" — the category page reached from the nav.
@@ -35,10 +36,10 @@ function Snum({ children }: { children: React.ReactNode }) {
   return <p className="track-mid mb-4 text-xs text-neutral-500">{children}</p>;
 }
 
-export function ProvableAI() {
+export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <div className="flex flex-1 flex-col">
-      <LandingHeader variant="sub" />
+      <LandingHeader variant="sub" locale={locale} active="provable-ai" />
 
       <main className="flex-1">
         {/* HERO */}

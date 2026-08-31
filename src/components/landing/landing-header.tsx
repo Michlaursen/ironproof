@@ -3,28 +3,50 @@
 import { useState } from "react";
 import { IronProofLogo } from "@/components/ironproof-logo";
 import { IconMenu, IconClose } from "@/components/icons";
+import { defaultLocale, type Locale } from "@/content";
 
 type Variant = "home" | "sub";
+type Active = "proof" | "provable-ai";
 
-// In-page anchors resolve to the home route from a sub-page ("/#platform") and
-// stay in-page on home ("#platform"). "/provable-ai" is always an absolute route.
-function links(variant: Variant): { href: string; label: string }[] {
-  const p = variant === "sub" ? "/" : "";
+// English keeps the short URLs ("/proof"), which next.config rewrites to
+// "/en/proof". Any other locale is addressed explicitly, so a visitor reading
+// /fr does not silently land on the English page.
+function routePrefix(locale: Locale): string {
+  return locale === defaultLocale ? "" : `/${locale}`;
+}
+
+// In-page anchors stay in-page on home ("#how") and resolve to that locale's
+// home route from a sub-page ("/#how", "/fr#how"). The sub-page variant matters:
+// a bare "#how" on /proof points at an id that page does not have.
+function links(variant: Variant, locale: Locale): { href: string; label: string; page?: Active }[] {
+  const r = routePrefix(locale);
+  const p = variant === "sub" ? r || "/" : "";
   return [
     { href: `${p}#how`, label: "HOW IT WORKS" },
     { href: `${p}#start`, label: "AI AGENTS" },
-    { href: "/proof", label: "PROOF" },
+    { href: `${r}/proof`, label: "PROOF", page: "proof" },
     { href: `${p}#verify`, label: "EVIDENCE" },
-    { href: "/provable-ai", label: "PROVABLE AI" },
+    { href: `${r}/provable-ai`, label: "PROVABLE AI", page: "provable-ai" },
   ];
 }
 
-export function LandingHeader({ variant = "home" }: { variant?: Variant }) {
+export function LandingHeader({
+  variant = "home",
+  locale = defaultLocale,
+  active,
+}: {
+  variant?: Variant;
+  locale?: Locale;
+  active?: Active;
+}) {
   const [open, setOpen] = useState(false);
-  const LINKS = links(variant);
-  const logoHref = variant === "sub" ? "/" : "#top";
-  const contactHref = variant === "sub" ? "/#contact" : "#contact";
-  const isActive = (href: string) => variant === "sub" && href === "/provable-ai";
+  const LINKS = links(variant, locale);
+  const r = routePrefix(locale);
+  const logoHref = variant === "sub" ? r || "/" : "#top";
+  const contactHref = variant === "sub" ? `${r || "/"}#contact` : "#contact";
+  // Derived from the page that rendered the header, never from the variant:
+  // every sub-page is not the Provable AI page.
+  const isActive = (page?: Active) => active !== undefined && page === active;
 
   return (
     <header className="edge-b sticky top-0 z-40 bg-[#050506]/60 backdrop-blur-md">
@@ -40,9 +62,9 @@ export function LandingHeader({ variant = "home" }: { variant?: Variant }) {
             <a
               key={l.href}
               href={l.href}
-              aria-current={isActive(l.href) ? "page" : undefined}
+              aria-current={isActive(l.page) ? "page" : undefined}
               className={`rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-                isActive(l.href) ? "metal-shine" : "metal-text"
+                isActive(l.page) ? "metal-shine" : "metal-text"
               }`}
             >
               {l.label}
@@ -76,10 +98,10 @@ export function LandingHeader({ variant = "home" }: { variant?: Variant }) {
               <a
                 key={l.href}
                 href={l.href}
-                aria-current={isActive(l.href) ? "page" : undefined}
+                aria-current={isActive(l.page) ? "page" : undefined}
                 onClick={() => setOpen(false)}
                 className={`track-mid border-b border-white/5 py-4 text-sm ${
-                  isActive(l.href) ? "metal-shine" : "metal-text"
+                  isActive(l.page) ? "metal-shine" : "metal-text"
                 }`}
               >
                 {l.label}

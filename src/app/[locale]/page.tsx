@@ -12,5 +12,5 @@ export default async function Home({ params }: PageProps) {
 
   // TODO(i18n): the ported slides carry English copy inline. Reconnect the
   // fr.ts / en.ts content system with Miguel so /fr renders French.
-  return <Landing />;
+  return <Landing locale={locale} />;
 }

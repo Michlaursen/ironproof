@@ -8,17 +8,18 @@ import { RefundDemo } from "./refund-demo";
 import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
 import { CtaForm } from "./cta-form";
+import { defaultLocale, type Locale } from "@/content";
 
 /*
  * The IronProof landing — ported from the reference page (ironproof-landing-local).
  * English copy inline for now; French / i18n to be reconnected with Miguel.
  */
 
-export function Landing() {
+export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <div className="flex flex-1 flex-col">
       {/* NAV */}
-      <LandingHeader />
+      <LandingHeader locale={locale} />
 
       <main className="flex-1">
         {/* HERO */}
@@ -590,7 +591,7 @@ export function Landing() {
               ))}
             </div>
             <a
-              href="/proof"
+              href={`${locale === defaultLocale ? "" : `/${locale}`}/proof`}
               className="chip-metal track-mid mt-10 inline-block px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
             >
               VIEW TECHNICAL RECORD

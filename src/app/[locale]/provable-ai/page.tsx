@@ -39,5 +39,5 @@ export default async function ProvableAIPage({ params }: PageProps) {
 
   // English copy inline for phase 1 (same posture as the landing); /fr resolves
   // to the same component until the i18n content is reconnected.
-  return <ProvableAI />;
+  return <ProvableAI locale={locale} />;
 }
