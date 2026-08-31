@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * IronProof brand system — dark metallic / chrome (2026-08).
+ * Ironproof brand system — dark metallic / chrome (2026-08).
  * Ported from the reference landing (ironproof-landing-local). No blue accent:
  * the previous placeholder --accent (#5b8def) is retired in favour of a bright
  * chrome silver. Every component reads these tokens, not hardcoded hex.

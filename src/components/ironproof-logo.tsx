@@ -1,5 +1,5 @@
 /*
- * IronProof chrome monogram — ported from the reference landing.
+ * Ironproof chrome monogram — ported from the reference landing.
  * The gradient/filter <defs> and the <g id="ipLogo"> group are emitted ONCE
  * via <IronProofLogoDefs /> (mounted in the root layout). Every logo instance
  * is a lightweight <use href="#ipLogo" />, so the heavy paths and the shared
@@ -109,7 +109,7 @@ export function IronProofLogo({
   width = 26,
   height = 35,
   className,
-  title = "IronProof",
+  title = "Ironproof",
 }: IronProofLogoProps) {
   return (
     <svg

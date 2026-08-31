@@ -149,7 +149,7 @@
     "schema_file": "agent_refunds.json",
     "ontology": "support-agent-refunds",
     "version": "v1.0",
-    "owner": "written by the customer (the merchant owns this schema, not IronProof)",
+    "owner": "written by the customer (the merchant owns this schema, not Ironproof)",
     "note": "Model of an AI support agent that issues refunds on a customer ticket. refund_authority is the maximum an agent may return to one customer without a human approver. The rule that matters is CUMULATIVE: refunded_total <= refund_authority. A gate that only checks the CURRENT refund lets through a sequence of individually authorized refunds whose total crosses the authority. Everything stays in LIA -- the fragment Spacer decides. Routing a refund back to the original payment instrument is out of scope for this model: it needs a symbolic payment object, still on the roadmap.",
     "state_vars": "refund_authority:Int, refunded_total:Int, escalations:Int, status:Status{new|open|resolved}, customer_verified:Bool",
     "actions": [
@@ -176,7 +176,7 @@
     "schema_file": "agent_refunds_broken.json",
     "ontology": "support-agent-refunds",
     "version": "v1.0-broken",
-    "owner": "written by the customer (the merchant owns this schema, not IronProof)",
+    "owner": "written by the customer (the merchant owns this schema, not Ironproof)",
     "note": "SAME ontology, ONE precondition removed. The refund gate still checks the CURRENT refund (amount <= refund_authority); it no longer checks the TOTAL (refunded_total + amount <= refund_authority). Each refund stays inside the agent's authority and clears its own gate. The total does not. This is exactly the pattern a per-action check cannot see.",
     "state_vars": "refund_authority:Int, refunded_total:Int, escalations:Int, status:Status{new|open|resolved}, customer_verified:Bool",
     "actions": [
