@@ -34,7 +34,7 @@ export default async function ProofPage({ params }: PageProps) {
   return (
     <div className="relative min-h-screen">
       <FadeUpInit />
-      <LandingHeader />
+      <LandingHeader variant="sub" locale={locale} active="proof" />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-32 md:px-14">
           <p className="track-mid mb-4 text-xs text-neutral-400">THE TECHNICAL RECORD</p>
