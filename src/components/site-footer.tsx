@@ -11,7 +11,7 @@ export function SiteFooter({ content }: SiteFooterProps) {
           <div>
             <Image
               src="/ironproof-wordmark-white-transparent.png"
-              alt="IronProof"
+              alt="Ironproof"
               width={1600}
               height={320}
               className="h-5 w-auto"

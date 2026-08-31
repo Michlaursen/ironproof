@@ -5,7 +5,7 @@ import { useState } from "react";
 /*
  * VERIFY A PROOF — the REAL thing. Paste (or load) a sealed Sceal dossier and
  * it is verified entirely in your browser: Ed25519 + ML-DSA-65 (FIPS 204)
- * signatures and the SHA3-512 chain, in pure JavaScript, no server, no IronProof
+ * signatures and the SHA3-512 chain, in pure JavaScript, no server, no Ironproof
  * code. The verifier is vendored verbatim from ironproof/sceal/verifier-web
  * (src/lib/sceal). Demo dossiers (real, plus deliberately tampered) live in
  * /public/sceal so anyone can watch a forgery get rejected.
@@ -164,7 +164,7 @@ export function VerifyArtifact() {
 
           <p className="mt-5 text-xs text-neutral-400">
             Runs entirely in your browser — pure-JavaScript Ed25519 + ML-DSA-65 (FIPS 204) + SHA3-512,
-            no server and no IronProof code. The wire format is published, so anyone can write a
+            no server and no Ironproof code. The wire format is published, so anyone can write a
             second verifier:{" "}
             <a
               href="/sceal/SPEC_CANON.md"

@@ -3,13 +3,13 @@ import type { SiteContent } from "./types";
 export const fr: SiteContent = {
   meta: {
     title:
-      "IronProof | Autorisation vérifiable pour les actions IA irréversibles",
+      "Ironproof | Autorisation vérifiable pour les actions IA irréversibles",
     description:
-      "IronProof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
+      "Ironproof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "IronProof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
+      "Ironproof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
   },
   header: {
     nav: [
@@ -28,9 +28,9 @@ export const fr: SiteContent = {
     headline:
       "Prouvez ce qu’un agent IA ne peut pas faire — avant qu’il agisse.",
     body: [
-      "Certaines actions ne se défont pas. IronProof vérifie qu’un agent reste à l’intérieur de la politique que vous avez écrite avant qu’il s’exécute — remboursements, paiements et changements de bénéficiaire aujourd’hui, et le même contrôle pour un dossier supprimé, une donnée qui sort ou du code qui part en production.",
+      "Certaines actions ne se défont pas. Ironproof vérifie qu’un agent reste à l’intérieur de la politique que vous avez écrite avant qu’il s’exécute — remboursements, paiements et changements de bénéficiaire aujourd’hui, et le même contrôle pour un dossier supprimé, une donnée qui sort ou du code qui part en production.",
       "Pour chaque décision, il consigne la politique appliquée, l’autorité de l’agent sous cette politique, l’état de la transaction, et une justification vérifiable expliquant pourquoi l’action a été permise ou refusée.",
-      "La preuve qui en résulte se vérifie de façon indépendante par les équipes de risque, de conformité et d’audit — sans dépendre d’un tableau de bord IronProof.",
+      "La preuve qui en résulte se vérifie de façon indépendante par les équipes de risque, de conformité et d’audit — sans dépendre d’un tableau de bord Ironproof.",
     ],
     ctaPrimary: "Évaluer le flux qui vous inquiète",
     ctaSecondary: "Inspecter un certificat exemple",
@@ -168,7 +168,7 @@ export const fr: SiteContent = {
     body: [
       "L’identité confirme quel agent agit. Les permissions définissent son accès général. Les garde-fous encadrent son comportement. Les journaux consignent ce qui s’est passé.",
       "Aucun d’eux, seul, ne prouve qu’une action financière précise était autorisée sous la politique, l’autorité et l’état transactionnel exacts en vigueur au moment de la décision.",
-      "IronProof comble cet écart avant l’exécution et conserve le fondement de l’autorisation comme preuve vérifiable indépendamment.",
+      "Ironproof comble cet écart avant l’exécution et conserve le fondement de l’autorisation comme preuve vérifiable indépendamment.",
     ],
     layers: [
       { name: "Identité", role: "Qui agit" },
@@ -177,13 +177,13 @@ export const fr: SiteContent = {
       { name: "Journaux", role: "Ce qui s’est passé" },
     ],
     conclusion: {
-      name: "IronProof",
+      name: "Ironproof",
       role: "Pourquoi cette action a été permise ou refusée",
     },
   },
   solution: {
     eyebrow: "Comment ça marche",
-    title: "Comment IronProof autorise une action d’IA",
+    title: "Comment Ironproof autorise une action d’IA",
     description:
       "Votre politique écrite est compilée en mathématiques — par le même compilateur déterministe qu’utilise le runtime. La preuve porte sur ce modèle, pas sur une liste de contrôles.",
     steps: [
@@ -214,7 +214,7 @@ export const fr: SiteContent = {
     title:
       "La couche d’autorisation pour les agents IA qui agissent",
     description:
-      "IronProof Actions évalue chaque action irréversible avant son exécution, au regard de la politique, de l’autorité et de l’état en vigueur. L’argent est notre point de départ ; le contrôle, lui, n’en dépend pas.",
+      "Ironproof Actions évalue chaque action irréversible avant son exécution, au regard de la politique, de l’autorité et de l’état en vigueur. L’argent est notre point de départ ; le contrôle, lui, n’en dépend pas.",
     capabilities: [
       {
         title: "Contexte au moment de la décision",
@@ -258,7 +258,7 @@ export const fr: SiteContent = {
       {
         num: "04",
         title: "Sceau et vérification",
-        body: "L’artefact révèle toute altération. Le format étant publié, une implémentation indépendante peut recalculer chaque empreinte et chaque signature — sans une ligne de code IronProof.",
+        body: "L’artefact révèle toute altération. Le format étant publié, une implémentation indépendante peut recalculer chaque empreinte et chaque signature — sans une ligne de code Ironproof.",
       },
     ],
     finalLine:
@@ -289,7 +289,7 @@ export const fr: SiteContent = {
         secondary: "Ne conservent généralement pas une preuve rejouable au moment de la décision.",
       },
       {
-        name: "IronProof",
+        name: "Ironproof",
         primary: "Prouve si l’action précise est à l’intérieur de la politique, de l’autorité et de l’état transactionnel en vigueur, avant l’exécution.",
         secondary: "Conserve le fondement de l’autorisation comme preuve vérifiable indépendamment.",
         isUs: true,
@@ -301,7 +301,7 @@ export const fr: SiteContent = {
     title:
       "Conçu pour les environnements qui ne peuvent exporter ni données ni confiance",
     description:
-      "IronProof peut fonctionner localement ou en isolement réseau, de sorte que les politiques transactionnelles, le contexte système et la preuve de décision restent sous le contrôle de l’institution.",
+      "Ironproof peut fonctionner localement ou en isolement réseau, de sorte que les politiques transactionnelles, le contexte système et la preuve de décision restent sous le contrôle de l’institution.",
     features: [
       {
         title: "Déploiement local",
@@ -309,7 +309,7 @@ export const fr: SiteContent = {
       },
       {
         title: "Vérification indépendante",
-        body: "L’auditeur du client peut recontrôler l’artefact avec un second vérificateur écrit indépendamment — hors ligne, sans tableau de bord IronProof.",
+        body: "L’auditeur du client peut recontrôler l’artefact avec un second vérificateur écrit indépendamment — hors ligne, sans tableau de bord Ironproof.",
       },
       {
         title: "Preuve durable",
@@ -411,8 +411,8 @@ export const fr: SiteContent = {
     description:
       "Autorisation vérifiable et preuve décisionnelle pour les flux financiers propulsés par l’IA.",
     closing:
-      "IronProof offre aux institutions quelque chose de rare : la preuve.",
+      "Ironproof offre aux institutions quelque chose de rare : la preuve.",
     country: "Canada",
-    copyright: "IronProof. Tous droits réservés.",
+    copyright: "Ironproof. Tous droits réservés.",
   },
 };

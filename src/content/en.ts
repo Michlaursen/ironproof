@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "IronProof | Verifiable Authorization for Irreversible AI Actions",
+    title: "Ironproof | Verifiable Authorization for Irreversible AI Actions",
     description:
-      "IronProof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
+      "Ironproof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "IronProof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
+      "Ironproof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
   },
   header: {
     nav: [
@@ -26,9 +26,9 @@ export const en: SiteContent = {
     eyebrow: "Verifiable authorization for irreversible AI actions",
     headline: "Prove what an AI agent cannot do — before it acts.",
     body: [
-      "Some actions cannot be undone. IronProof verifies that an agent stays inside the policy you wrote before it executes — refunds, payments and beneficiary changes today, and the same check for records deleted, data leaving or code shipped to production.",
+      "Some actions cannot be undone. Ironproof verifies that an agent stays inside the policy you wrote before it executes — refunds, payments and beneficiary changes today, and the same check for records deleted, data leaving or code shipped to production.",
       "For every decision, it records the policy applied, the agent’s authority under that policy, the transaction state, and a verifiable justification for why the action was allowed or denied.",
-      "The resulting evidence can be verified independently by risk, compliance and audit teams — without relying on an IronProof dashboard.",
+      "The resulting evidence can be verified independently by risk, compliance and audit teams — without relying on an Ironproof dashboard.",
     ],
     ctaPrimary: "Evaluate the workflow that worries you",
     ctaSecondary: "Inspect a sample certificate",
@@ -65,7 +65,7 @@ export const en: SiteContent = {
         { label: "Verifier", value: "offline · independent implementation" },
       ],
       footnote:
-        "The policy, authority, transaction state and proof verdict are sealed together. The wire format is published, so the artifact can be checked by a verifier we did not write — offline, with no account and no IronProof code.",
+        "The policy, authority, transaction state and proof verdict are sealed together. The wire format is published, so the artifact can be checked by a verifier we did not write — offline, with no account and no Ironproof code.",
     },
   },
   attributions: {
@@ -158,7 +158,7 @@ export const en: SiteContent = {
     body: [
       "Identity confirms which agent is acting. Permissions define its general access. Guardrails shape its behavior. Logs record what happened.",
       "None of them, alone, proves that a specific financial action was authorized under the exact policy, authority and transaction state in force at decision time.",
-      "IronProof fills that gap before execution and preserves the authorization basis as independently verifiable evidence.",
+      "Ironproof fills that gap before execution and preserves the authorization basis as independently verifiable evidence.",
     ],
     layers: [
       { name: "Identity", role: "Who is acting" },
@@ -167,13 +167,13 @@ export const en: SiteContent = {
       { name: "Logs", role: "What happened" },
     ],
     conclusion: {
-      name: "IronProof",
+      name: "Ironproof",
       role: "Why this action was allowed or denied",
     },
   },
   solution: {
     eyebrow: "How it works",
-    title: "How IronProof authorizes an AI action",
+    title: "How Ironproof authorizes an AI action",
     description:
       "Your written policy is compiled into mathematics — by the same deterministic compiler the runtime uses. The proof runs against that model, not against a checklist.",
     steps: [
@@ -203,7 +203,7 @@ export const en: SiteContent = {
     eyebrow: "Product",
     title: "The authorization layer for AI agents that act",
     description:
-      "IronProof Actions evaluates each irreversible action before execution against the policy, authority and state in force. Money is where we start; the check does not depend on it.",
+      "Ironproof Actions evaluates each irreversible action before execution against the policy, authority and state in force. Money is where we start; the check does not depend on it.",
     capabilities: [
       {
         title: "Decision-time context",
@@ -247,7 +247,7 @@ export const en: SiteContent = {
       {
         num: "04",
         title: "Seal and verification",
-        body: "The artifact is tamper-evident. Because the wire format is published, an independent implementation can re-check every hash and signature — no IronProof code involved.",
+        body: "The artifact is tamper-evident. Because the wire format is published, an independent implementation can re-check every hash and signature — no Ironproof code involved.",
       },
     ],
     finalLine:
@@ -278,7 +278,7 @@ export const en: SiteContent = {
         secondary: "Usually do not preserve a replayable decision-time proof.",
       },
       {
-        name: "IronProof",
+        name: "Ironproof",
         primary: "Proves whether the specific action is inside the policy, authority and transaction state in force before execution.",
         secondary: "Preserves the authorization basis as independently verifiable evidence.",
         isUs: true,
@@ -289,7 +289,7 @@ export const en: SiteContent = {
     eyebrow: "Sovereignty",
     title: "Built for environments that cannot export data or trust",
     description:
-      "IronProof can run locally or air-gapped, so transaction policies, system context and decision evidence remain under the institution’s control.",
+      "Ironproof can run locally or air-gapped, so transaction policies, system context and decision evidence remain under the institution’s control.",
     features: [
       {
         title: "Local deployment",
@@ -297,7 +297,7 @@ export const en: SiteContent = {
       },
       {
         title: "Independent verification",
-        body: "The customer’s auditor can re-check the artifact with a second, independently written verifier — offline, without an IronProof dashboard.",
+        body: "The customer’s auditor can re-check the artifact with a second, independently written verifier — offline, without an Ironproof dashboard.",
       },
       {
         title: "Durable evidence",
@@ -395,8 +395,8 @@ export const en: SiteContent = {
   footer: {
     description:
       "Verifiable authorization and decision evidence for money-moving AI workflows.",
-    closing: "IronProof gives institutions something rare: evidence.",
+    closing: "Ironproof gives institutions something rare: evidence.",
     country: "Canada",
-    copyright: "IronProof. All rights reserved.",
+    copyright: "Ironproof. All rights reserved.",
   },
 };
