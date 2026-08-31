@@ -91,7 +91,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       {
         "@type": "Organization",
         "@id": "https://ironproof.ai/#organization",
-        name: "IronProof",
+        name: "Ironproof",
         url: "https://ironproof.ai",
         logo: "https://ironproof.ai/icon.png",
         description: content.meta.description,
@@ -109,7 +109,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
       {
         "@type": "WebSite",
         "@id": "https://ironproof.ai/#website",
-        name: "IronProof",
+        name: "Ironproof",
         url: "https://ironproof.ai",
         publisher: { "@id": "https://ironproof.ai/#organization" },
       },

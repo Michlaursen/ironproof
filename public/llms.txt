@@ -1,31 +1,31 @@
-# IronProof
+# Ironproof
 
-> IronProof provides verifiable authorization and decision evidence for money-moving AI workflows. It verifies that a specific financial action — a refund, payment, disbursement or beneficiary change — stays inside the customer's written policy, agent authority and transaction state before execution, and preserves the authorization basis as evidence a third party can verify independently.
+> Ironproof provides verifiable authorization and decision evidence for money-moving AI workflows. It verifies that a specific financial action — a refund, payment, disbursement or beneficiary change — stays inside the customer's written policy, agent authority and transaction state before execution, and preserves the authorization basis as evidence a third party can verify independently.
 
-The written policy is compiled into mathematics by the same deterministic compiler the runtime uses, so the proof runs against that model rather than against a checklist. When an action can violate a rule or a cumulative limit, IronProof returns the counterexample. When it cannot, it issues a single-use execution grant and seals the decision, the justification and the proof result into an artifact that can be re-verified offline with a trusted public key — without an IronProof dashboard.
+The written policy is compiled into mathematics by the same deterministic compiler the runtime uses, so the proof runs against that model rather than against a checklist. When an action can violate a rule or a cumulative limit, Ironproof returns the counterexample. When it cannot, it issues a single-use execution grant and seals the decision, the justification and the proof result into an artifact that can be re-verified offline with a trusted public key — without an Ironproof dashboard.
 
-IronProof is a Canadian company. It starts with back-office AI agents in Canadian financial services; the primary buyers are technology risk, operational risk and compliance teams.
+Ironproof is a Canadian company. It starts with back-office AI agents in Canadian financial services; the primary buyers are technology risk, operational risk and compliance teams.
 
 ## Product
 
-- **IronProof Actions** — the authorization layer for money-moving AI agents. It captures the decision context (policy version, agent authority, requested action, cumulative state), proves whether the action stays inside the customer-defined transaction boundary, issues a single-use execution grant bound to that exact decision and to the policy in force, and preserves why the action was allowed or denied in a sealed artifact.
+- **Ironproof Actions** — the authorization layer for money-moving AI agents. It captures the decision context (policy version, agent authority, requested action, cumulative state), proves whether the action stays inside the customer-defined transaction boundary, issues a single-use execution grant bound to that exact decision and to the policy in force, and preserves why the action was allowed or denied in a sealed artifact.
 
 ## Key differentiators
 
 - Verification happens **before** execution, not in logs after the fact.
 - The proof covers sequences, not only the request at hand: no sequence of actions the agent can take escapes the boundary.
-- The policy is written by the customer, not by IronProof, and the artifact records that.
+- The policy is written by the customer, not by Ironproof, and the artifact records that.
 - Nothing executes without spending a grant — the gate is the only entrance, structurally.
 - Evidence is verifiable offline by the customer's own auditor, and supports classical and post-quantum signatures.
 - Can run locally or air-gapped, so policies, system context and decision evidence stay under the institution's control.
 
 ## Public technical record
 
-Eight independent organizations credit IronProof or its founder by name in their own public source trees: IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK and libmodbus. Four security preprints on arXiv (cs.CR) disclose the methods, datasets, limitations and failure cases. A Lean 4 theorem checks that the runtime policy compiler and the solver encoding represent the same decision logic, and the verification suite can be rerun end to end.
+Eight independent organizations credit Ironproof or its founder by name in their own public source trees: IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK and libmodbus. Four security preprints on arXiv (cs.CR) disclose the methods, datasets, limitations and failure cases. A Lean 4 theorem checks that the runtime policy compiler and the solver encoding represent the same decision logic, and the verification suite can be rerun end to end.
 
 ## Limits worth stating
 
-Proofs are relative to the declared model and its assumptions — the solver checks all states that model represents, not the world. IronProof is early, and is onboarding its first design partners.
+Proofs are relative to the declared model and its assumptions — the solver checks all states that model represents, not the world. Ironproof is early, and is onboarding its first design partners.
 
 ## Contact
 

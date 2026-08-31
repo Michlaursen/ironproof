@@ -84,7 +84,7 @@ export type SiteContent = {
     eyebrow: string;
     title: string;
     /* For the four existing controls, `secondary` is what they do NOT
-       establish. On the IronProof row it is what the artifact additionally
+       establish. On the Ironproof row it is what the artifact additionally
        preserves — same slot, opposite polarity, which is the point. */
     rows: {
       name: string;

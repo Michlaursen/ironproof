@@ -17,7 +17,7 @@ export function ProofSeal({ size = 140, className }: ProofSealProps) {
       viewBox="0 0 200 200"
       className={className}
       role="img"
-      aria-label="IronProof seal — Ed25519 and ML-DSA-65, FIPS 204"
+      aria-label="Ironproof seal — Ed25519 and ML-DSA-65, FIPS 204"
     >
       <defs>
         <path id="sealRing" d="M100,100 m-73,0 a73,73 0 1,1 146,0 a73,73 0 1,1 -146,0" fill="none" />

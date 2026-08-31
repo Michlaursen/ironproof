@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!isLocale(locale)) return {};
 
   const path = locale === "en" ? "/provable-ai" : `/${locale}/provable-ai`;
-  const title = "What is Provable AI? — IronProof";
+  const title = "What is Provable AI? — Ironproof";
   const description =
     "Provable AI: prove — mathematically and cryptographically — that an AI agent could not cross the line you drew, and hand you an artifact you verify yourself, offline, without trusting the vendor.";
 

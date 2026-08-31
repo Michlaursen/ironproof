@@ -97,7 +97,7 @@ export function RefundDemo() {
             Prove a Refund Decision
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-            A tiny example policy. Try a preset — or move the sliders — and IronProof proves
+            A tiny example policy. Try a preset — or move the sliders — and Ironproof proves
             whether the action is inside the rules, or shows the exact rule it breaks.
           </p>
         </div>

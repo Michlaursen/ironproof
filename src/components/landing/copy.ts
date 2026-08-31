@@ -45,7 +45,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       eyebrow: "PROVABLE SECURITY INFRASTRUCTURE",
       h1a: "Prove what's allowed.",
       h1b: "Block everything else.",
-      lead: "IronProof verifies every critical action {math} — and blocks anything unproven before it ever runs.",
+      lead: "Ironproof verifies every critical action {math} — and blocks anything unproven before it ever runs.",
       leadMath: "mathematically",
       sub: "Automated formal verification for critical software — starting where a wrong action moves money: AI agents issuing refunds, payments and disbursements in Canadian financial services.",
       tryProof: "TRY A PROOF",
@@ -69,7 +69,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
         {
           n: "02",
           title: "Exhaustive, Not Sampled",
-          body: "Testing checks a handful of cases. IronProof reasons exhaustively over the formally defined state space.",
+          body: "Testing checks a handful of cases. Ironproof reasons exhaustively over the formally defined state space.",
         },
         {
           n: "03",
@@ -83,7 +83,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
     },
     cta: {
       h2: "Prove your infrastructure.",
-      sub: "Request access to IronProof and turn policy into enforceable, independently verifiable guarantees.",
+      sub: "Request access to Ironproof and turn policy into enforceable, independently verifiable guarantees.",
     },
     footer: "Automated formal verification for critical software and infrastructure.",
   },
@@ -92,7 +92,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
       eyebrow: "INFRASTRUCTURE DE SÉCURITÉ PROUVABLE",
       h1a: "Prouvez ce qui est permis.",
       h1b: "Bloquez tout le reste.",
-      lead: "IronProof vérifie chaque action critique {math} — et bloque tout ce qui n'est pas prouvé avant même son exécution.",
+      lead: "Ironproof vérifie chaque action critique {math} — et bloque tout ce qui n'est pas prouvé avant même son exécution.",
       leadMath: "mathématiquement",
       sub: "Vérification formelle automatisée pour les logiciels critiques — à commencer là où une action erronée déplace de l'argent : des agents IA qui émettent remboursements, paiements et versements dans les services financiers canadiens.",
       tryProof: "ESSAYER UNE PREUVE",
@@ -116,7 +116,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
         {
           n: "02",
           title: "Exhaustif, pas échantillonné",
-          body: "Les tests vérifient une poignée de cas. IronProof raisonne exhaustivement sur l'espace d'états défini formellement.",
+          body: "Les tests vérifient une poignée de cas. Ironproof raisonne exhaustivement sur l'espace d'états défini formellement.",
         },
         {
           n: "03",
@@ -130,7 +130,7 @@ export const LANDING_COPY: Record<Locale, LandingCopy> = {
     },
     cta: {
       h2: "Prouvez votre infrastructure.",
-      sub: "Demandez l'accès à IronProof et transformez vos politiques en garanties applicables et vérifiables de façon indépendante.",
+      sub: "Demandez l'accès à Ironproof et transformez vos politiques en garanties applicables et vérifiables de façon indépendante.",
     },
     footer: "Vérification formelle automatisée pour les logiciels et infrastructures critiques.",
   },
