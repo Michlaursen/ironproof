@@ -316,6 +316,11 @@ export function ProvableAI() {
                 pill: null as null | "roadmap",
               },
               {
+                t: "A proof cannot confer authority",
+                b: "We prove the action stayed inside the policy in force, and that the policy is not operable until a designated quorum dual-signs its exact fingerprint — weaken a guard after sign-off and the schema stops being enforceable. What we cannot establish sits upstream of any code: that the people holding those keys were entitled to hold them, that their mandate is still current and in scope, or that whoever refuses to sign is protected when they do. A gate can be made unbypassable. The right to open it comes from somewhere else.",
+                pill: null,
+              },
+              {
                 t: "Authorized is not safe",
                 b: "A fully authorized action can still be the wrong action in the world. We govern the trajectory, not the wisdom of the capabilities you granted.",
                 pill: null,
