@@ -57,13 +57,13 @@ export function LandingHeader({
         </a>
 
         {/* Desktop nav */}
-        <nav className="track-mid hidden flex-1 items-center justify-between pl-10 text-xs md:flex lg:pl-24">
+        <nav className="track-mid hidden flex-1 items-center justify-between gap-x-6 pl-6 text-xs xl:flex 2xl:gap-x-8 2xl:pl-16">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
               aria-current={isActive(l.page) ? "page" : undefined}
-              className={`rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
+              className={`whitespace-nowrap rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
                 isActive(l.page) ? "metal-shine" : "metal-text"
               }`}
             >
@@ -72,7 +72,7 @@ export function LandingHeader({
           ))}
           <a
             href={contactHref}
-            className="track-mid shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+            className="track-mid whitespace-nowrap shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
           >
             REQUEST ACCESS
           </a>
@@ -84,7 +84,7 @@ export function LandingHeader({
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="chip-metal ml-auto flex h-10 w-10 shrink-0 items-center justify-center text-neutral-100 transition hover:text-white md:hidden"
+          className="chip-metal ml-auto flex h-10 w-10 shrink-0 items-center justify-center text-neutral-100 transition hover:text-white xl:hidden"
         >
           {open ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
         </button>
@@ -92,7 +92,7 @@ export function LandingHeader({
 
       {/* Mobile menu */}
       {open ? (
-        <nav className="edge-t relative z-20 bg-black/80 px-6 pb-6 pt-2 backdrop-blur md:hidden">
+        <nav className="edge-t relative z-20 bg-black/80 px-6 pb-6 pt-2 backdrop-blur xl:hidden">
           <div className="flex flex-col">
             {LINKS.map((l) => (
               <a
