@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
       { source: "/", destination: "/en" },
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/proof", destination: "/en/proof" },
+      { source: "/verify", destination: "/en/verify" },
     ];
   },
 };

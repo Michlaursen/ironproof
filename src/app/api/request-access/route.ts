@@ -39,9 +39,9 @@ export async function POST(request: Request) {
           method: "POST",
           headers: { authorization: `Bearer ${resendKey}`, "content-type": "application/json" },
           body: JSON.stringify({
-            from: "IronProof <onboarding@resend.dev>",
+            from: "Ironproof <onboarding@resend.dev>",
             to,
-            subject: "New IronProof access request",
+            subject: "New Ironproof access request",
             text: `Access request from: ${email}\nAt: ${at}`,
           }),
         });

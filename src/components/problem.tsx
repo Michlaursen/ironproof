@@ -27,7 +27,7 @@ export function Problem({ content }: ProblemProps) {
 
         {/*
           The four existing controls render identically to each other, and the
-          IronProof row repeats their exact shape in accent. The claim of the
+          Ironproof row repeats their exact shape in accent. The claim of the
           section is that it is the missing item in the same list, not a
           different kind of thing — so it is drawn as the fifth entry.
         */}

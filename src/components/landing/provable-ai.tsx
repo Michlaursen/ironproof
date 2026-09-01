@@ -460,7 +460,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
           <div className="halo" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
             <div className="mb-10 flex items-center justify-center gap-8">
-              <IronProofLogo width={96} height={128} title="IronProof monogram" />
+              <IronProofLogo width={96} height={128} title="Ironproof monogram" />
               <ProofSeal size={128} />
             </div>
             <h2 className="metal-shine mb-6 font-serif text-3xl font-medium md:text-5xl">

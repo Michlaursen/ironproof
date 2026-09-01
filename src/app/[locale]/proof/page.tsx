@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!isLocale(locale)) return {};
 
   const path = locale === "en" ? "/proof" : `/${locale}/proof`;
-  const title = "The technical record — IronProof";
+  const title = "The technical record — Ironproof";
   const description =
     "Inspect a sealed proof artifact field by field, and the public record behind the engine: published research, assigned CVEs and upstream acknowledgements credited by IBM, GnuPG, Mozilla, Red Hat, wolfSSL, VideoLAN and DCMTK.";
 

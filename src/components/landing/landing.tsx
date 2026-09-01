@@ -11,7 +11,7 @@ import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
 
 /*
- * The IronProof landing — ported from the reference page (ironproof-landing-local).
+ * The Ironproof landing — ported from the reference page (ironproof-landing-local).
  * English copy inline for now; French / i18n to be reconnected with Miguel.
  */
 
@@ -31,7 +31,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 width={210}
                 height={280}
                 className="h-[200px] w-[150px] drop-shadow-2xl md:h-[280px] md:w-[210px]"
-                title="IronProof monogram"
+                title="Ironproof monogram"
               />
               <span className="track-logo iron-text mt-4 text-2xl font-semibold md:mt-6 md:text-4xl">
                 IRONPROOF
@@ -47,7 +47,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
-                IronProof verifies high-impact agent actions against{" "}
+                Ironproof verifies high-impact agent actions against{" "}
                 <span className="metal-text">formally defined policy</span> before execution — and
                 produces independently verifiable evidence of every decision.
               </p>
@@ -253,7 +253,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 software delivery loop.
               </h2>
               <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-                IronProof automates proof obligations and re-verification so formally defined
+                Ironproof automates proof obligations and re-verification so formally defined
                 properties can be checked continuously as systems change.
               </p>
             </div>
@@ -384,7 +384,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   </li>
                   <li className="flex gap-3 text-neutral-300">
                     <span className="icon-metal mt-0.5">✓</span> If the formal model admits a
-                    violation, IronProof produces a counterexample
+                    violation, Ironproof produces a counterexample
                   </li>
                   <li className="flex gap-3 text-neutral-300">
                     <span className="icon-metal mt-0.5">✓</span> &quot;Proven&quot; means{" "}
@@ -404,7 +404,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </div>
             </div>
             <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-lg font-light text-neutral-300">
-              IronProof doesn&apos;t replace testing. It answers the question testing cannot
+              Ironproof doesn&apos;t replace testing. It answers the question testing cannot
               exhaustively answer.
             </p>
           </div>
@@ -421,7 +421,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              How IronProof Authorizes
+              How Ironproof Authorizes
               <br />
               an AI Action
             </h2>
@@ -522,7 +522,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               cannot export data or trust
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              IronProof can run locally or air-gapped, so policies, system context and decision
+              Ironproof can run locally or air-gapped, so policies, system context and decision
               evidence remain under the institution&apos;s control.
             </p>
           </div>
@@ -545,7 +545,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <h3 className="metal-text mb-3 font-serif text-2xl">Independent verification</h3>
               <p className="font-light leading-relaxed text-neutral-300">
                 Your auditor re-checks the artifact with a second, independently written verifier —
-                offline, no IronProof dashboard.
+                offline, no Ironproof dashboard.
               </p>
             </div>
             <div className="card-premium fade-up p-10">
@@ -604,14 +604,14 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <div className="halo" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
             <div className="mb-10 flex items-center justify-center gap-8">
-              <IronProofLogo width={111} height={148} title="IronProof monogram" />
+              <IronProofLogo width={111} height={148} title="Ironproof monogram" />
               <ProofSeal size={148} />
             </div>
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
               Before your agent acts, know it&apos;s authorized.
             </h2>
             <p className="mb-10 text-lg font-light text-neutral-400">
-              Choose one money-moving workflow. IronProof will formalize its authorization
+              Choose one money-moving workflow. Ironproof will formalize its authorization
               boundary and show exactly what can — and cannot — execute.
             </p>
             <CtaForm />
