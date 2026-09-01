@@ -85,6 +85,41 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* WHAT IRONPROOF CHANGES */}
+        <section id="changes" className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:px-14">
+          <div className="fade-up mb-14 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">THE OUTCOME</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              What Ironproof changes
+            </h2>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              {
+                title: "Unauthorized actions are stopped before execution.",
+                body: "A system cannot act outside the boundary defined by policy.",
+              },
+              {
+                title: "Policy becomes enforceable.",
+                body: "Critical rules are checked at the authorization boundary, not only monitored afterwards.",
+              },
+              {
+                title: "Every decision produces evidence.",
+                body: "ALLOW and BLOCK decisions can be independently verified.",
+              },
+              {
+                title: "Verification does not depend on Ironproof.",
+                body: "Auditors and technical teams can re-check the evidence offline.",
+              },
+            ].map((c) => (
+              <div key={c.title} className="card-premium fade-up p-10">
+                <h3 className="metal-text mb-3 font-serif text-2xl leading-snug">{c.title}</h3>
+                <p className="font-light leading-relaxed text-neutral-300">{c.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
@@ -96,44 +131,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {o}
               </span>
             ))}
-          </div>
-        </section>
-
-        {/* PLATFORM */}
-        <section id="platform" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">THE PLATFORM</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              Turn policy into an enforceable
-              <br />
-              authorization boundary.
-            </h2>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="card-premium fade-up p-10">
-              <div className="metal-text mb-4 font-serif text-4xl">01</div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Policy Into Mathematics</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Your written authorization policy is compiled into mathematics by a deterministic
-                compiler — the same one the runtime uses.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <div className="metal-text mb-4 font-serif text-4xl">02</div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Prove the Boundary</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                The solver reasons exhaustively over the modeled state space — not a sample of it —
-                and exhibits a counterexample when the boundary can be crossed.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <div className="metal-text mb-4 font-serif text-4xl">03</div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Enforce Before Execution</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                An execution grant is issued only when the requested action satisfies the authorized
-                boundary. Nothing executes without spending it.
-              </p>
-            </div>
           </div>
         </section>
 
@@ -242,6 +239,292 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* THE AGENT DOES NOT CONTROL AUTHORIZATION */}
+        <section className="relative z-10 edge-t px-6 py-32 md:px-14">
+          <div className="fade-up mx-auto max-w-3xl text-center">
+            <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="icon-metal">
+                <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
+                <path d="M9 12 l2 2 l4 -4" />
+              </svg>
+              <span className="track-mid metal-text text-xs">
+                THE AGENT DOES NOT CONTROL AUTHORIZATION
+              </span>
+            </div>
+            <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-300">
+              Prompts can influence what an agent requests. They cannot change what the agent is
+              allowed to do.
+            </p>
+          </div>
+        </section>
+
+        {/* TRY IT */}
+        <RefundDemo />
+
+        {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
+        <Counterexample />
+
+        {/* TESTING VS PROVING */}
+        <section id="compare" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up mb-16 text-center">
+              <p className="track-mid mb-4 text-xs text-neutral-400">THE DIFFERENCE</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+                Testing vs. Proving
+              </h2>
+              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
+                Testing and formal verification answer different questions.
+              </p>
+            </div>
+            <div className="fade-up grid gap-6 md:grid-cols-2">
+              <div className="card-premium relative p-10">
+                <div className="mb-6 flex items-center gap-3">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8a8a90" strokeWidth="1.4" aria-hidden="true">
+                    <path d="M9 3 v6 l-5 9 a2 2 0 0 0 2 3 h12 a2 2 0 0 0 2 -3 l-5 -9 V3" />
+                    <path d="M8 3 h8" />
+                  </svg>
+                  <h3 className="font-serif text-3xl text-neutral-400">Testing</h3>
+                </div>
+                <p className="track-mid mb-3 text-xs text-neutral-400">TESTING ASKS</p>
+                <p className="mb-4 font-light leading-snug text-neutral-300">
+                  Did the executions we tried behave correctly?
+                </p>
+                <TestingDots />
+                <ul className="space-y-3 text-sm">
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="mt-0.5 text-neutral-400">○</span> Checks the cases someone
+                    thought of
+                  </li>
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="mt-0.5 text-neutral-400">○</span>
+                    <span>
+                      &quot;Passed&quot; means <span className="italic">probably</span> fine
+                    </span>
+                  </li>
+                </ul>
+                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
+                  <span className="track-mid text-xs text-neutral-400">CONFIDENCE</span>
+                  <span className="font-serif text-2xl text-neutral-400">Partial</span>
+                </div>
+              </div>
+              <div className="card-premium relative p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
+                <div className="mb-6 flex items-center gap-3">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal" aria-hidden="true">
+                    <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
+                    <path d="M9 12 l2 2 l4 -4" />
+                  </svg>
+                  <h3 className="metal-text font-serif text-3xl">Proving</h3>
+                </div>
+                <p className="track-mid mb-3 text-xs text-neutral-300">PROOF ASKS</p>
+                <p className="mb-4 font-light leading-snug text-neutral-200">
+                  Can the defined property be violated anywhere in the modeled state space?
+                </p>
+                <ProvingDots />
+                <ul className="space-y-3 text-sm">
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="icon-metal mt-0.5">✓</span> Reasons exhaustively over the
+                    formally defined state space
+                  </li>
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="icon-metal mt-0.5">✓</span> If the formal model admits a
+                    violation, Ironproof produces a counterexample
+                  </li>
+                  <li className="flex gap-3 text-neutral-300">
+                    <span className="icon-metal mt-0.5">✓</span> &quot;Proven&quot; means the
+                    defined property cannot be violated within the formal model
+                  </li>
+                </ul>
+                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
+                  <span className="track-mid text-xs text-neutral-300">CONFIDENCE</span>
+                  <span className="metal-text text-right font-serif text-lg">
+                    Mathematical guarantee within the model
+                  </span>
+                </div>
+              </div>
+            </div>
+            <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-lg font-light text-neutral-300">
+              Ironproof does not replace testing. It proves properties that testing cannot
+              exhaustively cover.
+            </p>
+          </div>
+        </section>
+
+        {/* PROVE -> ENFORCE -> VERIFY */}
+        <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-16 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              Prove. Enforce. Verify.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              Your written policy is compiled into mathematics by a deterministic compiler &mdash;
+              the same one the runtime uses.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="card-premium fade-up p-10">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="num-badge font-serif text-3xl">01</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
+                  <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
+                  <path d="M9 12 l2 2 l4 -4" />
+                </svg>
+              </div>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Prove</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Before deployment, Ironproof establishes that the defined policy holds across the
+                modeled action space.
+              </p>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="num-badge font-serif text-3xl">02</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
+                  <rect x="5" y="11" width="14" height="9" rx="1" />
+                  <path d="M8 11 V8 a4 4 0 0 1 8 0 v3" />
+                </svg>
+              </div>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Enforce</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                At runtime, every requested action is checked deterministically before execution.
+              </p>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="num-badge font-serif text-3xl">03</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M9 12 l2 2 l4 -4" />
+                </svg>
+              </div>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Verify</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Every decision produces evidence that can be independently re-checked afterwards.
+              </p>
+            </div>
+          </div>
+          <p className="fade-up mt-8 text-sm font-light text-neutral-400">
+            The theorem that ties the runtime fast path to the full formal model, and the
+            equivalence checks behind it, are in the{" "}
+            <a
+              href={`${locale === defaultLocale ? "" : `/${locale}`}/proof`}
+              className="text-neutral-200 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+            >
+              technical record
+            </a>
+            .
+          </p>
+        </section>
+
+        {/* WHAT IS PROVEN AND WHAT IS NOT */}
+        <section id="limits" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-14 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">THE MODEL, NAMED</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              What is proven &mdash;
+              <br />
+              and what is not.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              A certificate that does not name its own boundary is a decoration.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="card-premium fade-up p-10">
+              <p className="track-mid mb-5 text-xs text-neutral-300">WHAT IS PROVEN</p>
+              <ul className="space-y-3 text-sm">
+                <li className="flex gap-3 text-neutral-300">
+                  <span className="icon-metal mt-0.5">&#10003;</span> The defined property cannot be
+                  violated anywhere in the modeled action space &mdash; for a sequence of any length,
+                  not for a sample of cases.
+                </li>
+                <li className="flex gap-3 text-neutral-300">
+                  <span className="icon-metal mt-0.5">&#10003;</span> The policy the prover reads and
+                  the policy the runtime enforces come from one compiler; a differential check fails
+                  the build if they diverge.
+                </li>
+                <li className="flex gap-3 text-neutral-300">
+                  <span className="icon-metal mt-0.5">&#10003;</span> Each certificate states how many
+                  clauses were encoded, and names the ones that were not.
+                </li>
+              </ul>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <p className="track-mid mb-5 text-xs text-neutral-300">WHAT IS OUTSIDE THE MODEL</p>
+              <ul className="space-y-3 text-sm">
+                <li className="flex gap-3 text-neutral-400">
+                  <span className="mt-0.5 text-neutral-500">&#9675;</span> Clauses that require human
+                  judgment are not encoded, and the certificate says so rather than counting them as
+                  covered.
+                </li>
+                <li className="flex gap-3 text-neutral-400">
+                  <span className="mt-0.5 text-neutral-500">&#9675;</span> The thresholds are your
+                  institution&apos;s chosen numbers. We prove the configuration stays inside them, not
+                  that they are the right numbers.
+                </li>
+                <li className="flex gap-3 text-neutral-400">
+                  <span className="mt-0.5 text-neutral-500">&#9675;</span> The cryptographic base is
+                  NIST standards &mdash; SHA3-512, Ed25519, ML-DSA-65 (FIPS 204) &mdash; not
+                  cryptography of our own.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* VERIFY */}
+        <VerifyArtifact />
+
+        {/* SOVEREIGNTY */}
+        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-16 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">SOVEREIGNTY</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              Built for environments that
+              <br />
+              cannot export data or trust
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              Ironproof can run locally or air-gapped, so policies, system context and decision
+              evidence remain under the institution&apos;s control.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="card-premium fade-up p-10">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+                <rect x="3" y="4" width="18" height="12" rx="1" />
+                <path d="M8 20 h8 M12 16 v4" />
+              </svg>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Local &amp; air-gapped</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                The proof core can operate fully air-gapped — no network access required.
+              </p>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+                <path d="M9 12 l2 2 l4 -4" />
+                <circle cx="12" cy="12" r="9" />
+              </svg>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Independent verification</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Your auditor re-checks the artifact with a second, independently written verifier —
+                offline, no Ironproof dashboard.
+              </p>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7 v5 l3 3" />
+              </svg>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Durable evidence</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Classical + post-quantum signature (Ed25519 + ML-DSA-65, FIPS 204), timestamp
+                bounded from both sides — a seal cannot move backwards in time.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* SPEED */}
         <section id="speed" className="relative z-10 edge-t px-6 py-28 md:px-14">
           <div className="mx-auto max-w-6xl">
@@ -320,245 +603,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="fade-up mt-6 text-center text-xs text-neutral-400">
               Formal guarantees. Without the traditional proof cycle.
             </p>
-          </div>
-        </section>
-
-        {/* TESTING VS PROVING */}
-        <section id="compare" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up mb-16 text-center">
-              <p className="track-mid mb-4 text-xs text-neutral-400">THE DIFFERENCE</p>
-              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-                Testing vs. Proving
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-                Testing and formal verification answer different questions.
-              </p>
-            </div>
-            <div className="fade-up grid gap-6 md:grid-cols-2">
-              <div className="card-premium relative p-10">
-                <div className="mb-6 flex items-center gap-3">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8a8a90" strokeWidth="1.4" aria-hidden="true">
-                    <path d="M9 3 v6 l-5 9 a2 2 0 0 0 2 3 h12 a2 2 0 0 0 2 -3 l-5 -9 V3" />
-                    <path d="M8 3 h8" />
-                  </svg>
-                  <h3 className="font-serif text-3xl text-neutral-400">Testing</h3>
-                </div>
-                <p className="track-mid mb-3 text-xs text-neutral-400">TESTING ASKS</p>
-                <p className="mb-4 font-light leading-snug text-neutral-300">
-                  Did the system behave correctly on the executions we tested?
-                </p>
-                <TestingDots />
-                <ul className="space-y-3 text-sm">
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="mt-0.5 text-neutral-400">○</span> Checks the cases someone
-                    thought of
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="mt-0.5 text-neutral-400">○</span> &quot;Passed&quot; means{" "}
-                    <span className="italic">probably</span> fine
-                  </li>
-                </ul>
-                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
-                  <span className="track-mid text-xs text-neutral-400">CONFIDENCE</span>
-                  <span className="font-serif text-2xl text-neutral-400">Partial</span>
-                </div>
-              </div>
-              <div className="card-premium relative p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
-                <div className="mb-6 flex items-center gap-3">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal" aria-hidden="true">
-                    <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                    <path d="M9 12 l2 2 l4 -4" />
-                  </svg>
-                  <h3 className="metal-text font-serif text-3xl">Proving</h3>
-                </div>
-                <p className="track-mid mb-3 text-xs text-neutral-300">PROVING ASKS</p>
-                <p className="mb-4 font-light leading-snug text-neutral-200">
-                  Can the defined property be violated anywhere in the modeled state space?
-                </p>
-                <ProvingDots />
-                <ul className="space-y-3 text-sm">
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> Reasons exhaustively over the
-                    formally defined state space
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> If the formal model admits a
-                    violation, Ironproof produces a counterexample
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> &quot;Proven&quot; means{" "}
-                    <span className="metal-text">mathematically</span> fine
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> Exhaustive within the proven model
-                    and property
-                  </li>
-                </ul>
-                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
-                  <span className="track-mid text-xs text-neutral-300">CONFIDENCE</span>
-                  <span className="metal-text text-right font-serif text-lg">
-                    Mathematical guarantee within the model
-                  </span>
-                </div>
-              </div>
-            </div>
-            <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-lg font-light text-neutral-300">
-              Ironproof doesn&apos;t replace testing. It answers the question testing cannot
-              exhaustively answer.
-            </p>
-          </div>
-        </section>
-
-        {/* TRY IT */}
-        <RefundDemo />
-
-        {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
-        <Counterexample />
-
-        {/* HOW IT WORKS */}
-        <section id="how" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              How Ironproof Authorizes
-              <br />
-              an AI Action
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              Your written policy is compiled into mathematics — by the same deterministic compiler
-              the runtime uses. The proof runs against that model, not a checklist.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-4">
-            <div className="card-premium fade-up p-8">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">01</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto">
-                  <path d="M4 6 h16 M4 12 h10 M4 18 h7" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-2 font-serif text-xl">Define</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-300">
-                Record the policy version, agent authority, transaction state and requested action.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-8">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">02</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto">
-                  <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                  <path d="M9 12 l2 2 l4 -4" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-2 font-serif text-xl">Prove</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-300">
-                The policy is certified across its entire action space beforehand — so the runtime
-                verdict is instant and deterministic, with no solver in the path. A machine-checked
-                theorem proves this fast path decides exactly like the full formal model — for every
-                policy and action covered by the formal semantics.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-8">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">03</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto">
-                  <rect x="5" y="11" width="14" height="9" rx="1" />
-                  <path d="M8 11 V8 a4 4 0 0 1 8 0 v3" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-2 font-serif text-xl">Enforce</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-300">
-                An execution grant is issued only when the requested action satisfies the
-                authorized boundary. It is single-use and bound to that exact decision.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-8">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">04</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto">
-                  <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                  <path d="M12 8 v4 M12 15 h.01" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-2 font-serif text-xl">Preserve Evidence</h3>
-              <p className="text-sm font-light leading-relaxed text-neutral-300">
-                Preserve the decision, justification and proof result in an independently verifiable
-                artifact.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* THE AGENT DOES NOT CONTROL AUTHORIZATION */}
-        <section className="relative z-10 edge-t px-6 py-32 md:px-14">
-          <div className="fade-up mx-auto max-w-3xl text-center">
-            <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="icon-metal">
-                <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                <path d="M9 12 l2 2 l4 -4" />
-              </svg>
-              <span className="track-mid metal-text text-xs">
-                THE AGENT DOES NOT CONTROL AUTHORIZATION
-              </span>
-            </div>
-            <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-300">
-              Prompts can influence what an agent requests. They cannot change what the agent is
-              allowed to do.
-            </p>
-          </div>
-        </section>
-
-        {/* VERIFY */}
-        <VerifyArtifact />
-
-        {/* SOVEREIGNTY */}
-        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">SOVEREIGNTY</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              Built for environments that
-              <br />
-              cannot export data or trust
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              Ironproof can run locally or air-gapped, so policies, system context and decision
-              evidence remain under the institution&apos;s control.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <rect x="3" y="4" width="18" height="12" rx="1" />
-                <path d="M8 20 h8 M12 16 v4" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Local &amp; air-gapped</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                The proof core can operate fully air-gapped — no network access required.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <path d="M9 12 l2 2 l4 -4" />
-                <circle cx="12" cy="12" r="9" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Independent verification</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Your auditor re-checks the artifact with a second, independently written verifier —
-                offline, no Ironproof dashboard.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 7 v5 l3 3" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Durable evidence</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Classical + post-quantum signature (Ed25519 + ML-DSA-65, FIPS 204), timestamp
-                bounded from both sides — a seal cannot move backwards in time.
-              </p>
-            </div>
           </div>
         </section>
 
