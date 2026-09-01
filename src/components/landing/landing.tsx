@@ -85,6 +85,20 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* CREDITED-BY STRIP */}
+        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
+          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <span className="track-mid text-xs text-neutral-500">
+              SECURITY RESEARCH BY IRONPROOF &mdash; CREDITED BY
+            </span>
+            {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
+              <span key={o} className="metal-text text-sm font-medium">
+                {o}
+              </span>
+            ))}
+          </div>
+        </section>
+
         {/* WHAT IRONPROOF CHANGES */}
         <section id="changes" className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
@@ -116,20 +130,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <h3 className="metal-text mb-3 font-serif text-2xl leading-snug">{c.title}</h3>
                 <p className="font-light leading-relaxed text-neutral-300">{c.body}</p>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CREDITED-BY STRIP */}
-        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
-          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            <span className="track-mid text-xs text-neutral-500">
-              SECURITY RESEARCH BY IRONPROOF &mdash; CREDITED BY
-            </span>
-            {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
-              <span key={o} className="metal-text text-sm font-medium">
-                {o}
-              </span>
             ))}
           </div>
         </section>
