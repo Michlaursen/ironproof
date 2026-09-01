@@ -120,6 +120,20 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* CREDITED-BY STRIP */}
+        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
+          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <span className="track-mid text-xs text-neutral-500">
+              SECURITY RESEARCH BY IRONPROOF &mdash; CREDITED BY
+            </span>
+            {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
+              <span key={o} className="metal-text text-sm font-medium">
+                {o}
+              </span>
+            ))}
+          </div>
+        </section>
+
         {/* WHEN THE AGENT CAN MOVE MONEY */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 text-center">
@@ -595,9 +609,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* PUBLIC TECHNICAL RECORD */}
         <section className="relative z-10 edge-t px-6 py-20 md:px-14">
           <div className="fade-up mx-auto max-w-4xl text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-400">
-              SECURITY RESEARCH BY IRONPROOF &mdash; CREDITED BY
-            </p>
+            <p className="track-mid mb-4 text-xs text-neutral-400">THE SAME ENGINE</p>
             <h2 className="metal-text font-serif text-3xl font-medium md:text-5xl">
               Same proof engine. Proven on real vulnerabilities.
             </h2>
