@@ -39,7 +39,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="fade-up">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
-                PROVABLE SECURITY INFRASTRUCTURE FOR AI AGENTS AND CRITICAL SYSTEMS
+                POLICY ENFORCEMENT FOR CRITICAL ACTIONS &mdash; PROVEN, SEALED, VERIFIABLE
               </p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
@@ -47,9 +47,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
-                Ironproof verifies high-impact agent actions against{" "}
-                <span className="metal-text">formally defined policy</span> before execution — and
-                produces independently verifiable evidence of every decision.
+                Ironproof blocks a critical action before it executes if it violates your{" "}
+                <span className="metal-text">policy</span>, and lets it through if it complies
+                &mdash; whether it was initiated by an AI agent, a script, an API or a person. Every
+                decision is sealed cryptographically and can be verified independently afterwards.
               </p>
               <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
@@ -134,20 +135,64 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* WHEN THE AGENT CAN MOVE MONEY */}
+        {/* ONE GATE, ANY INITIATOR */}
+        <section id="initiators" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
+          <div className="fade-up mb-12 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">ONE GATE, ANY INITIATOR</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              The gate does not ask who is asking.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              It asks whether the action is inside the policy in force. The same check applies to
+              every path that can reach a critical system.
+            </p>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                who: "AI agent",
+                body: "A model proposes an action. Prompts shape the request; they cannot widen what is allowed.",
+              },
+              {
+                who: "Script or scheduled job",
+                body: "A batch process runs at 02:00 with nobody watching. The boundary holds without a reviewer.",
+              },
+              {
+                who: "API call",
+                body: "An integration partner or internal service calls the endpoint. Its credentials say who it is, not what it may do now.",
+              },
+              {
+                who: "Person",
+                body: "An operator with a console and a deadline. The policy that binds the machine binds the hand too.",
+              },
+            ].map((c) => (
+              <div key={c.who} className="card-premium fade-up p-8">
+                <p className="track-mid mb-4 text-[10px] text-neutral-500">INITIATOR</p>
+                <h3 className="metal-text mb-3 font-serif text-2xl leading-snug">{c.who}</h3>
+                <p className="text-sm font-light leading-relaxed text-neutral-300">{c.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="fade-up mt-8 max-w-2xl text-sm font-light text-neutral-400">
+            Every authorization records the requesting actor, the policy version and the action.
+            Nothing executes without spending a single-use grant bound to that exact decision.
+          </p>
+        </section>
+
+        {/* WHEN A SYSTEM CAN MOVE MONEY */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 text-center">
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              When the agent can move money,
+              When a system can move money,
               <br />
-              grant access or delete records,
+              grant access, delete records or ship a change,
               <br />
               authorization becomes infrastructure.
             </h2>
             <p className="track-mid mx-auto mt-6 text-xs text-neutral-400">
-              WHAT THE AGENT ASKED FOR &mdash; AND WHAT HAPPENED
+              WHAT WAS REQUESTED &mdash; AND WHAT HAPPENED
             </p>
-            <div className="fade-up mx-auto mt-8 grid max-w-5xl gap-4 text-left sm:grid-cols-3">
+            <div className="fade-up mx-auto mt-8 grid max-w-6xl gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
                   ask: "Refund $640 to a payee already on file",
@@ -155,18 +200,23 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   why: "Under the $1,000 daily cap. Two approvers on record.",
                 },
                 {
-                  ask: "Pay $12,000 to a payee added four hours ago",
+                  ask: "Grant an admin role to a service account",
                   v: "BLOCK",
-                  why: "That payee is not in the authorized set.",
+                  why: "Privileged grants require an open change ticket and two approvers. Neither is present.",
                 },
                 {
-                  ask: "Change the beneficiary on a live account",
+                  ask: "Delete 40,000 customer records flagged inactive",
                   v: "BLOCK",
-                  why: "Policy requires two approvers. One signed.",
+                  why: "Bulk deletion above 1,000 rows requires a retention-hold check. None recorded.",
+                },
+                {
+                  ask: "Push a configuration change to the payment rail",
+                  v: "BLOCK",
+                  why: "The change window is closed and the rollback plan is unsigned.",
                 },
               ].map((r) => (
                 <div key={r.ask} className="card-premium flex flex-col p-6">
-                  <p className="track-mid mb-3 text-[10px] text-neutral-500">THE AGENT ASKS</p>
+                  <p className="track-mid mb-3 text-[10px] text-neutral-500">THE REQUEST</p>
                   <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{r.ask}</p>
                   <div className="mt-auto border-t border-white/5 pt-4">
                     <span
@@ -195,9 +245,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <circle cx="9" cy="8" r="3" />
                 <path d="M3 20 a6 6 0 0 1 12 0 M16 6 a3 3 0 0 1 0 5 M21 20 a5 5 0 0 0 -5 -5" />
               </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Primary buyers</h3>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Who owns the policy</h3>
               <p className="font-light leading-relaxed text-neutral-300">
-                Technology risk, operational risk and compliance teams.
+                Risk, security and compliance teams in regulated environments &mdash; the people who
+                already have the rules on paper and no way to prove they hold at execution.
               </p>
             </div>
             <div className="card-premium fade-up p-10">
@@ -207,39 +258,38 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </svg>
               <h3 className="metal-text mb-3 font-serif text-2xl">Initial engagement</h3>
               <p className="font-light leading-relaxed text-neutral-300">
-                Select one workflow, define the transaction boundary and produce an independently
-                verifiable proof artifact.
+                Select one critical action, define its authorization boundary and produce an
+                independently verifiable proof artifact.
               </p>
             </div>
           </div>
-          <div className="card-premium fade-up relative overflow-hidden p-10 md:p-14">
-            <span className="metal-text absolute left-6 top-2 select-none font-serif text-8xl opacity-20">
-              &ldquo;
-            </span>
-            <blockquote className="relative">
-              <p className="font-serif text-2xl italic leading-snug text-neutral-200 md:text-3xl">
-                They do not use it to replace human judgment or to fully automate critical decisions
-                given the significant financial, legal and reputational consequences.
-              </p>
-              <footer className="mt-6 flex items-center gap-3">
-                <div className="hairline h-px w-10" />
-                <a
-                  href="https://www.bankofcanada.ca/publications/financial-system-survey/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="track-mid inline-flex items-center gap-2 text-xs text-neutral-400 transition hover:text-white"
-                >
-                  BANK OF CANADA — FINANCIAL SYSTEM SURVEY, MAY 2026
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                    <path d="M7 17 L17 7 M9 7 h8 v8" />
-                  </svg>
-                </a>
-              </footer>
-            </blockquote>
+          <div className="card-premium fade-up p-10 md:p-12">
+            <p className="track-mid mb-6 text-xs text-neutral-400">
+              WHERE THE POLICY ALREADY EXISTS ON PAPER
+            </p>
+            <div className="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { where: "Financial services", rules: "OSFI E-23 · SOX · AML programs" },
+                { where: "Healthcare", rules: "HIPAA · PHIPA · device software" },
+                { where: "Government", rules: "Directive on Automated Decision-Making" },
+                { where: "Critical infrastructure", rules: "IEC 62443 · change control" },
+                { where: "Software delivery", rules: "SOC 2 change management · release gates" },
+                { where: "Data platforms", rules: "Retention holds · privacy law (Law 25, PIPEDA)" },
+              ].map((i) => (
+                <div key={i.where}>
+                  <p className="metal-text font-serif text-xl">{i.where}</p>
+                  <p className="mt-1 text-sm font-light text-neutral-400">{i.rules}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-8 text-sm font-light leading-relaxed text-neutral-400">
+              These frameworks already say what must never happen. Ironproof turns that sentence
+              into a boundary the system cannot cross, and into evidence the regulator can re-check.
+            </p>
           </div>
         </section>
 
-        {/* THE AGENT DOES NOT CONTROL AUTHORIZATION */}
+        {/* THE REQUESTER DOES NOT CONTROL AUTHORIZATION */}
         <section className="relative z-10 edge-t px-6 py-32 md:px-14">
           <div className="fade-up mx-auto max-w-3xl text-center">
             <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
@@ -248,12 +298,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <path d="M9 12 l2 2 l4 -4" />
               </svg>
               <span className="track-mid metal-text text-xs">
-                THE AGENT DOES NOT CONTROL AUTHORIZATION
+                THE REQUESTER DOES NOT CONTROL AUTHORIZATION
               </span>
             </div>
             <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-300">
-              Prompts can influence what an agent requests. They cannot change what the agent is
-              allowed to do.
+              Prompts, scripts and callers can influence what is requested. They cannot change
+              what is allowed.
             </p>
           </div>
         </section>
@@ -652,11 +702,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <ProofSeal size={148} />
             </div>
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
-              Before your agent acts, know it&apos;s authorized.
+              Before it executes, know it&apos;s authorized.
             </h2>
             <p className="mb-10 text-lg font-light text-neutral-400">
-              Choose one money-moving workflow. Ironproof will formalize its authorization
-              boundary and show exactly what can — and cannot — execute.
+              Choose one critical action &mdash; a payment, an access grant, a deletion, a
+              deployment. Ironproof will formalize its authorization boundary and show exactly what
+              can &mdash; and cannot &mdash; execute.
             </p>
             <CtaForm />
           </div>

@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "Ironproof | Verifiable Authorization for Irreversible AI Actions",
+    title: "Ironproof | Policy Enforcement for Critical Actions — Proven, Sealed, Verifiable",
     description:
-      "Ironproof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
+      "Ironproof blocks a critical action before it executes if it violates your policy, and lets it through if it complies — whether it was initiated by an AI agent, a script, an API or a person. Every decision is sealed cryptographically and can be verified independently afterwards.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "Ironproof proves what an AI agent may and may not do before it acts — money movements, record deletions, data leaving, code shipped to production — producing evidence that risk, compliance and audit teams verify independently.",
+      "Ironproof blocks a critical action before it executes if it violates your policy, and lets it through if it complies — whether it was initiated by an AI agent, a script, an API or a person. Every decision is sealed cryptographically and can be verified independently afterwards.",
   },
   header: {
     nav: [

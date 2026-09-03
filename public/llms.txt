@@ -1,19 +1,19 @@
 # Ironproof
 
-> Ironproof provides verifiable authorization and decision evidence for money-moving AI workflows. It verifies that a specific financial action — a refund, payment, disbursement or beneficiary change — stays inside the customer's written policy, agent authority and transaction state before execution, and preserves the authorization basis as evidence a third party can verify independently.
+> Ironproof is policy enforcement for critical actions. It blocks a critical action before it executes if it violates the customer's written policy, and lets it through if it complies — whether the action was initiated by an AI agent, a script, an API call or a person. Every decision is sealed cryptographically (Ed25519 + ML-DSA-65) and can be verified independently afterwards, offline, without an Ironproof dashboard.
 
-The written policy is compiled into mathematics by the same deterministic compiler the runtime uses, so the proof runs against that model rather than against a checklist. When an action can violate a rule or a cumulative limit, Ironproof returns the counterexample. When it cannot, it issues a single-use execution grant and seals the decision, the justification and the proof result into an artifact that can be re-verified offline with a trusted public key — without an Ironproof dashboard.
+The written policy is compiled into mathematics by the same deterministic compiler the runtime uses, so the proof runs against that model rather than against a checklist. When an action can violate a rule or a cumulative limit, Ironproof returns the counterexample. When it cannot, it issues a single-use execution grant bound to that exact decision and to the policy in force, and seals the decision, the justification and the proof result into an artifact a third party can re-verify.
 
-Ironproof is a Canadian company. It starts with back-office AI agents in Canadian financial services; the primary buyers are technology risk, operational risk and compliance teams.
+Ironproof is a Canadian company. Its first deployments target regulated environments — financial services, healthcare, government, critical infrastructure and software delivery — where the policy already exists on paper and nobody can prove it holds at execution. The people who own that policy are risk, security and compliance teams.
 
 ## Product
 
-- **Ironproof Actions** — the authorization layer for money-moving AI agents. It captures the decision context (policy version, agent authority, requested action, cumulative state), proves whether the action stays inside the customer-defined transaction boundary, issues a single-use execution grant bound to that exact decision and to the policy in force, and preserves why the action was allowed or denied in a sealed artifact.
+- **Ironproof Actions** — the authorization layer for critical actions: moving money, granting access, deleting or altering records, changing production. It captures the decision context (policy version, agent authority, requested action, cumulative state), proves whether the action stays inside the customer-defined transaction boundary, issues a single-use execution grant bound to that exact decision and to the policy in force, and preserves why the action was allowed or denied in a sealed artifact.
 
 ## Key differentiators
 
 - Verification happens **before** execution, not in logs after the fact.
-- The proof covers sequences, not only the request at hand: no sequence of actions the agent can take escapes the boundary.
+- The proof covers sequences, not only the request at hand: no sequence of actions the requester can take escapes the boundary.
 - The policy is written by the customer, not by Ironproof, and the artifact records that.
 - Nothing executes without spending a grant — the gate is the only entrance, structurally.
 - Evidence is verifiable offline by the customer's own auditor, and supports classical and post-quantum signatures.
