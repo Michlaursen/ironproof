@@ -2,7 +2,7 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "Ironproof | Policy Enforcement for Critical Actions — Proven, Sealed, Verifiable",
+    title: "Ironproof | Deterministic Authorization for Critical Actions",
     description:
       "Ironproof blocks a critical action before it executes if it violates your policy, and lets it through if it complies — whether it was initiated by an AI agent, a script, an API or a person. Every decision is sealed cryptographically and can be verified independently afterwards.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
