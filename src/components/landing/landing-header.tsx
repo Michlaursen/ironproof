@@ -23,7 +23,8 @@ function links(variant: Variant, locale: Locale): { href: string; label: string;
   const p = variant === "sub" ? r || "/" : "";
   return [
     { href: `${p}#how`, label: "HOW IT WORKS" },
-    { href: `${p}#start`, label: "AI AGENTS" },
+    { href: `${p}#initiators`, label: "ANY INITIATOR" },
+    { href: `${p}#start`, label: "CRITICAL ACTIONS" },
     { href: `${r}/proof`, label: "PROOF", page: "proof" },
     { href: `${p}#verify`, label: "EVIDENCE" },
     { href: `${r}/provable-ai`, label: "PROVABLE AI", page: "provable-ai" },

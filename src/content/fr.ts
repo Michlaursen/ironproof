@@ -3,13 +3,13 @@ import type { SiteContent } from "./types";
 export const fr: SiteContent = {
   meta: {
     title:
-      "Ironproof | Autorisation vérifiable pour les actions IA irréversibles",
+      "Ironproof | Application des politiques aux actions critiques — prouvée, scellée, vérifiable",
     description:
-      "Ironproof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
+      "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Ironproof prouve ce qu’un agent IA peut et ne peut pas faire avant qu’il agisse — mouvements d’argent, dossiers supprimés, données qui sortent, code déployé en production — et produit une preuve que les équipes de risque, de conformité et d’audit vérifient indépendamment.",
+      "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
   },
   header: {
     nav: [
