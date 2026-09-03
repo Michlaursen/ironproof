@@ -39,7 +39,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="fade-up">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
-                POLICY ENFORCEMENT FOR CRITICAL ACTIONS &mdash; PROVEN, SEALED, VERIFIABLE
+                DETERMINISTIC AUTHORIZATION FOR CRITICAL ACTIONS
               </p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
@@ -112,7 +112,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             {[
               {
                 title: "Unauthorized actions are stopped before execution.",
-                body: "A system cannot act outside the boundary defined by policy.",
+                body: "Actions routed through the authorization boundary cannot execute outside the enforced policy.",
               },
               {
                 title: "Policy becomes enforceable.",
@@ -289,25 +289,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* THE REQUESTER DOES NOT CONTROL AUTHORIZATION */}
-        <section className="relative z-10 edge-t px-6 py-32 md:px-14">
-          <div className="fade-up mx-auto max-w-3xl text-center">
-            <div className="chip-metal inline-flex items-center gap-3 px-7 py-4">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="icon-metal">
-                <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                <path d="M9 12 l2 2 l4 -4" />
-              </svg>
-              <span className="track-mid metal-text text-xs">
-                THE REQUESTER DOES NOT CONTROL AUTHORIZATION
-              </span>
-            </div>
-            <p className="mx-auto mt-6 max-w-xl font-light leading-relaxed text-neutral-300">
-              Prompts, scripts and callers can influence what is requested. They cannot change
-              what is allowed.
-            </p>
-          </div>
-        </section>
-
         {/* TRY IT */}
         <RefundDemo />
 
@@ -399,19 +380,19 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* PROVE -> ENFORCE -> VERIFY */}
+        {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
             <p className="track-mid mb-4 text-xs text-neutral-400">HOW IT WORKS</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              Prove. Enforce. Verify.
+              Prove. Enforce. Seal. Verify.
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
               Your written policy is compiled into mathematics by a deterministic compiler &mdash;
               the same one the runtime uses.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div className="card-premium fade-up p-10">
               <div className="mb-5 flex items-center gap-3">
                 <span className="num-badge font-serif text-3xl">01</span>
@@ -443,13 +424,29 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <div className="mb-5 flex items-center gap-3">
                 <span className="num-badge font-serif text-3xl">03</span>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
+                  <path d="M12 3 l7.8 4.5 v9 L12 21 l-7.8 -4.5 v-9 Z" />
+                  <path d="M9 12 h6" />
+                </svg>
+              </div>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Seal</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Each decision is sealed at execution time &mdash; SHA3-512 digest, ML-DSA-65
+                signature &mdash; binding the action, the policy version and the verdict into one
+                artifact.
+              </p>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="num-badge font-serif text-3xl">04</span>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M9 12 l2 2 l4 -4" />
                 </svg>
               </div>
               <h3 className="metal-text mb-3 font-serif text-2xl">Verify</h3>
               <p className="font-light leading-relaxed text-neutral-300">
-                Every decision produces evidence that can be independently re-checked afterwards.
+                The certificate is re-checked against its sealed inputs: the same verdict must
+                come back, or the seal is broken.
               </p>
             </div>
           </div>
@@ -678,11 +675,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               >
                 CVE-2026-41682
               </a>
-              {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
-                <span key={o} className="chip-metal track-mid px-3 py-1 text-xs text-neutral-300">
-                  {o}
-                </span>
-              ))}
             </div>
             <a
               href={`${locale === defaultLocale ? "" : `/${locale}`}/proof`}
