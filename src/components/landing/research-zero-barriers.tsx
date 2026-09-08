@@ -72,9 +72,22 @@ function Figure({ id, locale, cap, alt }: { id: FigId; locale: Locale; cap: stri
       </div>
     );
 
+  /* Charts carry their labels inside the SVG, so legibility is a function of
+     rendered width: inside the max-w-4xl prose column they land at ~808px,
+     which drops 12.5px label text to 9.4px on screen. Two things fix that —
+     the figure breaks out wider than the prose from lg up, and below that it
+     scrolls horizontally against a min-width rather than shrinking the type. */
   return (
-    <figure className="fade-up my-14">
-      {id === "sectors" ? chart : <div className="card-premium p-6 md:p-8">{chart}</div>}
+    <figure className="fade-up my-14 lg:-mx-16 xl:-mx-32">
+      {id === "sectors" ? (
+        <div className="overflow-x-auto">
+          <div className="min-w-[680px]">{chart}</div>
+        </div>
+      ) : (
+        <div className="card-premium overflow-x-auto p-6 md:p-8">
+          <div className="min-w-[1000px]">{chart}</div>
+        </div>
+      )}
       <figcaption className="track-mid edge-t mt-5 pt-4 text-[11px] leading-relaxed text-neutral-500">
         {cap}
       </figcaption>

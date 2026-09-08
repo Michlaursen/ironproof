@@ -348,6 +348,7 @@ export function DetectionChart({ locale, label }: { locale: Locale; label: strin
       {rows.map(([name, sub, val], i) => {
         const yy = y + i * gap;
         const w = Math.max((span * hours[i]) / max, 3);
+        const inside = x0 + w + 16 + val.length * 21 * 0.74 > 1000;
         return (
           <g key={name}>
             <Txt x={70} y={yy + 16} size={16}>
@@ -357,12 +358,15 @@ export function DetectionChart({ locale, label }: { locale: Locale; label: strin
               {sub}
             </Cap>
             <rect x={x0} y={yy} width={w} height={bh} fill={colours[i]} rx={2} />
+            {/* A long bar leaves no room to the right of it inside the viewBox,
+                so the value goes inside, knocked out of the fill. */}
             <text
-              x={x0 + w + 16}
+              x={inside ? x0 + w - 16 : x0 + w + 16}
               y={yy + bh / 2 + 7}
               fontFamily={MONO}
               fontSize={21}
-              fill={colours[i]}
+              fill={inside ? BG : colours[i]}
+              textAnchor={inside ? "end" : "start"}
               fontWeight={500}
             >
               {val}
