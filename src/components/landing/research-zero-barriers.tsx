@@ -175,12 +175,23 @@ function Blocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
   );
 }
 
-export function ResearchZeroBarriers({ locale = defaultLocale }: { locale?: Locale }) {
+/*
+ * `locale` selects the copy; `navLocale` selects the header links. They differ
+ * while French is written but unreviewed: /fr serves the English note, and the
+ * header still needs to point at /fr for the rest of the site.
+ */
+export function ResearchZeroBarriers({
+  locale = defaultLocale,
+  navLocale,
+}: {
+  locale?: Locale;
+  navLocale?: Locale;
+}) {
   const c = RESEARCH_COPY[locale] ?? RESEARCH_COPY.en;
 
   return (
     <div className="flex flex-1 flex-col">
-      <LandingHeader variant="sub" locale={locale} />
+      <LandingHeader variant="sub" locale={navLocale ?? locale} />
 
       <main className="flex-1">
         {/* HERO */}

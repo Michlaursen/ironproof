@@ -6,6 +6,21 @@ import { RESEARCH_COPY } from "@/components/landing/research-copy";
 
 const SLUG = "research/zero-barriers-one-reviewer";
 
+/*
+ * The French note is written and lives in RESEARCH_COPY.fr, but it has not had
+ * a native Quebec French reader yet (rule #78), so it is not served. /fr/…
+ * renders the English note — the same posture /provable-ai takes — and points
+ * its canonical at the English URL, so we are not advertising a French version
+ * that does not exist. No fr hreflang and no fr sitemap alternate for the same
+ * reason.
+ *
+ * To turn French on after review: set CONTENT_LOCALE back to `locale`, restore
+ * the fr entry in `languages` below, and re-add the fr alternate in
+ * src/app/sitemap.ts. Nothing else needs to change — the charts and the copy
+ * are already bilingual and the layout guard already covers both.
+ */
+const CONTENT_LOCALE = "en" as const;
+
 type PageProps = {
   params: Promise<{ locale: string }>;
 };
@@ -14,23 +29,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   if (!isLocale(locale)) return {};
 
-  const path = locale === "en" ? `/${SLUG}` : `/${locale}/${SLUG}`;
-  const { title, description } = RESEARCH_COPY[locale].meta;
+  const { title, description } = RESEARCH_COPY[CONTENT_LOCALE].meta;
 
   return {
     title,
     description,
     authors: [{ name: "Miguel Laursen" }],
     alternates: {
-      canonical: path,
-      languages: { en: `/${SLUG}`, fr: `/fr/${SLUG}`, "x-default": `/${SLUG}` },
+      canonical: `/${SLUG}`,
+      languages: { en: `/${SLUG}`, "x-default": `/${SLUG}` },
     },
     openGraph: {
       title,
       description,
       type: "article",
-      url: `https://ironproof.ai${path}`,
-      locale: locale === "fr" ? "fr_CA" : "en_US",
+      url: `https://ironproof.ai/${SLUG}`,
+      locale: "en_US",
       publishedTime: "2026-09-08",
       authors: ["Miguel Laursen"],
     },
@@ -47,8 +61,8 @@ export default async function ResearchZeroBarriersPage({ params }: PageProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: RESEARCH_COPY[locale].h1,
-    description: RESEARCH_COPY[locale].meta.description,
+    headline: RESEARCH_COPY[CONTENT_LOCALE].h1,
+    description: RESEARCH_COPY[CONTENT_LOCALE].meta.description,
     author: {
       "@type": "Person",
       name: "Miguel Laursen",
@@ -56,9 +70,9 @@ export default async function ResearchZeroBarriersPage({ params }: PageProps) {
     },
     publisher: { "@type": "Organization", name: "Ironproof", url: "https://ironproof.ai" },
     datePublished: "2026-09-08",
-    inLanguage: locale === "fr" ? "fr-CA" : "en",
+    inLanguage: "en",
     isAccessibleForFree: true,
-    mainEntityOfPage: `https://ironproof.ai${locale === "en" ? `/${SLUG}` : `/${locale}/${SLUG}`}`,
+    mainEntityOfPage: `https://ironproof.ai/${SLUG}`,
     citation: [
       "https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing",
       "https://huggingface.co/blog/agent-intrusion-technical-timeline",
@@ -73,7 +87,7 @@ export default async function ResearchZeroBarriersPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <ResearchZeroBarriers locale={locale} />
+      <ResearchZeroBarriers locale={CONTENT_LOCALE} navLocale={locale} />
     </>
   );
 }

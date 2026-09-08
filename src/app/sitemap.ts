@@ -41,18 +41,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     // A dated research note: lastModified is its publication date, not the
-    // build date, so a re-deploy does not claim the analysis changed.
+    // build date, so a re-deploy does not claim the analysis changed. English
+    // only for now — the French is written but not native-reviewed, so /fr
+    // serves the English note and is not advertised as a French alternate.
     {
       url: "https://ironproof.ai/research/zero-barriers-one-reviewer",
       lastModified: new Date("2026-09-08"),
       changeFrequency: "yearly",
       priority: 0.7,
-      alternates: {
-        languages: {
-          en: "https://ironproof.ai/research/zero-barriers-one-reviewer",
-          fr: "https://ironproof.ai/fr/research/zero-barriers-one-reviewer",
-        },
-      },
     },
   ];
 }

@@ -1,11 +1,17 @@
 /*
  * Copy for the research note "Zero barriers, one reviewer".
  *
- * English is the reference. The French is Quebec French and follows the same
- * rule as landing/copy.ts — it MUST be read by a native reviewer before this
- * goes live (rule #78 "professeur": zero faults, full accents). It has not
- * been validator-checked. Sections 5 and 7 carry the load-bearing hedges and
- * are where a mistranslation would cost the most.
+ * English is the reference.
+ *
+ * The French below is written but NOT SERVED. /fr/research/... renders the
+ * English note, because this translation has not had a native Quebec French
+ * reader (rule #78 "professeur": zero faults, full accents) and a research note
+ * whose value is precision should not ship its most careful paragraphs
+ * unreviewed. Sections 5 and 7 hold the load-bearing hedges and are where a
+ * mistranslation would cost the most — start there.
+ *
+ * To turn it on: see CONTENT_LOCALE in
+ * src/app/[locale]/research/zero-barriers-one-reviewer/page.tsx.
  *
  * Inline syntax, rendered by <Rich> in research-zero-barriers.tsx:
  *   **bold**            -> emphasis in --foreground
