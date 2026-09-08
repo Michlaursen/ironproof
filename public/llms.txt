@@ -23,6 +23,10 @@ Ironproof is a Canadian company. Its first deployments target regulated environm
 
 Eight independent organizations credit Ironproof or its founder by name in their own public source trees: IBM, GnuPG, Mozilla, Red Hat / OpenELA, wolfSSL, VideoLAN, OFFIS / DCMTK and libmodbus. Four security preprints on arXiv (cs.CR) disclose the methods, datasets, limitations and failure cases. A Lean 4 theorem checks that the runtime policy compiler and the solver encoding represent the same decision logic, and the verification suite can be rerun end to end.
 
+## Research
+
+- **Zero barriers, one reviewer** (Miguel Laursen, 8 September 2026) — https://ironproof.ai/research/zero-barriers-one-reviewer — aggregates four 2026 agent containment disclosures (Hugging Face / OpenAI, Anthropic, Meta, UK AI Security Institute) with an enterprise survey, and derives figures not published elsewhere: an 8.2% per-run rate of unsanctioned action across 122 AISI runs; a 7.3x spread between two frontier models on the same task; a detection window 5.5x longer than the 13 hours a comparable agent needed to reach cluster-admin at Hugging Face; and 5.84 suspected incidents per confirmed one in financial services against 1.08 in healthcare. Every derived figure shows its arithmetic, and a limitations section states what the evidence does not support — three of the four incidents ran in deliberately permissive evaluation environments with safety classifiers disabled. Available in English and French.
+
 ## Limits worth stating
 
 Proofs are relative to the declared model and its assumptions — the solver checks all states that model represents, not the world. Ironproof is early, and is onboarding its first design partners.
