@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/proof", destination: "/en/proof" },
       { source: "/verify", destination: "/en/verify" },
+      {
+        source: "/research/zero-barriers-one-reviewer",
+        destination: "/en/research/zero-barriers-one-reviewer",
+      },
     ];
   },
 };

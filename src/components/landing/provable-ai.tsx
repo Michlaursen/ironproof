@@ -87,6 +87,28 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
                 impossible.
               </p>
             </blockquote>
+
+            {/* The sentence above is the claim; the research note is the number
+                behind it. Highest-value inbound link to /research. */}
+            <a
+              href={
+                locale === "en"
+                  ? "/research/zero-barriers-one-reviewer"
+                  : `/${locale}/research/zero-barriers-one-reviewer`
+              }
+              className="group mt-6 block max-w-2xl rounded-md border border-seal/20 bg-surface-2 p-6 transition hover:border-seal/40"
+            >
+              <span className="track-mid mb-2 block text-[11px] text-seal">
+                RESEARCH — THE NUMBER BEHIND THAT SENTENCE
+              </span>
+              <span className="mb-2 block font-serif text-xl leading-snug text-foreground md:text-2xl">
+                The detection window was 5.5&times; longer than the whole attack
+              </span>
+              <span className="block text-sm font-light leading-relaxed text-neutral-400">
+                Four 2026 agent containment failures, aggregated — with the derived figures, the
+                arithmetic, and the limitations stated in full.
+              </span>
+            </a>
           </div>
         </section>
 
