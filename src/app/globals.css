@@ -39,6 +39,11 @@ html {
   scroll-behavior: smooth;
   /* Larger base so the whole rem-scaled design reads bigger (Miguel: too small). */
   font-size: 112.5%;
+  /* Hands the dark palette to everything the browser draws itself: scrollbars,
+   * checkboxes, range tracks, form controls. Without it the UA paints its light
+   * defaults — the demo's approval checkbox was a solid white square on black,
+   * and the scrollbar a white bar on every platform that reserves one. */
+  color-scheme: dark;
 }
 
 body {
@@ -504,4 +509,17 @@ summary:focus-visible {
     rgba(228, 233, 255, 0.2) 82%,
     rgba(228, 233, 255, 0.46) 100%
   );
+}
+
+/* Typographic wrapping. Cormorant at display sizes leaves ugly ragging when a
+ * heading breaks by pure line-fill: "The gate does not ask who is / asking."
+ * left one word alone on the second line. `balance` evens the lines of short
+ * blocks (browsers cap it around 6 lines, so it never touches body copy);
+ * `pretty` only pulls the last line of a paragraph up, killing widows. Both
+ * degrade to normal wrapping where unsupported — nothing to guard. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li {
+  text-wrap: pretty;
 }
