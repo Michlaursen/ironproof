@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { IronProofLogo } from "@/components/ironproof-logo";
 import { IconMenu, IconClose } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
@@ -18,16 +18,24 @@ function routePrefix(locale: Locale): string {
 // In-page anchors stay in-page on home ("#how") and resolve to that locale's
 // home route from a sub-page ("/#how", "/fr#how"). The sub-page variant matters:
 // a bare "#how" on /proof points at an id that page does not have.
-function links(variant: Variant, locale: Locale): { href: string; label: string; page?: Active }[] {
+/** `leaves` marks an entry that goes to another page rather than down this one. */
+function links(
+  variant: Variant,
+  locale: Locale,
+): { href: string; label: string; page?: Active; leaves?: boolean }[] {
   const r = routePrefix(locale);
   const p = variant === "sub" ? r || "/" : "";
+  // Two kinds of destination, and the reader cannot tell them apart from the
+  // label alone: the first four move down this page, the last two leave it.
+  // They used to alternate, so the row read as six equivalent things. Grouped
+  // — anchors, then pages — the separator can say which is which.
   return [
     { href: `${p}#how`, label: "HOW IT WORKS" },
     { href: `${p}#initiators`, label: "ANY INITIATOR" },
     { href: `${p}#start`, label: "CRITICAL ACTIONS" },
-    { href: `${r}/proof`, label: "PROOF", page: "proof" },
     { href: `${p}#verify`, label: "EVIDENCE" },
-    { href: `${r}/provable-ai`, label: "PROVABLE AI", page: "provable-ai" },
+    { href: `${r}/proof`, label: "PROOF", page: "proof", leaves: true },
+    { href: `${r}/provable-ai`, label: "PROVABLE AI", page: "provable-ai", leaves: true },
   ];
 }
 
@@ -59,17 +67,21 @@ export function LandingHeader({
 
         {/* Desktop nav */}
         <nav className="track-nav hidden flex-1 items-center justify-between gap-x-3 text-[11px] xl:flex 2xl:gap-x-[18px] 2xl:pl-4 2xl:text-xs">
-          {LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              aria-current={isActive(l.page) ? "page" : undefined}
-              className={`whitespace-nowrap rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-                isActive(l.page) ? "metal-shine" : "metal-text"
-              }`}
-            >
-              {l.label}
-            </a>
+          {LINKS.map((l, i) => (
+            <Fragment key={l.href}>
+              {l.leaves && !LINKS[i - 1]?.leaves ? (
+                <span className="nav-divider" aria-hidden="true" />
+              ) : null}
+              <a
+                href={l.href}
+                aria-current={isActive(l.page) ? "page" : undefined}
+                className={`whitespace-nowrap rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
+                  isActive(l.page) ? "metal-shine" : "metal-text"
+                }`}
+              >
+                {l.label}
+              </a>
+            </Fragment>
           ))}
           <a
             href={contactHref}
@@ -102,8 +114,8 @@ export function LandingHeader({
                 aria-current={isActive(l.page) ? "page" : undefined}
                 onClick={() => setOpen(false)}
                 className={`track-mid border-b border-white/5 py-4 text-sm ${
-                  isActive(l.page) ? "metal-shine" : "metal-text"
-                }`}
+                  l.leaves && !LINKS[LINKS.indexOf(l) - 1]?.leaves ? "mt-2 border-t border-white/10 pt-6" : ""
+                } ${isActive(l.page) ? "metal-shine" : "metal-text"}`}
               >
                 {l.label}
               </a>

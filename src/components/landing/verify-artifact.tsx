@@ -124,7 +124,7 @@ export function VerifyArtifact() {
             <div className="seal-pop mt-6">
               {result.status === "VERIFIED" ? (
                 <div className="chip-metal p-5">
-                  <p className="metal-text mb-2 font-serif text-2xl">✓ VERIFIED</p>
+                  <p className="seal-word mb-2 font-serif text-2xl">✓ VERIFIED</p>
                   <p className="text-sm font-light text-neutral-300">
                     Both signatures check out — <span className="text-neutral-200">Ed25519</span> and{" "}
                     <span className="text-neutral-200">ML-DSA-65</span> (dual: both must pass) — over

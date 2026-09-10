@@ -537,3 +537,35 @@ p, li {
   height: 56px;
   background: linear-gradient(180deg, transparent, rgba(228, 233, 255, 0.55) 45%, transparent);
 }
+
+/* ── The seal register ───────────────────────────────────────────────────────
+ * Gold is not a fourth accent looking for a home: proof-pipeline.tsx:19
+ * already states its law — "Gold from here on: the sealed artifact exists past
+ * this point." So it appears where an artifact has actually been sealed, and
+ * nowhere a decision is merely being described. Read together, the page has
+ * four registers and each answers a different question: green/red — what was
+ * decided; iron — what frames the decision; gold — what survives it.
+ * The tint stays on the label and the rule, never on a filled panel: a gold
+ * block on black turns a seal into a warning banner. */
+.seal-label {
+  color: var(--seal);
+  filter: drop-shadow(0 0 10px rgba(201, 162, 75, 0.25));
+}
+.seal-rule {
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 75, 0.5), transparent);
+}
+.seal-word {
+  color: #e0bd72;
+  filter: drop-shadow(0 0 14px rgba(201, 162, 75, 0.3));
+}
+
+/* Nav boundary. Four of the six entries move down this page and two leave it;
+ * the labels alone cannot say which. A hairline at the seam does, and costs no
+ * width — the row already needs ~1179px at the xl tier. */
+.nav-divider {
+  display: block;
+  width: 1px;
+  height: 14px;
+  flex: none;
+  background: linear-gradient(180deg, transparent, rgba(228, 233, 255, 0.28), transparent);
+}
