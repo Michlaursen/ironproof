@@ -9,6 +9,7 @@ import { VerifyArtifact } from "./verify-artifact";
 import { GateDiagram } from "./gate-diagram";
 import { ProofPipeline } from "./proof-pipeline";
 import { SequenceProof } from "./sequence-proof";
+import { DeployGate } from "./deploy-gate";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
 
@@ -497,6 +498,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </a>
           </div>
         </section>
+
+        {/* DEPLOY IT — where it sits in the stack */}
+        <DeployGate />
 
         {/* WHO IT IS FOR, AND HOW IT STARTS */}
         <section className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
