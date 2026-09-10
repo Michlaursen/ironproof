@@ -121,14 +121,25 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
-                Ironproof determines and proves that a critical action is authorized{" "}
-                <span className="metal-text">before it executes</span>{" "}&mdash; then produces
-                evidence anyone can verify independently. Not a review after the fact.
+                Ironproof checks every critical action before it executes. If it&apos;s authorized,
+                it runs. If it isn&apos;t, Ironproof{" "}
+                <span className="metal-text">blocks it</span>{" "}&mdash; and creates evidence
+                anyone can verify.
               </p>
-              <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
-                An AI agent, an API, a scheduled script or a person can all trigger the same
-                critical action. Ironproof controls the authorization boundary, whoever is asking.
-              </p>
+              <div className="mb-6 max-w-xl">
+                <p className="text-base font-medium text-neutral-200 md:text-lg">
+                  One boundary. Any initiator.
+                </p>
+                <p className="mt-1 text-sm font-light leading-relaxed text-neutral-400">
+                  AI agent. API. Script. Person.
+                </p>
+                <p className="track-mid mt-4 flex flex-wrap gap-x-6 gap-y-1 text-xs text-neutral-300 sm:text-sm">
+                  <span className="whitespace-nowrap">AUTHORIZED &rarr; EXECUTES</span>
+                  <span className="whitespace-nowrap">
+                    UNAUTHORIZED &rarr; <span className="metal-text">BLOCKED</span>
+                  </span>
+                </p>
+              </div>
               <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
                 <a
@@ -144,13 +155,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   WHICH ACTIONS
                 </a>
               </div>
-              <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500">
-                <span className="track-mid">DECIDED BEFORE EXECUTION</span>
-                <span className="text-neutral-700">&middot;</span>
-                <span className="track-mid">AGENT, API, SCRIPT OR PERSON</span>
-                <span className="text-neutral-700">&middot;</span>
-                <span className="track-mid">INDEPENDENTLY VERIFIABLE</span>
-              </div>
             </div>
           </div>
         </section>
@@ -160,7 +164,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
             Ironproof stops unauthorized critical actions from executing
             <span className="text-neutral-500"> &mdash; </span>
-            <span className="metal-text">and proves why.</span>
+            <span className="metal-text">and cryptographically seals every decision,</span>{" "}
+            allow or block.
           </p>
         </section>
 
