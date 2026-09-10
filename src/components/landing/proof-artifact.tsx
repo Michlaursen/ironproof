@@ -42,9 +42,11 @@ export function ProofArtifact({ kind }: { kind: "allowed" | "blocked" }) {
   const allowed = kind === "allowed";
   return (
     <div
-      className={`proof-scan card-premium relative w-full max-w-sm px-8 py-7 ${
-        allowed ? "card-allow" : "card-block"
-      }`}
+      // Iron contour on both, whatever the verdict: these two sit side by side at
+      // the top of the page, and a green frame against a red one reads as a
+      // status widget. The answer is already carried inside — the icon and the
+      // word — so the frame goes back to saying "this is an artifact".
+      className="proof-scan card-premium card-iron relative w-full max-w-sm px-8 py-7"
     >
       <div className="relative flex items-center justify-between">
         <span className="track-mid text-xs text-neutral-400">PROOF ARTIFACT</span>
