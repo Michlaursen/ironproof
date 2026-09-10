@@ -7,6 +7,9 @@ import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
 import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
+import { GateDiagram } from "./gate-diagram";
+import { ProofPipeline } from "./proof-pipeline";
+import { DeliveryLoop } from "./delivery-loop";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
 
@@ -108,7 +111,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               What Ironproof changes
             </h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <ol className="mx-auto max-w-5xl">
             {[
               {
                 title: "Unauthorized actions are stopped before execution.",
@@ -126,13 +129,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 title: "Verification does not depend on Ironproof.",
                 body: "Auditors and technical teams can re-check the evidence offline.",
               },
-            ].map((c) => (
-              <div key={c.title} className="card-premium fade-up p-10">
-                <h3 className="metal-text mb-3 font-serif text-2xl leading-snug">{c.title}</h3>
-                <p className="font-light leading-relaxed text-neutral-300">{c.body}</p>
-              </div>
+            ].map((c, i) => (
+              <li key={c.title} className="fade-up edge-t grid gap-x-8 gap-y-2 py-8 md:grid-cols-[4rem_1fr_1fr] md:items-baseline md:py-10">
+                <span className="num-badge font-serif text-3xl md:text-4xl">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="metal-text font-serif text-2xl leading-snug md:text-3xl">
+                  {c.title}
+                </h3>
+                <p className="font-light leading-relaxed text-neutral-400">{c.body}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
 
         {/* ONE GATE, ANY INITIATOR */}
@@ -147,33 +155,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               every path that can reach a critical system.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                who: "AI agent",
-                body: "A model proposes an action. Prompts shape the request; they cannot widen what is allowed.",
-              },
-              {
-                who: "Script or scheduled job",
-                body: "A batch process runs at 02:00 with nobody watching. The boundary holds without a reviewer.",
-              },
-              {
-                who: "API call",
-                body: "An integration partner or internal service calls the endpoint. Its credentials say who it is, not what it may do now.",
-              },
-              {
-                who: "Person",
-                body: "An operator with a console and a deadline. The policy that binds the machine binds the hand too.",
-              },
-            ].map((c) => (
-              <div key={c.who} className="card-premium fade-up p-8">
-                <p className="track-mid mb-4 text-[10px] text-neutral-500">INITIATOR</p>
-                <h3 className="metal-text mb-3 font-serif text-2xl leading-snug">{c.who}</h3>
-                <p className="text-sm font-light leading-relaxed text-neutral-300">{c.body}</p>
-              </div>
-            ))}
-          </div>
-          <p className="fade-up mt-8 max-w-2xl text-sm font-light text-neutral-400">
+          <GateDiagram />
+          <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
             Every authorization records the requesting actor, the policy version and the action.
             Nothing executes without spending a single-use grant bound to that exact decision.
           </p>
@@ -392,63 +375,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               the same one the runtime uses.
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="card-premium fade-up p-10">
-              <div className="mb-5 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">01</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
-                  <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                  <path d="M9 12 l2 2 l4 -4" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Prove</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Before deployment, Ironproof establishes that the defined policy holds across the
-                modeled action space.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <div className="mb-5 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">02</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
-                  <rect x="5" y="11" width="14" height="9" rx="1" />
-                  <path d="M8 11 V8 a4 4 0 0 1 8 0 v3" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Enforce</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                At runtime, every requested action is checked deterministically before execution.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <div className="mb-5 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">03</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
-                  <path d="M12 3 l7.8 4.5 v9 L12 21 l-7.8 -4.5 v-9 Z" />
-                  <path d="M9 12 h6" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Seal</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Each decision is sealed at execution time &mdash; SHA3-512 digest, ML-DSA-65
-                signature &mdash; binding the action, the policy version and the verdict into one
-                artifact.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <div className="mb-5 flex items-center gap-3">
-                <span className="num-badge font-serif text-3xl">04</span>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal ml-auto" aria-hidden="true">
-                  <circle cx="12" cy="12" r="9" />
-                  <path d="M9 12 l2 2 l4 -4" />
-                </svg>
-              </div>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Verify</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                The certificate is re-checked against its sealed inputs: the same verdict must
-                come back, or the seal is broken.
-              </p>
-            </div>
+          <div className="fade-up">
+            <ProofPipeline />
           </div>
           <p className="fade-up mt-8 text-sm font-light text-neutral-400">
             The theorem that ties the runtime fast path to the full formal model, and the
@@ -476,9 +404,19 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               A certificate that does not name its own boundary is a decoration.
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="card-premium fade-up p-10">
-              <p className="track-mid mb-5 text-xs text-neutral-300">WHAT IS PROVEN</p>
+          {/* One panel with a line down the middle — the certificate naming its
+              own boundary, drawn as a boundary. */}
+          <div className="card-premium fade-up relative grid gap-10 p-8 sm:p-12 md:grid-cols-2 md:gap-14">
+            <span
+              aria-hidden="true"
+              className="absolute left-8 right-8 top-1/2 hidden h-px md:left-1/2 md:right-auto md:top-12 md:bottom-12 md:h-auto md:w-px md:block"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent, rgba(228,233,255,0.28), transparent)",
+              }}
+            />
+            <div>
+              <p className="track-mid mb-5 text-xs text-neutral-300">INSIDE THE MODEL</p>
               <ul className="space-y-3 text-sm">
                 <li className="flex gap-3 text-neutral-300">
                   <span className="icon-metal mt-0.5">&#10003;</span> The defined property cannot be
@@ -496,8 +434,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </li>
               </ul>
             </div>
-            <div className="card-premium fade-up p-10">
-              <p className="track-mid mb-5 text-xs text-neutral-300">WHAT IS OUTSIDE THE MODEL</p>
+            <div>
+              <p className="track-mid mb-5 text-xs text-neutral-500">OUTSIDE THE MODEL</p>
               <ul className="space-y-3 text-sm">
                 <li className="flex gap-3 text-neutral-400">
                   <span className="mt-0.5 text-neutral-500">&#9675;</span> Clauses that require human
@@ -587,66 +525,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 properties can be checked continuously as systems change.
               </p>
             </div>
-            <div className="fade-up grid items-stretch gap-6 md:grid-cols-2">
-              <div className="card-premium p-10">
-                <p className="track-mid mb-6 text-xs text-neutral-400">
-                  BEFORE — TRADITIONAL FORMAL VERIFICATION
-                </p>
-                <div className="space-y-5">
-                  <div className="flex items-center gap-4">
-                    <span className="text-xl text-neutral-400">✕</span>
-                    <div>
-                      <p className="text-neutral-300">Timeline</p>
-                      <p className="font-serif text-3xl text-neutral-300">Weeks to months</p>
-                    </div>
-                  </div>
-                  <div className="h-px bg-white/5" />
-                  <div className="flex items-start gap-4">
-                    <span className="mt-0.5 text-neutral-400">✕</span>
-                    <p className="font-light text-neutral-300">
-                      Hand-written proofs by scarce specialists
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <span className="mt-0.5 text-neutral-400">✕</span>
-                    <p className="font-light text-neutral-300">
-                      Re-done manually every time the code changes
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
-                <p className="track-mid mb-6 text-xs text-neutral-300">
-                  WITH IRONPROOF — AUTOMATED
-                </p>
-                <div className="space-y-5">
-                  <div className="flex items-center gap-4">
-                    <span className="icon-metal text-xl">✓</span>
-                    <div>
-                      <p className="text-neutral-200">Timeline</p>
-                      <p className="metal-text font-serif text-3xl">Machine speed</p>
-                    </div>
-                  </div>
-                  <div className="h-px bg-white/5" />
-                  <div className="flex items-start gap-4">
-                    <span className="icon-metal mt-0.5">✓</span>
-                    <p className="font-light text-neutral-300">Proofs generated automatically</p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <span className="icon-metal mt-0.5">✓</span>
-                    <p className="font-light text-neutral-300">
-                      Re-proven on every commit, continuously
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <span className="icon-metal mt-0.5">✓</span>
-                    <p className="font-light text-neutral-300">
-                      Available to any team building critical systems
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DeliveryLoop />
             <p className="fade-up mt-6 text-center text-xs text-neutral-400">
               Formal guarantees. Without the traditional proof cycle.
             </p>
