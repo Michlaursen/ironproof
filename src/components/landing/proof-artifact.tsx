@@ -41,7 +41,11 @@ const NoIcon = (
 export function ProofArtifact({ kind }: { kind: "allowed" | "blocked" }) {
   const allowed = kind === "allowed";
   return (
-    <div className="proof-scan card-premium relative w-full max-w-sm px-8 py-7">
+    <div
+      className={`proof-scan card-premium relative w-full max-w-sm px-8 py-7 ${
+        allowed ? "card-allow" : "card-block"
+      }`}
+    >
       <div className="relative flex items-center justify-between">
         <span className="track-mid text-xs text-neutral-400">PROOF ARTIFACT</span>
         <span className="font-mono text-xs text-neutral-400">finance/refund@v3</span>
@@ -50,11 +54,9 @@ export function ProofArtifact({ kind }: { kind: "allowed" | "blocked" }) {
       <div className="relative mt-6 flex flex-col items-center text-center">
         {allowed ? OkIcon : NoIcon}
         <h3
-          className={
-            allowed
-              ? "metal-text mt-3 font-serif text-3xl"
-              : "mt-3 font-serif text-3xl text-neutral-100"
-          }
+          className={`mt-3 font-serif text-3xl ${
+            allowed ? "word-allow" : "word-block"
+          }`}
         >
           {allowed ? "ALLOWED" : "BLOCKED"}
         </h3>

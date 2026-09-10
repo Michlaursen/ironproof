@@ -211,16 +211,19 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
           <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
             {CRITICAL_ACTIONS.map((c) => (
-              <div key={c.ask} className="card-premium flex flex-col p-6">
+              <div
+                key={c.ask}
+                className={`card-premium flex flex-col p-6 ${
+                  c.v === "ALLOW" ? "card-allow" : "card-block"
+                }`}
+              >
                 <p className="track-mid mb-3 text-[10px] text-neutral-500">{c.kind}</p>
                 <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{c.ask}</p>
                 <div className="mt-auto border-t border-white/5 pt-4">
                   <span
-                    className={
-                      c.v === "ALLOW"
-                        ? "track-mid rounded-[4px] border border-emerald-400/30 px-2.5 py-1 text-[10px] text-emerald-300"
-                        : "track-mid rounded-[4px] border border-red-400/30 px-2.5 py-1 text-[10px] text-red-300"
-                    }
+                    className={`verdict-tag ${
+                      c.v === "ALLOW" ? "verdict-allow" : "verdict-block"
+                    }`}
                   >
                     {c.v}
                   </span>
@@ -435,9 +438,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   </li>
                 </ul>
                 <div className="my-6 h-px w-full bg-white/5" />
-                <div className="flex items-baseline justify-between">
-                  <span className="track-mid text-xs text-neutral-500">CONFIDENCE</span>
-                  <span className="metal-text font-serif text-2xl">
+                <div className="flex items-baseline justify-between gap-6">
+                  <span className="track-mid shrink-0 text-xs text-neutral-500">CONFIDENCE</span>
+                  <span className="metal-text text-right font-serif text-2xl leading-snug">
                     Mathematical guarantee within the model
                   </span>
                 </div>
