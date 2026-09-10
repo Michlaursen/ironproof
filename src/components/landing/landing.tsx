@@ -32,24 +32,40 @@ import { defaultLocale, type Locale } from "@/content";
 
 const CRITICAL_ACTIONS = [
   {
+    kind: "PAYMENT",
     ask: "Refund $640 to a payee already on file",
     v: "ALLOW",
     why: "Under the $1,000 daily cap. Two approvers on record.",
   },
   {
+    kind: "CUMULATIVE LIMIT",
+    ask: "Refund $600 to a payee already refunded $600 today",
+    v: "BLOCK",
+    why: "Each refund is under the $1,000 cap. Together they are not — and the limit is written per day.",
+  },
+  {
+    kind: "PRIVILEGE ESCALATION",
     ask: "Grant an admin role to a service account",
     v: "BLOCK",
     why: "Privileged grants require an open change ticket and two approvers. Neither is present.",
   },
   {
+    kind: "DELETION",
     ask: "Delete 40,000 customer records flagged inactive",
     v: "BLOCK",
     why: "Bulk deletion above 1,000 rows requires a retention-hold check. None recorded.",
   },
   {
+    kind: "DEPLOYMENT",
     ask: "Push a configuration change to the payment rail",
     v: "BLOCK",
     why: "The change window is closed and the rollback plan is unsigned.",
+  },
+  {
+    kind: "IRREVERSIBLE",
+    ask: "Wire $250,000 to a beneficiary added last month",
+    v: "ALLOW",
+    why: "Past the cooling-off period, dual authorization on record. A wire cannot be recalled — which is exactly why it is decided before it is sent.",
   },
 ] as const;
 
@@ -180,10 +196,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="track-mid fade-up mb-6 text-xs text-neutral-400">
             WHAT WAS REQUESTED &mdash; AND WHAT HAPPENED
           </p>
-          <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
+          <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
             {CRITICAL_ACTIONS.map((c) => (
               <div key={c.ask} className="card-premium flex flex-col p-6">
-                <p className="track-mid mb-3 text-[10px] text-neutral-500">THE REQUEST</p>
+                <p className="track-mid mb-3 text-[10px] text-neutral-500">{c.kind}</p>
                 <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{c.ask}</p>
                 <div className="mt-auto border-t border-white/5 pt-4">
                   <span
