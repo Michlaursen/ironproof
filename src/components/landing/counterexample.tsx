@@ -309,11 +309,6 @@ export function Counterexample() {
         </div>
       </div>
 
-      <p className="fade-up mx-auto mt-10 max-w-3xl text-center text-lg font-light text-neutral-300">
-        Take the clause out and the proof collapses. That is what makes the certificate
-        load-bearing rather than decorative: a green that can never turn red is worth
-        nothing.
-      </p>
     </section>
   );
 }

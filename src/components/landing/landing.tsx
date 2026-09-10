@@ -120,46 +120,63 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
-                Ironproof determines and proves that a critical action is authorized{" "}
-                <span className="metal-text">before it executes</span>{" "}&mdash; then produces
-                evidence anyone can verify independently. Not a review after the fact.
+                Ironproof checks every critical action before it executes. If it&apos;s authorized,
+                it runs. If it isn&apos;t, Ironproof{" "}
+                <span className="metal-text">blocks it</span>{" "}&mdash; and creates evidence
+                anyone can verify.
               </p>
-              <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
-                An AI agent, an API, a scheduled script or a person can all trigger the same
-                critical action. Ironproof controls the authorization boundary, whoever is asking.
-              </p>
+              <div className="mb-6 max-w-xl">
+                <p className="text-base font-medium text-neutral-200 md:text-lg">
+                  One boundary. Any initiator.
+                </p>
+                <p className="mt-1 text-sm font-light leading-relaxed text-neutral-400">
+                  AI agent. API. Script. Person.
+                </p>
+                <p className="track-mid mt-4 flex flex-wrap gap-x-6 gap-y-1 text-xs text-neutral-300 sm:text-sm">
+                  <span className="whitespace-nowrap">AUTHORIZED &rarr; EXECUTES</span>
+                  <span className="whitespace-nowrap">
+                    UNAUTHORIZED &rarr; <span className="metal-text">BLOCKED</span>
+                  </span>
+                </p>
+              </div>
               <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
+                {/* Both used to land on more prose — a section title is not a
+                  * reward for a click. These two go to the only places on the
+                  * page where the reader DOES something: move a limit and watch
+                  * the verdict flip, then check a real seal in their own tab. */}
                 <a
-                  href="#sequence"
+                  href="#try"
                   className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  SEE IT DECIDE
+                  BLOCK ONE YOURSELF
                 </a>
                 <a
-                  href="#start"
+                  href="#verify"
                   className="chip-metal track-mid px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
                 >
-                  WHICH ACTIONS
+                  CHECK A REAL SEAL
                 </a>
-              </div>
-              <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500">
-                <span className="track-mid">DECIDED BEFORE EXECUTION</span>
-                <span className="text-neutral-700">&middot;</span>
-                <span className="track-mid">AGENT, API, SCRIPT OR PERSON</span>
-                <span className="text-neutral-700">&middot;</span>
-                <span className="track-mid">INDEPENDENTLY VERIFIABLE</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* THE TEN-SECOND TAKEAWAY */}
-        <section className="relative z-10 edge-t px-6 py-16 md:px-14">
+        {/* THE TEN-SECOND TAKEAWAY — then the two artifacts that prove the sentence */}
+        <section id="evidence" className="relative z-10 edge-t px-6 py-16 md:px-14 md:py-20">
           <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
             Ironproof stops unauthorized critical actions from executing
             <span className="text-neutral-500"> &mdash; </span>
-            <span className="metal-text">and proves why.</span>
+            <span className="metal-text">and cryptographically seals every decision,</span>{" "}
+            allow or block.
+          </p>
+          <div className="fade-up mx-auto mt-12 grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
+            <ProofArtifact kind="allowed" />
+            <ProofArtifact kind="blocked" />
+          </div>
+          <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-sm font-light leading-relaxed text-neutral-400 md:text-base">
+            A block is not a silence. It is an artifact stating what was requested, which policy was
+            in force, and why the action did not run.
           </p>
         </section>
 
@@ -197,16 +214,19 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
           <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
             {CRITICAL_ACTIONS.map((c) => (
-              <div key={c.ask} className="card-premium flex flex-col p-6">
+              <div
+                key={c.ask}
+                className={`card-premium flex flex-col p-6 ${
+                  c.v === "ALLOW" ? "card-allow" : "card-block"
+                }`}
+              >
                 <p className="track-mid mb-3 text-[10px] text-neutral-500">{c.kind}</p>
                 <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{c.ask}</p>
                 <div className="mt-auto border-t border-white/5 pt-4">
                   <span
-                    className={
-                      c.v === "ALLOW"
-                        ? "track-mid rounded-[4px] border border-emerald-400/30 px-2.5 py-1 text-[10px] text-emerald-300"
-                        : "track-mid rounded-[4px] border border-red-400/30 px-2.5 py-1 text-[10px] text-red-300"
-                    }
+                    className={`verdict-tag ${
+                      c.v === "ALLOW" ? "verdict-allow" : "verdict-block"
+                    }`}
                   >
                     {c.v}
                   </span>
@@ -219,7 +239,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             Illustrative decisions under a sample policy.
           </p>
 
-          <div className="card-premium fade-up mt-12 p-10 md:p-12">
+          <div className="card-premium card-iron fade-up mt-12 p-10 md:p-12">
             <p className="track-mid mb-6 text-xs text-neutral-400">
               WHERE THE POLICY ALREADY EXISTS ON PAPER
             </p>
@@ -238,9 +258,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-sm font-light leading-relaxed text-neutral-400">
+          </div>
+        </section>
+
+        {/* BREATH — the frameworks exist; this is what Ironproof does with them */}
+        <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="breath-mark" aria-hidden="true" />
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
               These frameworks already say what must never happen. Ironproof turns that sentence
-              into a boundary the system cannot cross, and into evidence the regulator can re-check.
+              into{" "}
+              <span className="metal-text">a boundary the system cannot cross</span>, and into
+              evidence the regulator can re-check.
             </p>
           </div>
         </section>
@@ -299,6 +328,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
         <Counterexample />
+
+        {/* BREATH — what the counterexample was for */}
+        <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="breath-mark" aria-hidden="true" />
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
+              Take the clause out and the proof collapses. That is what makes the certificate
+              load-bearing rather than decorative:{" "}
+              <span className="metal-text">a green that can never turn red is worth nothing</span>.
+            </p>
+          </div>
+        </section>
 
         {/* ── from here down: the mechanism, then the evidence ── */}
 
@@ -396,24 +437,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* THE EVIDENCE — sealed artifacts, allowed and blocked */}
-        <section className="relative z-10 edge-t px-6 py-24 md:px-14">
-          <div className="fade-up mx-auto mb-12 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">THE EVIDENCE</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              Both answers leave a receipt.
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              A block is not a silence. It is an artifact stating what was requested, which policy
-              was in force, and why the action did not run.
-            </p>
-          </div>
-          <div className="fade-up mx-auto grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
-            <ProofArtifact kind="allowed" />
-            <ProofArtifact kind="blocked" />
-          </div>
-        </section>
-
         {/* VERIFY */}
         <VerifyArtifact />
 
@@ -433,7 +456,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
                 <rect x="3" y="4" width="18" height="12" rx="1" />
                 <path d="M8 20 h8 M12 16 v4" />
               </svg>
@@ -443,7 +466,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
                 <path d="M9 12 l2 2 l4 -4" />
                 <circle cx="12" cy="12" r="9" />
               </svg>
@@ -454,7 +477,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
                 <circle cx="12" cy="12" r="9" />
                 <path d="M12 7 v5 l3 3" />
               </svg>

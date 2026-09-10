@@ -39,6 +39,11 @@ html {
   scroll-behavior: smooth;
   /* Larger base so the whole rem-scaled design reads bigger (Miguel: too small). */
   font-size: 112.5%;
+  /* Hands the dark palette to everything the browser draws itself: scrollbars,
+   * checkboxes, range tracks, form controls. Without it the UA paints its light
+   * defaults — the demo's approval checkbox was a solid white square on black,
+   * and the scrollbar a white bar on every platform that reserves one. */
+  color-scheme: dark;
 }
 
 body {
@@ -154,7 +159,20 @@ summary:focus-visible {
  * a brushed-metal look, independent of the theme tokens).
  * ============================================================ */
 
+/* Descender clip, the trap behind every .metal-* class.
+ * `background-clip: text` paints the gradient only inside the element's
+ * background box. Cormorant Garamond draws g/j/p/q/y (and its old-style
+ * figures) BELOW the descent its metrics declare, so the tails fall outside
+ * that box and are cut off — a straight line through the tail, on inline
+ * spans and on blocks alike, and worse under a tight `leading-`. Plain
+ * coloured text is unaffected, which is why it only shows on metallic type.
+ * Vertical padding grows the painting area: on an inline it costs no layout
+ * at all, on a block it adds 0.12em under the text. Measured on this page's
+ * type: 0.06em still clips, 0.10em clears it, 0.12em keeps a margin at every
+ * size. Inter does not need it. NOT on .iron-text — IRONPROOF is all caps,
+ * has no descender, and its 10-stop vertical gradient is calibrated. */
 .metal-text {
+  padding-bottom: 0.12em; /* descender clip — see note above */
   /* Brighter floor — no thin/dark bands (Miguel: white too thin). */
   background: linear-gradient(180deg, #ffffff 0%, #f2f3f7 26%, #d8dbe4 50%, #f2f3f7 74%, #cfd3de 100%);
   -webkit-background-clip: text;
@@ -164,6 +182,7 @@ summary:focus-visible {
 }
 
 .metal-shine {
+  padding-bottom: 0.12em; /* descender clip — see note above */
   background: linear-gradient(110deg, #c6cad4 0%, #ffffff 22%, #e4e7ee 38%, #ffffff 55%, #d2d6e0 72%, #ffffff 88%, #dfe2ea 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
@@ -340,6 +359,7 @@ summary:focus-visible {
 }
 
 .num-badge {
+  padding-bottom: 0.12em; /* descender clip — see note above */
   background: linear-gradient(180deg, #fff, #8a8a92);
   -webkit-background-clip: text;
   background-clip: text;
@@ -398,4 +418,164 @@ summary:focus-visible {
 .gate-blade { --gate-dir: 90deg; }
 @media (min-width: 768px) {
   .gate-blade { --gate-dir: 180deg; }
+}
+
+/* ── The verdict system ──────────────────────────────────────────────────────
+ * This page argues in exactly two answers, so those two answers are the only
+ * colour it owns. Everything else stays metal on black; a third hue would tell
+ * the reader there is a third category, and there isn't one.
+ *
+ * The tint rides the contour and the tag — never a filled panel. On a dark
+ * page a block of colour reads as a status dashboard; a lit edge reads as a
+ * verdict. `currentColor` drives the dot and its glow, so a tag only ever
+ * needs its colour set once. */
+
+.verdict-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+  /* Right padding is trimmed by one tracking step: letter-spacing adds a
+   * trailing gap after the last letter, and without this the label sits
+   * visibly left of centre in the pill. */
+  padding: 0.34em 0.42em 0.34em 0.7em;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  line-height: 1;
+}
+/* The lit dot — the gate's own indicator, and the reason the tag reads at a
+ * glance instead of being read. */
+.verdict-tag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor, 0 0 2px currentColor;
+  flex: none;
+}
+.verdict-allow { color: #6ee7b7; background: rgba(52, 211, 153, 0.07); border-color: rgba(52, 211, 153, 0.45); }
+.verdict-block { color: #fca5a5; background: rgba(248, 113, 113, 0.07); border-color: rgba(248, 113, 113, 0.45); }
+
+/* Verdict-lit card: the metal contour of .card-premium takes the answer's hue
+ * — at a whisper. First pass ran the tint at 0.6 down to 30% of the height and
+ * Dom called it flash: on six cards in one grid, six lit edges stop reading as
+ * a hint and start reading as an alert panel. Halved to 0.3 and pulled back to
+ * 20%, so the colour is the first thing the eye COUNTS and the last thing it
+ * notices.
+ * at the top and fades to the same metal below, so a grid of cards can be read
+ * before it is read. Composes with .card-premium; it overrides only ::before. */
+.card-allow::before {
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.3), rgba(228, 233, 255, 0.07) 20%, rgba(228, 233, 255, 0.02) 100%);
+}
+.card-block::before {
+  background: linear-gradient(180deg, rgba(248, 113, 113, 0.3), rgba(228, 233, 255, 0.07) 20%, rgba(228, 233, 255, 0.02) 100%);
+}
+.card-allow:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 64px -22px rgba(0,0,0,0.92), 0 0 34px -10px rgba(52,211,153,0.14); }
+.card-block:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 64px -22px rgba(0,0,0,0.92), 0 0 34px -10px rgba(248,113,113,0.14); }
+.card-allow:hover::before {
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.5), rgba(228, 233, 255, 0.1) 26%, rgba(228, 233, 255, 0.03) 100%);
+}
+.card-block:hover::before {
+  background: linear-gradient(180deg, rgba(248, 113, 113, 0.5), rgba(228, 233, 255, 0.1) 26%, rgba(228, 233, 255, 0.03) 100%);
+}
+
+/* The verdict word on a sealed artifact. Same lift as .icon-metal, tinted. */
+.word-allow { color: #a7f3d0; filter: drop-shadow(0 0 14px rgba(52, 211, 153, 0.35)); }
+.word-block { color: #fecaca; filter: drop-shadow(0 0 14px rgba(248, 113, 113, 0.32)); }
+
+/* Iron-lit card — the third register, and the only one without a hue.
+ * Once ALLOW and BLOCK own green and red, a card that states a frame rather
+ * than a decision needs to say so without borrowing either. So it takes the
+ * forged-iron profile of .iron-text, moved from the letters to the contour:
+ * bright specular top, dark valley through the middle, a second highlight
+ * rising at the foot — a full edge that catches light all the way round,
+ * where .card-premium fades out below its top edge.
+ * Reserved for cards that carry context (the frameworks panel, the PROVING
+ * side of the comparison). Spending it on every card would flatten it back
+ * into the default. */
+.card-iron::before {
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.42) 0%,
+    rgba(228, 233, 255, 0.1) 26%,
+    rgba(228, 233, 255, 0.05) 52%,
+    rgba(228, 233, 255, 0.15) 82%,
+    rgba(228, 233, 255, 0.32) 100%
+  );
+}
+.card-iron:hover::before {
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.62) 0%,
+    rgba(228, 233, 255, 0.14) 26%,
+    rgba(228, 233, 255, 0.07) 52%,
+    rgba(228, 233, 255, 0.2) 82%,
+    rgba(228, 233, 255, 0.46) 100%
+  );
+}
+
+/* Typographic wrapping. Cormorant at display sizes leaves ugly ragging when a
+ * heading breaks by pure line-fill: "The gate does not ask who is / asking."
+ * left one word alone on the second line. `balance` evens the lines of short
+ * blocks (browsers cap it around 6 lines, so it never touches body copy);
+ * `pretty` only pulls the last line of a paragraph up, killing widows. Both
+ * degrade to normal wrapping where unsupported — nothing to guard. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li {
+  text-wrap: pretty;
+}
+
+/* Breath — the two places the page stops arguing and lets one line stand.
+ * Twenty-two sections shared one shape (eyebrow, serif heading, paragraph,
+ * cards), so nothing could stand out: with no quiet, there is no loud. These
+ * carry no eyebrow, no card and no .edge-t rule, because a divider would make
+ * them a twenty-third section instead of a gap between sections.
+ * The mark is the blade of the monogram, reduced to one lit line — enough to
+ * say "this is deliberate" without repeating the centred lede at the top. */
+.breath-mark {
+  display: block;
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, transparent, rgba(228, 233, 255, 0.55) 45%, transparent);
+}
+
+/* ── The seal register ───────────────────────────────────────────────────────
+ * Gold is not a fourth accent looking for a home: proof-pipeline.tsx:19
+ * already states its law — "Gold from here on: the sealed artifact exists past
+ * this point." So it appears where an artifact has actually been sealed, and
+ * nowhere a decision is merely being described. Read together, the page has
+ * four registers and each answers a different question: green/red — what was
+ * decided; iron — what frames the decision; gold — what survives it.
+ * The tint stays on the label and the rule, never on a filled panel: a gold
+ * block on black turns a seal into a warning banner. */
+.seal-label {
+  color: var(--seal);
+  filter: drop-shadow(0 0 10px rgba(201, 162, 75, 0.25));
+}
+.seal-rule {
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 75, 0.5), transparent);
+}
+.seal-word {
+  color: #e0bd72;
+  filter: drop-shadow(0 0 14px rgba(201, 162, 75, 0.3));
+}
+
+/* Nav boundary. Four of the six entries move down this page and two leave it;
+ * the labels alone cannot say which. A hairline at the seam does, and costs no
+ * width — the row already needs ~1179px at the xl tier. */
+.nav-divider {
+  display: block;
+  width: 1px;
+  height: 14px;
+  flex: none;
+  background: linear-gradient(180deg, transparent, rgba(228, 233, 255, 0.28), transparent);
+}
+/* Same register on an icon: gold marks the seal, not the subject it guards. */
+.icon-seal {
+  color: var(--seal);
+  filter: drop-shadow(0 0 8px rgba(201, 162, 75, 0.4));
 }

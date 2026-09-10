@@ -198,7 +198,11 @@ export function RefundDemo() {
           </div>
 
           {/* Verdict */}
-          <div className="card-premium flex flex-col p-8">
+          <div
+            className={`card-premium flex flex-col p-8 ${
+              violated ? "card-block" : "card-allow"
+            }`}
+          >
             <p className="track-mid mb-4 text-xs text-neutral-300">PROOF RESULT</p>
             <div
               key={tick}
@@ -206,11 +210,9 @@ export function RefundDemo() {
             >
               <div className="mb-5">{violated ? NoIcon : OkIcon}</div>
               <h3
-                className={
-                  violated
-                    ? "mb-3 font-serif text-3xl text-neutral-100 md:text-4xl"
-                    : "metal-text mb-3 font-serif text-3xl md:text-4xl"
-                }
+                className={`mb-3 font-serif text-3xl md:text-4xl ${
+                  violated ? "word-block" : "word-allow"
+                }`}
               >
                 {violated ? "REFUND BLOCKED" : "REFUND ALLOWED"}
               </h3>

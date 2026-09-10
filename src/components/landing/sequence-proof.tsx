@@ -61,14 +61,7 @@ function Check({ label, value, ok }: { label: string; value: string; ok: boolean
 
 function Verdict({ allow }: { allow: boolean }) {
   return (
-    <span
-      className="track-mid rounded-[4px] border px-2.5 py-1 text-[10px]"
-      style={
-        allow
-          ? { borderColor: "rgba(200,255,216,0.35)", color: OK }
-          : { borderColor: "rgba(255,180,180,0.35)", color: NO }
-      }
-    >
+    <span className={`verdict-tag ${allow ? "verdict-allow" : "verdict-block"}`}>
       {allow ? "ALLOW" : "BLOCK"}
     </span>
   );

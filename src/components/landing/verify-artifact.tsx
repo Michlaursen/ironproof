@@ -29,14 +29,20 @@ export function VerifyArtifact() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<VerifyResult | null>(null);
   const [busy, setBusy] = useState(false);
+  // A dossier loaded from the sealed sample reads in gold, like every other
+  // sealed artifact on the site. The tampered one does not: its seal is broken,
+  // so gold there would promise exactly what the demo goes on to refute.
+  const [sealed, setSealed] = useState(false);
 
   async function load(which: keyof typeof DEMOS) {
     try {
       const res = await fetch(DEMOS[which]);
       const text = await res.text();
       setInput(text);
+      setSealed(which === "verified");
       setResult(null);
     } catch {
+      setSealed(false);
       setResult({ status: "CANNOT_VERIFY", reason: "could not load the demo dossier", failures: [] });
     }
   }
@@ -76,7 +82,7 @@ export function VerifyArtifact() {
 
         <div className="fade-up card-premium relative overflow-hidden p-8">
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-            <label htmlFor="artifactInput" className="track-mid text-xs text-neutral-400">
+            <label htmlFor="artifactInput" className="seal-label track-mid text-xs">
               SEALED DOSSIER
             </label>
             <div className="flex flex-wrap gap-2">
@@ -103,10 +109,15 @@ export function VerifyArtifact() {
             value={input}
             onChange={(e) => {
               setInput(e.target.value);
+              setSealed(false);
               if (result) setResult(null);
             }}
             placeholder="paste a sealed Sceal dossier (JSON) — or use the buttons above"
-            className="w-full resize-none rounded-[5px] border border-white/10 bg-black/50 px-4 py-3 font-mono text-xs text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
+            className={`w-full resize-none rounded-[5px] border bg-black/50 px-4 py-3 font-mono text-xs placeholder-neutral-600 transition focus:outline-none ${
+              sealed
+                ? "border-seal/35 text-seal focus:border-seal/60"
+                : "border-white/10 text-neutral-200 focus:border-white/30"
+            }`}
           />
 
           <div className="mt-4 flex flex-wrap gap-3">
@@ -124,7 +135,7 @@ export function VerifyArtifact() {
             <div className="seal-pop mt-6">
               {result.status === "VERIFIED" ? (
                 <div className="chip-metal p-5">
-                  <p className="metal-text mb-2 font-serif text-2xl">✓ VERIFIED</p>
+                  <p className="seal-word mb-2 font-serif text-2xl">✓ VERIFIED</p>
                   <p className="text-sm font-light text-neutral-300">
                     Both signatures check out — <span className="text-neutral-200">Ed25519</span> and{" "}
                     <span className="text-neutral-200">ML-DSA-65</span> (dual: both must pass) — over
