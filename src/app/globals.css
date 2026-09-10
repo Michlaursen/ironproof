@@ -474,3 +474,34 @@ summary:focus-visible {
 /* The verdict word on a sealed artifact. Same lift as .icon-metal, tinted. */
 .word-allow { color: #a7f3d0; filter: drop-shadow(0 0 14px rgba(52, 211, 153, 0.35)); }
 .word-block { color: #fecaca; filter: drop-shadow(0 0 14px rgba(248, 113, 113, 0.32)); }
+
+/* Iron-lit card — the third register, and the only one without a hue.
+ * Once ALLOW and BLOCK own green and red, a card that states a frame rather
+ * than a decision needs to say so without borrowing either. So it takes the
+ * forged-iron profile of .iron-text, moved from the letters to the contour:
+ * bright specular top, dark valley through the middle, a second highlight
+ * rising at the foot — a full edge that catches light all the way round,
+ * where .card-premium fades out below its top edge.
+ * Reserved for cards that carry context (the frameworks panel, the PROVING
+ * side of the comparison). Spending it on every card would flatten it back
+ * into the default. */
+.card-iron::before {
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.42) 0%,
+    rgba(228, 233, 255, 0.1) 26%,
+    rgba(228, 233, 255, 0.05) 52%,
+    rgba(228, 233, 255, 0.15) 82%,
+    rgba(228, 233, 255, 0.32) 100%
+  );
+}
+.card-iron:hover::before {
+  background: linear-gradient(
+    180deg,
+    rgba(228, 233, 255, 0.62) 0%,
+    rgba(228, 233, 255, 0.14) 26%,
+    rgba(228, 233, 255, 0.07) 52%,
+    rgba(228, 233, 255, 0.2) 82%,
+    rgba(228, 233, 255, 0.46) 100%
+  );
+}

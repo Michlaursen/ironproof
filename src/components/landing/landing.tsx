@@ -236,7 +236,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             Illustrative decisions under a sample policy.
           </p>
 
-          <div className="card-premium fade-up mt-12 p-10 md:p-12">
+          <div className="card-premium card-iron fade-up mt-12 p-10 md:p-12">
             <p className="track-mid mb-6 text-xs text-neutral-400">
               WHERE THE POLICY ALREADY EXISTS ON PAPER
             </p>
@@ -417,7 +417,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   <span className="font-serif text-2xl text-neutral-300">Partial</span>
                 </div>
               </div>
-              <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
+              <div className="card-premium card-iron p-10">
                 <p className="track-mid mb-6 text-xs text-neutral-300">PROVING</p>
                 <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">
                   Can the defined property be violated anywhere in the modeled state space?
