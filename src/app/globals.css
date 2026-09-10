@@ -383,3 +383,10 @@ summary:focus-visible {
   background: linear-gradient(180deg, #fff, #d0d0d4);
   color: #050506;
 }
+
+/* The authorization blade — the gradient runs along the bar, and the bar
+ * flips orientation at md, so its direction has to flip with it. */
+.gate-blade { --gate-dir: 90deg; }
+@media (min-width: 768px) {
+  .gate-blade { --gate-dir: 180deg; }
+}
