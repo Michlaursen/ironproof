@@ -459,21 +459,26 @@ summary:focus-visible {
 .verdict-block { color: #fca5a5; background: rgba(248, 113, 113, 0.07); border-color: rgba(248, 113, 113, 0.45); }
 
 /* Verdict-lit card: the metal contour of .card-premium takes the answer's hue
+ * — at a whisper. First pass ran the tint at 0.6 down to 30% of the height and
+ * Dom called it flash: on six cards in one grid, six lit edges stop reading as
+ * a hint and start reading as an alert panel. Halved to 0.3 and pulled back to
+ * 20%, so the colour is the first thing the eye COUNTS and the last thing it
+ * notices.
  * at the top and fades to the same metal below, so a grid of cards can be read
  * before it is read. Composes with .card-premium; it overrides only ::before. */
 .card-allow::before {
-  background: linear-gradient(180deg, rgba(52, 211, 153, 0.6), rgba(228, 233, 255, 0.07) 30%, rgba(228, 233, 255, 0.02) 100%);
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.3), rgba(228, 233, 255, 0.07) 20%, rgba(228, 233, 255, 0.02) 100%);
 }
 .card-block::before {
-  background: linear-gradient(180deg, rgba(248, 113, 113, 0.6), rgba(228, 233, 255, 0.07) 30%, rgba(228, 233, 255, 0.02) 100%);
+  background: linear-gradient(180deg, rgba(248, 113, 113, 0.3), rgba(228, 233, 255, 0.07) 20%, rgba(228, 233, 255, 0.02) 100%);
 }
-.card-allow:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 64px -22px rgba(0,0,0,0.92), 0 0 34px -8px rgba(52,211,153,0.22); }
-.card-block:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 64px -22px rgba(0,0,0,0.92), 0 0 34px -8px rgba(248,113,113,0.22); }
+.card-allow:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 64px -22px rgba(0,0,0,0.92), 0 0 34px -10px rgba(52,211,153,0.14); }
+.card-block:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07), 0 30px 64px -22px rgba(0,0,0,0.92), 0 0 34px -10px rgba(248,113,113,0.14); }
 .card-allow:hover::before {
-  background: linear-gradient(180deg, rgba(52, 211, 153, 0.85), rgba(228, 233, 255, 0.1) 34%, rgba(228, 233, 255, 0.03) 100%);
+  background: linear-gradient(180deg, rgba(52, 211, 153, 0.5), rgba(228, 233, 255, 0.1) 26%, rgba(228, 233, 255, 0.03) 100%);
 }
 .card-block:hover::before {
-  background: linear-gradient(180deg, rgba(248, 113, 113, 0.85), rgba(228, 233, 255, 0.1) 34%, rgba(228, 233, 255, 0.03) 100%);
+  background: linear-gradient(180deg, rgba(248, 113, 113, 0.5), rgba(228, 233, 255, 0.1) 26%, rgba(228, 233, 255, 0.03) 100%);
 }
 
 /* The verdict word on a sealed artifact. Same lift as .icon-metal, tinted. */
