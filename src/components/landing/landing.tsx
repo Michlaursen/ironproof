@@ -9,23 +9,78 @@ import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
 import { GateDiagram } from "./gate-diagram";
 import { ProofPipeline } from "./proof-pipeline";
-import { DeliveryLoop } from "./delivery-loop";
+import { EnforcementCoverage } from "./enforcement-coverage";
+import { SequenceProof } from "./sequence-proof";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
 
 /*
- * The Ironproof landing — ported from the reference page (ironproof-landing-local).
+ * The Ironproof landing.
+ *
+ * Ordered so the visitor meets the product before the mechanism:
+ *   authorization  = the product      (what is bought)
+ *   formal methods = the mechanism    (how the boundary is established)
+ *   cryptography   = the evidence     (what is kept, and re-checked)
+ *
+ * Everything named Z3, ML-DSA, air-gapped or post-quantum therefore lives
+ * below the fold of the argument, not inside the pitch. Anchor ids are load
+ * bearing: the header links #how, #initiators, #start and #verify, and the
+ * research page links #limits.
+ *
  * English copy inline for now; French / i18n to be reconnected with Miguel.
  */
 
+const CRITICAL_ACTIONS = [
+  {
+    ask: "Refund $640 to a payee already on file",
+    v: "ALLOW",
+    why: "Under the $1,000 daily cap. Two approvers on record.",
+  },
+  {
+    ask: "Grant an admin role to a service account",
+    v: "BLOCK",
+    why: "Privileged grants require an open change ticket and two approvers. Neither is present.",
+  },
+  {
+    ask: "Delete 40,000 customer records flagged inactive",
+    v: "BLOCK",
+    why: "Bulk deletion above 1,000 rows requires a retention-hold check. None recorded.",
+  },
+  {
+    ask: "Push a configuration change to the payment rail",
+    v: "BLOCK",
+    why: "The change window is closed and the rollback plan is unsigned.",
+  },
+] as const;
+
+const LAYERS = [
+  {
+    tag: "THE PRODUCT",
+    title: "Authorization",
+    body: "A boundary a critical action cannot cross. That is what you deploy, and what the policy owner signs off on.",
+  },
+  {
+    tag: "THE MECHANISM",
+    title: "Formal verification",
+    body: "How the boundary is established rather than hoped for: the property is checked across the modeled action space, for a sequence of any length — not for a sample of cases.",
+  },
+  {
+    tag: "THE EVIDENCE",
+    title: "Cryptographic proof",
+    body: "What outlives the decision. Every allow and every block leaves a sealed artifact your auditor re-checks on their own machine.",
+  },
+] as const;
+
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
+  const r = locale === defaultLocale ? "" : `/${locale}`;
+
   return (
     <div className="flex flex-1 flex-col">
       {/* NAV */}
       <LandingHeader locale={locale} />
 
       <main className="flex-1">
-        {/* HERO */}
+        {/* HERO — the product, in one sentence, before any mechanism */}
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-12 md:grid-cols-2">
@@ -42,7 +97,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="fade-up">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
-                DETERMINISTIC AUTHORIZATION FOR CRITICAL ACTIONS
+                THE DETERMINISTIC AUTHORIZATION LAYER FOR CRITICAL ACTIONS
               </p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
@@ -50,43 +105,47 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </span>
               </h1>
               <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
-                Ironproof blocks a critical action before it executes if it violates your{" "}
-                <span className="metal-text">policy</span>, and lets it through if it complies
-                &mdash; whether it was initiated by an AI agent, a script, an API or a person. Every
-                decision is sealed cryptographically and can be verified independently afterwards.
+                Ironproof determines and proves that a critical action is authorized{" "}
+                <span className="metal-text">before it executes</span>{" "}&mdash; then produces
+                evidence anyone can verify independently. Not a review after the fact.
+              </p>
+              <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
+                An AI agent, an API, a scheduled script or a person can all trigger the same
+                critical action. Ironproof controls the authorization boundary, whoever is asking.
               </p>
               <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="#try"
+                  href="#sequence"
                   className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  SEE A LIVE DECISION
+                  SEE IT DECIDE
                 </a>
                 <a
-                  href="#how"
+                  href="#start"
                   className="chip-metal track-mid px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
                 >
-                  HOW IT WORKS
+                  WHICH ACTIONS
                 </a>
               </div>
               <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-neutral-500">
+                <span className="track-mid">DECIDED BEFORE EXECUTION</span>
+                <span className="text-neutral-700">&middot;</span>
+                <span className="track-mid">AGENT, API, SCRIPT OR PERSON</span>
+                <span className="text-neutral-700">&middot;</span>
                 <span className="track-mid">INDEPENDENTLY VERIFIABLE</span>
-                <span className="text-neutral-700">·</span>
-                <span className="track-mid">POST-QUANTUM SEALED</span>
-                <span className="text-neutral-700">·</span>
-                <span className="track-mid">RUNS AIR-GAPPED</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* PROOF ARTIFACTS — allowed + blocked, side by side, just above the credited-by strip */}
-        <section className="relative z-10 px-6 pb-12 pt-2 md:px-14">
-          <div className="fade-up mx-auto grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
-            <ProofArtifact kind="allowed" />
-            <ProofArtifact kind="blocked" />
-          </div>
+        {/* THE TEN-SECOND TAKEAWAY */}
+        <section className="relative z-10 edge-t px-6 py-16 md:px-14">
+          <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
+            Ironproof stops unauthorized critical actions from executing
+            <span className="text-neutral-500"> &mdash; </span>
+            <span className="metal-text">and proves why.</span>
+          </p>
         </section>
 
         {/* CREDITED-BY STRIP */}
@@ -103,150 +162,49 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* WHAT IRONPROOF CHANGES */}
-        <section id="changes" className="relative z-10 mx-auto max-w-7xl px-6 py-24 md:px-14">
+        {/* WHICH ACTIONS — the concrete problem, before any mechanism */}
+        <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">THE OUTCOME</p>
+            <p className="track-mid mb-4 text-xs text-neutral-400">WHICH ACTIONS</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              What Ironproof changes
-            </h2>
-          </div>
-          <ol className="mx-auto max-w-5xl">
-            {[
-              {
-                title: "Unauthorized actions are stopped before execution.",
-                body: "Actions routed through the authorization boundary cannot execute outside the enforced policy.",
-              },
-              {
-                title: "Policy becomes enforceable.",
-                body: "Critical rules are checked at the authorization boundary, not only monitored afterwards.",
-              },
-              {
-                title: "Every decision produces evidence.",
-                body: "ALLOW and BLOCK decisions can be independently verified.",
-              },
-              {
-                title: "Verification does not depend on Ironproof.",
-                body: "Auditors and technical teams can re-check the evidence offline.",
-              },
-            ].map((c, i) => (
-              <li key={c.title} className="fade-up edge-t grid gap-x-8 gap-y-2 py-8 md:grid-cols-[4rem_1fr_1fr] md:items-baseline md:py-10">
-                <span className="num-badge font-serif text-3xl md:text-4xl">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="metal-text font-serif text-2xl leading-snug md:text-3xl">
-                  {c.title}
-                </h3>
-                <p className="font-light leading-relaxed text-neutral-400">{c.body}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        {/* ONE GATE, ANY INITIATOR */}
-        <section id="initiators" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
-          <div className="fade-up mb-12 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">ONE GATE, ANY INITIATOR</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              The gate does not ask who is asking.
+              Move money. Grant access.
+              <br />
+              Delete records. Ship a change.
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              It asks whether the action is inside the policy in force. The same check applies to
-              every path that can reach a critical system.
+              The actions that cannot be taken back once they run. For those, authorization stops
+              being a setting and becomes infrastructure.
             </p>
           </div>
-          <GateDiagram />
-          <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
-            Every authorization records the requesting actor, the policy version and the action.
-            Nothing executes without spending a single-use grant bound to that exact decision.
-          </p>
-        </section>
 
-        {/* WHEN A SYSTEM CAN MOVE MONEY */}
-        <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 text-center">
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              When a system can move money,
-              <br />
-              grant access, delete records or ship a change,
-              <br />
-              authorization becomes infrastructure.
-            </h2>
-            <p className="track-mid mx-auto mt-6 text-xs text-neutral-400">
-              WHAT WAS REQUESTED &mdash; AND WHAT HAPPENED
-            </p>
-            <div className="fade-up mx-auto mt-8 grid max-w-6xl gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  ask: "Refund $640 to a payee already on file",
-                  v: "ALLOW",
-                  why: "Under the $1,000 daily cap. Two approvers on record.",
-                },
-                {
-                  ask: "Grant an admin role to a service account",
-                  v: "BLOCK",
-                  why: "Privileged grants require an open change ticket and two approvers. Neither is present.",
-                },
-                {
-                  ask: "Delete 40,000 customer records flagged inactive",
-                  v: "BLOCK",
-                  why: "Bulk deletion above 1,000 rows requires a retention-hold check. None recorded.",
-                },
-                {
-                  ask: "Push a configuration change to the payment rail",
-                  v: "BLOCK",
-                  why: "The change window is closed and the rollback plan is unsigned.",
-                },
-              ].map((r) => (
-                <div key={r.ask} className="card-premium flex flex-col p-6">
-                  <p className="track-mid mb-3 text-[10px] text-neutral-500">THE REQUEST</p>
-                  <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{r.ask}</p>
-                  <div className="mt-auto border-t border-white/5 pt-4">
-                    <span
-                      className={
-                        r.v === "ALLOW"
-                          ? "track-mid rounded-[4px] border border-emerald-400/30 px-2.5 py-1 text-[10px] text-emerald-300"
-                          : "track-mid rounded-[4px] border border-red-400/30 px-2.5 py-1 text-[10px] text-red-300"
-                      }
-                    >
-                      {r.v}
-                    </span>
-                    <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">
-                      {r.why}
-                    </p>
-                  </div>
+          <p className="track-mid fade-up mb-6 text-xs text-neutral-400">
+            WHAT WAS REQUESTED &mdash; AND WHAT HAPPENED
+          </p>
+          <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
+            {CRITICAL_ACTIONS.map((c) => (
+              <div key={c.ask} className="card-premium flex flex-col p-6">
+                <p className="track-mid mb-3 text-[10px] text-neutral-500">THE REQUEST</p>
+                <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{c.ask}</p>
+                <div className="mt-auto border-t border-white/5 pt-4">
+                  <span
+                    className={
+                      c.v === "ALLOW"
+                        ? "track-mid rounded-[4px] border border-emerald-400/30 px-2.5 py-1 text-[10px] text-emerald-300"
+                        : "track-mid rounded-[4px] border border-red-400/30 px-2.5 py-1 text-[10px] text-red-300"
+                    }
+                  >
+                    {c.v}
+                  </span>
+                  <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">{c.why}</p>
                 </div>
-              ))}
-            </div>
-            <p className="mx-auto mt-6 text-xs text-neutral-500">
-              Illustrative decisions under a sample policy.
-            </p>
+              </div>
+            ))}
           </div>
-          <div className="mb-8 grid gap-6 md:grid-cols-2">
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <circle cx="9" cy="8" r="3" />
-                <path d="M3 20 a6 6 0 0 1 12 0 M16 6 a3 3 0 0 1 0 5 M21 20 a5 5 0 0 0 -5 -5" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Who owns the policy</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Risk, security and compliance teams in regulated environments &mdash; the people who
-                already have the rules on paper and no way to prove they hold at execution.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <path d="M4 4 h16 v6 H4 Z" />
-                <path d="M4 14 h10 M4 18 h7" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Initial engagement</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Select one critical action, define its authorization boundary and produce an
-                independently verifiable proof artifact.
-              </p>
-            </div>
-          </div>
-          <div className="card-premium fade-up p-10 md:p-12">
+          <p className="fade-up mt-6 text-xs text-neutral-500">
+            Illustrative decisions under a sample policy.
+          </p>
+
+          <div className="card-premium fade-up mt-12 p-10 md:p-12">
             <p className="track-mid mb-6 text-xs text-neutral-400">
               WHERE THE POLICY ALREADY EXISTS ON PAPER
             </p>
@@ -272,17 +230,131 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* THE SEQUENCE — the centre of the argument */}
+        <SequenceProof />
+
+        {/* ONE GATE, ANY INITIATOR */}
+        <section id="initiators" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
+          <div className="fade-up mb-12 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">ONE GATE, ANY INITIATOR</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              The gate does not ask who is asking.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              It asks whether the action is inside the policy in force. The same check applies to
+              every path that can reach a critical system &mdash; which is why this is not an
+              AI problem with an AI answer.
+            </p>
+          </div>
+          <GateDiagram />
+          <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
+            Every authorization records the requesting actor, the policy version and the action.
+            Nothing executes without spending a single-use grant bound to that exact decision.
+          </p>
+        </section>
+
+        {/* COVERAGE — every action, before it runs */}
+        <section id="coverage" className="relative z-10 edge-t px-6 py-28 md:px-14">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up mb-14 max-w-3xl">
+              <p className="track-mid mb-4 text-xs text-neutral-400">COVERAGE AND TIMING</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+                Every action, and before
+                <br />
+                rather than after.
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+                Controls that sample after the fact can tell you an unauthorized action happened.
+                They cannot stop it. The decision has to sit in front of execution to change the
+                outcome.
+              </p>
+            </div>
+            <EnforcementCoverage />
+          </div>
+        </section>
+
+        {/* PRODUCT / MECHANISM / EVIDENCE */}
+        <section id="layers" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-14 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">HOW THE PIECES SIT</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              You buy authorization.
+              <br />
+              The rest is how it holds.
+            </h2>
+          </div>
+          <ol className="grid gap-6 md:grid-cols-3">
+            {LAYERS.map((l, i) => (
+              <li key={l.title} className="card-premium fade-up p-8 md:p-10">
+                <div className="mb-5 flex items-baseline gap-3">
+                  <span className="num-badge font-serif text-3xl">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="track-mid text-[10px] text-neutral-500">{l.tag}</p>
+                </div>
+                <h3 className="metal-text mb-3 font-serif text-2xl">{l.title}</h3>
+                <p className="text-sm font-light leading-relaxed text-neutral-300">{l.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        {/* WHAT IRONPROOF CHANGES */}
+        <section id="changes" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
+          <div className="fade-up mb-10 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">THE OUTCOME</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              What Ironproof changes
+            </h2>
+          </div>
+          <ol className="mx-auto max-w-5xl">
+            {[
+              {
+                title: "Unauthorized actions are stopped before execution.",
+                body: "Actions routed through the authorization boundary cannot execute outside the enforced policy.",
+              },
+              {
+                title: "Policy becomes enforceable.",
+                body: "Critical rules are checked at the authorization boundary, not only monitored afterwards.",
+              },
+              {
+                title: "Every decision produces evidence.",
+                body: "ALLOW and BLOCK decisions can be independently verified.",
+              },
+              {
+                title: "Verification does not depend on Ironproof.",
+                body: "Auditors and technical teams can re-check the evidence offline.",
+              },
+            ].map((c, i) => (
+              <li
+                key={c.title}
+                className="fade-up edge-t grid gap-x-8 gap-y-2 py-8 md:grid-cols-[4rem_1fr_1fr] md:items-baseline md:py-10"
+              >
+                <span className="num-badge font-serif text-3xl md:text-4xl">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="metal-text font-serif text-2xl leading-snug md:text-3xl">
+                  {c.title}
+                </h3>
+                <p className="font-light leading-relaxed text-neutral-400">{c.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
         {/* TRY IT */}
         <RefundDemo />
 
         {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
         <Counterexample />
 
+        {/* ── from here down: the mechanism, then the evidence ── */}
+
         {/* TESTING VS PROVING */}
         <section id="compare" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="mx-auto max-w-6xl">
             <div className="fade-up mb-16 text-center">
-              <p className="track-mid mb-4 text-xs text-neutral-400">THE DIFFERENCE</p>
+              <p className="track-mid mb-4 text-xs text-neutral-400">THE MECHANISM</p>
               <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
                 Testing vs. Proving
               </h2>
@@ -291,72 +363,58 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </p>
             </div>
             <div className="fade-up grid gap-6 md:grid-cols-2">
-              <div className="card-premium relative p-10">
-                <div className="mb-6 flex items-center gap-3">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8a8a90" strokeWidth="1.4" aria-hidden="true">
-                    <path d="M9 3 v6 l-5 9 a2 2 0 0 0 2 3 h12 a2 2 0 0 0 2 -3 l-5 -9 V3" />
-                    <path d="M8 3 h8" />
-                  </svg>
-                  <h3 className="font-serif text-3xl text-neutral-400">Testing</h3>
-                </div>
-                <p className="track-mid mb-3 text-xs text-neutral-400">TESTING ASKS</p>
-                <p className="mb-4 font-light leading-snug text-neutral-300">
+              <div className="card-premium p-10">
+                <p className="track-mid mb-6 text-xs text-neutral-400">TESTING</p>
+                <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">
                   Did the executions we tried behave correctly?
                 </p>
                 <TestingDots />
                 <ul className="space-y-3 text-sm">
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="mt-0.5 text-neutral-400">○</span> Checks the cases someone
-                    thought of
+                  <li className="flex gap-3 text-neutral-400">
+                    <span className="mt-0.5 text-neutral-500">&#9675;</span> Checks the cases
+                    someone thought of
                   </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="mt-0.5 text-neutral-400">○</span>
-                    <span>
-                      &quot;Passed&quot; means <span className="italic">probably</span> fine
-                    </span>
+                  <li className="flex gap-3 text-neutral-400">
+                    <span className="mt-0.5 text-neutral-500">&#9675;</span> &quot;Passed&quot;
+                    means <em>probably</em> fine
                   </li>
                 </ul>
-                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
-                  <span className="track-mid text-xs text-neutral-400">CONFIDENCE</span>
-                  <span className="font-serif text-2xl text-neutral-400">Partial</span>
+                <div className="my-6 h-px w-full bg-white/5" />
+                <div className="flex items-baseline justify-between">
+                  <span className="track-mid text-xs text-neutral-500">CONFIDENCE</span>
+                  <span className="font-serif text-2xl text-neutral-300">Partial</span>
                 </div>
               </div>
-              <div className="card-premium relative p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
-                <div className="mb-6 flex items-center gap-3">
-                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal" aria-hidden="true">
-                    <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
-                    <path d="M9 12 l2 2 l4 -4" />
-                  </svg>
-                  <h3 className="metal-text font-serif text-3xl">Proving</h3>
-                </div>
-                <p className="track-mid mb-3 text-xs text-neutral-300">PROOF ASKS</p>
-                <p className="mb-4 font-light leading-snug text-neutral-200">
+              <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
+                <p className="track-mid mb-6 text-xs text-neutral-300">PROVING</p>
+                <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">
                   Can the defined property be violated anywhere in the modeled state space?
                 </p>
                 <ProvingDots />
                 <ul className="space-y-3 text-sm">
                   <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> Reasons exhaustively over the
-                    formally defined state space
+                    <span className="icon-metal mt-0.5">&#10003;</span> Reasons exhaustively over
+                    the formally defined state space
                   </li>
                   <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> If the formal model admits a
+                    <span className="icon-metal mt-0.5">&#10003;</span> If the formal model admits a
                     violation, Ironproof produces a counterexample
                   </li>
                   <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">✓</span> &quot;Proven&quot; means the
+                    <span className="icon-metal mt-0.5">&#10003;</span> &quot;Proven&quot; means the
                     defined property cannot be violated within the formal model
                   </li>
                 </ul>
-                <div className="mt-8 flex items-center justify-between border-t border-white/5 pt-6">
-                  <span className="track-mid text-xs text-neutral-300">CONFIDENCE</span>
-                  <span className="metal-text text-right font-serif text-lg">
+                <div className="my-6 h-px w-full bg-white/5" />
+                <div className="flex items-baseline justify-between">
+                  <span className="track-mid text-xs text-neutral-500">CONFIDENCE</span>
+                  <span className="metal-text font-serif text-2xl">
                     Mathematical guarantee within the model
                   </span>
                 </div>
               </div>
             </div>
-            <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-lg font-light text-neutral-300">
+            <p className="fade-up mt-10 text-center text-lg font-light text-neutral-300">
               Ironproof does not replace testing. It proves properties that testing cannot
               exhaustively cover.
             </p>
@@ -382,7 +440,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             The theorem that ties the runtime fast path to the full formal model, and the
             equivalence checks behind it, are in the{" "}
             <a
-              href={`${locale === defaultLocale ? "" : `/${locale}`}/proof`}
+              href={`${r}/proof`}
               className="text-neutral-200 underline decoration-white/20 underline-offset-4 transition hover:text-white"
             >
               technical record
@@ -404,8 +462,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               A certificate that does not name its own boundary is a decoration.
             </p>
           </div>
-          {/* One panel with a line down the middle — the certificate naming its
-              own boundary, drawn as a boundary. */}
+          {/* One panel with a line down the middle — the section naming its own
+              boundary, drawn as a boundary. */}
           <div className="card-premium fade-up relative grid gap-10 p-8 sm:p-12 md:grid-cols-2 md:gap-14">
             <span
               aria-hidden="true"
@@ -454,6 +512,24 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </li>
               </ul>
             </div>
+          </div>
+        </section>
+
+        {/* THE EVIDENCE — sealed artifacts, allowed and blocked */}
+        <section className="relative z-10 edge-t px-6 py-24 md:px-14">
+          <div className="fade-up mx-auto mb-12 max-w-3xl">
+            <p className="track-mid mb-4 text-xs text-neutral-400">THE EVIDENCE</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              Both answers leave a receipt.
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              A block is not a silence. It is an artifact stating what was requested, which policy
+              was in force, and why the action did not run.
+            </p>
+          </div>
+          <div className="fade-up mx-auto grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
+            <ProofArtifact kind="allowed" />
+            <ProofArtifact kind="blocked" />
           </div>
         </section>
 
@@ -510,28 +586,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* SPEED */}
-        <section id="speed" className="relative z-10 edge-t px-6 py-28 md:px-14">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up mb-16 text-center">
-              <p className="track-mid mb-4 text-xs text-neutral-400">AT MACHINE SPEED</p>
-              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-                Formal verification in the
-                <br />
-                software delivery loop.
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-                Ironproof automates proof obligations and re-verification so formally defined
-                properties can be checked continuously as systems change.
-              </p>
-            </div>
-            <DeliveryLoop />
-            <p className="fade-up mt-6 text-center text-xs text-neutral-400">
-              Formal guarantees. Without the traditional proof cycle.
-            </p>
-          </div>
-        </section>
-
         {/* PUBLIC TECHNICAL RECORD */}
         <section className="relative z-10 edge-t px-6 py-20 md:px-14">
           <div className="fade-up mx-auto max-w-4xl text-center">
@@ -556,11 +610,39 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </a>
             </div>
             <a
-              href={`${locale === defaultLocale ? "" : `/${locale}`}/proof`}
+              href={`${r}/proof`}
               className="chip-metal track-mid mt-10 inline-block px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
             >
               VIEW TECHNICAL RECORD
             </a>
+          </div>
+        </section>
+
+        {/* WHO IT IS FOR, AND HOW IT STARTS */}
+        <section className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="card-premium fade-up p-10">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+                <circle cx="9" cy="8" r="3" />
+                <path d="M3 20 a6 6 0 0 1 12 0 M16 6 a3 3 0 0 1 0 5 M21 20 a5 5 0 0 0 -5 -5" />
+              </svg>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Who owns the policy</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Risk, security and compliance teams in regulated environments &mdash; the people who
+                already have the rules on paper and no way to prove they hold at execution.
+              </p>
+            </div>
+            <div className="card-premium fade-up p-10">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+                <path d="M4 4 h16 v6 H4 Z" />
+                <path d="M4 14 h10 M4 18 h7" />
+              </svg>
+              <h3 className="metal-text mb-3 font-serif text-2xl">Initial engagement</h3>
+              <p className="font-light leading-relaxed text-neutral-300">
+                Select one critical action, define its authorization boundary and produce an
+                independently verifiable proof artifact.
+              </p>
+            </div>
           </div>
         </section>
 
