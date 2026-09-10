@@ -4,6 +4,7 @@ import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { ProofExplorer } from "@/components/landing/proof-explorer";
+import { TestingVsProving } from "@/components/landing/testing-vs-proving";
 import { Credibility } from "@/components/landing/credibility";
 
 type PageProps = {
@@ -48,6 +49,7 @@ export default async function ProofPage({ params }: PageProps) {
           </p>
         </section>
         <ProofExplorer />
+        <TestingVsProving />
         <Credibility />
       </main>
     </div>
