@@ -569,3 +569,8 @@ p, li {
   flex: none;
   background: linear-gradient(180deg, transparent, rgba(228, 233, 255, 0.28), transparent);
 }
+/* Same register on an icon: gold marks the seal, not the subject it guards. */
+.icon-seal {
+  color: var(--seal);
+  filter: drop-shadow(0 0 8px rgba(201, 162, 75, 0.4));
+}

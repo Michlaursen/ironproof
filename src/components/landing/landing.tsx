@@ -587,7 +587,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
           <div className="grid gap-6 md:grid-cols-3">
             <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
                 <rect x="3" y="4" width="18" height="12" rx="1" />
                 <path d="M8 20 h8 M12 16 v4" />
               </svg>
@@ -597,7 +597,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
                 <path d="M9 12 l2 2 l4 -4" />
                 <circle cx="12" cy="12" r="9" />
               </svg>
@@ -608,7 +608,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </p>
             </div>
             <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
                 <circle cx="12" cy="12" r="9" />
                 <path d="M12 7 v5 l3 3" />
               </svg>
