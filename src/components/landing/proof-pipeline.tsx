@@ -46,7 +46,7 @@ const STEPS: readonly Step[] = [
   {
     n: "03",
     title: "Seal",
-    body: "Each decision is sealed at execution time — SHA3-512 digest, ML-DSA-65 signature — binding the action, the policy version and the verdict into one artifact.",
+    body: "Each decision is sealed at execution time — SHA3-512 digest, dual Ed25519 + ML-DSA-65 signature — binding the action, the policy version and the verdict into one artifact.",
     sealed: true,
     icon: (
       <>
