@@ -159,13 +159,21 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* THE TEN-SECOND TAKEAWAY */}
-        <section className="relative z-10 edge-t px-6 py-16 md:px-14">
+        {/* THE TEN-SECOND TAKEAWAY — then the two artifacts that prove the sentence */}
+        <section id="evidence" className="relative z-10 edge-t px-6 py-16 md:px-14 md:py-20">
           <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
             Ironproof stops unauthorized critical actions from executing
             <span className="text-neutral-500"> &mdash; </span>
             <span className="metal-text">and cryptographically seals every decision,</span>{" "}
             allow or block.
+          </p>
+          <div className="fade-up mx-auto mt-12 grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
+            <ProofArtifact kind="allowed" />
+            <ProofArtifact kind="blocked" />
+          </div>
+          <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-sm font-light leading-relaxed text-neutral-400 md:text-base">
+            A block is not a silence. It is an artifact stating what was requested, which policy was
+            in force, and why the action did not run.
           </p>
         </section>
 
@@ -533,24 +541,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </li>
               </ul>
             </div>
-          </div>
-        </section>
-
-        {/* THE EVIDENCE — sealed artifacts, allowed and blocked */}
-        <section className="relative z-10 edge-t px-6 py-24 md:px-14">
-          <div className="fade-up mx-auto mb-12 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">THE EVIDENCE</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              Both answers leave a receipt.
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              A block is not a silence. It is an artifact stating what was requested, which policy
-              was in force, and why the action did not run.
-            </p>
-          </div>
-          <div className="fade-up mx-auto grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
-            <ProofArtifact kind="allowed" />
-            <ProofArtifact kind="blocked" />
           </div>
         </section>
 
