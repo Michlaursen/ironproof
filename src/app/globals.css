@@ -209,6 +209,15 @@ summary:focus-visible {
 }
 
 .track-wide { letter-spacing: 0.5em; }
+/* Nav tracking. The full menu needs ~1179px of intrinsic width and the xl tier
+ * (1280px) only affords ~905, so the brand 0.28em cannot ride there — it comes
+ * back at 2xl where there is room. Defined as a class, not a Tailwind
+ * `tracking-[]` utility: .track-* is declared after the Tailwind import and
+ * would win the cascade over it (same trap as .chip-metal vs rounded-full). */
+.track-nav { letter-spacing: 0.18em; }
+@media (min-width: 1536px) {
+  .track-nav { letter-spacing: 0.28em; }
+}
 .track-mid { letter-spacing: 0.28em; }
 .track-logo { letter-spacing: 0.42em; }
 
