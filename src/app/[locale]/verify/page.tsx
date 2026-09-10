@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
+import { ProofSeal } from "@/components/landing/proof-seal";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { VerifyArtifact } from "@/components/landing/verify-artifact";
 
@@ -36,6 +37,12 @@ export default async function VerifyPage({ params }: PageProps) {
       <LandingHeader variant="sub" locale={locale} />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-32 md:px-14">
+          {/* The seal is what both of these pages are about, so it anchors the
+            * empty half instead of decorating it. Behind the text on narrow
+            * screens, beside it once there is room. */}
+          <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
+            <ProofSeal size={300} />
+          </div>
           <p className="track-mid mb-4 text-xs text-neutral-400">VERIFY IT YOURSELF</p>
           <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             Do not trust us. Check.
