@@ -154,7 +154,20 @@ summary:focus-visible {
  * a brushed-metal look, independent of the theme tokens).
  * ============================================================ */
 
+/* Descender clip, the trap behind every .metal-* class.
+ * `background-clip: text` paints the gradient only inside the element's
+ * background box. Cormorant Garamond draws g/j/p/q/y (and its old-style
+ * figures) BELOW the descent its metrics declare, so the tails fall outside
+ * that box and are cut off — a straight line through the tail, on inline
+ * spans and on blocks alike, and worse under a tight `leading-`. Plain
+ * coloured text is unaffected, which is why it only shows on metallic type.
+ * Vertical padding grows the painting area: on an inline it costs no layout
+ * at all, on a block it adds 0.12em under the text. Measured on this page's
+ * type: 0.06em still clips, 0.10em clears it, 0.12em keeps a margin at every
+ * size. Inter does not need it. NOT on .iron-text — IRONPROOF is all caps,
+ * has no descender, and its 10-stop vertical gradient is calibrated. */
 .metal-text {
+  padding-bottom: 0.12em; /* descender clip — see note above */
   /* Brighter floor — no thin/dark bands (Miguel: white too thin). */
   background: linear-gradient(180deg, #ffffff 0%, #f2f3f7 26%, #d8dbe4 50%, #f2f3f7 74%, #cfd3de 100%);
   -webkit-background-clip: text;
@@ -164,6 +177,7 @@ summary:focus-visible {
 }
 
 .metal-shine {
+  padding-bottom: 0.12em; /* descender clip — see note above */
   background: linear-gradient(110deg, #c6cad4 0%, #ffffff 22%, #e4e7ee 38%, #ffffff 55%, #d2d6e0 72%, #ffffff 88%, #dfe2ea 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
@@ -340,6 +354,7 @@ summary:focus-visible {
 }
 
 .num-badge {
+  padding-bottom: 0.12em; /* descender clip — see note above */
   background: linear-gradient(180deg, #fff, #8a8a92);
   -webkit-background-clip: text;
   background-clip: text;
