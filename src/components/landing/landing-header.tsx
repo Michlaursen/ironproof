@@ -58,7 +58,7 @@ export function LandingHeader({
         </a>
 
         {/* Desktop nav */}
-        <nav className="track-mid hidden flex-1 items-center justify-between gap-x-6 pl-6 text-xs xl:flex 2xl:gap-x-8 2xl:pl-16">
+        <nav className="track-nav hidden flex-1 items-center justify-between gap-x-3 text-[11px] xl:flex 2xl:gap-x-[18px] 2xl:pl-4 2xl:text-xs">
           {LINKS.map((l) => (
             <a
               key={l.href}
@@ -73,7 +73,7 @@ export function LandingHeader({
           ))}
           <a
             href={contactHref}
-            className="track-mid whitespace-nowrap shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-2.5 font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
+            className="track-nav whitespace-nowrap shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-4 py-2.5 font-semibold 2xl:px-5 text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
           >
             REQUEST ACCESS
           </a>
