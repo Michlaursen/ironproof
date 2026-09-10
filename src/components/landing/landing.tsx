@@ -255,9 +255,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </div>
               ))}
             </div>
-            <p className="mt-8 text-sm font-light leading-relaxed text-neutral-400">
+          </div>
+        </section>
+
+        {/* BREATH — the frameworks exist; this is what Ironproof does with them */}
+        <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="breath-mark" aria-hidden="true" />
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
               These frameworks already say what must never happen. Ironproof turns that sentence
-              into a boundary the system cannot cross, and into evidence the regulator can re-check.
+              into{" "}
+              <span className="metal-text">a boundary the system cannot cross</span>, and into
+              evidence the regulator can re-check.
             </p>
           </div>
         </section>
@@ -379,6 +388,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
         <Counterexample />
+
+        {/* BREATH — what the counterexample was for */}
+        <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="breath-mark" aria-hidden="true" />
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
+              Take the clause out and the proof collapses. That is what makes the certificate
+              load-bearing rather than decorative:{" "}
+              <span className="metal-text">a green that can never turn red is worth nothing</span>.
+            </p>
+          </div>
+        </section>
 
         {/* ── from here down: the mechanism, then the evidence ── */}
 

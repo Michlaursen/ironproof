@@ -523,3 +523,17 @@ h1, h2, h3 {
 p, li {
   text-wrap: pretty;
 }
+
+/* Breath — the two places the page stops arguing and lets one line stand.
+ * Twenty-two sections shared one shape (eyebrow, serif heading, paragraph,
+ * cards), so nothing could stand out: with no quiet, there is no loud. These
+ * carry no eyebrow, no card and no .edge-t rule, because a divider would make
+ * them a twenty-third section instead of a gap between sections.
+ * The mark is the blade of the monogram, reduced to one lit line — enough to
+ * say "this is deliberate" without repeating the centred lede at the top. */
+.breath-mark {
+  display: block;
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, transparent, rgba(228, 233, 255, 0.55) 45%, transparent);
+}
