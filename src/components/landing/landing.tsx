@@ -3,13 +3,11 @@ import { LandingHeader } from "./landing-header";
 import { ProofSeal } from "./proof-seal";
 import { ProofArtifact } from "./proof-artifact";
 import { FadeUpInit } from "./fade-up-init";
-import { TestingDots, ProvingDots } from "./compare-dots";
 import { RefundDemo } from "./refund-demo";
 import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
 import { GateDiagram } from "./gate-diagram";
 import { ProofPipeline } from "./proof-pipeline";
-import { EnforcementCoverage } from "./enforcement-coverage";
 import { SequenceProof } from "./sequence-proof";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
@@ -269,26 +267,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* COVERAGE — every action, before it runs */}
-        <section id="coverage" className="relative z-10 edge-t px-6 py-28 md:px-14">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up mb-14 max-w-3xl">
-              <p className="track-mid mb-4 text-xs text-neutral-400">COVERAGE AND TIMING</p>
-              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-                Every action, and before
-                <br />
-                rather than after.
-              </h2>
-              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-                Controls that sample after the fact can tell you an unauthorized action happened.
-                They cannot stop it. The decision has to sit in front of execution to change the
-                outcome.
-              </p>
-            </div>
-            <EnforcementCoverage />
-          </div>
-        </section>
-
         {/* PRODUCT / MECHANISM / EVIDENCE */}
         <section id="layers" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
@@ -315,49 +293,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </ol>
         </section>
 
-        {/* WHAT IRONPROOF CHANGES */}
-        <section id="changes" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
-          <div className="fade-up mb-10 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">THE OUTCOME</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              What Ironproof changes
-            </h2>
-          </div>
-          <ol className="mx-auto max-w-5xl">
-            {[
-              {
-                title: "Unauthorized actions are stopped before execution.",
-                body: "Actions routed through the authorization boundary cannot execute outside the enforced policy.",
-              },
-              {
-                title: "Policy becomes enforceable.",
-                body: "Critical rules are checked at the authorization boundary, not only monitored afterwards.",
-              },
-              {
-                title: "Every decision produces evidence.",
-                body: "ALLOW and BLOCK decisions can be independently verified.",
-              },
-              {
-                title: "Verification does not depend on Ironproof.",
-                body: "Auditors and technical teams can re-check the evidence offline.",
-              },
-            ].map((c, i) => (
-              <li
-                key={c.title}
-                className="fade-up edge-t grid gap-x-8 gap-y-2 py-8 md:grid-cols-[4rem_1fr_1fr] md:items-baseline md:py-10"
-              >
-                <span className="num-badge font-serif text-3xl md:text-4xl">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="metal-text font-serif text-2xl leading-snug md:text-3xl">
-                  {c.title}
-                </h3>
-                <p className="font-light leading-relaxed text-neutral-400">{c.body}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
         {/* TRY IT */}
         <RefundDemo />
 
@@ -365,77 +300,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <Counterexample />
 
         {/* ── from here down: the mechanism, then the evidence ── */}
-
-        {/* TESTING VS PROVING */}
-        <section id="compare" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up mb-16 text-center">
-              <p className="track-mid mb-4 text-xs text-neutral-400">THE MECHANISM</p>
-              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-                Testing vs. Proving
-              </h2>
-              <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-                Testing and formal verification answer different questions.
-              </p>
-            </div>
-            <div className="fade-up grid gap-6 md:grid-cols-2">
-              <div className="card-premium p-10">
-                <p className="track-mid mb-6 text-xs text-neutral-400">TESTING</p>
-                <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">
-                  Did the executions we tried behave correctly?
-                </p>
-                <TestingDots />
-                <ul className="space-y-3 text-sm">
-                  <li className="flex gap-3 text-neutral-400">
-                    <span className="mt-0.5 text-neutral-500">&#9675;</span> Checks the cases
-                    someone thought of
-                  </li>
-                  <li className="flex gap-3 text-neutral-400">
-                    <span className="mt-0.5 text-neutral-500">&#9675;</span> &quot;Passed&quot;
-                    means <em>probably</em> fine
-                  </li>
-                </ul>
-                <div className="my-6 h-px w-full bg-white/5" />
-                <div className="flex items-baseline justify-between">
-                  <span className="track-mid text-xs text-neutral-500">CONFIDENCE</span>
-                  <span className="font-serif text-2xl text-neutral-300">Partial</span>
-                </div>
-              </div>
-              <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
-                <p className="track-mid mb-6 text-xs text-neutral-300">PROVING</p>
-                <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">
-                  Can the defined property be violated anywhere in the modeled state space?
-                </p>
-                <ProvingDots />
-                <ul className="space-y-3 text-sm">
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">&#10003;</span> Reasons exhaustively over
-                    the formally defined state space
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">&#10003;</span> If the formal model admits a
-                    violation, Ironproof produces a counterexample
-                  </li>
-                  <li className="flex gap-3 text-neutral-300">
-                    <span className="icon-metal mt-0.5">&#10003;</span> &quot;Proven&quot; means the
-                    defined property cannot be violated within the formal model
-                  </li>
-                </ul>
-                <div className="my-6 h-px w-full bg-white/5" />
-                <div className="flex items-baseline justify-between">
-                  <span className="track-mid text-xs text-neutral-500">CONFIDENCE</span>
-                  <span className="metal-text font-serif text-2xl">
-                    Mathematical guarantee within the model
-                  </span>
-                </div>
-              </div>
-            </div>
-            <p className="fade-up mt-10 text-center text-lg font-light text-neutral-300">
-              Ironproof does not replace testing. It proves properties that testing cannot
-              exhaustively cover.
-            </p>
-          </div>
-        </section>
 
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
