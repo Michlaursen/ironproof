@@ -142,17 +142,21 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </div>
               <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
+                {/* Both used to land on more prose — a section title is not a
+                  * reward for a click. These two go to the only places on the
+                  * page where the reader DOES something: move a limit and watch
+                  * the verdict flip, then check a real seal in their own tab. */}
                 <a
-                  href="#sequence"
+                  href="#try"
                   className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  SEE IT DECIDE
+                  BLOCK ONE YOURSELF
                 </a>
                 <a
-                  href="#start"
+                  href="#verify"
                   className="chip-metal track-mid px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
                 >
-                  WHICH ACTIONS
+                  CHECK A REAL SEAL
                 </a>
               </div>
             </div>
