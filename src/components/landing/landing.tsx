@@ -24,7 +24,7 @@ import { defaultLocale, type Locale } from "@/content";
  * Everything named Z3, ML-DSA, air-gapped or post-quantum therefore lives
  * below the fold of the argument, not inside the pitch. Anchor ids are load
  * bearing: the header links #how, #initiators, #start and #verify, and the
- * research page links #limits.
+ * research page links #counterexample.
  *
  * English copy inline for now; French / i18n to be reconnected with Miguel.
  */
@@ -352,7 +352,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
               Your written policy is compiled into mathematics by a deterministic compiler &mdash;
-              the same one the runtime uses.
+              the same one the runtime uses. A differential check fails the build if the two
+              ever diverge.
             </p>
           </div>
           <div className="fade-up">
@@ -369,72 +370,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </a>
             .
           </p>
-        </section>
-
-        {/* WHAT IS PROVEN AND WHAT IS NOT */}
-        <section id="limits" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-14 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">THE MODEL, NAMED</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              What is proven &mdash;
-              <br />
-              and what is not.
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              A certificate that does not name its own boundary is a decoration.
-            </p>
-          </div>
-          {/* One panel with a line down the middle — the section naming its own
-              boundary, drawn as a boundary. */}
-          <div className="card-premium fade-up relative grid gap-10 p-8 sm:p-12 md:grid-cols-2 md:gap-14">
-            <span
-              aria-hidden="true"
-              className="absolute left-8 right-8 top-1/2 hidden h-px md:left-1/2 md:right-auto md:top-12 md:bottom-12 md:h-auto md:w-px md:block"
-              style={{
-                background:
-                  "linear-gradient(180deg, transparent, rgba(228,233,255,0.28), transparent)",
-              }}
-            />
-            <div>
-              <p className="track-mid mb-5 text-xs text-neutral-300">INSIDE THE MODEL</p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex gap-3 text-neutral-300">
-                  <span className="icon-metal mt-0.5">&#10003;</span> The defined property cannot be
-                  violated anywhere in the modeled action space &mdash; for a sequence of any length,
-                  not for a sample of cases.
-                </li>
-                <li className="flex gap-3 text-neutral-300">
-                  <span className="icon-metal mt-0.5">&#10003;</span> The policy the prover reads and
-                  the policy the runtime enforces come from one compiler; a differential check fails
-                  the build if they diverge.
-                </li>
-                <li className="flex gap-3 text-neutral-300">
-                  <span className="icon-metal mt-0.5">&#10003;</span> Each certificate states how many
-                  clauses were encoded, and names the ones that were not.
-                </li>
-              </ul>
-            </div>
-            <div>
-              <p className="track-mid mb-5 text-xs text-neutral-500">OUTSIDE THE MODEL</p>
-              <ul className="space-y-3 text-sm">
-                <li className="flex gap-3 text-neutral-400">
-                  <span className="mt-0.5 text-neutral-500">&#9675;</span> Clauses that require human
-                  judgment are not encoded, and the certificate says so rather than counting them as
-                  covered.
-                </li>
-                <li className="flex gap-3 text-neutral-400">
-                  <span className="mt-0.5 text-neutral-500">&#9675;</span> The thresholds are your
-                  institution&apos;s chosen numbers. We prove the configuration stays inside them, not
-                  that they are the right numbers.
-                </li>
-                <li className="flex gap-3 text-neutral-400">
-                  <span className="mt-0.5 text-neutral-500">&#9675;</span> The cryptographic base is
-                  NIST standards &mdash; SHA3-512, Ed25519, ML-DSA-65 (FIPS 204) &mdash; not
-                  cryptography of our own.
-                </li>
-              </ul>
-            </div>
-          </div>
         </section>
 
         {/* VERIFY */}

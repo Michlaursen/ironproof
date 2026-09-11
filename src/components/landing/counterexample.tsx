@@ -147,7 +147,8 @@ export function Counterexample() {
           </ul>
           <p className="mt-5 text-sm font-light text-neutral-400">
             A certificate names what it does not cover. A coverage figure you cannot see the
-            gaps in is a decoration.
+            gaps in is a decoration. The authority above is your number, not ours &mdash; we
+            prove the agent stays inside it, not that it is the right one.
           </p>
         </div>
       </div>
