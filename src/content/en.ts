@@ -354,22 +354,6 @@ export const en: SiteContent = {
       ],
     },
   },
-  sector: {
-    eyebrow: "Where we start",
-    title: "Money-moving workflows in Canadian financial services",
-    description:
-      "We start with back-office AI agents that issue refunds, payments, disbursements or beneficiary changes under defined limits and approval rules.",
-    buyersLabel: "Primary buyers",
-    buyers: "Technology risk, operational risk and compliance teams.",
-    engagementLabel: "Initial engagement",
-    engagement:
-      "Select one workflow, define the transaction boundary and produce an independently verifiable proof artifact.",
-    quote:
-      "They do not use it to replace human judgment or to fully automate critical decisions given the significant financial, legal and reputational consequences.",
-    quoteSource: "Bank of Canada — Financial System Survey, May 2026",
-    quoteHref:
-      "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
-  },
   finalCta: {
     title: "Start with one money-moving workflow",
     description:
