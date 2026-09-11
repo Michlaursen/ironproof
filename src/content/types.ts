@@ -109,18 +109,6 @@ export type SiteContent = {
       items: { id: string; title: string; href: string }[];
     };
   };
-  sector: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    buyersLabel: string;
-    buyers: string;
-    engagementLabel: string;
-    engagement: string;
-    quote: string;
-    quoteSource: string;
-    quoteHref: string;
-  };
   finalCta: {
     title: string;
     description: string;

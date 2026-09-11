@@ -366,24 +366,6 @@ export const fr: SiteContent = {
       ],
     },
   },
-  sector: {
-    eyebrow: "Par où nous commençons",
-    title:
-      "Les flux qui déplacent de l’argent, dans les services financiers canadiens",
-    description:
-      "Nous commençons par les agents IA d’arrière-guichet qui émettent des remboursements, des paiements, des décaissements ou des changements de bénéficiaire, sous des limites et des règles d’approbation définies.",
-    buyersLabel: "Acheteurs principaux",
-    buyers:
-      "Les équipes de risque technologique, de risque opérationnel et de conformité.",
-    engagementLabel: "Mandat initial",
-    engagement:
-      "Choisir un flux, définir la frontière transactionnelle et produire un artefact de preuve vérifiable indépendamment.",
-    quote:
-      "Elles ne l’utilisent pas pour remplacer le jugement humain ni pour automatiser entièrement des décisions critiques, compte tenu des conséquences financières, juridiques et réputationnelles importantes.",
-    quoteSource: "Banque du Canada — Enquête sur le système financier, mai 2026",
-    quoteHref:
-      "https://www.bankofcanada.ca/2026/05/financial-system-survey-highlights-2026/",
-  },
   finalCta: {
     title: "Commencez par un seul flux qui déplace de l’argent",
     description:
