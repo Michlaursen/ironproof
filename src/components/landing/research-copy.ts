@@ -55,7 +55,6 @@ const RELATED_HREFS = {
   initiators: "/#initiators",
   try: "/#try",
   counter: "/#counterexample",
-  limits: "/#limits",
 } as const;
 
 export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
@@ -373,7 +372,6 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
         [RELATED_HREFS.initiators, "One gate, any initiator", "Agent, script, API call or person — the same check"],
         [RELATED_HREFS.try, "Try a live decision", "A small refund policy, proved or broken in the browser"],
         [RELATED_HREFS.counter, "What a counterexample looks like", "One clause removed, and the sequence the solver found"],
-        [RELATED_HREFS.limits, "The honest surface", "What the model does not cover, named"],
       ],
     },
     sources: {
@@ -729,7 +727,6 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
         [RELATED_HREFS.initiators, "Une porte, tout initiateur", "Agent, script, appel d’API ou personne — le même contrôle"],
         [RELATED_HREFS.try, "Essayer une décision en direct", "Une petite politique de remboursement, prouvée ou brisée dans le navigateur"],
         [RELATED_HREFS.counter, "À quoi ressemble un contre-exemple", "Une clause retirée, et la séquence trouvée par le solveur"],
-        [RELATED_HREFS.limits, "La surface honnête", "Ce que le modèle ne couvre pas, nommé"],
       ],
     },
     sources: {
