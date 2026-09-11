@@ -351,6 +351,39 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* ── from here down: the mechanism, then the evidence ── */}
 
+        {/* WHY THIS IS DIFFERENT — the commercial form of "testing vs proving".
+          * The full two-column comparison moved to /proof on 2026-09-10 because
+          * it stalled the page between "why is this different" and "prove it";
+          * nothing replaced it here. This is the replacement: same idea, two
+          * sentences, zero solver vocabulary. The reader who wants the mechanism
+          * gets it in the very next section. Scope is deliberately stated once,
+          * at the end, rather than hedged into every sentence — diluting the
+          * caveat everywhere is the mirror error of overclaiming. */}
+        <section id="why" className="relative z-10 px-6 py-32 md:px-14 md:py-40">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <p className="track-mid mb-8 text-xs text-neutral-400">WHY THIS IS DIFFERENT</p>
+            <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
+              We don&apos;t test your system{" "}
+              <span className="text-neutral-500">&mdash;</span>{" "}
+              <span className="metal-shine">we prove it</span>.
+            </h2>
+            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
+              You walk away with one of two things: the exact case that breaks it, or the proof
+              that no such case exists. Either way, you re-run that proof yourself &mdash; in your
+              own tools, without trusting us.
+            </p>
+            <div className="hairline my-10 h-px w-full max-w-md" />
+            <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
+              A test tells you what it tried.{" "}
+              <span className="metal-text">A proof tells you what&apos;s impossible.</span>
+            </p>
+            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
+              Proven within the boundary you define. The certificate states that boundary.
+            </p>
+          </div>
+        </section>
+
+
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
