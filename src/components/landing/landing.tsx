@@ -112,7 +112,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="fade-up">
               <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
-                THE DETERMINISTIC AUTHORIZATION LAYER FOR CRITICAL ACTIONS
+                THE AUTHORIZATION LAYER FOR CRITICAL ACTIONS
               </p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
@@ -161,6 +161,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
           </div>
         </section>
+
+        {/* TRY IT — the reader blocks one before being told how anything works.
+            Placed directly under the hero: the strongest demonstration on the page
+            should not wait behind five sections of argument. */}
+        <RefundDemo />
 
         {/* THE TEN-SECOND TAKEAWAY — then the two artifacts that prove the sentence */}
         <section id="evidence" className="relative z-10 edge-t px-6 py-16 md:px-14 md:py-20">
@@ -323,9 +328,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </ol>
         </section>
 
-        {/* TRY IT */}
-        <RefundDemo />
-
         {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
         <Counterexample />
 
@@ -337,6 +339,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               Take the clause out and the proof collapses. That is what makes the certificate
               load-bearing rather than decorative:{" "}
               <span className="metal-text">a green that can never turn red is worth nothing</span>.
+            </p>
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
+              Ironproof does not claim coverage it has not modeled.{" "}
+              <span className="metal-text">
+                Every certificate states what was proven &mdash; and what was not.
+              </span>
             </p>
           </div>
         </section>
@@ -351,6 +359,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               Prove. Enforce. Seal. Verify.
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+              Ironproof mathematically checks that no reachable sequence of actions can cross
+              the defined authorization boundary.
+            </p>
+            <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">
               Your written policy is compiled into mathematics by a deterministic compiler &mdash;
               the same one the runtime uses. A differential check fails the build if the two
               ever diverge.
@@ -497,12 +509,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <ProofSeal size={148} />
             </div>
             <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
-              Before it executes, know it&apos;s authorized.
+              Put one critical action behind the boundary.
             </h2>
             <p className="mb-10 text-lg font-light text-neutral-400">
-              Choose one critical action &mdash; a payment, an access grant, a deletion, a
-              deployment. Ironproof will formalize its authorization boundary and show exactly what
-              can &mdash; and cannot &mdash; execute.
+              Choose a payment, access grant, deletion, or deployment. Ironproof will define the
+              authorization boundary, prove it, enforce it at runtime, and produce an
+              independently verifiable record.
             </p>
             <CtaForm />
           </div>
