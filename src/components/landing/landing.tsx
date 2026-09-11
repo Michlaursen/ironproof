@@ -21,8 +21,8 @@ import { defaultLocale, type Locale } from "@/content";
  *   formal methods = the mechanism    (how the boundary is established)
  *   cryptography   = the evidence     (what is kept, and re-checked)
  *
- * Everything named Z3, ML-DSA, air-gapped or post-quantum therefore lives
- * below the fold of the argument, not inside the pitch. Anchor ids are load
+ * Everything named Z3, ML-DSA or post-quantum therefore lives below the fold
+ * of the argument, not inside the pitch. Anchor ids are load
  * bearing: the header links #how, #initiators, #start and #verify, and the
  * research page links #counterexample.
  *
@@ -162,11 +162,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* TRY IT — the reader blocks one before being told how anything works.
-            Placed directly under the hero: the strongest demonstration on the page
-            should not wait behind five sections of argument. */}
-        <RefundDemo />
-
         {/* THE TEN-SECOND TAKEAWAY — then the two artifacts that prove the sentence */}
         <section id="evidence" className="relative z-10 edge-t px-6 py-16 md:px-14 md:py-20">
           <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
@@ -184,6 +179,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             in force, and why the action did not run.
           </p>
         </section>
+
+        {/* TRY IT — the reader blocks one themselves, right after seeing the two
+            sealed artifacts the sentence above promises. Kept high on the page:
+            the strongest demonstration should not wait behind the argument. */}
+        <RefundDemo />
 
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
@@ -387,56 +387,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* VERIFY */}
         <VerifyArtifact />
 
-        {/* SOVEREIGNTY */}
-        <section id="sovereignty" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">SOVEREIGNTY</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              Built for environments that
-              <br />
-              cannot export data or trust
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              Ironproof can run locally or air-gapped, so policies, system context and decision
-              evidence remain under the institution&apos;s control.
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
-                <rect x="3" y="4" width="18" height="12" rx="1" />
-                <path d="M8 20 h8 M12 16 v4" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Local &amp; air-gapped</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                The proof core can operate fully air-gapped — no network access required.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
-                <path d="M9 12 l2 2 l4 -4" />
-                <circle cx="12" cy="12" r="9" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Independent verification</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Your auditor re-checks the artifact with a second, independently written verifier —
-                offline, no Ironproof dashboard.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-seal mb-5">
-                <circle cx="12" cy="12" r="9" />
-                <path d="M12 7 v5 l3 3" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Durable evidence</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Classical + post-quantum signature (Ed25519 + ML-DSA-65, FIPS 204), timestamp
-                bounded from both sides — a seal cannot move backwards in time.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* PUBLIC TECHNICAL RECORD */}
         <section className="relative z-10 edge-t px-6 py-20 md:px-14">
           <div className="fade-up mx-auto max-w-4xl text-center">
@@ -471,34 +421,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* DEPLOY IT — where it sits in the stack */}
         <DeployGate />
-
-        {/* WHO IT IS FOR, AND HOW IT STARTS */}
-        <section className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <circle cx="9" cy="8" r="3" />
-                <path d="M3 20 a6 6 0 0 1 12 0 M16 6 a3 3 0 0 1 0 5 M21 20 a5 5 0 0 0 -5 -5" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Who owns the policy</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Risk, security and compliance teams in regulated environments &mdash; the people who
-                already have the rules on paper and no way to prove they hold at execution.
-              </p>
-            </div>
-            <div className="card-premium fade-up p-10">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" className="icon-metal mb-5">
-                <path d="M4 4 h16 v6 H4 Z" />
-                <path d="M4 14 h10 M4 18 h7" />
-              </svg>
-              <h3 className="metal-text mb-3 font-serif text-2xl">Initial engagement</h3>
-              <p className="font-light leading-relaxed text-neutral-300">
-                Select one critical action, define its authorization boundary and produce an
-                independently verifiable proof artifact.
-              </p>
-            </div>
-          </div>
-        </section>
 
         {/* CTA */}
         <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
