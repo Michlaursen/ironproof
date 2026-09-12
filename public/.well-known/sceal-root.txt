@@ -1,0 +1,47 @@
+Ironproof — Sceal root key attestation
+======================================
+
+This file publishes the fingerprint of the ONE root key that authorises every
+signing key Ironproof uses. It is a fingerprint of a PUBLIC key: nothing here
+is secret, and the same value is already published in DNS (below).
+
+sceal-root=v1 4f769f81f7818102d09a225b3b036087e088bedb60f21a31f44f222e4c2737387aaf7e32c2610fa333a8461335e825b84efe52b4440885cd53bda3de7aecbc98
+
+WHY THIS EXISTS
+  A sealed dossier verifies against the public keys carried inside it. That is
+  self-consistent and says nothing about WHO sealed it: anyone can generate a
+  keyring and produce a dossier that verifies perfectly against itself. The key
+  log reduces the question from "do I trust these N operational keys" to "do I
+  trust this ONE root". This file makes that one value checkable by a stranger.
+
+CHECK IT YOURSELF, WITHOUT OUR CODE
+  Two independent DNS authorities publish the same value. Compare all three:
+
+    dig +short TXT _sceal.ironproof.ai
+    dig +short TXT _sceal.capital-b.ca
+    curl https://ironproof.ai/.well-known/sceal-root.txt
+
+  Three sources agreeing means substituting the root requires compromising the
+  web host AND both DNS zones at once. One disagreeing is the signal.
+
+WHAT THIS DOES NOT PROVE
+  - Not ownership by a legal entity. DNS and HTTPS demonstrate control of a
+    NAME, which is not a company owning a key. The binding root <-> legal person
+    remains an out-of-band act. What changes is that the out-of-band step is now
+    performed against a name anyone can look up, ONCE, on ONE value — and a
+    substitution becomes visible instead of silent.
+  - Present tense only. This says the name points here NOW. It says nothing
+    about what it pointed to when any given dossier was sealed. Detecting a swap
+    over time needs repeated observation, which this file is not.
+  - Not offline-verifiable, deliberately. A "confirmed" flag stored in our own
+    log would be worthless — a forger writes their own log, so they write their
+    own confirmations. Confirmation is an ACT you perform against the network,
+    never a claim you read from us.
+
+FORMAT
+  The record line is a versioned prefix, a single space, then the SHA3-512
+  fingerprint in hex. The prefix is versioned on purpose: an unversioned or
+  differently versioned record is not this format and must not be read as if it
+  were. The prefix is deliberately NOT quoted anywhere else in this file — a
+  parser scans every line for it, so a second mention in prose would be read as
+  a second, bogus record.
