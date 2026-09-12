@@ -288,6 +288,9 @@ export function verifyDossier(dossier, onProgress) {
   let done = 0;
   const tick = () => { done++; if (onProgress) onProgress(done, totalUnits); };
 
+  // Every real chain head, so an anchor cannot claim to cover a chain it does
+  // not belong to. See the digest check in section 5.
+  const entryHashes = new Set([GENESIS_PREV]);
   let expectedPrev = GENESIS_PREV;
   entries.forEach((raw, idx) => {
     const e = asMap(raw);
@@ -316,6 +319,7 @@ export function verifyDossier(dossier, onProgress) {
     const sigErr = verifyDual(str(e, "entry_hash"), str(e, "sig_ed25519"), str(e, "sig_mldsa65"), edPub, pqPub);
     if (sigErr !== null) failures.push(`${tag}: ${sigErr}`);
 
+    entryHashes.add(str(e, "entry_hash"));
     expectedPrev = str(e, "entry_hash");
     tick();
   });
@@ -333,6 +337,20 @@ export function verifyDossier(dossier, onProgress) {
       failures.push(`${tag}: witnesses tampered (witnesses_hash mismatch)`);
     }
     if (str(a, "prev_anchor_hash") !== expectedPrevAnchor) failures.push(`${tag}: broken anchor link`);
+
+    // The anchor must point at a head of THIS chain. Without this the other
+    // four checks all pass on a BORROWED anchor: take a genuine, correctly
+    // signed anchor off an older dossier of your own, staple it onto a new
+    // one, and seq/witnesses_hash/prev_anchor_hash/anchor_hash/signatures are
+    // every one of them valid -- because nothing was forged. Measured
+    // 2026-09-11: python reported `digest does not match any chain head`,
+    // this file reported VERIFIED with a two-sided temporal claim. A verifier
+    // that publishes WHEN for a chain the anchor does not cover is exactly the
+    // backdating the anchor exists to refute, and the sealer is the adversary
+    // the threat model names.
+    if (!entryHashes.has(str(a, "digest"))) {
+      failures.push(`${tag}: digest does not match any chain head`);
+    }
 
     const preimage = new Map([
       ["seq", a.get("seq") ?? null],
