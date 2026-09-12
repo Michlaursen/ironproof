@@ -6,7 +6,7 @@ import { IconMenu, IconClose } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
 
 type Variant = "home" | "sub";
-type Active = "proof" | "provable-ai";
+type Active = "proof" | "provable-ai" | "verify";
 
 // English keeps the short URLs ("/proof"), which next.config rewrites to
 // "/en/proof". Any other locale is addressed explicitly, so a visitor reading
@@ -26,14 +26,14 @@ function links(
   const r = routePrefix(locale);
   const p = variant === "sub" ? r || "/" : "";
   // Two kinds of destination, and the reader cannot tell them apart from the
-  // label alone: the first four move down this page, the last two leave it.
+  // label alone: the first three move down this page, the last three leave it.
   // They used to alternate, so the row read as six equivalent things. Grouped
   // — anchors, then pages — the separator can say which is which.
   return [
     { href: `${p}#how`, label: "HOW IT WORKS" },
     { href: `${p}#initiators`, label: "ANY INITIATOR" },
     { href: `${p}#start`, label: "CRITICAL ACTIONS" },
-    { href: `${p}#verify`, label: "EVIDENCE" },
+    { href: `${r}/verify`, label: "VERIFY", page: "verify", leaves: true },
     { href: `${r}/proof`, label: "PROOF", page: "proof", leaves: true },
     { href: `${r}/provable-ai`, label: "PROVABLE AI", page: "provable-ai", leaves: true },
   ];

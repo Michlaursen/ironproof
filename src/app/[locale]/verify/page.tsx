@@ -34,7 +34,7 @@ export default async function VerifyPage({ params }: PageProps) {
   return (
     <div className="relative min-h-screen">
       <FadeUpInit />
-      <LandingHeader variant="sub" locale={locale} />
+      <LandingHeader variant="sub" locale={locale} active="verify" />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-32 md:px-14">
           {/* The seal is what both of these pages are about, so it anchors the
