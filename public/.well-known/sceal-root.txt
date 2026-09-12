@@ -21,8 +21,13 @@ CHECK IT YOURSELF, WITHOUT OUR CODE
     dig +short TXT _sceal.capital-b.ca
     curl https://ironproof.ai/.well-known/sceal-root.txt
 
-  Three sources agreeing means substituting the root requires compromising the
-  web host AND both DNS zones at once. One disagreeing is the signal.
+  Three sources, but count the AUTHORITIES, not the URLs: the DNS zone and the
+  web host for ironproof.ai are the same authority, because whoever controls the
+  zone decides where the host points. So this is TWO independent authorities --
+  ironproof.ai and capital-b.ca -- and substituting the root undetected requires
+  compromising BOTH names. The https file above adds visibility, not
+  independence: it is here so a person can read the value, since nobody clicks a
+  TXT record. One source disagreeing is the signal.
 
 WHAT THIS DOES NOT PROVE
   - Not ownership by a legal entity. DNS and HTTPS demonstrate control of a
