@@ -17,6 +17,17 @@ type VerifyResult = {
   reason?: string;
   nEntries?: number;
   nAnchors?: number;
+  // Six states, not two. `both` is the only one that refutes backdating: an
+  // upper bound alone proves the bytes are no NEWER than the timestamp and says
+  // nothing about a date written inside the document that is older than the
+  // truth. So the state is RENDERED, never implied by the word "anchored".
+  time?: {
+    state: "both" | "upper" | "lower" | "none" | "unbounded" | "direction-unrecorded";
+    before: number;
+    after: number;
+    unspecified: number;
+    down: number;
+  };
   toolchain?: { liboqs?: string; liboqsPython?: string; canonicalForm?: string } | null;
 };
 
@@ -24,6 +35,50 @@ const DEMOS = {
   verified: "/sceal/demo-verified.json",
   tampered: "/sceal/demo-tampered-content.json",
 } as const;
+
+/** What the seal proves about WHEN, stated at the strength it actually has.
+ *
+ * A signature proves the bytes did not move; it proves nothing about the date,
+ * because `collected_at` is a clock the sealer owns. An anchor binds the chain
+ * head to witnesses the sealer does not own. Which DIRECTION those witnesses
+ * bound is the whole question and it is printed, because "anchored" on its own
+ * is the word a reader takes for "the date is proven".
+ */
+function TemporalLine({ time }: { time?: VerifyResult["time"] }) {
+  if (!time || time.state === "none") {
+    return (
+      <p className="mt-3 text-sm font-light text-neutral-400">
+        <span className="text-neutral-300">No temporal anchor.</span> The seal proves the bytes,
+        not the date — nothing here refutes a document written later and dated earlier.
+      </p>
+    );
+  }
+  if (time.state === "both") {
+    return (
+      <p className="mt-3 text-sm font-light text-neutral-300">
+        <span className="text-neutral-100">Anchored in time, from both sides.</span>{" "}
+        {time.before} RFC 3161 timestamp{time.before === 1 ? "" : "s"} place it{" "}
+        <span className="text-neutral-200">before</span> an instant, and {time.after} public
+        beacon{time.after === 1 ? "" : "s"} place it{" "}
+        <span className="text-neutral-200">after</span> one — a value nobody could predict
+        earlier. Two sides close the interval; an upper bound alone would not.
+      </p>
+    );
+  }
+  const side =
+    time.state === "upper"
+      ? "an upper bound only — it proves the bytes are no newer than the timestamp, and does not refute a date written inside the document that is older than the truth."
+      : time.state === "lower"
+        ? "a lower bound only — it proves the bytes are no older than that beacon round, with nothing capping the other side."
+        : time.state === "unbounded"
+          ? "witnesses that were all unreachable when this was sealed, so no bound was recorded. The absence is the signal, not an error."
+          : "witnesses whose direction was not recorded, so no bound can be claimed from them.";
+  return (
+    <p className="mt-3 text-sm font-light text-neutral-400">
+      <span className="text-neutral-300">Anchored, partially:</span> {side}
+    </p>
+  );
+}
 
 export function VerifyArtifact() {
   const [input, setInput] = useState("");
@@ -74,9 +129,10 @@ export function VerifyArtifact() {
             Check a Real Proof Yourself
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-            Load a real sealed dossier and verify it right here — Ed25519 + ML-DSA-65 signatures and
-            the SHA3-512 chain, entirely in your browser. Then load a tampered one and watch it get
-            rejected. No dashboard, no server, no trust required.
+            Load a real sealed dossier and verify it right here — Ed25519 + ML-DSA-65 signatures,
+            the SHA3-512 chain, and the temporal anchor that pins <em>when</em>, entirely in your
+            browser. Then load a tampered one and watch it get rejected. No dashboard, no server,
+            no trust required.
           </p>
         </div>
 
@@ -141,6 +197,7 @@ export function VerifyArtifact() {
                     <span className="text-neutral-200">ML-DSA-65</span> (dual: both must pass) — over
                     a SHA3-512 chain of {result.nEntries ?? 0} sealed entries. Nothing was altered.
                   </p>
+                  <TemporalLine time={result.time} />
                   {result.toolchain?.liboqs ? (
                     <p className="mt-2 font-mono text-xs text-neutral-500">
                       sealed by liboqs {result.toolchain.liboqs}
