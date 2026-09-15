@@ -2,8 +2,7 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title:
-      "Ironproof | Application des politiques aux actions critiques — prouvée, scellée, vérifiable",
+    title: "Ironproof | Autorisation déterministe pour les actions critiques",
     description:
       "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta

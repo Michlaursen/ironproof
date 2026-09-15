@@ -4,6 +4,7 @@ import { Fragment, useState } from "react";
 import { IronProofLogo } from "@/components/ironproof-logo";
 import { IconMenu, IconClose } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
+import { type L, pick } from "./i18n";
 
 type Variant = "home" | "sub";
 type Active = "proof" | "provable-ai" | "verify";
@@ -15,6 +16,41 @@ function routePrefix(locale: Locale): string {
   return locale === defaultLocale ? "" : `/${locale}`;
 }
 
+const NAV: L<{
+  how: string;
+  initiators: string;
+  actions: string;
+  verify: string;
+  proof: string;
+  provableAi: string;
+  cta: string;
+  openMenu: string;
+  closeMenu: string;
+}> = {
+  en: {
+    how: "HOW IT WORKS",
+    initiators: "ANY INITIATOR",
+    actions: "CRITICAL ACTIONS",
+    verify: "VERIFY",
+    proof: "PROOF",
+    provableAi: "PROVABLE AI",
+    cta: "REQUEST ACCESS",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+  },
+  fr: {
+    how: "COMMENT ÇA MARCHE",
+    initiators: "PEU IMPORTE QUI DEMANDE",
+    actions: "ACTIONS CRITIQUES",
+    verify: "VÉRIFIER",
+    proof: "PREUVE",
+    provableAi: "IA PROUVABLE",
+    cta: "DEMANDER UN ACCÈS",
+    openMenu: "Ouvrir le menu",
+    closeMenu: "Fermer le menu",
+  },
+};
+
 // In-page anchors stay in-page on home ("#how") and resolve to that locale's
 // home route from a sub-page ("/#how", "/fr#how"). The sub-page variant matters:
 // a bare "#how" on /proof points at an id that page does not have.
@@ -25,17 +61,18 @@ function links(
 ): { href: string; label: string; page?: Active; leaves?: boolean }[] {
   const r = routePrefix(locale);
   const p = variant === "sub" ? r || "/" : "";
+  const t = pick(NAV, locale);
   // Two kinds of destination, and the reader cannot tell them apart from the
   // label alone: the first three move down this page, the last three leave it.
   // They used to alternate, so the row read as six equivalent things. Grouped
   // — anchors, then pages — the separator can say which is which.
   return [
-    { href: `${p}#how`, label: "HOW IT WORKS" },
-    { href: `${p}#initiators`, label: "ANY INITIATOR" },
-    { href: `${p}#start`, label: "CRITICAL ACTIONS" },
-    { href: `${r}/verify`, label: "VERIFY", page: "verify", leaves: true },
-    { href: `${r}/proof`, label: "PROOF", page: "proof", leaves: true },
-    { href: `${r}/provable-ai`, label: "PROVABLE AI", page: "provable-ai", leaves: true },
+    { href: `${p}#how`, label: t.how },
+    { href: `${p}#initiators`, label: t.initiators },
+    { href: `${p}#start`, label: t.actions },
+    { href: `${r}/verify`, label: t.verify, page: "verify", leaves: true },
+    { href: `${r}/proof`, label: t.proof, page: "proof", leaves: true },
+    { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai", leaves: true },
   ];
 }
 
@@ -50,6 +87,7 @@ export function LandingHeader({
 }) {
   const [open, setOpen] = useState(false);
   const LINKS = links(variant, locale);
+  const t = pick(NAV, locale);
   const r = routePrefix(locale);
   const logoHref = variant === "sub" ? r || "/" : "#top";
   const contactHref = variant === "sub" ? `${r || "/"}#contact` : "#contact";
@@ -87,7 +125,7 @@ export function LandingHeader({
             href={contactHref}
             className="track-nav whitespace-nowrap shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-4 py-2.5 font-semibold 2xl:px-5 text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60"
           >
-            REQUEST ACCESS
+            {t.cta}
           </a>
         </nav>
 
@@ -95,7 +133,7 @@ export function LandingHeader({
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? t.closeMenu : t.openMenu}
           aria-expanded={open}
           className="chip-metal ml-auto flex h-10 w-10 shrink-0 items-center justify-center text-neutral-100 transition hover:text-white xl:hidden"
         >
@@ -125,7 +163,7 @@ export function LandingHeader({
               onClick={() => setOpen(false)}
               className="track-mid mt-5 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-3.5 text-center font-semibold text-ink shadow-lg shadow-white/10"
             >
-              REQUEST ACCESS
+              {t.cta}
             </a>
           </div>
         </nav>

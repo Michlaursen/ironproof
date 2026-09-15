@@ -9,29 +9,57 @@
  * orientation (horizontal on md+, a single convergence tick on mobile).
  */
 
+import { defaultLocale, type Locale } from "@/content";
+import { type L, pick } from "./i18n";
+
 type Initiator = {
   who: string;
   body: string;
 };
 
-const INITIATORS: readonly Initiator[] = [
-  {
-    who: "AI agent",
-    body: "Prompts shape the request; they cannot widen what is allowed.",
+type Copy = {
+  initiatorLabel: string;
+  inside: string;
+  insideVerdict: string;
+  insideWhy: string;
+  outside: string;
+  outsideVerdict: string;
+  outsideWhy: string;
+  initiators: readonly Initiator[];
+};
+
+const T: L<Copy> = {
+  en: {
+    initiatorLabel: "INITIATOR",
+    inside: "INSIDE THE POLICY",
+    insideVerdict: "It executes.",
+    insideWhy: "And a certificate is sealed at execution time.",
+    outside: "OUTSIDE THE POLICY",
+    outsideVerdict: "It never runs.",
+    outsideWhy: "The refusal is sealed too — a blocked action leaves evidence.",
+    initiators: [
+      { who: "AI agent", body: "Prompts shape the request; they cannot widen what is allowed." },
+      { who: "Script or scheduled job", body: "Runs at 02:00 with nobody watching. The boundary holds without a reviewer." },
+      { who: "API call", body: "Credentials say who it is, not what it may do now." },
+      { who: "Person", body: "The policy that binds the machine binds the hand too." },
+    ],
   },
-  {
-    who: "Script or scheduled job",
-    body: "Runs at 02:00 with nobody watching. The boundary holds without a reviewer.",
+  fr: {
+    initiatorLabel: "DEMANDEUR",
+    inside: "À L’INTÉRIEUR DE LA POLITIQUE",
+    insideVerdict: "Elle s’exécute.",
+    insideWhy: "Et un certificat est scellé au moment de l’exécution.",
+    outside: "À L’EXTÉRIEUR DE LA POLITIQUE",
+    outsideVerdict: "Elle ne s’exécute jamais.",
+    outsideWhy: "Le refus est scellé lui aussi — une action bloquée laisse une preuve.",
+    initiators: [
+      { who: "Agent IA", body: "Les consignes façonnent la demande ; elles ne peuvent pas élargir ce qui est permis." },
+      { who: "Script ou tâche planifiée", body: "S’exécute à 2\u202fh du matin, sans personne pour regarder. La frontière tient sans relecteur." },
+      { who: "Appel d’API", body: "Les identifiants disent qui c’est, pas ce qui lui est permis maintenant." },
+      { who: "Humain", body: "La politique qui lie la machine lie aussi la main." },
+    ],
   },
-  {
-    who: "API call",
-    body: "Credentials say who it is, not what it may do now.",
-  },
-  {
-    who: "Person",
-    body: "The policy that binds the machine binds the hand too.",
-  },
-] as const;
+};
 
 /** A hairline that runs toward the blade. Horizontal on md+, invisible below. */
 function Lead() {
@@ -47,16 +75,17 @@ function Lead() {
   );
 }
 
-export function GateDiagram() {
+export function GateDiagram({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = pick(T, locale);
   return (
     <div className="fade-up">
       <div className="flex flex-col items-stretch gap-6 md:flex-row md:items-center md:gap-0">
         {/* INITIATORS — everything that can reach a critical system */}
         <ul className="grid gap-3 sm:grid-cols-2 md:flex md:flex-1 md:flex-col md:gap-4">
-          {INITIATORS.map((c) => (
+          {t.initiators.map((c) => (
             <li key={c.who} className="flex items-center">
               <div className="chip-metal min-w-0 flex-1 px-5 py-3.5 md:px-6">
-                <p className="track-mid mb-1.5 text-[10px] text-neutral-500">INITIATOR</p>
+                <p className="track-mid mb-1.5 text-[10px] text-neutral-500">{t.initiatorLabel}</p>
                 <p className="metal-text font-serif text-lg leading-tight">{c.who}</p>
                 <p className="mt-1.5 text-xs font-light leading-relaxed text-neutral-400">
                   {c.body}
@@ -131,12 +160,10 @@ export function GateDiagram() {
                   <circle cx="12" cy="12" r="9" />
                   <path d="M8 12 l3 3 l5 -6" />
                 </svg>
-                <p className="track-mid text-xs text-neutral-300">INSIDE THE POLICY</p>
+                <p className="track-mid text-xs text-neutral-300">{t.inside}</p>
               </div>
-              <p className="metal-text mt-3 font-serif text-2xl">It executes.</p>
-              <p className="mt-1.5 text-xs font-light text-neutral-400">
-                And a certificate is sealed at execution time.
-              </p>
+              <p className="metal-text mt-3 font-serif text-2xl">{t.insideVerdict}</p>
+              <p className="mt-1.5 text-xs font-light text-neutral-400">{t.insideWhy}</p>
             </div>
           </li>
           <li className="flex items-center">
@@ -163,12 +190,10 @@ export function GateDiagram() {
                   <circle cx="12" cy="12" r="9" />
                   <path d="M9 9 l6 6 M15 9 l-6 6" />
                 </svg>
-                <p className="track-mid text-xs text-neutral-300">OUTSIDE THE POLICY</p>
+                <p className="track-mid text-xs text-neutral-300">{t.outside}</p>
               </div>
-              <p className="mt-3 font-serif text-2xl text-neutral-100">It never runs.</p>
-              <p className="mt-1.5 text-xs font-light text-neutral-400">
-                The refusal is sealed too &mdash; a blocked action leaves evidence.
-              </p>
+              <p className="mt-3 font-serif text-2xl text-neutral-100">{t.outsideVerdict}</p>
+              <p className="mt-1.5 text-xs font-light text-neutral-400">{t.outsideWhy}</p>
             </div>
           </li>
         </ul>

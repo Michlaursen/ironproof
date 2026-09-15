@@ -1,16 +1,46 @@
 "use client";
 
 import { useState } from "react";
+import { defaultLocale, type Locale } from "@/content";
+import { type L, pick, NBSP } from "./i18n";
 
 type State = "idle" | "loading" | "done" | "error";
+
+const T: L<{
+  placeholder: string;
+  ariaEmail: string;
+  submit: string;
+  sending: string;
+  done: string;
+  error: string;
+}> = {
+  en: {
+    placeholder: "work@company.com",
+    ariaEmail: "Work email",
+    submit: "EVALUATE AN ACTION",
+    sending: "SENDING…",
+    done: "Thank you — request received. We’ll be in touch shortly.",
+    error:
+      "Something went wrong — check the email and try again, or write to hello@ironproof.ai.",
+  },
+  fr: {
+    placeholder: "vous@entreprise.com",
+    ariaEmail: "Courriel professionnel",
+    submit: "ÉVALUER UNE ACTION",
+    sending: "ENVOI…",
+    done: "Merci — demande reçue. Nous vous reviendrons sous peu.",
+    error: `Une erreur est survenue — vérifiez le courriel et réessayez, ou écrivez à${NBSP}hello@ironproof.ai.`,
+  },
+};
 
 /*
  * Request-access form — posts the lead to /api/request-access (server-side
  * validated, destination configured via env). Shows loading / success / error.
  */
-export function CtaForm() {
+export function CtaForm({ locale = defaultLocale }: { locale?: Locale }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<State>("idle");
+  const t = pick(T, locale);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -44,8 +74,8 @@ export function CtaForm() {
             setEmail(e.target.value);
             if (state !== "idle") setState("idle");
           }}
-          placeholder="work@company.com"
-          aria-label="Work email"
+          placeholder={t.placeholder}
+          aria-label={t.ariaEmail}
           className="flex-1 rounded-[5px] border border-white/10 bg-black/50 px-5 py-3.5 text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
         />
         <button
@@ -53,17 +83,15 @@ export function CtaForm() {
           disabled={state === "loading"}
           className="track-mid whitespace-nowrap rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {state === "loading" ? "SENDING…" : "EVALUATE AN ACTION"}
+          {state === "loading" ? t.sending : t.submit}
         </button>
       </form>
       {state === "done" ? (
-        <p className="mt-5 text-sm text-neutral-300">
-          Thank you — request received. We&apos;ll be in touch shortly.
-        </p>
+        <p className="mt-5 text-sm text-neutral-300">{t.done}</p>
       ) : null}
       {state === "error" ? (
         <p className="mt-5 text-sm" style={{ color: "#ffb4b4" }}>
-          Something went wrong — check the email and try again, or write to hello@ironproof.ai.
+          {t.error}
         </p>
       ) : null}
     </>
