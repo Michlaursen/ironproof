@@ -237,6 +237,19 @@ summary:focus-visible {
 @media (min-width: 1536px) {
   .track-nav { letter-spacing: 0.28em; }
 }
+/* French nav tracking. The French labels are longer than the English ones and
+ * overflow the xl tier: measured 2026-09-15 at 1280px, the CTA was clipped at
+ * the viewport edge with no gutter left. They get their own, tighter tracking
+ * there; at 2xl there is room again and both languages sit at 0.28em. A
+ * separate class, so the English nav is not touched. */
+.track-nav-fr { letter-spacing: 0.08em; }
+@media (min-width: 1536px) {
+  /* NOT 0.28em like the English nav: measured 2026-09-15, the French labels
+   * clip the CTA at 1536px at that value. They breathe a little at 2xl, not
+   * as much. */
+  .track-nav-fr { letter-spacing: 0.14em; }
+}
+
 .track-mid { letter-spacing: 0.28em; }
 .track-logo { letter-spacing: 0.42em; }
 

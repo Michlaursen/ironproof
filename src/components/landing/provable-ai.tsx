@@ -39,7 +39,7 @@ function Snum({ children }: { children: React.ReactNode }) {
 export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <div className="flex flex-1 flex-col">
-      <LandingHeader variant="sub" locale={locale} active="provable-ai" />
+      <LandingHeader variant="sub" locale={locale} page="provable-ai" />
 
       <main className="flex-1">
         {/* HERO */}
