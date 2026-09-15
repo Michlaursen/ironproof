@@ -470,7 +470,12 @@ merging the two hides the more incriminating one.
 A key-activity check is only as good as the instant it compares against, and that instant comes from
 `anchored_at` — self-declared (§9). A forger who backdates the anchor also backdates the window in
 which their key appears authorized. **A verifier MUST therefore report which time basis it used**:
-`bounded` (both directions per §5.1), `one-sided`, `self-declared`, or `none`. Reporting
+`bounded` (both directions per §5.1), `upper-only`, `lower-only`, `self-declared`, or
+`none`. The two one-sided states are NOT interchangeable and were a single word
+(`one-sided`) until 2026-09-10: an RFC 3161 token proves the digest is no NEWER
+than its genTime and does not refute an antedated claim, while a beacon proves the
+bytes could not exist before its round and does. A verifier that reads one as the
+other concludes the reverse of the truth. Reporting
 `authorized` without that qualifier states a conclusion stronger than the evidence supports.
 
 ### 10.7 Root anchoring — where the root itself is published
