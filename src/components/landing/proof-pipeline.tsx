@@ -10,6 +10,8 @@
  */
 
 import type { ReactNode } from "react";
+import { defaultLocale, type Locale } from "@/content";
+import { type L, pick } from "./i18n";
 
 type Step = {
   n: string;
@@ -20,11 +22,51 @@ type Step = {
   sealed?: boolean;
 };
 
-const STEPS: readonly Step[] = [
+/* The words only. The icons, the numbers and which steps are gold belong to
+   the diagram, not to a language — so they are declared once below and the
+   dictionary supplies nothing but the title and the body. */
+const WORDS: L<readonly { title: string; body: string }[]> = {
+  en: [
+    {
+      title: "Prove",
+      body: "Before deployment, Ironproof establishes that the defined policy holds across the modeled action space.",
+    },
+    {
+      title: "Enforce",
+      body: "At runtime, every requested action is checked deterministically before execution.",
+    },
+    {
+      title: "Seal",
+      body: "Each decision is sealed at execution time — SHA3-512 digest, dual Ed25519 + ML-DSA-65 signature — binding the action, the policy version and the verdict into one artifact.",
+    },
+    {
+      title: "Verify",
+      body: "The certificate is re-checked against its sealed inputs: the same verdict must come back, or the seal is broken.",
+    },
+  ],
+  fr: [
+    {
+      title: "Prouver",
+      body: "Avant le déploiement, Ironproof établit que la politique définie tient sur tout l’espace d’actions modélisé.",
+    },
+    {
+      title: "Appliquer",
+      body: "À l’exécution, chaque action demandée est vérifiée de façon déterministe avant de s’exécuter.",
+    },
+    {
+      title: "Sceller",
+      body: "Chaque décision est scellée au moment de l’exécution — empreinte SHA3-512, double signature Ed25519 + ML-DSA-65 — liant l’action, la version de la politique et le verdict dans un seul artefact.",
+    },
+    {
+      title: "Vérifier",
+      body: "Le certificat est revérifié contre ses entrées scellées\u00a0: le même verdict doit revenir, sinon le sceau est rompu.",
+    },
+  ],
+};
+
+const STEPS: readonly Omit<Step, "title" | "body">[] = [
   {
     n: "01",
-    title: "Prove",
-    body: "Before deployment, Ironproof establishes that the defined policy holds across the modeled action space.",
     icon: (
       <>
         <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />
@@ -34,8 +76,6 @@ const STEPS: readonly Step[] = [
   },
   {
     n: "02",
-    title: "Enforce",
-    body: "At runtime, every requested action is checked deterministically before execution.",
     icon: (
       <>
         <rect x="5" y="11" width="14" height="9" rx="1" />
@@ -45,8 +85,6 @@ const STEPS: readonly Step[] = [
   },
   {
     n: "03",
-    title: "Seal",
-    body: "Each decision is sealed at execution time — SHA3-512 digest, dual Ed25519 + ML-DSA-65 signature — binding the action, the policy version and the verdict into one artifact.",
     sealed: true,
     icon: (
       <>
@@ -57,8 +95,6 @@ const STEPS: readonly Step[] = [
   },
   {
     n: "04",
-    title: "Verify",
-    body: "The certificate is re-checked against its sealed inputs: the same verdict must come back, or the seal is broken.",
     sealed: true,
     icon: (
       <>
@@ -72,10 +108,12 @@ const STEPS: readonly Step[] = [
 const CHROME = "rgba(228,233,255,0.30)";
 const GOLD = "rgba(201,162,75,0.65)";
 
-export function ProofPipeline() {
+export function ProofPipeline({ locale = defaultLocale }: { locale?: Locale }) {
+  const words = pick(WORDS, locale);
   return (
     <ol className="flex flex-col md:flex-row">
       {STEPS.map((s, i) => {
+        const w = words[i] ?? pick(WORDS, "en")[i];
         const last = i === STEPS.length - 1;
         // The rail segment leaving this node. It turns gold once the artifact
         // exists, so the eye follows the seal from where it is minted (03) to
@@ -147,10 +185,10 @@ export function ProofPipeline() {
                   }
                   style={s.sealed ? { color: "#e8d5a8" } : undefined}
                 >
-                  {s.title}
+                  {w.title}
                 </h3>
               </div>
-              <p className="text-sm font-light leading-relaxed text-neutral-300">{s.body}</p>
+              <p className="text-sm font-light leading-relaxed text-neutral-300">{w.body}</p>
             </div>
           </li>
         );

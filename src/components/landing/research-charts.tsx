@@ -13,6 +13,7 @@
  */
 
 import type { Locale } from "@/content";
+import { type L, pick } from "./i18n";
 
 const SEAL = "var(--seal)";
 const FG = "var(--foreground)";
@@ -26,8 +27,7 @@ const BG = "var(--background)";
 const MONO = "var(--font-jetbrains), ui-monospace, monospace";
 const SANS = "var(--font-inter), Inter, sans-serif";
 
-type L<T> = Record<Locale, T>;
-const pick = <T,>(d: L<T>, locale: Locale): T => d[locale] ?? d.en;
+
 
 function Cap(props: {
   x: number;

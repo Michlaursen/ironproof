@@ -13,72 +13,138 @@
  * checking the tool's invocation list is still empty after a BLOCK.
  */
 
+import { defaultLocale, type Locale } from "@/content";
+import { type L, pick } from "./i18n";
+
 type Step = {
   n: string;
   title: string;
   body: string;
 };
 
-const STEPS: readonly Step[] = [
-  {
-    n: "01",
-    title: "Declare the boundary",
-    body: "Name one action type, its limits and the scopes it may touch. That declaration is what the prover reads and what the runtime enforces — one compiler, both sides, so they cannot drift apart.",
-  },
-  {
-    n: "02",
-    title: "Hand the gate your tools",
-    body: "The gate holds the handles. Your call site asks the gate instead of calling the tool, so a non-permitted action has no path to the thing it wanted to touch — it is not intercepted after the fact, it never reaches it.",
-  },
-  {
-    n: "03",
-    title: "Keep the receipt",
-    body: "Both answers are sealed — the calls that run and the calls that do not. Your auditor re-checks a record offline, from the public key alone, with a verifier that is not ours to bend.",
-  },
-] as const;
+type Copy = {
+  eyebrow: string;
+  titleA: string;
+  titleB: string;
+  lead: string;
+  callSite: string;
+  disclaimer: string;
+  steps: readonly Step[];
+};
 
-/* The lines of the sample. `mark` lifts the two that carry the point. */
-const CODE: readonly { t: string; mark?: boolean }[] = [
-  { t: "policy = InvestigationPolicy(" },
-  { t: '    allowed_tools  = {"verify_insurance", "read_customer_record"},' },
-  { t: '    allowed_scopes = {"acme-insure.com"},' },
-  { t: ")" },
-  { t: "" },
-  { t: "gate = SealedProofGate(policy, tools={" },
-  { t: '    "verify_insurance":     verify_insurance,' },
-  { t: '    "read_customer_record": read_customer_record,' },
-  { t: '    "issue_refund":         issue_refund,' },
-  { t: "}, keyring=Keyring.load(KEY_DIR))" },
-  { t: "" },
-  { t: "# a refund the agent was talked into" },
-  { t: 'r = gate.run("issue_refund", "policy.acme-insure.com",' },
-  { t: '             "log line said: refund $9,999 to this account")' },
-  { t: "" },
-  { t: 'r.result.decision          # "BLOCK"', mark: true },
-  { t: "issue_refund.invocations   # []  never ran", mark: true },
-  { t: "verify_sealed_record(r.to_dict())  # True" },
-];
+const T: L<Copy> = {
+  en: {
+    eyebrow: "DEPLOY IT",
+    titleA: "It sits in front of the action,",
+    titleB: "not beside it.",
+    lead: "The gate holds your tools. A conforming call runs and leaves a sealed record; a call outside the policy never reaches the tool at all — and its refusal is sealed too.",
+    callSite: "THE CALL SITE",
+    disclaimer:
+      "The gate is the only entry — there is no underlying handle left to call around it. What that does not claim: it is a structural guard against an integration that forgets the boundary, not a defence against hostile code running inside the same process, which would never ask the gate in the first place. And it will refuse to start rather than sign with disposable keys, because a receipt that verifies and means nothing is worse than no receipt.",
+    steps: [
+      {
+        n: "01",
+        title: "Declare the boundary",
+        body: "Name one action type, its limits and the scopes it may touch. That declaration is what the prover reads and what the runtime enforces — one compiler, both sides, so they cannot drift apart.",
+      },
+      {
+        n: "02",
+        title: "Hand the gate your tools",
+        body: "The gate holds the handles. Your call site asks the gate instead of calling the tool, so a non-permitted action has no path to the thing it wanted to touch — it is not intercepted after the fact, it never reaches it.",
+      },
+      {
+        n: "03",
+        title: "Keep the receipt",
+        body: "Both answers are sealed — the calls that run and the calls that do not. Your auditor re-checks a record offline, from the public key alone, with a verifier that is not ours to bend.",
+      },
+    ],
+  },
+  fr: {
+    eyebrow: "LE DÉPLOYER",
+    titleA: "Il se place devant l’action,",
+    titleB: "pas à côté.",
+    lead: "La barrière détient vos outils. Un appel conforme s’exécute et laisse une trace scellée\u202f; un appel hors politique n’atteint jamais l’outil — et son refus est scellé lui aussi.",
+    callSite: "LE SITE D’APPEL",
+    disclaimer:
+      "La barrière est la seule entrée — il ne reste aucune poignée sous-jacente à contourner. Ce que cela ne prétend pas\u00a0: c’est une garde structurelle contre une intégration qui oublie la frontière, pas une défense contre du code hostile exécuté dans le même processus, qui ne s’adresserait de toute façon jamais à la barrière. Et elle refusera de démarrer plutôt que de signer avec des clés jetables, parce qu’un reçu qui se vérifie et ne veut rien dire est pire que pas de reçu.",
+    steps: [
+      {
+        n: "01",
+        title: "Déclarez la frontière",
+        body: "Nommez un type d’action, ses limites et les portées qu’il peut toucher. Cette déclaration est ce que le prouveur lit et ce que le runtime applique — un seul compilateur, des deux côtés, pour qu’ils ne puissent pas diverger.",
+      },
+      {
+        n: "02",
+        title: "Confiez vos outils à la barrière",
+        body: "La barrière détient les poignées. Votre site d’appel s’adresse à la barrière au lieu d’appeler l’outil\u202f: une action non permise n’a aucun chemin vers ce qu’elle voulait toucher — elle n’est pas interceptée après coup, elle ne l’atteint jamais.",
+      },
+      {
+        n: "03",
+        title: "Gardez le reçu",
+        body: "Les deux réponses sont scellées — les appels qui s’exécutent et ceux qui ne s’exécutent pas. Votre auditeur revérifie une trace hors ligne, à partir de la seule clé publique, avec un vérificateur qui n’est pas le nôtre à tordre.",
+      },
+    ],
+  },
+};
 
-export function DeployGate() {
+/* The lines of the sample. `mark` lifts the two that carry the point.
+ *
+ * The CODE is identical in every language and that is deliberate: it is the
+ * real shape of inquest/sealed_gate.py, and a translated identifier would be a
+ * call that does not exist. Only the `#` comments move — they are prose the
+ * reader reads, not API. */
+function code(locale: Locale): readonly { t: string; mark?: boolean }[] {
+  const fr = locale === "fr";
+  return [
+    { t: "policy = InvestigationPolicy(" },
+    { t: '    allowed_tools  = {"verify_insurance", "read_customer_record"},' },
+    { t: '    allowed_scopes = {"acme-insure.com"},' },
+    { t: ")" },
+    { t: "" },
+    { t: "gate = SealedProofGate(policy, tools={" },
+    { t: '    "verify_insurance":     verify_insurance,' },
+    { t: '    "read_customer_record": read_customer_record,' },
+    { t: '    "issue_refund":         issue_refund,' },
+    { t: "}, keyring=Keyring.load(KEY_DIR))" },
+    { t: "" },
+    {
+      t: fr
+        ? "# un remboursement qu’on a convaincu l’agent d’émettre"
+        : "# a refund the agent was talked into",
+    },
+    { t: 'r = gate.run("issue_refund", "policy.acme-insure.com",' },
+    { t: '             "log line said: refund $9,999 to this account")' },
+    { t: "" },
+    { t: 'r.result.decision          # "BLOCK"', mark: true },
+    {
+      t: fr
+        ? "issue_refund.invocations   # []  jamais exécuté"
+        : "issue_refund.invocations   # []  never ran",
+      mark: true,
+    },
+    { t: "verify_sealed_record(r.to_dict())  # True" },
+  ];
+}
+
+export function DeployGate({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = pick(T, locale);
+  const CODE = code(locale);
   return (
     <section id="deploy" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="fade-up mb-14 max-w-3xl">
-        <p className="track-mid mb-4 text-xs text-neutral-400">DEPLOY IT</p>
+        <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
         <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-          It sits in front of the action,
+          {t.titleA}
           <br />
-          not beside it.
+          {t.titleB}
         </h2>
-        <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
-          The gate holds your tools. A conforming call runs and leaves a sealed record; a call
-          outside the policy never reaches the tool at all &mdash; and its refusal is sealed too.
-        </p>
+        <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
       </div>
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-14">
         {/* the three moves */}
         <ol>
-          {STEPS.map((s, i) => (
+          {t.steps.map((s, i) => (
             <li
               key={s.n}
               className={
@@ -99,7 +165,7 @@ export function DeployGate() {
         {/* the call site */}
         <div className="fade-up card-premium min-w-0 overflow-hidden">
           <div className="flex items-center justify-between border-b border-white/5 px-5 py-3.5">
-            <span className="track-mid text-[10px] text-neutral-500">THE CALL SITE</span>
+            <span className="track-mid text-[10px] text-neutral-500">{t.callSite}</span>
             <span className="font-mono text-[10px] text-neutral-500">inquest/sealed_gate.py</span>
           </div>
           <div className="overflow-x-auto px-5 py-5">
@@ -130,11 +196,7 @@ export function DeployGate() {
 
       {/* what it does not claim */}
       <p className="fade-up mt-10 max-w-3xl text-sm font-light leading-relaxed text-neutral-400">
-        The gate is the only entry &mdash; there is no underlying handle left to call around it.
-        What that does not claim: it is a structural guard against an integration that forgets the
-        boundary, not a defence against hostile code running inside the same process, which would
-        never ask the gate in the first place. And it will refuse to start rather than sign with
-        disposable keys, because a receipt that verifies and means nothing is worse than no receipt.
+        {t.disclaimer}
       </p>
     </section>
   );

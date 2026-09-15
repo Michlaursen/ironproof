@@ -1,3 +1,6 @@
+import { defaultLocale, type Locale } from "@/content";
+import { type L, pick } from "./i18n";
+
 /*
  * ProofSeal — the signature motif. A circular chrome seal: a slowly rotating
  * ring of the actual primitives (Ed25519 + ML-DSA-65, FIPS 204) around a
@@ -7,9 +10,15 @@
 type ProofSealProps = {
   size?: number;
   className?: string;
+  locale?: Locale;
 };
 
-export function ProofSeal({ size = 140, className }: ProofSealProps) {
+const LABEL: L<string> = {
+  en: "Ironproof seal \u2014 Ed25519 and ML-DSA-65, FIPS 204",
+  fr: "Sceau Ironproof \u2014 Ed25519 et ML-DSA-65, FIPS 204",
+};
+
+export function ProofSeal({ size = 140, className, locale = defaultLocale }: ProofSealProps) {
   return (
     <svg
       width={size}
@@ -17,7 +26,7 @@ export function ProofSeal({ size = 140, className }: ProofSealProps) {
       viewBox="0 0 200 200"
       className={className}
       role="img"
-      aria-label="Ironproof seal — Ed25519 and ML-DSA-65, FIPS 204"
+      aria-label={pick(LABEL, locale)}
     >
       <defs>
         <path id="sealRing" d="M100,100 m-73,0 a73,73 0 1,1 146,0 a73,73 0 1,1 -146,0" fill="none" />

@@ -191,7 +191,7 @@ export function ResearchZeroBarriers({
 
   return (
     <div className="flex flex-1 flex-col">
-      <LandingHeader variant="sub" locale={navLocale ?? locale} />
+      <LandingHeader variant="sub" locale={navLocale ?? locale} page="research" />
 
       <main className="flex-1">
         {/* HERO */}

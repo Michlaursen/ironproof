@@ -10,7 +10,8 @@ export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  // TODO(i18n): the ported slides carry English copy inline. Reconnect the
-  // fr.ts / en.ts content system with Miguel so /fr renders French.
+  // The landing carries its own copy dictionaries (components/landing/i18n.ts),
+  // one per component, read through `pick`. src/content/{en,fr}.ts still serves
+  // the metadata in layout.tsx; it no longer feeds this page's body.
   return <Landing locale={locale} />;
 }
