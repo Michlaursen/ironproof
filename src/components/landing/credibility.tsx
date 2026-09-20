@@ -168,7 +168,7 @@ const T: L<{
 export function Credibility({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(T, locale);
   return (
-    <section id="record" className="relative z-10 mx-auto max-w-7xl edge-gold px-6 py-28 md:px-14">
+    <section id="record" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="fade-up mb-16 text-center">
         <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
         <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
@@ -190,7 +190,7 @@ export function Credibility({ locale = defaultLocale }: { locale?: Locale }) {
           >
             <h3 className="metal-text mb-2 font-serif text-xl">{item.org}</h3>
             <p className="flex-1 text-sm font-light leading-relaxed text-neutral-300">{pick(item.body, locale)}</p>
-            <span className="track-mid mt-5 inline-flex items-center gap-2 text-xs text-neutral-400 transition group-hover:text-[#f6e5b4]">
+            <span className="track-mid mt-5 inline-flex items-center gap-2 text-xs text-neutral-400 transition group-hover:text-white">
               {pick(item.cta, locale)}
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">
                 <ExternalArrow />
@@ -202,7 +202,7 @@ export function Credibility({ locale = defaultLocale }: { locale?: Locale }) {
 
       {/* Published research */}
       <div className="fade-up mt-16">
-        <p className="seal-label track-mid mb-6 text-center text-xs">{t.papers}</p>
+        <p className="track-mid mb-6 text-center text-xs text-neutral-400">{t.papers}</p>
         <div className="mx-auto max-w-4xl space-y-3">
           {PAPERS.map((paper) => (
             <a

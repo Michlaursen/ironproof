@@ -86,13 +86,12 @@ export default async function VerifyPage({ params }: PageProps) {
           <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             {t.h1}
           </h1>
-          <div className="hairline-gold mt-8 h-px w-full max-w-md" />
           <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
             {t.lead}
           </p>
           <p className="mt-4 max-w-2xl text-sm font-light text-neutral-400">
             {t.specPre}
-            <a href="/sceal/SPEC_CANON.md" className="link-seal">
+            <a href="/sceal/SPEC_CANON.md" className="underline underline-offset-4">
               {t.specLink}
             </a>
             {t.specPost}

@@ -88,7 +88,7 @@ export function ProofArtifact({
       className="proof-scan card-premium card-iron relative w-full max-w-sm px-8 py-7"
     >
       <div className="relative flex items-center justify-between">
-        <span className="seal-label track-mid text-xs">{t.label}</span>
+        <span className="track-mid text-xs text-neutral-400">{t.label}</span>
         <span className="font-mono text-xs text-neutral-400">finance/refund@v3</span>
       </div>
 

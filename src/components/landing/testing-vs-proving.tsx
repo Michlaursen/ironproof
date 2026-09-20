@@ -98,7 +98,7 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
         </div>
         <div className="fade-up grid gap-6 md:grid-cols-2">
           <div className="card-premium p-10">
-            <p className="track-mid mb-6 text-xs text-neutral-500">{t.testing}</p>
+            <p className="track-mid mb-6 text-xs text-neutral-400">{t.testing}</p>
             <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">{t.testingQ}</p>
             <TestingDots />
             <ul className="space-y-3 text-sm">
@@ -115,14 +115,14 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
               <span className="font-serif text-2xl text-neutral-300">{t.partial}</span>
             </div>
           </div>
-          <div className="card-premium card-seal p-10">
-            <p className="seal-label track-mid mb-6 text-xs">{t.proving}</p>
+          <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
+            <p className="track-mid mb-6 text-xs text-neutral-300">{t.proving}</p>
             <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">{t.provingQ}</p>
             <ProvingDots />
             <ul className="space-y-3 text-sm">
               {t.provingPoints.map((point, i) => (
                 <li key={i} className="flex gap-3 text-neutral-300">
-                  <span className="icon-seal mt-0.5">&#10003;</span>{" "}
+                  <span className="icon-metal mt-0.5">&#10003;</span>{" "}
                   <span>{point}</span>
                 </li>
               ))}

@@ -553,10 +553,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* HERO — the product, in one sentence, before any mechanism */}
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
-          {/* Second halo, offset and gold: the cool one lights the headline,
-            * this one warms the metal under it. Two layers rather than one
-            * tinted layer, so neither hue is diluted into the other. */}
-          <div className="halo-gold" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-12 md:grid-cols-2">
             <div className="flex flex-col items-center">
               <IronProofLogo
@@ -598,7 +594,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   </span>
                 </p>
               </div>
-              <div className="hairline-gold mb-10 h-px w-full max-w-md" />
+              <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
                 {/* Both used to land on more prose — a section title is not a
                   * reward for a click. These two go to the only places on the
@@ -606,7 +602,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   * the verdict flip, then check a real seal in their own tab. */}
                 <a
                   href="#try"
-                  className="btn-gold track-mid rounded-[5px] px-8 py-3.5 text-xs font-semibold"
+                  className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
                   {t.hero.ctaTry}
                 </a>
@@ -622,7 +618,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* THE TEN-SECOND TAKEAWAY — then the two artifacts that prove the sentence */}
-        <section id="evidence" className="relative z-10 edge-gold px-6 py-16 md:px-14 md:py-20">
+        <section id="evidence" className="relative z-10 edge-t px-6 py-16 md:px-14 md:py-20">
           <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
             {t.takeaway}
           </p>
@@ -643,7 +639,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            <span className="seal-label track-mid text-xs">{t.creditedBy}</span>
+            <span className="track-mid text-xs text-neutral-500">{t.creditedBy}</span>
             {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
               <span key={o} className="metal-text text-sm font-medium">
                 {o}
@@ -664,7 +660,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.actions.lead}</p>
           </div>
 
-          <p className="seal-label track-mid fade-up mb-6 text-xs">{t.actions.tableLabel}</p>
+          <p className="track-mid fade-up mb-6 text-xs text-neutral-400">{t.actions.tableLabel}</p>
           <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
             {t.actions.items.map((c) => (
               <div
@@ -689,7 +685,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="fade-up mt-6 text-xs text-neutral-500">{t.actions.illustrative}</p>
 
           <div className="card-premium card-iron fade-up mt-12 p-10 md:p-12">
-            <p className="seal-label track-mid mb-6 text-xs">{t.actions.frameworksLabel}</p>
+            <p className="track-mid mb-6 text-xs text-neutral-400">{t.actions.frameworksLabel}</p>
             <div className="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
               {t.actions.frameworks.map((i) => (
                 <div key={i.where}>
@@ -741,13 +737,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
           <ol className="grid gap-6 md:grid-cols-3">
             {t.layers.items.map((l, i) => (
-              <li
-                key={l.title}
-                /* Third layer = the evidence layer, the one the seal is for. */
-                className={`card-premium fade-up p-8 md:p-10 ${i === 2 ? "card-seal" : ""}`}
-              >
+              <li key={l.title} className="card-premium fade-up p-8 md:p-10">
                 <div className="mb-5 flex items-baseline gap-3">
-                  <span className={i === 2 ? "num-badge-gold font-serif text-3xl" : "num-badge font-serif text-3xl"}>
+                  <span className="num-badge font-serif text-3xl">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="track-mid text-[10px] text-neutral-500">{l.tag}</p>
@@ -765,7 +757,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* BREATH — what the counterexample was for */}
         <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
           <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="breath-mark-gold" aria-hidden="true" />
+            <span className="breath-mark" aria-hidden="true" />
             <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
               {t.breathCounterexample}
             </p>
@@ -806,7 +798,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
 
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
-        <section id="how" className="relative z-10 mx-auto max-w-7xl edge-gold px-6 py-28 md:px-14">
+        <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
             <p className="seal-label track-mid mb-4 text-xs">{t.how.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
@@ -855,7 +847,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <a
               href={`${r}/proof`}
-              className="chip-gold track-mid mt-10 inline-block px-8 py-3.5 text-xs transition"
+              className="chip-metal track-mid mt-10 inline-block px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
             >
               {t.engine.cta}
             </a>
@@ -866,9 +858,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <DeployGate locale={locale} />
 
         {/* CTA */}
-        <section id="contact" className="relative z-10 edge-gold px-6 py-40 md:px-14">
+        <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
           <div className="halo" aria-hidden="true" />
-          <div className="halo-gold" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
             <div className="mb-10 flex items-center justify-center gap-8">
               <IronProofLogo width={111} height={148} title={t.hero.logoTitle} />
@@ -884,7 +875,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative z-10 edge-gold px-6 py-12 md:px-14">
+      <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <div className="flex items-center gap-3">
             <IronProofLogo width={20} height={27} />

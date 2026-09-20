@@ -335,7 +335,7 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
               type="button"
               onClick={verify}
               disabled={busy || input.trim().length === 0}
-              className="btn-gold track-mid rounded-[5px] px-7 py-3 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-50"
+              className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               {busy ? t.verifying : t.verify}
             </button>

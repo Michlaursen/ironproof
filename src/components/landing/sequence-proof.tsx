@@ -159,7 +159,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <section
       id="sequence"
-      className="relative z-10 mx-auto max-w-7xl edge-gold px-6 py-28 md:px-14"
+      className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14"
     >
       <div className="fade-up mb-14 max-w-3xl">
         <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
@@ -178,7 +178,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
           {t.rule(usd(CAP))}
         </p>
 
-        <div className="hairline-gold my-9 h-px w-full" />
+        <div className="hairline my-9 h-px w-full" />
 
         {/* the two requests */}
         <ol className="grid gap-8 md:grid-cols-2 md:gap-12">
@@ -229,7 +229,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
           </li>
         </ol>
 
-        <div className="hairline-gold my-9 h-px w-full" />
+        <div className="hairline my-9 h-px w-full" />
 
         {/* the running total, drawn */}
         <p className="track-mid mb-4 text-[10px] text-neutral-500">{t.blindLabel}</p>

@@ -77,7 +77,6 @@ export default async function ProofPage({ params }: PageProps) {
           <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             {t.h1}
           </h1>
-          <div className="hairline-gold mt-8 h-px w-full max-w-md" />
           <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
             {t.lead}
           </p>
