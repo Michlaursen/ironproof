@@ -211,6 +211,14 @@ same way a forgery does, so the operator sees `FAILED` and concludes the dossier
 with. **Interoperability confirmed by execution**, not assumed: signatures produced by
 `liboqs` 0.15.0 verify under OpenSSL 3.6 with these parameters (`verifier-ts/`).
 
+> ⚠️ **Not re-measured under 0.16.0.** The pin moved to `liboqs-python==0.16.0` on
+> 2026-09-20 (see `requirements.txt` for the receipts). What WAS measured across the
+> bump is that a seal produced by 0.15.0 verifies under 0.16.0, with a flipped message
+> bit, a flipped signature bit and a foreign key all returning false. The OpenSSL 3.6
+> cross-check above still names 0.15.0 because that is the version it ran against;
+> re-running `verifier-ts/` under 0.16.0 is open work, deliberately not overwritten
+> with a number nobody produced.
+
 ---
 
 ## 5. Anchor record
@@ -271,8 +279,8 @@ silence in that case erases the distinction `status` exists to preserve.
     "mode": "dual (both must verify)"
   },
   "toolchain": {
-    "liboqs": "0.15.0",
-    "liboqs_python": "0.15.0",
+    "liboqs": "0.16.0",
+    "liboqs_python": "0.16.0",
     "canonical_form": "sceal-canonical-json/1.0",
     "spec": "SPEC_CANON.md"
   },
