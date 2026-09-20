@@ -39,7 +39,7 @@ function Pill({ kind, locale }: { kind: "built" | "coming" | "roadmap"; locale: 
 }
 
 function Snum({ children }: { children: React.ReactNode }) {
-  return <p className="track-mid mb-4 text-xs text-neutral-500">{children}</p>;
+  return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
 }
 
 export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
@@ -54,7 +54,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
         <section id="top" className="relative z-10 px-6 pb-16 pt-24 md:px-14 md:pt-28">
           <div className="halo" aria-hidden="true" />
           <div className="fade-up mx-auto max-w-4xl">
-            <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">{t.eyebrow}</p>
+            <p className="seal-label track-wide mb-6 text-xs md:text-sm">{t.eyebrow}</p>
             <h1 className="metal-shine mb-8 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
               {t.h1}
             </h1>

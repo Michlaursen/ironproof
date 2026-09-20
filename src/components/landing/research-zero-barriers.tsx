@@ -48,7 +48,7 @@ function Rich({ children }: { children: string }) {
 }
 
 function Snum({ children }: { children: string }) {
-  return <p className="track-mid mb-4 text-xs text-neutral-500">{children}</p>;
+  return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
 }
 
 function Figure({ id, locale, cap, alt }: { id: FigId; locale: Locale; cap: string; alt: string }) {

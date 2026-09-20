@@ -73,7 +73,7 @@ export default async function ProofPage({ params }: PageProps) {
           <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
             <ProofSeal size={300} locale={locale} />
           </div>
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             {t.h1}
           </h1>

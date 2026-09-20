@@ -147,7 +147,7 @@ const T: L<Copy> = {
         <>
           Ironproof checks every critical action before it executes. If it's authorized, it runs. If
           it isn't, Ironproof <span className="metal-text">blocks it</span>{" "}&mdash; and creates
-          evidence anyone can verify.
+          mathematical evidence anyone can independently verify.
         </>
       ),
       boundary: "One boundary. Any initiator.",
@@ -341,12 +341,13 @@ const T: L<Copy> = {
 
     hero: {
       eyebrow: "LA COUCHE D’AUTORISATION DES ACTIONS CRITIQUES",
-      headline: "Si ce n’est pas autorisé, ça ne s’exécute jamais.",
+      headline: "Si ce n’est pas autorisé, il n’y a pas d’exécution.",
       body: (
         <>
           Ironproof vérifie chaque action critique avant qu’elle s’exécute. Si elle est autorisée,
           elle passe. Sinon, Ironproof <span className="metal-text">la bloque</span>{" "}&mdash; et
-          produit une preuve que n’importe qui peut vérifier.
+          produit une preuve mathématique que n’importe qui peut vérifier de façon
+          indépendante.
         </>
       ),
       boundary: "Une seule frontière. Peu importe qui demande.",
@@ -566,7 +567,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </span>
             </div>
             <div className="fade-up">
-              <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">
+              <p className="seal-label track-wide mb-6 text-xs md:text-sm">
                 {t.hero.eyebrow}
               </p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
@@ -651,7 +652,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* WHICH ACTIONS — the concrete problem, before any mechanism */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">{t.actions.eyebrow}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{t.actions.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               {t.actions.titleA}
               <br />
@@ -713,7 +714,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* ONE GATE, ANY INITIATOR */}
         <section id="initiators" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
           <div className="fade-up mb-12 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">{t.gate.eyebrow}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{t.gate.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               {t.gate.title}
             </h2>
@@ -728,7 +729,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* PRODUCT / MECHANISM / EVIDENCE */}
         <section id="layers" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">{t.layers.eyebrow}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{t.layers.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               {t.layers.titleA}
               <br />
@@ -779,7 +780,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           * caveat everywhere is the mirror error of overclaiming. */}
         <section id="why" className="relative z-10 px-6 py-32 md:px-14 md:py-40">
           <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <p className="track-mid mb-8 text-xs text-neutral-400">{t.why.eyebrow}</p>
+            <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
             <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
               {t.why.title}
             </h2>
@@ -800,7 +801,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 max-w-3xl">
-            <p className="track-mid mb-4 text-xs text-neutral-400">{t.how.eyebrow}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{t.how.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               {t.how.title}
             </h2>
@@ -828,7 +829,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* PUBLIC TECHNICAL RECORD */}
         <section className="relative z-10 edge-t px-6 py-20 md:px-14">
           <div className="fade-up mx-auto max-w-4xl text-center">
-            <p className="track-mid mb-4 text-xs text-neutral-400">{t.engine.eyebrow}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{t.engine.eyebrow}</p>
             <h2 className="metal-text font-serif text-3xl font-medium md:text-5xl">
               {t.engine.title}
             </h2>

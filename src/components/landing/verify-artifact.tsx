@@ -283,7 +283,7 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
     <section id="verify" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
       <div className="mx-auto max-w-4xl">
         <div className="fade-up mb-12 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.title}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
             {t.lead(<em>{t.when}</em>)}

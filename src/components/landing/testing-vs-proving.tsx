@@ -92,7 +92,7 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
     <section id="compare" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-16 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.title}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </div>
@@ -128,9 +128,11 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
               ))}
             </ul>
             <div className="my-6 h-px w-full bg-white/5" />
-            <div className="flex items-baseline justify-between">
-              <span className="track-mid text-xs text-neutral-500">{t.confidence}</span>
-              <span className="metal-text font-serif text-2xl">{t.guarantee}</span>
+            <div className="flex items-baseline justify-between gap-6">
+              <span className="track-mid shrink-0 text-xs text-neutral-500">{t.confidence}</span>
+              <span className="metal-text font-serif text-2xl leading-snug text-right">
+                {t.guarantee}
+              </span>
             </div>
           </div>
         </div>
