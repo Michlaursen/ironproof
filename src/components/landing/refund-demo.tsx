@@ -175,10 +175,10 @@ export function RefundDemo({ locale = defaultLocale }: { locale?: Locale }) {
   };
 
   return (
-    <section id="try" className="relative z-10 edge-t px-6 py-28 md:px-14">
+    <section id="try" className="relative z-10 edge-gold px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-10 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.title}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </div>

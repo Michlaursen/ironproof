@@ -64,6 +64,12 @@ body {
   pointer-events: none;
   background:
     radial-gradient(120% 78% at 50% -12%, rgba(122, 140, 205, 0.12), transparent 58%),
+    /* Gold floor. The brand's metal, laid under every page rather than saved
+     * for the few components that hold a seal: on a black page a warm rise at
+     * the foot is read before any label is. Kept under the vignette so it
+     * reads as light in the room, not as a coloured band. */
+    radial-gradient(95% 52% at 50% 112%, rgba(201, 162, 75, 0.16), transparent 66%),
+    radial-gradient(70% 40% at 82% 8%, rgba(201, 162, 75, 0.07), transparent 62%),
     radial-gradient(100% 100% at 50% 118%, rgba(0, 0, 0, 0.55), transparent 68%);
 }
 
@@ -591,4 +597,210 @@ p, li {
 .icon-seal {
   color: var(--seal);
   filter: drop-shadow(0 0 8px rgba(201, 162, 75, 0.4));
+}
+
+/* ── The gold register, widened (2026-09-20) ─────────────────────────────────
+ * Ordered by Dom: gold is brand, not a rare event — it belongs on every page.
+ * The law above still holds, it is only read one level up: the seal IS the
+ * product, so gold marks everything the seal touches — the mark, the artifact,
+ * the act of verifying, the way in. What it still never marks is a VERDICT:
+ * green and red own "what was decided", and a gold ALLOW would say nothing.
+ *
+ * Three stops, one metal. --seal is the body of the gold; --seal-hi is its
+ * specular edge; --seal-lo the valley. Every class below reads these, so the
+ * whole register re-tints from three lines.
+ */
+:root {
+  --seal-hi: #f6e5b4;
+  --seal-lo: #8a6a2c;
+}
+
+/* Brushed gold on type — the .metal-text of this register. Same descender
+ * clip note applies: EB Garamond draws g/j/p/q/y below its declared descent
+ * and `background-clip: text` would cut the tails off. */
+.gold-text {
+  padding-bottom: 0.12em; /* descender clip — see note above */
+  background: linear-gradient(180deg, var(--seal-hi) 0%, #e9cd8b 26%, var(--seal) 50%, #efd9a2 74%, var(--seal-lo) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(201, 162, 75, 0.3));
+}
+
+/* The animated twin, for the one line per page that should catch the light.
+ * Shares @keyframes sweep with .metal-shine so the two registers move at the
+ * same speed — two different sweeps on one screen read as a glitch. */
+.gold-shine {
+  padding-bottom: 0.12em; /* descender clip — see note above */
+  background: linear-gradient(110deg, #b98f3c 0%, var(--seal-hi) 22%, #ddbd74 38%, #fff3d4 55%, var(--seal) 72%, var(--seal-hi) 88%, #d6b76e 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 18px rgba(201, 162, 75, 0.32));
+  animation: sweep 7s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gold-shine { animation: none; }
+}
+
+/* Section divider in the seal register — the gold twin of .edge-t. Used where
+ * the section below it is about the artifact rather than about the argument. */
+.edge-gold {
+  position: relative;
+}
+.edge-gold::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 75, 0.45), transparent);
+}
+
+/* Gold hairline — the .hairline of this register, for the rule under a lede. */
+.hairline-gold {
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 75, 0.55), transparent);
+  box-shadow: 0 0 8px rgba(201, 162, 75, 0.2);
+}
+
+/* Gold-lit card. Fourth member of the card family (premium / allow / block /
+ * iron), same mechanism: it overrides only ::before, so it composes with
+ * .card-premium. Reserved for a card that holds a sealed artifact or the
+ * primitives behind one — not for any card that happens to be important. */
+.card-seal::before {
+  background: linear-gradient(
+    180deg,
+    rgba(201, 162, 75, 0.55) 0%,
+    rgba(201, 162, 75, 0.16) 26%,
+    rgba(228, 233, 255, 0.04) 60%,
+    rgba(201, 162, 75, 0.1) 100%
+  );
+}
+.card-seal:hover {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 30px 64px -22px rgba(0, 0, 0, 0.92),
+    0 0 34px -10px rgba(201, 162, 75, 0.22);
+}
+.card-seal:hover::before {
+  background: linear-gradient(
+    180deg,
+    rgba(201, 162, 75, 0.78) 0%,
+    rgba(201, 162, 75, 0.24) 30%,
+    rgba(228, 233, 255, 0.06) 62%,
+    rgba(201, 162, 75, 0.16) 100%
+  );
+}
+
+/* Gold chip — the .chip-metal of this register. Tint on the contour and the
+ * label; the fill stays black, because a filled gold block on black reads as a
+ * warning banner and not as a seal. */
+.chip-gold {
+  position: relative;
+  background: linear-gradient(180deg, rgba(201, 162, 75, 0.12), rgba(201, 162, 75, 0.03));
+  border: 1px solid rgba(201, 162, 75, 0.22);
+  box-shadow: inset 0 1px 0 rgba(246, 229, 180, 0.18);
+  border-radius: 5px;
+  color: #e6c987;
+}
+.chip-gold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(201, 162, 75, 0.5),
+    rgba(201, 162, 75, 0.12) 60%,
+    rgba(201, 162, 75, 0.06) 100%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.chip-gold:hover { color: #f6e5b4; }
+
+/* The way in, struck in gold. The primary CTA is the one place a filled gold
+ * surface is right: it is not labelling a verdict, it is the door. Dark ink on
+ * gold keeps contrast well above 4.5:1 where white on gold would fail it. */
+.btn-gold {
+  background: linear-gradient(180deg, var(--seal-hi) 0%, #e2c179 38%, var(--seal) 66%, #b98f3c 100%);
+  color: #1b1405;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 252, 240, 0.6),
+    0 10px 30px -12px rgba(201, 162, 75, 0.55);
+  transition: filter 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-gold:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 252, 240, 0.75),
+    0 14px 38px -12px rgba(201, 162, 75, 0.7);
+}
+
+/* Soft gold halo behind a sealed motif — the .halo of this register. */
+.halo-gold {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(60% 50% at 50% 45%, rgba(201, 162, 75, 0.16), transparent 70%);
+}
+
+/* Numeral in the seal register — the .num-badge twin, for counters that stand
+ * beside sealed material. */
+.num-badge-gold {
+  padding-bottom: 0.12em; /* descender clip — see note above */
+  background: linear-gradient(180deg, var(--seal-hi), var(--seal-lo));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold blade — the .breath-mark of this register, for the pause that lands on
+ * the artifact rather than on the argument. */
+.breath-mark-gold {
+  display: block;
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, transparent, rgba(201, 162, 75, 0.7) 45%, transparent);
+}
+
+/* Gold nav seam — same hairline as .nav-divider, in the seal register. */
+.nav-divider-gold {
+  display: block;
+  width: 1px;
+  height: 14px;
+  flex: none;
+  background: linear-gradient(180deg, transparent, rgba(201, 162, 75, 0.55), transparent);
+}
+
+/* Gold bullet — a filled dot at the head of a list item that belongs to the
+ * sealed half of a page. */
+.dot-seal {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  flex: none;
+  border-radius: 999px;
+  background: var(--seal);
+  box-shadow: 0 0 10px rgba(201, 162, 75, 0.55);
+}
+
+/* Link in the seal register — underline inherits the tint, which a plain
+ * `underline` on gold text does not do consistently across browsers. */
+.link-seal {
+  color: #e6c987;
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 162, 75, 0.45);
+  text-underline-offset: 4px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.link-seal:hover {
+  color: var(--seal-hi);
+  text-decoration-color: rgba(246, 229, 180, 0.8);
 }

@@ -132,7 +132,7 @@ export function DeployGate({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <section id="deploy" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="fade-up mb-14 max-w-3xl">
-        <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+        <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
         <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
           {t.titleA}
           <br />

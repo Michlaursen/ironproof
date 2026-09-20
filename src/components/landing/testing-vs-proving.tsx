@@ -92,13 +92,13 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
     <section id="compare" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-16 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.title}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </div>
         <div className="fade-up grid gap-6 md:grid-cols-2">
           <div className="card-premium p-10">
-            <p className="track-mid mb-6 text-xs text-neutral-400">{t.testing}</p>
+            <p className="track-mid mb-6 text-xs text-neutral-500">{t.testing}</p>
             <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">{t.testingQ}</p>
             <TestingDots />
             <ul className="space-y-3 text-sm">
@@ -115,22 +115,24 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
               <span className="font-serif text-2xl text-neutral-300">{t.partial}</span>
             </div>
           </div>
-          <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
-            <p className="track-mid mb-6 text-xs text-neutral-300">{t.proving}</p>
+          <div className="card-premium card-seal p-10">
+            <p className="seal-label track-mid mb-6 text-xs">{t.proving}</p>
             <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">{t.provingQ}</p>
             <ProvingDots />
             <ul className="space-y-3 text-sm">
               {t.provingPoints.map((point, i) => (
                 <li key={i} className="flex gap-3 text-neutral-300">
-                  <span className="icon-metal mt-0.5">&#10003;</span>{" "}
+                  <span className="icon-seal mt-0.5">&#10003;</span>{" "}
                   <span>{point}</span>
                 </li>
               ))}
             </ul>
             <div className="my-6 h-px w-full bg-white/5" />
-            <div className="flex items-baseline justify-between">
-              <span className="track-mid text-xs text-neutral-500">{t.confidence}</span>
-              <span className="metal-text font-serif text-2xl">{t.guarantee}</span>
+            <div className="flex items-baseline justify-between gap-6">
+              <span className="track-mid shrink-0 text-xs text-neutral-500">{t.confidence}</span>
+              <span className="metal-text font-serif text-2xl leading-snug text-right">
+                {t.guarantee}
+              </span>
             </div>
           </div>
         </div>

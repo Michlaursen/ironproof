@@ -184,13 +184,13 @@ export function LandingHeader(props: HeaderProps) {
           {LINKS.map((l, i) => (
             <Fragment key={l.href}>
               {l.leaves && !LINKS[i - 1]?.leaves ? (
-                <span className="nav-divider" aria-hidden="true" />
+                <span className="nav-divider-gold" aria-hidden="true" />
               ) : null}
               <a
                 href={l.href}
                 aria-current={isActive(l.page) ? "page" : undefined}
                 className={`whitespace-nowrap rounded-sm transition hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-                  isActive(l.page) ? "metal-shine" : "metal-text"
+                  isActive(l.page) ? "gold-shine" : "metal-text"
                 }`}
               >
                 {l.label}
@@ -213,7 +213,7 @@ export function LandingHeader(props: HeaderProps) {
 
           <a
             href={contactHref}
-            className={`${trackNav} whitespace-nowrap shrink-0 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-4 py-2.5 font-semibold 2xl:px-5 text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60`}
+            className={`btn-gold ${trackNav} whitespace-nowrap shrink-0 rounded-[5px] px-4 py-2.5 font-semibold 2xl:px-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#f6e5b4]/70`}
           >
             {t.cta}
           </a>
@@ -257,7 +257,7 @@ export function LandingHeader(props: HeaderProps) {
                 onClick={() => setOpen(false)}
                 className={`track-mid border-b border-white/5 py-4 text-sm ${
                   l.leaves && !LINKS[LINKS.indexOf(l) - 1]?.leaves ? "mt-2 border-t border-white/10 pt-6" : ""
-                } ${isActive(l.page) ? "metal-shine" : "metal-text"}`}
+                } ${isActive(l.page) ? "gold-shine" : "metal-text"}`}
               >
                 {l.label}
               </a>
@@ -265,7 +265,7 @@ export function LandingHeader(props: HeaderProps) {
             <a
               href={contactHref}
               onClick={() => setOpen(false)}
-              className="track-mid mt-5 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-5 py-3.5 text-center font-semibold text-ink shadow-lg shadow-white/10"
+              className="btn-gold track-mid mt-5 rounded-[5px] px-5 py-3.5 text-center font-semibold"
             >
               {t.cta}
             </a>

@@ -39,7 +39,7 @@ function Pill({ kind, locale }: { kind: "built" | "coming" | "roadmap"; locale: 
 }
 
 function Snum({ children }: { children: React.ReactNode }) {
-  return <p className="track-mid mb-4 text-xs text-neutral-500">{children}</p>;
+  return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
 }
 
 export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
@@ -53,15 +53,16 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
         {/* HERO */}
         <section id="top" className="relative z-10 px-6 pb-16 pt-24 md:px-14 md:pt-28">
           <div className="halo" aria-hidden="true" />
+          <div className="halo-gold" aria-hidden="true" />
           <div className="fade-up mx-auto max-w-4xl">
-            <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">{t.eyebrow}</p>
+            <p className="seal-label track-wide mb-6 text-xs md:text-sm">{t.eyebrow}</p>
             <h1 className="metal-shine mb-8 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
               {t.h1}
             </h1>
             <p className="max-w-2xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
               {t.heroLead}
             </p>
-            <div className="hairline mt-10 h-px w-full max-w-md" />
+            <div className="hairline-gold mt-10 h-px w-full max-w-md" />
           </div>
         </section>
 
@@ -193,7 +194,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* 05 — the artifact */}
-        <section id="verify" className="relative z-10 edge-t mx-auto max-w-4xl px-6 py-20 md:px-14">
+        <section id="verify" className="relative z-10 edge-gold mx-auto max-w-4xl px-6 py-20 md:px-14">
           <div className="fade-up flex flex-col items-start gap-10 md:flex-row md:items-center">
             <div className="flex-1">
               <Snum>{t.s05}</Snum>
@@ -294,20 +295,22 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* 10 — closing phrase */}
-        <section className="relative z-10 edge-t px-6 py-28 text-center md:px-14">
+        <section className="relative z-10 edge-gold px-6 py-28 text-center md:px-14">
           <div className="halo" aria-hidden="true" />
+          <div className="halo-gold" aria-hidden="true" />
           <div className="fade-up mx-auto max-w-3xl">
             <Snum>{t.s10}</Snum>
             <p className="metal-shine mx-auto max-w-2xl font-serif text-3xl font-medium leading-tight md:text-4xl">
               {t.s10Phrase}
             </p>
-            <p className="track-wide mt-8 text-xs text-seal">{t.eyebrow}</p>
+            <p className="gold-text track-wide mt-8 text-xs">{t.eyebrow}</p>
           </div>
         </section>
 
         {/* CTA */}
-        <section id="contact" className="relative z-10 edge-t px-6 py-32 md:px-14">
+        <section id="contact" className="relative z-10 edge-gold px-6 py-32 md:px-14">
           <div className="halo" aria-hidden="true" />
+          <div className="halo-gold" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
             <div className="mb-10 flex items-center justify-center gap-8">
               <IronProofLogo width={96} height={128} title={t.logoTitle} />
@@ -323,7 +326,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
       </main>
 
       {/* FOOTER */}
-      <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
+      <footer className="relative z-10 edge-gold px-6 py-12 md:px-14">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <div className="flex items-center gap-3">
             <IronProofLogo width={20} height={27} />

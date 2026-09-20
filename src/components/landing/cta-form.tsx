@@ -81,7 +81,7 @@ export function CtaForm({ locale = defaultLocale }: { locale?: Locale }) {
         <button
           type="submit"
           disabled={state === "loading"}
-          className="track-mid whitespace-nowrap rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn-gold track-mid whitespace-nowrap rounded-[5px] px-8 py-3.5 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-60"
         >
           {state === "loading" ? t.sending : t.submit}
         </button>

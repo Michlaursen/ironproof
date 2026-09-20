@@ -283,7 +283,7 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
     <section id="verify" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
       <div className="mx-auto max-w-4xl">
         <div className="fade-up mb-12 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.title}</h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
             {t.lead(<em>{t.when}</em>)}
@@ -335,7 +335,7 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
               type="button"
               onClick={verify}
               disabled={busy || input.trim().length === 0}
-              className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="btn-gold track-mid rounded-[5px] px-7 py-3 text-xs font-semibold disabled:cursor-not-allowed disabled:opacity-50"
             >
               {busy ? t.verifying : t.verify}
             </button>

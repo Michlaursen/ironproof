@@ -113,11 +113,11 @@ export function GateDiagram({ locale = defaultLocale }: { locale?: Locale }) {
             className="gate-blade absolute h-[3px] w-full rounded-full md:h-full md:w-[3px]"
             style={{
               background:
-                "linear-gradient(var(--gate-dir), transparent, rgba(232,235,245,0.85) 22%, rgba(232,235,245,0.85) 78%, transparent)",
-              boxShadow: "0 0 16px rgba(200,210,255,0.35)",
+                "linear-gradient(var(--gate-dir), transparent, rgba(201,162,75,0.9) 22%, rgba(246,229,180,0.95) 50%, rgba(201,162,75,0.9) 78%, transparent)",
+              boxShadow: "0 0 18px rgba(201,162,75,0.45)",
             }}
           />
-          <span className="chip-metal relative flex h-14 w-14 rotate-45 items-center justify-center">
+          <span className="chip-gold relative flex h-14 w-14 rotate-45 items-center justify-center">
             <svg
               width="20"
               height="20"
@@ -125,7 +125,7 @@ export function GateDiagram({ locale = defaultLocale }: { locale?: Locale }) {
               fill="none"
               stroke="currentColor"
               strokeWidth="1.4"
-              className="icon-metal -rotate-45"
+              className="icon-seal -rotate-45"
               aria-hidden="true"
             >
               <path d="M12 2 L20 6 V12 C20 17 16 21 12 22 C8 21 4 17 4 12 V6 Z" />

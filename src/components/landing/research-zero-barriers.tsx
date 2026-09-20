@@ -48,7 +48,7 @@ function Rich({ children }: { children: string }) {
 }
 
 function Snum({ children }: { children: string }) {
-  return <p className="track-mid mb-4 text-xs text-neutral-500">{children}</p>;
+  return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
 }
 
 function Figure({ id, locale, cap, alt }: { id: FigId; locale: Locale; cap: string; alt: string }) {
@@ -197,6 +197,7 @@ export function ResearchZeroBarriers({
         {/* HERO */}
         <section id="top" className="relative z-10 px-6 pb-10 pt-24 md:px-14 md:pt-28">
           <div className="halo" aria-hidden="true" />
+          <div className="halo-gold" aria-hidden="true" />
           <div className="fade-up mx-auto max-w-4xl">
             <p className="track-wide mb-6 text-xs text-neutral-400 md:text-sm">{c.eyebrow}</p>
             <h1 className="metal-shine mb-8 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-6xl">
@@ -205,7 +206,7 @@ export function ResearchZeroBarriers({
             <p className="max-w-2xl text-lg font-light leading-snug text-neutral-300 md:text-xl">
               {c.standfirst}
             </p>
-            <div className="edge-t mt-10 flex max-w-2xl flex-col gap-2 pt-5">
+            <div className="edge-gold mt-10 flex max-w-2xl flex-col gap-2 pt-5">
               <p className="track-mid text-[11px] text-neutral-400">{c.byline}</p>
               <p className="text-sm font-light leading-relaxed text-neutral-500">{c.note}</p>
             </div>

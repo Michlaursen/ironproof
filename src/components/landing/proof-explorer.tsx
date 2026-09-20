@@ -296,10 +296,10 @@ export function ProofExplorer({ locale = defaultLocale }: { locale?: Locale }) {
   const panel = PANELS[tab];
 
   return (
-    <section id="explorer" className="relative z-10 edge-t px-6 py-28 md:px-14">
+    <section id="explorer" className="relative z-10 edge-gold px-6 py-28 md:px-14">
       <div className="mx-auto max-w-6xl">
         <div className="fade-up mb-12 text-center">
-          <p className="track-mid mb-4 text-xs text-neutral-400">{t.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
             {t.titleA}
             <br />
@@ -314,7 +314,7 @@ export function ProofExplorer({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </div>
 
-        <div className="fade-up card-premium overflow-hidden">
+        <div className="fade-up card-premium card-seal overflow-hidden">
           <div className="flex flex-wrap gap-2 border-b border-white/5 p-4">
             {TAB_ORDER.map((key) => (
               <button
@@ -330,17 +330,17 @@ export function ProofExplorer({ locale = defaultLocale }: { locale?: Locale }) {
 
           <div className="bg-black/40 p-6 md:p-8">
             <div>
-              <p className="track-mid mb-4 text-[10px] text-neutral-400">{panel.label}</p>
+              <p className="seal-label track-mid mb-4 text-[10px]">{panel.label}</p>
               <CodeBlock src={panel.src} />
               <p className="mt-5 text-sm font-light text-neutral-400">{panel.note}</p>
             </div>
           </div>
 
           <div className="border-t border-white/5 p-6 md:p-8">
-            <p className="track-mid mb-3 text-[10px] text-neutral-400">{t.scopeLabel}</p>
+            <p className="seal-label track-mid mb-3 text-[10px]">{t.scopeLabel}</p>
             <div className="grid gap-4 text-sm md:grid-cols-2">
               <div className="flex gap-3">
-                <span className="icon-metal mt-0.5">✓</span>
+                <span className="icon-seal mt-0.5">✓</span>
                 <p className="font-light text-neutral-400">
                   <span className="text-neutral-200">{t.provenLead}</span> {t.proven}
                 </p>
