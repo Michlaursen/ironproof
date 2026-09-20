@@ -147,7 +147,7 @@ const T: L<Copy> = {
         <>
           Ironproof checks every critical action before it executes. If it's authorized, it runs. If
           it isn't, Ironproof <span className="metal-text">blocks it</span>{" "}&mdash; and creates
-          evidence anyone can verify.
+          mathematical proof anyone can verify.
         </>
       ),
       boundary: "One boundary. Any initiator.",
