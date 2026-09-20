@@ -211,13 +211,21 @@ same way a forgery does, so the operator sees `FAILED` and concludes the dossier
 with. **Interoperability confirmed by execution**, not assumed: signatures produced by
 `liboqs` 0.15.0 verify under OpenSSL 3.6 with these parameters (`verifier-ts/`).
 
-> ⚠️ **Not re-measured under 0.16.0.** The pin moved to `liboqs-python==0.16.0` on
-> 2026-09-20 (see `requirements.txt` for the receipts). What WAS measured across the
-> bump is that a seal produced by 0.15.0 verifies under 0.16.0, with a flipped message
-> bit, a flipped signature bit and a foreign key all returning false. The OpenSSL 3.6
-> cross-check above still names 0.15.0 because that is the version it ran against;
-> re-running `verifier-ts/` under 0.16.0 is open work, deliberately not overwritten
-> with a number nobody produced.
+> ✅ **Re-measured under 0.16.0 on 2026-09-20**, by execution rather than by editing a
+> number. The pin moved to `liboqs-python==0.16.0` that day; `verifier-ts/` was then run
+> against a dossier whose own `toolchain` block reads `liboqs 0.16.0 / python 0.16.0`,
+> on Node v26.4.0 carrying **OpenSSL 3.6.3** (`process.versions.openssl`). Exercised
+> both ways, because a green that cannot go red is worth nothing:
+>
+> | state | result | exit |
+> |---|---|---|
+> | intact | `VERIFIED  7 entries (Ed25519 + ML-DSA-65 + SHA3-512 chain intact)` | 0 |
+> | one hex char of `sig_mldsa65` flipped | `FAILED — seq=0: ml-dsa signature invalid` | 1 |
+> | one hex char of `sig_ed25519` flipped | `FAILED — seq=0: ed25519 signature invalid` | 1 |
+>
+> The signature is 3309 bytes, the exact FIPS 204 ML-DSA-65 size. The 0.15.0 figure in
+> the sentence above is kept as written: it names the version that ran back then, and
+> overwriting it would have manufactured a measurement. Both are true, at their own dates.
 
 ---
 
