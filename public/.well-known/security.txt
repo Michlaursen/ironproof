@@ -1,0 +1,4 @@
+Contact: mailto:dominik@ironproof.ai
+Expires: 2027-09-22T23:59:59.000Z
+Preferred-Languages: en, fr
+Canonical: https://ironproof.ai/.well-known/security.txt
