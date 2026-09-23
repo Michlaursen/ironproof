@@ -53,7 +53,7 @@ const RELATED_HREFS = {
   provable: "/provable-ai",
   proof: "/proof",
   initiators: "/#initiators",
-  try: "/#try",
+  try: "/#decide",
   counter: "/#counterexample",
 } as const;
 
@@ -333,7 +333,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           {
             t: "ol",
             items: [
-              "**For your highest-consequence action, what evaluates it before it executes?** If the answer is the model’s own judgement, you have a probabilistic control with a known spread. If it is a human reviewer, ask whether that reviewer exists at 2.7 actions per minute for four and a half days. (There is [a small policy you can run live](/#try) if you want to see what a pre-execution verdict looks like.)",
+              "**For your highest-consequence action, what evaluates it before it executes?** If the answer is the model’s own judgement, you have a probabilistic control with a known spread. If it is a human reviewer, ask whether that reviewer exists at 2.7 actions per minute for four and a half days. (There is [a small policy you can run live](/#decide) if you want to see what a pre-execution verdict looks like.)",
               "**If a supervisor asked you to evidence every action taken last quarter and the rule that permitted each one, could you?** Financial services suspects 5.84 incidents for every one it can confirm. That is an evidence-retention problem, and it precedes any question about controls.",
               "**What did you grant for convenience that becomes an egress path under pressure?** Every incident here turned on a permission granted for a mundane reason — downloading tools, installing packages, loading a config.",
               "**How long would it take you to notice?** AISI took roughly 72 hours and contained it in one. The bottleneck was never response. A comparable agent needed 13 hours to own a production cluster.",
@@ -688,7 +688,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           {
             t: "ol",
             items: [
-              "**Pour votre action la plus lourde de conséquences, qu’est-ce qui l’évalue avant qu’elle ne s’exécute ?** Si la réponse est le jugement du modèle lui-même, vous disposez d’un contrôle probabiliste à l’écart connu. Si c’est un relecteur humain, demandez-vous si ce relecteur existe à 2,7 actions par minute pendant quatre jours et demi. (Il existe [une petite politique que vous pouvez exécuter en direct](/#try) si vous voulez voir à quoi ressemble un verdict rendu avant exécution.)",
+              "**Pour votre action la plus lourde de conséquences, qu’est-ce qui l’évalue avant qu’elle ne s’exécute ?** Si la réponse est le jugement du modèle lui-même, vous disposez d’un contrôle probabiliste à l’écart connu. Si c’est un relecteur humain, demandez-vous si ce relecteur existe à 2,7 actions par minute pendant quatre jours et demi. (Il existe [une petite politique que vous pouvez exécuter en direct](/#decide) si vous voulez voir à quoi ressemble un verdict rendu avant exécution.)",
               "**Si un superviseur vous demandait de justifier chaque action prise le trimestre dernier et la règle qui l’a autorisée, le pourriez-vous ?** Les services financiers soupçonnent 5,84 incidents pour chacun qu’ils peuvent confirmer. C’est un problème de conservation des preuves, et il précède toute question de contrôles.",
               "**Qu’avez-vous accordé par commodité qui devient une voie de sortie sous pression ?** Chacun des incidents ici présents reposait sur une permission accordée pour une raison banale — télécharger des outils, installer des paquets, charger une configuration.",
               "**Combien de temps vous faudrait-il pour vous en apercevoir ?** L’AISI a mis environ 72 heures et l’a confiné en une. Le goulet d’étranglement n’a jamais été la réponse. Un agent comparable a eu besoin de 13 heures pour s’emparer d’un cluster de production.",
