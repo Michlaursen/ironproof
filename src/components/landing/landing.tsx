@@ -3,7 +3,7 @@ import { LandingHeader } from "./landing-header";
 import { ProofSeal } from "./proof-seal";
 import { ProofArtifact } from "./proof-artifact";
 import { FadeUpInit } from "./fade-up-init";
-import { RefundDemo } from "./refund-demo";
+import { AgentScenarios } from "./agent-scenarios";
 import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
 import { GateDiagram } from "./gate-diagram";
@@ -12,54 +12,40 @@ import { SequenceProof } from "./sequence-proof";
 import { DeployGate } from "./deploy-gate";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
-import { type L, pick, money, count, NBSP } from "./i18n";
+import { type L, pick, NBSP } from "./i18n";
 
 /*
  * The Ironproof landing.
  *
- * Ordered so the visitor meets the product before the mechanism:
- *   authorization  = the product      (what is bought)
- *   formal methods = the mechanism    (how the boundary is established)
- *   cryptography   = the evidence     (what is kept, and re-checked)
+ * Rebuilt 2026-09-23. The previous page demonstrated one action class — a
+ * refund — seven times over, while the headline sold four. The order now
+ * follows the reader's questions, not our mechanism:
  *
- * Everything named Z3, ML-DSA or post-quantum therefore lives below the fold
- * of the argument, not inside the pitch. Anchor ids are load
- * bearing: the header links #how, #initiators, #start and #verify, and the
- * research page links #counterexample.
+ *   1. what it does            hero, then the two sealed artifacts
+ *   2. why logging in is not   authentication vs authorization
+ *      the same as allowed
+ *   3. see it decide           four action classes, one gate (interactive)
+ *   4. what it is not          the categories it gets confused with
+ *   5. where it applies        three domains, with the rules that already exist
+ *   6. why now                 dated, sourced regulatory and market events
+ *   7. what only a proof does  the sequence, the gate, the pipeline
+ *   8. check it yourself       a real sealed record, verified in the browser
+ *   9. start                   a scoped pilot on one action type
  *
- * Copy lives in the T dictionary below and in each child component's own
- * dictionary, read through `pick`. Nothing on this page is written inline any
- * more: a string in the JSX is a string that only exists in one language, and
- * that is exactly how /fr spent months rendering an English page.
+ * Anchor ids are load bearing: the header links #how, #initiators, #start and
+ * the research page links #decide and #counterexample.
  *
- * The numbers are NOT in the dictionary. Amounts are declared once as figures
- * and formatted per locale by `money`, so the French and the English page
- * cannot disagree about what a cap is.
+ * Every dated claim in WHY NOW carries its source link. A date on this page
+ * without a source is the exact failure the product exists to prevent.
  */
 
-const DAILY_CAP = 1000;
-const REFUND_OK = 640;
-const REFUND_SPLIT = 600;
-const REFUND_COMBINED = 1200;
-const BULK_RECORDS = 40000;
-const BULK_THRESHOLD = 1000;
-const WIRE = 250000;
-
-type Action = {
-  kind: string;
-  ask: string;
-  /** `true` = the gate lets it through. The tag text comes from the copy. */
-  allow: boolean;
-  why: string;
-};
-
-type Layer = { tag: string; title: string; body: string };
-type Framework = { where: string; rules: string };
+type Contrast = { label: string; body: string };
+type NotItem = { label: string; body: string };
+type Domain = { name: string; actions: readonly string[]; rules: string };
+type Dated = { date: string; what: string; source: string; href: string };
+type Step = { title: string; body: string };
 
 type Copy = {
-  allow: string;
-  block: string;
-
   hero: {
     eyebrow: string;
     headline: string;
@@ -70,38 +56,43 @@ type Copy = {
     unauthorized: string;
     executes: string;
     refused: string;
-    ctaTry: string;
+    ctaDecide: string;
     ctaVerify: string;
+    ctaPilot: string;
     logoTitle: string;
   };
 
   takeaway: React.ReactNode;
   blockIsNotSilence: string;
 
+  authz: {
+    eyebrow: string;
+    title: React.ReactNode;
+    lead: string;
+    authn: Contrast;
+    authz: Contrast;
+    foot: string;
+  };
+
   creditedBy: string;
 
-  actions: {
+  not: { eyebrow: string; title: string; items: readonly NotItem[]; foot: string };
+
+  domains: {
     eyebrow: string;
     titleA: string;
     titleB: string;
     lead: string;
-    tableLabel: string;
-    illustrative: string;
-    items: readonly Action[];
-    frameworksLabel: string;
-    frameworks: readonly Framework[];
+    actionsLabel: string;
+    rulesLabel: string;
+    items: readonly Domain[];
   };
 
   breathFrameworks: React.ReactNode;
 
-  gate: {
-    eyebrow: string;
-    title: string;
-    lead: string;
-    foot: string;
-  };
+  now: { eyebrow: string; title: string; lead: string; items: readonly Dated[]; foot: string };
 
-  layers: { eyebrow: string; titleA: string; titleB: string; items: readonly Layer[] };
+  gate: { eyebrow: string; title: string; lead: string; foot: string };
 
   breathCounterexample: React.ReactNode;
   breathCoverage: React.ReactNode;
@@ -123,10 +114,15 @@ type Copy = {
     recordLink: string;
   };
 
-  engine: {
+  engine: { eyebrow: string; title: string; lead: React.ReactNode; cta: string };
+
+  pilot: {
     eyebrow: string;
     title: string;
-    lead: React.ReactNode;
+    lead: string;
+    steps: readonly Step[];
+    fitLabel: string;
+    fit: readonly string[];
     cta: string;
   };
 
@@ -135,19 +131,24 @@ type Copy = {
   footer: string;
 };
 
+const SRC_E23 =
+  "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/guideline-e-23-model-risk-management-2027";
+const SRC_OSFI_TOKENIZED =
+  "https://www.osfi-bsif.gc.ca/en/news/statement-tokenized-other-digitally-represented-deposits";
+const SRC_SIX_BANKS =
+  "https://www.newswire.ca/news-releases/six-canadian-banks-explore-development-of-a-secure-cad-tokenized-deposit-solution-869071438.html";
+
 const T: L<Copy> = {
   en: {
-    allow: "ALLOW",
-    block: "BLOCK",
-
     hero: {
-      eyebrow: "THE AUTHORIZATION LAYER FOR CRITICAL ACTIONS",
+      eyebrow: "PRE-EXECUTION AUTHORIZATION FOR AI AGENTS AND AUTOMATION",
       headline: "If it isn't authorized, it never executes.",
       body: (
         <>
-          Ironproof checks every critical action before it executes. If it's authorized, it runs. If
-          it isn't, Ironproof <span className="metal-text">blocks it</span>{" "}&mdash; and creates
-          mathematical evidence anyone can independently verify.
+          Ironproof checks every critical action before it executes — a payment, an access grant, a
+          deletion, a deployment. If it&rsquo;s authorized, it runs. If it isn&rsquo;t, Ironproof{" "}
+          <span className="metal-text">blocks it</span>{" "}&mdash; and seals a record anyone can
+          verify independently.
         </>
       ),
       boundary: "One boundary. Any initiator.",
@@ -156,8 +157,9 @@ const T: L<Copy> = {
       unauthorized: "UNAUTHORIZED",
       executes: "EXECUTES",
       refused: "BLOCKED",
-      ctaTry: "BLOCK ONE YOURSELF",
-      ctaVerify: "CHECK A REAL SEAL",
+      ctaDecide: "WATCH IT DECIDE",
+      ctaVerify: "VERIFY A REAL DECISION",
+      ctaPilot: "START A PILOT",
       logoTitle: "Ironproof monogram",
     },
 
@@ -172,61 +174,89 @@ const T: L<Copy> = {
     blockIsNotSilence:
       "A block is not a silence. It is an artifact stating what was requested, which policy was in force, and why the action did not run.",
 
+    authz: {
+      eyebrow: "THE GAP",
+      title: (
+        <>
+          Logged in is not <span className="metal-shine">allowed</span>.
+        </>
+      ),
+      lead: "Your agent already has credentials. That settles who it is — not whether this specific action, right now, is inside your policy.",
+      authn: {
+        label: "AUTHENTICATION — ALREADY SOLVED",
+        body: "Who is asking? Keys, tokens, SSO, service accounts. An agent running in production has already passed it.",
+      },
+      authz: {
+        label: "AUTHORIZATION — WHERE IRONPROOF SITS",
+        body: "Should this action execute? Amount, cumulative totals, approvals, time windows, holds — checked before the action runs, every time.",
+      },
+      foot: "An agent with valid credentials and a bad plan is still a valid session. The only place to stop it is before execution.",
+    },
+
     creditedBy: "SECURITY RESEARCH BY IRONPROOF — CREDITED BY",
 
-    actions: {
-      eyebrow: "WHICH ACTIONS",
+    not: {
+      eyebrow: "WHAT IRONPROOF IS NOT",
+      title: "Not another dashboard.",
+      items: [
+        {
+          label: "Not monitoring",
+          body: "Observability tells you what happened. Ironproof decides before it happens — a blocked action never runs.",
+        },
+        {
+          label: "Not an AI guardrail",
+          body: "No language model sits in the decision path. The same request under the same policy always gets the same verdict.",
+        },
+        {
+          label: "Not a penetration test",
+          body: "A test samples cases. Ironproof proves a property across every modeled sequence — or returns the one that breaks it.",
+        },
+        {
+          label: "Not a platform replacement",
+          body: "Ironproof does not hold funds or custody keys. It runs in your environment, in front of the systems you already operate.",
+        },
+      ],
+      foot: "What Ironproof is: a deterministic gate before execution, a proof about the policy, and a sealed record of every decision.",
+    },
+
+    domains: {
+      eyebrow: "WHERE IT APPLIES",
       titleA: "Move money. Grant access.",
       titleB: "Delete records. Ship a change.",
       lead: "The actions that cannot be taken back once they run. For those, authorization stops being a setting and becomes infrastructure.",
-      tableLabel: "WHAT WAS REQUESTED — AND WHAT HAPPENED",
-      illustrative: "Illustrative decisions under a sample policy.",
+      actionsLabel: "ACTIONS GOVERNED",
+      rulesLabel: "WHERE THE POLICY ALREADY EXISTS",
       items: [
         {
-          kind: "PAYMENT",
-          ask: `Refund ${money(REFUND_OK, "en")} to a payee already on file`,
-          allow: true,
-          why: `Below the ${money(DAILY_CAP, "en")} daily cap. Two authorized approvers are on record.`,
+          name: "Financial services",
+          actions: [
+            "Wires, refunds and internal transfers",
+            "Per-type and combined daily limits",
+            "Beneficiary changes and cooling-off periods",
+            "Programmable payment conditions",
+          ],
+          rules: "OSFI E-23 · OSFI B-13 · AML programs · SOX",
         },
         {
-          kind: "CUMULATIVE LIMIT",
-          ask: `Refund ${money(REFUND_SPLIT, "en")} to a payee who already received ${money(REFUND_SPLIT, "en")} today`,
-          allow: false,
-          why: `The refund is individually within the limit. The combined total would reach ${money(REFUND_COMBINED, "en")} — so the second refund never executes.`,
+          name: "Identity & access",
+          actions: [
+            "Role and privilege grants",
+            "Service-account permissions",
+            "Time-boxed and emergency access",
+            "Separation of duties",
+          ],
+          rules: "SOC 2 access controls · ISO 27001 · OSFI B-13",
         },
         {
-          kind: "PRIVILEGE ESCALATION",
-          ask: "Grant admin access to a service account",
-          allow: false,
-          why: "Privileged access requires an open change ticket and two authorized approvers. Neither is present.",
+          name: "Data & operations",
+          actions: [
+            "Bulk deletion and retention holds",
+            "Production deployments and change windows",
+            "Configuration changes on critical systems",
+            "Exports of customer data",
+          ],
+          rules: "Law 25 · PIPEDA · SOC 2 change management · IEC 62443",
         },
-        {
-          kind: "DELETION",
-          ask: `Delete ${count(BULK_RECORDS, "en")} inactive customer records`,
-          allow: false,
-          why: `Bulk deletion above ${count(BULK_THRESHOLD, "en")} records requires a verified retention-hold check. None is recorded.`,
-        },
-        {
-          kind: "DEPLOYMENT",
-          ask: "Push a configuration change to the payment rail",
-          allow: false,
-          why: "The approved change window is closed, and the rollback plan is unsigned.",
-        },
-        {
-          kind: "IRREVERSIBLE ACTION",
-          ask: `Wire ${money(WIRE, "en")} to a beneficiary added last month`,
-          allow: true,
-          why: "The cooling-off period has elapsed and dual authorization is on record. Because the wire cannot be recalled, authorization is decided before it is sent.",
-        },
-      ],
-      frameworksLabel: "WHERE THE POLICY ALREADY EXISTS ON PAPER",
-      frameworks: [
-        { where: "Financial services", rules: "OSFI E-23 · SOX · AML programs" },
-        { where: "Healthcare", rules: "HIPAA · PHIPA · device software" },
-        { where: "Government", rules: "Directive on Automated Decision-Making" },
-        { where: "Critical infrastructure", rules: "IEC 62443 · change control" },
-        { where: "Software delivery", rules: "SOC 2 change management · release gates" },
-        { where: "Data platforms", rules: "Retention holds · privacy law (Law 25, PIPEDA)" },
       ],
     },
 
@@ -238,34 +268,38 @@ const T: L<Copy> = {
       </>
     ),
 
+    now: {
+      eyebrow: "WHY NOW",
+      title: "Code is starting to move money on its own.",
+      lead: "Canadian regulators and banks have put dates on it. Each item links to its source.",
+      items: [
+        {
+          date: "Sep 10, 2026",
+          what: "OSFI states that tokenized deposits are not legally distinct from traditional deposits. The existing rules apply to them.",
+          source: "OSFI, statement on tokenized deposits",
+          href: SRC_OSFI_TOKENIZED,
+        },
+        {
+          date: "Sep 22, 2026",
+          what: "Six Canadian banks announce they are exploring a CAD tokenized deposit solution, aiming for faster, more efficient and programmable payments.",
+          source: "Joint release, Newswire",
+          href: SRC_SIX_BANKS,
+        },
+        {
+          date: "May 1, 2027",
+          what: "OSFI Guideline E-23 on model risk management takes effect. Its definition of a model explicitly includes AI/ML methods.",
+          source: "OSFI, Guideline E-23",
+          href: SRC_E23,
+        },
+      ],
+      foot: "When a payment can release itself on a condition, someone has to verify the condition before it executes.",
+    },
+
     gate: {
       eyebrow: "ONE GATE, ANY INITIATOR",
       title: "The gate does not ask who is asking.",
       lead: "It asks whether the action is inside the policy in force. The same check applies to every path that can reach a critical system — which is why this is not an AI problem with an AI answer.",
       foot: "Every authorization records the requesting actor, the policy version and the action. Nothing executes without spending a single-use grant bound to that exact decision.",
-    },
-
-    layers: {
-      eyebrow: "HOW THE PIECES SIT",
-      titleA: "You buy authorization.",
-      titleB: "The rest is how it holds.",
-      items: [
-        {
-          tag: "THE PRODUCT",
-          title: "Authorization",
-          body: "A boundary a critical action cannot cross. That is what you deploy, and what the policy owner signs off on.",
-        },
-        {
-          tag: "THE MECHANISM",
-          title: "Formal verification",
-          body: "How the boundary is established rather than hoped for: the property is checked across the modeled action space, for a sequence of any length — not for a sample of cases.",
-        },
-        {
-          tag: "THE EVIDENCE",
-          title: "Cryptographic proof",
-          body: "What outlives the decision. Every allow and every block leaves a sealed artifact your auditor re-checks on their own machine.",
-        },
-      ],
     },
 
     breathCounterexample: (
@@ -285,18 +319,18 @@ const T: L<Copy> = {
     ),
 
     why: {
-      eyebrow: "WHY THIS IS DIFFERENT",
+      eyebrow: "WHAT ONLY A PROOF DOES",
       title: (
         <>
-          We don't test your system <span className="text-neutral-500">&mdash;</span>{" "}
-          <span className="metal-shine">we prove it</span>.
+          Rules checked one by one <span className="text-neutral-500">&mdash;</span>{" "}
+          <span className="metal-shine">or the whole policy proven</span>.
         </>
       ),
-      lead: "You walk away with one of two things: the exact case that breaks it, or the proof that no such case exists. Either way, you re-run that proof yourself — in your own tools, without trusting us.",
+      lead: "A gate that checks each rule against each request can pass every rule while a sequence of compliant actions still breaks what the policy was meant to prevent. Ironproof checks the policy as a whole: it returns the exact sequence that breaks it, or the proof that none exists.",
       testVsProof: (
         <>
           A test tells you what it tried.{" "}
-          <span className="metal-text">A proof tells you what's impossible.</span>
+          <span className="metal-text">A proof tells you what&rsquo;s impossible.</span>
         </>
       ),
       scope: "Proven within the boundary you define. The certificate states that boundary.",
@@ -318,13 +352,43 @@ const T: L<Copy> = {
       title: "Same proof engine. Proven on real vulnerabilities.",
       lead: (
         <>
-          Findings by <span className="metal-text">Dominik Blain</span>{" "}
-          and Cobalt, credited on the
-          projects' own repositories &mdash; published research, assigned CVEs and public upstream
-          acknowledgements.
+          Findings by <span className="metal-text">Dominik Blain</span> and Cobalt, credited on the
+          projects&rsquo; own repositories &mdash; published research, assigned CVEs and public
+          upstream acknowledgements.
         </>
       ),
       cta: "VIEW TECHNICAL RECORD",
+    },
+
+    pilot: {
+      eyebrow: "DESIGN PARTNER PILOT",
+      title: "Start with one action type.",
+      lead: "A fixed-scope pilot on a single action your automation already performs. You keep the certificate, the gate and the sealed records.",
+      steps: [
+        {
+          title: "Pick the action",
+          body: "One action type your agents or scripts already run — a transfer, an access grant, a deletion, a deployment — and the rules that govern it today.",
+        },
+        {
+          title: "Prove the policy",
+          body: "We encode the rules, search for sequences that pass every rule yet break the intent, and prove the corrected policy holds.",
+        },
+        {
+          title: "Enforce and seal",
+          body: "The gate runs in your environment, in front of the action. Every decision, allow or block, is sealed.",
+        },
+        {
+          title: "Verify without us",
+          body: "Your risk team or auditor re-checks the certificate and the records on their own machine.",
+        },
+      ],
+      fitLabel: "A GOOD FIT IF",
+      fit: [
+        "An agent, API or script can already execute the action without a person clicking approve",
+        "The rules exist on paper — limits, approvals, windows, holds",
+        "Someone will be asked to show that those rules actually held",
+      ],
+      cta: "APPLY FOR A PILOT",
     },
 
     cta: {
@@ -336,18 +400,15 @@ const T: L<Copy> = {
   },
 
   fr: {
-    allow: "AUTORISÉ",
-    block: "BLOQUÉ",
-
     hero: {
-      eyebrow: "LA COUCHE D’AUTORISATION DES ACTIONS CRITIQUES",
+      eyebrow: "AUTORISATION AVANT EXÉCUTION POUR LES AGENTS IA ET L’AUTOMATISATION",
       headline: "Si ce n’est pas autorisé, il n’y a pas d’exécution.",
       body: (
         <>
-          Ironproof vérifie chaque action critique avant qu’elle s’exécute. Si elle est autorisée,
-          elle passe. Sinon, Ironproof <span className="metal-text">la bloque</span>{" "}&mdash; et
-          produit une preuve mathématique que n’importe qui peut vérifier de façon
-          indépendante.
+          Ironproof vérifie chaque action critique avant qu’elle s’exécute — un paiement, un accès,
+          une suppression, un déploiement. Si elle est autorisée, elle passe. Sinon, Ironproof{" "}
+          <span className="metal-text">la bloque</span>{" "}&mdash; et scelle une trace que
+          n’importe qui peut vérifier de façon indépendante.
         </>
       ),
       boundary: "Une seule frontière. Peu importe qui demande.",
@@ -356,8 +417,9 @@ const T: L<Copy> = {
       unauthorized: "NON AUTORISÉE",
       executes: "S’EXÉCUTE",
       refused: "BLOQUÉE",
-      ctaTry: "BLOQUEZ-EN UNE VOUS-MÊME",
-      ctaVerify: "VÉRIFIEZ UN VRAI SCEAU",
+      ctaDecide: "VOYEZ-LE DÉCIDER",
+      ctaVerify: "VÉRIFIEZ UNE VRAIE DÉCISION",
+      ctaPilot: "DÉMARRER UN PILOTE",
       logoTitle: "Monogramme Ironproof",
     },
 
@@ -371,66 +433,88 @@ const T: L<Copy> = {
     ),
     blockIsNotSilence: `Un blocage n’est pas un silence. C’est un artefact qui dit ce qui a été demandé, quelle politique s’appliquait, et pourquoi l’action ne s’est pas exécutée.`,
 
+    authz: {
+      eyebrow: "L’ÉCART",
+      title: (
+        <>
+          Connecté ne veut pas dire <span className="metal-shine">autorisé</span>.
+        </>
+      ),
+      lead: "Votre agent a déjà des identifiants. Ça règle qui il est — pas si cette action précise, maintenant, respecte votre politique.",
+      authn: {
+        label: "AUTHENTIFICATION — DÉJÀ RÉGLÉE",
+        body: "Qui demande ? Clés, jetons, SSO, comptes de service. Un agent en production l’a déjà passé.",
+      },
+      authz: {
+        label: "AUTORISATION — LÀ OÙ SE PLACE IRONPROOF",
+        body: "Cette action doit-elle s’exécuter ? Montant, cumuls, approbations, fenêtres de temps, gels — vérifiés avant l’exécution, chaque fois.",
+      },
+      foot: "Un agent aux identifiants valides et au mauvais plan reste une session valide. Le seul endroit pour l’arrêter, c’est avant l’exécution.",
+    },
+
     creditedBy: "RECHERCHE EN SÉCURITÉ PAR IRONPROOF — CRÉDITÉE PAR",
 
-    actions: {
-      eyebrow: "QUELLES ACTIONS",
+    not: {
+      eyebrow: "CE QU’IRONPROOF N’EST PAS",
+      title: "Pas un tableau de bord de plus.",
+      items: [
+        {
+          label: "Pas de la surveillance",
+          body: "L’observabilité dit ce qui s’est passé. Ironproof décide avant — une action bloquée ne s’exécute jamais.",
+        },
+        {
+          label: "Pas un garde-fou d’IA",
+          body: "Aucun modèle de langage dans le chemin de décision. La même demande sous la même politique reçoit toujours le même verdict.",
+        },
+        {
+          label: "Pas un test d’intrusion",
+          body: "Un test échantillonne des cas. Ironproof prouve une propriété sur toute séquence modélisée — ou rend celle qui la casse.",
+        },
+        {
+          label: "Pas un remplacement de plateforme",
+          body: "Ironproof ne détient pas de fonds et ne garde pas de clés. Il tourne dans votre environnement, devant les systèmes que vous opérez déjà.",
+        },
+      ],
+      foot: "Ce qu’Ironproof est : une barrière déterministe avant l’exécution, une preuve sur la politique, et une trace scellée de chaque décision.",
+    },
+
+    domains: {
+      eyebrow: "OÙ ÇA S’APPLIQUE",
       titleA: "Déplacer de l’argent. Donner un accès.",
       titleB: "Supprimer des dossiers. Livrer un changement.",
       lead: "Les actions qu’on ne peut plus reprendre une fois exécutées. Pour celles-là, l’autorisation cesse d’être un réglage et devient une infrastructure.",
-      tableLabel: "CE QUI A ÉTÉ DEMANDÉ — ET CE QUI S’EST PASSÉ",
-      illustrative: "Décisions illustratives sous une politique d’exemple.",
+      actionsLabel: "ACTIONS GOUVERNÉES",
+      rulesLabel: "OÙ LA POLITIQUE EXISTE DÉJÀ",
       items: [
         {
-          kind: "PAIEMENT",
-          ask: `Rembourser ${money(REFUND_OK, "fr")} à un bénéficiaire déjà au dossier`,
-          allow: true,
-          why: `Sous le plafond quotidien de ${money(DAILY_CAP, "fr")}. Deux approbateurs autorisés sont au dossier.`,
+          name: "Services financiers",
+          actions: [
+            "Virements, remboursements et transferts internes",
+            "Limites par type et limites quotidiennes combinées",
+            "Changements de bénéficiaire et délais de carence",
+            "Conditions de paiement programmables",
+          ],
+          rules: "BSIF E-23 · BSIF B-13 · programmes LBA · SOX",
         },
         {
-          kind: "LIMITE CUMULATIVE",
-          ask: `Rembourser ${money(REFUND_SPLIT, "fr")} à un bénéficiaire qui a déjà reçu ${money(REFUND_SPLIT, "fr")} aujourd’hui`,
-          allow: false,
-          why: `Pris seul, le remboursement respecte la limite. Le total combiné atteindrait ${money(REFUND_COMBINED, "fr")} — le deuxième remboursement ne s’exécute donc jamais.`,
+          name: "Identité et accès",
+          actions: [
+            "Octroi de rôles et de privilèges",
+            "Permissions des comptes de service",
+            "Accès limités dans le temps et d’urgence",
+            "Séparation des tâches",
+          ],
+          rules: "Contrôles d’accès SOC 2 · ISO 27001 · BSIF B-13",
         },
         {
-          kind: "ÉLÉVATION DE PRIVILÈGES",
-          ask: "Accorder un accès administrateur à un compte de service",
-          allow: false,
-          why: "Un accès privilégié exige un billet de changement ouvert et deux approbateurs autorisés. Ni l’un ni l’autre n’est présent.",
-        },
-        {
-          kind: "SUPPRESSION",
-          ask: `Supprimer ${count(BULK_RECORDS, "fr")} dossiers clients inactifs`,
-          allow: false,
-          why: `Une suppression en lot de plus de ${count(BULK_THRESHOLD, "fr")} dossiers exige une vérification de gel de conservation. Aucune n’est consignée.`,
-        },
-        {
-          kind: "DÉPLOIEMENT",
-          ask: "Pousser un changement de configuration sur le rail de paiement",
-          allow: false,
-          why: "La fenêtre de changement approuvée est fermée, et le plan de retour arrière n’est pas signé.",
-        },
-        {
-          kind: "ACTION IRRÉVERSIBLE",
-          ask: `Virer ${money(WIRE, "fr")} à un bénéficiaire ajouté le mois dernier`,
-          allow: true,
-          why: "Le délai de carence est écoulé et la double autorisation est au dossier. Comme un virement ne se rappelle pas, l’autorisation se décide avant l’envoi.",
-        },
-      ],
-      frameworksLabel: "OÙ LA POLITIQUE EXISTE DÉJÀ SUR PAPIER",
-      frameworks: [
-        { where: "Services financiers", rules: "BSIF E-23 · SOX · programmes LBA" },
-        { where: "Santé", rules: "HIPAA · PHIPA · logiciels de dispositifs médicaux" },
-        { where: "Gouvernement", rules: "Directive sur la prise de décisions automatisée" },
-        { where: "Infrastructures critiques", rules: "IEC 62443 · gestion du changement" },
-        {
-          where: "Livraison logicielle",
-          rules: "Gestion du changement SOC 2 · barrières de mise en production",
-        },
-        {
-          where: "Plateformes de données",
-          rules: "Gels de conservation · lois sur la vie privée (loi 25, LPRPDE)",
+          name: "Données et opérations",
+          actions: [
+            "Suppressions en lot et gels de conservation",
+            "Déploiements en production et fenêtres de changement",
+            "Changements de configuration sur les systèmes critiques",
+            "Exportations de données clients",
+          ],
+          rules: "Loi 25 · LPRPDE · gestion du changement SOC 2 · IEC 62443",
         },
       ],
     },
@@ -443,34 +527,38 @@ const T: L<Copy> = {
       </>
     ),
 
+    now: {
+      eyebrow: "POURQUOI MAINTENANT",
+      title: "Le code commence à déplacer l’argent tout seul.",
+      lead: "Les régulateurs et les banques du Canada y ont mis des dates. Chaque élément renvoie à sa source.",
+      items: [
+        {
+          date: "10 sept. 2026",
+          what: "Le BSIF affirme que les dépôts tokenisés ne sont pas juridiquement distincts des dépôts traditionnels. Les règles existantes s’y appliquent.",
+          source: "BSIF, énoncé sur les dépôts tokenisés",
+          href: SRC_OSFI_TOKENIZED,
+        },
+        {
+          date: "22 sept. 2026",
+          what: "Six banques canadiennes annoncent explorer une solution de dépôts tokenisés en dollars canadiens, pour des paiements plus rapides, plus efficaces et programmables.",
+          source: "Communiqué conjoint, Newswire",
+          href: SRC_SIX_BANKS,
+        },
+        {
+          date: "1er mai 2027",
+          what: "La ligne directrice E-23 du BSIF sur la gestion du risque de modèle entre en vigueur. Sa définition d’un modèle inclut explicitement les méthodes d’IA et d’apprentissage automatique.",
+          source: "BSIF, ligne directrice E-23",
+          href: SRC_E23,
+        },
+      ],
+      foot: "Quand un paiement peut se libérer tout seul sur une condition, quelqu’un doit vérifier la condition avant l’exécution.",
+    },
+
     gate: {
       eyebrow: "UNE SEULE BARRIÈRE, PEU IMPORTE QUI DEMANDE",
       title: "La barrière ne demande pas qui demande.",
       lead: "Elle demande si l’action est à l’intérieur de la politique en vigueur. La même vérification s’applique à tous les chemins qui mènent à un système critique — c’est pourquoi ce n’est pas un problème d’IA qui appelle une réponse d’IA.",
       foot: "Chaque autorisation consigne l’acteur qui demande, la version de la politique et l’action. Rien ne s’exécute sans dépenser un jeton à usage unique lié à cette décision exacte.",
-    },
-
-    layers: {
-      eyebrow: "COMMENT LES PIÈCES S’EMBOÎTENT",
-      titleA: "Vous achetez de l’autorisation.",
-      titleB: "Le reste, c’est ce qui la fait tenir.",
-      items: [
-        {
-          tag: "LE PRODUIT",
-          title: "L’autorisation",
-          body: "Une frontière qu’une action critique ne peut pas franchir. C’est ce que vous déployez, et ce que le responsable de la politique approuve.",
-        },
-        {
-          tag: "LE MÉCANISME",
-          title: "La vérification formelle",
-          body: `Comment la frontière est établie plutôt qu’espérée${NBSP}: la propriété est vérifiée sur tout l’espace d’actions modélisé, pour une séquence de n’importe quelle longueur — pas sur un échantillon de cas.`,
-        },
-        {
-          tag: "LA PREUVE",
-          title: "La preuve cryptographique",
-          body: "Ce qui survit à la décision. Chaque autorisation et chaque blocage laisse un artefact scellé que votre auditeur revérifie sur sa propre machine.",
-        },
-      ],
     },
 
     breathCounterexample: (
@@ -490,14 +578,14 @@ const T: L<Copy> = {
     ),
 
     why: {
-      eyebrow: "CE QUI NOUS DISTINGUE",
+      eyebrow: "CE QUE SEULE UNE PREUVE FAIT",
       title: (
         <>
-          On ne teste pas votre système <span className="text-neutral-500">&mdash;</span>{" "}
-          <span className="metal-shine">on le prouve</span>.
+          Des règles vérifiées une à une <span className="text-neutral-500">&mdash;</span>{" "}
+          <span className="metal-shine">ou la politique entière prouvée</span>.
         </>
       ),
-      lead: `Vous repartez avec l’une de deux choses${NBSP}: le cas exact qui le casse, ou la preuve qu’aucun tel cas n’existe. Dans les deux cas, vous rejouez cette preuve vous-même — avec vos propres outils, sans avoir à nous croire.`,
+      lead: `Une barrière qui vérifie chaque règle contre chaque demande peut toutes les laisser passer alors qu’une suite d’actions conformes brise ce que la politique devait empêcher. Ironproof vérifie la politique comme un tout${NBSP}: il rend la séquence exacte qui la casse, ou la preuve qu’aucune n’existe.`,
       testVsProof: (
         <>
           Un test vous dit ce qu’il a essayé.{" "}
@@ -523,13 +611,43 @@ const T: L<Copy> = {
       title: "Le même moteur de preuve. Éprouvé sur de vraies vulnérabilités.",
       lead: (
         <>
-          Découvertes par <span className="metal-text">Dominik Blain</span>{" "}
-          et Cobalt, créditées sur
-          les dépôts des projets eux-mêmes &mdash; recherche publiée, CVE assignées et
+          Découvertes par <span className="metal-text">Dominik Blain</span> et Cobalt, créditées
+          sur les dépôts des projets eux-mêmes &mdash; recherche publiée, CVE assignées et
           remerciements publics en amont.
         </>
       ),
       cta: "VOIR LE DOSSIER TECHNIQUE",
+    },
+
+    pilot: {
+      eyebrow: "PILOTE PARTENAIRE DE CONCEPTION",
+      title: "Commencez par un seul type d’action.",
+      lead: "Un pilote à périmètre fixe sur une seule action que votre automatisation exécute déjà. Vous gardez le certificat, la barrière et les traces scellées.",
+      steps: [
+        {
+          title: "Choisir l’action",
+          body: "Un type d’action que vos agents ou scripts exécutent déjà — un transfert, un accès, une suppression, un déploiement — et les règles qui l’encadrent aujourd’hui.",
+        },
+        {
+          title: "Prouver la politique",
+          body: "Nous encodons les règles, cherchons les séquences qui passent chaque règle mais trahissent l’intention, et prouvons que la politique corrigée tient.",
+        },
+        {
+          title: "Appliquer et sceller",
+          body: "La barrière tourne dans votre environnement, devant l’action. Chaque décision, autorisée ou bloquée, est scellée.",
+        },
+        {
+          title: "Vérifier sans nous",
+          body: "Votre équipe de risque ou votre auditeur revérifie le certificat et les traces sur sa propre machine.",
+        },
+      ],
+      fitLabel: "UN BON CANDIDAT SI",
+      fit: [
+        "Un agent, une API ou un script peut déjà exécuter l’action sans qu’une personne clique sur approuver",
+        "Les règles existent sur papier — limites, approbations, fenêtres, gels",
+        "Quelqu’un devra montrer que ces règles ont réellement tenu",
+      ],
+      cta: "POSTULER POUR UN PILOTE",
     },
 
     cta: {
@@ -551,7 +669,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <LandingHeader locale={locale} />
 
       <main className="flex-1">
-        {/* HERO — the product, in one sentence, before any mechanism */}
+        {/* 1. HERO — the product, in one sentence, before any mechanism */}
         <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
           <div className="halo" aria-hidden="true" />
           <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-12 md:grid-cols-2">
@@ -567,9 +685,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </span>
             </div>
             <div className="fade-up">
-              <p className="seal-label track-wide mb-6 text-xs md:text-sm">
-                {t.hero.eyebrow}
-              </p>
+              <p className="seal-label track-wide mb-6 text-xs md:text-sm">{t.hero.eyebrow}</p>
               <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
                 <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
                   {t.hero.headline}
@@ -597,21 +713,25 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </div>
               <div className="hairline mb-10 h-px w-full max-w-md" />
               <div className="flex flex-wrap gap-4">
-                {/* Both used to land on more prose — a section title is not a
-                  * reward for a click. These two go to the only places on the
-                  * page where the reader DOES something: move a limit and watch
-                  * the verdict flip, then check a real seal in their own tab. */}
+                {/* Three doors, three intents: see it, check it, start. Each lands
+                  * where the reader DOES something, never on more prose. */}
                 <a
-                  href="#try"
+                  href="#decide"
                   className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  {t.hero.ctaTry}
+                  {t.hero.ctaDecide}
                 </a>
                 <a
                   href="#verify"
                   className="chip-metal track-mid px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
                 >
                   {t.hero.ctaVerify}
+                </a>
+                <a
+                  href="#pilot"
+                  className="track-mid px-2 py-3.5 text-xs text-neutral-400 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+                >
+                  {t.hero.ctaPilot}
                 </a>
               </div>
             </div>
@@ -632,10 +752,36 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* TRY IT — the reader blocks one themselves, right after seeing the two
-            sealed artifacts the sentence above promises. Kept high on the page:
-            the strongest demonstration should not wait behind the argument. */}
-        <RefundDemo locale={locale} />
+        {/* 2. AUTHENTICATION IS NOT AUTHORIZATION */}
+        <section id="gap" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-12 max-w-3xl">
+            <p className="seal-label track-mid mb-4 text-xs">{t.authz.eyebrow}</p>
+            <h2 className="font-serif text-4xl font-medium text-neutral-100 md:text-6xl">
+              {t.authz.title}
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.authz.lead}</p>
+          </div>
+          <div className="fade-up grid gap-6 md:grid-cols-2">
+            <div className="card-premium p-8 md:p-10">
+              <p className="track-mid mb-4 text-[10px] text-neutral-500">{t.authz.authn.label}</p>
+              <p className="text-base font-light leading-relaxed text-neutral-400">
+                {t.authz.authn.body}
+              </p>
+            </div>
+            <div className="card-premium card-iron p-8 md:p-10">
+              <p className="seal-label track-mid mb-4 text-[10px]">{t.authz.authz.label}</p>
+              <p className="text-base font-light leading-relaxed text-neutral-200">
+                {t.authz.authz.body}
+              </p>
+            </div>
+          </div>
+          <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
+            {t.authz.foot}
+          </p>
+        </section>
+
+        {/* 3. WATCH IT DECIDE — four action classes, one gate */}
+        <AgentScenarios locale={locale} verifyHref="#verify" />
 
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
@@ -649,61 +795,125 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* WHICH ACTIONS — the concrete problem, before any mechanism */}
+        {/* 4. WHAT IRONPROOF IS NOT */}
+        <section id="not" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-12 max-w-3xl">
+            <p className="seal-label track-mid mb-4 text-xs">{t.not.eyebrow}</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.not.title}</h2>
+          </div>
+          <div className="fade-up grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {t.not.items.map((n) => (
+              <div key={n.label} className="card-premium p-7">
+                <p className="mb-3 font-serif text-xl text-neutral-100">
+                  <span className="mr-2 font-mono text-sm text-red-300" aria-hidden="true">
+                    ✕
+                  </span>
+                  {n.label}
+                </p>
+                <p className="text-sm font-light leading-relaxed text-neutral-400">{n.body}</p>
+              </div>
+            ))}
+          </div>
+          <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
+            {t.not.foot}
+          </p>
+        </section>
+
+        {/* 5. WHERE IT APPLIES — three domains, with the rules that already exist */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.actions.eyebrow}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{t.domains.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              {t.actions.titleA}
+              {t.domains.titleA}
               <br />
-              {t.actions.titleB}
+              {t.domains.titleB}
             </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.actions.lead}</p>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
-
-          <p className="track-mid fade-up mb-6 text-xs text-neutral-400">{t.actions.tableLabel}</p>
-          <div className="fade-up grid gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
-            {t.actions.items.map((c) => (
-              <div
-                key={c.ask}
-                className={`card-premium flex flex-col p-6 ${
-                  c.allow ? "card-allow" : "card-block"
-                }`}
-              >
-                <p className="track-mid mb-3 text-[10px] text-neutral-500">{c.kind}</p>
-                <p className="mb-5 font-serif text-xl leading-snug text-neutral-100">{c.ask}</p>
-                <div className="mt-auto border-t border-white/5 pt-4">
-                  <span
-                    className={`verdict-tag ${c.allow ? "verdict-allow" : "verdict-block"}`}
-                  >
-                    {c.allow ? t.allow : t.block}
+          <div className="fade-up grid gap-6 lg:grid-cols-3">
+            {t.domains.items.map((d, i) => (
+              <div key={d.name} className="card-premium flex flex-col p-8 md:p-10">
+                <div className="mb-5 flex items-baseline gap-3">
+                  <span className="num-badge font-serif text-3xl">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">{c.why}</p>
+                  <h3 className="metal-text font-serif text-2xl">{d.name}</h3>
+                </div>
+                <p className="track-mid mb-3 text-[10px] text-neutral-500">
+                  {t.domains.actionsLabel}
+                </p>
+                <ul className="space-y-2">
+                  {d.actions.map((a) => (
+                    <li key={a} className="text-sm font-light leading-relaxed text-neutral-300">
+                      {a}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto border-t border-white/5 pt-5">
+                  <p className="track-mid mb-2 mt-6 text-[10px] text-neutral-500">
+                    {t.domains.rulesLabel}
+                  </p>
+                  <p className="text-sm font-light text-neutral-400">{d.rules}</p>
                 </div>
               </div>
             ))}
           </div>
-          <p className="fade-up mt-6 text-xs text-neutral-500">{t.actions.illustrative}</p>
-
-          <div className="card-premium card-iron fade-up mt-12 p-10 md:p-12">
-            <p className="track-mid mb-6 text-xs text-neutral-400">{t.actions.frameworksLabel}</p>
-            <div className="grid gap-x-10 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-              {t.actions.frameworks.map((i) => (
-                <div key={i.where}>
-                  <p className="metal-text font-serif text-xl">{i.where}</p>
-                  <p className="mt-1 text-sm font-light text-neutral-400">{i.rules}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* BREATH — the frameworks exist; this is what Ironproof does with them */}
-        <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
+        <section className="relative z-10 px-6 py-28 md:px-14 md:py-32">
           <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="breath-mark" aria-hidden="true" />
             <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
               {t.breathFrameworks}
+            </p>
+          </div>
+        </section>
+
+        {/* 6. WHY NOW — dated, each with its source */}
+        <section id="now" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-12 max-w-3xl">
+            <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
+          </div>
+          <ol className="fade-up grid gap-6 md:grid-cols-3">
+            {t.now.items.map((d) => (
+              <li key={d.date} className="card-premium flex flex-col p-8">
+                <p className="seal-label track-mid mb-4 text-xs">{d.date}</p>
+                <p className="mb-6 text-base font-light leading-relaxed text-neutral-200">{d.what}</p>
+                <a
+                  href={d.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto text-xs text-neutral-400 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+                >
+                  {d.source} &#8599;
+                </a>
+              </li>
+            ))}
+          </ol>
+          <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
+            {t.now.foot}
+          </p>
+        </section>
+
+        {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
+        <section id="why" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
+            <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
+              {t.why.title}
+            </h2>
+            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
+              {t.why.lead}
+            </p>
+            <div className="hairline my-10 h-px w-full max-w-md" />
+            <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
+              {t.why.testVsProof}
+            </p>
+            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
+              {t.why.scope}
             </p>
           </div>
         </section>
@@ -725,78 +935,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             {t.gate.foot}
           </p>
         </section>
-
-        {/* PRODUCT / MECHANISM / EVIDENCE */}
-        <section id="layers" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-14 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.layers.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              {t.layers.titleA}
-              <br />
-              {t.layers.titleB}
-            </h2>
-          </div>
-          <ol className="grid gap-6 md:grid-cols-3">
-            {t.layers.items.map((l, i) => (
-              <li key={l.title} className="card-premium fade-up p-8 md:p-10">
-                <div className="mb-5 flex items-baseline gap-3">
-                  <span className="num-badge font-serif text-3xl">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="track-mid text-[10px] text-neutral-500">{l.tag}</p>
-                </div>
-                <h3 className="metal-text mb-3 font-serif text-2xl">{l.title}</h3>
-                <p className="text-sm font-light leading-relaxed text-neutral-300">{l.body}</p>
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
-        <Counterexample locale={locale} />
-
-        {/* BREATH — what the counterexample was for */}
-        <section className="relative z-10 px-6 py-32 md:px-14 md:py-40">
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="breath-mark" aria-hidden="true" />
-            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
-              {t.breathCounterexample}
-            </p>
-            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
-              {t.breathCoverage}
-            </p>
-          </div>
-        </section>
-
-        {/* ── from here down: the mechanism, then the evidence ── */}
-
-        {/* WHY THIS IS DIFFERENT — the commercial form of "testing vs proving".
-          * The full two-column comparison moved to /proof on 2026-09-10 because
-          * it stalled the page between "why is this different" and "prove it";
-          * nothing replaced it here. This is the replacement: same idea, two
-          * sentences, zero solver vocabulary. The reader who wants the mechanism
-          * gets it in the very next section. Scope is deliberately stated once,
-          * at the end, rather than hedged into every sentence — diluting the
-          * caveat everywhere is the mirror error of overclaiming. */}
-        <section id="why" className="relative z-10 px-6 py-32 md:px-14 md:py-40">
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
-            <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
-              {t.why.title}
-            </h2>
-            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
-              {t.why.lead}
-            </p>
-            <div className="hairline my-10 h-px w-full max-w-md" />
-            <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
-              {t.why.testVsProof}
-            </p>
-            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
-              {t.why.scope}
-            </p>
-          </div>
-        </section>
-
 
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
@@ -823,7 +961,23 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* VERIFY */}
+        {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
+        <Counterexample locale={locale} />
+
+        {/* BREATH — what the counterexample was for */}
+        <section className="relative z-10 px-6 py-28 md:px-14 md:py-32">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <span className="breath-mark" aria-hidden="true" />
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
+              {t.breathCounterexample}
+            </p>
+            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
+              {t.breathCoverage}
+            </p>
+          </div>
+        </section>
+
+        {/* 8. VERIFY A REAL DECISION */}
         <VerifyArtifact locale={locale} />
 
         {/* PUBLIC TECHNICAL RECORD */}
@@ -857,6 +1011,49 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* DEPLOY IT — where it sits in the stack */}
         <DeployGate locale={locale} />
+
+        {/* 9. DESIGN PARTNER PILOT — scope, not price */}
+        <section id="pilot" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-14 max-w-3xl">
+            <p className="seal-label track-mid mb-4 text-xs">{t.pilot.eyebrow}</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+              {t.pilot.title}
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.pilot.lead}</p>
+          </div>
+          <ol className="fade-up grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {t.pilot.steps.map((s, i) => (
+              <li key={s.title} className="card-premium p-7">
+                <span className="num-badge mb-4 block font-serif text-3xl">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="metal-text mb-3 font-serif text-xl">{s.title}</h3>
+                <p className="text-sm font-light leading-relaxed text-neutral-400">{s.body}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="card-premium card-iron fade-up mt-10 flex flex-col gap-8 p-8 md:flex-row md:items-center md:justify-between md:p-10">
+            <div>
+              <p className="track-mid mb-4 text-[10px] text-neutral-500">{t.pilot.fitLabel}</p>
+              <ul className="space-y-2">
+                {t.pilot.fit.map((f) => (
+                  <li key={f} className="flex items-start gap-3 text-sm font-light text-neutral-300">
+                    <span className="font-mono text-emerald-300" aria-hidden="true">
+                      ✓
+                    </span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <a
+              href="#contact"
+              className="track-mid shrink-0 self-start rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white md:self-center"
+            >
+              {t.pilot.cta}
+            </a>
+          </div>
+        </section>
 
         {/* CTA */}
         <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
