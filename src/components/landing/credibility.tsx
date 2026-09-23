@@ -108,7 +108,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
 ];
 
-const PAPERS: { id: string; title: string; href: string }[] = [
+export const PAPERS: { id: string; title: string; href: string }[] = [
   {
     id: "arXiv:2604.05292",
     title:
