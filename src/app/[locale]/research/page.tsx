@@ -4,6 +4,7 @@ import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { RESEARCH_COPY } from "@/components/landing/research-copy";
+import { PAPERS } from "@/components/landing/credibility";
 
 /*
  * The research index. Before it existed, trimming the note's URL back to
@@ -14,8 +15,9 @@ import { RESEARCH_COPY } from "@/components/landing/research-copy";
  * written but not native-reviewed (rule #78), so /fr/research serves this
  * English page with an English canonical and no fr hreflang.
  *
- * Titles and descriptions are read from each note's own copy, never
- * re-typed here, so the index cannot disagree with the note it points at.
+ * Titles and descriptions are read from each note's own copy, and the
+ * papers from the same PAPERS list the home page renders — never re-typed
+ * here, so the index cannot disagree with what it points at.
  */
 const NOTES = [
   {
@@ -29,7 +31,7 @@ const NOTES = [
 const META = {
   title: "Research — Ironproof",
   description:
-    "Dated research notes from Ironproof. Every figure traces to a cited primary source, and each note states what it does not show.",
+    "Research notes and published papers from Ironproof. Every figure traces to a cited source, and each note states what it does not show.",
 };
 
 type PageProps = {
@@ -69,13 +71,13 @@ export default async function ResearchIndexPage({ params }: PageProps) {
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-32 md:px-14">
           <p className="seal-label track-mid mb-4 text-xs">RESEARCH</p>
           <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
-            Research notes
+            Research
           </h1>
           <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
             {META.description}
           </p>
         </section>
-        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 md:px-14">
           <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
             {NOTES.map((n) => (
               <li key={n.slug}>
@@ -87,6 +89,26 @@ export default async function ResearchIndexPage({ params }: PageProps) {
                     {n.copy.h1}
                   </h2>
                   <p className="mt-3 font-light text-neutral-400">{n.copy.meta.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
+          <h2 className="seal-label track-mid mb-4 text-xs">PUBLISHED PAPERS · ARXIV</h2>
+          <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
+            {PAPERS.map((p) => (
+              <li key={p.id}>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block py-6"
+                >
+                  <p className="text-xs uppercase tracking-widest text-neutral-500">{p.id}</p>
+                  <p className="mt-2 font-serif text-xl font-medium text-neutral-100 group-hover:underline group-hover:underline-offset-4">
+                    {p.title}
+                  </p>
                 </a>
               </li>
             ))}
