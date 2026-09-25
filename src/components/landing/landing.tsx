@@ -1,15 +1,10 @@
+import Image from "next/image";
 import { IronProofLogo } from "@/components/ironproof-logo";
 import { LandingHeader } from "./landing-header";
-import { ProofSeal } from "./proof-seal";
-import { ProofArtifact } from "./proof-artifact";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
-import { Counterexample } from "./counterexample";
 import { VerifyArtifact } from "./verify-artifact";
-import { GateDiagram } from "./gate-diagram";
 import { ProofPipeline } from "./proof-pipeline";
-import { SequenceProof } from "./sequence-proof";
-import { DeployGate } from "./deploy-gate";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
@@ -21,19 +16,22 @@ import { type L, pick, NBSP } from "./i18n";
  * refund — seven times over, while the headline sold four. The order now
  * follows the reader's questions, not our mechanism:
  *
- *   1. what it does            hero, then the two sealed artifacts
- *   2. why logging in is not   authentication vs authorization
+ *   1. the claim               hero: the robot and the one sentence
+ *   2. what Ironproof is       the checkpoint, allow/block, check-prove-seal
+ *   3. see it decide           the gate film, four action classes (interactive)
+ *   4. why logging in is not   authentication vs authorization
  *      the same as allowed
- *   3. see it decide           four action classes, one gate (interactive)
  *   4. what it is not          the categories it gets confused with
  *   5. where it applies        three domains, with the rules that already exist
  *   6. why now                 dated, sourced regulatory and market events
- *   7. what only a proof does  the sequence, the gate, the pipeline
+ *   7. what only a proof does  the gate, the pipeline (the sequence demo is
+ *                              gone; the counterexample moved to /proof)
  *   8. check it yourself       a real sealed record, verified in the browser
- *   9. start                   a scoped pilot on one action type
+ *   9. start                   a scoped pilot on one action type, with the
+ *                              request form (the closing contact block is gone)
  *
  * Anchor ids are load bearing: the header links #how, #initiators, #start and
- * the research page links #decide and #counterexample.
+ * the research page links #decide (#counterexample moved to /proof).
  *
  * Every dated claim in WHY NOW carries its source link. A date on this page
  * without a source is the exact failure the product exists to prevent.
@@ -64,6 +62,17 @@ type Copy = {
 
   takeaway: React.ReactNode;
   blockIsNotSilence: string;
+
+  what: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    allowed: string;
+    allowedResult: string;
+    blocked: string;
+    blockedResult: string;
+    pillars: readonly Step[];
+  };
 
   authz: {
     eyebrow: string;
@@ -127,6 +136,7 @@ type Copy = {
   };
 
   cta: { title: string; lead: string };
+  closing: { titleA: string; titleB: string; body: string; kicker: string };
 
   footer: string;
 };
@@ -135,13 +145,17 @@ const SRC_E23 =
   "https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/guideline-e-23-model-risk-management-2027";
 const SRC_OSFI_TOKENIZED =
   "https://www.osfi-bsif.gc.ca/en/news/statement-tokenized-other-digitally-represented-deposits";
+// Opened 2026-09-24. EY's "prove" means documented evidence of governance,
+// not a mathematical proof: the item quotes it, it does not stretch it.
+const SRC_EY_AGENTIC =
+  "https://www.ey.com/en_gr/insights/financial-services/how-governed-intelligence-can-scale-agentic-banking";
 const SRC_SIX_BANKS =
   "https://www.newswire.ca/news-releases/six-canadian-banks-explore-development-of-a-secure-cad-tokenized-deposit-solution-869071438.html";
 
 const T: L<Copy> = {
   en: {
     hero: {
-      eyebrow: "PRE-EXECUTION AUTHORIZATION FOR AI AGENTS AND AUTOMATION",
+      eyebrow: "AUTHORIZATION BEFORE EXECUTION",
       headline: "If it isn't authorized, it never executes.",
       body: (
         <>
@@ -151,7 +165,7 @@ const T: L<Copy> = {
           verify independently.
         </>
       ),
-      boundary: "One boundary. Any initiator.",
+      boundary: "Ironproof checks every critical action before execution, not after.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -174,11 +188,35 @@ const T: L<Copy> = {
     blockIsNotSilence:
       "A block is not a silence. It is an artifact stating what was requested, which policy was in force, and why the action did not run.",
 
+    what: {
+      eyebrow: "WHAT IRONPROOF IS",
+      title: "A checkpoint between your automation and the actions it can’t undo.",
+      lead: "AI agents, APIs and scripts can already move money, grant access, delete records and ship changes on their own. Ironproof sits in front of those actions and checks each one against your rules before it runs.",
+      allowed: "Allowed",
+      allowedResult: "it runs.",
+      blocked: "Not allowed",
+      blockedResult: "it never runs.",
+      pillars: [
+        {
+          title: "Checked before, not logged after",
+          body: "Every action waits at the gate until it clears your policy. No language model decides: the same request under the same policy always gets the same answer.",
+        },
+        {
+          title: "Proven, not tested",
+          body: "We don’t test your rules, we prove them. You leave with the exact case that breaks them, or the proof that no such case exists.",
+        },
+        {
+          title: "Sealed, so anyone can check",
+          body: "Every decision, allowed or blocked, is sealed. Your auditor re-checks it on their own machine, without us.",
+        },
+      ],
+    },
+
     authz: {
-      eyebrow: "THE GAP",
+      eyebrow: "WHY A LOGIN IS NOT ENOUGH",
       title: (
         <>
-          Logged in is not <span className="metal-shine">allowed</span>.
+          Logged in is not the same as <span className="metal-shine">allowed</span>.
         </>
       ),
       lead: "Your agent already has credentials. That settles who it is — not whether this specific action, right now, is inside your policy.",
@@ -224,38 +262,43 @@ const T: L<Copy> = {
       titleA: "Move money. Grant access.",
       titleB: "Delete records. Ship a change.",
       lead: "The actions that cannot be taken back once they run. For those, authorization stops being a setting and becomes infrastructure.",
-      actionsLabel: "ACTIONS GOVERNED",
-      rulesLabel: "WHERE THE POLICY ALREADY EXISTS",
+      actionsLabel: "THE ACTIONS",
+      rulesLabel: "THE RULES ALREADY WRITTEN",
       items: [
         {
-          name: "Financial services",
-          actions: [
-            "Wires, refunds and internal transfers",
-            "Per-type and combined daily limits",
-            "Beneficiary changes and cooling-off periods",
-            "Programmable payment conditions",
-          ],
-          rules: "OSFI E-23 · OSFI B-13 · AML programs · SOX",
+          name: "Banking & payments",
+          actions: ["Wires, refunds and transfers", "Payee changes and daily limits", "Real-time payments"],
+          rules: "OSFI E-23 · OSFI B-13 · RPAA · AML programs",
         },
         {
-          name: "Identity & access",
-          actions: [
-            "Role and privilege grants",
-            "Service-account permissions",
-            "Time-boxed and emergency access",
-            "Separation of duties",
-          ],
-          rules: "SOC 2 access controls · ISO 27001 · OSFI B-13",
+          name: "Mortgage & lending",
+          actions: ["Approvals outside underwriting limits", "Funding and disbursement", "Changes to payout details"],
+          rules: "OSFI B-20 · PCMLTFA (mortgage sector, since Oct 2024)",
         },
         {
-          name: "Data & operations",
-          actions: [
-            "Bulk deletion and retention holds",
-            "Production deployments and change windows",
-            "Configuration changes on critical systems",
-            "Exports of customer data",
-          ],
-          rules: "Law 25 · PIPEDA · SOC 2 change management · IEC 62443",
+          name: "Insurance",
+          actions: ["Automated claim approvals", "Underwriting decisions", "Payouts"],
+          rules: "OSFI E-23 · AMF guideline on AI",
+        },
+        {
+          name: "Online gaming",
+          actions: ["Deposit and betting limits", "Payouts", "Self-exclusion holds"],
+          rules: "AGCO Registrar’s Standards (Ontario)",
+        },
+        {
+          name: "Government & defence",
+          actions: ["Updates to official records", "Approvals and spending", "Access to sensitive systems"],
+          rules: "TBS guidance on agentic AI · ITSG-33",
+        },
+        {
+          name: "Healthcare",
+          actions: ["Access to patient records", "Changes to orders and prescriptions", "Data exports"],
+          rules: "PHIPA · Law 25 · PIPEDA",
+        },
+        {
+          name: "Energy & critical infrastructure",
+          actions: ["Setpoint and configuration changes", "Remote operations on control systems", "Production deployments"],
+          rules: "IEC 62443 · NERC CIP",
         },
       ],
     },
@@ -273,6 +316,12 @@ const T: L<Copy> = {
       title: "Code is starting to move money on its own.",
       lead: "Canadian regulators and banks have put dates on it. Each item links to its source.",
       items: [
+        {
+          date: "Sep 1, 2026",
+          what: "EY: 52% of banks have piloted agentic AI, only 16% have fully deployed use cases. “A bank cannot simply say an AI system is governed. It must be able to prove it.”",
+          source: "EY, How governed intelligence can scale agentic banking",
+          href: SRC_EY_AGENTIC,
+        },
         {
           date: "Sep 10, 2026",
           what: "OSFI states that tokenized deposits are not legally distinct from traditional deposits. The existing rules apply to them.",
@@ -388,7 +437,14 @@ const T: L<Copy> = {
         "The rules exist on paper — limits, approvals, windows, holds",
         "Someone will be asked to show that those rules actually held",
       ],
-      cta: "APPLY FOR A PILOT",
+      cta: "START A PILOT",
+    },
+
+    closing: {
+      titleA: "Probably safe is not",
+      titleB: "provably impossible.",
+      body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action is checked before it executes: what’s authorized runs, sealed; what isn’t never executes.",
+      kicker: "Check every action. Run what’s proven. Stop the rest.",
     },
 
     cta: {
@@ -401,7 +457,7 @@ const T: L<Copy> = {
 
   fr: {
     hero: {
-      eyebrow: "AUTORISATION AVANT EXÉCUTION POUR LES AGENTS IA ET L’AUTOMATISATION",
+      eyebrow: "L’AUTORISATION AVANT L’EXÉCUTION",
       headline: "Si ce n’est pas autorisé, il n’y a pas d’exécution.",
       body: (
         <>
@@ -411,7 +467,7 @@ const T: L<Copy> = {
           n’importe qui peut vérifier de façon indépendante.
         </>
       ),
-      boundary: "Une seule frontière. Peu importe qui demande.",
+      boundary: "Ironproof vérifie chaque action critique avant son exécution, pas après.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -433,8 +489,32 @@ const T: L<Copy> = {
     ),
     blockIsNotSilence: `Un blocage n’est pas un silence. C’est un artefact qui dit ce qui a été demandé, quelle politique s’appliquait, et pourquoi l’action ne s’est pas exécutée.`,
 
+    what: {
+      eyebrow: "CE QU’EST IRONPROOF",
+      title: "Un point de contrôle entre votre automatisation et les actions qu’on ne peut pas défaire.",
+      lead: "Les agents IA, les API et les scripts peuvent déjà déplacer de l’argent, donner des accès, effacer des données et déployer du code, seuls. Ironproof se place devant ces actions et vérifie chacune contre vos règles avant qu’elle s’exécute.",
+      allowed: "Autorisée",
+      allowedResult: "exécution.",
+      blocked: "Non autorisée",
+      blockedResult: "pas d’exécution.",
+      pillars: [
+        {
+          title: "Vérifié avant, pas journalisé après",
+          body: "Chaque action attend à la barrière tant qu’elle ne respecte pas votre politique. Aucun modèle de langage ne décide : la même demande, sous la même politique, reçoit toujours la même réponse.",
+        },
+        {
+          title: "Prouvé, pas testé",
+          body: "On ne teste pas vos règles, on les prouve. Vous ressortez avec le cas exact qui les brise, ou la preuve qu’il n’en existe aucun.",
+        },
+        {
+          title: "Scellé, vérifiable par tous",
+          body: "Chaque décision, autorisée ou bloquée, est scellée. Votre auditeur la revérifie sur sa propre machine, sans nous.",
+        },
+      ],
+    },
+
     authz: {
-      eyebrow: "L’ÉCART",
+      eyebrow: "POURQUOI LA CONNEXION NE SUFFIT PAS",
       title: (
         <>
           Connecté ne veut pas dire <span className="metal-shine">autorisé</span>.
@@ -456,11 +536,11 @@ const T: L<Copy> = {
 
     not: {
       eyebrow: "CE QU’IRONPROOF N’EST PAS",
-      title: "Pas un tableau de bord de plus.",
+      title: "Ni un tableau de bord, ni un garde-fou.",
       items: [
         {
           label: "Pas de la surveillance",
-          body: "L’observabilité dit ce qui s’est passé. Ironproof décide avant — une action bloquée ne s’exécute jamais.",
+          body: "L’observabilité dit ce qui s’est passé. Ironproof décide avant : action bloquée, pas d’exécution.",
         },
         {
           label: "Pas un garde-fou d’IA",
@@ -483,38 +563,43 @@ const T: L<Copy> = {
       titleA: "Déplacer de l’argent. Donner un accès.",
       titleB: "Supprimer des dossiers. Livrer un changement.",
       lead: "Les actions qu’on ne peut plus reprendre une fois exécutées. Pour celles-là, l’autorisation cesse d’être un réglage et devient une infrastructure.",
-      actionsLabel: "ACTIONS GOUVERNÉES",
-      rulesLabel: "OÙ LA POLITIQUE EXISTE DÉJÀ",
+      actionsLabel: "LES ACTIONS",
+      rulesLabel: "LES RÈGLES DÉJÀ ÉCRITES",
       items: [
         {
-          name: "Services financiers",
-          actions: [
-            "Virements, remboursements et transferts internes",
-            "Limites par type et limites quotidiennes combinées",
-            "Changements de bénéficiaire et délais de carence",
-            "Conditions de paiement programmables",
-          ],
-          rules: "BSIF E-23 · BSIF B-13 · programmes LBA · SOX",
+          name: "Banque et paiements",
+          actions: ["Virements, remboursements et transferts", "Changements de bénéficiaire et limites quotidiennes", "Paiements en temps réel"],
+          rules: "BSIF E-23 · BSIF B-13 · LAPD · programmes LBA",
         },
         {
-          name: "Identité et accès",
-          actions: [
-            "Octroi de rôles et de privilèges",
-            "Permissions des comptes de service",
-            "Accès limités dans le temps et d’urgence",
-            "Séparation des tâches",
-          ],
-          rules: "Contrôles d’accès SOC 2 · ISO 27001 · BSIF B-13",
+          name: "Hypothécaire et prêt",
+          actions: ["Approbations hors des limites de souscription", "Déboursement des fonds", "Changements aux coordonnées de versement"],
+          rules: "BSIF B-20 · LRPCFAT (secteur hypothécaire, depuis oct. 2024)",
         },
         {
-          name: "Données et opérations",
-          actions: [
-            "Suppressions en lot et gels de conservation",
-            "Déploiements en production et fenêtres de changement",
-            "Changements de configuration sur les systèmes critiques",
-            "Exportations de données clients",
-          ],
-          rules: "Loi 25 · LPRPDE · gestion du changement SOC 2 · IEC 62443",
+          name: "Assurance",
+          actions: ["Approbations automatisées de réclamations", "Décisions de souscription", "Versements"],
+          rules: "BSIF E-23 · ligne directrice de l’AMF sur l’IA",
+        },
+        {
+          name: "Jeu en ligne",
+          actions: ["Limites de dépôt et de mise", "Versements de gains", "Autoexclusion"],
+          rules: "Normes du registrateur de la CAJO (Ontario)",
+        },
+        {
+          name: "Gouvernement et défense",
+          actions: ["Mises à jour de dossiers officiels", "Approbations et dépenses", "Accès aux systèmes sensibles"],
+          rules: "Orientation du SCT sur l’IA agentique · ITSG-33",
+        },
+        {
+          name: "Santé",
+          actions: ["Accès aux dossiers patients", "Changements d’ordonnances", "Exportations de données"],
+          rules: "LPRPS · Loi 25 · LPRPDE",
+        },
+        {
+          name: "Énergie et infrastructures critiques",
+          actions: ["Changements de consignes et de configuration", "Opérations à distance sur les systèmes de contrôle", "Déploiements en production"],
+          rules: "IEC 62443 · NERC CIP",
         },
       ],
     },
@@ -532,6 +617,12 @@ const T: L<Copy> = {
       title: "Le code commence à déplacer l’argent tout seul.",
       lead: "Les régulateurs et les banques du Canada y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
+        {
+          date: "1er sept. 2026",
+          what: "EY : 52 % des banques ont piloté l’IA agentique, 16 % seulement ont des cas d’usage pleinement déployés. « Une banque ne peut pas simplement dire qu’un système d’IA est gouverné. Elle doit pouvoir le prouver. » (notre traduction)",
+          source: "EY, How governed intelligence can scale agentic banking",
+          href: SRC_EY_AGENTIC,
+        },
         {
           date: "10 sept. 2026",
           what: "Le BSIF affirme que les dépôts tokenisés ne sont pas juridiquement distincts des dépôts traditionnels. Les règles existantes s’y appliquent.",
@@ -647,7 +738,14 @@ const T: L<Copy> = {
         "Les règles existent sur papier — limites, approbations, fenêtres, gels",
         "Quelqu’un devra montrer que ces règles ont réellement tenu",
       ],
-      cta: "POSTULER POUR UN PILOTE",
+      cta: "DÉMARRER UN PILOTE",
+    },
+
+    closing: {
+      titleA: "Probablement sûr, ce n’est pas",
+      titleB: "prouvé impossible.",
+      body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; pour le reste, pas d’exécution.",
+      kicker: "Chaque action vérifiée. Ce qui est prouvé s’exécute. Le reste, jamais.",
     },
 
     cta: {
@@ -658,6 +756,25 @@ const T: L<Copy> = {
     footer: "Autorisation déterministe. Preuve vérifiable de façon indépendante.",
   },
 };
+
+/* A decorative photograph from the steel-and-gold series. The copy around it
+ * carries the meaning, so the image is hidden from assistive tech. */
+function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boolean; position?: string }) {
+  if (!src) return null;
+  return (
+    <div className={`photo-plate fade-up${wide ? " photo-plate-wide" : ""}`} aria-hidden="true">
+      <Image
+        src={src}
+        alt=""
+        fill
+        loading="eager"
+        sizes="(min-width: 1280px) 1200px, 100vw"
+        className="object-cover"
+        style={position ? { objectPosition: position } : undefined}
+      />
+    </div>
+  );
+}
 
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
@@ -670,89 +787,107 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
       <main className="flex-1">
         {/* 1. HERO — the product, in one sentence, before any mechanism */}
-        <section id="top" className="relative z-10 flex min-h-[86vh] items-center px-6 md:px-14">
-          <div className="halo" aria-hidden="true" />
-          <div className="mx-auto grid w-full max-w-7xl items-center gap-8 md:gap-12 md:grid-cols-2">
-            <div className="flex flex-col items-center">
-              <IronProofLogo
-                width={210}
-                height={280}
-                className="h-[200px] w-[150px] drop-shadow-2xl md:h-[280px] md:w-[210px]"
-                title={t.hero.logoTitle}
-              />
-              <span className="track-logo iron-text mt-4 text-2xl font-semibold md:mt-6 md:text-4xl">
-                IRONPROOF
-              </span>
-            </div>
-            <div className="fade-up">
-              <p className="seal-label track-wide mb-6 text-xs md:text-sm">{t.hero.eyebrow}</p>
-              <h1 className="mb-6 font-serif font-medium leading-[0.98] sm:leading-[0.95]">
-                <span className="metal-shine block text-4xl sm:text-5xl md:text-7xl">
-                  {t.hero.headline}
-                </span>
+        <section id="top" className="hero-agent relative z-10 flex items-center overflow-hidden px-6 md:px-14">
+          {/* The guardian before the bank vault, shield forward (Dom, 2026-09-25). Full-bleed and
+            * melted into the page on every edge so it reads as the scene, not a
+            * photo pasted on it. Symbolic, not a product Ironproof ships. */}
+          <div className="hero-agent-photo" aria-hidden="true">
+            <Image
+              src="/media/hero-guard.jpg"
+              alt=""
+              fill
+              preload
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="hero-agent-scrim" aria-hidden="true" />
+          {/* Phone: the head gets its own portrait crop, above the copy, instead
+            * of the desktop frame squeezed behind the text. */}
+          <div className="hero-agent-mobile md:hidden" aria-hidden="true">
+            <Image
+              src="/media/hero-guard-m.jpg"
+              alt=""
+              fill
+              preload
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="relative mx-auto grid w-full min-w-0 max-w-7xl grid-cols-1 items-center md:grid-cols-2">
+            <div className="fade-up min-w-0">
+              {/* Three things, nothing else: what we are, the sentence, two doors.
+                * The explanation that used to sit here now opens the next screen. */}
+              <p className="seal-label track-wide mb-7 text-[11px] md:text-xs">{t.hero.eyebrow}</p>
+              <h1 className="hero-iron mb-7 font-semibold uppercase">
+                <span className="iron-text">{t.hero.headline}</span>
               </h1>
-              <p className="mb-6 max-w-xl text-sm font-light leading-relaxed text-neutral-400 sm:text-lg sm:leading-snug sm:text-neutral-300 md:text-xl">
-                {t.hero.body}
+              <p className="mb-10 max-w-md text-sm font-light leading-relaxed text-neutral-400 md:text-base">
+                {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
+                  * PERSON plates) and in #initiators; the hero keeps the claim only. */}
+                <span className="text-neutral-200">{t.hero.boundary}</span>
               </p>
-              <div className="mb-6 max-w-xl">
-                <p className="text-base font-medium text-neutral-200 md:text-lg">
-                  {t.hero.boundary}
-                </p>
-                <p className="mt-1 text-sm font-light leading-relaxed text-neutral-400">
-                  {t.hero.initiators}
-                </p>
-                <p className="track-mid mt-4 flex flex-wrap gap-x-6 gap-y-1 text-xs text-neutral-300 sm:text-sm">
-                  <span className="whitespace-nowrap">
-                    {t.hero.authorized} &rarr; {t.hero.executes}
-                  </span>
-                  <span className="whitespace-nowrap">
-                    {t.hero.unauthorized} &rarr;{" "}
-                    <span className="metal-text">{t.hero.refused}</span>
-                  </span>
-                </p>
-              </div>
-              <div className="hairline mb-10 h-px w-full max-w-md" />
-              <div className="flex flex-wrap gap-4">
-                {/* Three doors, three intents: see it, check it, start. Each lands
-                  * where the reader DOES something, never on more prose. */}
-                <a
-                  href="#decide"
-                  className="track-mid bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-                >
-                  {t.hero.ctaDecide}
-                </a>
-                <a
-                  href="#verify"
-                  className="chip-metal track-mid px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
-                >
-                  {t.hero.ctaVerify}
-                </a>
+              {/* One primary action (the site-wide CTA) and one quiet way in.
+                * "Verify a real decision" left the first screen: the vault has
+                * its own section further down. */}
+              <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a
                   href="#pilot"
-                  className="track-mid px-2 py-3.5 text-xs text-neutral-400 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+                  className="track-mid inline-flex items-center gap-3 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  {t.hero.ctaPilot}
+                  {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
+                </a>
+                <a
+                  href="#decide"
+                  className="track-mid inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+                >
+                  {t.hero.ctaDecide} <span aria-hidden="true">&darr;</span>
                 </a>
               </div>
             </div>
           </div>
         </section>
 
-        {/* THE TEN-SECOND TAKEAWAY — then the two artifacts that prove the sentence */}
-        <section id="evidence" className="relative z-10 edge-t px-6 py-16 md:px-14 md:py-20">
-          <p className="fade-up mx-auto max-w-4xl text-center font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
-            {t.takeaway}
-          </p>
-          <div className="fade-up mx-auto mt-12 grid max-w-3xl justify-items-center gap-6 sm:grid-cols-2">
-            <ProofArtifact kind="allowed" locale={locale} />
-            <ProofArtifact kind="blocked" locale={locale} />
+        {/* 2. WHAT IRONPROOF IS — the product in plain words, before any mechanism */}
+        <section id="what" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.what.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
+                {t.what.title}
+              </h2>
+              <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
+                {t.what.lead}
+              </p>
+            </div>
+            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
+              <p className="flex items-baseline gap-4 bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
+                <span className="text-seal">{t.what.allowed}</span>
+                <span className="text-neutral-500" aria-hidden="true">&rarr;</span>
+                <span>{t.what.allowedResult}</span>
+              </p>
+              <p className="flex items-baseline gap-4 bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
+                <span className="text-[#ffb4b4]">{t.what.blocked}</span>
+                <span className="text-neutral-500" aria-hidden="true">&rarr;</span>
+                <span>{t.what.blockedResult}</span>
+              </p>
+            </div>
+            <ol className="fade-up mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
+              {t.what.pillars.map((p, i) => (
+                <li key={p.title} className="border-t border-white/10 pt-6">
+                  <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-3 font-serif text-2xl text-neutral-100">{p.title}</h3>
+                  <p className="mt-3 text-base font-light leading-relaxed text-neutral-400">{p.body}</p>
+                </li>
+              ))}
+            </ol>
           </div>
-          <p className="fade-up mx-auto mt-10 max-w-2xl text-center text-sm font-light leading-relaxed text-neutral-400 md:text-base">
-            {t.blockIsNotSilence}
-          </p>
         </section>
 
-        {/* 2. AUTHENTICATION IS NOT AUTHORIZATION */}
+        {/* 3. WATCH IT DECIDE — four action classes, one gate */}
+        <AgentScenarios locale={locale} verifyHref="#verify" />
+
+        {/* 4. AUTHENTICATION IS NOT AUTHORIZATION */}
         <section id="gap" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-12 max-w-3xl">
             <p className="seal-label track-mid mb-4 text-xs">{t.authz.eyebrow}</p>
@@ -761,27 +896,35 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.authz.lead}</p>
           </div>
-          <div className="fade-up grid gap-6 md:grid-cols-2">
-            <div className="card-premium p-8 md:p-10">
-              <p className="track-mid mb-4 text-[10px] text-neutral-500">{t.authz.authn.label}</p>
-              <p className="text-base font-light leading-relaxed text-neutral-400">
-                {t.authz.authn.body}
-              </p>
+          {/* The badge worked, the gate stayed shut: authentication (who you
+            * are) passed, authorization (this action, now) did not. The two
+            * labels sit under the photo so they never cover the agent. */}
+          <figure className="gap-figure fade-up">
+            <div className="gap-photo">
+              <Image
+                src="/media/gap-badge.jpg"
+                loading="eager"
+                alt=""
+                fill
+                sizes="(min-width: 1280px) 1200px, 100vw"
+                className="object-cover"
+              />
             </div>
-            <div className="card-premium card-iron p-8 md:p-10">
-              <p className="seal-label track-mid mb-4 text-[10px]">{t.authz.authz.label}</p>
-              <p className="text-base font-light leading-relaxed text-neutral-200">
-                {t.authz.authz.body}
-              </p>
-            </div>
-          </div>
+            <figcaption className="gap-callouts">
+              <div className="gap-callout gap-callout-authn">
+                <p className="track-mid mb-3 text-[10px] text-neutral-200">01 · {t.authz.authn.label}</p>
+                <p className="text-sm font-light leading-relaxed text-neutral-400">{t.authz.authn.body}</p>
+              </div>
+              <div className="gap-callout gap-callout-authz">
+                <p className="seal-label track-mid mb-3 text-[10px]">02 · {t.authz.authz.label}</p>
+                <p className="text-sm font-light leading-relaxed text-neutral-200">{t.authz.authz.body}</p>
+              </div>
+            </figcaption>
+          </figure>
           <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
             {t.authz.foot}
           </p>
         </section>
-
-        {/* 3. WATCH IT DECIDE — four action classes, one gate */}
-        <AgentScenarios locale={locale} verifyHref="#verify" />
 
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
@@ -801,19 +944,20 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="seal-label track-mid mb-4 text-xs">{t.not.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.not.title}</h2>
           </div>
-          <div className="fade-up grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Ruled rows, no cards: what it gets confused with, struck, and why. */}
+          <ul className="fade-up border-t border-white/10">
             {t.not.items.map((n) => (
-              <div key={n.label} className="card-premium p-7">
-                <p className="mb-3 font-serif text-xl text-neutral-100">
-                  <span className="mr-2 font-mono text-sm text-red-300" aria-hidden="true">
-                    ✕
-                  </span>
+              <li
+                key={n.label}
+                className="grid gap-3 border-b border-white/10 py-8 md:grid-cols-[1fr_1.3fr] md:items-baseline md:gap-12"
+              >
+                <p className="font-serif text-3xl text-neutral-500 line-through decoration-[#ffb4b4]/70 decoration-1 md:text-4xl">
                   {n.label}
                 </p>
-                <p className="text-sm font-light leading-relaxed text-neutral-400">{n.body}</p>
-              </div>
+                <p className="text-base font-light leading-relaxed text-neutral-300">{n.body}</p>
+              </li>
             ))}
-          </div>
+          </ul>
           <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
             {t.not.foot}
           </p>
@@ -830,33 +974,31 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
-          <div className="fade-up grid gap-6 lg:grid-cols-3">
-            {t.domains.items.map((d, i) => (
-              <div key={d.name} className="card-premium flex flex-col p-8 md:p-10">
-                <div className="mb-5 flex items-baseline gap-3">
-                  <span className="num-badge font-serif text-3xl">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="metal-text font-serif text-2xl">{d.name}</h3>
-                </div>
-                <p className="track-mid mb-3 text-[10px] text-neutral-500">
-                  {t.domains.actionsLabel}
-                </p>
-                <ul className="space-y-2">
-                  {d.actions.map((a) => (
-                    <li key={a} className="text-sm font-light leading-relaxed text-neutral-300">
-                      {a}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto border-t border-white/5 pt-5">
-                  <p className="track-mid mb-2 mt-6 text-[10px] text-neutral-500">
-                    {t.domains.rulesLabel}
+          <div className="mb-14">
+            <PhotoPlate src="/media/critical-switches.jpg" position="50% 55%" />
+          </div>
+          {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
+            * and the rules that already say what must never happen there. */}
+          <div className="fade-up">
+            <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-[10px] text-neutral-500 md:grid">
+              <span />
+              <span>{t.domains.actionsLabel}</span>
+              <span>{t.domains.rulesLabel}</span>
+            </div>
+            <ul className="border-t border-white/10">
+              {t.domains.items.map((d) => (
+                <li
+                  key={d.name}
+                  className="grid gap-3 border-b border-white/10 py-7 md:grid-cols-[16rem_1fr_18rem] md:items-baseline md:gap-10"
+                >
+                  <h3 className="font-serif text-2xl text-neutral-100">{d.name}</h3>
+                  <p className="text-base font-light leading-relaxed text-neutral-300">
+                    {d.actions.join(" · ")}
                   </p>
-                  <p className="text-sm font-light text-neutral-400">{d.rules}</p>
-                </div>
-              </div>
-            ))}
+                  <p className="font-mono text-xs leading-relaxed text-neutral-400">{d.rules}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -872,12 +1014,15 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* 6. WHY NOW — dated, each with its source */}
         <section id="now" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-12 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
+          <div className="fade-up mb-12 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
+            <div className="max-w-3xl">
+              <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
+              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
+            </div>
+            <PhotoPlate src="/media/hand-coins.jpg" wide position="70% 50%" />
           </div>
-          <ol className="fade-up grid gap-6 md:grid-cols-3">
+          <ol className="fade-up grid gap-6 md:grid-cols-2">
             {t.now.items.map((d) => (
               <li key={d.date} className="card-premium flex flex-col p-8">
                 <p className="seal-label track-mid mb-4 text-xs">{d.date}</p>
@@ -899,7 +1044,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
-        <section id="why" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+        <section id="why" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14 md:py-32">
+          <div className="breath-photo" aria-hidden="true">
+            <Image src="/media/sequence-gate.jpg" alt="" fill loading="eager" sizes="100vw" className="object-cover" />
+          </div>
           <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
             <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
             <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
@@ -918,9 +1066,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* THE SEQUENCE — the centre of the argument */}
-        <SequenceProof locale={locale} />
-
         {/* ONE GATE, ANY INITIATOR */}
         <section id="initiators" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
           <div className="fade-up mb-12 max-w-3xl">
@@ -930,7 +1075,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.gate.lead}</p>
           </div>
-          <GateDiagram locale={locale} />
+          <PhotoPlate src="/media/initiators-gate.jpg" wide position="50% 70%" />
           <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
             {t.gate.foot}
           </p>
@@ -938,13 +1083,17 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.how.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              {t.how.title}
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.how.lead}</p>
-            <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">{t.how.compiler}</p>
+          <div className="fade-up mb-16 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
+            <div className="max-w-3xl">
+              <p className="seal-label track-mid mb-4 text-xs">{t.how.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+                {t.how.title}
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.how.lead}</p>
+              <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">{t.how.compiler}</p>
+            </div>
+            {/* The one image here: the decision struck into steel. */}
+            <PhotoPlate src="/media/step-seal-ironproof.jpg" wide position="50% 60%" />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
@@ -961,23 +1110,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* WHAT A COUNTEREXAMPLE LOOKS LIKE */}
-        <Counterexample locale={locale} />
-
-        {/* BREATH — what the counterexample was for */}
-        <section className="relative z-10 px-6 py-28 md:px-14 md:py-32">
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="breath-mark" aria-hidden="true" />
-            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
-              {t.breathCounterexample}
-            </p>
-            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
-              {t.breathCoverage}
-            </p>
-          </div>
-        </section>
-
-        {/* 8. VERIFY A REAL DECISION */}
+        {/* 8. VERIFY A REAL DECISION — the verifier sits in its own sealed module */}
         <VerifyArtifact locale={locale} />
 
         {/* PUBLIC TECHNICAL RECORD */}
@@ -1009,67 +1142,80 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* DEPLOY IT — where it sits in the stack */}
-        <DeployGate locale={locale} />
 
         {/* 9. DESIGN PARTNER PILOT — scope, not price */}
         <section id="pilot" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-14 max-w-3xl">
+          <div className="fade-up mb-16 max-w-3xl">
             <p className="seal-label track-mid mb-4 text-xs">{t.pilot.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
               {t.pilot.title}
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.pilot.lead}</p>
           </div>
-          <ol className="fade-up grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {t.pilot.steps.map((s, i) => (
-              <li key={s.title} className="card-premium p-7">
-                <span className="num-badge mb-4 block font-serif text-3xl">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="metal-text mb-3 font-serif text-xl">{s.title}</h3>
-                <p className="text-sm font-light leading-relaxed text-neutral-400">{s.body}</p>
-              </li>
-            ))}
+          {/* Same grammar as How it works: ruled columns, large numbers, no
+            * cards and no picture. The last step is gold: it is the one the
+            * client keeps. */}
+          <ol className="fade-up grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
+            {t.pilot.steps.map((st, i) => {
+              const last = i === t.pilot.steps.length - 1;
+              return (
+                <li key={st.title} className={`min-w-0 border-t pt-6 ${last ? "border-seal/60" : "border-white/15"}`}>
+                  <span className={`font-serif text-6xl leading-none ${last ? "text-seal" : "text-neutral-600"}`}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-5 font-serif text-3xl text-neutral-100">{st.title}</h3>
+                  <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">{st.body}</p>
+                </li>
+              );
+            })}
           </ol>
-          <div className="card-premium card-iron fade-up mt-10 flex flex-col gap-8 p-8 md:flex-row md:items-center md:justify-between md:p-10">
+          <div className="fade-up mt-20 grid gap-12 border-t border-white/10 pt-12 lg:grid-cols-[1fr_32rem] lg:items-end">
             <div>
-              <p className="track-mid mb-4 text-[10px] text-neutral-500">{t.pilot.fitLabel}</p>
-              <ul className="space-y-2">
+              <p className="track-mid mb-6 text-[10px] text-neutral-500">{t.pilot.fitLabel}</p>
+              <ul className="space-y-4">
                 {t.pilot.fit.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-sm font-light text-neutral-300">
-                    <span className="font-mono text-emerald-300" aria-hidden="true">
-                      ✓
-                    </span>
+                  <li key={f} className="flex items-baseline gap-4 font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
+                    <span className="h-px w-6 shrink-0 translate-y-[-0.35em] bg-seal" aria-hidden="true" />
                     {f}
                   </li>
                 ))}
               </ul>
             </div>
-            <a
-              href="#contact"
-              className="track-mid shrink-0 self-start rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white md:self-center"
-            >
-              {t.pilot.cta}
-            </a>
+            {/* The request form lives here now that the closing contact block is gone. */}
+            <div className="pilot-form w-full min-w-0">
+              <CtaForm locale={locale} />
+            </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section id="contact" className="relative z-10 edge-t px-6 py-40 md:px-14">
-          <div className="halo" aria-hidden="true" />
-          <div className="fade-up relative mx-auto max-w-3xl text-center">
-            <div className="mb-10 flex items-center justify-center gap-8">
-              <IronProofLogo width={111} height={148} title={t.hero.logoTitle} />
-              <ProofSeal size={148} locale={locale} />
+        {/* CLOSING — the vault under a gold dome that stops a rain of sparks
+          * (swapped with the hero by Dom, 2026-09-25), full-bleed behind
+          * a glass card. Both halves of the act in the body: what is proven
+          * runs, the rest never executes. Symbolic art, not a product. */}
+        <section className="closing-trio relative z-10 edge-t">
+          <div className="closing-band closing-band-photo">
+            <div className="closing-photo" aria-hidden="true">
+              <Image src="/media/closing-dome.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-dome-m.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
-            <h2 className="metal-shine mb-6 font-serif text-4xl font-medium md:text-6xl">
-              {t.cta.title}
-            </h2>
-            <p className="mb-10 text-lg font-light text-neutral-400">{t.cta.lead}</p>
-            <CtaForm locale={locale} />
+            <div className="closing-card fade-up">
+              <p className="seal-label track-mid mb-5 text-[11px]">{t.closing.kicker}</p>
+              <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">
+                {t.closing.titleA}
+                <br />
+                <span className="text-seal">{t.closing.titleB}</span>
+              </h2>
+              <p className="mt-6 text-base font-light leading-relaxed text-neutral-300">{t.closing.body}</p>
+              <a
+                href="#pilot"
+                className="track-mid mt-8 inline-flex items-center gap-3 rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+              >
+                {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
           </div>
         </section>
+
       </main>
 
       {/* FOOTER */}
@@ -1085,5 +1231,28 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
       <FadeUpInit />
     </div>
+  );
+}
+
+/* The counterexample's closing breath, moved with it to /proof: a green that
+ * can never turn red is worth nothing, and the coverage is declared. */
+export function CounterexampleBreath({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = pick(T, locale);
+  return (
+      <section className="relative z-10 isolate overflow-hidden px-6 py-28 md:px-14 md:py-32">
+        {/* One missing link and the chain parts: the removed clause, as an object. */}
+        <div className="breath-photo" aria-hidden="true">
+          <Image src="/media/broken-chain.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        </div>
+        <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+          <span className="breath-mark" aria-hidden="true" />
+          <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
+            {t.breathCounterexample}
+          </p>
+          <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-100 sm:text-3xl md:text-4xl">
+            {t.breathCoverage}
+          </p>
+        </div>
+      </section>
   );
 }

@@ -17,7 +17,7 @@ const T: L<{
   en: {
     placeholder: "work@company.com",
     ariaEmail: "Work email",
-    submit: "EVALUATE AN ACTION",
+    submit: "START A PILOT",
     sending: "SENDING…",
     done: "Thank you — request received. We’ll be in touch shortly.",
     error:
@@ -26,7 +26,7 @@ const T: L<{
   fr: {
     placeholder: "vous@entreprise.com",
     ariaEmail: "Courriel professionnel",
-    submit: "ÉVALUER UNE ACTION",
+    submit: "DÉMARRER UN PILOTE",
     sending: "ENVOI…",
     done: "Merci — demande reçue. Nous vous reviendrons sous peu.",
     error: `Une erreur est survenue — vérifiez le courriel et réessayez, ou écrivez à${NBSP}hello@ironproof.ai.`,
@@ -76,7 +76,7 @@ export function CtaForm({ locale = defaultLocale }: { locale?: Locale }) {
           }}
           placeholder={t.placeholder}
           aria-label={t.ariaEmail}
-          className="flex-1 rounded-[5px] border border-white/10 bg-black/50 px-5 py-3.5 text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
+          className="min-w-0 flex-1 rounded-[5px] border border-white/10 bg-black/50 px-5 py-3.5 text-neutral-200 placeholder-neutral-600 transition focus:border-white/30 focus:outline-none"
         />
         <button
           type="submit"

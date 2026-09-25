@@ -361,7 +361,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
 
     ctaTitle: "Prove your infrastructure.",
     ctaLead:
-      "Request access and turn policy into enforceable, independently verifiable guarantees.",
+      "Start a pilot and turn policy into enforceable, independently verifiable guarantees.",
     logoTitle: "Ironproof monogram",
     footer: "Automated formal verification for critical software and infrastructure.",
   },
@@ -633,7 +633,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
 
     ctaTitle: "Prouvez votre infrastructure.",
     ctaLead:
-      "Demandez un accès et transformez votre politique en garanties applicables et vérifiables de façon indépendante.",
+      "Démarrez un pilote et transformez votre politique en garanties applicables et vérifiables de façon indépendante.",
     logoTitle: "Monogramme Ironproof",
     footer:
       "Vérification formelle automatisée pour les logiciels et les infrastructures critiques.",

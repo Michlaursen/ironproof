@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, money, count } from "./i18n";
+import { GateLoop } from "./gate-loop";
 
 /*
  * WATCH IT DECIDE — four action classes, one gate.
@@ -65,8 +66,8 @@ const T: L<Copy> = {
     checksLabel: "POLICY CHECKS",
     presetAllow: "✓ WITHIN POLICY",
     presetBlock: "✕ OUTSIDE POLICY",
-    allow: "ALLOWED — EXECUTES",
-    block: "BLOCKED — NEVER EXECUTES",
+    allow: "Allowed. It executes.",
+    block: "Blocked. It never executes.",
     allowWhy: "Every rule holds. The action runs, and the decision is sealed.",
     blockWhy: "A rule fails. The action does not run, and the refusal is sealed with the reason.",
     receiptLabel: "WHAT THE SEALED RECORD CARRIES",
@@ -174,8 +175,8 @@ const T: L<Copy> = {
     checksLabel: "VÉRIFICATIONS DE LA POLITIQUE",
     presetAllow: "✓ DANS LA POLITIQUE",
     presetBlock: "✕ HORS POLITIQUE",
-    allow: "AUTORISÉE — S’EXÉCUTE",
-    block: "BLOQUÉE — NE S’EXÉCUTE JAMAIS",
+    allow: "Autorisée. Exécution.",
+    block: "Bloquée. Pas d’exécution.",
     allowWhy: "Toutes les règles tiennent. L’action s’exécute, et la décision est scellée.",
     blockWhy: "Une règle échoue. L’action ne s’exécute pas, et le refus est scellé avec sa raison.",
     receiptLabel: "CE QUE CONTIENT LA TRACE SCELLÉE",
@@ -307,92 +308,97 @@ export function AgentScenarios({
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </div>
 
-        <div role="tablist" className="fade-up mb-6 flex flex-wrap justify-center gap-2">
-          {t.scenarios.map((s, i) => (
+        <GateLoop locale={locale} />
+
+        {/* Redesigned 2026-09-25 in the new grammar: text tabs on a hairline,
+          * a two-state policy switch, ruled rows instead of cards, and the
+          * verdict set large. Both halves of the act stay one click apart. */}
+        <div className="fade-up mb-12 flex flex-col gap-6 border-b border-white/10 md:flex-row md:items-end md:justify-between">
+          <div role="tablist" className="-mb-px flex flex-wrap gap-x-8 gap-y-2">
+            {t.scenarios.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                role="tab"
+                aria-selected={i === tab}
+                onClick={() => setTab(i)}
+                className={`track-mid border-b-2 pb-4 text-[11px] transition ${
+                  i === tab ? "border-seal text-white" : "border-transparent text-neutral-500 hover:text-neutral-200"
+                }`}
+              >
+                {s.tab}
+              </button>
+            ))}
+          </div>
+          <div className="mb-4 inline-flex self-start rounded-full border border-white/10 p-1 md:self-auto">
             <button
-              key={s.id}
               type="button"
-              role="tab"
-              aria-selected={i === tab}
-              onClick={() => setTab(i)}
-              className={`chip-metal track-mid px-5 py-2.5 text-[11px] transition ${
-                i === tab ? "text-white" : "text-neutral-500 hover:text-neutral-200"
-              }`}
+              aria-pressed={!blocked}
+              onClick={() => setBlocked(false)}
+              className={`track-mid rounded-full px-4 py-2 text-[10px] transition ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
             >
-              {s.tab}
+              {t.presetAllow}
             </button>
-          ))}
+            <button
+              type="button"
+              aria-pressed={blocked}
+              onClick={() => setBlocked(true)}
+              className={`track-mid rounded-full px-4 py-2 text-[10px] transition ${blocked ? "bg-[#ffb4b4]/10 text-[#ffb4b4]" : "text-neutral-500 hover:text-neutral-200"}`}
+            >
+              {t.presetBlock}
+            </button>
+          </div>
         </div>
 
-        <div className="fade-up mb-10 flex justify-center gap-3">
-          <button
-            type="button"
-            onClick={() => setBlocked(false)}
-            className={`preset-btn chip-metal track-mid px-6 py-3 text-xs text-neutral-200 transition hover:text-white${blocked ? "" : " active"}`}
-          >
-            {t.presetAllow}
-          </button>
-          <button
-            type="button"
-            onClick={() => setBlocked(true)}
-            className={`preset-btn chip-metal track-mid px-6 py-3 text-xs text-neutral-200 transition hover:text-white${blocked ? " active" : ""}`}
-          >
-            {t.presetBlock}
-          </button>
-        </div>
+        <div key={`${tab}-${blocked ? "b" : "a"}`} className="scenario-swap grid gap-14 lg:grid-cols-[1.5fr_1fr]">
+          <div>
+            <p className="track-mid text-[10px] text-neutral-500">
+              {t.initiatorLabel} <span className="ml-3 font-mono normal-case tracking-normal text-neutral-300">{scenario.initiator}</span>
+            </p>
+            <p className="track-mid mt-8 text-[10px] text-neutral-500">{t.requestLabel}</p>
+            <p className="mt-3 font-serif text-3xl leading-snug text-neutral-100 md:text-4xl">{current.request}</p>
 
-        <div className="fade-up grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-          <div className={`card-premium p-8 md:p-10 ${allowed ? "card-allow" : "card-block"}`}>
-            <p className="track-mid text-[10px] text-neutral-500">{t.initiatorLabel}</p>
-            <p className="mt-1 font-mono text-sm text-neutral-300">{scenario.initiator}</p>
-
-            <p className="track-mid mt-6 text-[10px] text-neutral-500">{t.requestLabel}</p>
-            <p className="mt-2 font-serif text-2xl leading-snug text-neutral-100">{current.request}</p>
-
-            <p className="track-mid mt-8 text-[10px] text-neutral-500">{t.checksLabel}</p>
-            <ul className="mt-3 space-y-2">
+            <p className="track-mid mt-10 text-[10px] text-neutral-500">{t.checksLabel}</p>
+            <ul className="mt-3 border-t border-white/10">
               {current.checks.map((k) => (
-                <li key={k.rule} className="flex items-start gap-3 text-sm font-light">
-                  <span
-                    aria-hidden="true"
-                    className={`mt-0.5 font-mono ${k.ok ? "text-emerald-300" : "text-red-300"}`}
-                  >
+                <li key={k.rule} className="flex items-baseline gap-4 border-b border-white/10 py-4 text-base font-light">
+                  <span aria-hidden="true" className={`w-4 shrink-0 font-mono ${k.ok ? "text-seal" : "text-[#ffb4b4]"}`}>
                     {k.ok ? "✓" : "✕"}
                   </span>
-                  <span className={k.ok ? "text-neutral-300" : "text-neutral-100"}>{k.rule}</span>
+                  <span className={k.ok ? "text-neutral-400" : "text-neutral-100"}>{k.rule}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-8 border-t border-white/5 pt-6">
-              <span className={`verdict-tag ${allowed ? "verdict-allow" : "verdict-block"}`}>
+            <div className="mt-10">
+              <p className={`font-serif text-4xl md:text-5xl ${allowed ? "text-seal" : "text-[#ffb4b4]"}`}>
                 {allowed ? t.allow : t.block}
-              </span>
-              <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">
+              </p>
+              <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
                 {allowed ? t.allowWhy : t.blockWhy}
               </p>
             </div>
           </div>
 
-          <div className="card-premium card-iron flex flex-col p-8 md:p-10">
-            <p className="track-mid mb-5 text-[10px] text-neutral-500">{t.receiptLabel}</p>
-            <ol className="space-y-4">
+          <div className="border-l border-seal/40 pl-8 lg:mt-1">
+            <p className="track-mid mb-6 text-[10px] text-neutral-500">{t.receiptLabel}</p>
+            <ol className="space-y-5">
               {t.receiptFields.map((f, i) => (
-                <li key={f} className="flex items-baseline gap-3">
-                  <span className="num-badge font-serif text-lg">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-sm font-light leading-relaxed text-neutral-300">{f}</span>
+                <li key={f} className="flex items-baseline gap-4">
+                  <span className="font-mono text-xs text-seal">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-base font-light leading-relaxed text-neutral-300">{f}</span>
                 </li>
               ))}
             </ol>
             <a
               href={verifyHref}
-              className="chip-metal track-mid mt-8 inline-block self-start lg:mt-auto px-6 py-3 text-xs text-neutral-200 transition hover:text-white"
+              className="track-mid mt-10 inline-flex items-center gap-3 border-b border-white/20 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
             >
-              {t.receiptCta}
+              {t.receiptCta} <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
         </div>
-        <p className="fade-up mt-6 text-center text-xs text-neutral-500">{t.illustrative}</p>
+        <p className="fade-up mt-12 text-xs text-neutral-500">{t.illustrative}</p>
       </div>
     </section>
   );

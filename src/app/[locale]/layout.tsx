@@ -5,7 +5,6 @@ import { Clarity } from "@/components/clarity";
 import { notFound } from "next/navigation";
 import { getContent, isLocale, locales } from "@/content";
 import { IronProofLogoDefs } from "@/components/ironproof-logo";
-import { WaveCanvas } from "@/components/wave-canvas";
 import "../globals.css";
 
 const inter = Inter({
@@ -127,10 +126,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <div className="bg-grid" aria-hidden="true" />
-        <div className="bg-depth" aria-hidden="true" />
-        <div className="bg-noise" aria-hidden="true" />
-        <WaveCanvas />
+        {/* 2026 redesign: one flat black. The grid, depth wash, noise and wave
+          * canvas read as template texture and tinted the header blue. */}
         <IronProofLogoDefs />
         {children}
         <Analytics />

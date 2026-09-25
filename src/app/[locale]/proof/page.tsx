@@ -7,6 +7,9 @@ import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { ProofExplorer } from "@/components/landing/proof-explorer";
 import { TestingVsProving } from "@/components/landing/testing-vs-proving";
 import { Credibility } from "@/components/landing/credibility";
+import { Counterexample } from "@/components/landing/counterexample";
+import { DeployGate } from "@/components/landing/deploy-gate";
+import { CounterexampleBreath } from "@/components/landing/landing";
 import { type L, pick } from "@/components/landing/i18n";
 
 const T: L<{
@@ -82,6 +85,12 @@ export default async function ProofPage({ params }: PageProps) {
           </p>
         </section>
         <ProofExplorer locale={locale} />
+        {/* Moved from the front page (Dom, 2026-09-25): too long for it, right
+          * at home next to the artifact it explains. */}
+        <Counterexample locale={locale} />
+        <CounterexampleBreath locale={locale} />
+        {/* The call site, moved from the front page with the counterexample. */}
+        <DeployGate locale={locale} />
         <TestingVsProving locale={locale} />
         <Credibility locale={locale} />
       </main>
