@@ -68,7 +68,7 @@ const NAV: L<{
     verify: "VERIFY",
     proof: "PROOF",
     provableAi: "PROVABLE AI",
-    cta: "REQUEST ACCESS",
+    cta: "START A PILOT",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     // On the English page the switch leads to French, so it says so in French.
@@ -83,7 +83,7 @@ const NAV: L<{
     verify: "VÉRIFIER",
     proof: "PREUVE",
     provableAi: "IA PROUVABLE",
-    cta: "DEMANDER UN ACCÈS",
+    cta: "DÉMARRER UN PILOTE",
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",
     switchLabel: "EN",
@@ -141,7 +141,7 @@ export function LandingHeader(props: HeaderProps) {
   const t = pick(NAV, locale);
   const r = routePrefix(locale);
   const logoHref = variant === "sub" ? r || "/" : "#top";
-  const contactHref = variant === "sub" ? `${r || "/"}#contact` : "#contact";
+  const contactHref = variant === "sub" ? `${r || "/"}#pilot` : "#pilot";
   const isActive = (p?: Page) => p !== undefined && p === page;
 
   const switchHref = otherLocaleHref(page, locale);
@@ -174,10 +174,10 @@ export function LandingHeader(props: HeaderProps) {
 
   return (
     <header className="edge-b sticky top-0 z-40 bg-[#050506]/60 backdrop-blur-md">
-      <div className="relative z-20 flex items-center gap-8 px-6 py-6 md:px-14">
+      <div className="relative z-20 flex items-center gap-4 px-6 py-6 sm:gap-8 md:px-14">
         <a href={logoHref} className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
           <IronProofLogo width={26} height={35} />
-          <span className="track-logo iron-text text-base font-semibold">IRONPROOF</span>
+          <span className="track-logo iron-text text-base font-semibold max-[440px]:text-sm max-[440px]:tracking-[0.3em]">IRONPROOF</span>
         </a>
 
         {/* Desktop nav */}

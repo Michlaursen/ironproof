@@ -50,6 +50,8 @@ type Copy = {
   lead: (when: React.ReactNode) => React.ReactNode;
   when: string;
   dossierLabel: string;
+  hsmLabel: string;
+  hsmState: Record<"idle" | "busy" | "VERIFIED" | "FAILED" | "CANNOT_VERIFY", string>;
   loadReal: string;
   loadTampered: string;
   placeholder: string;
@@ -88,6 +90,8 @@ const T: L<Copy> = {
     ),
     when: "when",
     dossierLabel: "SEALED DOSSIER",
+    hsmLabel: "IRONPROOF · SEAL VERIFIER",
+    hsmState: { idle: "READY", busy: "CHECKING", VERIFIED: "SEAL INTACT", FAILED: "SEAL BROKEN", CANNOT_VERIFY: "NO VERDICT" },
     loadReal: "LOAD A REAL PROOF",
     loadTampered: "LOAD A TAMPERED ONE",
     placeholder: "paste a sealed Sceal dossier (JSON) — or use the buttons above",
@@ -151,6 +155,8 @@ const T: L<Copy> = {
     ),
     when: "quand",
     dossierLabel: "DOSSIER SCELLÉ",
+    hsmLabel: "IRONPROOF · VÉRIFICATEUR DE SCEAU",
+    hsmState: { idle: "PRÊT", busy: "VÉRIFICATION", VERIFIED: "SCEAU INTACT", FAILED: "SCEAU ROMPU", CANNOT_VERIFY: "AUCUN VERDICT" },
     loadReal: "CHARGER UNE VRAIE PREUVE",
     loadTampered: "CHARGER UN DOSSIER ALTÉRÉ",
     placeholder: "collez un dossier Sceal scellé (JSON) — ou utilisez les boutons ci-dessus",
@@ -247,6 +253,7 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
   // so gold there would promise exactly what the demo goes on to refute.
   const [sealed, setSealed] = useState(false);
   const t = pick(T, locale);
+  const state = busy ? "busy" : (result?.status ?? "idle");
 
   async function load(which: keyof typeof DEMOS) {
     try {
@@ -290,7 +297,26 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
           </p>
         </div>
 
-        <div className="fade-up card-premium relative overflow-hidden p-8">
+        {/* The verifier behind an armoured vault door you can see into: the
+          * widget is the window, it still runs entirely in the browser. Lamp,
+          * dial and bolts follow the verdict; a metaphor, not a hardware claim. */}
+        <div className="hsm fade-up" data-state={state}>
+          <span className="vault-hinge vault-hinge-top" aria-hidden="true" />
+          <span className="vault-hinge vault-hinge-bottom" aria-hidden="true" />
+          <span className="vault-bolt vault-bolt-1" aria-hidden="true" />
+          <span className="vault-bolt vault-bolt-2" aria-hidden="true" />
+          <span className="vault-bolt vault-bolt-3" aria-hidden="true" />
+          <div className="hsm-plate">
+            <span className="hsm-engrave">{t.hsmLabel}</span>
+            <span className="hsm-status" role="status">
+              <span className="vault-dial" aria-hidden="true" />
+              <span className="hsm-led hsm-led-power" aria-hidden="true" />
+              <span className="hsm-led hsm-led-state" aria-hidden="true" />
+              <span className="hsm-engrave">{t.hsmState[state]}</span>
+            </span>
+          </div>
+          <div className="hsm-bay">
+            <span className="vault-glass" aria-hidden="true" />
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
             <label htmlFor="artifactInput" className="seal-label track-mid text-xs">
               {t.dossierLabel}
@@ -389,6 +415,14 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
               {t.readSpec}
             </a>
           </p>
+          </div>
+          <div className="hsm-foot" aria-hidden="true">
+            <span className="vault-hazard" />
+            <svg width="14" height="16" viewBox="0 0 14 16" className="hsm-lock">
+              <rect x="1" y="7" width="12" height="8" rx="1" fill="currentColor" />
+              <path d="M4 7 V5 a3 3 0 0 1 6 0 v2" fill="none" stroke="currentColor" strokeWidth="1.4" />
+            </svg>
+          </div>
         </div>
       </div>
     </section>

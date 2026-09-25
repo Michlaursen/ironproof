@@ -54,7 +54,7 @@ const RELATED_HREFS = {
   proof: "/proof",
   initiators: "/#initiators",
   try: "/#decide",
-  counter: "/#counterexample",
+  counter: "/proof#counterexample",
 } as const;
 
 export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {

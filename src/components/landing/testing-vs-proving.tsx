@@ -97,7 +97,7 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
           <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </div>
         <div className="fade-up grid gap-6 md:grid-cols-2">
-          <div className="card-premium p-10">
+          <div className="card-premium min-w-0 p-6 md:p-10">
             <p className="track-mid mb-6 text-xs text-neutral-400">{t.testing}</p>
             <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">{t.testingQ}</p>
             <TestingDots />
@@ -115,7 +115,7 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
               <span className="font-serif text-2xl text-neutral-300">{t.partial}</span>
             </div>
           </div>
-          <div className="card-premium p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
+          <div className="card-premium min-w-0 p-6 md:p-10" style={{ borderColor: "rgba(220,225,255,0.18)" }}>
             <p className="track-mid mb-6 text-xs text-neutral-300">{t.proving}</p>
             <p className="mb-6 font-serif text-2xl leading-snug text-neutral-100">{t.provingQ}</p>
             <ProvingDots />
