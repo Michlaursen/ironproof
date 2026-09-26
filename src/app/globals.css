@@ -178,7 +178,9 @@ summary:focus-visible {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(220, 225, 255, 0.22));
+  /* No outer glow: a halo behind a serif headline reads as a game title, not a
+   * statement (Dom, 2026-09-26). The 1px shadow keeps the edge on black. */
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
 }
 
 .metal-shine {
@@ -188,7 +190,7 @@ summary:focus-visible {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(220, 225, 255, 0.26));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
   animation: sweep 7s linear infinite;
 }
 @keyframes sweep {
