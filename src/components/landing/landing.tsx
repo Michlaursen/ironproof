@@ -405,7 +405,7 @@ const T: L<Copy> = {
       title: "Same proof engine. Proven on real vulnerabilities.",
       lead: (
         <>
-          Findings by <span className="metal-text">Dominik Blain</span> and Cobalt, credited on the
+          Findings by <span className="metal-text">Dominik Blain</span>{" "}and Cobalt, credited on the
           projects&rsquo; own repositories &mdash; published research, assigned CVEs and public
           upstream acknowledgements.
         </>
@@ -708,7 +708,7 @@ const T: L<Copy> = {
       title: "Le même moteur de preuve. Éprouvé sur de vraies vulnérabilités.",
       lead: (
         <>
-          Découvertes par <span className="metal-text">Dominik Blain</span> et Cobalt, créditées
+          Découvertes par <span className="metal-text">Dominik Blain</span>{" "}et Cobalt, créditées
           sur les dépôts des projets eux-mêmes &mdash; recherche publiée, CVE assignées et
           remerciements publics en amont.
         </>
