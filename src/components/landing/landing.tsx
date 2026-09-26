@@ -19,6 +19,7 @@ import { type L, pick, NBSP } from "./i18n";
  *   1. the claim               hero: the two keys and the one sentence
  *   2. what Ironproof is       the checkpoint, allow/block, check-prove-seal
  *   3. see it decide           the gate film, four action classes (interactive)
+ *   3b. check it yourself      a real sealed record, verified in the browser
  *   4. why logging in is not   authentication vs authorization
  *      the same as allowed
  *   4. what it is not          the categories it gets confused with
@@ -26,7 +27,6 @@ import { type L, pick, NBSP } from "./i18n";
  *   6. why now                 dated, sourced regulatory and market events
  *   7. what only a proof does  the gate, the pipeline (the sequence demo is
  *                              gone; the counterexample moved to /proof)
- *   8. check it yourself       a real sealed record, verified in the browser
  *   9. start                   a scoped pilot on one action type, with the
  *                              request form (the closing contact block is gone)
  *
@@ -904,6 +904,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* 3. WATCH IT DECIDE — four action classes, one gate */}
         <AgentScenarios locale={locale} verifyHref="#verify" />
 
+        {/* 3b. CHECK IT YOURSELF — right after watching it decide: the reader who just
+          * saw a sealed record can verify one in the browser, before any argument
+          * (moved up from after "how", Dom 2026-09-26). */}
+        <VerifyArtifact locale={locale} />
+
         {/* 4. AUTHENTICATION IS NOT AUTHORIZATION */}
         <section id="gap" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-12 max-w-3xl">
@@ -1126,9 +1131,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             .
           </p>
         </section>
-
-        {/* 8. VERIFY A REAL DECISION — the verifier sits in its own sealed module */}
-        <VerifyArtifact locale={locale} />
 
         {/* PUBLIC TECHNICAL RECORD */}
         <section className="relative z-10 edge-t px-6 py-20 md:px-14">
