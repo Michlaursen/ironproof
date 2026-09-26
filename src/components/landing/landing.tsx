@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IronProofLogo } from "@/components/ironproof-logo";
+import { IronproofMark } from "@/components/ironproof-mark";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -16,7 +16,7 @@ import { type L, pick, NBSP } from "./i18n";
  * refund — seven times over, while the headline sold four. The order now
  * follows the reader's questions, not our mechanism:
  *
- *   1. the claim               hero: the robot and the one sentence
+ *   1. the claim               hero: the two keys and the one sentence
  *   2. what Ironproof is       the checkpoint, allow/block, check-prove-seal
  *   3. see it decide           the gate film, four action classes (interactive)
  *   4. why logging in is not   authentication vs authorization
@@ -46,7 +46,9 @@ type Step = { title: string; body: string };
 type Copy = {
   hero: {
     eyebrow: string;
+    /** Two clauses: the condition (plain) and the consequence (gold italic). */
     headline: string;
+    headlineEnd: string;
     body: React.ReactNode;
     boundary: string;
     initiators: string;
@@ -155,8 +157,9 @@ const SRC_SIX_BANKS =
 const T: L<Copy> = {
   en: {
     hero: {
-      eyebrow: "AUTHORIZATION BEFORE EXECUTION",
-      headline: "If it isn't authorized, it never executes.",
+      eyebrow: "THE AUTHORIZATION LAYER FOR CRITICAL ACTIONS",
+      headline: "If it isn’t authorized,",
+      headlineEnd: "it never executes.",
       body: (
         <>
           Ironproof checks every critical action before it executes — a payment, an access grant, a
@@ -165,7 +168,8 @@ const T: L<Copy> = {
           verify independently.
         </>
       ),
-      boundary: "Ironproof checks every critical action before execution, not after.",
+      boundary:
+        "Any action you can’t afford to get wrong, whoever starts it: a person, a script or an AI agent. What your policy allows goes through. What it doesn’t is stopped before it runs, with a sealed record anyone can verify.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -457,8 +461,9 @@ const T: L<Copy> = {
 
   fr: {
     hero: {
-      eyebrow: "L’AUTORISATION AVANT L’EXÉCUTION",
-      headline: "Si ce n’est pas autorisé, il n’y a pas d’exécution.",
+      eyebrow: "LA COUCHE D’AUTORISATION POUR LES ACTIONS CRITIQUES",
+      headline: "Si ce n’est pas autorisé,",
+      headlineEnd: "il n’y a pas d’exécution.",
       body: (
         <>
           Ironproof vérifie chaque action critique avant qu’elle s’exécute — un paiement, un accès,
@@ -467,7 +472,8 @@ const T: L<Copy> = {
           n’importe qui peut vérifier de façon indépendante.
         </>
       ),
-      boundary: "Ironproof vérifie chaque action critique avant son exécution, pas après.",
+      boundary:
+        "Toute action que vous ne pouvez pas vous permettre de rater, peu importe qui la lance : une personne, un script ou un agent IA. Ce que votre politique autorise passe. Le reste est arrêté avant de s’exécuter, avec une trace scellée que n’importe qui peut vérifier.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -788,12 +794,13 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <main className="flex-1">
         {/* 1. HERO — the product, in one sentence, before any mechanism */}
         <section id="top" className="hero-agent relative z-10 flex items-center overflow-hidden px-6 md:px-14">
-          {/* The guardian before the bank vault, shield forward (Dom, 2026-09-25). Full-bleed and
-            * melted into the page on every edge so it reads as the scene, not a
-            * photo pasted on it. Symbolic, not a product Ironproof ships. */}
+          {/* Dual control: two people, two keys, one lamp (Dom, 2026-09-26). A bank
+            * reads it before any caption: nothing irreversible runs on one say-so.
+            * Documentary light, not a render, because the buyer is a risk
+            * committee. Full-bleed and melted into the page on every edge. */}
           <div className="hero-agent-photo" aria-hidden="true">
             <Image
-              src="/media/hero-guard.jpg"
+              src="/media/hero-keys.jpg"
               alt=""
               fill
               preload
@@ -806,7 +813,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * of the desktop frame squeezed behind the text. */}
           <div className="hero-agent-mobile md:hidden" aria-hidden="true">
             <Image
-              src="/media/hero-guard-m.jpg"
+              src="/media/hero-keys-m.jpg"
               alt=""
               fill
               preload
@@ -818,9 +825,19 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <div className="fade-up min-w-0">
               {/* Three things, nothing else: what we are, the sentence, two doors.
                 * The explanation that used to sit here now opens the next screen. */}
+              {/* The full lockup opens the statement: a young name is learned by
+                * seeing it large once, even with the header 200 px above (Dom, 2026-09-26). */}
+              <div className="mb-8 flex items-center gap-5">
+                <IronproofMark height={112} preload className="h-16 w-auto md:h-24" />
+                <span className="track-logo iron-brushed text-2xl font-semibold max-[380px]:text-lg max-[380px]:tracking-[0.3em] md:text-4xl">IRONPROOF</span>
+              </div>
               <p className="seal-label track-wide mb-7 text-[11px] md:text-xs">{t.hero.eyebrow}</p>
-              <h1 className="hero-iron mb-7 font-semibold uppercase">
-                <span className="iron-text">{t.hero.headline}</span>
+              {/* Set like a statement, not a poster: serif, sentence case, the
+                * consequence in the same gold as the lamp between the two keys. */}
+              <h1 className="hero-serif mb-8 font-serif font-normal text-neutral-100">
+                {t.hero.headline}
+                <br />
+                <em className="text-seal">{t.hero.headlineEnd}</em>
               </h1>
               <p className="mb-10 max-w-md text-sm font-light leading-relaxed text-neutral-400 md:text-base">
                 {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
@@ -1222,8 +1239,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <div className="flex items-center gap-3">
-            <IronProofLogo width={20} height={27} />
-            <span className="track-logo iron-text font-semibold">IRONPROOF</span>
+            <IronproofMark height={30} />
+            <span className="track-logo iron-brushed font-semibold">IRONPROOF</span>
           </div>
           <span className="font-light">{t.footer}</span>
         </div>

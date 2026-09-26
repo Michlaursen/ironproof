@@ -227,6 +227,24 @@ summary:focus-visible {
   .iron-text { animation: none; }
 }
 
+/* Brushed-steel wordmark: a photograph of real brushed stainless clipped to
+ * the letters, same metal as logo 09. Replaces the chrome mirror on the site's
+ * own lockups only. .iron-text stays untouched: .omg/brand.py extracts it for
+ * the PDF documents, which cannot load a texture from /media. */
+.iron-brushed {
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.25)),
+    url("/media/steel-brushed.jpg");
+  background-size: 100% 100%, 240px auto;
+  background-position: 0 0, center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.28))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+}
+
 .track-wide { letter-spacing: 0.5em; }
 /* Nav tracking. The full menu needs ~1179px of intrinsic width and the xl tier
  * (1280px) only affords ~905, so the brand 0.28em cannot ride there — it comes
@@ -694,12 +712,12 @@ p, li {
   }
 }
 
-/* Hero headline in the wordmark's forged iron: same material as IRONPROOF in
-   the header, so the first screen reads as one object. Caps, tight tracking. */
-.hero-iron {
-  font-size: clamp(2rem, 4.6vw, 4.25rem);
-  line-height: 1.02;
-  letter-spacing: 0.02em;
+/* Hero headline set like a statement in a financial paper: serif, sentence
+   case, no metal effect. The seriousness comes from the photograph beside it. */
+.hero-serif {
+  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
 }
 
 /* THE GAP — corridor photo with the two labels pinned on their objects.
@@ -815,14 +833,6 @@ p, li {
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(5, 5, 6, 0.85) 0%, rgba(5, 5, 6, 0.45) 45%, rgba(5, 5, 6, 0.9) 100%);
-}
-
-/* Multi-line iron headlines: the forged gradient is calibrated for ONE line.
-   Cloned per line, every line gets its own bright top and dark valley,
-   instead of the middle line sitting in the valley of a block-tall gradient. */
-.hero-iron .iron-text {
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 /* VAULT — the seal verifier sits behind an armoured vault door you can see

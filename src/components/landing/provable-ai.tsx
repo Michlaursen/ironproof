@@ -1,4 +1,4 @@
-import { IronProofLogo } from "@/components/ironproof-logo";
+import { IronproofMark } from "@/components/ironproof-mark";
 import { LandingHeader } from "./landing-header";
 import { ProofSeal } from "./proof-seal";
 import { FadeUpInit } from "./fade-up-init";
@@ -310,7 +310,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
           <div className="halo" aria-hidden="true" />
           <div className="fade-up relative mx-auto max-w-3xl text-center">
             <div className="mb-10 flex items-center justify-center gap-8">
-              <IronProofLogo width={96} height={128} title={t.logoTitle} />
+              <IronproofMark height={128} title={t.logoTitle} />
               <ProofSeal size={128} locale={locale} />
             </div>
             <h2 className="metal-shine mb-6 font-serif text-3xl font-medium md:text-5xl">
@@ -326,8 +326,8 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
       <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
           <div className="flex items-center gap-3">
-            <IronProofLogo width={20} height={27} />
-            <span className="track-logo iron-text font-semibold">IRONPROOF</span>
+            <IronproofMark height={30} />
+            <span className="track-logo iron-brushed font-semibold">IRONPROOF</span>
           </div>
           <span className="font-light">{t.footer}</span>
         </div>
