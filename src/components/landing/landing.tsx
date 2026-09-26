@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { IronproofMark } from "@/components/ironproof-mark";
 import { CREDITED_STRIP } from "./credibility";
+import { HERO_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -158,9 +159,7 @@ const SRC_SIX_BANKS =
 const T: L<Copy> = {
   en: {
     hero: {
-      eyebrow: "THE AUTHORIZATION LAYER FOR CRITICAL ACTIONS",
-      headline: "If it isn’t authorized,",
-      headlineEnd: "it never executes.",
+      ...HERO_COPY.en,
       body: (
         <>
           Ironproof checks every critical action before it executes — a payment, an access grant, a
@@ -462,9 +461,7 @@ const T: L<Copy> = {
 
   fr: {
     hero: {
-      eyebrow: "LA COUCHE D’AUTORISATION POUR LES ACTIONS CRITIQUES",
-      headline: "Si ce n’est pas autorisé,",
-      headlineEnd: "il n’y a pas d’exécution.",
+      ...HERO_COPY.fr,
       body: (
         <>
           Ironproof vérifie chaque action critique avant qu’elle s’exécute — un paiement, un accès,

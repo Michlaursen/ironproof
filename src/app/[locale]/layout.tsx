@@ -5,6 +5,7 @@ import { Clarity } from "@/components/clarity";
 import { notFound } from "next/navigation";
 import { getContent, isLocale, locales } from "@/content";
 import { IronProofLogoDefs } from "@/components/ironproof-logo";
+import { HERO_COPY } from "@/components/landing/hero-copy";
 import "../globals.css";
 
 const inter = Inter({
@@ -80,10 +81,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
   if (!isLocale(locale)) notFound();
 
   const content = getContent(locale);
-  // The hero's four-part tagline was replaced by a single headline; the
-  // structured-data slogan now reads from that rather than reassembling copy
-  // that no longer exists.
-  const slogan = content.hero.headline;
+  // The slogan is the hero sentence the landing shows, read from its one source.
+  const hero = HERO_COPY[locale];
+  const slogan = `${hero.headline} ${hero.headlineEnd}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
