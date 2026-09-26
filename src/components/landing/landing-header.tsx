@@ -1,7 +1,7 @@
 "use client";
 
 import { Fragment, useState } from "react";
-import { IronProofLogo } from "@/components/ironproof-logo";
+import { IronproofMark } from "@/components/ironproof-mark";
 import { IconMenu, IconClose } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
@@ -176,8 +176,8 @@ export function LandingHeader(props: HeaderProps) {
     <header className="edge-b sticky top-0 z-40 bg-[#050506]/60 backdrop-blur-md">
       <div className="relative z-20 flex items-center gap-4 px-6 py-6 sm:gap-8 md:px-14">
         <a href={logoHref} className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
-          <IronProofLogo width={26} height={35} />
-          <span className="track-logo iron-text text-base font-semibold max-[440px]:text-sm max-[440px]:tracking-[0.3em]">IRONPROOF</span>
+          <IronproofMark height={40} preload />
+          <span className="track-logo iron-brushed text-base font-semibold max-[440px]:text-sm max-[440px]:tracking-[0.3em]">IRONPROOF</span>
         </a>
 
         {/* Desktop nav */}
