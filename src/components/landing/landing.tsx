@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { IronproofMark } from "@/components/ironproof-mark";
+import { CREDITED_STRIP } from "./credibility";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -952,10 +953,17 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <span className="track-mid text-xs text-neutral-500">{t.creditedBy}</span>
-            {["IBM", "GnuPG", "Mozilla", "Red Hat", "wolfSSL", "VideoLAN", "DCMTK"].map((o) => (
-              <span key={o} className="metal-text text-sm font-medium">
-                {o}
-              </span>
+            {/* Each name opens the public commit, bug or release note that credits us. */}
+            {CREDITED_STRIP.map((c) => (
+              <a
+                key={c.name}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="metal-text border-b border-transparent text-sm font-medium transition hover:border-white/40"
+              >
+                {c.name}
+              </a>
             ))}
           </div>
         </section>

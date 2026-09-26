@@ -20,9 +20,12 @@ import { type L, pick } from "./i18n";
  * they are the published titles, and a translated title does not find the paper.
  */
 
-const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] = [
+/** `strip`: the short name shown in the landing's credited-by strip, which links to
+ * the same public record. One list, so the strip cannot name an org without a source. */
+const RECORD: { org: string; strip?: string; body: L<string>; cta: L<string>; href: string }[] = [
   {
     org: "IBM",
+    strip: "IBM",
     body: {
       en: "The sarama fix commit reads: “Thanks to Dominik Blain of Cobalt AI for reporting.”",
       fr: "Le commit de correctif sarama dit\u202f: “Thanks to Dominik Blain of Cobalt AI for reporting.”",
@@ -32,6 +35,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
   {
     org: "GnuPG",
+    strip: "GnuPG",
     body: {
       en: "Two libksba commits carry “Reported-by: Dominik Blain”, shipped in release 1.7.0.",
       fr: "Deux commits libksba portent “Reported-by: Dominik Blain”, livrés en version 1.7.0.",
@@ -41,6 +45,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
   {
     org: "Mozilla",
+    strip: "Mozilla",
     body: {
       en: "Reported by Dominik Blain — recorded and resolved in Mozilla’s public bug tracker (NSS, CWE-195).",
       fr: "Signalé par Dominik Blain — consigné et résolu dans le suivi de bogues public de Mozilla (NSS, CWE-195).",
@@ -50,6 +55,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
   {
     org: "Red Hat · OpenELA",
+    strip: "Red Hat",
     body: {
       en: "Public libyang patches credit Dominik Blain and Cobalt AI for reporting two memory-corruption issues.",
       fr: "Des correctifs libyang publics créditent Dominik Blain et Cobalt AI pour le signalement de deux corruptions mémoire.",
@@ -59,6 +65,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
   {
     org: "wolfSSL",
+    strip: "wolfSSL",
     body: {
       en: "Security fixes credited to Dominik Blain in the wolfSSL 5.9.2 release notes.",
       fr: "Correctifs de sécurité crédités à Dominik Blain dans les notes de version wolfSSL 5.9.2.",
@@ -68,6 +75,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
   {
     org: "VideoLAN · VLC",
+    strip: "VideoLAN",
     body: {
       en: "A vulnerability fix carrying Dominik Blain’s name is preserved in VLC’s public source tree.",
       fr: "Un correctif de vulnérabilité portant le nom de Dominik Blain est conservé dans l’arbre source public de VLC.",
@@ -79,6 +87,7 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
   },
   {
     org: "OFFIS · DCMTK",
+    strip: "DCMTK",
     body: {
       en: "Three commits thank Dominik Blain for the report.",
       fr: "Trois commits remercient Dominik Blain pour le signalement.",
@@ -107,6 +116,10 @@ const RECORD: { org: string; body: L<string>; cta: L<string>; href: string }[] =
     href: "https://github.com/stephane/libmodbus/commit/d6941168d13cfa1db1bec40ef5bf04470c351175",
   },
 ];
+
+export const CREDITED_STRIP: { name: string; href: string }[] = RECORD.flatMap((r) =>
+  r.strip ? [{ name: r.strip, href: r.href }] : [],
+);
 
 export const PAPERS: { id: string; title: string; href: string }[] = [
   {
