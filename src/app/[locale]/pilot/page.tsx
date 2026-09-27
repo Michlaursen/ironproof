@@ -21,6 +21,7 @@ import { type L, pick } from "@/components/landing/i18n";
 type Copy = {
   metaTitle: string;
   metaDescription: string;
+  eyebrow: string;
   h1: string;
   lead: string;
   stepsEyebrow: string;
@@ -43,8 +44,9 @@ function copy(r: string): L<Copy> {
       metaTitle: "Start a pilot — Ironproof",
       metaDescription:
         "A fixed-scope design-partner pilot on one action your automation already performs. You keep the gate, the sealed records, and what the solver found in your rule.",
-      h1: "One action. Evidence your risk committee checks without us.",
-      lead: "A pilot takes one action your agents or scripts already perform and puts it behind the gate. It ends with the same kind of evidence pack you can open on this site, built for your rule.",
+      eyebrow: "PILOT",
+      h1: "Pick one critical action. We prove your rules hold, or show you exactly where they break.",
+      lead: "You pick one action your systems already perform, a wire transfer for example. We turn your rules into a check, block anything that breaks them before it runs, and seal every decision. At the end, your risk team re-checks everything themselves, without us.",
       stepsEyebrow: "HOW IT RUNS",
       bringTitle: "What you bring",
       bring: [
@@ -89,8 +91,9 @@ function copy(r: string): L<Copy> {
       metaTitle: "Démarrer un pilote — Ironproof",
       metaDescription:
         "Un pilote de partenaire de conception, à périmètre fixe, sur une action que votre automatisation exécute déjà. Vous gardez la barrière, les traces scellées, et ce que le solveur a trouvé dans votre règle.",
-      h1: "Une action. Une preuve que votre comité de risque vérifie sans nous.",
-      lead: "Un pilote prend une action que vos agents ou scripts exécutent déjà et la place derrière la barrière. Il se termine par le même genre de dossier de preuve que celui consultable sur ce site, construit pour votre règle.",
+      eyebrow: "PILOTE",
+      h1: "Choisissez une action critique. On prouve que vos règles tiennent, ou on vous montre exactement où elles cassent.",
+      lead: "Vous choisissez une action que vos systèmes font déjà, par exemple un virement. On traduit vos règles en vérification, on bloque avant l’exécution tout ce qui les enfreint, et chaque décision est scellée. À la fin, votre équipe de risque revérifie tout elle-même, sans nous.",
       stepsEyebrow: "COMMENT ÇA SE DÉROULE",
       bringTitle: "Ce que vous apportez",
       bring: [
@@ -170,7 +173,7 @@ export default async function PilotPage({ params }: PageProps) {
           <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
             <ProofSeal size={300} locale={locale} />
           </div>
-          <p className="seal-label track-mid mb-4 text-xs">{p.eyebrow}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h1 className="metal-shine max-w-4xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             {t.h1}
           </h1>
