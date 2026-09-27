@@ -39,10 +39,12 @@ type VerifyResult = {
   toolchain?: { liboqs?: string; liboqsPython?: string; canonicalForm?: string } | null;
 };
 
-const DEMOS = {
+type Demos = { verified: string; tampered: string };
+
+const DEMOS: Demos = {
   verified: "/sceal/demo-verified.json",
   tampered: "/sceal/demo-tampered-content.json",
-} as const;
+};
 
 type Copy = {
   eyebrow: string;
@@ -244,7 +246,23 @@ function TemporalLine({ time, t }: { time?: VerifyResult["time"]; t: Copy }) {
   );
 }
 
-export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) {
+/*
+ * `demos` lets another page put ITS OWN sealed record in the same machine
+ * (/evidence loads a gate decision dossier). `heading={false}` drops the intro
+ * when the host page already framed what is being verified -- this intro
+ * promises a temporal anchor, and not every dossier carries one.
+ */
+export function VerifyArtifact({
+  locale = defaultLocale,
+  demos = DEMOS,
+  heading = true,
+  id = "verify",
+}: {
+  locale?: Locale;
+  demos?: Demos;
+  heading?: boolean;
+  id?: string;
+}) {
   const [input, setInput] = useState("");
   const [result, setResult] = useState<VerifyResult | null>(null);
   const [busy, setBusy] = useState(false);
@@ -255,9 +273,10 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
   const t = pick(T, locale);
   const state = busy ? "busy" : (result?.status ?? "idle");
 
-  async function load(which: keyof typeof DEMOS) {
+  async function load(which: keyof Demos) {
     try {
-      const res = await fetch(DEMOS[which]);
+      const res = await fetch(demos[which]);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       setInput(text);
       setSealed(which === "verified");
@@ -287,8 +306,9 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
   }
 
   return (
-    <section id="verify" className="relative z-10 mx-auto max-w-7xl px-6 py-28 md:px-14">
+    <section id={id} className={`relative z-10 mx-auto max-w-7xl px-6 md:px-14 ${heading ? "py-28" : "pb-16 pt-4"}`}>
       <div className="mx-auto max-w-4xl">
+        {heading ? (
         <div className="fade-up mb-12 text-center">
           <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.title}</h2>
@@ -296,6 +316,7 @@ export function VerifyArtifact({ locale = defaultLocale }: { locale?: Locale }) 
             {t.lead(<em>{t.when}</em>)}
           </p>
         </div>
+        ) : null}
 
         {/* The verifier behind an armoured vault door you can see into: the
           * widget is the window, it still runs entirely in the browser. Lamp,
