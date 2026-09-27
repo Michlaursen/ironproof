@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
-import { ProofSeal } from "@/components/landing/proof-seal";
+import { HeroPhoto } from "@/components/landing/hero-photo";
 import { type L, pick, NBSP } from "@/components/landing/i18n";
 import {
   ACTION_COPY,
@@ -125,9 +125,7 @@ export default async function ActionPage({ params }: PageProps) {
       <LandingHeader variant="sub" locale={locale} page={`act-${type}`} />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
-          <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
-            <ProofSeal size={300} locale={locale} />
-          </div>
+          <HeroPhoto src="/media/gate-chip.jpg" position="50% 50%" />
           <p className="seal-label track-mid mb-4 text-xs">
             {t.eyebrow} · {a.tab}
           </p>
@@ -188,7 +186,7 @@ export default async function ActionPage({ params }: PageProps) {
             <div className="flex flex-wrap items-center gap-4">
               <h2 className="font-serif text-2xl text-neutral-100 md:text-3xl">{t.evidenceTitle}</h2>
               <span
-                className="track-mid rounded-[4px] border px-2.5 py-1 text-[11px]"
+                className="track-mid rounded-[4px] border px-2.5 py-1 text-xs"
                 style={{ color: LEVEL_COLOR[a.evidence], borderColor: "rgba(255,255,255,0.22)" }}
               >
                 {t.level[a.evidence]}
@@ -222,7 +220,7 @@ export default async function ActionPage({ params }: PageProps) {
             {ACTION_IDS.filter((id) => id !== type).map((id) => (
               <li key={id}>
                 <a href={path(locale, id)} className="chip-metal block p-5 transition hover:border-white/30">
-                  <span className="track-mid text-[11px] text-neutral-400">{all[id].tab}</span>
+                  <span className="track-mid text-xs text-neutral-400">{all[id].tab}</span>
                   <span className="mt-2 block font-serif text-lg leading-snug text-neutral-100">{all[id].h1}</span>
                 </a>
               </li>

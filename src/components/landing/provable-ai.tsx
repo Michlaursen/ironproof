@@ -90,7 +90,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
               }
               className="group mt-6 block max-w-2xl rounded-md border border-seal/20 bg-surface-2 p-6 transition hover:border-seal/40"
             >
-              <span className="track-mid mb-2 block text-[11px] text-seal">{t.researchTag}</span>
+              <span className="track-mid mb-2 block text-xs text-seal">{t.researchTag}</span>
               <span className="mb-2 block font-serif text-xl leading-snug text-foreground md:text-2xl">
                 {t.researchTitle}
               </span>
@@ -337,7 +337,7 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
               href="https://www.linkedin.com/company/ironproof/"
               target="_blank"
               rel="noopener noreferrer"
-              className="track-mid border-b border-white/20 pb-0.5 text-[11px] text-neutral-300 transition hover:border-seal hover:text-white"
+              className="track-mid border-b border-white/20 pb-0.5 text-xs text-neutral-300 transition hover:border-seal hover:text-white"
             >
               LinkedIn <span aria-hidden="true">&#8599;</span>
             </a>

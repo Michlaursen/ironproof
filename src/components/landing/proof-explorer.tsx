@@ -330,14 +330,14 @@ export function ProofExplorer({ locale = defaultLocale }: { locale?: Locale }) {
 
           <div className="bg-black/40 p-6 md:p-8">
             <div>
-              <p className="track-mid mb-4 text-[10px] text-neutral-400">{panel.label}</p>
+              <p className="track-mid mb-4 text-xs text-neutral-400">{panel.label}</p>
               <CodeBlock src={panel.src} />
               <p className="mt-5 text-sm font-light text-neutral-400">{panel.note}</p>
             </div>
           </div>
 
           <div className="border-t border-white/5 p-6 md:p-8">
-            <p className="track-mid mb-3 text-[10px] text-neutral-400">{t.scopeLabel}</p>
+            <p className="track-mid mb-3 text-xs text-neutral-400">{t.scopeLabel}</p>
             <div className="grid gap-4 text-sm md:grid-cols-2">
               <div className="flex gap-3">
                 <span className="icon-metal mt-0.5">✓</span>

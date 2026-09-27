@@ -88,7 +88,7 @@ function Figure({ id, locale, cap, alt }: { id: FigId; locale: Locale; cap: stri
           <div className="min-w-[1000px]">{chart}</div>
         </div>
       )}
-      <figcaption className="track-mid edge-t mt-5 pt-4 text-[11px] leading-relaxed text-neutral-500">
+      <figcaption className="track-mid edge-t mt-5 pt-4 text-xs leading-relaxed text-neutral-500">
         {cap}
       </figcaption>
     </figure>
@@ -121,7 +121,7 @@ function Blocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
           case "flag":
             return (
               <aside key={i} className="my-10 max-w-2xl rounded-md border border-seal/20 bg-surface-2 p-6">
-                <p className="track-mid mb-2 text-[11px] text-seal">{b.head}</p>
+                <p className="track-mid mb-2 text-xs text-seal">{b.head}</p>
                 <p className="font-light leading-relaxed text-neutral-300">
                   <Rich>{b.text}</Rich>
                 </p>
@@ -130,7 +130,7 @@ function Blocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
           case "note":
             return (
               <aside key={i} className="card-premium my-10 max-w-2xl p-8">
-                <p className="track-mid mb-3 text-[11px] text-seal">{b.head}</p>
+                <p className="track-mid mb-3 text-xs text-seal">{b.head}</p>
                 {b.text.map((t, j) => (
                   <p
                     key={j}
@@ -206,7 +206,7 @@ export function ResearchZeroBarriers({
               {c.standfirst}
             </p>
             <div className="edge-t mt-10 flex max-w-2xl flex-col gap-2 pt-5">
-              <p className="track-mid text-[11px] text-neutral-400">{c.byline}</p>
+              <p className="track-mid text-xs text-neutral-400">{c.byline}</p>
               <p className="text-sm font-light leading-relaxed text-neutral-500">{c.note}</p>
             </div>
           </div>

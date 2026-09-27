@@ -40,7 +40,7 @@ export function SiteFooter({ locale = defaultLocale }: { locale?: Locale }) {
         </div>
         {nav.groups.map((g) => (
           <div key={g.id}>
-            <p className="seal-label track-mid mb-4 text-[11px]">{g.label}</p>
+            <p className="seal-label track-mid mb-4 text-xs">{g.label}</p>
             <ul className="space-y-2.5">
               {g.items.map((it) => (
                 <li key={it.href}>
@@ -53,7 +53,7 @@ export function SiteFooter({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         ))}
         <div>
-          <p className="seal-label track-mid mb-4 text-[11px]">{t.company}</p>
+          <p className="seal-label track-mid mb-4 text-xs">{t.company}</p>
           <ul className="space-y-2.5">
             {nav.company.map((it) => (
               <li key={it.href}>

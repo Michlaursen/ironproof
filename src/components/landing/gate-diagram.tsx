@@ -85,7 +85,7 @@ export function GateDiagram({ locale = defaultLocale }: { locale?: Locale }) {
           {t.initiators.map((c) => (
             <li key={c.who} className="flex items-center">
               <div className="chip-metal min-w-0 flex-1 px-5 py-3.5 md:px-6">
-                <p className="track-mid mb-1.5 text-[10px] text-neutral-500">{t.initiatorLabel}</p>
+                <p className="track-mid mb-1.5 text-xs text-neutral-500">{t.initiatorLabel}</p>
                 <p className="metal-text font-serif text-lg leading-tight">{c.who}</p>
                 <p className="mt-1.5 text-xs font-light leading-relaxed text-neutral-400">
                   {c.body}
