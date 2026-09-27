@@ -79,6 +79,7 @@ type Copy = {
   ctaLead: string;
   ctaPilot: string;
   ctaVerify: string;
+  ctaLab: string;
 };
 
 const T: L<Copy> = {
@@ -200,6 +201,7 @@ const T: L<Copy> = {
     ctaLead: "A pilot starts with one action type and ends with this: a sealed record your risk committee checks without us.",
     ctaPilot: "START A PILOT",
     ctaVerify: "VERIFY ANY DOSSIER",
+    ctaLab: "ATTACK THIS POLICY",
   },
   fr: {
     metaTitle: "Dossier de preuve — Ironproof",
@@ -321,6 +323,7 @@ const T: L<Copy> = {
     ctaLead: "Un pilote commence par un type d’action et se termine par ceci : un dossier scellé que votre comité de risque vérifie sans nous.",
     ctaPilot: "DÉMARRER UN PILOTE",
     ctaVerify: "VÉRIFIER UN DOSSIER",
+    ctaLab: "ATTAQUER CETTE POLITIQUE",
   },
 };
 
@@ -649,6 +652,12 @@ export default async function EvidencePage({ params }: PageProps) {
                   className="chip-metal track-mid px-7 py-3 text-xs text-neutral-200 transition hover:text-white"
                 >
                   {t.ctaVerify}
+                </a>
+                <a
+                  href={`${r}/lab`}
+                  className="chip-metal track-mid px-7 py-3 text-xs text-neutral-200 transition hover:text-white"
+                >
+                  {t.ctaLab}
                 </a>
               </div>
             </div>
