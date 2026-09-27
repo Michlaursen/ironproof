@@ -329,7 +329,19 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
             <IronproofMark height={30} />
             <span className="track-logo iron-brushed font-semibold">IRONPROOF</span>
           </div>
-          <span className="font-light">{t.footer}</span>
+          <div className="flex flex-col items-center gap-3 md:flex-row md:gap-8">
+            <span className="font-light">{t.footer}</span>
+            {/* The company page, so a buyer can check there are people behind the
+              * site without searching (URL given by Dom, 2026-09-26). */}
+            <a
+              href="https://www.linkedin.com/company/ironproof/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="track-mid border-b border-white/20 pb-0.5 text-[11px] text-neutral-300 transition hover:border-seal hover:text-white"
+            >
+              LinkedIn <span aria-hidden="true">&#8599;</span>
+            </a>
+          </div>
         </div>
       </footer>
 
