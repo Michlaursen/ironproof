@@ -166,7 +166,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     ),
 
     s03: "03 — What “provable” means, precisely",
-    s03Title: "Two layers on every surface.",
+    s03Title: "Detecting a problem is not proving there is none.",
     s03Lead:
       "Provable AI is not a vibe. On each surface we run — agent actions, code, cryptography — there are two distinct layers, and only one of them is the moat.",
     layer1: "LAYER 1 · DETECTION",
@@ -287,7 +287,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     ],
 
     s07: "07 — What it does not solve",
-    s07Title: "Sharp primitive, sharp edges.",
+    s07Title: "What a proof does not cover.",
     limits: [
       {
         t: "Valid under policy is not good policy",
@@ -434,7 +434,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     ),
 
     s03: "03 — Ce que « prouvable » veut dire, précisément",
-    s03Title: "Deux couches sur chaque surface.",
+    s03Title: "Détecter un problème, ce n’est pas prouver qu’il n’y en a pas.",
     s03Lead:
       "L’IA prouvable n’est pas une impression. Sur chaque surface où nous intervenons — actions d’agents, code, cryptographie — il y a deux couches distinctes, et une seule est la vraie barrière.",
     layer1: "COUCHE 1 · DÉTECTION",
@@ -558,7 +558,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     ],
 
     s07: "07 — Ce que ça ne règle pas",
-    s07Title: "Primitive tranchante, arêtes vives.",
+    s07Title: "Ce qu’une preuve ne couvre pas.",
     limits: [
       {
         t: "Valide selon la politique n’est pas une bonne politique",
