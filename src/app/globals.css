@@ -178,7 +178,9 @@ summary:focus-visible {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 16px rgba(220, 225, 255, 0.22));
+  /* No outer glow: a halo behind a serif headline reads as a game title, not a
+   * statement (Dom, 2026-09-26). The 1px shadow keeps the edge on black. */
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
 }
 
 .metal-shine {
@@ -188,7 +190,7 @@ summary:focus-visible {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(220, 225, 255, 0.26));
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
   animation: sweep 7s linear infinite;
 }
 @keyframes sweep {
@@ -819,6 +821,10 @@ p, li {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse at center, rgba(5, 5, 6, 0.55) 0%, rgba(5, 5, 6, 0.8) 80%);
+}
+/* Behind cards (Why now): darker, so the text on the cards stays the subject. */
+.breath-photo-deep::after {
+  background: linear-gradient(180deg, rgba(5, 5, 6, 0.7) 0%, rgba(5, 5, 6, 0.55) 40%, rgba(5, 5, 6, 0.9) 100%);
 }
 
 /* CLOSING — the agent before the wall, headline in forged iron on top. */

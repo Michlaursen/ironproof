@@ -80,7 +80,7 @@ type Copy = {
 const T: L<Copy> = {
   en: {
     eyebrow: "VERIFY A PROOF",
-    title: "Check a Real Proof Yourself",
+    title: "Check a real proof yourself.",
     lead: (when) => (
       <>
         Load a real sealed dossier and verify it right here — Ed25519 + ML-DSA-65 signatures, the

@@ -177,7 +177,10 @@ export function LandingHeader(props: HeaderProps) {
       <div className="relative z-20 flex items-center gap-4 px-6 py-6 sm:gap-8 md:px-14">
         <a href={logoHref} className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
           <IronproofMark height={40} preload />
-          <span className="track-logo iron-brushed text-base font-semibold max-[440px]:text-sm max-[440px]:tracking-[0.3em]">IRONPROOF</span>
+          {/* Phone: the hero already carries the full lockup one screen below, so the
+            * header keeps the mark alone (Dom, 2026-09-26). sr-only, not hidden: the
+            * link still needs its name. */}
+          <span className="track-logo iron-brushed text-base font-semibold max-md:sr-only">IRONPROOF</span>
         </a>
 
         {/* Desktop nav */}
