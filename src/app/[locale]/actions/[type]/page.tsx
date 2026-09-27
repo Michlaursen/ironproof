@@ -188,7 +188,7 @@ export default async function ActionPage({ params }: PageProps) {
             <div className="flex flex-wrap items-center gap-4">
               <h2 className="font-serif text-2xl text-neutral-100 md:text-3xl">{t.evidenceTitle}</h2>
               <span
-                className="track-mid rounded-[4px] border px-2.5 py-1 text-[11px]"
+                className="track-mid rounded-[4px] border px-2.5 py-1 text-xs"
                 style={{ color: LEVEL_COLOR[a.evidence], borderColor: "rgba(255,255,255,0.22)" }}
               >
                 {t.level[a.evidence]}
@@ -222,7 +222,7 @@ export default async function ActionPage({ params }: PageProps) {
             {ACTION_IDS.filter((id) => id !== type).map((id) => (
               <li key={id}>
                 <a href={path(locale, id)} className="chip-metal block p-5 transition hover:border-white/30">
-                  <span className="track-mid text-[11px] text-neutral-400">{all[id].tab}</span>
+                  <span className="track-mid text-xs text-neutral-400">{all[id].tab}</span>
                   <span className="mt-2 block font-serif text-lg leading-snug text-neutral-100">{all[id].h1}</span>
                 </a>
               </li>

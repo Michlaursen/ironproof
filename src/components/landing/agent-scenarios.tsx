@@ -327,7 +327,7 @@ export function AgentScenarios({
                 role="tab"
                 aria-selected={i === tab}
                 onClick={() => setTab(i)}
-                className={`track-mid border-b-2 pb-4 text-[11px] transition ${
+                className={`track-mid border-b-2 pb-4 text-xs transition ${
                   i === tab ? "border-seal text-white" : "border-transparent text-neutral-500 hover:text-neutral-200"
                 }`}
               >
@@ -340,7 +340,7 @@ export function AgentScenarios({
               type="button"
               aria-pressed={!blocked}
               onClick={() => setBlocked(false)}
-              className={`track-mid rounded-full px-4 py-2 text-[10px] transition ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
+              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
             >
               {t.presetAllow}
             </button>
@@ -348,7 +348,7 @@ export function AgentScenarios({
               type="button"
               aria-pressed={blocked}
               onClick={() => setBlocked(true)}
-              className={`track-mid rounded-full px-4 py-2 text-[10px] transition ${blocked ? "bg-[#ffb4b4]/10 text-[#ffb4b4]" : "text-neutral-500 hover:text-neutral-200"}`}
+              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "bg-[#ffb4b4]/10 text-[#ffb4b4]" : "text-neutral-500 hover:text-neutral-200"}`}
             >
               {t.presetBlock}
             </button>
@@ -357,13 +357,13 @@ export function AgentScenarios({
 
         <div key={`${tab}-${blocked ? "b" : "a"}`} className="scenario-swap grid gap-14 lg:grid-cols-[1.5fr_1fr]">
           <div>
-            <p className="track-mid text-[10px] text-neutral-500">
+            <p className="track-mid text-xs text-neutral-500">
               {t.initiatorLabel} <span className="ml-3 font-mono normal-case tracking-normal text-neutral-300">{scenario.initiator}</span>
             </p>
-            <p className="track-mid mt-8 text-[10px] text-neutral-500">{t.requestLabel}</p>
+            <p className="track-mid mt-8 text-xs text-neutral-500">{t.requestLabel}</p>
             <p className="mt-3 font-serif text-3xl leading-snug text-neutral-100 md:text-4xl">{current.request}</p>
 
-            <p className="track-mid mt-10 text-[10px] text-neutral-500">{t.checksLabel}</p>
+            <p className="track-mid mt-10 text-xs text-neutral-500">{t.checksLabel}</p>
             <ul className="mt-3 border-t border-white/10">
               {current.checks.map((k) => (
                 <li key={k.rule} className="flex items-baseline gap-4 border-b border-white/10 py-4 text-base font-light">
@@ -386,7 +386,7 @@ export function AgentScenarios({
           </div>
 
           <div className="border-l border-seal/40 pl-8 lg:mt-1">
-            <p className="track-mid mb-6 text-[10px] text-neutral-500">{t.receiptLabel}</p>
+            <p className="track-mid mb-6 text-xs text-neutral-500">{t.receiptLabel}</p>
             <ol className="space-y-5">
               {t.receiptFields.map((f, i) => (
                 <li key={f} className="flex items-baseline gap-4">

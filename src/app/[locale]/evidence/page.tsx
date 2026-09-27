@@ -360,7 +360,7 @@ function RequestCard({ d, t, locale }: { d: Decision; t: Copy; locale: Locale })
     <li className="chip-metal fade-up flex flex-col p-5" style={{ borderColor: s.border }}>
       <div className="flex items-center justify-between gap-3">
         <span className="font-mono text-sm text-neutral-200">{d.id}</span>
-        <span className="track-mid rounded-[4px] border px-2 py-1 text-[11px]" style={{ color: s.color, borderColor: s.border }}>
+        <span className="track-mid rounded-[4px] border px-2 py-1 text-xs" style={{ color: s.color, borderColor: s.border }}>
           {t.verdictName[d.verdict]}
         </span>
       </div>
@@ -562,7 +562,7 @@ export default async function EvidencePage({ params }: PageProps) {
                 <span className="font-serif text-3xl text-neutral-500">{i + 1}</span>
                 <p className="mt-3 font-serif text-xl leading-snug text-neutral-100">{c.q}</p>
                 <p className="mt-3 flex-1 text-sm font-light text-neutral-400">{c.how}</p>
-                <p className={`track-mid mt-5 text-[11px] ${i === 1 ? "text-seal" : "text-neutral-500"}`}>{c.here}</p>
+                <p className={`track-mid mt-5 text-xs ${i === 1 ? "text-seal" : "text-neutral-500"}`}>{c.here}</p>
               </li>
             ))}
           </ol>
@@ -580,7 +580,7 @@ export default async function EvidencePage({ params }: PageProps) {
                 <li key={d.question} className="chip-metal fade-up p-6">
                   <p className="font-mono text-sm text-neutral-200">{d.question}</p>
                   <p className="mt-3 text-sm text-neutral-100">
-                    <span className="seal-label track-mid mr-2 text-[11px]">{t.decided}</span>
+                    <span className="seal-label track-mid mr-2 text-xs">{t.decided}</span>
                     {d.decided}
                   </p>
                   <p className="mt-2 text-sm font-light text-neutral-400">{d.why}</p>

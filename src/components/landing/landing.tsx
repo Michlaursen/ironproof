@@ -804,7 +804,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <IronproofMark height={112} preload className="h-16 w-auto md:h-24" />
                 <span className="track-logo iron-brushed text-2xl font-semibold max-[380px]:text-lg max-[380px]:tracking-[0.3em] md:text-4xl">IRONPROOF</span>
               </div>
-              <p className="seal-label track-wide mb-7 text-[11px] md:text-xs">{t.hero.eyebrow}</p>
+              <p className="seal-label track-wide mb-7 text-xs md:text-xs">{t.hero.eyebrow}</p>
               {/* Set like a statement, not a poster: serif, sentence case, the
                 * consequence in the same gold as the lamp between the two keys. */}
               <h1 className="hero-serif mb-8 font-serif font-normal text-neutral-100">
@@ -999,7 +999,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <Image src="/media/closing-vault-marble-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             <div className="closing-card fade-up">
-              <p className="seal-label track-mid mb-5 text-[11px]">{t.closing.kicker}</p>
+              <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
               <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">
                 {t.closing.titleA}
                 <br />

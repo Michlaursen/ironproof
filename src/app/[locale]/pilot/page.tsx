@@ -237,7 +237,7 @@ export default async function PilotPage({ params }: PageProps) {
         <section id="request" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
           <div className="grid gap-12 lg:grid-cols-[1fr_32rem] lg:items-end">
             <div>
-              <p className="track-mid mb-6 text-[10px] text-neutral-500">{p.fitLabel}</p>
+              <p className="track-mid mb-6 text-xs text-neutral-500">{p.fitLabel}</p>
               <ul className="space-y-4">
                 {p.fit.map((f) => (
                   <li key={f} className="flex items-baseline gap-4 font-serif text-xl leading-snug text-neutral-200 md:text-2xl">

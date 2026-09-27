@@ -234,7 +234,7 @@ function cad(n: number, locale: Locale): string {
 function Chip({ v, t, big = false }: { v: Verdict; t: Copy; big?: boolean }) {
   return (
     <span
-      className={`track-mid rounded-[4px] border ${big ? "px-3 py-1.5 text-sm" : "px-2 py-0.5 text-[11px]"}`}
+      className={`track-mid rounded-[4px] border ${big ? "px-3 py-1.5 text-sm" : "px-2 py-0.5 text-xs"}`}
       style={{ color: STYLE[v].color, borderColor: STYLE[v].border }}
     >
       {t.verdictName[v]}
@@ -252,7 +252,7 @@ function Result({ d, t, action }: { d: Decision; t: Copy; action: unknown }) {
       </div>
       {lines.length ? (
         <div className="mt-4">
-          <p className="seal-label track-mid text-[11px]">{t.why}</p>
+          <p className="seal-label track-mid text-xs">{t.why}</p>
           <ul lang="en" className="mt-2 space-y-1.5">
             {lines.map(([id, why]) => (
               <li key={id} className="flex gap-2 font-mono text-xs text-neutral-300">
@@ -261,12 +261,12 @@ function Result({ d, t, action }: { d: Decision; t: Copy; action: unknown }) {
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[11px] text-neutral-500">{t.quoted}</p>
+          <p className="mt-2 text-xs text-neutral-500">{t.quoted}</p>
         </div>
       ) : null}
       <details className="mt-4">
         <summary className="cursor-pointer text-xs text-neutral-500 hover:text-neutral-300">{t.sent}</summary>
-        <pre className="mt-2 max-h-56 overflow-auto rounded-[4px] bg-black/50 p-3 font-mono text-[11px] leading-relaxed text-neutral-400">
+        <pre className="mt-2 max-h-56 overflow-auto rounded-[4px] bg-black/50 p-3 font-mono text-xs leading-relaxed text-neutral-400">
           {JSON.stringify(action, null, 2)}
         </pre>
       </details>
@@ -426,12 +426,12 @@ export function GateLab({
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <div className="grid gap-6 sm:grid-cols-2">
             <fieldset>
-              <legend className="seal-label track-mid mb-2 text-[11px]">{t.sentGroup}</legend>
+              <legend className="seal-label track-mid mb-2 text-xs">{t.sentGroup}</legend>
               <Toggle on={knobs.dropSent} onChange={set("dropSent")}>{t.knob.dropSent}</Toggle>
               <Toggle on={knobs.relabelSent} onChange={set("relabelSent")}>{t.knob.relabelSent}</Toggle>
             </fieldset>
             <fieldset>
-              <legend className="seal-label track-mid mb-2 text-[11px]">{t.declaredGroup}</legend>
+              <legend className="seal-label track-mid mb-2 text-xs">{t.declaredGroup}</legend>
               <Toggle on={knobs.dropDeclared} onChange={set("dropDeclared")}>{t.knob.dropDeclared}</Toggle>
               <Toggle on={knobs.relabelDeclared} onChange={set("relabelDeclared")}>{t.knob.relabelDeclared}</Toggle>
               <Toggle on={knobs.noDeclaration} onChange={set("noDeclaration")}>{t.knob.noDeclaration}</Toggle>
