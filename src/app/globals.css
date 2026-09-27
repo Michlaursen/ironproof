@@ -822,6 +822,10 @@ p, li {
   inset: 0;
   background: radial-gradient(ellipse at center, rgba(5, 5, 6, 0.55) 0%, rgba(5, 5, 6, 0.8) 80%);
 }
+/* Behind cards (Why now): darker, so the text on the cards stays the subject. */
+.breath-photo-deep::after {
+  background: linear-gradient(180deg, rgba(5, 5, 6, 0.7) 0%, rgba(5, 5, 6, 0.55) 40%, rgba(5, 5, 6, 0.9) 100%);
+}
 
 /* CLOSING — the agent before the wall, headline in forged iron on top. */
 .closing-wall-photo {

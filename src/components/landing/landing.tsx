@@ -140,7 +140,7 @@ type Copy = {
   };
 
   cta: { title: string; lead: string };
-  closing: { titleA: string; titleB: string; body: string; kicker: string };
+  closing: { titleA: string; titleB: string; body: string; kicker: string; scope: string };
 
   footer: string;
 };
@@ -153,6 +153,13 @@ const SRC_OSFI_TOKENIZED =
 // not a mathematical proof: the item quotes it, it does not stretch it.
 const SRC_EY_AGENTIC =
   "https://www.ey.com/en_gr/insights/financial-services/how-governed-intelligence-can-scale-agentic-banking";
+// Both opened 2026-09-26 in a real browser. Santander page dated 2 March 2026;
+// OSFI bulletin "Date modified: 2026-07-13". Mastercard's own newsroom and
+// Gartner refused automated reads, so neither is cited here.
+const SRC_SANTANDER_AGENT_PAY =
+  "https://www.santander.com/en/press-room/press-releases/2026/03/santander-and-mastercard-complete-europes-first-live-end-to-end-payment-executed-by-an-ai-agent";
+const SRC_OSFI_AGENTIC =
+  "https://www.osfi-bsif.gc.ca/en/risks/technology-cyber-risk-management/technology-risk-bulletin/generative-agentic-artificial-intelligence-implications-technology-cyber-security-operational";
 const SRC_SIX_BANKS =
   "https://www.newswire.ca/news-releases/six-canadian-banks-explore-development-of-a-secure-cad-tokenized-deposit-solution-869071438.html";
 
@@ -317,9 +324,21 @@ const T: L<Copy> = {
 
     now: {
       eyebrow: "WHY NOW",
-      title: "Code is starting to move money on its own.",
-      lead: "Canadian regulators and banks have put dates on it. Each item links to its source.",
+      title: "Systems are starting to act on their own.",
+      lead: "Agents, scripts and automated pipelines now move money, change access and ship code without a person in the loop. Regulators and banks have put dates on it. Each item links to its source.",
       items: [
+        {
+          date: "Mar 2, 2026",
+          what: "Santander and Mastercard complete Europe’s first live end-to-end payment executed by an AI agent, inside a regulated bank’s payment infrastructure.",
+          source: "Santander, press release",
+          href: SRC_SANTANDER_AGENT_PAY,
+        },
+        {
+          date: "Jul 13, 2026",
+          what: "OSFI publishes its bulletin on generative and agentic AI: agents that reason, plan, decide and take actions without human intervention call for least privilege and audit trails on every AI-initiated activity.",
+          source: "OSFI, bulletin on generative and agentic AI",
+          href: SRC_OSFI_AGENTIC,
+        },
         {
           date: "Sep 1, 2026",
           what: "EY: 52% of banks have piloted agentic AI, only 16% have fully deployed use cases. “A bank cannot simply say an AI system is governed. It must be able to prove it.”",
@@ -345,7 +364,7 @@ const T: L<Copy> = {
           href: SRC_E23,
         },
       ],
-      foot: "When a payment can release itself on a condition, someone has to verify the condition before it executes.",
+      foot: "When a system can act on its own, the decision has to be made before the action runs, not read in a log afterwards.",
     },
 
     gate: {
@@ -449,6 +468,10 @@ const T: L<Copy> = {
       titleB: "provably impossible.",
       body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action is checked before it executes: what’s authorized runs, sealed; what isn’t never executes.",
       kicker: "Check every action. Run what’s proven. Stop the rest.",
+      // The fine print under "provably impossible": what the proof covers, and
+      // the one condition it rests on (the action can only run through the gate).
+      scope:
+        "Proven for the actions and the policy you define, where the action can only execute through the gate. The certificate states that boundary.",
     },
 
     cta: {
@@ -618,9 +641,21 @@ const T: L<Copy> = {
 
     now: {
       eyebrow: "POURQUOI MAINTENANT",
-      title: "Le code commence à déplacer l’argent tout seul.",
-      lead: "Les régulateurs et les banques du Canada y ont mis des dates. Chaque élément renvoie à sa source.",
+      title: "Les systèmes commencent à agir seuls.",
+      lead: "Des agents, des scripts et des chaînes automatisées déplacent déjà de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs et les banques y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
+        {
+          date: "2 mars 2026",
+          what: "Santander et Mastercard réalisent le premier paiement de bout en bout exécuté par un agent IA en Europe, sur l’infrastructure de paiement réelle d’une banque réglementée.",
+          source: "Santander, communiqué",
+          href: SRC_SANTANDER_AGENT_PAY,
+        },
+        {
+          date: "13 juil. 2026",
+          what: "Le BSIF publie son bulletin sur l’IA générative et agentique : des agents qui raisonnent, planifient, décident et agissent sans intervention humaine exigent le moindre privilège et une piste d’audit pour chaque activité lancée par l’IA.",
+          source: "BSIF, bulletin sur l’IA générative et agentique",
+          href: SRC_OSFI_AGENTIC,
+        },
         {
           date: "1er sept. 2026",
           what: "EY : 52 % des banques ont piloté l’IA agentique, 16 % seulement ont des cas d’usage pleinement déployés. « Une banque ne peut pas simplement dire qu’un système d’IA est gouverné. Elle doit pouvoir le prouver. » (notre traduction)",
@@ -646,7 +681,7 @@ const T: L<Copy> = {
           href: SRC_E23,
         },
       ],
-      foot: "Quand un paiement peut se libérer tout seul sur une condition, quelqu’un doit vérifier la condition avant l’exécution.",
+      foot: "Quand un système peut agir seul, la décision doit se prendre avant que l’action parte, pas se lire dans un journal après coup.",
     },
 
     gate: {
@@ -750,6 +785,8 @@ const T: L<Copy> = {
       titleB: "prouvé impossible.",
       body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; pour le reste, pas d’exécution.",
       kicker: "Chaque action vérifiée. Ce qui est prouvé s’exécute. Le reste, jamais.",
+      scope:
+        "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
     },
 
     cta: {
@@ -916,13 +953,14 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.authz.lead}</p>
           </div>
-          {/* The badge worked, the gate stayed shut: authentication (who you
-            * are) passed, authorization (this action, now) did not. The two
-            * labels sit under the photo so they never cover the agent. */}
+          {/* Two chips on one board: the small one on the left is lit green
+            * (authentication, who you are) and its traces run into the steel one on
+            * the right, lit amber (authorization, this action, now). Same order as
+            * the two labels under it; same series as the gate chip (Dom, 2026-09-26). */}
           <figure className="gap-figure fade-up">
             <div className="gap-photo">
               <Image
-                src="/media/gap-badge.jpg"
+                src="/media/gap-two-chips.jpg"
                 loading="eager"
                 alt=""
                 fill
@@ -1002,7 +1040,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/critical-switches.jpg" position="50% 55%" />
+            <PhotoPlate src="/media/guarded-switches.jpg" position="50% 50%" />
           </div>
           {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
             * and the rules that already say what must never happen there. */}
@@ -1040,14 +1078,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* 6. WHY NOW — dated, each with its source */}
-        <section id="now" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-12 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
-            <div className="max-w-3xl">
-              <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
-              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
-            </div>
-            <PhotoPlate src="/media/hand-coins.jpg" wide position="70% 50%" />
+        <section id="now" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14">
+          {/* The financial district at night behind the whole section, traffic
+            * flowing between the towers like payments that no longer wait for a
+            * person (Dom, 2026-09-26). Darkened so the dated cards stay the subject. */}
+          <div className="breath-photo breath-photo-deep" aria-hidden="true">
+            <Image src="/media/district-night.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          </div>
+          <div className="mx-auto max-w-7xl">
+          <div className="fade-up mb-12 max-w-3xl">
+            <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
+            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
+            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
           </div>
           <ol className="fade-up grid gap-6 md:grid-cols-2">
             {t.now.items.map((d) => (
@@ -1068,12 +1110,15 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
             {t.now.foot}
           </p>
+          </div>
         </section>
 
         {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
         <section id="why" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14 md:py-32">
           <div className="breath-photo" aria-hidden="true">
-            <Image src="/media/sequence-gate.jpg" alt="" fill loading="eager" sizes="100vw" className="object-cover" />
+            {/* Hundreds of boxes that hold, one standing open: the exact sequence that
+              * breaks the policy, found among all the ones that do not (Dom, 2026-09-26). */}
+            <Image src="/media/vault-grid.jpg" alt="" fill loading="eager" sizes="100vw" className="object-cover" />
           </div>
           <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
             <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
@@ -1102,7 +1147,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.gate.lead}</p>
           </div>
-          <PhotoPlate src="/media/initiators-gate.jpg" wide position="50% 70%" />
+          {/* Every trace on the board runs into the one chip: every path that can
+            * reach a critical system goes through the same check (Dom, 2026-09-26). */}
+          <PhotoPlate src="/media/gate-chip.jpg" wide position="50% 50%" />
           <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
             {t.gate.foot}
           </p>
@@ -1119,8 +1166,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.how.lead}</p>
               <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">{t.how.compiler}</p>
             </div>
-            {/* The one image here: the decision struck into steel. */}
-            <PhotoPlate src="/media/step-seal-ironproof.jpg" wide position="50% 60%" />
+            {/* The one image here: the decision struck into steel, with logo 09
+              * (Dom, 2026-09-26). */}
+            <PhotoPlate src="/media/seal-press-logo09.jpg" wide position="50% 55%" />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
@@ -1212,15 +1260,14 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* CLOSING — the vault under a gold dome that stops a rain of sparks
-          * (swapped with the hero by Dom, 2026-09-25), full-bleed behind
-          * a glass card. Both halves of the act in the body: what is proven
-          * runs, the rest never executes. Symbolic art, not a product. */}
+        {/* CLOSING — a closed vault door under one hard light, full-bleed behind
+          * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
+          * of the act in the body: what is proven runs, the rest never executes. */}
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-dome.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-dome-m.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-vault.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-vault-m.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-[11px]">{t.closing.kicker}</p>
@@ -1230,6 +1277,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <span className="text-seal">{t.closing.titleB}</span>
               </h2>
               <p className="mt-6 text-base font-light leading-relaxed text-neutral-300">{t.closing.body}</p>
+              <p className="mt-4 text-xs font-light leading-relaxed text-neutral-500">{t.closing.scope}</p>
               <a
                 href="#pilot"
                 className="track-mid mt-8 inline-flex items-center gap-3 rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
