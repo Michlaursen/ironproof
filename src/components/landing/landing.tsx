@@ -1260,14 +1260,15 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* CLOSING — a closed vault door under one hard light, full-bleed behind
+        {/* CLOSING — a closed vault door with a gold ring in a black marble hall
+          * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
           * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
           * of the act in the body: what is proven runs, the rest never executes. */}
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-vault.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-vault-m.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-vault-marble.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-vault-marble-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-[11px]">{t.closing.kicker}</p>
