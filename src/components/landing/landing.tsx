@@ -5,9 +5,7 @@ import { HERO_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
-import { VerifyArtifact } from "./verify-artifact";
 import { ProofPipeline } from "./proof-pipeline";
-import { CtaForm } from "./cta-form";
 import { PILOT_COPY } from "./pilot-copy";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
@@ -143,7 +141,6 @@ type Copy = {
   cta: { title: string; lead: string };
   closing: { titleA: string; titleB: string; body: string; kicker: string; scope: string };
 
-  footer: string;
 };
 
 const SRC_E23 =
@@ -451,7 +448,6 @@ const T: L<Copy> = {
       lead: "Choose a payment, access grant, deletion, or deployment. Ironproof will define the authorization boundary, prove it, enforce it at runtime, and produce an independently verifiable record.",
     },
 
-    footer: "Deterministic authorization. Independently verifiable proof.",
   },
 
   fr: {
@@ -737,7 +733,6 @@ const T: L<Copy> = {
       lead: "Choisissez un paiement, un octroi d’accès, une suppression ou un déploiement. Ironproof définira la frontière d’autorisation, la prouvera, l’appliquera à l’exécution et produira une trace vérifiable de façon indépendante.",
     },
 
-    footer: "Autorisation déterministe. Preuve vérifiable de façon indépendante.",
   },
 };
 
@@ -827,7 +822,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * its own section further down. */}
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a
-                  href="#pilot"
+                  href={`${r}/pilot`}
                   className="track-mid inline-flex items-center gap-3 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
                   {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
@@ -880,52 +875,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* 3. WATCH IT DECIDE — four action classes, one gate */}
-        <AgentScenarios locale={locale} verifyHref="#verify" />
-
-        {/* 3b. CHECK IT YOURSELF — right after watching it decide: the reader who just
-          * saw a sealed record can verify one in the browser, before any argument
-          * (moved up from after "how", Dom 2026-09-26). */}
-        <VerifyArtifact locale={locale} />
-
-        {/* 4. AUTHENTICATION IS NOT AUTHORIZATION */}
-        <section id="gap" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-12 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.authz.eyebrow}</p>
-            <h2 className="font-serif text-4xl font-medium text-neutral-100 md:text-6xl">
-              {t.authz.title}
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.authz.lead}</p>
-          </div>
-          {/* Two chips on one board: the small one on the left is lit green
-            * (authentication, who you are) and its traces run into the steel one on
-            * the right, lit amber (authorization, this action, now). Same order as
-            * the two labels under it; same series as the gate chip (Dom, 2026-09-26). */}
-          <figure className="gap-figure fade-up">
-            <div className="gap-photo">
-              <Image
-                src="/media/gap-two-chips.jpg"
-                loading="eager"
-                alt=""
-                fill
-                sizes="(min-width: 1280px) 1200px, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <figcaption className="gap-callouts">
-              <div className="gap-callout gap-callout-authn">
-                <p className="track-mid mb-3 text-[10px] text-neutral-200">01 · {t.authz.authn.label}</p>
-                <p className="text-sm font-light leading-relaxed text-neutral-400">{t.authz.authn.body}</p>
-              </div>
-              <div className="gap-callout gap-callout-authz">
-                <p className="seal-label track-mid mb-3 text-[10px]">02 · {t.authz.authz.label}</p>
-                <p className="text-sm font-light leading-relaxed text-neutral-200">{t.authz.authz.body}</p>
-              </div>
-            </figcaption>
-          </figure>
-          <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
-            {t.authz.foot}
-          </p>
-        </section>
+        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
 
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
@@ -943,80 +893,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {c.name}
               </a>
             ))}
-          </div>
-        </section>
-
-        {/* 4. WHAT IRONPROOF IS NOT */}
-        <section id="not" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-12 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.not.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.not.title}</h2>
-          </div>
-          {/* Ruled rows, no cards: what it gets confused with, struck, and why. */}
-          <ul className="fade-up border-t border-white/10">
-            {t.not.items.map((n) => (
-              <li
-                key={n.label}
-                className="grid gap-3 border-b border-white/10 py-8 md:grid-cols-[1fr_1.3fr] md:items-baseline md:gap-12"
-              >
-                <p className="font-serif text-3xl text-neutral-500 line-through decoration-[#ffb4b4]/70 decoration-1 md:text-4xl">
-                  {n.label}
-                </p>
-                <p className="text-base font-light leading-relaxed text-neutral-300">{n.body}</p>
-              </li>
-            ))}
-          </ul>
-          <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
-            {t.not.foot}
-          </p>
-        </section>
-
-        {/* 5. WHERE IT APPLIES — three domains, with the rules that already exist */}
-        <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-14 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.domains.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              {t.domains.titleA}
-              <br />
-              {t.domains.titleB}
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
-          </div>
-          <div className="mb-14">
-            <PhotoPlate src="/media/guarded-switches.jpg" position="50% 50%" />
-          </div>
-          {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
-            * and the rules that already say what must never happen there. */}
-          <div className="fade-up">
-            <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-[10px] text-neutral-500 md:grid">
-              <span />
-              <span>{t.domains.actionsLabel}</span>
-              <span>{t.domains.rulesLabel}</span>
-            </div>
-            <ul className="border-t border-white/10">
-              {t.domains.items.map((d) => (
-                <li
-                  key={d.name}
-                  className="grid gap-3 border-b border-white/10 py-7 md:grid-cols-[16rem_1fr_18rem] md:items-baseline md:gap-10"
-                >
-                  <h3 className="font-serif text-2xl text-neutral-100">{d.name}</h3>
-                  <p className="text-base font-light leading-relaxed text-neutral-300">
-                    {d.actions.join(" · ")}
-                  </p>
-                  <p className="font-mono text-xs leading-relaxed text-neutral-400">{d.rules}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* BREATH — the frameworks exist; this is what Ironproof does with them */}
-        <section className="relative z-10 px-6 py-28 md:px-14 md:py-32">
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <span className="breath-mark" aria-hidden="true" />
-            <p className="mt-10 font-serif text-2xl font-medium leading-snug text-neutral-400 sm:text-3xl md:text-4xl">
-              {t.breathFrameworks}
-            </p>
           </div>
         </section>
 
@@ -1081,23 +957,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* ONE GATE, ANY INITIATOR */}
-        <section id="initiators" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
-          <div className="fade-up mb-12 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.gate.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              {t.gate.title}
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.gate.lead}</p>
-          </div>
-          {/* Every trace on the board runs into the one chip: every path that can
-            * reach a critical system goes through the same check (Dom, 2026-09-26). */}
-          <PhotoPlate src="/media/gate-chip.jpg" wide position="50% 50%" />
-          <p className="fade-up mt-10 max-w-2xl text-sm font-light text-neutral-400">
-            {t.gate.foot}
-          </p>
-        </section>
-
         {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
         <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-16 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
@@ -1128,80 +987,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* PUBLIC TECHNICAL RECORD */}
-        <section className="relative z-10 edge-t px-6 py-20 md:px-14">
-          <div className="fade-up mx-auto max-w-4xl text-center">
-            <p className="seal-label track-mid mb-4 text-xs">{t.engine.eyebrow}</p>
-            <h2 className="metal-text font-serif text-3xl font-medium md:text-5xl">
-              {t.engine.title}
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-light text-neutral-300">
-              {t.engine.lead}
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <a
-                href="https://github.com/pupnp/pupnp/security/advisories/GHSA-q522-6w45-4j58"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="chip-metal track-mid px-3 py-1 text-xs text-neutral-200 transition hover:text-white"
-              >
-                CVE-2026-41682
-              </a>
-            </div>
-            <a
-              href={`${r}/proof`}
-              className="chip-metal track-mid mt-10 inline-block px-8 py-3.5 text-xs text-neutral-200 transition hover:text-white"
-            >
-              {t.engine.cta}
-            </a>
-          </div>
-        </section>
-
-
-        {/* 9. DESIGN PARTNER PILOT — scope, not price */}
-        <section id="pilot" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.pilot.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-              {t.pilot.title}
-            </h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.pilot.lead}</p>
-          </div>
-          {/* Same grammar as How it works: ruled columns, large numbers, no
-            * cards and no picture. The last step is gold: it is the one the
-            * client keeps. */}
-          <ol className="fade-up grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
-            {t.pilot.steps.map((st, i) => {
-              const last = i === t.pilot.steps.length - 1;
-              return (
-                <li key={st.title} className={`min-w-0 border-t pt-6 ${last ? "border-seal/60" : "border-white/15"}`}>
-                  <span className={`font-serif text-6xl leading-none ${last ? "text-seal" : "text-neutral-600"}`}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-5 font-serif text-3xl text-neutral-100">{st.title}</h3>
-                  <p className="mt-3 text-sm font-light leading-relaxed text-neutral-400">{st.body}</p>
-                </li>
-              );
-            })}
-          </ol>
-          <div className="fade-up mt-20 grid gap-12 border-t border-white/10 pt-12 lg:grid-cols-[1fr_32rem] lg:items-end">
-            <div>
-              <p className="track-mid mb-6 text-[10px] text-neutral-500">{t.pilot.fitLabel}</p>
-              <ul className="space-y-4">
-                {t.pilot.fit.map((f) => (
-                  <li key={f} className="flex items-baseline gap-4 font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
-                    <span className="h-px w-6 shrink-0 translate-y-[-0.35em] bg-seal" aria-hidden="true" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* The request form lives here now that the closing contact block is gone. */}
-            <div className="pilot-form w-full min-w-0">
-              <CtaForm locale={locale} />
-            </div>
-          </div>
-        </section>
 
         {/* CLOSING — a closed vault door with a gold ring in a black marble hall
           * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
@@ -1223,7 +1008,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <p className="mt-6 text-base font-light leading-relaxed text-neutral-300">{t.closing.body}</p>
               <p className="mt-4 text-xs font-light leading-relaxed text-neutral-500">{t.closing.scope}</p>
               <a
-                href="#pilot"
+                href={`${r}/pilot`}
                 className="track-mid mt-8 inline-flex items-center gap-3 rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
               >
                 {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
@@ -1234,28 +1019,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
       </main>
 
-      {/* FOOTER */}
-      <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
-          <div className="flex items-center gap-3">
-            <IronproofMark height={30} />
-            <span className="track-logo iron-brushed font-semibold">IRONPROOF</span>
-          </div>
-          <div className="flex flex-col items-center gap-3 md:flex-row md:gap-8">
-            <span className="font-light">{t.footer}</span>
-            {/* The company page, so a buyer can check there are people behind the
-              * site without searching (URL given by Dom, 2026-09-26). */}
-            <a
-              href="https://www.linkedin.com/company/ironproof/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="track-mid border-b border-white/20 pb-0.5 text-[11px] text-neutral-300 transition hover:border-seal hover:text-white"
-            >
-              LinkedIn <span aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </div>
-      </footer>
 
       <FadeUpInit />
     </div>
