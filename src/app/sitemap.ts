@@ -88,6 +88,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://ironproof.ai/pilot",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/pilot",
+          fr: "https://ironproof.ai/fr/pilot",
+        },
+      },
+    },
     // The research index is English only, like the notes it lists.
     {
       url: "https://ironproof.ai/research",

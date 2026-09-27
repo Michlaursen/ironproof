@@ -642,7 +642,7 @@ export default async function EvidencePage({ params }: PageProps) {
               <p className="mt-5 max-w-xl text-lg font-light text-neutral-300">{t.ctaLead}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href={`${r || "/"}#pilot`}
+                  href={`${r}/pilot`}
                   className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
                   {t.ctaPilot}
