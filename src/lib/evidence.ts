@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { decide } from "./govgate";
 
 /*
  * The /evidence page reads the published pack; it never restates it.
@@ -53,6 +54,9 @@ export type EvidencePack = {
   ownDecisions: OwnDecision[];
   limits: Limit[];
   forgedSeq: number;
+  /** The sealed policy and actions, verbatim, for /lab to edit and re-decide. */
+  policy: unknown;
+  actions: Record<string, unknown>;
 };
 
 function fail(what: string): never {
@@ -134,7 +138,24 @@ function parseDossier(raw: string) {
     };
   });
 
+  // The site's evaluator must reach every sealed verdict on its own, or the
+  // build stops: /lab runs this evaluator, so it has to agree with the engine
+  // on everything the engine sealed.
+  const policy = h.policy;
+  const actions: Record<string, unknown> = {};
+  for (const [i, e] of rest.entries()) {
+    const c = (e as Record<string, Record<string, unknown>>).content;
+    const d = decisions[i];
+    const got = decide(policy, c.action);
+    const want = `${d.verdict} v=${d.violated.join(",")} u=${d.undecidable.join(",")}`;
+    const mine = `${got.decision} v=${got.violated.join(",")} u=${got.undecidable.join(",")}`;
+    if (want !== mine) fail(`site evaluator decides ${d.id} as ${mine}, the seal says ${want}`);
+    actions[d.id] = c.action;
+  }
+
   return {
+    policy,
+    actions,
     constraints,
     approvers,
     quorum: a.quorum,
