@@ -4,6 +4,7 @@ import { useState } from "react";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, money, count } from "./i18n";
 import { GateLoop } from "./gate-loop";
+import { ACTION_COPY, type ActionId } from "./action-types";
 
 /*
  * WATCH IT DECIDE — four action classes, one gate.
@@ -21,7 +22,8 @@ import { GateLoop } from "./gate-loop";
 type Check = { rule: string; ok: boolean };
 type Case = { request: string; checks: readonly Check[] };
 type Scenario = {
-  id: string;
+  // An ActionId, so every tab has an /actions/<id> page to link to.
+  id: ActionId;
   tab: string;
   initiator: string;
   allowCase: Case;
@@ -45,6 +47,7 @@ type Copy = {
   receiptFields: readonly string[];
   receiptCta: string;
   illustrative: string;
+  more: string;
   scenarios: readonly Scenario[];
 };
 
@@ -79,10 +82,11 @@ const T: L<Copy> = {
     ],
     receiptCta: "CHECK A REAL SEALED RECORD",
     illustrative: "Illustrative decisions under a sample policy.",
+    more: "MORE ON THIS ACTION TYPE",
     scenarios: [
       {
         id: "money",
-        tab: "MOVE MONEY",
+        tab: ACTION_COPY.en.money.tab,
         initiator: "AI agent · treasury-ops",
         allowCase: {
           request: `Wire ${money(WIRE_ASK, "en")} to a beneficiary on file for 90 days`,
@@ -103,7 +107,7 @@ const T: L<Copy> = {
       },
       {
         id: "access",
-        tab: "GRANT ACCESS",
+        tab: ACTION_COPY.en.access.tab,
         initiator: "AI agent · it-helpdesk",
         allowCase: {
           request: "Grant read-only access to the reporting dashboard for 24 hours",
@@ -124,7 +128,7 @@ const T: L<Copy> = {
       },
       {
         id: "records",
-        tab: "DELETE RECORDS",
+        tab: ACTION_COPY.en.records.tab,
         initiator: "Script · nightly-cleanup",
         allowCase: {
           request: `Delete ${count(800, "en")} records past their retention period`,
@@ -145,7 +149,7 @@ const T: L<Copy> = {
       },
       {
         id: "deploy",
-        tab: "SHIP A CHANGE",
+        tab: ACTION_COPY.en.deploy.tab,
         initiator: "AI coding agent · release-bot",
         allowCase: {
           request: "Push a configuration change to the payment rail",
@@ -188,10 +192,11 @@ const T: L<Copy> = {
     ],
     receiptCta: "VÉRIFIEZ UNE VRAIE TRACE SCELLÉE",
     illustrative: "Décisions illustratives sous une politique d’exemple.",
+    more: "EN SAVOIR PLUS SUR CE TYPE D’ACTION",
     scenarios: [
       {
         id: "money",
-        tab: "DÉPLACER DE L’ARGENT",
+        tab: ACTION_COPY.fr.money.tab,
         initiator: "Agent IA · treasury-ops",
         allowCase: {
           request: `Virer ${money(WIRE_ASK, "fr")} à un bénéficiaire au dossier depuis 90 jours`,
@@ -212,7 +217,7 @@ const T: L<Copy> = {
       },
       {
         id: "access",
-        tab: "DONNER UN ACCÈS",
+        tab: ACTION_COPY.fr.access.tab,
         initiator: "Agent IA · it-helpdesk",
         allowCase: {
           request: "Accorder un accès en lecture seule au tableau de bord de rapports pour 24 heures",
@@ -233,7 +238,7 @@ const T: L<Copy> = {
       },
       {
         id: "records",
-        tab: "SUPPRIMER DES DOSSIERS",
+        tab: ACTION_COPY.fr.records.tab,
         initiator: "Script · nightly-cleanup",
         allowCase: {
           request: `Supprimer ${count(800, "fr")} dossiers dont la période de conservation est échue`,
@@ -254,7 +259,7 @@ const T: L<Copy> = {
       },
       {
         id: "deploy",
-        tab: "LIVRER UN CHANGEMENT",
+        tab: ACTION_COPY.fr.deploy.tab,
         initiator: "Agent de code IA · release-bot",
         allowCase: {
           request: "Pousser un changement de configuration sur le rail de paiement",
@@ -398,7 +403,16 @@ export function AgentScenarios({
             </a>
           </div>
         </div>
-        <p className="fade-up mt-12 text-xs text-neutral-500">{t.illustrative}</p>
+        <div className="fade-up mt-12 flex flex-wrap items-baseline justify-between gap-4">
+          <p className="text-xs text-neutral-500">{t.illustrative}</p>
+          {/* The tab's own page: same id, so tab and page name the same thing. */}
+          <a
+            href={`${locale === defaultLocale ? "" : `/${locale}`}/actions/${scenario.id}`}
+            className="track-mid border-b border-white/20 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+          >
+            {t.more} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
       </div>
     </section>
   );

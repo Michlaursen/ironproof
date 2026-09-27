@@ -27,6 +27,7 @@ const nextConfig: NextConfig = {
       { source: "/evidence", destination: "/en/evidence" },
       { source: "/lab", destination: "/en/lab" },
       { source: "/pilot", destination: "/en/pilot" },
+      { source: "/actions/:type", destination: "/en/actions/:type" },
       { source: "/research", destination: "/en/research" },
       {
         source: "/research/zero-barriers-one-reviewer",
