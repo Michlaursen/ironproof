@@ -15,7 +15,7 @@ type Variant = "home" | "sub";
  * the language switch which page to cross to. Those used to be the same idea
  * split across two props, which is a mirror waiting to disagree.
  */
-type Page = "home" | "proof" | "provable-ai" | "verify" | "evidence" | "lab" | "research" | "research-index";
+type Page = "home" | "proof" | "provable-ai" | "verify" | "evidence" | "lab" | "pilot" | "research" | "research-index";
 
 /**
  * Each page's path WITHOUT a locale prefix. The single source for both link
@@ -29,6 +29,7 @@ const PATHS: Record<Page, string> = {
   verify: "/verify",
   evidence: "/evidence",
   lab: "/lab",
+  pilot: "/pilot",
   research: "/research/zero-barriers-one-reviewer",
   "research-index": "/research",
 };
@@ -143,7 +144,8 @@ export function LandingHeader(props: HeaderProps) {
   const t = pick(NAV, locale);
   const r = routePrefix(locale);
   const logoHref = variant === "sub" ? r || "/" : "#top";
-  const contactHref = variant === "sub" ? `${r || "/"}#pilot` : "#pilot";
+  // Every "Start a pilot" lands on the one page that explains it (2026-09-26).
+  const contactHref = `${r}${PATHS.pilot}`;
   const isActive = (p?: Page) => p !== undefined && p === page;
 
   const switchHref = otherLocaleHref(page, locale);

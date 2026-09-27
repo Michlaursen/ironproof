@@ -8,6 +8,7 @@ import { AgentScenarios } from "./agent-scenarios";
 import { VerifyArtifact } from "./verify-artifact";
 import { ProofPipeline } from "./proof-pipeline";
 import { CtaForm } from "./cta-form";
+import { PILOT_COPY } from "./pilot-copy";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
 
@@ -432,36 +433,7 @@ const T: L<Copy> = {
       cta: "VIEW TECHNICAL RECORD",
     },
 
-    pilot: {
-      eyebrow: "DESIGN PARTNER PILOT",
-      title: "Start with one action type.",
-      lead: "A fixed-scope pilot on a single action your automation already performs. You keep the certificate, the gate and the sealed records.",
-      steps: [
-        {
-          title: "Pick the action",
-          body: "One action type your agents or scripts already run — a transfer, an access grant, a deletion, a deployment — and the rules that govern it today.",
-        },
-        {
-          title: "Prove the policy",
-          body: "We encode the rules, search for sequences that pass every rule yet break the intent, and prove the corrected policy holds.",
-        },
-        {
-          title: "Enforce and seal",
-          body: "The gate runs in your environment, in front of the action. Every decision, allow or block, is sealed.",
-        },
-        {
-          title: "Verify without us",
-          body: "Your risk team or auditor re-checks the certificate and the records on their own machine.",
-        },
-      ],
-      fitLabel: "A GOOD FIT IF",
-      fit: [
-        "An agent, API or script can already execute the action without a person clicking approve",
-        "The rules exist on paper — limits, approvals, windows, holds",
-        "Someone will be asked to show that those rules actually held",
-      ],
-      cta: "START A PILOT",
-    },
+    pilot: PILOT_COPY.en,
 
     closing: {
       titleA: "Probably safe is not",
@@ -749,36 +721,7 @@ const T: L<Copy> = {
       cta: "VOIR LE DOSSIER TECHNIQUE",
     },
 
-    pilot: {
-      eyebrow: "PILOTE PARTENAIRE DE CONCEPTION",
-      title: "Commencez par un seul type d’action.",
-      lead: "Un pilote à périmètre fixe sur une seule action que votre automatisation exécute déjà. Vous gardez le certificat, la barrière et les traces scellées.",
-      steps: [
-        {
-          title: "Choisir l’action",
-          body: "Un type d’action que vos agents ou scripts exécutent déjà — un transfert, un accès, une suppression, un déploiement — et les règles qui l’encadrent aujourd’hui.",
-        },
-        {
-          title: "Prouver la politique",
-          body: "Nous encodons les règles, cherchons les séquences qui passent chaque règle mais trahissent l’intention, et prouvons que la politique corrigée tient.",
-        },
-        {
-          title: "Appliquer et sceller",
-          body: "La barrière tourne dans votre environnement, devant l’action. Chaque décision, autorisée ou bloquée, est scellée.",
-        },
-        {
-          title: "Vérifier sans nous",
-          body: "Votre équipe de risque ou votre auditeur revérifie le certificat et les traces sur sa propre machine.",
-        },
-      ],
-      fitLabel: "UN BON CANDIDAT SI",
-      fit: [
-        "Un agent, une API ou un script peut déjà exécuter l’action sans qu’une personne clique sur approuver",
-        "Les règles existent sur papier — limites, approbations, fenêtres, gels",
-        "Quelqu’un devra montrer que ces règles ont réellement tenu",
-      ],
-      cta: "DÉMARRER UN PILOTE",
-    },
+    pilot: PILOT_COPY.fr,
 
     closing: {
       titleA: "Probablement sûr, ce n’est pas",

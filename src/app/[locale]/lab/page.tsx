@@ -134,7 +134,7 @@ export default async function LabPage({ params }: PageProps) {
           </ol>
           <div className="mt-12 flex flex-wrap gap-3">
             <a
-              href={`${r || "/"}#pilot`}
+              href={`${r}/pilot`}
               className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
             >
               {t.ctaPilot}
