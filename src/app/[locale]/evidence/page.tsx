@@ -88,7 +88,7 @@ const T: L<Copy> = {
     metaDescription:
       "One payment control, six requests, every decision sealed. See what an examiner can check without Ironproof: the verdicts, who approved the policy, what the solver established about the rule, the choices we made on the customer’s behalf, and what the pack does not establish.",
     eyebrow: "EVIDENCE PACK",
-    h1: "What an examiner can check without us.",
+    h1: "What your auditor can check, without us.",
     lead: "One payment control, six requests, every decision sealed. This page is built from the pack itself: the verdicts, approvals and limits below are read from the files you can download, not written by hand.",
     provenance: (commit) => (
       <>
@@ -136,8 +136,8 @@ const T: L<Copy> = {
       </>
     ),
 
-    solverEyebrow: "WHAT THE SOLVER SAID ABOUT THE RULE",
-    solverTitle: "The first answer is the one to read.",
+    solverEyebrow: "THE SOLVER",
+    solverTitle: "What the solver found in the rule.",
     solverLead: "Four questions about the same rule, four different answers. Replaying a decision says nothing about the set of actions a rule admits; these questions do.",
     solverMeaning: {
       REFUTED: "The rule never imposed an absolute ceiling, only one conditional on the second signature: a signed payment of any size passes.",
@@ -208,7 +208,7 @@ const T: L<Copy> = {
     metaDescription:
       "Une règle de paiement, six demandes, chaque décision scellée. Voyez ce qu’un examinateur peut vérifier sans Ironproof : les verdicts, qui a approuvé la politique, ce que le solveur a établi sur la règle, les choix faits pour le client, et ce que le dossier n’établit pas.",
     eyebrow: "DOSSIER DE PREUVE",
-    h1: "Ce qu’un examinateur peut vérifier sans nous.",
+    h1: "Ce que votre auditeur peut vérifier, sans nous.",
     lead: "Une règle de paiement, six demandes, chaque décision scellée. Cette page est construite à partir du dossier lui-même : les verdicts, les approbations et les limites ci-dessous sont lus dans les fichiers téléchargeables, pas écrits à la main.",
     provenance: (commit) => (
       <>
@@ -256,8 +256,8 @@ const T: L<Copy> = {
       </>
     ),
 
-    solverEyebrow: "CE QUE LE SOLVEUR A DIT DE LA RÈGLE",
-    solverTitle: "La première réponse est celle à lire.",
+    solverEyebrow: "LE SOLVEUR",
+    solverTitle: "Ce que le solveur a trouvé dans la règle.",
     solverLead: "Quatre questions sur la même règle, quatre réponses différentes. Rejouer une décision ne dit rien de l’ensemble des actions qu’une règle admet ; ces questions, si.",
     solverMeaning: {
       REFUTED: "La règle n’a jamais imposé de plafond absolu, seulement un plafond conditionnel à la deuxième signature : un paiement signé de n’importe quel montant passe.",

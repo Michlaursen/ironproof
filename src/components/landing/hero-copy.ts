@@ -23,6 +23,6 @@ export const HERO_COPY: L<HeroCopy> = {
   fr: {
     eyebrow: "LA COUCHE D’AUTORISATION POUR LES ACTIONS CRITIQUES",
     headline: "Si ce n’est pas autorisé,",
-    headlineEnd: "il n’y a pas d’exécution.",
+    headlineEnd: "pas d’exécution.",
   },
 };

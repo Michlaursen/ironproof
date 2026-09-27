@@ -392,8 +392,8 @@ const T: L<Copy> = {
       eyebrow: "WHAT ONLY A PROOF DOES",
       title: (
         <>
-          Rules checked one by one <span className="text-neutral-500">&mdash;</span>{" "}
-          <span className="metal-shine">or the whole policy proven</span>.
+          Each payment can follow the rule while together they break it.{" "}
+          <span className="metal-shine">We find it first.</span>
         </>
       ),
       lead: "A gate that checks each rule against each request can pass every rule while a sequence of compliant actions still breaks what the policy was meant to prevent. Ironproof checks the policy as a whole: it returns the exact sequence that breaks it, or the proof that none exists.",
@@ -679,8 +679,8 @@ const T: L<Copy> = {
       eyebrow: "CE QUE SEULE UNE PREUVE FAIT",
       title: (
         <>
-          Des règles vérifiées une à une <span className="text-neutral-500">&mdash;</span>{" "}
-          <span className="metal-shine">ou la politique entière prouvée</span>.
+          Chaque paiement peut respecter la règle, et leur total la trahir.{" "}
+          <span className="metal-shine">On le trouve avant.</span>
         </>
       ),
       lead: `Une barrière qui vérifie chaque règle contre chaque demande peut toutes les laisser passer alors qu’une suite d’actions conformes brise ce que la politique devait empêcher. Ironproof vérifie la politique comme un tout${NBSP}: il rend la séquence exacte qui la casse, ou la preuve qu’aucune n’existe.`,
