@@ -33,6 +33,10 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+// Only en and fr exist: any other first segment is unmatched, so it reaches
+// the branded global-not-found instead of the framework's default 404.
+export const dynamicParams = false;
+
 type LayoutProps = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;

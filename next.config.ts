@@ -5,6 +5,11 @@ const nextConfig: NextConfig = {
   // The round "N" badge in dev sat on top of the page and read as a play
   // button during design review. Dev-only; production never shows it.
   devIndicators: false,
+  // Branded 404 for unmatched URLs: the root layout sits under [locale], so a
+  // plain not-found.tsx cannot catch them (src/app/global-not-found.tsx).
+  experimental: {
+    globalNotFound: true,
+  },
   // AVIF first: the hero and plates are dark photographs, where AVIF is
   // markedly smaller than WebP at the same look (Lighthouse pass 2026-09-25).
   images: {
