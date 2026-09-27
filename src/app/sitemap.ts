@@ -64,6 +64,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://ironproof.ai/evidence",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/evidence",
+          fr: "https://ironproof.ai/fr/evidence",
+        },
+      },
+    },
     // The research index is English only, like the notes it lists.
     {
       url: "https://ironproof.ai/research",

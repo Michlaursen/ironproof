@@ -16,6 +16,7 @@ const T: L<{
   specPre: string;
   specLink: string;
   specPost: string;
+  evidence: string;
 }> = {
   en: {
     metaTitle: "Verify a sealed proof — Ironproof",
@@ -28,6 +29,7 @@ const T: L<{
     specLink: "wire specification",
     specPost:
       ", so an independent verifier can be written in any language, by anyone, without our code.",
+    evidence: "See a full evidence pack: six gate decisions, sealed →",
   },
   fr: {
     metaTitle: "Vérifier une preuve scellée — Ironproof",
@@ -40,6 +42,7 @@ const T: L<{
     specLink: "spécification du format",
     specPost:
       ", donc un vérificateur indépendant peut être écrit dans n’importe quel langage, par n’importe qui, sans notre code.",
+    evidence: "Voir un dossier de preuve complet : six décisions de la barrière, scellées →",
   },
 };
 
@@ -96,6 +99,12 @@ export default async function VerifyPage({ params }: PageProps) {
             </a>
             {t.specPost}
           </p>
+          <a
+            href={locale === "en" ? "/evidence" : `/${locale}/evidence`}
+            className="metal-text mt-5 inline-block text-sm underline decoration-white/20 underline-offset-4 transition hover:decoration-white/60"
+          >
+            {t.evidence}
+          </a>
         </section>
         <VerifyArtifact locale={locale} />
       </main>

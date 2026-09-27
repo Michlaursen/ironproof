@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/proof", destination: "/en/proof" },
       { source: "/verify", destination: "/en/verify" },
+      { source: "/evidence", destination: "/en/evidence" },
       { source: "/research", destination: "/en/research" },
       {
         source: "/research/zero-barriers-one-reviewer",

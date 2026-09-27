@@ -15,7 +15,7 @@ type Variant = "home" | "sub";
  * the language switch which page to cross to. Those used to be the same idea
  * split across two props, which is a mirror waiting to disagree.
  */
-type Page = "home" | "proof" | "provable-ai" | "verify" | "research" | "research-index";
+type Page = "home" | "proof" | "provable-ai" | "verify" | "evidence" | "research" | "research-index";
 
 /**
  * Each page's path WITHOUT a locale prefix. The single source for both link
@@ -27,6 +27,7 @@ const PATHS: Record<Page, string> = {
   proof: "/proof",
   "provable-ai": "/provable-ai",
   verify: "/verify",
+  evidence: "/evidence",
   research: "/research/zero-barriers-one-reviewer",
   "research-index": "/research",
 };
