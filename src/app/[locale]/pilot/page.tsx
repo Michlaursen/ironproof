@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
-import { ProofSeal } from "@/components/landing/proof-seal";
+import { HeroPhoto } from "@/components/landing/hero-photo";
 import { CtaForm } from "@/components/landing/cta-form";
 import { PILOT_COPY } from "@/components/landing/pilot-copy";
 import { type L, pick } from "@/components/landing/i18n";
@@ -170,9 +170,7 @@ export default async function PilotPage({ params }: PageProps) {
       <LandingHeader variant="sub" locale={locale} page="pilot" />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
-          <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
-            <ProofSeal size={300} locale={locale} />
-          </div>
+          <HeroPhoto src="/media/guarded-switches.jpg" position="55% 50%" />
           <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h1 className="metal-shine max-w-4xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             {t.h1}

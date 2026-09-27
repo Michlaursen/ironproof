@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
-import { ProofSeal } from "@/components/landing/proof-seal";
+import { HeroPhoto } from "@/components/landing/hero-photo";
 import { type L, pick, NBSP } from "@/components/landing/i18n";
 import {
   ACTION_COPY,
@@ -125,9 +125,7 @@ export default async function ActionPage({ params }: PageProps) {
       <LandingHeader variant="sub" locale={locale} page={`act-${type}`} />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
-          <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
-            <ProofSeal size={300} locale={locale} />
-          </div>
+          <HeroPhoto src="/media/gate-chip.jpg" position="50% 50%" />
           <p className="seal-label track-mid mb-4 text-xs">
             {t.eyebrow} · {a.tab}
           </p>
