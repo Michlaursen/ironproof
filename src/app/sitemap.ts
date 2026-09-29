@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { ACTION_IDS } from "@/components/landing/action-types";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -76,6 +77,42 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       },
     },
+    {
+      url: "https://ironproof.ai/lab",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/lab",
+          fr: "https://ironproof.ai/fr/lab",
+        },
+      },
+    },
+    {
+      url: "https://ironproof.ai/pilot",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/pilot",
+          fr: "https://ironproof.ai/fr/pilot",
+        },
+      },
+    },
+    ...ACTION_IDS.map((id) => ({
+      url: `https://ironproof.ai/actions/${id}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: `https://ironproof.ai/actions/${id}`,
+          fr: `https://ironproof.ai/fr/actions/${id}`,
+        },
+      },
+    })),
     // The research index is English only, like the notes it lists.
     {
       url: "https://ironproof.ai/research",

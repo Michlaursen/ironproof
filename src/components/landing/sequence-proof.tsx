@@ -173,7 +173,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
 
       <div className="card-premium fade-up p-7 sm:p-10 md:p-12">
         {/* the rule in force */}
-        <p className="track-mid mb-3 text-[10px] text-neutral-500">{t.policyLabel}</p>
+        <p className="track-mid mb-3 text-xs text-neutral-500">{t.policyLabel}</p>
         <p className="font-serif text-xl leading-snug text-neutral-100 sm:text-2xl">
           {t.rule(usd(CAP))}
         </p>
@@ -184,7 +184,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
         <ol className="grid gap-8 md:grid-cols-2 md:gap-12">
           <li>
             <div className="mb-4 flex flex-wrap items-center gap-3">
-              <span className="track-mid text-[10px] text-neutral-500">{t.req1} &middot; 09:14</span>
+              <span className="track-mid text-xs text-neutral-500">{t.req1} &middot; 09:14</span>
               <Verdict allow t={t} />
             </div>
             <p className="mb-4 font-serif text-2xl text-neutral-100">
@@ -207,7 +207,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
 
           <li>
             <div className="mb-4 flex flex-wrap items-center gap-3">
-              <span className="track-mid text-[10px] text-neutral-500">{t.req2} &middot; 09:16</span>
+              <span className="track-mid text-xs text-neutral-500">{t.req2} &middot; 09:16</span>
               <Verdict allow={false} t={t} />
             </div>
             <p className="mb-4 font-serif text-2xl text-neutral-100">
@@ -232,7 +232,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
         <div className="hairline my-9 h-px w-full" />
 
         {/* the running total, drawn */}
-        <p className="track-mid mb-4 text-[10px] text-neutral-500">{t.blindLabel}</p>
+        <p className="track-mid mb-4 text-xs text-neutral-500">{t.blindLabel}</p>
         <div className="relative h-12 w-full overflow-hidden rounded-[4px] border border-white/5 bg-black/40">
           {/* request 1 */}
           <span
@@ -261,7 +261,7 @@ export function SequenceProof({ locale = defaultLocale }: { locale?: Locale }) {
             aria-hidden="true"
           />
         </div>
-        <div className="relative mt-2 h-5 w-full text-[10px]">
+        <div className="relative mt-2 h-5 w-full text-xs">
           <span className="absolute left-0 text-neutral-500">{usd(0)}</span>
           <span
             className="track-mid absolute -translate-x-1/2 whitespace-nowrap text-neutral-300"

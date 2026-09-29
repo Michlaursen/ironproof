@@ -165,11 +165,11 @@ export function DeployGate({ locale = defaultLocale }: { locale?: Locale }) {
         {/* the call site */}
         <div className="fade-up card-premium min-w-0 overflow-hidden">
           <div className="flex items-center justify-between border-b border-white/5 px-5 py-3.5">
-            <span className="track-mid text-[10px] text-neutral-500">{t.callSite}</span>
-            <span className="font-mono text-[10px] text-neutral-500">inquest/sealed_gate.py</span>
+            <span className="track-mid text-xs text-neutral-500">{t.callSite}</span>
+            <span className="font-mono text-xs text-neutral-500">inquest/sealed_gate.py</span>
           </div>
           <div className="overflow-x-auto px-5 py-5">
-            <pre className="font-mono text-[11px] leading-[1.75] sm:text-xs">
+            <pre className="font-mono text-xs leading-[1.75] sm:text-xs">
               {CODE.map((l, i) => (
                 <div
                   key={i}

@@ -274,7 +274,7 @@ export function Counterexample({ locale = defaultLocale }: { locale?: Locale }) 
 
         <div className="grid gap-8 md:grid-cols-2 md:gap-12">
           <div>
-            <p className="track-mid mb-3 text-[10px] text-neutral-500">{t.asWritten}</p>
+            <p className="track-mid mb-3 text-xs text-neutral-500">{t.asWritten}</p>
             <p className="metal-text font-serif text-4xl">
               {verdict(lab.proof_correct.verdict, locale)}
             </p>
@@ -283,7 +283,7 @@ export function Counterexample({ locale = defaultLocale }: { locale?: Locale }) 
             </p>
           </div>
           <div className="border-t border-white/5 pt-8 md:border-l md:border-t-0 md:pl-12 md:pt-0">
-            <p className="track-mid mb-3 text-[10px] text-neutral-500">
+            <p className="track-mid mb-3 text-xs text-neutral-500">
               {t.without}{" "}
               <span className="font-mono text-neutral-400">{lab.removed_clause}</span>
             </p>
@@ -295,7 +295,7 @@ export function Counterexample({ locale = defaultLocale }: { locale?: Locale }) 
         </div>
 
         <div className="mt-10 border-t border-white/5 pt-8">
-          <p className="track-mid mb-5 text-[10px] text-neutral-500">
+          <p className="track-mid mb-5 text-xs text-neutral-500">
             {t.wayOut(n(bmc.horizon))}
           </p>
           <div className="-mx-2 overflow-x-auto px-2">
