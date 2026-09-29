@@ -1040,7 +1040,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/guarded-switches.jpg" position="50% 50%" />
+            <PhotoPlate src="/media/critical-switches.jpg" position="50% 55%" />
           </div>
           {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
             * and the rules that already say what must never happen there. */}
