@@ -4,6 +4,7 @@ import { useState } from "react";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, money, count } from "./i18n";
 import { GateLoop } from "./gate-loop";
+import { ACTION_COPY, type ActionId } from "./action-types";
 
 /*
  * WATCH IT DECIDE — four action classes, one gate.
@@ -21,7 +22,8 @@ import { GateLoop } from "./gate-loop";
 type Check = { rule: string; ok: boolean };
 type Case = { request: string; checks: readonly Check[] };
 type Scenario = {
-  id: string;
+  // An ActionId, so every tab has an /actions/<id> page to link to.
+  id: ActionId;
   tab: string;
   initiator: string;
   allowCase: Case;
@@ -45,6 +47,7 @@ type Copy = {
   receiptFields: readonly string[];
   receiptCta: string;
   illustrative: string;
+  more: string;
   scenarios: readonly Scenario[];
 };
 
@@ -79,10 +82,11 @@ const T: L<Copy> = {
     ],
     receiptCta: "CHECK A REAL SEALED RECORD",
     illustrative: "Illustrative decisions under a sample policy.",
+    more: "MORE ON THIS ACTION TYPE",
     scenarios: [
       {
         id: "money",
-        tab: "MOVE MONEY",
+        tab: ACTION_COPY.en.money.tab,
         initiator: "AI agent · treasury-ops",
         allowCase: {
           request: `Wire ${money(WIRE_ASK, "en")} to a beneficiary on file for 90 days`,
@@ -103,7 +107,7 @@ const T: L<Copy> = {
       },
       {
         id: "access",
-        tab: "GRANT ACCESS",
+        tab: ACTION_COPY.en.access.tab,
         initiator: "AI agent · it-helpdesk",
         allowCase: {
           request: "Grant read-only access to the reporting dashboard for 24 hours",
@@ -124,7 +128,7 @@ const T: L<Copy> = {
       },
       {
         id: "records",
-        tab: "DELETE RECORDS",
+        tab: ACTION_COPY.en.records.tab,
         initiator: "Script · nightly-cleanup",
         allowCase: {
           request: `Delete ${count(800, "en")} records past their retention period`,
@@ -145,7 +149,7 @@ const T: L<Copy> = {
       },
       {
         id: "deploy",
-        tab: "SHIP A CHANGE",
+        tab: ACTION_COPY.en.deploy.tab,
         initiator: "AI coding agent · release-bot",
         allowCase: {
           request: "Push a configuration change to the payment rail",
@@ -188,10 +192,11 @@ const T: L<Copy> = {
     ],
     receiptCta: "VÉRIFIEZ UNE VRAIE TRACE SCELLÉE",
     illustrative: "Décisions illustratives sous une politique d’exemple.",
+    more: "EN SAVOIR PLUS SUR CE TYPE D’ACTION",
     scenarios: [
       {
         id: "money",
-        tab: "DÉPLACER DE L’ARGENT",
+        tab: ACTION_COPY.fr.money.tab,
         initiator: "Agent IA · treasury-ops",
         allowCase: {
           request: `Virer ${money(WIRE_ASK, "fr")} à un bénéficiaire au dossier depuis 90 jours`,
@@ -212,7 +217,7 @@ const T: L<Copy> = {
       },
       {
         id: "access",
-        tab: "DONNER UN ACCÈS",
+        tab: ACTION_COPY.fr.access.tab,
         initiator: "Agent IA · it-helpdesk",
         allowCase: {
           request: "Accorder un accès en lecture seule au tableau de bord de rapports pour 24 heures",
@@ -233,7 +238,7 @@ const T: L<Copy> = {
       },
       {
         id: "records",
-        tab: "SUPPRIMER DES DOSSIERS",
+        tab: ACTION_COPY.fr.records.tab,
         initiator: "Script · nightly-cleanup",
         allowCase: {
           request: `Supprimer ${count(800, "fr")} dossiers dont la période de conservation est échue`,
@@ -254,7 +259,7 @@ const T: L<Copy> = {
       },
       {
         id: "deploy",
-        tab: "LIVRER UN CHANGEMENT",
+        tab: ACTION_COPY.fr.deploy.tab,
         initiator: "Agent de code IA · release-bot",
         allowCase: {
           request: "Pousser un changement de configuration sur le rail de paiement",
@@ -322,7 +327,7 @@ export function AgentScenarios({
                 role="tab"
                 aria-selected={i === tab}
                 onClick={() => setTab(i)}
-                className={`track-mid border-b-2 pb-4 text-[11px] transition ${
+                className={`track-mid border-b-2 pb-4 text-xs transition ${
                   i === tab ? "border-seal text-white" : "border-transparent text-neutral-500 hover:text-neutral-200"
                 }`}
               >
@@ -335,7 +340,7 @@ export function AgentScenarios({
               type="button"
               aria-pressed={!blocked}
               onClick={() => setBlocked(false)}
-              className={`track-mid rounded-full px-4 py-2 text-[10px] transition ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
+              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
             >
               {t.presetAllow}
             </button>
@@ -343,7 +348,7 @@ export function AgentScenarios({
               type="button"
               aria-pressed={blocked}
               onClick={() => setBlocked(true)}
-              className={`track-mid rounded-full px-4 py-2 text-[10px] transition ${blocked ? "bg-[#ffb4b4]/10 text-[#ffb4b4]" : "text-neutral-500 hover:text-neutral-200"}`}
+              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "bg-[#ffb4b4]/10 text-[#ffb4b4]" : "text-neutral-500 hover:text-neutral-200"}`}
             >
               {t.presetBlock}
             </button>
@@ -352,13 +357,13 @@ export function AgentScenarios({
 
         <div key={`${tab}-${blocked ? "b" : "a"}`} className="scenario-swap grid gap-14 lg:grid-cols-[1.5fr_1fr]">
           <div>
-            <p className="track-mid text-[10px] text-neutral-500">
+            <p className="track-mid text-xs text-neutral-500">
               {t.initiatorLabel} <span className="ml-3 font-mono normal-case tracking-normal text-neutral-300">{scenario.initiator}</span>
             </p>
-            <p className="track-mid mt-8 text-[10px] text-neutral-500">{t.requestLabel}</p>
+            <p className="track-mid mt-8 text-xs text-neutral-500">{t.requestLabel}</p>
             <p className="mt-3 font-serif text-3xl leading-snug text-neutral-100 md:text-4xl">{current.request}</p>
 
-            <p className="track-mid mt-10 text-[10px] text-neutral-500">{t.checksLabel}</p>
+            <p className="track-mid mt-10 text-xs text-neutral-500">{t.checksLabel}</p>
             <ul className="mt-3 border-t border-white/10">
               {current.checks.map((k) => (
                 <li key={k.rule} className="flex items-baseline gap-4 border-b border-white/10 py-4 text-base font-light">
@@ -381,7 +386,7 @@ export function AgentScenarios({
           </div>
 
           <div className="border-l border-seal/40 pl-8 lg:mt-1">
-            <p className="track-mid mb-6 text-[10px] text-neutral-500">{t.receiptLabel}</p>
+            <p className="track-mid mb-6 text-xs text-neutral-500">{t.receiptLabel}</p>
             <ol className="space-y-5">
               {t.receiptFields.map((f, i) => (
                 <li key={f} className="flex items-baseline gap-4">
@@ -398,7 +403,16 @@ export function AgentScenarios({
             </a>
           </div>
         </div>
-        <p className="fade-up mt-12 text-xs text-neutral-500">{t.illustrative}</p>
+        <div className="fade-up mt-12 flex flex-wrap items-baseline justify-between gap-4">
+          <p className="text-xs text-neutral-500">{t.illustrative}</p>
+          {/* The tab's own page: same id, so tab and page name the same thing. */}
+          <a
+            href={`${locale === defaultLocale ? "" : `/${locale}`}/actions/${scenario.id}`}
+            className="track-mid border-b border-white/20 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+          >
+            {t.more} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -79,6 +79,7 @@ type Copy = {
   ctaLead: string;
   ctaPilot: string;
   ctaVerify: string;
+  ctaLab: string;
 };
 
 const T: L<Copy> = {
@@ -87,7 +88,7 @@ const T: L<Copy> = {
     metaDescription:
       "One payment control, six requests, every decision sealed. See what an examiner can check without Ironproof: the verdicts, who approved the policy, what the solver established about the rule, the choices we made on the customer’s behalf, and what the pack does not establish.",
     eyebrow: "EVIDENCE PACK",
-    h1: "What an examiner can check without us.",
+    h1: "What your auditor can check, without us.",
     lead: "One payment control, six requests, every decision sealed. This page is built from the pack itself: the verdicts, approvals and limits below are read from the files you can download, not written by hand.",
     provenance: (commit) => (
       <>
@@ -135,8 +136,8 @@ const T: L<Copy> = {
       </>
     ),
 
-    solverEyebrow: "WHAT THE SOLVER SAID ABOUT THE RULE",
-    solverTitle: "The first answer is the one to read.",
+    solverEyebrow: "THE SOLVER",
+    solverTitle: "What the solver found in the rule.",
     solverLead: "Four questions about the same rule, four different answers. Replaying a decision says nothing about the set of actions a rule admits; these questions do.",
     solverMeaning: {
       REFUTED: "The rule never imposed an absolute ceiling, only one conditional on the second signature: a signed payment of any size passes.",
@@ -200,13 +201,14 @@ const T: L<Copy> = {
     ctaLead: "A pilot starts with one action type and ends with this: a sealed record your risk committee checks without us.",
     ctaPilot: "START A PILOT",
     ctaVerify: "VERIFY ANY DOSSIER",
+    ctaLab: "ATTACK THIS POLICY",
   },
   fr: {
     metaTitle: "Dossier de preuve — Ironproof",
     metaDescription:
       "Une règle de paiement, six demandes, chaque décision scellée. Voyez ce qu’un examinateur peut vérifier sans Ironproof : les verdicts, qui a approuvé la politique, ce que le solveur a établi sur la règle, les choix faits pour le client, et ce que le dossier n’établit pas.",
     eyebrow: "DOSSIER DE PREUVE",
-    h1: "Ce qu’un examinateur peut vérifier sans nous.",
+    h1: "Ce que votre auditeur peut vérifier, sans nous.",
     lead: "Une règle de paiement, six demandes, chaque décision scellée. Cette page est construite à partir du dossier lui-même : les verdicts, les approbations et les limites ci-dessous sont lus dans les fichiers téléchargeables, pas écrits à la main.",
     provenance: (commit) => (
       <>
@@ -254,8 +256,8 @@ const T: L<Copy> = {
       </>
     ),
 
-    solverEyebrow: "CE QUE LE SOLVEUR A DIT DE LA RÈGLE",
-    solverTitle: "La première réponse est celle à lire.",
+    solverEyebrow: "LE SOLVEUR",
+    solverTitle: "Ce que le solveur a trouvé dans la règle.",
     solverLead: "Quatre questions sur la même règle, quatre réponses différentes. Rejouer une décision ne dit rien de l’ensemble des actions qu’une règle admet ; ces questions, si.",
     solverMeaning: {
       REFUTED: "La règle n’a jamais imposé de plafond absolu, seulement un plafond conditionnel à la deuxième signature : un paiement signé de n’importe quel montant passe.",
@@ -321,6 +323,7 @@ const T: L<Copy> = {
     ctaLead: "Un pilote commence par un type d’action et se termine par ceci : un dossier scellé que votre comité de risque vérifie sans nous.",
     ctaPilot: "DÉMARRER UN PILOTE",
     ctaVerify: "VÉRIFIER UN DOSSIER",
+    ctaLab: "ATTAQUER CETTE POLITIQUE",
   },
 };
 
@@ -357,7 +360,7 @@ function RequestCard({ d, t, locale }: { d: Decision; t: Copy; locale: Locale })
     <li className="chip-metal fade-up flex flex-col p-5" style={{ borderColor: s.border }}>
       <div className="flex items-center justify-between gap-3">
         <span className="font-mono text-sm text-neutral-200">{d.id}</span>
-        <span className="track-mid rounded-[4px] border px-2 py-1 text-[11px]" style={{ color: s.color, borderColor: s.border }}>
+        <span className="track-mid rounded-[4px] border px-2 py-1 text-xs" style={{ color: s.color, borderColor: s.border }}>
           {t.verdictName[d.verdict]}
         </span>
       </div>
@@ -559,7 +562,7 @@ export default async function EvidencePage({ params }: PageProps) {
                 <span className="font-serif text-3xl text-neutral-500">{i + 1}</span>
                 <p className="mt-3 font-serif text-xl leading-snug text-neutral-100">{c.q}</p>
                 <p className="mt-3 flex-1 text-sm font-light text-neutral-400">{c.how}</p>
-                <p className={`track-mid mt-5 text-[11px] ${i === 1 ? "text-seal" : "text-neutral-500"}`}>{c.here}</p>
+                <p className={`track-mid mt-5 text-xs ${i === 1 ? "text-seal" : "text-neutral-500"}`}>{c.here}</p>
               </li>
             ))}
           </ol>
@@ -577,7 +580,7 @@ export default async function EvidencePage({ params }: PageProps) {
                 <li key={d.question} className="chip-metal fade-up p-6">
                   <p className="font-mono text-sm text-neutral-200">{d.question}</p>
                   <p className="mt-3 text-sm text-neutral-100">
-                    <span className="seal-label track-mid mr-2 text-[11px]">{t.decided}</span>
+                    <span className="seal-label track-mid mr-2 text-xs">{t.decided}</span>
                     {d.decided}
                   </p>
                   <p className="mt-2 text-sm font-light text-neutral-400">{d.why}</p>
@@ -639,7 +642,7 @@ export default async function EvidencePage({ params }: PageProps) {
               <p className="mt-5 max-w-xl text-lg font-light text-neutral-300">{t.ctaLead}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href={`${r || "/"}#pilot`}
+                  href={`${r}/pilot`}
                   className="track-mid rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-7 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
                   {t.ctaPilot}
@@ -649,6 +652,12 @@ export default async function EvidencePage({ params }: PageProps) {
                   className="chip-metal track-mid px-7 py-3 text-xs text-neutral-200 transition hover:text-white"
                 >
                   {t.ctaVerify}
+                </a>
+                <a
+                  href={`${r}/lab`}
+                  className="chip-metal track-mid px-7 py-3 text-xs text-neutral-200 transition hover:text-white"
+                >
+                  {t.ctaLab}
                 </a>
               </div>
             </div>
