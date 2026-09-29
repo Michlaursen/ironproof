@@ -176,7 +176,15 @@ export function LandingHeader(props: HeaderProps) {
   return (
     <header className="edge-b sticky top-0 z-40 bg-[#050506]/60 backdrop-blur-md">
       <div className="relative z-20 flex items-center gap-4 px-6 py-6 sm:gap-8 md:px-14">
-        <a href={logoHref} className="flex shrink-0 items-center gap-3" onClick={() => setOpen(false)}>
+        {/* Phone, home only: no mark up here. The full IRONPROOF lockup sits in
+          * the hero one screen below, and a lone mark above read as clutter
+          * (Dom, 2026-09-28; same rule as the stacked #69). Every other page
+          * keeps it: there it is also the way home. */}
+        <a
+          href={logoHref}
+          className={`flex shrink-0 items-center gap-3 ${variant === "home" ? "max-md:hidden" : ""}`}
+          onClick={() => setOpen(false)}
+        >
           <IronproofMark height={40} preload />
           {/* Phone: the hero already carries the full lockup one screen below, so the
             * header keeps the mark alone (Dom, 2026-09-26). sr-only, not hidden: the
