@@ -170,7 +170,7 @@ export default async function PilotPage({ params }: PageProps) {
       <LandingHeader variant="sub" locale={locale} page="pilot" />
       <main>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
-          <HeroPhoto src="/media/guarded-switches.jpg" position="55% 50%" />
+          <HeroPhoto src="/media/critical-switches.jpg" position="50% 55%" />
           <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
           <h1 className="metal-shine max-w-4xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
             {t.h1}
