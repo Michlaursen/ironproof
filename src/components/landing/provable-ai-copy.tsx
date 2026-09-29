@@ -210,7 +210,8 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       <>
         The policy the prover reads and the policy the runtime enforces come from{" "}
         <span className="text-foreground">one compiler</span>, not two hand-copied encodings — a
-        differential check fails the build if they ever diverge. Two artifacts that must agree, with
+        differential check, run at every start and in CI, refuses a policy the prover reads
+        differently. Two artifacts that must agree, with
         something that breaks when they don&apos;t.
       </>
     ),
@@ -478,7 +479,8 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       <>
         La politique que le prouveur lit et la politique que le runtime applique viennent d’{" "}
         <span className="text-foreground">un seul compilateur</span>, pas de deux encodages recopiés
-        à la main — un contrôle différentiel fait échouer la compilation si les deux divergent.
+        à la main — un contrôle différentiel, à chaque démarrage et en intégration continue, refuse une
+        politique que le prouveur lirait autrement.
         Deux artefacts qui doivent s’accorder, avec quelque chose qui casse quand ce n’est pas le
         cas.
       </>

@@ -81,7 +81,7 @@ type Copy = {
 
 const T: L<Copy> = {
   en: {
-    eyebrow: "VERIFY A PROOF",
+    eyebrow: "DON’T TAKE OUR WORD FOR IT",
     title: "Check a real proof yourself.",
     lead: (when) => (
       <>
@@ -145,7 +145,7 @@ const T: L<Copy> = {
     unrecorded: "witnesses whose direction was not recorded, so no bound can be claimed from them.",
   },
   fr: {
-    eyebrow: "VÉRIFIER UNE PREUVE",
+    eyebrow: "NE NOUS CROYEZ PAS SUR PAROLE",
     title: "Vérifiez vous-même une vraie preuve",
     lead: (when) => (
       <>

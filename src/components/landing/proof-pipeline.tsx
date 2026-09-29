@@ -25,7 +25,7 @@ const WORDS: L<readonly { title: string; body: string }[]> = {
     },
     {
       title: "Seal",
-      body: "Each decision is sealed at execution time — SHA3-512 digest, dual Ed25519 + ML-DSA-65 signature — binding the action, the policy version and the verdict into one artifact.",
+      body: "Each decision is sealed — SHA3-512 digest, dual Ed25519 + ML-DSA-65 signature — binding the action, the policy digest, the acting agent and the verdict into one artifact. An allowed action is sealed before it runs; if the seal cannot be written, it does not run.",
     },
     {
       title: "Verify",
@@ -43,7 +43,7 @@ const WORDS: L<readonly { title: string; body: string }[]> = {
     },
     {
       title: "Sceller",
-      body: "Chaque décision est scellée au moment de l’exécution — empreinte SHA3-512, double signature Ed25519 + ML-DSA-65 — liant l’action, la version de la politique et le verdict dans un seul artefact.",
+      body: "Chaque décision est scellée — empreinte SHA3-512, double signature Ed25519 + ML-DSA-65 — liant l’action, l’empreinte de la politique, l’agent qui agit et le verdict dans un seul artefact. Une action autorisée est scellée avant de s’exécuter ; si le sceau ne peut pas s’écrire, elle ne s’exécute pas.",
     },
     {
       title: "Vérifier",
