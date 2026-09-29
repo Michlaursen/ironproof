@@ -829,13 +829,14 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <main className="flex-1">
         {/* 1. HERO — the product, in one sentence, before any mechanism */}
         <section id="top" className="hero-agent relative z-10 flex items-center overflow-hidden px-6 md:px-14">
-          {/* Dual control: two people, two keys, one lamp (Dom, 2026-09-26). A bank
-            * reads it before any caption: nothing irreversible runs on one say-so.
-            * Documentary light, not a render, because the buyer is a risk
-            * committee. Full-bleed and melted into the page on every edge. */}
+          {/* Any initiator, one gate: a person, an agent and a machine wait at a
+            * closed door with a gold seam (Dom, 2026-09-28, chosen on rendered
+            * variants after the hands photograph and eight stock photos). The
+            * studio render matches the rest of the page. Full-bleed and melted
+            * into the page on every edge. */}
           <div className="hero-agent-photo" aria-hidden="true">
             <Image
-              src="/media/hero-keys.jpg"
+              src="/media/hero-initiators.jpg"
               alt=""
               fill
               preload
@@ -844,11 +845,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             />
           </div>
           <div className="hero-agent-scrim" aria-hidden="true" />
-          {/* Phone: the head gets its own portrait crop, above the copy, instead
-            * of the desktop frame squeezed behind the text. */}
+          {/* Phone: a 4:5 crop on the door and the three figures, above the copy,
+            * instead of the desktop frame squeezed behind the text. */}
           <div className="hero-agent-mobile md:hidden" aria-hidden="true">
             <Image
-              src="/media/hero-keys-m.jpg"
+              src="/media/hero-initiators-m.jpg"
               alt=""
               fill
               preload
