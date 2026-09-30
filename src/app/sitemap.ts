@@ -30,6 +30,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/demo",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/demo",
+          fr: "https://ironproof.ai/fr/demo",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/provable-ai",
       lastModified,
       changeFrequency: "monthly",

@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       { source: "/", destination: "/en" },
+      { source: "/demo", destination: "/en/demo" },
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/proof", destination: "/en/proof" },
       { source: "/verify", destination: "/en/verify" },

@@ -14,7 +14,7 @@ import { siteNav, type NavItem } from "./site-nav";
  * the language switch which page to cross to. Those used to be the same idea
  * split across two props, which is a mirror waiting to disagree.
  */
-type Page = "home" | "proof" | "provable-ai" | "verify" | "evidence" | "lab" | "pilot" | "act-money" | "act-access" | "act-records" | "act-deploy" | "research" | "research-index";
+type Page = "home" | "demo" | "proof" | "provable-ai" | "verify" | "evidence" | "lab" | "pilot" | "act-money" | "act-access" | "act-records" | "act-deploy" | "research" | "research-index";
 
 /**
  * Each page's path WITHOUT a locale prefix. The single source for both link
@@ -23,6 +23,7 @@ type Page = "home" | "proof" | "provable-ai" | "verify" | "evidence" | "lab" | "
  */
 const PATHS: Record<Page, string> = {
   home: "",
+  demo: "/demo",
   proof: "/proof",
   "provable-ai": "/provable-ai",
   verify: "/verify",
