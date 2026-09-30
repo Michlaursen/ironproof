@@ -809,12 +809,12 @@ p, li {
 /* PHOTO PLATES — the new photographs that replaced the old card-only sections.
    Symbolic objects in the same steel-and-gold world as the hero; decorative,
    so they carry no text and the section copy stays the source of meaning. */
-/* WHAT IRONPROOF IS — the broken chain above "Not allowed -> it never runs".
+/* WHAT ONLY A PROOF DOES — the broken chain under the sequence that breaks the policy.
  * Cropped to the chain band; every edge melts into the page black so the gap,
  * not a frame, is what the eye lands on. */
-.what-chain {
+.proof-chain {
   position: relative;
-  margin: 3rem 0 2.5rem;
+  margin: 2.5rem auto 1.25rem;
   aspect-ratio: 3 / 1;
   -webkit-mask-image:
     linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%),
@@ -825,16 +825,16 @@ p, li {
     linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
   mask-composite: intersect;
 }
-.what-chain img {
+.proof-chain img {
   object-position: 50% 42%;
 }
 @media (max-width: 639px) {
   /* Phone: keep the gap and one link either side, not the whole chain. */
-  .what-chain {
+  .proof-chain {
     aspect-ratio: 2 / 1;
-    margin: 2.25rem -1.5rem 2rem;
+    margin: 2rem -1.5rem 1rem;
   }
-  .what-chain img {
+  .proof-chain img {
     transform: scale(1.9);
   }
 }
