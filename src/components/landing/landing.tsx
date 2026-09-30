@@ -113,6 +113,7 @@ type Copy = {
     eyebrow: string;
     title: React.ReactNode;
     lead: string;
+    chainCaption: string;
     testVsProof: React.ReactNode;
     scope: string;
   };
@@ -397,6 +398,7 @@ const T: L<Copy> = {
         </>
       ),
       lead: "A gate that checks each rule against each request can pass every rule while a sequence of compliant actions still breaks what the policy was meant to prevent. Ironproof checks the policy as a whole: it returns the exact sequence that breaks it, or the proof that none exists.",
+      chainCaption: "Every link holds. The chain still breaks.",
       testVsProof: (
         <>
           A test tells you what it tried.{" "}
@@ -684,6 +686,7 @@ const T: L<Copy> = {
         </>
       ),
       lead: `Une barrière qui vérifie chaque règle contre chaque demande peut toutes les laisser passer alors qu’une suite d’actions conformes brise ce que la politique devait empêcher. Ironproof vérifie la politique comme un tout${NBSP}: il rend la séquence exacte qui la casse, ou la preuve qu’aucune n’existe.`,
+      chainCaption: "Chaque maillon tient. La chaîne casse quand même.",
       testVsProof: (
         <>
           Un test vous dit ce qu’il a essayé.{" "}
@@ -974,11 +977,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
         <section id="why" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14 md:py-32">
-          <div className="breath-photo" aria-hidden="true">
-            {/* Hundreds of boxes that hold, one standing open: the exact sequence that
-              * breaks the policy, found among all the ones that do not (Dom, 2026-09-26). */}
-            <Image src="/media/vault-grid.jpg" alt="" fill loading="eager" sizes="100vw" className="object-cover" />
-          </div>
           <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
             <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
             <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
@@ -987,6 +985,21 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
               {t.why.lead}
             </p>
+          </div>
+          {/* The title as an object: every link is a compliant payment, the chain is
+            * the sequence, the gap is where the policy gives way (Dom, 2026-09-30).
+            * Brought from /proof, which most visitors never reach. */}
+          <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
+            <Image
+              src="/media/broken-chain.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1152px) 1152px, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <p className="track-mid text-xs text-neutral-400">{t.why.chainCaption}</p>
             <div className="hairline my-10 h-px w-full max-w-md" />
             <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
               {t.why.testVsProof}
