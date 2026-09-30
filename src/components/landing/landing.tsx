@@ -851,7 +851,19 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {t.what.lead}
               </p>
             </div>
-            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
+            {/* The broken chain right above "it never runs": the missing link is the
+              * action that was not authorized (Dom, 2026-09-30). No frame, it melts
+              * into the page black, so it reads as part of the argument, not a plate. */}
+            <div className="what-chain fade-up" aria-hidden="true">
+              <Image
+                src="/media/broken-chain.jpg"
+                alt=""
+                fill
+                sizes="(min-width: 1152px) 1152px, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="fade-up grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
               <p className="flex items-baseline gap-4 bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
                 <span className="text-seal">{t.what.allowed}</span>
                 <span className="text-neutral-500" aria-hidden="true">&rarr;</span>
