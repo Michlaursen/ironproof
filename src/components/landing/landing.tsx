@@ -174,21 +174,16 @@ const SRC_SIX_BANKS =
 
 // Defence items (2026-09-30). How each page was read, because a date on this
 // page without an opened source is the failure the product exists to prevent:
-// - canada.ca pages (strategy briefing, drone initiative, departmental plan):
-//   read through a fetch tool, quotes returned verbatim; canada.ca refused curl.
+// - canada.ca pages (strategy briefing, departmental plan): opened in a real
+//   browser, quoted text found on the page; canada.ca refused curl.
 // - NATO STO: opened in a real browser. It is ONE AUTHOR's symposium paper
 //   (R. Searle, STO-MP-IST-210), not a NATO position: the card says "a paper".
 //   The page gives "Year: 2026" and an upload date, hence "Feb 2026".
 // - CBC: article dated 22 Sep 2026, remarks made the Monday before (21 Sep).
-// - Army Times: secondary source, no primary release found.
 const SRC_DND_DIS =
   "https://www.canada.ca/en/department-national-defence/corporate/reports-publications/proactive-disclosure/2026/nddn-defence-industrial-strategy.html";
 const SRC_NATO_AGENTIC =
   "https://www.sto.nato.int/document/a-cryptographic-trust-framework-for-agentic-autonomy-in-defence/";
-const SRC_DND_DRONES =
-  "https://www.canada.ca/en/department-national-defence/news/2026/07/government-of-canada-launches-defence-drone-initiative-to-strengthen-canadas-sovereign-defence-capabilities.html";
-const SRC_ARMYTIMES_AGENTS =
-  "https://www.armytimes.com/news/your-military/2026/08/07/pentagon-ready-to-deploy-ai-agents-for-admin-tasks/";
 const SRC_CBC_MOLSTAD = "https://www.cbc.ca/news/business/canada-ai-robots-miliatary-9.7353399";
 const SRC_DND_PLAN =
   "https://www.canada.ca/en/department-national-defence/corporate/reports-publications/departmental-plans/departmental-plan-2026-27.html";
@@ -391,18 +386,6 @@ const T: L<Copy> = {
           what: "OSFI publishes its bulletin on generative and agentic AI: agents that reason, plan, decide and take actions without human intervention call for least privilege and audit trails on every AI-initiated activity.",
           source: "OSFI, bulletin on generative and agentic AI",
           href: SRC_OSFI_AGENTIC,
-        },
-        {
-          date: "Jul 23, 2026",
-          what: "Canada launches the Defence Drone Initiative to accelerate the development, testing and production of Canadian uncrewed and autonomous systems for the Canadian Armed Forces and the Coast Guard.",
-          source: "National Defence, news release",
-          href: SRC_DND_DRONES,
-        },
-        {
-          date: "Aug 7, 2026",
-          what: "The U.S. Defense Department and the Army’s Human Resources Command approve autonomous AI agents for work involving controlled unclassified information.",
-          source: "Army Times",
-          href: SRC_ARMYTIMES_AGENTS,
         },
         {
           date: "Sep 1, 2026",
@@ -726,18 +709,6 @@ const T: L<Copy> = {
           what: "Le BSIF publie son bulletin sur l’IA générative et agentique : des agents qui raisonnent, planifient, décident et agissent sans intervention humaine exigent le moindre privilège et une piste d’audit pour chaque activité lancée par l’IA.",
           source: "BSIF, bulletin sur l’IA générative et agentique",
           href: SRC_OSFI_AGENTIC,
-        },
-        {
-          date: "23 juil. 2026",
-          what: "Le Canada lance l’Initiative liée aux drones de la défense pour accélérer le développement, la mise à l’essai et la production de systèmes canadiens sans équipage et autonomes, pour les Forces armées canadiennes et la Garde côtière.",
-          source: "Défense nationale, communiqué",
-          href: SRC_DND_DRONES,
-        },
-        {
-          date: "7 août 2026",
-          what: "Le département américain de la Défense et le commandement des ressources humaines de l’armée de terre approuvent des agents IA autonomes pour des tâches touchant de l’information contrôlée non classifiée.",
-          source: "Army Times",
-          href: SRC_ARMYTIMES_AGENTS,
         },
         {
           date: "1er sept. 2026",
