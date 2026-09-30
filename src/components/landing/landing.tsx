@@ -333,9 +333,20 @@ const T: L<Copy> = {
           rules: "AGCO Registrar’s Standards (Ontario)",
         },
         {
-          name: "Government & defence",
+          name: "Government",
           actions: ["Updates to official records", "Approvals and spending", "Access to sensitive systems"],
           rules: "TBS guidance on agentic AI · ITSG-33",
+        },
+        {
+          // "Delegated" is the house word (delegated authority). Never rules
+          // of engagement, never weapon systems: we do no work on those.
+          name: "Defence",
+          actions: [
+            "Tasks delegated to autonomous systems",
+            "Software and configuration updates to fielded systems",
+            "Access to controlled information",
+          ],
+          rules: "DND/CAF AI Strategy · ITSG-33 · Controlled Goods Program",
         },
         {
           name: "Healthcare",
@@ -656,9 +667,18 @@ const T: L<Copy> = {
           rules: "Normes du registrateur de la CAJO (Ontario)",
         },
         {
-          name: "Gouvernement et défense",
+          name: "Gouvernement",
           actions: ["Mises à jour de dossiers officiels", "Approbations et dépenses", "Accès aux systèmes sensibles"],
           rules: "Orientation du SCT sur l’IA agentique · ITSG-33",
+        },
+        {
+          name: "Défense",
+          actions: [
+            "Tâches déléguées aux systèmes autonomes",
+            "Mises à jour logicielles et de configuration des systèmes en service",
+            "Accès à l’information contrôlée",
+          ],
+          rules: "Stratégie d’IA du MDN et des FAC · ITSG-33 · Programme des marchandises contrôlées",
         },
         {
           name: "Santé",
