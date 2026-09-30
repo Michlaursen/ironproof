@@ -201,7 +201,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Any action you can’t afford to get wrong, whether started by a person, a script, or an AI agent. What your policy allows goes through. What it doesn’t is stopped before it runs, with a sealed record anyone can verify.",
+        "For any action you can’t afford to get wrong, whoever started it: a person, a script, or an AI agent.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -536,7 +536,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Toute action que vous ne pouvez pas vous permettre de rater, peu importe qui la lance : une personne, un script ou un agent IA. Ce que votre politique autorise passe. Le reste est arrêté avant de s’exécuter, avec une trace scellée que n’importe qui peut vérifier.",
+        "Pour toute action que vous ne pouvez pas vous permettre de rater, peu importe qui la lance : une personne, un script ou un agent IA.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
