@@ -21,6 +21,7 @@ const LABELS: L<{
   proof: string;
   how: string;
   demo: string;
+  demoItem: string;
   lab: string;
   evidence: string;
   verify: string;
@@ -35,7 +36,8 @@ const LABELS: L<{
     product: "PRODUCT",
     proof: "PROOF",
     how: "How it works",
-    demo: "Demo",
+    demo: "DEMO",
+    demoItem: "Demo",
     lab: "The lab",
     evidence: "Evidence pack",
     verify: "Verify a proof",
@@ -50,7 +52,8 @@ const LABELS: L<{
     product: "PRODUIT",
     proof: "PREUVE",
     how: "Fonctionnement",
-    demo: "Démo",
+    demo: "DÉMO",
+    demoItem: "Démo",
     lab: "Le labo",
     evidence: "Dossier de preuve",
     verify: "Vérifier une preuve",
@@ -78,7 +81,6 @@ export function siteNav(locale: Locale = defaultLocale) {
       label: t.product,
       items: [
         { href: `${r || "/"}#how`, label: t.how },
-        { href: `${r}/demo`, label: t.demo, page: "demo" },
         ...ACTION_IDS.map((id) => ({
           href: `${r}/actions/${id}`,
           label: cap(actions[id].tab),
@@ -100,10 +102,13 @@ export function siteNav(locale: Locale = defaultLocale) {
   ];
   return {
     groups,
+    /** Top level, right after PRODUCT (Dom, 2026-09-30): the demo is the first thing to open. */
+    demo: { href: `${r}/demo`, label: t.demo, page: "demo" } as NavItem,
     provableAi: { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" } as NavItem,
     pilot: { href: `${r}/pilot`, label: t.pilot, page: "pilot" } as NavItem,
     /** The same two pages, in sentence case, for lists (footer). */
     company: [
+      { href: `${r}/demo`, label: t.demoItem, page: "demo" },
       { href: `${r}/pilot`, label: t.pilotItem, page: "pilot" },
       { href: `${r}/provable-ai`, label: t.provableAiItem, page: "provable-ai" },
     ] as NavItem[],
