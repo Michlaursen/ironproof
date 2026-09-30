@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { IronproofMark } from "@/components/ironproof-mark";
 import { IconMenu, IconClose } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
@@ -159,8 +159,8 @@ export function LandingHeader(props: HeaderProps) {
           }}
         >
           {nav.groups.map((g) => (
+            <Fragment key={g.id}>
             <div
-              key={g.id}
               className="relative"
               onMouseEnter={() => setMenu(g.id)}
               onMouseLeave={() => setMenu(null)}
@@ -200,6 +200,18 @@ export function LandingHeader(props: HeaderProps) {
                 </div>
               ) : null}
             </div>
+            {g.id === "product" ? (
+              <a
+                href={nav.demo.href}
+                aria-current={isActive(nav.demo.page) ? "page" : undefined}
+                className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
+                  isActive(nav.demo.page) ? "metal-shine" : "metal-text"
+                }`}
+              >
+                {nav.demo.label}
+              </a>
+            ) : null}
+            </Fragment>
           ))}
           <a
             href={nav.provableAi.href}
@@ -263,7 +275,8 @@ export function LandingHeader(props: HeaderProps) {
         <nav className="edge-t relative z-20 bg-black/80 px-6 pb-6 pt-2 backdrop-blur xl:hidden">
           <div className="flex flex-col">
             {nav.groups.map((g) => (
-              <div key={g.id} className="border-b border-white/10 py-4">
+              <Fragment key={g.id}>
+              <div className="border-b border-white/10 py-4">
                 <p className="seal-label track-mid mb-2 text-[11px]">{g.label}</p>
                 {g.items.map((it) => (
                   <a
@@ -277,6 +290,16 @@ export function LandingHeader(props: HeaderProps) {
                   </a>
                 ))}
               </div>
+              {g.id === "product" ? (
+                <a
+                  href={nav.demo.href}
+                  onClick={() => setOpen(false)}
+                  className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.demo.page) ? "metal-shine" : "metal-text"}`}
+                >
+                  {nav.demo.label}
+                </a>
+              ) : null}
+              </Fragment>
             ))}
             <a
               href={nav.provableAi.href}
