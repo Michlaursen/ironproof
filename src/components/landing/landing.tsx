@@ -175,7 +175,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Any action you can’t afford to get wrong, whoever starts it: a person, a script or an AI agent. What your policy allows goes through. What it doesn’t is stopped before it runs, with a sealed record anyone can verify.",
+        "Any action you can’t afford to get wrong, whether started by a person, a script, or an AI agent. What your policy allows goes through. What it doesn’t is stopped before it runs, with a sealed record anyone can verify.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -202,22 +202,22 @@ const T: L<Copy> = {
       eyebrow: "WHAT IRONPROOF IS",
       title: "A checkpoint between your automation and the actions it can’t undo.",
       lead: "AI agents, APIs and scripts can already move money, grant access, delete records and ship changes on their own. Ironproof sits in front of those actions and checks each one against your rules before it runs.",
-      allowed: "Allowed",
-      allowedResult: "it runs.",
-      blocked: "Not allowed",
-      blockedResult: "it never runs.",
+      allowed: "Authorized",
+      allowedResult: "actions run.",
+      blocked: "Unauthorized",
+      blockedResult: "actions never do.",
       pillars: [
         {
           title: "Checked before, not logged after",
-          body: "Every action waits at the gate until it clears your policy. No language model decides: the same request under the same policy always gets the same answer.",
+          body: "Every action waits at the gate until it clears your policy. No language model decides: the same request, in the same state, under the same policy always gets the same answer.",
         },
         {
-          title: "Proven, not tested",
-          body: "We don’t test your rules, we prove them. You leave with the exact case that breaks them, or the proof that no such case exists.",
+          title: "Proven, not just tested",
+          body: "We don’t rely on testing alone: we prove what your rules permit. You leave with the exact case that breaks them, or the proof that no such case exists.",
         },
         {
           title: "Sealed, so anyone can check",
-          body: "Every decision, allowed or blocked, is sealed. Your auditor re-checks it on their own machine, without us.",
+          body: "Every decision, allowed, blocked or refused, is sealed — an allowed action before it runs. Your auditor re-derives the policy verdict on their own machine, with a verifier written from the published specification, without us.",
         },
       ],
     },
@@ -253,11 +253,11 @@ const T: L<Copy> = {
         },
         {
           label: "Not an AI guardrail",
-          body: "No language model sits in the decision path. The same request under the same policy always gets the same verdict.",
+          body: "No language model sits in the decision path. The same request, in the same state, under the same policy always gets the same verdict.",
         },
         {
           label: "Not a penetration test",
-          body: "A test samples cases. Ironproof proves a property across every modeled sequence — or returns the one that breaks it.",
+          body: "A test samples cases. For rules over the history of approved actions, Ironproof proves the bound across every sequence, of any length — or returns the shortest one that breaks it. A rule it cannot model is reported as not exercised, never as proven.",
         },
         {
           label: "Not a platform replacement",
@@ -370,7 +370,7 @@ const T: L<Copy> = {
       eyebrow: "ONE GATE, ANY INITIATOR",
       title: "The gate does not ask who is asking.",
       lead: "It asks whether the action is inside the policy in force. The same check applies to every path that can reach a critical system — which is why this is not an AI problem with an AI answer.",
-      foot: "Every authorization records the requesting actor, the policy version and the action. Nothing executes without spending a single-use grant bound to that exact decision.",
+      foot: "Every authorization records the action, the exact policy version by its digest, and the declared identity of the acting agent. Nothing executes without spending a single-use grant bound to that exact decision — and a spent grant stays spent across restarts.",
     },
 
     breathCounterexample: (
@@ -411,9 +411,9 @@ const T: L<Copy> = {
     how: {
       eyebrow: "HOW IT WORKS",
       title: "Prove. Enforce. Seal. Verify.",
-      lead: "Ironproof mathematically checks that no reachable sequence of actions can cross the defined authorization boundary.",
+      lead: "For a rule over the history of approved actions, Ironproof mathematically proves that no sequence, of any length, can cross the defined authorization boundary — or returns the shortest one that does, replayed through the gate.",
       compiler:
-        "Your written policy is compiled into mathematics by a deterministic compiler — the same one the runtime uses. A differential check fails the build if the two ever diverge.",
+        "Your written policy is compiled into mathematics by a deterministic compiler — the same one the gate runs. A differential check, run at every start and in CI, refuses a policy the proof reads differently from the gate.",
       recordPre:
         "The theorem that ties the runtime fast path to the full formal model, and the equivalence checks behind it, are in the ",
       recordLink: "technical record",
@@ -490,22 +490,22 @@ const T: L<Copy> = {
       eyebrow: "CE QU’EST IRONPROOF",
       title: "Un point de contrôle entre votre automatisation et les actions qu’on ne peut pas défaire.",
       lead: "Les agents IA, les API et les scripts peuvent déjà déplacer de l’argent, donner des accès, effacer des données et déployer du code, seuls. Ironproof se place devant ces actions et vérifie chacune contre vos règles avant qu’elle s’exécute.",
-      allowed: "Autorisée",
-      allowedResult: "exécution.",
-      blocked: "Non autorisée",
-      blockedResult: "pas d’exécution.",
+      allowed: "Les actions autorisées",
+      allowedResult: "s’exécutent.",
+      blocked: "Les actions non autorisées,",
+      blockedResult: "jamais.",
       pillars: [
         {
           title: "Vérifié avant, pas journalisé après",
-          body: "Chaque action attend à la barrière tant qu’elle ne respecte pas votre politique. Aucun modèle de langage ne décide : la même demande, sous la même politique, reçoit toujours la même réponse.",
+          body: "Chaque action attend à la barrière tant qu’elle ne respecte pas votre politique. Aucun modèle de langage ne décide : la même demande, dans le même état, sous la même politique, reçoit toujours la même réponse.",
         },
         {
-          title: "Prouvé, pas testé",
-          body: "On ne teste pas vos règles, on les prouve. Vous ressortez avec le cas exact qui les brise, ou la preuve qu’il n’en existe aucun.",
+          title: "Prouvé, pas seulement testé",
+          body: "On ne se fie pas qu’aux tests : on prouve ce que vos règles permettent. Vous ressortez avec le cas exact qui les brise, ou la preuve qu’il n’en existe aucun.",
         },
         {
           title: "Scellé, vérifiable par tous",
-          body: "Chaque décision, autorisée ou bloquée, est scellée. Votre auditeur la revérifie sur sa propre machine, sans nous.",
+          body: "Chaque décision, autorisée, bloquée ou refusée, est scellée — une action autorisée, avant de s’exécuter. Votre auditeur recalcule le verdict de la politique sur sa propre machine, avec un vérificateur écrit à partir de la spécification publiée, sans nous.",
         },
       ],
     },
@@ -541,11 +541,11 @@ const T: L<Copy> = {
         },
         {
           label: "Pas un garde-fou d’IA",
-          body: "Aucun modèle de langage dans le chemin de décision. La même demande sous la même politique reçoit toujours le même verdict.",
+          body: "Aucun modèle de langage dans le chemin de décision. La même demande, dans le même état, sous la même politique reçoit toujours le même verdict.",
         },
         {
           label: "Pas un test d’intrusion",
-          body: "Un test échantillonne des cas. Ironproof prouve une propriété sur toute séquence modélisée — ou rend celle qui la casse.",
+          body: "Un test échantillonne des cas. Pour les règles qui portent sur l’historique des actions autorisées, Ironproof prouve la borne sur toute séquence, de n’importe quelle longueur — ou rend la plus courte qui la casse. Une règle qu’il ne sait pas modéliser est déclarée non exercée, jamais prouvée.",
         },
         {
           label: "Pas un remplacement de plateforme",
@@ -658,7 +658,7 @@ const T: L<Copy> = {
       eyebrow: "UNE SEULE BARRIÈRE, PEU IMPORTE QUI DEMANDE",
       title: "La barrière ne demande pas qui demande.",
       lead: "Elle demande si l’action est à l’intérieur de la politique en vigueur. La même vérification s’applique à tous les chemins qui mènent à un système critique — c’est pourquoi ce n’est pas un problème d’IA qui appelle une réponse d’IA.",
-      foot: "Chaque autorisation consigne l’acteur qui demande, la version de la politique et l’action. Rien ne s’exécute sans dépenser un jeton à usage unique lié à cette décision exacte.",
+      foot: "Chaque autorisation consigne l’action, la version exacte de la politique par son empreinte, et l’identité déclarée de l’agent qui agit. Rien ne s’exécute sans dépenser un jeton à usage unique lié à cette décision exacte — et un jeton dépensé le reste après un redémarrage.",
     },
 
     breathCounterexample: (
@@ -699,9 +699,9 @@ const T: L<Copy> = {
     how: {
       eyebrow: "COMMENT ÇA MARCHE",
       title: "Prouver. Appliquer. Sceller. Vérifier.",
-      lead: "Ironproof vérifie mathématiquement qu’aucune séquence d’actions atteignable ne peut franchir la frontière d’autorisation définie.",
+      lead: "Pour une règle qui porte sur l’historique des actions autorisées, Ironproof prouve mathématiquement qu’aucune séquence, de n’importe quelle longueur, ne peut franchir la frontière d’autorisation définie — ou rend la plus courte qui la franchit, rejouée dans la barrière.",
       compiler:
-        "Votre politique écrite est compilée en mathématiques par un compilateur déterministe — le même que celui qu’utilise le runtime. Un contrôle différentiel fait échouer la compilation si les deux divergent.",
+        "Votre politique écrite est compilée en mathématiques par un compilateur déterministe — le même que celui qu’exécute la barrière. Un contrôle différentiel, à chaque démarrage et en intégration continue, refuse une politique que la preuve lirait autrement que la barrière.",
       recordPre:
         "Le théorème qui relie le chemin rapide du runtime au modèle formel complet, et les contrôles d’équivalence derrière lui, sont dans le ",
       recordLink: "dossier technique",
@@ -855,14 +855,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </p>
             </div>
             <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
-              <p className="flex items-baseline gap-4 bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-seal">{t.what.allowed}</span>
-                <span className="text-neutral-500" aria-hidden="true">&rarr;</span>
+              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
+                <span className="text-seal">{t.what.allowed}</span>{" "}
                 <span>{t.what.allowedResult}</span>
               </p>
-              <p className="flex items-baseline gap-4 bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-[#ffb4b4]">{t.what.blocked}</span>
-                <span className="text-neutral-500" aria-hidden="true">&rarr;</span>
+              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
+                <span className="text-[#ffb4b4]">{t.what.blocked}</span>{" "}
                 <span>{t.what.blockedResult}</span>
               </p>
             </div>
