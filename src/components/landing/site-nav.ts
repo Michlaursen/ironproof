@@ -20,6 +20,7 @@ const LABELS: L<{
   product: string;
   proof: string;
   how: string;
+  demo: string;
   lab: string;
   evidence: string;
   verify: string;
@@ -34,6 +35,7 @@ const LABELS: L<{
     product: "PRODUCT",
     proof: "PROOF",
     how: "How it works",
+    demo: "Demo",
     lab: "The lab",
     evidence: "Evidence pack",
     verify: "Verify a proof",
@@ -48,6 +50,7 @@ const LABELS: L<{
     product: "PRODUIT",
     proof: "PREUVE",
     how: "Fonctionnement",
+    demo: "Démo",
     lab: "Le labo",
     evidence: "Dossier de preuve",
     verify: "Vérifier une preuve",
@@ -75,6 +78,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       label: t.product,
       items: [
         { href: `${r || "/"}#how`, label: t.how },
+        { href: `${r}/demo`, label: t.demo, page: "demo" },
         ...ACTION_IDS.map((id) => ({
           href: `${r}/actions/${id}`,
           label: cap(actions[id].tab),
