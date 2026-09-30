@@ -172,6 +172,22 @@ const SRC_OSFI_AGENTIC =
 const SRC_SIX_BANKS =
   "https://www.newswire.ca/news-releases/six-canadian-banks-explore-development-of-a-secure-cad-tokenized-deposit-solution-869071438.html";
 
+// Defence items (2026-09-30). How each page was read, because a date on this
+// page without an opened source is the failure the product exists to prevent:
+// - canada.ca pages (strategy briefing, departmental plan): opened in a real
+//   browser, quoted text found on the page; canada.ca refused curl.
+// - NATO STO: opened in a real browser. It is ONE AUTHOR's symposium paper
+//   (R. Searle, STO-MP-IST-210), not a NATO position: the card says "a paper".
+//   The page gives "Year: 2026" and an upload date, hence "Feb 2026".
+// - CBC: article dated 22 Sep 2026, remarks made the Monday before (21 Sep).
+const SRC_DND_DIS =
+  "https://www.canada.ca/en/department-national-defence/corporate/reports-publications/proactive-disclosure/2026/nddn-defence-industrial-strategy.html";
+const SRC_NATO_AGENTIC =
+  "https://www.sto.nato.int/document/a-cryptographic-trust-framework-for-agentic-autonomy-in-defence/";
+const SRC_CBC_MOLSTAD = "https://www.cbc.ca/news/business/canada-ai-robots-miliatary-9.7353399";
+const SRC_DND_PLAN =
+  "https://www.canada.ca/en/department-national-defence/corporate/reports-publications/departmental-plans/departmental-plan-2026-27.html";
+
 const T: L<Copy> = {
   en: {
     hero: {
@@ -345,8 +361,20 @@ const T: L<Copy> = {
     now: {
       eyebrow: "WHY NOW",
       title: "Systems are starting to act on their own.",
-      lead: "Agents, scripts and automated pipelines now move money, change access and ship code without a person in the loop. Regulators and banks have put dates on it. Each item links to its source.",
+      lead: "Agents, scripts and automated pipelines now move money, change access and ship code without a person in the loop. Regulators, banks and defence departments have put dates on it. Each item links to its source.",
       items: [
+        {
+          date: "Feb 17, 2026",
+          what: "Canada launches its first Defence Industrial Strategy. Its ten priority areas include digital systems, where artificial intelligence sits, and uncrewed and autonomous systems.",
+          source: "National Defence, Defence Industrial Strategy briefing",
+          href: SRC_DND_DIS,
+        },
+        {
+          date: "Feb 2026",
+          what: "A paper in the proceedings of NATO’s Science and Technology Organization: agentic systems “can affect system performance or the physical environment”, and an effective agentic control regime is “essential for the trustworthiness of autonomous military and intelligence AI systems”.",
+          source: "NATO STO, symposium paper STO-MP-IST-210",
+          href: SRC_NATO_AGENTIC,
+        },
         {
           date: "Mar 2, 2026",
           what: "Santander and Mastercard complete Europe’s first live end-to-end payment executed by an AI agent, inside a regulated bank’s payment infrastructure.",
@@ -372,6 +400,12 @@ const T: L<Copy> = {
           href: SRC_OSFI_TOKENIZED,
         },
         {
+          date: "Sep 21, 2026",
+          what: "Lt.-Gen. Darcy Molstad, commander of Canadian Joint Forces Command, tells industry the military will rapidly buy more autonomous systems: 399 vendors pre-qualified for the Defence Drone Initiative, five days to answer a request for proposals.",
+          source: "CBC News",
+          href: SRC_CBC_MOLSTAD,
+        },
+        {
           date: "Sep 22, 2026",
           what: "Six Canadian banks announce they are exploring a CAD tokenized deposit solution, aiming for faster, more efficient and programmable payments.",
           source: "Joint release, Newswire",
@@ -382,6 +416,12 @@ const T: L<Copy> = {
           what: "OSFI Guideline E-23 on model risk management takes effect. Its definition of a model explicitly includes AI/ML methods.",
           source: "OSFI, Guideline E-23",
           href: SRC_E23,
+        },
+        {
+          date: "2030",
+          what: "National Defence, 2026-27 Departmental Plan: “By 2030, we aim to be a secure, agile, AI-enabled organization.”",
+          source: "National Defence, Departmental Plan 2026-27",
+          href: SRC_DND_PLAN,
         },
       ],
       foot: "When a system can act on its own, the decision has to be made before the action runs, not read in a log afterwards.",
@@ -644,8 +684,20 @@ const T: L<Copy> = {
     now: {
       eyebrow: "POURQUOI MAINTENANT",
       title: "Les systèmes commencent à agir seuls.",
-      lead: "Des agents, des scripts et des chaînes automatisées déplacent déjà de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs et les banques y ont mis des dates. Chaque élément renvoie à sa source.",
+      lead: "Des agents, des scripts et des chaînes automatisées déplacent déjà de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
+        {
+          date: "17 févr. 2026",
+          what: "Le Canada lance sa première Stratégie industrielle de défense. Ses dix domaines prioritaires comprennent les systèmes numériques, où figure l’intelligence artificielle, et les systèmes sans équipage et autonomes.",
+          source: "Défense nationale, note sur la Stratégie industrielle de défense",
+          href: SRC_DND_DIS,
+        },
+        {
+          date: "Févr. 2026",
+          what: "Un article des actes de l’Organisation pour la science et la technologie de l’OTAN : les systèmes agentiques « peuvent agir sur la performance d’un système ou sur l’environnement physique », et un régime de contrôle efficace est « essentiel à la fiabilité des systèmes d’IA militaires et de renseignement autonomes ». (notre traduction)",
+          source: "OTAN STO, article de symposium STO-MP-IST-210",
+          href: SRC_NATO_AGENTIC,
+        },
         {
           date: "2 mars 2026",
           what: "Santander et Mastercard réalisent le premier paiement de bout en bout exécuté par un agent IA en Europe, sur l’infrastructure de paiement réelle d’une banque réglementée.",
@@ -671,6 +723,12 @@ const T: L<Copy> = {
           href: SRC_OSFI_TOKENIZED,
         },
         {
+          date: "21 sept. 2026",
+          what: "Le lieutenant-général Darcy Molstad, commandant du Commandement des forces interarmées du Canada, annonce à l’industrie que l’armée achètera rapidement plus de systèmes autonomes : 399 fournisseurs préqualifiés pour l’Initiative liée aux drones de la défense, cinq jours pour répondre à une demande de propositions.",
+          source: "CBC News",
+          href: SRC_CBC_MOLSTAD,
+        },
+        {
           date: "22 sept. 2026",
           what: "Six banques canadiennes annoncent explorer une solution de dépôts tokenisés en dollars canadiens, pour des paiements plus rapides, plus efficaces et programmables.",
           source: "Communiqué conjoint, Newswire",
@@ -681,6 +739,12 @@ const T: L<Copy> = {
           what: "La ligne directrice E-23 du BSIF sur la gestion du risque de modèle entre en vigueur. Sa définition d’un modèle inclut explicitement les méthodes d’IA et d’apprentissage automatique.",
           source: "BSIF, ligne directrice E-23",
           href: SRC_E23,
+        },
+        {
+          date: "2030",
+          what: "Défense nationale, Plan ministériel 2026-27 : « D’ici 2030, nous visons à être une organisation sécurisée, agile et axée sur l’IA. » (notre traduction)",
+          source: "Défense nationale, Plan ministériel 2026-27",
+          href: SRC_DND_PLAN,
         },
       ],
       foot: "Quand un système peut agir seul, la décision doit se prendre avant que l’action parte, pas se lire dans un journal après coup.",
