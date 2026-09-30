@@ -66,6 +66,16 @@ type Copy = {
   takeaway: React.ReactNode;
   blockIsNotSilence: string;
 
+  sheet: {
+    eyebrow: string;
+    title: string;
+    sheetLabel: string;
+    sheetBody: string;
+    doorLabel: string;
+    doorBody: string;
+    foot: string;
+  };
+
   what: {
     eyebrow: string;
     title: string;
@@ -198,6 +208,17 @@ const T: L<Copy> = {
     blockIsNotSilence:
       "A block is not a silence. It is an artifact stating what was requested, which policy was in force, and why the action did not run.",
 
+    sheet: {
+      eyebrow: "THE PROBLEM",
+      title: "A policy can say one thing while the system allows another.",
+      sheetLabel: "THE POLICY IS THE SHEET",
+      sheetBody:
+        "A doorman follows a sheet written by the owner: “Anyone may enter anywhere. Except the VIP lounge: card required.” The owner titles it “Card required” and believes everything is protected. A guest without a card walks into the stockroom. Nobody cheated: the sheet never said what the owner thought.",
+      doorLabel: "THE EXECUTION BOUNDARY IS THE DOOR",
+      doorBody:
+        "Ironproof proves what the sheet actually allows, and returns the exact case that opens the hole. Then it stands at the door: an action that goes through it and is not authorized does not execute. No ticket, no execution.",
+      foot: "On two lines, you can see it. On forty pages written by twelve people over five years, rereading is no longer enough.",
+    },
     what: {
       eyebrow: "WHAT IRONPROOF IS",
       title: "A checkpoint between your automation and the actions it can’t undo.",
@@ -486,6 +507,17 @@ const T: L<Copy> = {
     ),
     blockIsNotSilence: `Un blocage n’est pas un silence. C’est un artefact qui dit ce qui a été demandé, quelle politique s’appliquait, et pourquoi l’action ne s’est pas exécutée.`,
 
+    sheet: {
+      eyebrow: "LE PROBLÈME",
+      title: "Une politique peut dire une chose pendant que le système en permet une autre.",
+      sheetLabel: "LA POLITIQUE, C’EST LA FEUILLE",
+      sheetBody:
+        "Un portier suit une feuille écrite par le patron : « Tout le monde peut entrer partout. Sauf le salon VIP : carte obligatoire. » Le patron l’intitule « Carte obligatoire » et croit que tout est protégé. Un client sans carte entre dans l’entrepôt. Personne n’a triché : la feuille ne disait pas ce que le patron croyait.",
+      doorLabel: "LA FRONTIÈRE D’EXÉCUTION, C’EST LA PORTE",
+      doorBody:
+        "Ironproof prouve ce que la feuille permet vraiment, et rend le cas exact qui ouvre le trou. Puis il se place à la porte : une action qui y passe sans être autorisée ne s’exécute pas. Pas de ticket, pas d’exécution.",
+      foot: "Sur deux lignes, ça se voit. Sur quarante pages écrites par douze personnes en cinq ans, relire ne suffit plus.",
+    },
     what: {
       eyebrow: "CE QU’EST IRONPROOF",
       title: "Un point de contrôle entre votre automatisation et les actions qu’on ne peut pas défaire.",
@@ -839,6 +871,34 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
+          * mechanism: the reader understands the gap before the technology.
+          * The door pane carries the condition of the hero's sentence (an action
+          * that goes THROUGH the gate), so screen 2 qualifies screen 1. */}
+        <section id="problem" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.sheet.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
+                {t.sheet.title}
+              </h2>
+            </div>
+            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-2">
+              <div className="bg-ink px-7 py-9 md:px-10">
+                <p className="track-mid mb-5 text-xs text-neutral-200">01 · {t.sheet.sheetLabel}</p>
+                <p className="text-base font-light leading-relaxed text-neutral-400 md:text-lg">{t.sheet.sheetBody}</p>
+              </div>
+              <div className="bg-ink px-7 py-9 md:px-10">
+                <p className="seal-label track-mid mb-5 text-xs">02 · {t.sheet.doorLabel}</p>
+                <p className="text-base font-light leading-relaxed text-neutral-200 md:text-lg">{t.sheet.doorBody}</p>
+              </div>
+            </div>
+            <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
+              {t.sheet.foot}
+            </p>
           </div>
         </section>
 
