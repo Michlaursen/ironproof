@@ -14,8 +14,11 @@ type Props = { params: Promise<{ locale: string }> };
 
 const GOLD = "#c9a24b";
 
-async function dataUri(relPath: string, mime: string): Promise<string> {
-  const buf = await readFile(join(process.cwd(), relPath), "base64");
+// Each path is a literal inside join(process.cwd(), ...) at the call site, so
+// the build copies just these four files into the function. A path passed in
+// as a variable made it copy the whole project into every deployment.
+async function dataUri(path: string, mime: string): Promise<string> {
+  const buf = await readFile(path, "base64");
   return `data:${mime};base64,${buf}`;
 }
 
@@ -31,8 +34,8 @@ export default async function Image({ params }: Props) {
   const hero = HERO_COPY[locale];
 
   const [photo, mark, serif, serifItalic] = await Promise.all([
-    dataUri("public/media/hero-keys.jpg", "image/jpeg"),
-    dataUri("public/media/ironproof-mark.png", "image/png"),
+    dataUri(join(process.cwd(), "public/media/hero-keys.jpg"), "image/jpeg"),
+    dataUri(join(process.cwd(), "public/media/ironproof-mark.png"), "image/png"),
     readFile(join(process.cwd(), "src/assets/fonts/EBGaramond-Regular.ttf")),
     readFile(join(process.cwd(), "src/assets/fonts/EBGaramond-Italic.ttf")),
   ]);
