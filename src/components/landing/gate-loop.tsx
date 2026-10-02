@@ -28,8 +28,12 @@ import { type L, pick } from "./i18n";
  *     and the first play jumps to 2 s: one frame per second shows gold
  *     (authorized, SCRIPT then its path) from 2-3 s and the red agent from
  *     4 s. Dom: it must open on gold, never on red. The loop then plays whole.
- *   - play() rejected (Low Power Mode, autoplay policy): the poster stays,
- *     a click on the frame starts it — degrade, never a broken frame.
+ *   - play() rejected, or the film does not advance within WATCHDOG_MS
+ *     (Dom, 2026-10-01: on his iPhone the poster stayed, never the film --
+ *     iOS Low Power Mode refuses every autoplay video): the same loop is
+ *     shown as an animated AVIF, which iOS does not block (a browser without
+ *     AVIF keeps the still poster, as before). Fetched only in that case, so it costs nothing when the video
+ *     plays. A click shows the still poster (stoppable, WCAG 2.2.2).
  */
 
 type Copy = { label: string; pause: string; play: string };
@@ -51,6 +55,9 @@ const T: L<Copy> = {
 
 const POSTER = "/media/gate-poster.jpg";
 const FIRST_PLAY_AT = 2; // seconds: the first gold (an authorized action) lights up
+const WATCHDOG_MS = 3500; // no progress by then: the animated image takes over
+// Same 15 s loop, starting at 2 s (gold first), 960 px, 12 fps.
+const ANIM_AVIF = "/media/gate.anim.avif"; // 309 KB, 182 frames
 
 export function GateLoop({ locale }: { locale: Locale }) {
   const t = pick(T, locale);
@@ -58,6 +65,7 @@ export function GateLoop({ locale }: { locale: Locale }) {
   const [playing, setPlaying] = useState(false);
   const [userPaused, setUserPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
+  const [fallback, setFallback] = useState(false);
 
   const started = useRef(false);
   const tryPlay = useCallback(() => {
@@ -77,9 +85,19 @@ export function GateLoop({ locale }: { locale: Locale }) {
       if (v.readyState >= 1) seek();
       else v.addEventListener("loadedmetadata", seek, { once: true });
     }
+    const t0 = v.currentTime;
+    window.setTimeout(() => {
+      // Still not moving: the browser accepted play() but never started.
+      if (!v.paused && v.currentTime > t0) return;
+      if (v.currentTime > FIRST_PLAY_AT + 0.25) return;
+      setFallback(true);
+    }, WATCHDOG_MS);
     v.play().then(
       () => setPlaying(true),
-      () => setPlaying(false),
+      () => {
+        setPlaying(false);
+        setFallback(true);
+      },
     );
   }, []);
 
@@ -94,7 +112,7 @@ export function GateLoop({ locale }: { locale: Locale }) {
 
   useEffect(() => {
     const v = ref.current;
-    if (!v || reduced || userPaused) {
+    if (!v || reduced || userPaused || fallback) {
       v?.pause();
       setPlaying(false);
       return;
@@ -117,9 +135,13 @@ export function GateLoop({ locale }: { locale: Locale }) {
     );
     io.observe(v);
     return () => io.disconnect();
-  }, [reduced, userPaused, tryPlay]);
+  }, [reduced, userPaused, fallback, tryPlay]);
 
   const toggle = () => {
+    if (fallback) {
+      setUserPaused((p) => !p);
+      return;
+    }
     if (playing) {
       setUserPaused(true);
     } else {
@@ -130,7 +152,24 @@ export function GateLoop({ locale }: { locale: Locale }) {
 
   return (
     <figure className="gate-loop fade-up relative mx-auto mb-14 w-full max-w-5xl overflow-hidden rounded-[6px]">
-      {reduced ? (
+      {fallback && !reduced ? (
+        userPaused ? (
+          // eslint-disable-next-line @next/next/no-img-element -- static poster, no optimisation needed
+          <img src={POSTER} alt={t.label} width={1920} height={1080} className="block h-auto w-full" />
+        ) : (
+          <picture>
+            <source srcSet={ANIM_AVIF} type="image/avif" />
+            <img
+              src={POSTER}
+              alt={t.label}
+              width={1920}
+              height={1080}
+              className="block h-auto w-full"
+              style={{ backgroundImage: `url(${POSTER})`, backgroundSize: "cover" }}
+            />
+          </picture>
+        )
+      ) : reduced ? (
         // eslint-disable-next-line @next/next/no-img-element -- static poster, no optimisation needed
         <img src={POSTER} alt={t.label} width={1920} height={1080} className="block h-auto w-full" />
       ) : (
@@ -154,7 +193,7 @@ export function GateLoop({ locale }: { locale: Locale }) {
         <button
           type="button"
           onClick={toggle}
-          aria-label={playing ? t.pause : t.play}
+          aria-label={fallback ? (userPaused ? t.play : t.pause) : playing ? t.pause : t.play}
           className="absolute inset-0 cursor-pointer bg-transparent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-white/60"
         />
       )}
