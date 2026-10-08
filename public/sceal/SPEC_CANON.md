@@ -1,6 +1,14 @@
 # Sceal Wire Specification — canonical encoding and seal verification
 
-**Version 1.0 · covers dossier schema `sceal_dossier_version` 1.2 (and reads 1.1)**
+**Version 1.1 · covers dossier schema `sceal_dossier_version` 1.2 (and reads 1.1)**
+
+> **1.1 (2026-09-26).** §2 C5 now forbids duplicate object keys (1.0 said the last occurrence
+> wins), and §7 gains step 0, which rejects such a document before anything else is checked.
+> A conformant producer never emitted a duplicate, so no dossier it wrote changes status.
+> §7 step 3 now states that an anchor's `digest` must be a head of this chain. The reference
+> implementation and the web verifier already required it; the text did not, and the
+> TypeScript verifier written from the text accepted a dossier whose anchored head had been
+> removed.
 
 This document specifies the exact bytes a Sceal dossier commits to, so that an independent
 verifier — written in any language, by anyone, without our code — can reproduce every hash and
@@ -42,7 +50,15 @@ nesting:
 | C2 | **No insignificant whitespace** — item separator is `,`, key separator is `:` | no incidental spacing drift |
 | C3 | **String escaping** per §2.2 — the output is pure ASCII | byte-identical across locales and platforms |
 | C4 | **Numbers** encoded per §2.1 | no float ambiguity |
-| C5 | **Duplicate object keys**: the last occurrence wins | a re-encoder cannot invent an order |
+| C5 | **Duplicate object keys are forbidden.** A document in which any object repeats a member name is not a Sceal document | one document, one reading |
+
+**Why C5 forbids rather than resolves (1.1).** RFC 8259 §4 says member names SHOULD be unique and
+leaves the rest to each parser; parsers in wide use disagree on which occurrence of a repeated name
+counts. A document with a duplicate therefore has more than one reading, while its seal, computed
+over the re-encoded value and not over the bytes, verifies under exactly one of them. Choosing an
+occurrence, as 1.0 did, does not remove the other reading from the reader who parses differently.
+Names are compared after string decoding, so `"a"` and `"\u0061"` are the same name. A producer
+serialises maps, so it cannot emit a duplicate; the rule costs a conformant producer nothing.
 
 The reference implementation is Python's
 `json.dumps(v, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("utf-8")`
@@ -263,11 +279,19 @@ reads witnesses at all MUST read `bound`, because two witnesses of identical sha
 |---|---|---|---|
 | `"before"` | The digest existed **before** that instant — an **upper** bound | RFC 3161 token, ledger event | offline, via the token's own CMS signature |
 | `"after"` | The anchor was sealed **after** that instant, because the value could not be known earlier — a **lower** bound | drand pulse, Bitcoin tip | **re-querying the public source** (round / height), not offline |
+| `"before"` (type `opentimestamps`, 2026-09-21) | The digest was committed **into a Bitcoin block**, so it existed before that block — an upper bound with **no authority to trust** | OpenTimestamps proof (`ots.py`), the complete `.ots` file in `ref` | replay offline to `attested`; `confirmed` only against the block header (§11.1) |
 | `""` (absent) | Direction not declared — sealed before this field existed | any pre-1.0 witness | nothing; counts toward neither side |
 
 **Three states, never two.** A verifier MUST NOT treat an absent `bound` as either direction, and
 MUST NOT infer direction from `type`: an unknown type is a reason to abstain, not to guess. Reading
 a lower bound as an upper one yields the exact reverse of the truth.
+
+**An `opentimestamps` witness counts toward `before` only once its proof replays to `attested` or
+better (§11.1).** While `pending` it proves only that a calendar was asked, so it counts toward
+neither side, and the verifier says so. An implementation that does not replay OpenTimestamps
+proofs counts every such witness in neither side, out loud. This abstains on what cannot be checked; it
+does not infer a direction from `type`. (Added 2026-10-08: the first anchored golden-path pack
+printed "3 upper" where two were held.)
 
 **A verifier MUST distinguish "no witnesses" from "witnesses that came back unavailable."** A
 witness with `status != "ok"` is a recorded fact — the sealer asked and got nothing — and reporting
@@ -317,6 +341,11 @@ Absence of `toolchain` means *unrecorded*, never *unsealed*.
 Input: a dossier. No network, no secrets, no Sceal code.
 
 ```
+0. Parse the document. If any object, at any depth, repeats a member name (§2 C5)
+   → FAIL "duplicate key", and stop: there is no single document to verify.
+   This step applies to every document this specification defines, the key log
+   of §10 included.
+
 1. Read public_keys.ed25519 and public_keys.mldsa65.
    Read signature_scheme.post_quantum as the ML-DSA parameter set.
 
@@ -333,7 +362,9 @@ Input: a dossier. No network, no secrets, no Sceal code.
    f. expected_prev := entry.entry_hash
 
 3. Anchors: same walk, using §5, with prev_anchor_hash / anchor_hash,
-   and additionally H(anchor.witnesses) == anchor.witnesses_hash.
+   and additionally H(anchor.witnesses) == anchor.witnesses_hash,
+   and anchor.digest is GENESIS_PREV or the entry_hash of an entry of
+   this dossier                               else FAIL "digest does not match any chain head"
 
 4. The dossier is valid only if the failure list is empty.
 ```
@@ -559,3 +590,157 @@ false — the shared-operator overcount is real and is the direction that flatte
   here *now*, never what it pointed to when a dossier was sealed. Detecting a swap over time needs
   repeated observation, which §10 does not specify.
 - **When control of a key was actually lost.** The log records when retirement was *declared*.
+
+---
+
+## 11. Long-term companions — OpenTimestamps witness and Evidence Record (2026-09-21)
+
+Two additions after reading RFC 4998, RFC 9162 and the OpenTimestamps announcement in full.
+Neither changes a sealed byte: the first is a witness like any other (§5.1, hashed as-is), the
+second is a **companion file**, like the key log of §10.
+
+### 11.1 `opentimestamps` witness (`sceal/ots.py`)
+
+The ASCII anchor digest (`message`, §5) is SHA-256-hashed, a 16-byte nonce is appended and hashed
+again, and that commitment is submitted to the public calendars (`SCEAL_OTS_CALENDARS`, default
+`a.pool` and `b.pool`). The calendar returns a path of commitment operations ending in a **pending**
+attestation; the complete `.ots` file is stored in `ref`, so the proof is bound by `witnesses_hash`.
+
+**Five states, never fewer**, from `ots.state()`:
+
+| State | Meaning | Reached |
+|---|---|---|
+| `pending` | only calendar promises — proves a calendar was asked, nothing else | offline |
+| `attested` | a Bitcoin attestation is present, header **not** checked | offline |
+| `confirmed` | the block header's merkle root equals the replayed value | with the header (`sceal evidence ots`) |
+| `contradicted` | the proof does not bind this digest, or the merkle root differs | offline or with the header |
+| `unavailable` | header could not be fetched — nothing concluded | network failure |
+
+A conformant verifier MUST NOT print `confirmed` without a header, and MUST treat `contradicted` as
+a failure of the dossier. `sceal verify` (offline) reaches `attested` at best and says so.
+
+**What it proves, once confirmed:** the digest existed before the block at that height, with the
+block's own precision — the announcement states it as "very likely within two or three hours".
+**What it does not:** a lower bound (that is the beacon, §5.1 `after`); anything while `pending`;
+verification without a Bitcoin node or an explorer that serves headers (`SCEAL_BITCOIN_API`).
+
+### 11.2 Evidence Record (`sceal/ers.py`, RFC 4998 single-object profile)
+
+`sceal evidence build <dossier>` wraps each ok `rfc3161` witness in a DER `EvidenceRecord`
+(version 1, `digestAlgorithms` = SHA-512, one `ArchiveTimeStampChain` holding the existing
+`TimeStampToken` as the initial Archive Timestamp, no `reducedHashtree`). The file lives beside the
+dossier and is the only thing that changes over time.
+
+Two renewals, two triggers, exactly as RFC 4998 §1.2:
+
+| Renewal | When | Binds | Effect |
+|---|---|---|---|
+| timestamp (`sceal evidence renew`) | the TSA's signature algorithm, key or certificate weakens | SHA-512 of the previous `timeStamp` DER | appends to the current chain |
+| hash-tree (`--hash-tree`) | the hash algorithm weakens | `SHA-512(ascii digest) ‖ SHA-512(DER of all previous chains)` | starts a new chain — needs the digest, i.e. the original bytes |
+
+`ers.verify` re-derives every binding, refuses a renewal whose `genTime` precedes the timestamp it
+renews (§5.3.2), and re-checks each token's CMS signature through `tsa.verify_cms_signature`. A
+renewal that binds the wrong bytes is refused **at append time**, not discovered by a future verifier.
+
+**Advisory, not verdict:** `ers.renewal_deadline` reads the last token's signature family and
+reports the NIST IR 8547 ipd date (112-bit RSA/ECDSA deprecated after 2030, disallowed after 2035).
+RFC 4998 §3.1 keeps algorithm lifetimes out of the protected structure; so does this.
+
+### 11.3 What §11 does not establish
+
+- **Timeliness of renewal.** The RFC requires renewal *before* loss of security and says that
+  knowledge comes out-of-band. Nothing here schedules it; the deadline is printed, not enforced.
+- **Redundancy.** RFC 4998 §7 recommends at least two Evidence Records with different hash
+  algorithms and different TSAs. This produces one per token.
+- ~~**Third-party verification of the seal itself** — the CMS export is not built.~~ **Built the same
+  day (§11.4).** What remains: the export binds the *digest*, so a stranger still needs `sceal
+  verify` (or this specification) to go from digest to dossier bytes; and the certificate is
+  self-signed (§9 key ownership is unchanged).
+
+### 11.4 CMS export (`sceal/cms.py`, RFC 9882 + RFC 9881)
+
+`sceal cms export` writes, per anchor, a `ContentInfo(SignedData)` whose `eContent` is the ASCII
+`anchor_hash` (the exact bytes the seal signs, §5), with signed attributes `content-type`,
+`message-digest` (SHA-512) and `CMSAlgorithmProtection` (RFC 6211), signed **ML-DSA-65 pure mode,
+empty context, over the DER of `SignedAttrs` with the EXPLICIT SET tag** (RFC 5652 §5.4, RFC 9882
+§3.2). `signatureAlgorithm` is `id-ml-dsa-65 = 2.16.840.1.101.3.4.3.18` with parameters absent
+(RFC 9881 §2); HashML-DSA is never used (RFC 9881 §8.3). A self-signed X.509 v3 certificate carrying
+the ML-DSA-65 key (RFC 9881 §4, `subjectPublicKey` = raw FIPS 204 encoding, no extensions) is
+embedded and written as `signer-mldsa65.pem`.
+
+**Two verifiers, deliberately.** `sceal cms verify` re-checks with liboqs (ours). The reason the
+export exists is the other one: `openssl cms -verify -inform DER -certfile signer.pem -CAfile
+signer.pem` — OpenSSL's own ML-DSA implementation validating a liboqs signature over bytes it
+parsed itself. Exercised in both directions in `tests/test_cms.py`: the export verifies, a
+one-byte change in the content is rejected (OpenSSL 3.6.3 measured 2026-09-21). A machine whose
+OpenSSL predates ML-DSA reports that test as **skipped**, never as passed.
+
+**What §11.4 does not establish:** ownership of the key by a legal entity (the certificate is
+self-signed and names a string we chose); the Ed25519 half of the dual seal (RFC 8419 conventions,
+not built); that the digest corresponds to an intact dossier — that is `sceal verify`, and the CMS
+file says only "this key vouched for this digest".
+
+### 11.5 Seed-backed ML-DSA-65 keys (RFC 9881 §6)
+
+liboqs exposes no seed and expansion is one-way (RFC 9881 §8.1). Since 2026-09-21 `Keyring.generate()`
+asks OpenSSL 3.5+ (when on PATH) to generate the ML-DSA-65 key **from a 32-byte seed**, keeps the
+seed-form `OneAsymmetricKey` (`.keys/mldsa65.seed.der`, the RECOMMENDED form) and derives the
+expanded key liboqs signs with. The pair is round-tripped before acceptance. `sceal init` prints one
+of two origins, never silently: `seed-backed` or `expanded-only (liboqs; no seed exists)`.
+
+**Cross-implementation, both directions** (`tests/test_keys_seed.py`, OpenSSL 3.6.3 measured): a
+liboqs signature made with the OpenSSL-derived key verifies under the public key OpenSSL re-derives
+from the seed file; a changed message is refused; the two public keys are byte-identical.
+**Not established:** the §8.2 consistency check as the RFC states it (re-expanding the seed inside
+liboqs) — liboqs cannot; the round-trip signature is the check we can run.
+
+### 11.7 Redundant Evidence Records (RFC 4998 §7)
+
+The RFC recommends "at least two redundant Evidence Records with ArchiveTimeStampSequences using
+different hash algorithms and different TSAs using different signature algorithms", because the
+retrospective loss of one signature algorithm hits every authority that used it at once. `sceal
+evidence build --redundant` obtains, per anchor and beside the sealed SHA-512 record, a **second
+record under another hash** (`SCEAL_ERS_ALT_HASH`, default SHA-384) **from another authority**
+(`SCEAL_TSA_ALT_URL`, default DigiCert then Sectigo — RSA signers, where freetsa's signer is ECDSA;
+all five public authorities probed on 2026-09-21 grant sha256/384/512). The imprint hash is read from
+each token and a record refuses a token of another family at build time; a renewal must be
+imprinted with the record's family. `sceal evidence status` prints `REDUNDANT` only when an anchor
+has two hashes **and** two authorities, `SINGLE FAMILY` otherwise.
+
+**Independence is measured, not declared.** `sceal evidence build` reads each token's embedded
+certificate chain (`tsa.signer_chain`) and the SignerInfo's own signature algorithm
+(`tsa.signer_sig_alg`), and records in the sidecar the authority's organisations, countries, root and
+signer family, plus the host's IP and RDAP operator. `sceal evidence status` then judges each anchor on
+seven axes — hash, host, organisation, root, signer family, country, network — each reported as
+`distinct` / `shared` / `unknown`. **REDUNDANT** requires the RFC's three (hash, organisation, signer
+family) all distinct; anything else is **PARTIAL** with the shared or unknown axis named, and a token
+without certificates is `unknown`, never `distinct`. Measured on the five public authorities
+(2026-09-21, from their own tokens):
+
+| Authority | Organisation | Country | Signer | Root |
+|---|---|---|---|---|
+| freetsa.org | Free TSA | DE | ECDSA | self-signed |
+| timestamp.digicert.com | DigiCert Inc | US | RSA | DigiCert Assured ID Root CA |
+| timestamp.sectigo.com | Sectigo Limited | GB | RSA | USERTrust RSA (US) |
+| tsa.belgium.be | Kingdom of Belgium, BOSA | BE | ECDSA | Belgium Root CA6 |
+| timestamp.globalsign.com | GlobalSign nv-sa | BE | RSA | GlobalSign |
+
+The default pair (freetsa sealed, DigiCert alternate) is therefore distinct on all seven axes;
+Belgium would share the signer family with freetsa and is not the default for that reason.
+**Not established:** anything behind the names — shared datacentre suppliers, shared HSM vendors,
+shared auditors. The axes are what a token and a public registry can show.
+
+### 11.6 Renewal is scheduled by a command, not by memory
+
+`sceal evidence build` writes a sidecar (`<file>.er.json`: anchor, digest, dossier, date) beside each
+record, because the data object an Evidence Record proves is not inside it (RFC 4998 §1.1).
+`sceal evidence status <dir> [--warn-days N]` re-verifies every record and exits 1 when one is invalid
+or its advisory deadline is within N days (default 365). ~~Run it from a scheduler.~~ **Scheduled
+(2026-09-21):** `deploy/evidence_pulse.sh` walks `$SCEAL_EVIDENCE_ROOT` (default `~/.sceal/evidence`),
+runs `status` on every directory and `ots` on every dossier a sidecar names, and writes one of three
+states — VERT / A_FAIRE / ROUGE — to `~/.omg/evidence_pulse.state`. `deploy/com.ironproof.sceal.evidence.plist`
+runs it daily under launchd on Dom's Mac (RunAtLoad catches up after sleep), same pattern as the
+observatory pulse. It never renews by itself: renewal contacts an authority and rewrites a proof file,
+so it is reported as A_FAIRE and left to a human command. **Not established:** a dead man's switch —
+a third party that notices the pulse's silence (the same open item as the observatory).
+

@@ -54,6 +54,9 @@ export type EvidencePack = {
   ownDecisions: OwnDecision[];
   limits: Limit[];
   forgedSeq: number;
+  /** Read from the dossier's own anchors, never declared: the page's sentence
+   * about time follows the bytes it serves. */
+  anchored: boolean;
   /** The sealed policy and actions, verbatim, for /lab to edit and re-decide. */
   policy: unknown;
   actions: Record<string, unknown>;
@@ -154,6 +157,7 @@ function parseDossier(raw: string) {
   }
 
   return {
+    anchored: Array.isArray(d.anchors) && d.anchors.length > 0,
     policy,
     actions,
     constraints,

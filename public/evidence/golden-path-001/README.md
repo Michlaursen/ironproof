@@ -1,6 +1,6 @@
 # Ironproof evidence pack -- golden-path-001
 
-Built from commit `882302935ad544d126017866a5d34b4ba5bba7a0`.
+Built from commit `fb0d5f027b6ff5fdc1869bdd302b7f77b389c940`.
 
 This pack lets you reach our verdicts without running our code, and without
 taking our word for any step. Start here:
@@ -29,13 +29,24 @@ signature -- it never imposed an absolute ceiling, it imposed one CONDITIONAL on
 that signature. A solver returned that in about a tenth of a second; two human
 readings of the same sentence did not.
 
+## When it was sealed
+
+The chain head is anchored (declared 2026-10-08T16:06:46.531348Z). Witnesses that landed:
+
+- sealed AFTER: bitcoin, drand
+- existed BEFORE: opentimestamps (pending Bitcoin confirmation), rfc3161
+
+Both sides are bounded: backdating would require rewriting a public record.
+
+`verify.sh` checks that the anchor is signed by the dossier's keys and covers this chain's head, and prints which side the time is bounded on. It does not re-fetch the witnesses: each one names its public source (TSA, drand round, Bitcoin block), checkable there.
+
 ## Who authorised the policy
 
 2 of 2 designated authorities dual-signed (Ed25519 + ML-DSA-65) the exact
 bytes of this policy AND of the compiler that reads it. Their roles:
 
-- `treasury-controller`  key `29851b207b85110f...`
-- `risk-officer`  key `fc7e2730563914cd...`
+- `risk-officer`  key `3b5ffc6e05f11844...`
+- `treasury-controller`  key `9a6d9aa2c8fe721a...`
 
 A signature binds a KEY, never a label. The roles above are declared; resolve
 them against your own key registry.
