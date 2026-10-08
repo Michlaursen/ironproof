@@ -35,6 +35,8 @@ type VerifyResult = {
     after: number;
     unspecified: number;
     down: number;
+    /** OpenTimestamps receipts this verifier does not replay: counted in neither side. */
+    unreplayed?: number;
   };
   toolchain?: { liboqs?: string; liboqsPython?: string; canonicalForm?: string } | null;
 };
@@ -76,6 +78,8 @@ type Copy = {
   upper: string;
   lower: string;
   unbounded: string;
+  pendingOnly: string;
+  unreplayed: (n: number) => string;
   unrecorded: string;
 };
 
@@ -142,6 +146,8 @@ const T: L<Copy> = {
     upper: "an upper bound only — it proves the bytes are no newer than the timestamp, and does not refute a date written inside the document that is older than the truth.",
     lower: "a lower bound only — it proves the bytes are no older than that beacon round, with nothing capping the other side.",
     unbounded: "witnesses that were all unreachable when this was sealed, so no bound was recorded. The absence is the signal, not an error.",
+    pendingOnly: "only an OpenTimestamps receipt, which this page does not replay, so no bound is established here.",
+    unreplayed: (n) => `${n} OpenTimestamps receipt${n > 1 ? "s" : ""} not counted: this page does not replay them, and a receipt proves nothing until Bitcoin confirms it.`,
     unrecorded: "witnesses whose direction was not recorded, so no bound can be claimed from them.",
   },
   fr: {
@@ -208,6 +214,8 @@ const T: L<Copy> = {
     upper: "une borne supérieure seulement — elle prouve que les octets ne sont pas plus récents que l’horodatage, et ne réfute pas une date écrite dans le document qui serait plus ancienne que la vérité.",
     lower: "une borne inférieure seulement — elle prouve que les octets ne sont pas plus anciens que ce tour de balise, sans rien pour plafonner l’autre côté.",
     unbounded: "des témoins tous injoignables au moment du scellement, donc aucune borne n’a été consignée. C’est l’absence qui est le signal, pas une erreur.",
+    pendingOnly: "seulement un reçu OpenTimestamps, que cette page ne rejoue pas, donc aucune borne n’est établie ici.",
+    unreplayed: (n) => `${n} reçu${n > 1 ? "s" : ""} OpenTimestamps non compté${n > 1 ? "s" : ""}${NBSP}: cette page ne les rejoue pas, et un reçu ne prouve rien tant que Bitcoin ne l’a pas confirmé.`,
     unrecorded: "des témoins dont la direction n’a pas été consignée, donc aucune borne ne peut en être tirée.",
   },
 };
@@ -224,11 +232,19 @@ function TemporalLine({ time, t }: { time?: VerifyResult["time"]; t: Copy }) {
   if (!time || time.state === "none") {
     return <p className="mt-3 text-sm font-light text-neutral-400">{t.noAnchor}</p>;
   }
+  const unreplayed = time.unreplayed ?? 0;
+  const note =
+    unreplayed > 0 ? (
+      <p className="mt-2 text-xs font-light text-neutral-500">{t.unreplayed(unreplayed)}</p>
+    ) : null;
   if (time.state === "both") {
     return (
-      <p className="mt-3 text-sm font-light text-neutral-300">
-        {t.bothSides(time.before, time.after)}
-      </p>
+      <>
+        <p className="mt-3 text-sm font-light text-neutral-300">
+          {t.bothSides(time.before, time.after)}
+        </p>
+        {note}
+      </>
     );
   }
   const side =
@@ -237,12 +253,17 @@ function TemporalLine({ time, t }: { time?: VerifyResult["time"]; t: Copy }) {
       : time.state === "lower"
         ? t.lower
         : time.state === "unbounded"
-          ? t.unbounded
+          ? time.down === 0 && unreplayed > 0
+            ? t.pendingOnly
+            : t.unbounded
           : t.unrecorded;
   return (
-    <p className="mt-3 text-sm font-light text-neutral-400">
-      <span className="text-neutral-300">{t.partial}</span> {side}
-    </p>
+    <>
+      <p className="mt-3 text-sm font-light text-neutral-400">
+        <span className="text-neutral-300">{t.partial}</span> {side}
+      </p>
+      {note}
+    </>
   );
 }
 

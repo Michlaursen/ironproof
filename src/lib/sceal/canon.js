@@ -40,6 +40,14 @@ export class RawNumber {
   constructor(lexeme) { this.lexeme = lexeme; }
 }
 
+/**
+ * SPEC_CANON §2 C5 (1.1): a document that repeats a member name inside one
+ * object is not a Sceal document. Its own class so `report` answers FAILED
+ * rather than CANNOT_VERIFY: the file was read, and it is invalid. Compared on
+ * the DECODED key, so `"a"` and `"\u0061"` are the same name.
+ */
+export class DuplicateKey extends Error {}
+
 export class JsonReader {
   constructor(src) { this.src = src; this.i = 0; }
 
@@ -88,7 +96,11 @@ export class JsonReader {
       if (this.src[this.i] !== ":") throw new Error(`expected ':' at offset ${this.i}`);
       this.i++;
       this.ws();
-      out.set(k, this.value()); // duplicate keys: last wins, as in the producer
+      // C5: never last-wins. A repeated name gives the document two readings
+      // (parsers disagree on which occurrence counts) while the seal, computed
+      // over the re-encoded value, verifies under one of them.
+      if (out.has(k)) throw new DuplicateKey(`duplicate key ${JSON.stringify(k)} at offset ${this.i}`);
+      out.set(k, this.value());
       this.ws();
       const c = this.src[this.i];
       if (c === ",") { this.i++; continue; }
@@ -380,8 +392,8 @@ export function verifyDossier(dossier, onProgress) {
  * be reported as silence.
  */
 export function temporalBounds(anchors) {
-  if (!Array.isArray(anchors)) return { state: "none", before: 0, after: 0, unspecified: 0, down: 0 };
-  let before = 0, after = 0, unspecified = 0, down = 0;
+  if (!Array.isArray(anchors)) return { state: "none", before: 0, after: 0, unspecified: 0, down: 0, unreplayed: 0 };
+  let before = 0, after = 0, unspecified = 0, down = 0, unreplayed = 0;
 
   for (const rawAnchor of anchors) {
     const a = asMap(rawAnchor);
@@ -392,6 +404,9 @@ export function temporalBounds(anchors) {
       const w = asMap(rawWitness);
       if (w === null) continue;
       if (str(w, "status") !== "ok") { down++; continue; }
+      // §11.1: an OpenTimestamps receipt proves nothing until it replays to a
+      // Bitcoin attestation, and this verifier does not replay it. Abstain.
+      if (str(w, "type") === "opentimestamps") { unreplayed++; continue; }
       const bound = str(w, "bound");
       if (bound === "before") before++;
       else if (bound === "after") after++;
@@ -400,13 +415,13 @@ export function temporalBounds(anchors) {
   }
 
   let state;
-  if (before === 0 && after === 0 && unspecified === 0) state = down > 0 ? "unbounded" : "none";
+  if (before === 0 && after === 0 && unspecified === 0) state = down > 0 || unreplayed > 0 ? "unbounded" : "none";
   else if (before > 0 && after > 0) state = "both";
   else if (before > 0) state = "upper";
   else if (after > 0) state = "lower";
   else state = "direction-unrecorded";
 
-  return { state, before, after, unspecified, down };
+  return { state, before, after, unspecified, down, unreplayed };
 }
 
 export function parseDossier(text) {
@@ -428,6 +443,10 @@ export function report(text, onProgress) {
   try {
     dossier = parseDossier(text);
   } catch (err) {
+    // §7 step 0: FAILED, and stop -- there is no single document to report on.
+    if (err instanceof DuplicateKey) {
+      return { status: "FAILED", duplicateKey: true, reason: err.message, failures: [err.message] };
+    }
     return { status: "CANNOT_VERIFY", reason: err.message, failures: [] };
   }
 
