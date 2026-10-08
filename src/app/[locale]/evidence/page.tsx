@@ -58,6 +58,7 @@ type Copy = {
   checkTitle: string;
   checkLead: (seq: number) => ReactNode;
   noAnchor: string;
+  anchored: string;
 
   threeEyebrow: string;
   threeTitle: string;
@@ -164,6 +165,7 @@ const T: L<Copy> = {
       </>
     ),
     noAnchor: "This record carries no time anchor, so it proves the bytes have not moved since sealing, not when they were written.",
+    anchored: "This record is also anchored in time. The verifier below shows which side of the interval each public witness bounds.",
 
     threeEyebrow: "THREE CHECKS, NO IRONPROOF ACCOUNT",
     threeTitle: "Everything we concluded, re-derived without our code.",
@@ -286,6 +288,7 @@ const T: L<Copy> = {
       </>
     ),
     noAnchor: "Ce dossier ne porte aucun ancrage temporel : il prouve que les octets n’ont pas bougé depuis le scellement, pas quand ils ont été écrits.",
+    anchored: "Ce dossier porte aussi un ancrage temporel. Le vérificateur ci-dessous montre de quel côté chaque témoin public borne le temps.",
 
     threeEyebrow: "TROIS CONTRÔLES, AUCUN COMPTE IRONPROOF",
     threeTitle: "Tout ce que nous avons conclu, re-dérivé sans notre code.",
@@ -537,7 +540,7 @@ export default async function EvidencePage({ params }: PageProps) {
             <Eyebrow>{t.checkEyebrow}</Eyebrow>
             <H2>{t.checkTitle}</H2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.checkLead(pack.forgedSeq)}</p>
-            <p className="mt-3 max-w-2xl text-sm font-light text-neutral-500">{t.noAnchor}</p>
+            <p className="mt-3 max-w-2xl text-sm font-light text-neutral-500">{pack.anchored ? t.anchored : t.noAnchor}</p>
           </div>
           <div className="mt-10">
             <VerifyArtifact
