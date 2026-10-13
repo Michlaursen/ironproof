@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { IronproofMark } from "@/components/ironproof-mark";
 import { LandingHeader } from "./landing-header";
 import { ProofSeal } from "./proof-seal";
@@ -31,7 +32,7 @@ export function NeuroSymbolic({ locale = defaultLocale }: { locale?: Locale }) {
 
       <main className="flex-1">
         {/* HERO */}
-        <section id="top" className="relative z-10 px-6 pb-16 pt-24 md:px-14 md:pt-28">
+        <section id="top" className="relative z-10 px-6 pb-12 pt-24 md:px-14 md:pt-28">
           <div className="halo" aria-hidden="true" />
           <div className="fade-up mx-auto max-w-4xl">
             <p className="seal-label track-wide mb-6 text-xs md:text-sm">{t.eyebrow}</p>
@@ -43,6 +44,27 @@ export function NeuroSymbolic({ locale = defaultLocale }: { locale?: Locale }) {
             </p>
             <div className="hairline mt-10 h-px w-full max-w-md" />
           </div>
+        </section>
+
+        {/* ARCHITECTURE — the whole system, before the explanation */}
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
+          <figure className="fade-up">
+            <p className="seal-label track-mid mb-4 text-xs">{t.archTag}</p>
+            <a href={t.archSrc} target="_blank" rel="noopener" className="card-premium block overflow-hidden p-0">
+              <Image
+                src={t.archSrc}
+                alt={t.archAlt}
+                width={3200}
+                height={2000}
+                priority
+                sizes="(min-width: 1280px) 1200px, 100vw"
+                className="block h-auto w-full"
+              />
+            </a>
+            <figcaption className="mt-5 max-w-3xl font-light leading-relaxed text-neutral-400">
+              {t.archCaption}
+            </figcaption>
+          </figure>
         </section>
 
         {/* 01 — two kinds of intelligence */}

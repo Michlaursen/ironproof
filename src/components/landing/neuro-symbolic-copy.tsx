@@ -29,6 +29,11 @@ export type NeuroSymbolicCopy = {
   h1: React.ReactNode;
   heroLead: React.ReactNode;
 
+  archTag: string;
+  archSrc: string;
+  archAlt: string;
+  archCaption: string;
+
   s01: string;
   s01Title: string;
   s01Lead: string;
@@ -99,6 +104,13 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
         one sits inside Ironproof.
       </>
     ),
+
+    archTag: "ARCHITECTURE",
+    archSrc: "/media/architecture-en.webp",
+    archAlt:
+      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts: holds, breaks, not covered. Then: enforce before execution, seal with a post-quantum signature, verify offline without trusting us.",
+    archCaption:
+      "The whole system on one page. The model never has the last word: the solver does, and the seal lets anyone check it afterward.",
 
     s01: "01 — Two kinds of intelligence",
     s01Title: "One learns from examples. The other follows rules to the end.",
@@ -307,6 +319,13 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
         où chacun se trouve exactement dans Ironproof.
       </>
     ),
+
+    archTag: "ARCHITECTURE",
+    archSrc: "/media/architecture-fr.webp",
+    archAlt:
+      "Architecture d’Ironproof. Trois entrées (une action d’agent avec sa politique, un programme COBOL à migrer, une faille C à corriger) entrent dans un système d’exploitation cognitif qui encadre l’agent d’ingénierie : mémoire persistante, règles apprises des erreurs passées, aucun rapport sans commande et sortie. À l’intérieur, un moteur de vérification neuro-symbolique : le modèle propose, le solveur tranche, les contre-exemples reviennent. Chaque résultat est un de trois verdicts : tient, tombe, non couvert. Puis : appliquer avant l’exécution, sceller par une signature post-quantique, vérifier hors ligne sans nous faire confiance.",
+    archCaption:
+      "Tout le système sur une page. Le modèle n’a jamais le dernier mot : le solveur l’a, et le sceau permet à n’importe qui de le vérifier après coup.",
 
     s01: "01 — Deux formes d’intelligence",
     s01Title: "L’une apprend par l’exemple. L’autre suit les règles jusqu’au bout.",
