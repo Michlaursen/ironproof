@@ -28,8 +28,10 @@ const LABELS: L<{
   record: string;
   research: string;
   provableAi: string;
+  neuroSymbolic: string;
   pilot: string;
   provableAiItem: string;
+  neuroSymbolicItem: string;
   pilotItem: string;
 }> = {
   en: {
@@ -44,8 +46,10 @@ const LABELS: L<{
     record: "Technical record",
     research: "Research",
     provableAi: "PROVABLE AI",
+    neuroSymbolic: "NEURO-SYMBOLIC",
     pilot: "START A PILOT",
     provableAiItem: "Provable AI",
+    neuroSymbolicItem: "Neuro-symbolic",
     pilotItem: "Start a pilot",
   },
   fr: {
@@ -60,8 +64,10 @@ const LABELS: L<{
     record: "Dossier technique",
     research: "Recherche",
     provableAi: "IA PROUVABLE",
+    neuroSymbolic: "NEURO-SYMBOLIQUE",
     pilot: "DÉMARRER UN PILOTE",
     provableAiItem: "IA prouvable",
+    neuroSymbolicItem: "Neuro-symbolique",
     pilotItem: "Démarrer un pilote",
   },
 };
@@ -105,12 +111,15 @@ export function siteNav(locale: Locale = defaultLocale) {
     /** Top level, right after PRODUCT (Dom, 2026-09-30): the demo is the first thing to open. */
     demo: { href: `${r}/demo`, label: t.demo, page: "demo" } as NavItem,
     provableAi: { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" } as NavItem,
+    /** Top level beside PROVABLE AI (Dom, 2026-10-12): what the engine is, in plain words. */
+    neuroSymbolic: { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" } as NavItem,
     pilot: { href: `${r}/pilot`, label: t.pilot, page: "pilot" } as NavItem,
     /** The same two pages, in sentence case, for lists (footer). */
     company: [
       { href: `${r}/demo`, label: t.demoItem, page: "demo" },
       { href: `${r}/pilot`, label: t.pilotItem, page: "pilot" },
       { href: `${r}/provable-ai`, label: t.provableAiItem, page: "provable-ai" },
+      { href: `${r}/neuro-symbolic`, label: t.neuroSymbolicItem, page: "neuro-symbolic" },
     ] as NavItem[],
   };
 }
