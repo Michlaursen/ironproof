@@ -66,6 +66,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/zero-trust",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/zero-trust",
+          fr: "https://ironproof.ai/fr/zero-trust",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/proof",
       lastModified,
       changeFrequency: "monthly",

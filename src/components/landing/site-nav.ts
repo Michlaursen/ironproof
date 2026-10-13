@@ -29,9 +29,11 @@ const LABELS: L<{
   research: string;
   provableAi: string;
   neuroSymbolic: string;
+  zeroTrust: string;
   pilot: string;
   provableAiItem: string;
   neuroSymbolicItem: string;
+  zeroTrustItem: string;
   pilotItem: string;
 }> = {
   en: {
@@ -47,9 +49,11 @@ const LABELS: L<{
     research: "Research",
     provableAi: "PROVABLE AI",
     neuroSymbolic: "NEURO-SYMBOLIC",
+    zeroTrust: "ZERO TRUST",
     pilot: "START A PILOT",
     provableAiItem: "Provable AI",
     neuroSymbolicItem: "Neuro-symbolic",
+    zeroTrustItem: "Zero Trust",
     pilotItem: "Start a pilot",
   },
   fr: {
@@ -65,9 +69,11 @@ const LABELS: L<{
     research: "Recherche",
     provableAi: "IA PROUVABLE",
     neuroSymbolic: "NEURO-SYMBOLIQUE",
+    zeroTrust: "ZERO TRUST",
     pilot: "DÉMARRER UN PILOTE",
     provableAiItem: "IA prouvable",
     neuroSymbolicItem: "Neuro-symbolique",
+    zeroTrustItem: "Zero Trust",
     pilotItem: "Démarrer un pilote",
   },
 };
@@ -113,6 +119,8 @@ export function siteNav(locale: Locale = defaultLocale) {
     provableAi: { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" } as NavItem,
     /** Top level beside PROVABLE AI (Dom, 2026-10-12): what the engine is, in plain words. */
     neuroSymbolic: { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" } as NavItem,
+    /** Top level beside NEURO-SYMBOLIC (Dom, 2026-10-12): where Ironproof sits in a Zero Trust architecture. */
+    zeroTrust: { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" } as NavItem,
     pilot: { href: `${r}/pilot`, label: t.pilot, page: "pilot" } as NavItem,
     /** The same two pages, in sentence case, for lists (footer). */
     company: [
@@ -120,6 +128,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       { href: `${r}/pilot`, label: t.pilotItem, page: "pilot" },
       { href: `${r}/provable-ai`, label: t.provableAiItem, page: "provable-ai" },
       { href: `${r}/neuro-symbolic`, label: t.neuroSymbolicItem, page: "neuro-symbolic" },
+      { href: `${r}/zero-trust`, label: t.zeroTrustItem, page: "zero-trust" },
     ] as NavItem[],
   };
 }

@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
       { source: "/demo", destination: "/en/demo" },
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/neuro-symbolic", destination: "/en/neuro-symbolic" },
+      { source: "/zero-trust", destination: "/en/zero-trust" },
       { source: "/proof", destination: "/en/proof" },
       { source: "/verify", destination: "/en/verify" },
       { source: "/evidence", destination: "/en/evidence" },
