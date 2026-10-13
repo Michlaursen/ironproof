@@ -9,10 +9,18 @@ import { VerifyArtifact } from "@/components/landing/verify-artifact";
 import { type L, pick } from "@/components/landing/i18n";
 
 /*
- * The terminal demo, given a page. The file itself stays at its original URL
- * (/media/ironproof-demo-a7f3c2.mp4): that link was already sent out, so it
+ * Two recordings. First the film (Dom, 2026-10-12: "quand ça ouvre ça doit
+ * être la vidéo") -- the $7.2M transfer through the gate, 137 s, from
+ * ironproof/demo/film (commit 3802a08, every voice-over line audited against
+ * its proof; the film states its own limits at 1:51). Web encode of
+ * ironproof-chain.mp4 (sha256 9b134702f12f7b75…), H.264 CRF 30.
+ *
+ * Then the terminal demo. That file stays at its original URL
+ * (/media/ironproof-demo-a7f3c2.mp4): the link was already sent out, so it
  * must keep working -- the page embeds it, it does not move it.
  */
+const FILM = "/media/ironproof-film.h264.mp4";
+const FILM_POSTER = "/media/film-poster.jpg";
 const VIDEO = "/media/ironproof-demo-a7f3c2.mp4";
 const POSTER = "/media/demo-poster.jpg";
 // The two receipts the recorded run wrote (ironproof/demo/cdl_receipt*.json,
@@ -30,6 +38,11 @@ const T: L<{
   eyebrow: string;
   h1: string;
   lead: string;
+  filmLabel: string;
+  filmNote: string;
+  termEyebrow: string;
+  termTitle: string;
+  termLead: string;
   steps: string[];
   limits: string;
   videoLabel: string;
@@ -44,10 +57,16 @@ const T: L<{
   en: {
     metaTitle: "Demo — Ironproof",
     metaDescription:
-      "75 seconds on the real engine: a $50,000 transfer is allowed and sealed, then the account is frozen and the same transfer is blocked. The money never moves, and the refusal is sealed too.",
+      "An AI agent wants to send $7.2 million. The bank’s rule is proven, the payment is blocked at the gate, and the refusal is sealed. Then the same engine in the terminal: a $50,000 transfer allowed, then blocked.",
     eyebrow: "DEMO",
-    h1: "One transfer. Allowed, then blocked.",
-    lead: "A $50,000 transfer clears the bank’s policy and is sealed. Then the account is frozen: the same transfer is blocked, the money never moves, and the refusal is sealed too.",
+    h1: "$7.2 million. Should it go?",
+    lead: "An AI agent wants to send $7.2 million. The bank’s rule says no payment above $5 million leaves without a second signature. The rule is proven, the payment arrives without that signature, and it is blocked at the gate.",
+    filmLabel: "Film: a $7.2 million payment by an AI agent, blocked at the gate",
+    filmNote:
+      "Animated film, 2 min 17 s, in English. The rule and its proof are real; the scene is an illustration. Near the end, the film says what this does not guard.",
+    termEyebrow: "IN THE TERMINAL",
+    termTitle: "One transfer. Allowed, then blocked.",
+    termLead: "A $50,000 transfer clears the bank’s policy and is sealed. Then the account is frozen: the same transfer is blocked, the money never moves, and the refusal is sealed too.",
     steps: [
       "The bank’s rules become formal constraints.",
       "The transfer is checked against them before it executes.",
@@ -70,10 +89,16 @@ const T: L<{
   fr: {
     metaTitle: "Démo — Ironproof",
     metaDescription:
-      "75 secondes sur le vrai moteur : un virement de 50 000 $ est autorisé et scellé, puis le compte est gelé et le même virement est bloqué. L’argent ne bouge jamais, et le refus est scellé lui aussi.",
+      "Un agent IA veut envoyer 7,2 millions $. La règle de la banque est prouvée, le paiement est bloqué à la porte, et le refus est scellé. Puis le même moteur dans le terminal : un virement de 50 000 $ autorisé, puis bloqué.",
     eyebrow: "DÉMO",
-    h1: "Un virement. Autorisé, puis bloqué.",
-    lead: "Un virement de 50 000 $ respecte la politique de la banque et il est scellé. Puis le compte est gelé : le même virement est bloqué, l’argent ne bouge jamais, et le refus est scellé lui aussi.",
+    h1: "7,2 millions $. Doit-il partir\u00a0?",
+    lead: "Un agent IA veut envoyer 7,2 millions $. La règle de la banque dit qu’aucun paiement de plus de 5 millions $ ne part sans une deuxième signature. La règle est prouvée, le paiement arrive sans cette signature, et il est bloqué à la porte.",
+    filmLabel: "Film : un paiement de 7,2 millions $ par un agent IA, bloqué à la porte",
+    filmNote:
+      "Film d’animation, 2 min 17 s, en anglais. La règle et sa preuve sont réelles ; la scène est une illustration. Vers la fin, le film dit ce que cela ne protège pas.",
+    termEyebrow: "DANS LE TERMINAL",
+    termTitle: "Un virement. Autorisé, puis bloqué.",
+    termLead: "Un virement de 50 000 $ respecte la politique de la banque et il est scellé. Puis le compte est gelé : le même virement est bloqué, l’argent ne bouge jamais, et le refus est scellé lui aussi.",
     steps: [
       "Les règles de la banque deviennent des contraintes formelles.",
       "Le virement est vérifié contre elles avant de s’exécuter.",
@@ -139,8 +164,28 @@ export default async function DemoPage({ params }: PageProps) {
           <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </section>
         <section className="relative z-10 mx-auto max-w-5xl px-6 pb-24 md:px-14">
-          {/* Controls on and no autoplay: this is a recording to watch, not a
-            * background loop like the home page's gate. */}
+          {/* The film opens the page. Controls on and no autoplay: a recording
+            * to watch, not a background loop like the home page's gate. */}
+          <figure className="overflow-hidden rounded-[6px] border border-white/10">
+            <video
+              className="block h-auto w-full"
+              width={1920}
+              height={1080}
+              poster={FILM_POSTER}
+              controls
+              playsInline
+              preload="metadata"
+              aria-label={t.filmLabel}
+            >
+              <source src={FILM} type="video/mp4" />
+            </video>
+          </figure>
+          <p className="mt-6 max-w-2xl text-sm text-neutral-500">{t.filmNote}</p>
+        </section>
+        <section className="relative z-10 edge-t mx-auto max-w-5xl px-6 pb-24 pt-24 md:px-14">
+          <p className="seal-label track-mid mb-4 text-xs">{t.termEyebrow}</p>
+          <h2 className="font-serif text-3xl font-medium leading-tight sm:text-4xl md:text-5xl">{t.termTitle}</h2>
+          <p className="mb-10 mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.termLead}</p>
           <figure className="fade-up overflow-hidden rounded-[6px] border border-white/10">
             <video
               className="block h-auto w-full"
