@@ -54,6 +54,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/neuro-symbolic",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/neuro-symbolic",
+          fr: "https://ironproof.ai/fr/neuro-symbolic",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/proof",
       lastModified,
       changeFrequency: "monthly",

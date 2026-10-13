@@ -14,7 +14,7 @@ import { siteNav, type NavItem } from "./site-nav";
  * the language switch which page to cross to. Those used to be the same idea
  * split across two props, which is a mirror waiting to disagree.
  */
-type Page = "home" | "demo" | "proof" | "provable-ai" | "verify" | "evidence" | "lab" | "pilot" | "act-money" | "act-access" | "act-records" | "act-deploy" | "research" | "research-index";
+type Page = "home" | "demo" | "proof" | "provable-ai" | "neuro-symbolic" | "verify" | "evidence" | "lab" | "pilot" | "act-money" | "act-access" | "act-records" | "act-deploy" | "research" | "research-index";
 
 /**
  * Each page's path WITHOUT a locale prefix. The single source for both link
@@ -26,6 +26,7 @@ const PATHS: Record<Page, string> = {
   demo: "/demo",
   proof: "/proof",
   "provable-ai": "/provable-ai",
+  "neuro-symbolic": "/neuro-symbolic",
   verify: "/verify",
   evidence: "/evidence",
   lab: "/lab",
@@ -222,6 +223,15 @@ export function LandingHeader(props: HeaderProps) {
           >
             {nav.provableAi.label}
           </a>
+          <a
+            href={nav.neuroSymbolic.href}
+            aria-current={isActive(nav.neuroSymbolic.page) ? "page" : undefined}
+            className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
+              isActive(nav.neuroSymbolic.page) ? "metal-shine" : "metal-text"
+            }`}
+          >
+            {nav.neuroSymbolic.label}
+          </a>
 
           {/* No divider before it: the switch carries its own border box, and
               at the xl tier the French labels need every pixel back. */}
@@ -307,6 +317,13 @@ export function LandingHeader(props: HeaderProps) {
               className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.provableAi.page) ? "metal-shine" : "metal-text"}`}
             >
               {nav.provableAi.label}
+            </a>
+            <a
+              href={nav.neuroSymbolic.href}
+              onClick={() => setOpen(false)}
+              className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.neuroSymbolic.page) ? "metal-shine" : "metal-text"}`}
+            >
+              {nav.neuroSymbolic.label}
             </a>
             <a
               href={contactHref}
