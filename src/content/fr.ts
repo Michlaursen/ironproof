@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "Ironproof | Autorisation déterministe pour les actions critiques",
+    title: "Ironproof | IA neuro-symbolique et vérification formelle pour les systèmes critiques",
     description:
-      "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
+      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier la modernisation des systèmes patrimoniaux. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui la vérifie de façon indépendante, sans avoir à nous faire confiance.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
+      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier la modernisation des systèmes patrimoniaux. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui la vérifie de façon indépendante, sans avoir à nous faire confiance.",
   },
   header: {
     nav: [

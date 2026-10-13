@@ -7,6 +7,7 @@ import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
+import { Platform } from "./platform";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
 
@@ -60,6 +61,8 @@ type Copy = {
     ctaDecide: string;
     ctaVerify: string;
     ctaPilot: string;
+    ctaTech: string;
+    ctaEvidence: string;
     logoTitle: string;
   };
 
@@ -201,7 +204,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "For any action you can’t afford to get wrong, whoever started it: a person, a script, or an AI agent.",
+        "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and mathematically verify key properties of system behavior.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -210,6 +213,8 @@ const T: L<Copy> = {
       ctaDecide: "WATCH IT DECIDE",
       ctaVerify: "VERIFY A REAL DECISION",
       ctaPilot: "START A PILOT",
+      ctaTech: "EXPLORE OUR TECHNOLOGY",
+      ctaEvidence: "SEE THE EVIDENCE",
       logoTitle: "Ironproof monogram",
     },
 
@@ -536,7 +541,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Pour toute action que vous ne pouvez pas vous permettre de rater, peu importe qui la lance : une personne, un script ou un agent IA.",
+        "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier mathématiquement des propriétés clés du comportement d’un système.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -545,6 +550,8 @@ const T: L<Copy> = {
       ctaDecide: "VOYEZ-LE DÉCIDER",
       ctaVerify: "VÉRIFIEZ UNE VRAIE DÉCISION",
       ctaPilot: "DÉMARRER UN PILOTE",
+      ctaTech: "DÉCOUVRIR NOTRE TECHNOLOGIE",
+      ctaEvidence: "VOIR LES PREUVES",
       logoTitle: "Monogramme Ironproof",
     },
 
@@ -942,21 +949,25 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * its own section further down. */}
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a
-                  href={`${r}/pilot`}
+                  href={`${r}/neuro-symbolic`}
                   className="track-mid inline-flex items-center gap-3 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
+                  {t.hero.ctaTech} <span aria-hidden="true">&rarr;</span>
                 </a>
                 <a
-                  href="#decide"
+                  href={`${r}/evidence`}
                   className="track-mid inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
                 >
-                  {t.hero.ctaDecide} <span aria-hidden="true">&darr;</span>
+                  {t.hero.ctaEvidence} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
           </div>
         </section>
+
+        {/* 1a. ONE TECHNOLOGY, THREE APPLICATIONS, then the method (2026-10-13).
+          * Everything below, from THE PROBLEM on, details pillar 01: the gate. */}
+        <Platform locale={locale} />
 
         {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
           * mechanism: the reader understands the gap before the technology.
