@@ -321,17 +321,23 @@ export const en: SiteContent = {
       },
       {
         title: "Published methods",
-        body: "Four security preprints disclose the methods, datasets, limitations and failure cases.",
+        body: "Four preprints disclose the methods, datasets, limitations and failure cases.",
       },
     ],
     papers: {
       eyebrow: "Published research",
       items: [
         {
-          id: "arXiv:2604.05292",
+          id: "arXiv:2610.11073",
           title:
-            "Broken by Default: A Formal Verification Study of Security Vulnerabilities in AI-Generated Code",
-          href: "https://arxiv.org/abs/2604.05292",
+            "IRONPROOF: COBOL-to-Python Transpilation with SMT-Based Equivalence Checking",
+          href: "https://arxiv.org/abs/2610.11073",
+        },
+        {
+          id: "arXiv:2610.10992",
+          title:
+            "The Hint Weight of ML-DSA Signatures Is Key-Dependent: An Empirical Study across the Three FIPS 204 Parameter Sets",
+          href: "https://arxiv.org/abs/2610.10992",
         },
         {
           id: "arXiv:2604.06712",
@@ -340,16 +346,10 @@ export const en: SiteContent = {
           href: "https://arxiv.org/abs/2604.06712",
         },
         {
-          id: "arXiv:2604.12172",
+          id: "arXiv:2604.05292",
           title:
-            "COBALT-TLA: A Neuro-Symbolic Verification Loop for Cross-Chain Bridge Vulnerability Discovery",
-          href: "https://arxiv.org/abs/2604.12172",
-        },
-        {
-          id: "arXiv:2604.20496",
-          title:
-            "Mythos and the Unverified Cage: Z3-Based Pre-Deployment Verification for Frontier-Model Sandbox Infrastructure",
-          href: "https://arxiv.org/abs/2604.20496",
+            "Broken by Default: A Formal Verification Study of Security Vulnerabilities in AI-Generated Code",
+          href: "https://arxiv.org/abs/2604.05292",
         },
       ],
     },

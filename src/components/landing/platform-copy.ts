@@ -39,8 +39,11 @@ export type PlatformCopy = {
     lead: string;
     body: string;
     verdicts: readonly Verdict[];
+    /** Transversal to the three pillars (Dom, 2026-10-13): never drop it. */
+    independent: { title: string; body: string };
     foot: string;
   };
+  research: { eyebrow: string; title: string; lead: string; cta: string };
 };
 
 export const PLATFORM_COPY: L<PlatformCopy> = {
@@ -79,7 +82,17 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         { word: "Refuted.", body: "A concrete counterexample shows exactly how it breaks." },
         { word: "Not yet demonstrated.", body: "Said as such, never shown as a pass." },
       ],
+      independent: {
+        title: "Independent proof, without trusting us.",
+        body: "A result ships with what it rests on: the policy or the program, the model, the stated assumptions and the solver’s evidence. Anyone can re-check it offline. Where an artifact cannot be shared, the result says so.",
+      },
       foot: "No unsupported guarantees. No assumptions hidden behind a green checkmark.",
+    },
+    research: {
+      eyebrow: "PUBLISHED RESEARCH",
+      title: "Research-driven. Evidence-based.",
+      lead: "Our research spans automated formal verification, software security, legacy-system modernization, post-quantum cryptography and quantum software security. Each paper states its method, its results and its limits.",
+      cta: "EXPLORE RESEARCH",
     },
   },
   fr: {
@@ -117,7 +130,17 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         { word: "Réfuté.", body: "Un contre-exemple concret montre exactement comment elle casse." },
         { word: "Pas encore démontré.", body: "Dit comme tel, jamais affiché comme un succès." },
       ],
+      independent: {
+        title: "Une preuve indépendante, sans avoir à nous faire confiance.",
+        body: "Un résultat part avec ce sur quoi il repose : la politique ou le programme, le modèle, les hypothèses déclarées et les éléments du solveur. N’importe qui peut le revérifier hors ligne. Quand un élément ne peut pas être partagé, le résultat le dit.",
+      },
       foot: "Aucune garantie sans appui. Aucune hypothèse cachée derrière un crochet vert.",
+    },
+    research: {
+      eyebrow: "RECHERCHE PUBLIÉE",
+      title: "Portée par la recherche. Fondée sur la preuve.",
+      lead: "Nos travaux couvrent la vérification formelle automatisée, la sécurité logicielle, la modernisation des systèmes patrimoniaux, la cryptographie post-quantique et la sécurité du logiciel quantique. Chaque papier expose sa méthode, ses résultats et ses limites.",
+      cta: "VOIR LA RECHERCHE",
     },
   },
 };

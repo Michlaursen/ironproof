@@ -1,6 +1,7 @@
 import { defaultLocale, type Locale } from "@/content";
 import { pick } from "./i18n";
 import { PLATFORM_COPY } from "./platform-copy";
+import { PAPERS } from "./credibility";
 
 /*
  * Right below the hero: the three applications of the one engine, then the
@@ -11,6 +12,8 @@ import { PLATFORM_COPY } from "./platform-copy";
 export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(PLATFORM_COPY, locale);
   const m = t.method;
+  const rs = t.research;
+  const r = locale === defaultLocale ? "" : `/${locale}`;
 
   return (
     <>
@@ -61,7 +64,42 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
               </li>
             ))}
           </ul>
+          <div className="fade-up card-premium mt-14 max-w-3xl p-8">
+            <p className="font-serif text-2xl text-neutral-100 md:text-3xl">{m.independent.title}</p>
+            <p className="mt-4 text-base font-light leading-relaxed text-neutral-300">{m.independent.body}</p>
+          </div>
           <p className="fade-up mt-14 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{m.foot}</p>
+        </div>
+      </section>
+
+      {/* The same PAPERS list as /research: one source, never re-typed. */}
+      <section id="papers" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="fade-up max-w-4xl">
+            <p className="seal-label track-mid mb-5 text-xs">{rs.eyebrow}</p>
+            <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{rs.title}</h2>
+            <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{rs.lead}</p>
+          </div>
+          <div className="fade-up mt-14 space-y-3">
+            {PAPERS.map((paper) => (
+              <a
+                key={paper.id}
+                href={paper.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-premium group flex flex-col gap-2 p-5 transition sm:flex-row sm:items-center sm:gap-4"
+              >
+                <span className="metal-text shrink-0 font-mono text-xs">{paper.id}</span>
+                <span className="flex-1 text-sm font-light leading-snug text-neutral-300">{paper.title}</span>
+              </a>
+            ))}
+          </div>
+          <a
+            href={`${r}/research`}
+            className="track-mid mt-10 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+          >
+            {rs.cta} <span aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </section>
     </>
