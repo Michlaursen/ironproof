@@ -6,6 +6,11 @@ import type { L } from "./i18n";
  * read this object. Before, the card and the slogan read an older headline
  * from src/content and kept selling "what an AI agent cannot do" after the
  * page had moved to any action, any initiator.
+ *
+ * Repositioned 2026-10-13 (Dom): one technology, three applications (AI
+ * agents and critical actions, C software security, legacy modernization).
+ * "If it isn't authorized, it never executes" now opens the first of the
+ * three pillars instead of the page (platform-copy.ts).
  */
 export type HeroCopy = {
   eyebrow: string;
@@ -16,13 +21,13 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "THE AUTHORIZATION LAYER FOR CRITICAL ACTIONS",
-    headline: "If it isn’t authorized,",
-    headlineEnd: "it never executes.",
+    eyebrow: "NEURO-SYMBOLIC AI × AUTOMATED FORMAL VERIFICATION",
+    headline: "Critical systems deserve",
+    headlineEnd: "more than testing.",
   },
   fr: {
-    eyebrow: "LA COUCHE D’AUTORISATION POUR LES ACTIONS CRITIQUES",
-    headline: "Si ce n’est pas autorisé,",
-    headlineEnd: "pas d’exécution.",
+    eyebrow: "IA NEURO-SYMBOLIQUE × VÉRIFICATION FORMELLE AUTOMATISÉE",
+    headline: "Les systèmes critiques méritent",
+    headlineEnd: "plus que des tests.",
   },
 };

@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "Ironproof | Autorisation déterministe pour les actions critiques",
+    title: "Ironproof | IA neuro-symbolique et vérification formelle pour les systèmes critiques",
     description:
-      "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
+      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier la modernisation des systèmes patrimoniaux. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui la vérifie de façon indépendante, sans avoir à nous faire confiance.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Ironproof bloque une action critique avant son exécution si elle enfreint votre politique, et la laisse passer si elle est conforme — qu’elle soit initiée par un agent IA, un script, une API ou une personne. Chaque décision est scellée cryptographiquement et peut être vérifiée de façon indépendante.",
+      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier la modernisation des systèmes patrimoniaux. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui la vérifie de façon indépendante, sans avoir à nous faire confiance.",
   },
   header: {
     nav: [
@@ -332,17 +332,23 @@ export const fr: SiteContent = {
       },
       {
         title: "Méthodes publiées",
-        body: "Quatre prépublications en sécurité exposent les méthodes, les jeux de données, les limites et les cas d’échec.",
+        body: "Quatre prépublications exposent les méthodes, les jeux de données, les limites et les cas d’échec.",
       },
     ],
     papers: {
       eyebrow: "Recherche publiée",
       items: [
         {
-          id: "arXiv:2604.05292",
+          id: "arXiv:2610.11073",
           title:
-            "Broken by Default: A Formal Verification Study of Security Vulnerabilities in AI-Generated Code",
-          href: "https://arxiv.org/abs/2604.05292",
+            "IRONPROOF: COBOL-to-Python Transpilation with SMT-Based Equivalence Checking",
+          href: "https://arxiv.org/abs/2610.11073",
+        },
+        {
+          id: "arXiv:2610.10992",
+          title:
+            "The Hint Weight of ML-DSA Signatures Is Key-Dependent: An Empirical Study across the Three FIPS 204 Parameter Sets",
+          href: "https://arxiv.org/abs/2610.10992",
         },
         {
           id: "arXiv:2604.06712",
@@ -351,16 +357,10 @@ export const fr: SiteContent = {
           href: "https://arxiv.org/abs/2604.06712",
         },
         {
-          id: "arXiv:2604.12172",
+          id: "arXiv:2604.05292",
           title:
-            "COBALT-TLA: A Neuro-Symbolic Verification Loop for Cross-Chain Bridge Vulnerability Discovery",
-          href: "https://arxiv.org/abs/2604.12172",
-        },
-        {
-          id: "arXiv:2604.20496",
-          title:
-            "Mythos and the Unverified Cage: Z3-Based Pre-Deployment Verification for Frontier-Model Sandbox Infrastructure",
-          href: "https://arxiv.org/abs/2604.20496",
+            "Broken by Default: A Formal Verification Study of Security Vulnerabilities in AI-Generated Code",
+          href: "https://arxiv.org/abs/2604.05292",
         },
       ],
     },
