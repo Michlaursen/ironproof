@@ -7,9 +7,12 @@ import type { L } from "./i18n";
  * Every claim was read against the code or a phrase already ratified on the
  * site before it was written here:
  *   - pillar 1 keeps the ratified tagline with BOTH sides (block AND allow,
- *     2026-09-14), any initiator (2026-09-03), and "without trusting us"
+ *     2026-09-14), any initiator (2026-09-03), and "without having to trust us"
  *     (2026-10-12, provable-ai-copy.tsx). Blocked decisions are sealed too:
  *     ironproof/inquest/governed_executor.py:323 requires the ledger.
+ *   - pillar 2's replay line: on 2026-10-12 a context-free agent replayed our
+ *     4 Cobalt archives and reached the same 8 verdicts out of 8. Pillar 3
+ *     gets no such line until a COBOL proof has been replayed the same way.
  *   - pillar 2 says C, not C/C++: every fix measured so far is C
  *     (cobalt-ai bench/lot20_2026-10-11, 20 fixes drawn at random).
  *   - pillar 3 says "defined equivalence properties" with explicit
@@ -55,7 +58,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         num: "01",
         name: "AI agents & critical actions",
         claim: "If it isn’t authorized, it never executes. If it is, it executes — with verifiable evidence.",
-        body: "Ironproof checks every critical action against your policy before it runs, whether an AI agent, a script, an API or a person started it. Unauthorized actions are blocked, and every decision is sealed with cryptographic evidence anyone can verify offline, without trusting us.",
+        body: "Ironproof checks every critical action against your policy before it runs, whether an AI agent, a script, an API or a person started it. Unauthorized actions are blocked, and every decision is sealed with cryptographic evidence anyone can verify offline, without having to trust us.",
         href: "#problem",
         cta: "HOW THE GATE WORKS",
       },
@@ -63,7 +66,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         num: "02",
         name: "Software security & formal verification",
         claim: "Don’t just find vulnerabilities. Prove what holds.",
-        body: "Our verification technology analyzes C software to identify security violations, mathematically verify defined properties, and assess whether a fix addresses the underlying vulnerability.",
+        body: "Our verification technology analyzes C software to identify security violations, mathematically verify defined properties, and assess whether a fix addresses the underlying vulnerability. Each verdict can be replayed by a third party, without having to trust us.",
       },
       {
         num: "03",
@@ -83,7 +86,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         { word: "Not yet demonstrated.", body: "Said as such, never shown as a pass." },
       ],
       independent: {
-        title: "Independent proof, without trusting us.",
+        title: "Independent proof, without having to trust us.",
         body: "A result ships with what it rests on: the policy or the program, the model, the stated assumptions and the solver’s evidence. Anyone can re-check it offline. Where an artifact cannot be shared, the result says so.",
       },
       foot: "No unsupported guarantees. No assumptions hidden behind a green checkmark.",
@@ -111,7 +114,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         num: "02",
         name: "Sécurité logicielle et vérification formelle",
         claim: "Ne vous contentez pas de trouver les failles. Prouvez ce qui tient.",
-        body: "Notre technologie de vérification analyse du logiciel C pour repérer les violations de sécurité, vérifier mathématiquement des propriétés définies et évaluer si un correctif règle vraiment la faille d’origine.",
+        body: "Notre technologie de vérification analyse du logiciel C pour repérer les violations de sécurité, vérifier mathématiquement des propriétés définies et évaluer si un correctif règle vraiment la faille d’origine. Chaque verdict peut être rejoué par un tiers, sans avoir à nous faire confiance.",
       },
       {
         num: "03",
