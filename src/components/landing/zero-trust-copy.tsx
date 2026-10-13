@@ -15,7 +15,7 @@ import type { L } from "./i18n";
  * Every sentence about Ironproof reuses wording already on the site:
  *   - hero-copy.ts ("it never executes");
  *   - landing.tsx (the gate decides for an action that goes THROUGH it);
- *   - provable-ai-copy.tsx ("anyone verifies it offline — without trusting us").
+ *   - provable-ai-copy.tsx ("anyone verifies it offline — without having to trust us").
  *
  * Deliberately NOT claimed: that Ironproof is a Zero Trust architecture. It
  * covers the decision on an action; identity, authentication, devices and the
@@ -84,7 +84,7 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
         Zero Trust decides who reaches a resource. Ironproof decides whether{" "}
         <span className="metal-text">this exact action</span> may run. Before each critical action
         executes, Ironproof allows it or blocks it against your formal policy, and every allowed
-        action leaves sealed evidence anyone can verify offline, without trusting us.
+        action leaves sealed evidence anyone can verify offline, without having to trust us.
       </>
     ),
 
@@ -152,7 +152,7 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       },
       {
         zt: "Decisions logged",
-        ip: "Every allowed action sealed post-quantum, verifiable offline without trusting us",
+        ip: "Every allowed action sealed post-quantum, verifiable offline without having to trust us",
       },
       {
         zt: "Policy written by the enterprise",

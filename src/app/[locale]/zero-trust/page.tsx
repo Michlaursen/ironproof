@@ -8,7 +8,7 @@ const META: L<{ title: string; description: string }> = {
   en: {
     title: "Zero Trust, extended to actions — Ironproof",
     description:
-      "Zero Trust (NIST SP 800-207) decides who reaches a resource. Ironproof decides whether this exact action may run: allowed or blocked against your formal policy before it executes, with sealed evidence you verify offline without trusting us.",
+      "Zero Trust (NIST SP 800-207) decides who reaches a resource. Ironproof decides whether this exact action may run: allowed or blocked against your formal policy before it executes, with sealed evidence you verify offline without having to trust us.",
   },
   fr: {
     title: "Le Zero Trust, étendu aux actions — Ironproof",

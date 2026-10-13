@@ -108,7 +108,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     archTag: "ARCHITECTURE",
     archSrc: "/media/architecture-en.webp",
     archAlt:
-      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts: holds, breaks, not covered. Then: enforce before execution, seal with a post-quantum signature, verify offline without trusting us.",
+      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts: holds, breaks, not covered. Then: enforce before execution, seal with a post-quantum signature, verify offline without having to trust us.",
     archCaption:
       "The whole system on one page. The model never has the last word: the solver does, and the seal lets anyone check it afterward.",
 

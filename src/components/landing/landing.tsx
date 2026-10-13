@@ -53,6 +53,8 @@ type Copy = {
     headlineEnd: string;
     body: React.ReactNode;
     boundary: string;
+    /** Only what has been replayed by a third party: agents and C, not COBOL yet. */
+    proofLine: string;
     initiators: string;
     authorized: string;
     unauthorized: string;
@@ -205,6 +207,8 @@ const T: L<Copy> = {
       ),
       boundary:
         "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and mathematically verify key properties of system behavior.",
+      proofLine:
+        "Agent decisions and C verdicts ship with the evidence to re-check them — offline, without having to trust us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -542,6 +546,8 @@ const T: L<Copy> = {
       ),
       boundary:
         "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier mathématiquement des propriétés clés du comportement d’un système.",
+      proofLine:
+        "Les décisions d’agents et les verdicts sur le C partent avec de quoi les revérifier, hors ligne, sans avoir à nous faire confiance.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -943,6 +949,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
                   * PERSON plates) and in #initiators; the hero keeps the claim only. */}
                 <span className="text-neutral-200">{t.hero.boundary}</span>
+              </p>
+              <p className="-mt-6 mb-10 max-w-md font-serif text-lg leading-snug text-neutral-100 md:text-xl">
+                {t.hero.proofLine}
               </p>
               {/* One primary action (the site-wide CTA) and one quiet way in.
                 * "Verify a real decision" left the first screen: the vault has

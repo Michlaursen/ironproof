@@ -358,7 +358,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
 
     s10: "10 — The phrase, one more time",
     s10Phrase:
-      "We prove what can be proven, seal it post-quantum, and anyone verifies it offline — without trusting us.",
+      "We prove what can be proven, seal it post-quantum, and anyone verifies it offline — without having to trust us.",
 
     ctaTitle: "Prove your infrastructure.",
     ctaLead:
