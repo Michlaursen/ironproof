@@ -21,12 +21,12 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "NEURO-SYMBOLIC AI × AUTOMATED FORMAL VERIFICATION",
+    eyebrow: "NEURO-SYMBOLIC AI × AUTOMATED REASONING",
     headline: "Critical systems deserve",
     headlineEnd: "more than testing.",
   },
   fr: {
-    eyebrow: "IA NEURO-SYMBOLIQUE × VÉRIFICATION FORMELLE AUTOMATISÉE",
+    eyebrow: "IA NEURO-SYMBOLIQUE × RAISONNEMENT AUTOMATISÉ",
     headline: "Les systèmes critiques méritent",
     headlineEnd: "plus que des tests.",
   },
