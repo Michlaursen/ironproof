@@ -396,66 +396,16 @@ const T: L<Copy> = {
         },
         {
           name: "Energy & critical infrastructure",
-          actions: ["Setpoint and configuration changes", "Remote operations on control systems", "Production deployments"],
-          rules: "IEC 62443 · NERC CIP",
+          actions: ["Remote setpoint and configuration changes", "Emergency shutdowns and safety-instrumented logic", "Water-treatment dosing and valve commands", "Configuration pushed to a telecom network core"],
+          rules: "IEC 62443 · NERC CIP · IEC 61511-1 · Bill C-8, S.C. 2026, c. 9 — Critical Cyber Systems Protection Act",
         },
-        // Added 2026-10-13 (Dom). Each rules line was opened at its source that
-        // day; the URLs are listed in the pull request. Recognized, permitted or
-        // highly recommended is said only where the text says it.
-        {
-          name: "Civil aerospace",
-          actions: ["Loading new flight software", "Engine-control software changes", "Autopilot logic updates"],
-          rules: "DO-178C · DO-333 formal methods supplement, recognized by FAA AC 20-115D and EASA AMC 20-115D",
-        },
-        {
-          name: "Space",
-          actions: ["Flight-software patches uploaded in orbit", "Burn and separation commands", "Safing and recovery sequences"],
-          rules: "ECSS-Q-ST-80C Rev.2 · NASA-STD-8739.8B",
-        },
-        {
-          name: "Nuclear",
-          actions: ["Changes to protection-system setpoints", "Software updates to safety I&C", "Containment isolation commands"],
-          rules: "CNSC REGDOC-2.5.2 · IAEA SSG-39 · regulators’ common position on safety-critical software (2015)",
-        },
-        {
-          name: "Rail",
-          actions: ["Setting a route in an interlocking", "Granting movement authority", "Releasing emergency brakes"],
-          rules: "EN 50716:2023 — formal methods highly recommended at SIL 1 to 4",
-        },
-        {
-          name: "Automotive",
-          actions: ["Over-the-air updates to a fleet", "Emergency-braking logic", "Driver-assistance software releases"],
-          rules: "ISO 26262-6:2018 · ISO/PAS 8800:2024 (AI in vehicles)",
-        },
-        {
-          name: "Telecommunications",
-          actions: ["Configuration pushed to the network core", "Bulk subscriber or SIM revocation", "Regional routing changes"],
-          rules: "Bill C-8, S.C. 2026, c. 9 — Critical Cyber Systems Protection Act",
-        },
-        {
-          name: "Industrial process safety",
-          actions: ["Emergency shutdown of a unit", "Venting or flaring", "Changes to safety-instrumented logic"],
-          rules: "IEC 61508-3 · IEC 61511-1",
-        },
-        {
-          name: "Water & wastewater",
-          actions: ["Chemical dosing setpoints", "New PLC logic downloads", "Valve and bypass commands"],
-          rules: "EPA cybersecurity guidance for water systems (2024) · Cyber Centre alert AL25-016",
-        },
-        {
-          name: "Medical devices",
-          actions: ["Infusion-pump dose delivery", "Therapy and pacing parameters", "Device software releases"],
-          rules: "IEC 62304 · FDA General Principles of Software Validation",
-        },
+        // Pharma added 2026-10-13 (Dom), its rules opened at the source that day
+        // (URLs in PR #102). Water, process safety and telecom were folded into
+        // the row above the same evening: one strong row rather than three thin.
         {
           name: "Pharmaceutical manufacturing",
           actions: ["Electronic batch release", "Changes to master batch records", "Audit-trail changes"],
           rules: "Health Canada GMP Annex 11 (GUI-0050) · FDA 21 CFR Part 11",
-        },
-        {
-          name: "Elections",
-          actions: ["Installing tabulator firmware", "Transmitting official results", "Resetting a device’s vote store"],
-          rules: "EAC VVSG 2.0 — only digitally signed software, updates authorized before install",
         },
       ],
     },
@@ -814,64 +764,15 @@ const T: L<Copy> = {
         },
         {
           name: "Énergie et infrastructures critiques",
-          actions: ["Changements de consignes et de configuration", "Opérations à distance sur les systèmes de contrôle", "Déploiements en production"],
-          rules: "IEC 62443 · NERC CIP",
+          actions: ["Changements de consignes et de configuration à distance", "Arrêts d’urgence et logique instrumentée de sécurité", "Dosage chimique et commandes de vannes en traitement de l’eau", "Configuration poussée au cœur d’un réseau de télécommunications"],
+          rules: "IEC 62443 · NERC CIP · IEC 61511-1 · Projet de loi C-8, L.C. 2026, ch. 9 — Loi sur la protection des cybersystèmes essentiels",
         },
-        // Ajouts du 2026-10-13 (Dom) : chaque ligne de règles ouverte à la source ce jour-là.
-        {
-          name: "Aérospatiale civile",
-          actions: ["Chargement d’un nouveau logiciel de vol", "Changements au logiciel de contrôle moteur", "Mises à jour de la logique du pilote automatique"],
-          rules: "DO-178C · supplément méthodes formelles DO-333, reconnu par la FAA (AC 20-115D) et l’AESA (AMC 20-115D)",
-        },
-        {
-          name: "Espace",
-          actions: ["Correctifs de logiciel de vol téléversés en orbite", "Commandes de poussée et de séparation", "Séquences de mise en sécurité"],
-          rules: "ECSS-Q-ST-80C Rév. 2 · NASA-STD-8739.8B",
-        },
-        {
-          name: "Nucléaire",
-          actions: ["Changements aux consignes des systèmes de protection", "Mises à jour logicielles du contrôle-commande de sûreté", "Commandes d’isolement de l’enceinte"],
-          rules: "CCSN REGDOC-2.5.2 · AIEA SSG-39 · position commune des régulateurs sur le logiciel critique (2015)",
-        },
-        {
-          name: "Ferroviaire",
-          actions: ["Établir un itinéraire dans un enclenchement", "Accorder une autorisation de mouvement", "Desserrer les freins d’urgence"],
-          rules: "EN 50716:2023 — méthodes formelles fortement recommandées du SIL 1 au SIL 4",
-        },
-        {
-          name: "Automobile",
-          actions: ["Mises à jour à distance d’une flotte", "Logique de freinage d’urgence", "Versions du logiciel d’aide à la conduite"],
-          rules: "ISO 26262-6:2018 · ISO/PAS 8800:2024 (IA dans les véhicules)",
-        },
-        {
-          name: "Télécommunications",
-          actions: ["Configuration poussée au cœur de réseau", "Révocation massive d’abonnés ou de cartes SIM", "Changements de routage régionaux"],
-          rules: "Projet de loi C-8, L.C. 2026, ch. 9 — Loi sur la protection des cybersystèmes essentiels",
-        },
-        {
-          name: "Sécurité des procédés industriels",
-          actions: ["Arrêt d’urgence d’une unité", "Mise à l’évent ou à la torche", "Changements à la logique instrumentée de sécurité"],
-          rules: "IEC 61508-3 · IEC 61511-1",
-        },
-        {
-          name: "Eau potable et eaux usées",
-          actions: ["Consignes de dosage chimique", "Téléchargement d’une nouvelle logique d’automate", "Commandes de vannes et de dérivation"],
-          rules: "Guide de cybersécurité de l’EPA pour les réseaux d’eau (2024) · alerte AL25-016 du Centre pour la cybersécurité",
-        },
-        {
-          name: "Dispositifs médicaux",
-          actions: ["Dose délivrée par une pompe à perfusion", "Paramètres de thérapie et de stimulation", "Versions du logiciel de l’appareil"],
-          rules: "IEC 62304 · FDA General Principles of Software Validation",
-        },
+        // Pharma ajouté le 2026-10-13 (Dom), règles ouvertes à la source ce jour-là (PR #102).
+        // Eau, procédés et télécoms fondus dans la ligne du dessus le même soir.
         {
           name: "Fabrication pharmaceutique",
           actions: ["Libération électronique d’un lot", "Changements aux dossiers maîtres de production", "Modifications de la piste d’audit"],
           rules: "Santé Canada, BPF Annexe 11 (GUI-0050) · FDA 21 CFR Part 11",
-        },
-        {
-          name: "Élections",
-          actions: ["Installation du micrologiciel des tabulatrices", "Transmission des résultats officiels", "Remise à zéro de la mémoire des votes"],
-          rules: "EAC VVSG 2.0 — logiciel signé seulement, mises à jour autorisées avant l’installation",
         },
       ],
     },
