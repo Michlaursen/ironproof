@@ -44,6 +44,8 @@ type NotItem = { label: string; body: string };
 type Domain = { name: string; actions: readonly string[]; rules: string };
 type Dated = { date: string; what: string; source: string; href: string };
 type Step = { title: string; body: string };
+/** A case Ironproof has actually run, with its date and its number. */
+type RunCase = { name: string; what: string; result: string; date: string };
 
 type Copy = {
   hero: {
@@ -112,6 +114,12 @@ type Copy = {
     lead: string;
     actionsLabel: string;
     rulesLabel: string;
+    /** Run on real, public material: date and number, never a promise. */
+    runEyebrow: string;
+    runTitle: string;
+    runNote: string;
+    run: readonly RunCase[];
+    appliesEyebrow: string;
     items: readonly Domain[];
   };
 
@@ -320,6 +328,30 @@ const T: L<Copy> = {
       lead: "The actions that cannot be taken back once they run. For those, authorization stops being a setting and becomes infrastructure.",
       actionsLabel: "THE ACTIONS",
       rulesLabel: "THE RULES ALREADY WRITTEN",
+      runEyebrow: "ALREADY RUN",
+      runTitle: "On real, public material — with the numbers.",
+      runNote: "Labs on published policies and open-source code, not client systems.",
+      run: [
+        {
+          name: "Cloud authorization",
+          what: "57 example IAM policies published by AWS, 185 guarantees written before the solver ran.",
+          result: "139 held under two independent solvers. 11 cases where a policy did not do what its description said, each confirmed in AWS’s own policy simulator.",
+          date: "2026-09-30",
+        },
+        {
+          name: "Energy",
+          what: "The NERC CIP-010-4 R1 change-management requirement, encoded as a gate.",
+          result: "23 of 23 test cases decided as the text says. 12 of 12 deliberate faults caught. Every signature re-verified from the file alone.",
+          date: "2026-10-09",
+        },
+        {
+          name: "Open-source C",
+          what: "20 fixes for real vulnerabilities drawn at random, from projects such as curl, libssh2 and Suricata.",
+          result: "Within stated bounds: 13 close the hole, 3 do not, 4 not analyzed. A third party replayed 4 of the archives and reached the same 8 verdicts.",
+          date: "2026-10-12",
+        },
+      ],
+      appliesEyebrow: "WHERE IT APPLIES — THE RULES ALREADY WRITTEN",
       items: [
         {
           name: "Banking & payments",
@@ -366,6 +398,64 @@ const T: L<Copy> = {
           name: "Energy & critical infrastructure",
           actions: ["Setpoint and configuration changes", "Remote operations on control systems", "Production deployments"],
           rules: "IEC 62443 · NERC CIP",
+        },
+        // Added 2026-10-13 (Dom). Each rules line was opened at its source that
+        // day; the URLs are listed in the pull request. Recognized, permitted or
+        // highly recommended is said only where the text says it.
+        {
+          name: "Civil aerospace",
+          actions: ["Loading new flight software", "Engine-control software changes", "Autopilot logic updates"],
+          rules: "DO-178C · DO-333 formal methods supplement, recognized by FAA AC 20-115D and EASA AMC 20-115D",
+        },
+        {
+          name: "Space",
+          actions: ["Flight-software patches uploaded in orbit", "Burn and separation commands", "Safing and recovery sequences"],
+          rules: "ECSS-Q-ST-80C Rev.2 · NASA-STD-8739.8B",
+        },
+        {
+          name: "Nuclear",
+          actions: ["Changes to protection-system setpoints", "Software updates to safety I&C", "Containment isolation commands"],
+          rules: "CNSC REGDOC-2.5.2 · IAEA SSG-39 · regulators’ common position on safety-critical software (2015)",
+        },
+        {
+          name: "Rail",
+          actions: ["Setting a route in an interlocking", "Granting movement authority", "Releasing emergency brakes"],
+          rules: "EN 50716:2023 — formal methods highly recommended at SIL 1 to 4",
+        },
+        {
+          name: "Automotive",
+          actions: ["Over-the-air updates to a fleet", "Emergency-braking logic", "Driver-assistance software releases"],
+          rules: "ISO 26262-6:2018 · ISO/PAS 8800:2024 (AI in vehicles)",
+        },
+        {
+          name: "Telecommunications",
+          actions: ["Configuration pushed to the network core", "Bulk subscriber or SIM revocation", "Regional routing changes"],
+          rules: "Bill C-8, S.C. 2026, c. 9 — Critical Cyber Systems Protection Act",
+        },
+        {
+          name: "Industrial process safety",
+          actions: ["Emergency shutdown of a unit", "Venting or flaring", "Changes to safety-instrumented logic"],
+          rules: "IEC 61508-3 · IEC 61511-1",
+        },
+        {
+          name: "Water & wastewater",
+          actions: ["Chemical dosing setpoints", "New PLC logic downloads", "Valve and bypass commands"],
+          rules: "EPA cybersecurity guidance for water systems (2024) · Cyber Centre alert AL25-016",
+        },
+        {
+          name: "Medical devices",
+          actions: ["Infusion-pump dose delivery", "Therapy and pacing parameters", "Device software releases"],
+          rules: "IEC 62304 · FDA General Principles of Software Validation",
+        },
+        {
+          name: "Pharmaceutical manufacturing",
+          actions: ["Electronic batch release", "Changes to master batch records", "Audit-trail changes"],
+          rules: "Health Canada GMP Annex 11 (GUI-0050) · FDA 21 CFR Part 11",
+        },
+        {
+          name: "Elections",
+          actions: ["Installing tabulator firmware", "Transmitting official results", "Resetting a device’s vote store"],
+          rules: "EAC VVSG 2.0 — only digitally signed software, updates authorized before install",
         },
       ],
     },
@@ -658,6 +748,30 @@ const T: L<Copy> = {
       lead: "Les actions qu’on ne peut plus reprendre une fois exécutées. Pour celles-là, l’autorisation cesse d’être un réglage et devient une infrastructure.",
       actionsLabel: "LES ACTIONS",
       rulesLabel: "LES RÈGLES DÉJÀ ÉCRITES",
+      runEyebrow: "DÉJÀ FAIT",
+      runTitle: "Sur du matériel réel et public — avec les chiffres.",
+      runNote: "Des labos sur des politiques publiées et du code open source, pas des systèmes de clients.",
+      run: [
+        {
+          name: "Autorisation infonuagique",
+          what: "57 politiques IAM d’exemple publiées par AWS, 185 garanties écrites avant de lancer le solveur.",
+          result: "139 tiennent sous deux solveurs indépendants. 11 cas où une politique ne faisait pas ce que sa description disait, chacun confirmé dans le simulateur de politiques d’AWS.",
+          date: "2026-09-30",
+        },
+        {
+          name: "Énergie",
+          what: "L’exigence de gestion des changements NERC CIP-010-4 R1, encodée en barrière.",
+          result: "23 cas de test sur 23 tranchés comme le dit le texte. 12 fautes volontaires sur 12 attrapées. Chaque signature revérifiée depuis le dossier seul.",
+          date: "2026-10-09",
+        },
+        {
+          name: "C open source",
+          what: "20 correctifs de vraies failles tirés au hasard, dans des projets comme curl, libssh2 et Suricata.",
+          result: "Dans les bornes déclarées : 13 ferment la faille, 3 ne la ferment pas, 4 non analysés. Un tiers a rejoué 4 des archives et retrouvé les mêmes 8 verdicts.",
+          date: "2026-10-12",
+        },
+      ],
+      appliesEyebrow: "OÙ ÇA S’APPLIQUE — LES RÈGLES DÉJÀ ÉCRITES",
       items: [
         {
           name: "Banque et paiements",
@@ -702,6 +816,62 @@ const T: L<Copy> = {
           name: "Énergie et infrastructures critiques",
           actions: ["Changements de consignes et de configuration", "Opérations à distance sur les systèmes de contrôle", "Déploiements en production"],
           rules: "IEC 62443 · NERC CIP",
+        },
+        // Ajouts du 2026-10-13 (Dom) : chaque ligne de règles ouverte à la source ce jour-là.
+        {
+          name: "Aérospatiale civile",
+          actions: ["Chargement d’un nouveau logiciel de vol", "Changements au logiciel de contrôle moteur", "Mises à jour de la logique du pilote automatique"],
+          rules: "DO-178C · supplément méthodes formelles DO-333, reconnu par la FAA (AC 20-115D) et l’AESA (AMC 20-115D)",
+        },
+        {
+          name: "Espace",
+          actions: ["Correctifs de logiciel de vol téléversés en orbite", "Commandes de poussée et de séparation", "Séquences de mise en sécurité"],
+          rules: "ECSS-Q-ST-80C Rév. 2 · NASA-STD-8739.8B",
+        },
+        {
+          name: "Nucléaire",
+          actions: ["Changements aux consignes des systèmes de protection", "Mises à jour logicielles du contrôle-commande de sûreté", "Commandes d’isolement de l’enceinte"],
+          rules: "CCSN REGDOC-2.5.2 · AIEA SSG-39 · position commune des régulateurs sur le logiciel critique (2015)",
+        },
+        {
+          name: "Ferroviaire",
+          actions: ["Établir un itinéraire dans un enclenchement", "Accorder une autorisation de mouvement", "Desserrer les freins d’urgence"],
+          rules: "EN 50716:2023 — méthodes formelles fortement recommandées du SIL 1 au SIL 4",
+        },
+        {
+          name: "Automobile",
+          actions: ["Mises à jour à distance d’une flotte", "Logique de freinage d’urgence", "Versions du logiciel d’aide à la conduite"],
+          rules: "ISO 26262-6:2018 · ISO/PAS 8800:2024 (IA dans les véhicules)",
+        },
+        {
+          name: "Télécommunications",
+          actions: ["Configuration poussée au cœur de réseau", "Révocation massive d’abonnés ou de cartes SIM", "Changements de routage régionaux"],
+          rules: "Projet de loi C-8, L.C. 2026, ch. 9 — Loi sur la protection des cybersystèmes essentiels",
+        },
+        {
+          name: "Sécurité des procédés industriels",
+          actions: ["Arrêt d’urgence d’une unité", "Mise à l’évent ou à la torche", "Changements à la logique instrumentée de sécurité"],
+          rules: "IEC 61508-3 · IEC 61511-1",
+        },
+        {
+          name: "Eau potable et eaux usées",
+          actions: ["Consignes de dosage chimique", "Téléchargement d’une nouvelle logique d’automate", "Commandes de vannes et de dérivation"],
+          rules: "Guide de cybersécurité de l’EPA pour les réseaux d’eau (2024) · alerte AL25-016 du Centre pour la cybersécurité",
+        },
+        {
+          name: "Dispositifs médicaux",
+          actions: ["Dose délivrée par une pompe à perfusion", "Paramètres de thérapie et de stimulation", "Versions du logiciel de l’appareil"],
+          rules: "IEC 62304 · FDA General Principles of Software Validation",
+        },
+        {
+          name: "Fabrication pharmaceutique",
+          actions: ["Libération électronique d’un lot", "Changements aux dossiers maîtres de production", "Modifications de la piste d’audit"],
+          rules: "Santé Canada, BPF Annexe 11 (GUI-0050) · FDA 21 CFR Part 11",
+        },
+        {
+          name: "Élections",
+          actions: ["Installation du micrologiciel des tabulatrices", "Transmission des résultats officiels", "Remise à zéro de la mémoire des votes"],
+          rules: "EAC VVSG 2.0 — logiciel signé seulement, mises à jour autorisées avant l’installation",
         },
       ],
     },
@@ -1076,6 +1246,24 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <div className="mb-14">
             <PhotoPlate src="/media/critical-switches.jpg" position="50% 55%" />
           </div>
+          {/* What has run first, with its number; then where it applies, with its
+            * rule. The two never share a list (2026-10-13). */}
+          <div className="fade-up mb-20">
+            <p className="seal-label track-mid mb-4 text-xs">{t.domains.runEyebrow}</p>
+            <h3 className="font-serif text-3xl text-neutral-100 md:text-4xl">{t.domains.runTitle}</h3>
+            <div className="mt-10 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-3">
+              {t.domains.run.map((c) => (
+                <div key={c.name} className="flex flex-col bg-ink px-7 py-8">
+                  <p className="track-mid text-xs text-neutral-300">{c.name.toUpperCase()}</p>
+                  <p className="mt-4 text-base font-light leading-relaxed text-neutral-400">{c.what}</p>
+                  <p className="mt-4 flex-1 font-serif text-lg leading-snug text-neutral-100">{c.result}</p>
+                  <p className="mt-6 font-mono text-xs text-neutral-500">{c.date}</p>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 max-w-3xl text-sm font-light leading-relaxed text-neutral-500">{t.domains.runNote}</p>
+          </div>
+          <p className="fade-up seal-label track-mid mb-6 text-xs">{t.domains.appliesEyebrow}</p>
           {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
             * and the rules that already say what must never happen there. */}
           <div className="fade-up">
