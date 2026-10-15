@@ -2660,3 +2660,105 @@ p, li {
    through the kicker, Dom 2026-10-15). */
 .closing-steps { position: relative; --paper: #e7e5e2; padding-top: 0; }
 .closing-steps::before { top: 0.22rem !important; left: 1.6rem !important; right: 1.6rem !important; }
+
+/* ============================================================
+ * PLATES, NOT BOXES (Dom, 2026-10-15: « y'a encore des plain carrés,
+ * les borders, le vert rouge, ça fait basic »). Every flat card on the
+ * landing becomes an engraved plate: paper gradient, a hairline frame,
+ * gold crop marks, square corners. Green and red leave the page: the
+ * verdicts speak in gold (holds / runs), iron (breaks / blocked) and a
+ * dashed gold ring (not demonstrated) — the three metals of the site.
+ * ============================================================ */
+.blueprint {
+  --plate-bg: linear-gradient(168deg, #f8f6f1 0%, #efede7 62%, #e9e6df 100%);
+  --plate-line: rgba(36, 38, 42, 0.14);
+  --plate-mark: rgba(168, 132, 58, 0.85);
+  --crop:
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left top / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left top / 1px 12px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right top / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right top / 1px 12px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left bottom / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left bottom / 1px 12px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right bottom / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right bottom / 1px 12px no-repeat;
+}
+/* Split panes (problem, what, already run): gold hairline between plates. */
+.blueprint .grid.gap-px.rounded-\[6px\] {
+  border-radius: 0 !important;
+  border-color: var(--plate-line) !important;
+  background: linear-gradient(180deg, rgba(168, 132, 58, 0.55), rgba(168, 132, 58, 0.25)) !important;
+  box-shadow: 0 40px 70px -50px rgba(36, 38, 42, 0.45);
+}
+.blueprint .grid.gap-px > .bg-ink {
+  position: relative;
+  background: var(--plate-bg) !important;
+}
+.blueprint .grid.gap-px > .bg-ink::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+
+/* The three verdicts: plates, each with its metal. */
+.blueprint .verdict-card {
+  position: relative;
+  border-radius: 0 !important;
+  background: var(--plate-bg) !important;
+  border: 1px solid var(--plate-line) !important;
+  box-shadow: 0 40px 70px -52px rgba(36, 38, 42, 0.5) !important;
+}
+.blueprint .verdict-card::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+.blueprint .verdict-proven { border-top: 3px solid #a8843a !important; }
+.blueprint .verdict-refuted { border-top: 3px solid #24262a !important; }
+.blueprint .verdict-proven .verdict-mark {
+  background: radial-gradient(circle at 35% 30%, #f3dca0 0%, #c9a24b 38%, #8a6a2a 100%);
+  box-shadow: 0 0 0 4px rgba(168, 132, 58, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+.blueprint .verdict-refuted .verdict-mark::before,
+.blueprint .verdict-refuted .verdict-mark::after { background: #24262a !important; }
+.blueprint .verdict-refuted .verdict-word { color: #24262a; }
+.blueprint .verdict-refuted .verdict-word::after {
+  content: "";
+  display: block;
+  width: 2.2rem;
+  height: 1px;
+  margin-top: 0.5rem;
+  background: #24262a;
+}
+
+/* Two checks: square the panels, crop marks, gold edge on the iron one. */
+.blueprint .checks-split { border-radius: 0 !important; overflow: visible; }
+.blueprint .checks-panel { position: relative; border-radius: 0 !important; }
+.blueprint .checks-browser { background: var(--plate-bg) !important; }
+.blueprint .checks-panel::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+
+/* Gate demo: no red. Blocked speaks in iron, allowed in gold. */
+.blueprint .text-\[\#a3392f\] { color: #24262a !important; }
+.blueprint .bg-\[\#a3392f\]\/10 { background: rgba(36, 38, 42, 0.08) !important; }
+#decide .font-serif.text-4xl.text-\[\#a3392f\] { font-style: italic; }
+
+/* Method steps 01-04: outlined gold numerals, like the chapters. */
+#how ol .font-serif.text-6xl {
+  color: transparent !important;
+  -webkit-text-stroke: 1px #a8843a;
+}
+#how ol .font-serif.text-6xl.text-neutral-600 { -webkit-text-stroke: 1px #5b5f66; }
+
+/* Square corners everywhere on the landing: engineered, not app-like. */
+.blueprint .rounded-\[6px\],
+.blueprint .rounded-\[5px\] { border-radius: 2px !important; }
