@@ -25,6 +25,9 @@ export type Pillar = {
   num: string;
   name: string;
   claim: string;
+  /** The story in three beats (Dom, 2026-10-15: « écris l'histoire, comprenable »):
+   *  what goes wrong without us, what Ironproof does, what runs today. */
+  risk: string;
   body: string;
   href?: string;
   cta?: string;
@@ -38,6 +41,8 @@ export type Verdict = { word: string; body: string; receive: string };
 export type PlatformCopy = {
   eyebrow: string;
   title: string;
+  /** Labels of the three beats of each chapter. */
+  beats: { risk: string; does: string; today: string };
   pillars: readonly Pillar[];
   method: {
     eyebrow: string;
@@ -64,28 +69,33 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
   en: {
     eyebrow: "ONE CORE TECHNOLOGY",
     title: "Three applications. One standard of evidence.",
+    beats: { risk: "THE RISK", does: "WHAT IRONPROOF DOES", today: "TODAY" },
     pillars: [
       {
         num: "01",
         name: "AI agents & critical actions",
-        claim: "No authorization. No execution. Every decision backed by verifiable evidence.",
-        body: "Every critical action routed through Ironproof’s gate, whether an AI agent, a script, an API or a person started it, is checked against your policy before it runs. Unauthorized ones are blocked; each production decision is sealed and can be checked offline.",
+        claim: "Your agent can move money. It should never move it wrong.",
+        risk: "An AI agent, a script or a person with valid credentials asks to pay, delete, grant access or ship a change. Logged in is not the same as allowed.",
+        body: "Every request routed through Ironproof is checked against your rules before it runs. Allowed, it runs. Not allowed, it never does. Either way, the decision is sealed.",
         href: "#problem",
         cta: "HOW THE GATE WORKS",
-        evidence: "Today: a decision’s sealed record is checked in your browser, with no server and no account. That checks integrity; the decision itself is re-derived from its inputs and the policy.",
+        evidence: "Open a sealed decision and check it yourself, in your browser, with no server and no account.",
       },
       {
         num: "02",
         name: "C software security",
-        claim: "Don’t just find vulnerabilities. Check, within stated bounds, that the fix closes them.",
-        body: "Checks defined properties of C code within stated bounds, and whether a fix removes the failure our test exhibits. Each result ships as a dossier you can re-run.",
+        claim: "A patch says the bug is fixed. We check that it is.",
+        risk: "Scanners find the hole and a developer writes the fix. Nobody shows that the fix actually closes it.",
+        body: "Ironproof writes a test that triggers the bug, runs it before and after the fix, and tells you whether the fix closes it, within stated bounds. Each result ships as a dossier you can re-run.",
+        evidence: "20 real fixes drawn at random from projects such as curl and libssh2: 13 closed, 3 where our test was fooled, 4 not analyzed (October 12, 2026).",
       },
       {
         num: "03",
         name: "Legacy modernization",
-        claim: "Modernize the code. Check what the translation preserves.",
-        body: "Translates COBOL to Python and checks, under a stated model of the COBOL, that both compute the same results, or returns the input where they differ. What the model does not cover is reported as not covered.",
-        evidence: "Today: IBM’s GenApp business programs, checked only under a CICS model we write. No third-party replay yet.",
+        claim: "Leave COBOL behind. Check that the results stay the same.",
+        risk: "A translated program can compile, pass its tests and still compute a different amount on the one input nobody tried.",
+        body: "Ironproof translates COBOL into Python, then checks that both give the same results, or shows the exact input where they differ. What our model of the old system does not cover is marked as not covered, never as passed.",
+        evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. No outside party has replayed it yet.",
       },
     ],
     method: {
@@ -129,28 +139,33 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
   fr: {
     eyebrow: "UNE TECHNOLOGIE CENTRALE",
     title: "Trois applications. Une seule exigence de preuve.",
+    beats: { risk: "LE RISQUE", does: "CE QUE FAIT IRONPROOF", today: "AUJOURD’HUI" },
     pillars: [
       {
         num: "01",
         name: "Agents IA et actions critiques",
-        claim: "Pas d’autorisation. Pas d’exécution. Chaque décision appuyée par une preuve vérifiable.",
-        body: "Chaque action critique qui passe par la barrière d’Ironproof, qu’elle vienne d’un agent IA, d’un script, d’une API ou d’une personne, est vérifiée contre votre politique avant de s’exécuter. Les actions non autorisées sont bloquées ; chaque décision de production est scellée et vérifiable hors ligne.",
+        claim: "Votre agent peut déplacer de l’argent. Il ne doit jamais le déplacer de travers.",
+        risk: "Un agent IA, un script ou une personne avec des accès valides demande de payer, d’effacer, d’ouvrir un accès ou de déployer. Être connecté, ce n’est pas être autorisé.",
+        body: "Chaque demande qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter. Permise, elle s’exécute. Interdite, elle ne s’exécute jamais. Dans les deux cas, la décision est scellée.",
         href: "#problem",
         cta: "COMMENT FONCTIONNE LA BARRIÈRE",
-        evidence: "Aujourd’hui : la trace scellée d’une décision se vérifie dans votre navigateur, sans serveur ni compte. C’est un contrôle d’intégrité ; la décision elle-même se recalcule à partir de ses entrées et de la politique.",
+        evidence: "Ouvrez une décision scellée et vérifiez-la vous-même, dans votre navigateur, sans serveur ni compte.",
       },
       {
         num: "02",
         name: "Sécurité du logiciel C",
-        claim: "Ne vous contentez pas de trouver les failles. Vérifiez, dans des bornes déclarées, que le correctif les ferme.",
-        body: "Vérifie des propriétés définies du code C dans des bornes déclarées, et si un correctif supprime l’échec que notre test met en évidence. Chaque résultat part avec un dossier que vous pouvez rejouer.",
+        claim: "Un correctif dit que la faille est fermée. Nous vérifions qu’elle l’est.",
+        risk: "Les scanneurs trouvent la faille et un développeur écrit le correctif. Personne ne montre que le correctif la ferme vraiment.",
+        body: "Ironproof écrit un test qui déclenche la faille, le roule avant et après le correctif, et vous dit si le correctif la ferme, dans des bornes déclarées. Chaque résultat part avec un dossier que vous pouvez rejouer.",
+        evidence: "20 vrais correctifs tirés au hasard dans des projets comme curl et libssh2 : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés (12 octobre 2026).",
       },
       {
         num: "03",
         name: "Modernisation des systèmes hérités",
-        claim: "Modernisez le code. Vérifiez ce que la traduction préserve.",
-        body: "Traduit le COBOL en Python et vérifie, sous un modèle déclaré du COBOL, que les deux calculent les mêmes résultats, ou rend l’entrée où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert.",
-        evidence: "Aujourd’hui : les programmes métier GenApp d’IBM, vérifiés seulement sous un modèle CICS que nous écrivons. Pas encore de rejeu par un tiers.",
+        claim: "Quittez le COBOL. Vérifiez que les résultats restent les mêmes.",
+        risk: "Un programme traduit peut compiler, passer ses tests et calculer quand même un autre montant sur la seule entrée que personne n’a essayée.",
+        body: "Ironproof traduit le COBOL en Python, puis vérifie que les deux donnent les mêmes résultats, ou montre l’entrée exacte où ils diffèrent. Ce que notre modèle de l’ancien système ne couvre pas est déclaré non couvert, jamais réussi.",
+        evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
       },
     ],
     method: {

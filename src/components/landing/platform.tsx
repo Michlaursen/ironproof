@@ -11,7 +11,8 @@ import { PAPERS } from "./credibility";
  * already show the gate (#problem onward).
  */
 /* One image per application, same order as the pillars. */
-const APP_IMAGES = ["/media/app-vault.jpg", "/media/app-cockpit.jpg", "/media/app-punchcards.jpg"] as const;
+// One family with the trio (Dom, 2026-10-15): marble, iron and gold, one object each.
+const APP_IMAGES = ["/media/app-gate.jpg", "/media/app-c-chip.jpg", "/media/app-legacy-reel.jpg"] as const;
 
 export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(PLATFORM_COPY, locale);
@@ -96,8 +97,22 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
                     <span className="chapter-name track-mid">{p.name.toUpperCase()}</span>
                   </div>
                   <h3 className="chapter-claim font-serif">{p.claim}</h3>
-                  <p className="chapter-body">{p.body}</p>
-                  {p.evidence ? <p className="chapter-evidence">{p.evidence}</p> : null}
+                  <dl className="chapter-beats">
+                    <div className="chapter-beat">
+                      <dt className="track-mid">{t.beats.risk}</dt>
+                      <dd>{p.risk}</dd>
+                    </div>
+                    <div className="chapter-beat">
+                      <dt className="track-mid">{t.beats.does}</dt>
+                      <dd>{p.body}</dd>
+                    </div>
+                    {p.evidence ? (
+                      <div className="chapter-beat chapter-beat-today">
+                        <dt className="track-mid">{t.beats.today}</dt>
+                        <dd>{p.evidence}</dd>
+                      </div>
+                    ) : null}
+                  </dl>
                   {p.href && p.cta ? (
                     <a href={p.href} className="chapter-cta track-mid">
                       {p.cta} <span aria-hidden="true">&darr;</span>

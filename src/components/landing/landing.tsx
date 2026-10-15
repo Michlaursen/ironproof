@@ -309,19 +309,19 @@ const T: L<Copy> = {
         {
           tag: "MATHEMATICALLY PROVEN",
           title: "Certainty, where it can be had.",
-          body: "A solver proves the rule holds in every case the model allows, or returns the exact case that breaks it. When it cannot conclude, it says so.",
+          body: "Whatever can be stated precisely, a policy, a C function, a COBOL translation, a solver proves it holds in every case the model allows, or returns the exact case that breaks it. When it cannot conclude, it says so.",
           img: "/media/trio-proven.jpg",
         },
         {
           tag: "POST-QUANTUM SEALED",
           title: "Every decision, set in metal.",
-          body: "Each decision, allowed or blocked, is sealed with Ed25519 and the post-quantum ML-DSA-65 signature. Change one figure in the record and the seal breaks.",
+          body: "Every result, a proof, a counterexample or a gate decision, ships in a record sealed with Ed25519 and the post-quantum ML-DSA-65 signature. Change one figure and the seal breaks.",
           img: "/media/trio-sealed.jpg",
         },
         {
           tag: "INDEPENDENTLY VERIFIABLE",
           title: "Measured by anyone. Not by us.",
-          body: "Your auditor re-checks the seal and re-derives the policy verdict on their own machine, with a verifier written from our specification.",
+          body: "Your auditor checks the seal in a browser and re-runs the proof in their own solver, from the obligations we ship. Our word is never part of the check.",
           img: "/media/trio-verifiable.jpg",
         },
       ],
@@ -735,19 +735,19 @@ const T: L<Copy> = {
         {
           tag: "PROUVÉ MATHÉMATIQUEMENT",
           title: "La certitude, là où elle existe.",
-          body: "Un solveur prouve que la règle tient dans tous les cas que le modèle permet, ou rend le cas exact qui la brise. Quand il ne peut pas conclure, il le dit.",
+          body: "Tout ce qui s’énonce avec précision, une politique, une fonction C, une traduction COBOL, un solveur prouve que ça tient dans tous les cas que le modèle permet, ou rend le cas exact qui le brise. Quand il ne peut pas conclure, il le dit.",
           img: "/media/trio-proven.jpg",
         },
         {
           tag: "SCELLÉ POST-QUANTIQUE",
           title: "Chaque décision, gravée dans le métal.",
-          body: "Chaque décision, permise ou bloquée, est scellée avec Ed25519 et la signature post-quantique ML-DSA-65. Changez un chiffre dans le registre et le sceau se brise.",
+          body: "Chaque résultat, une preuve, un contre-exemple ou une décision de la barrière, part dans un registre scellé avec Ed25519 et la signature post-quantique ML-DSA-65. Changez un chiffre et le sceau se brise.",
           img: "/media/trio-sealed.jpg",
         },
         {
           tag: "VÉRIFIABLE DE FAÇON INDÉPENDANTE",
           title: "Mesuré par n’importe qui. Pas par nous.",
-          body: "Votre auditeur revérifie le sceau et re-dérive le verdict de la politique sur sa propre machine, avec un vérificateur écrit à partir de notre spécification.",
+          body: "Votre auditeur vérifie le sceau dans un navigateur et rejoue la preuve dans son propre solveur, à partir des obligations que nous livrons. Notre parole ne fait jamais partie du contrôle.",
           img: "/media/trio-verifiable.jpg",
         },
       ],
@@ -1493,15 +1493,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* CLOSING — a closed vault door with a gold ring in a black marble hall
+        {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
+          * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas
+          * le reste »), the same family as the trio and the applications.
+          * History: a closed vault door with a gold ring in a black marble hall
           * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
           * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
           * of the act in the body: what is proven runs, the rest never executes. */}
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-guardian-real.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-guardian-real-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-vault-white.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-vault-white-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
