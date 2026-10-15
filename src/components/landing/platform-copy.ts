@@ -56,7 +56,7 @@ export type PlatformCopy = {
     /** The company line (Dom, 2026-10-15): set alone, at hero scale. */
     foot: { a: string; b: string };
   };
-  research: { eyebrow: string; title: string; lead: string; cta: string };
+  research: { eyebrow: string; title: string; lead: string; cta: string; read: string; fields: readonly string[] };
 };
 
 export const PLATFORM_COPY: L<PlatformCopy> = {
@@ -122,6 +122,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Research-driven. Evidence-based.",
       lead: "Our research spans automated formal verification, software security, legacy-system modernization, post-quantum cryptography and quantum software security. Each paper states its method and its declared limits.",
       cta: "EXPLORE RESEARCH",
+      read: "READ ON ARXIV",
+      fields: ["LEGACY MODERNIZATION", "POST-QUANTUM CRYPTOGRAPHY", "QUANTUM SOFTWARE SECURITY", "AI-GENERATED CODE"],
     },
   },
   fr: {
@@ -186,6 +188,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Portée par la recherche. Fondée sur la preuve.",
       lead: "Nos travaux couvrent la vérification formelle automatisée, la sécurité logicielle, la modernisation des systèmes patrimoniaux, la cryptographie post-quantique et la sécurité du logiciel quantique. Chaque papier expose sa méthode et ses limites déclarées.",
       cta: "VOIR LA RECHERCHE",
+      read: "LIRE SUR ARXIV",
+      fields: ["MODERNISATION DES SYSTÈMES HÉRITÉS", "CRYPTOGRAPHIE POST-QUANTIQUE", "SÉCURITÉ DU LOGICIEL QUANTIQUE", "CODE GÉNÉRÉ PAR IA"],
     },
   },
 };

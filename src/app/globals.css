@@ -2104,3 +2104,61 @@ p, li {
 }
 .closing-card h2 { color: var(--foreground); }
 .closing-card p.text-neutral-300 { color: var(--muted); }
+
+/* ===== Colour pass (Dom, 2026-10-15: "plus de couleur, c'est trop plain") =====
+   Each application gets its own accent, carried by the top rule, the number,
+   a tinted head and the evidence box: gold for actions, oxblood for C
+   security, deep teal for modernization. Research becomes publication cards
+   on an iron band, one accent per field. */
+.app-panel { --acc: #a8843a; --acc-soft: rgba(168, 132, 58, 0.1); position: relative; overflow: hidden; border-top: 3px solid var(--acc) !important; padding-top: 0; }
+.app-panel:nth-child(2) { --acc: #9b3a30; --acc-soft: rgba(155, 58, 48, 0.08); }
+.app-panel:nth-child(3) { --acc: #2f6b6a; --acc-soft: rgba(47, 107, 106, 0.09); }
+.app-panel .app-head {
+  margin: 0 -2rem;
+  padding: 1.6rem 2rem 1.3rem;
+  background: linear-gradient(180deg, var(--acc-soft) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(36, 38, 42, 0.08);
+}
+.app-panel .app-num { color: var(--acc); font-size: 3.4rem; }
+.app-panel .app-name { color: var(--acc); font-weight: 600; }
+.app-panel .app-evidence { border-left-color: var(--acc); background: var(--acc-soft); }
+.app-panel .app-cta { border-bottom-color: var(--acc); }
+.app-panel .app-fig .fig-pass, .app-panel .app-fig .fig-eq { stroke: var(--acc); }
+.app-panel .app-fig .fig-goal { fill: var(--acc); }
+.app-panel .app-fig .fig-goal-ring { stroke: var(--acc); }
+.app-panel:nth-child(3) .app-fig .fig-edge { stroke: rgba(47, 107, 106, 0.55); }
+.app-panel:hover { box-shadow: 0 30px 60px -32px var(--acc); }
+@media (max-width: 767px) { .app-panel .app-head { margin: 0 -1.4rem; padding: 1.4rem 1.4rem 1.1rem; } }
+
+/* Research on iron. */
+.papers-band { background: linear-gradient(180deg, #1f2125 0%, #17191c 100%); }
+.papers-band h2 { background: none; -webkit-text-fill-color: #f4f3f1; color: #f4f3f1; }
+.papers-band h2 + p { color: #c9c6bf; }
+.papers-band .seal-label { color: #d9b25a; }
+.papers-band > div > a { color: #e4e2dd; border-color: rgba(217, 178, 90, 0.5); }
+.papers-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 768px) { .papers-grid { grid-template-columns: repeat(2, 1fr); } }
+.paper-card {
+  --acc: #d9b25a;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-height: 13rem;
+  padding: 1.6rem 1.7rem 1.4rem;
+  border-radius: 6px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--acc);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+.paper-2 { --acc: #c9a24b; }
+.paper-3 { --acc: #6f9fa0; }
+.paper-4 { --acc: #c0624f; }
+.paper-1 { --acc: #e3bf63; }
+.paper-card:hover { transform: translateY(-3px); background: linear-gradient(160deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%); }
+.paper-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.paper-field { font-size: 0.62rem; color: var(--acc); font-weight: 600; }
+.paper-id { font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.72rem; color: #a9aab0; }
+.paper-title { flex: 1; font-size: 1.3rem; line-height: 1.3; color: #f4f3f1; }
+.paper-read { font-size: 0.62rem; color: #cfccc5; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 0.9rem; }
+.paper-card:hover .paper-read { color: var(--acc); }

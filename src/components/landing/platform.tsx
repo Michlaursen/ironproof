@@ -147,24 +147,26 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
       </section>
 
       {/* The same PAPERS list as /research: one source, never re-typed. */}
-      <section id="papers" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+      <section id="papers" className="papers-band relative z-10 px-6 py-28 md:px-14 md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="fade-up max-w-4xl">
             <p className="seal-label track-mid mb-5 text-xs">{rs.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{rs.title}</h2>
             <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{rs.lead}</p>
           </div>
-          <div className="fade-up mt-14 space-y-3">
-            {PAPERS.map((paper) => (
-              <a
-                key={paper.id}
-                href={paper.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-premium group flex flex-col gap-2 p-5 transition sm:flex-row sm:items-center sm:gap-4"
-              >
-                <span className="metal-text shrink-0 font-mono text-xs">{paper.id}</span>
-                <span className="flex-1 text-sm font-light leading-snug text-neutral-300">{paper.title}</span>
+          {/* Four publication cards on iron, each with its field (Dom, 2026-10-15:
+            * "trop plain"). The field is read from the paper's own title. */}
+          <div className="fade-up papers-grid mt-14">
+            {PAPERS.map((paper, i) => (
+              <a key={paper.id} href={paper.href} target="_blank" rel="noopener noreferrer" className={`paper-card paper-${i + 1}`}>
+                <div className="paper-top">
+                  <span className="paper-field track-mid">{rs.fields[i] ?? ""}</span>
+                  <span className="paper-id">{paper.id}</span>
+                </div>
+                <p className="paper-title font-serif">{paper.title}</p>
+                <span className="paper-read track-mid">
+                  {rs.read} <span aria-hidden="true">&#8599;</span>
+                </span>
               </a>
             ))}
           </div>
