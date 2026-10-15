@@ -108,7 +108,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     archTag: "ARCHITECTURE",
     archSrc: "/media/architecture-en.webp",
     archAlt:
-      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts, shown in the figure as holds, breaks, not covered: Proven, Refuted, Not demonstrated. Then: enforce before execution, seal every decision with a post-quantum signature, verify offline without having to trust us.",
+      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts: Proven, Refuted, Not demonstrated. Then: proceed, block or refuse before execution; seal every gate decision with a post-quantum signature, which shows integrity, not truth; verify offline without having to trust us.",
     archCaption:
       "The whole system on one page. The model never has the last word: the solver does, and the seal lets anyone check afterward that the record was not changed.",
 
@@ -325,7 +325,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     archTag: "ARCHITECTURE",
     archSrc: "/media/architecture-fr.webp",
     archAlt:
-      "Architecture d’Ironproof. Trois entrées (une action d’agent avec sa politique, un programme COBOL à migrer, une faille C à corriger) entrent dans un système d’exploitation cognitif qui encadre l’agent d’ingénierie : mémoire persistante, règles apprises des erreurs passées, aucun rapport sans commande et sortie. À l’intérieur, un moteur de vérification neuro-symbolique : le modèle propose, le solveur tranche, les contre-exemples reviennent. Chaque résultat est un de trois verdicts, nommés dans la figure tient, tombe, non couvert : Prouvé, Réfuté, Non démontré. Puis : appliquer avant l’exécution, sceller chaque décision par une signature post-quantique, vérifier hors ligne sans nous faire confiance.",
+      "Architecture d’Ironproof. Trois entrées (une action d’agent avec sa politique, un programme COBOL à migrer, une faille C à corriger) entrent dans un système d’exploitation cognitif qui encadre l’agent d’ingénierie : mémoire persistante, règles apprises des erreurs passées, aucun rapport sans commande et sortie. À l’intérieur, un moteur de vérification neuro-symbolique : le modèle propose, le solveur tranche, les contre-exemples reviennent. Chaque résultat est un de trois verdicts : Prouvé, Réfuté, Non démontré. Puis : passer, bloquer ou refuser avant l’exécution ; sceller chaque décision de la barrière par une signature post-quantique, qui montre l’intégrité, pas la vérité ; vérifier hors ligne sans avoir à nous faire confiance.",
     archCaption:
       "Tout le système sur une page. Le modèle n’a jamais le dernier mot : le solveur l’a, et le sceau permet à n’importe qui de vérifier après coup que la trace n’a pas changé.",
 
