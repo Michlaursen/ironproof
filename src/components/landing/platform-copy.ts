@@ -67,7 +67,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       {
         num: "01",
         name: "AI agents & critical actions",
-        claim: "If it isn’t authorized, it never executes. If it is, it executes — with verifiable evidence.",
+        claim: "No authorization. No execution. Every decision backed by verifiable evidence.",
         body: "Every critical action routed through Ironproof’s gate, whether an AI agent, a script, an API or a person started it, is checked against your policy before it runs. Unauthorized ones are blocked; each production decision is sealed and can be checked offline.",
         href: "#problem",
         cta: "HOW THE GATE WORKS",
@@ -133,7 +133,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       {
         num: "01",
         name: "Agents IA et actions critiques",
-        claim: "Si ce n’est pas autorisé, pas d’exécution. Si ça l’est, ça s’exécute — avec une preuve vérifiable.",
+        claim: "Pas d’autorisation. Pas d’exécution. Chaque décision appuyée par une preuve vérifiable.",
         body: "Chaque action critique qui passe par la barrière d’Ironproof, qu’elle vienne d’un agent IA, d’un script, d’une API ou d’une personne, est vérifiée contre votre politique avant de s’exécuter. Les actions non autorisées sont bloquées ; chaque décision de production est scellée et vérifiable hors ligne.",
         href: "#problem",
         cta: "COMMENT FONCTIONNE LA BARRIÈRE",
