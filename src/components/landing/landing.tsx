@@ -421,6 +421,18 @@ const T: L<Copy> = {
       lead: "Agents, scripts and automated pipelines now move money, change access and ship code without a person in the loop. Regulators, banks and defence departments have put dates on it. Each item links to its source.",
       items: [
         {
+          date: "Oct 9, 2025",
+          what: "The Government of Canada sets its post-quantum migration deadlines: high-priority federal systems by the end of 2031, all remaining systems by the end of 2035.",
+          source: "Treasury Board, SPIN on migrating to post-quantum cryptography",
+          href: "https://www.canada.ca/en/government/system/digital-government/policies-standards/spin/migrating-government-canada-post-quantum-cryptography.html",
+        },
+        {
+          date: "Dec 3, 2025",
+          what: "Canada’s Cyber Centre co-signs joint guidance with CISA and allied agencies on AI in operational technology: integrating AI into “OT environments that manage essential public services” “introduces significant risks”.",
+          source: "Canadian Centre for Cyber Security, joint guidance",
+          href: "https://cyber.gc.ca/en/news-events/joint-guidance-principles-secure-integration-artificial-intelligence-operational-technology",
+        },
+        {
           date: "Feb 17, 2026",
           what: "Canada launches its first Defence Industrial Strategy. Its ten priority areas include digital systems, where artificial intelligence sits, and uncrewed and autonomous systems.",
           source: "National Defence, Defence Industrial Strategy briefing",
@@ -439,10 +451,22 @@ const T: L<Copy> = {
           href: SRC_SANTANDER_AGENT_PAY,
         },
         {
+          date: "Jun 15, 2026",
+          what: "Bill C-8, “An Act respecting cyber security”, receives Royal Assent. It amends the Telecommunications Act and makes consequential amendments to other Acts.",
+          source: "Parliament of Canada, LEGISinfo C-8",
+          href: "https://www.parl.ca/legisinfo/en/bill/45-1/c-8",
+        },
+        {
           date: "Jul 13, 2026",
           what: "OSFI publishes its bulletin on generative and agentic AI: agents that reason, plan, decide and take actions without human intervention call for least privilege and audit trails on every AI-initiated activity.",
           source: "OSFI, bulletin on generative and agentic AI",
           href: SRC_OSFI_AGENTIC,
+        },
+        {
+          date: "Aug 2026",
+          what: "FERC issues a letter order approving NERC’s proposed critical infrastructure protection standard CIP-015-2 for the bulk power system.",
+          source: "FERC eLibrary, docket RD26-6",
+          href: "https://elibrary.ferc.gov/eLibrary/filelist?accession_num=20260810-3047",
         },
         {
           date: "Sep 1, 2026",
@@ -786,6 +810,18 @@ const T: L<Copy> = {
       lead: "Des agents, des scripts et des chaînes automatisées déplacent déjà de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
         {
+          date: "9 oct. 2025",
+          what: "Le gouvernement du Canada fixe ses échéances de migration post-quantique : les systèmes fédéraux prioritaires d’ici la fin de 2031, tous les autres d’ici la fin de 2035.",
+          source: "Conseil du Trésor, AMOPS sur la migration vers la cryptographie post-quantique",
+          href: "https://www.canada.ca/en/government/system/digital-government/policies-standards/spin/migrating-government-canada-post-quantum-cryptography.html",
+        },
+        {
+          date: "3 déc. 2025",
+          what: "Le Centre canadien pour la cybersécurité cosigne avec la CISA et des agences alliées une orientation sur l’IA dans les technologies opérationnelles : intégrer l’IA aux environnements qui gèrent des services publics essentiels « introduit des risques importants » (notre traduction).",
+          source: "Centre canadien pour la cybersécurité, orientation conjointe",
+          href: "https://cyber.gc.ca/en/news-events/joint-guidance-principles-secure-integration-artificial-intelligence-operational-technology",
+        },
+        {
           date: "17 févr. 2026",
           what: "Le Canada lance sa première Stratégie industrielle de défense. Ses dix domaines prioritaires comprennent les systèmes numériques, où figure l’intelligence artificielle, et les systèmes sans équipage et autonomes.",
           source: "Défense nationale, note sur la Stratégie industrielle de défense",
@@ -804,10 +840,22 @@ const T: L<Copy> = {
           href: SRC_SANTANDER_AGENT_PAY,
         },
         {
+          date: "15 juin 2026",
+          what: "Le projet de loi C-8, « Loi concernant la cybersécurité », reçoit la sanction royale. Il modifie la Loi sur les télécommunications et apporte des modifications corrélatives à d’autres lois.",
+          source: "Parlement du Canada, LEGISinfo C-8",
+          href: "https://www.parl.ca/legisinfo/en/bill/45-1/c-8",
+        },
+        {
           date: "13 juil. 2026",
           what: "Le BSIF publie son bulletin sur l’IA générative et agentique : des agents qui raisonnent, planifient, décident et agissent sans intervention humaine exigent le moindre privilège et une piste d’audit pour chaque activité lancée par l’IA.",
           source: "BSIF, bulletin sur l’IA générative et agentique",
           href: SRC_OSFI_AGENTIC,
+        },
+        {
+          date: "Août 2026",
+          what: "La FERC approuve par lettre la norme de protection des infrastructures critiques CIP-015-2 proposée par la NERC pour le réseau électrique de grande puissance.",
+          source: "FERC eLibrary, dossier RD26-6",
+          href: "https://elibrary.ferc.gov/eLibrary/filelist?accession_num=20260810-3047",
         },
         {
           date: "1er sept. 2026",
@@ -1201,19 +1249,22 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
           </div>
-          <ol className="fade-up grid gap-6 md:grid-cols-2">
+          {/* Compact ruled list (Dom, 2026-10-15: « que les gens aient pas besoin de scroll 10 min »). */}
+          <ol className="fade-up gap-x-10 rounded-[6px] border border-white/10 bg-ink/90 px-6 py-2 md:columns-2 lg:columns-3">
             {t.now.items.map((d) => (
-              <li key={d.date} className="card-premium flex flex-col p-8">
-                <p className="seal-label track-mid mb-4 text-xs">{d.date}</p>
-                <p className="mb-6 text-base font-light leading-relaxed text-neutral-200">{d.what}</p>
-                <a
-                  href={d.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto text-xs text-neutral-400 underline decoration-white/20 underline-offset-4 transition hover:text-white"
-                >
-                  {d.source} &#8599;
-                </a>
+              <li key={d.date} className="grid break-inside-avoid gap-1 border-b sm:grid-cols-[6rem_1fr] sm:gap-3 border-white/10 py-4 last:border-b-0">
+                <p className="seal-label track-mid pt-0.5 text-[11px]">{d.date}</p>
+                <div>
+                  <p className="text-[13px] font-light leading-relaxed text-neutral-200">{d.what}</p>
+                  <a
+                    href={d.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1.5 inline-block text-xs text-neutral-500 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+                  >
+                    {d.source} &#8599;
+                  </a>
+                </div>
               </li>
             ))}
           </ol>
