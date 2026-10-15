@@ -2762,3 +2762,86 @@ p, li {
 /* Square corners everywhere on the landing: engineered, not app-like. */
 .blueprint .rounded-\[6px\],
 .blueprint .rounded-\[5px\] { border-radius: 2px !important; }
+
+/* ============================================================
+ * MOTION ON SCROLL (Dom, 2026-10-15: « animation while scrolling, que
+ * ce soit moins plat »). CSS scroll-driven animations only: no library,
+ * no JavaScript, no layout shift. Browsers without animation-timeline
+ * (Safari today) keep the static page; reduced motion keeps it too.
+ * Where the motion goes, and why:
+ *   - the left rail fills with gold as you read: the page is a proof
+ *     being worked through, top to bottom;
+ *   - each section rule is drawn from the centre as the section arrives;
+ *   - photographs drift slower than the page (depth, like a plate under glass);
+ *   - callouts on a photograph light up once the photograph is in view;
+ *   - the closing bust comes forward as the page ends.
+ * ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* 1. Reading progress: gold on the left rail. */
+    @media (min-width: 900px) {
+      .blueprint::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: calc(50% - var(--bp-col) / 2);
+        width: 1px;
+        height: 100vh;
+        z-index: 32;
+        pointer-events: none;
+        background: linear-gradient(180deg, transparent, #a8843a 18%, #c9a24b 82%, transparent);
+        transform-origin: top;
+        animation: bp-progress linear both;
+        animation-timeline: scroll(root);
+      }
+    }
+    @keyframes bp-progress { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+    /* 2. Section rules drawn from the centre. */
+    .blueprint .edge-t::before {
+      transform-origin: center;
+      animation: bp-rule ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    @keyframes bp-rule { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+
+    /* 3. Photographs drift slower than the page. */
+    .blueprint .photo-plate img,
+    .blueprint .chapter-media img,
+    .blueprint .trio-media img {
+      animation: bp-drift linear both;
+      animation-timeline: view();
+      scale: 1.08;
+    }
+    @keyframes bp-drift { from { translate: 0 -3.5%; } to { translate: 0 3.5%; } }
+
+    /* 4. Callouts light up once their photograph is in view. */
+    .blueprint .plate-note {
+      animation: bp-note ease-out both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 35%;
+    }
+    @keyframes bp-note { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+
+    /* 5. Plates rise and settle, a little later than their section. */
+    .blueprint .verdict-card,
+    .blueprint .trio-tile,
+    .blueprint .grid.gap-px > .bg-ink {
+      animation: bp-rise ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .blueprint .verdict-card:nth-child(2), .blueprint .trio-tile:nth-child(2) { animation-range: entry 10% cover 36%; }
+    .blueprint .verdict-card:nth-child(3), .blueprint .trio-tile:nth-child(3) { animation-range: entry 20% cover 42%; }
+    @keyframes bp-rise { from { opacity: 0; translate: 0 28px; } to { opacity: 1; translate: 0 0; } }
+
+    /* 6. The closing bust comes forward as the page ends. */
+    .blueprint .closing-photo img {
+      animation: bp-forward ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+    @keyframes bp-forward { from { scale: 1.12; translate: 3% 0; filter: saturate(0.6); } to { scale: 1; translate: 0 0; filter: saturate(1); } }
+  }
+}
