@@ -578,7 +578,7 @@ const T: L<Copy> = {
     closing: {
       titleA: "Probably safe is not",
       titleB: "provably impossible.",
-      body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action is checked before it executes: what’s authorized runs, sealed; what isn’t never executes.",
+      body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action routed through the gate is checked before it executes: what’s authorized runs, sealed; what isn’t never executes. And every result comes with what you need to verify it without us.",
       kicker: "Check every action. Run what complies. Stop the rest.",
       // The fine print under "provably impossible": what the proof covers, and
       // the one condition it rests on (the action can only run through the gate).
@@ -967,7 +967,7 @@ const T: L<Copy> = {
     closing: {
       titleA: "Probablement sûr, ce n’est pas",
       titleB: "prouvé impossible.",
-      body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; pour le reste, pas d’exécution.",
+      body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action qui passe par la barrière est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; le reste ne s’exécute jamais. Et chaque résultat vient avec ce qu’il faut pour le vérifier sans nous.",
       kicker: "Chaque action vérifiée. Ce qui est conforme s’exécute. Le reste, jamais.",
       scope:
         "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
