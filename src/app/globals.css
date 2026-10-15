@@ -2418,3 +2418,137 @@ p, li {
 @media (max-width: 767px) { .hero-white-stage .hero-stage-side { display: none !important; } }
 /* Eyebrow in gold for contrast (Dom, 2026-10-15); a deep gold so it reads on ivory. */
 .hero-white-eyebrow { color: #9a7630; font-weight: 600; }
+
+/* ============================================================
+ * BLUEPRINT FRAME (Dom, 2026-10-15: « un design qui concorde avec
+ * l'histoire de la première section »). The hero is drawn like an
+ * engineering sheet: a figure, callouts, one hairline with four steps.
+ * The rest of the page now shares that drawing language instead of
+ * restarting a new template at every section:
+ *   - two column rails run the whole page, like the margins of a plan;
+ *   - every section opens on a full rule with a cross where it meets
+ *     the rails;
+ *   - section labels are set in mono with a gold square, one voice;
+ *   - photographs get corner marks and callouts, like a figure on a sheet.
+ * Scoped to main.blueprint (the landing) so other pages are untouched.
+ * ============================================================ */
+.blueprint {
+  --bp-col: min(77rem, calc(100% - 2rem));
+  --bp-line: rgba(128, 128, 128, 0.26);
+  --bp-mark: rgba(128, 128, 128, 0.7);
+  position: relative;
+}
+@media (min-width: 900px) {
+  .blueprint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    width: var(--bp-col);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 30;
+    background:
+      repeating-linear-gradient(180deg, var(--bp-line) 0 6px, transparent 6px 12px) left top / 1px 100% no-repeat,
+      repeating-linear-gradient(180deg, var(--bp-line) 0 6px, transparent 6px 12px) right top / 1px 100% no-repeat;
+  }
+  /* The section rule: full width, solid, with a cross at each rail. */
+  .blueprint .edge-t::before {
+    background: var(--bp-line);
+  }
+  .blueprint .edge-t::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: calc(var(--bp-col) + 12px);
+    height: 13px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 31;
+    background:
+      linear-gradient(var(--bp-mark), var(--bp-mark)) 6px 0 / 1px 13px no-repeat,
+      linear-gradient(var(--bp-mark), var(--bp-mark)) 0 6px / 13px 1px no-repeat,
+      linear-gradient(var(--bp-mark), var(--bp-mark)) calc(100% - 6px) 0 / 1px 13px no-repeat,
+      linear-gradient(var(--bp-mark), var(--bp-mark)) 100% 6px / 13px 1px no-repeat;
+  }
+  /* Sections that are narrower than the page still draw their rule full width. */
+  .blueprint section.max-w-7xl.edge-t::before { left: calc(50% - 50vw); right: calc(50% - 50vw); }
+}
+
+/* One voice for every section label: mono, gold square, no glow. */
+.blueprint .seal-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  filter: none;
+  color: #8a6a2a;
+}
+.blueprint .seal-label::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.85em;
+  vertical-align: 0.08em;
+  background: var(--seal);
+}
+.blueprint .text-center .seal-label::before,
+.blueprint .items-center > .seal-label::before { vertical-align: 0.08em; }
+.blueprint .papers-band .seal-label,
+.blueprint #now .seal-label { color: #d9b25a; }
+
+/* Figures: corner marks inside the frame, like crop marks on a plate. */
+.plate-brackets {
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  z-index: 2;
+  --bk: rgba(168, 132, 58, 0.9);
+  background:
+    linear-gradient(var(--bk), var(--bk)) left top / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) left top / 1px 16px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right top / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right top / 1px 16px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) left bottom / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) left bottom / 1px 16px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right bottom / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right bottom / 1px 16px no-repeat;
+}
+/* White figures lose the dark bottom wash: it greyed the marble. */
+.blueprint .photo-plate { border: 1px solid rgba(36, 38, 42, 0.12); border-radius: 4px; }
+.blueprint .photo-plate::after { display: none; }
+.plate-note {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.38rem 0.7rem;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #24262a;
+  background: rgba(247, 246, 243, 0.92);
+  border: 1px solid rgba(36, 38, 42, 0.28);
+  border-radius: 2px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.plate-note::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #24262a;
+}
+.plate-note-gold { border-color: rgba(168, 132, 58, 0.7); color: #7a5c22; }
+.plate-note-gold::before { background: var(--seal); box-shadow: 0 0 8px rgba(168, 132, 58, 0.6); }
+@media (max-width: 767px) {
+  .plate-note { font-size: 8.5px; padding: 0.3rem 0.5rem; letter-spacing: 0.1em; }
+  .plate-note:nth-of-type(n + 3) { display: none; }
+}
+/* The first pane's label speaks in the same mono voice, in iron. */
+.blueprint .sheet-label { font-family: var(--font-jetbrains), ui-monospace, monospace; letter-spacing: 0.16em; color: #3a3d43; }
+.blueprint .sheet-label::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 0.85em; vertical-align: 0.08em; background: #3a3d43; }

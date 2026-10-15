@@ -88,6 +88,7 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
               <li key={p.num} id={`app-${p.num}`} className={`chapter scroll-mt-24 ${i % 2 === 1 ? "chapter-flip" : ""}`}>
                 <div className="chapter-media fade-up">
                   <Image src={APP_IMAGES[i] ?? APP_IMAGES[0]} alt="" fill sizes="(min-width: 900px) 46vw, 100vw" className="object-cover" />
+                  <span className="plate-brackets" aria-hidden="true" />
                 </div>
                 <div className="chapter-text fade-up">
                   <div className="chapter-head">

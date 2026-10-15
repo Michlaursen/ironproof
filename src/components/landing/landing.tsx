@@ -116,6 +116,8 @@ type Copy = {
     runEyebrow: string;
     runTitle: string;
     runNote: string;
+    /** Callouts drawn on the switch-panel photograph. */
+    plateNotes: readonly PlateNote[];
     run: readonly RunCase[];
     appliesEyebrow: string;
     items: readonly Domain[];
@@ -146,6 +148,8 @@ type Copy = {
     compiler: string;
     recordPre: string;
     recordLink: string;
+    /** Callouts drawn on the seal photograph. */
+    plateNotes: readonly PlateNote[];
   };
 
   engine: { eyebrow: string; title: string; lead: React.ReactNode; cta: string };
@@ -327,6 +331,10 @@ const T: L<Copy> = {
       runEyebrow: "ALREADY RUN",
       runTitle: "Verification runs — with the misses left in.",
       runNote: "Labs on published policies and open-source code, not client systems.",
+      plateNotes: [
+        { x: 47, y: 14, label: "ARMED · CHECKED BEFORE IT RUNS", gold: true },
+        { x: 74, y: 82, label: "IRREVERSIBLE ONCE IT RUNS" },
+      ],
       run: [
         {
           name: "Cloud authorization",
@@ -558,6 +566,10 @@ const T: L<Copy> = {
       recordPre:
         "A policy proved and then broken, and the exact call site where the gate sits in front of the action, are in the ",
       recordLink: "technical record",
+      plateNotes: [
+        { x: 44, y: 20, label: "SEALED · Ed25519 + ML-DSA-65", gold: true },
+        { x: 6, y: 86, label: "EVERY DECISION · ALLOW OR BLOCK" },
+      ],
     },
 
     engine: {
@@ -719,6 +731,10 @@ const T: L<Copy> = {
       runEyebrow: "DÉJÀ FAIT",
       runTitle: "Vérifications menées — les échecs compris.",
       runNote: "Des labos sur des politiques publiées et du code open source, pas des systèmes de clients.",
+      plateNotes: [
+        { x: 47, y: 14, label: "ARMÉ · VÉRIFIÉ AVANT D’AGIR", gold: true },
+        { x: 74, y: 82, label: "IRRÉVERSIBLE UNE FOIS EXÉCUTÉ" },
+      ],
       run: [
         {
           name: "Autorisation infonuagique",
@@ -947,6 +963,10 @@ const T: L<Copy> = {
       recordPre:
         "Une politique prouvée puis brisée, et l’endroit exact où la barrière se place devant l’action, sont dans le ",
       recordLink: "registre technique",
+      plateNotes: [
+        { x: 40, y: 20, label: "SCELLÉ · Ed25519 + ML-DSA-65", gold: true },
+        { x: 6, y: 86, label: "CHAQUE DÉCISION · PERMISE OU BLOQUÉE" },
+      ],
     },
 
     engine: {
@@ -983,7 +1003,22 @@ const T: L<Copy> = {
 
 /* A decorative photograph from the steel-and-gold series. The copy around it
  * carries the meaning, so the image is hidden from assistive tech. */
-function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boolean; position?: string }) {
+/** A callout drawn on a photograph, like a note on an engineering drawing.
+ *  x and y are percentages of the plate; the label names what the object
+ *  stands for in the product, never a number we have not measured. */
+type PlateNote = { x: number; y: number; label: string; gold?: boolean };
+
+function PhotoPlate({
+  src,
+  wide = false,
+  position,
+  notes,
+}: {
+  src: string;
+  wide?: boolean;
+  position?: string;
+  notes?: readonly PlateNote[];
+}) {
   if (!src) return null;
   return (
     <div className={`photo-plate fade-up${wide ? " photo-plate-wide" : ""}`} aria-hidden="true">
@@ -996,6 +1031,16 @@ function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boole
         className="object-cover"
         style={position ? { objectPosition: position } : undefined}
       />
+      <span className="plate-brackets" />
+      {notes?.map((n) => (
+        <span
+          key={n.label}
+          className={`plate-note${n.gold ? " plate-note-gold" : ""}`}
+          style={{ left: `${n.x}%`, top: `${n.y}%` }}
+        >
+          {n.label}
+        </span>
+      ))}
     </div>
   );
 }
@@ -1010,7 +1055,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       {/* NAV */}
       <LandingHeader locale={locale} />
 
-      <main className="flex-1">
+      <main className="blueprint flex-1">
         {/* 1. HERO — white, iron and gold (Dom, 2026-10-15). The words on top,
           * the statement left and the explanation right; the one brain of the
           * site under them, full width: white marble for the intuition, iron
@@ -1120,7 +1165,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-2">
               <div className="bg-ink px-7 py-9 md:px-10">
-                <p className="track-mid mb-5 text-xs text-neutral-200">01 · {t.sheet.sheetLabel}</p>
+                <p className="sheet-label track-mid mb-5 text-xs">01 · {t.sheet.sheetLabel}</p>
                 <p className="text-base font-light leading-relaxed text-neutral-400 md:text-lg">{t.sheet.sheetBody}</p>
               </div>
               <div className="bg-ink px-7 py-9 md:px-10">
@@ -1214,7 +1259,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
+            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" notes={t.domains.plateNotes} />
           </div>
           {/* What has run first, with its number; then where it applies, with its
             * rule. The two never share a list (2026-10-13). */}
@@ -1346,7 +1391,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             {/* The one image here: the decision struck into steel, with logo 09
               * (Dom, 2026-09-26). */}
-            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" />
+            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" notes={t.how.plateNotes} />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
