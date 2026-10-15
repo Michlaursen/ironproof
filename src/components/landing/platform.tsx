@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { defaultLocale, type Locale } from "@/content";
 import { pick } from "./i18n";
 import { PLATFORM_COPY } from "./platform-copy";
@@ -9,51 +10,8 @@ import { PAPERS } from "./credibility";
  * in platform-copy.ts. The agent pillar points down to the sections that
  * already show the gate (#problem onward).
  */
-/* One fine-line technical drawing per application (Dom, 2026-10-15). Shapes
- * only, no text: 01 an action graph where three paths pass the gate and one is
- * stopped at it; 02 a state graph with the counterexample path; 03 two program
- * flows converging on one equivalent result. */
-function AppFigure({ num }: { num: string }) {
-  if (num === "01") {
-    return (
-      <svg className="app-fig" viewBox="0 0 240 90" aria-hidden="true">
-        {[18, 38, 58, 78].map((y) => (
-          <circle key={y} cx="14" cy={y} r="3.2" className="fig-node" />
-        ))}
-        <path d="M18 18 C70 18 90 40 120 42 M18 38 C70 38 90 44 120 44 M18 58 C70 58 90 48 120 46" className="fig-pass" />
-        <path d="M18 78 C60 78 92 72 112 66" className="fig-stop" />
-        <path d="M108 62 l8 8 M116 62 l-8 8" className="fig-x" />
-        <rect x="120" y="24" width="6" height="42" className="fig-gate" />
-        <path d="M126 45 C160 45 190 45 222 45" className="fig-pass" />
-        <circle cx="226" cy="45" r="4.5" className="fig-goal" />
-      </svg>
-    );
-  }
-  if (num === "02") {
-    const nodes: Array<[number, number]> = [[20, 45], [70, 22], [70, 68], [125, 12], [125, 38], [125, 62], [180, 30], [180, 75], [225, 75]];
-    return (
-      <svg className="app-fig" viewBox="0 0 240 90" aria-hidden="true">
-        <path d="M20 45 L70 22 M20 45 L70 68 M70 22 L125 12 M70 22 L125 38 M70 68 L125 62 M125 38 L180 30" className="fig-edge" />
-        <path d="M20 45 L70 68 L125 62 L180 75 L225 75" className="fig-cex" />
-        {nodes.map(([x, y]) => (
-          <circle key={`${x}-${y}`} cx={x} cy={y} r="3.2" className="fig-node" />
-        ))}
-        <path d="M220 70 l10 10 M230 70 l-10 10" className="fig-x" />
-      </svg>
-    );
-  }
-  return (
-    <svg className="app-fig" viewBox="0 0 240 90" aria-hidden="true">
-      <path d="M14 20 L60 20 L90 30 L130 30 L170 42 L206 45" className="fig-edge" />
-      <path d="M14 70 L52 70 L84 62 L124 62 L168 50 L206 45" className="fig-edge" />
-      {[[14, 20], [60, 20], [90, 30], [130, 30], [170, 42], [14, 70], [52, 70], [84, 62], [124, 62], [168, 50]].map(([x, y]) => (
-        <circle key={`${x}-${y}`} cx={x} cy={y} r="3" className="fig-node" />
-      ))}
-      <circle cx="214" cy="45" r="8" className="fig-goal-ring" />
-      <path d="M209 42.5 h10 M209 47.5 h10" className="fig-eq" />
-    </svg>
-  );
-}
+/* One image per application, same order as the pillars. */
+const APP_IMAGES = ["/media/gate-white-poster.jpg", "/media/app-c-chip.jpg", "/media/app-legacy-reel.jpg"] as const;
 
 export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(PLATFORM_COPY, locale);
@@ -122,24 +80,29 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="seal-label track-mid mb-5 text-xs">{t.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.title}</h2>
           </div>
-          {/* Three panels, larger and separate (Dom, 2026-10-15): the number as
-            * the entry, the claim as the headline, today's evidence set apart. */}
-          <ol className="fade-up apps-grid mt-14">
-            {t.pillars.map((p) => (
-              <li key={p.num} id={`app-${p.num}`} className="app-panel scroll-mt-24">
-                <div className="app-head">
-                  <span className="app-num font-serif">{p.num}</span>
-                  <p className="app-name track-mid">{p.name.toUpperCase()}</p>
+          {/* Three chapters, editorial (Dom, 2026-10-15: "bien plus premium"): one
+            * large image per application in the marble, iron and gold family,
+            * the text set like a catalogue page, no boxes; alternating sides. */}
+          <ol className="apps-chapters mt-20">
+            {t.pillars.map((p, i) => (
+              <li key={p.num} id={`app-${p.num}`} className={`chapter scroll-mt-24 ${i % 2 === 1 ? "chapter-flip" : ""}`}>
+                <div className="chapter-media fade-up">
+                  <Image src={APP_IMAGES[i] ?? APP_IMAGES[0]} alt="" fill sizes="(min-width: 900px) 46vw, 100vw" className="object-cover" />
                 </div>
-                <AppFigure num={p.num} />
-                <h3 className="app-claim font-serif">{p.claim}</h3>
-                <p className="app-body">{p.body}</p>
-                <p className="app-evidence">{p.evidence}</p>
-                {p.href && p.cta ? (
-                  <a href={p.href} className="app-cta track-mid">
-                    {p.cta} <span aria-hidden="true">&darr;</span>
-                  </a>
-                ) : null}
+                <div className="chapter-text fade-up">
+                  <div className="chapter-head">
+                    <span className="chapter-num font-serif">{p.num}</span>
+                    <span className="chapter-name track-mid">{p.name.toUpperCase()}</span>
+                  </div>
+                  <h3 className="chapter-claim font-serif">{p.claim}</h3>
+                  <p className="chapter-body">{p.body}</p>
+                  <p className="chapter-evidence">{p.evidence}</p>
+                  {p.href && p.cta ? (
+                    <a href={p.href} className="chapter-cta track-mid">
+                      {p.cta} <span aria-hidden="true">&darr;</span>
+                    </a>
+                  ) : null}
+                </div>
               </li>
             ))}
           </ol>
@@ -154,22 +117,27 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
             <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{rs.title}</h2>
             <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{rs.lead}</p>
           </div>
-          {/* Four publication cards on iron, each with its field (Dom, 2026-10-15:
-            * "trop plain"). The field is read from the paper's own title. */}
-          <div className="fade-up papers-grid mt-14">
+          {/* An editorial index, not cards (Dom, 2026-10-15: "BIN PLUS PREMIUM").
+            * The field is read from the paper's own title. */}
+          <ol className="fade-up papers-index mt-16">
             {PAPERS.map((paper, i) => (
-              <a key={paper.id} href={paper.href} target="_blank" rel="noopener noreferrer" className={`paper-card paper-${i + 1}`}>
-                <div className="paper-top">
-                  <span className="paper-field track-mid">{rs.fields[i] ?? ""}</span>
-                  <span className="paper-id">{paper.id}</span>
-                </div>
-                <p className="paper-title font-serif">{paper.title}</p>
-                <span className="paper-read track-mid">
-                  {rs.read} <span aria-hidden="true">&#8599;</span>
-                </span>
-              </a>
+              <li key={paper.id}>
+                <a href={paper.href} target="_blank" rel="noopener noreferrer" className="paper-row">
+                  <span className="paper-row-num font-serif">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="paper-row-main">
+                    <span className="paper-row-field track-mid">{rs.fields[i] ?? ""}</span>
+                    <span className="paper-row-title font-serif">{paper.title}</span>
+                  </span>
+                  <span className="paper-row-side">
+                    <span className="paper-row-id">{paper.id}</span>
+                    <span className="paper-row-read track-mid">
+                      {rs.read} <span aria-hidden="true">&#8599;</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ol>
           <a
             href={`${r}/research`}
             className="track-mid mt-10 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"

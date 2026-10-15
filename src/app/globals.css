@@ -2162,3 +2162,142 @@ p, li {
 .paper-title { flex: 1; font-size: 1.3rem; line-height: 1.3; color: #f4f3f1; }
 .paper-read { font-size: 0.62rem; color: #cfccc5; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 0.9rem; }
 .paper-card:hover .paper-read { color: var(--acc); }
+
+/* ===== Applications as editorial chapters (Dom, 2026-10-15) =====
+   No boxes. A large image, a big serif numeral, the claim as a headline,
+   hairlines for structure, gold only where it means something. */
+#applications { padding-bottom: 7rem; }
+#applications h2 { font-size: clamp(2.8rem, 5.6vw, 4.8rem); max-width: 14ch; }
+.apps-chapters { list-style: none; display: flex; flex-direction: column; gap: 7rem; }
+.chapter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .chapter { grid-template-columns: 1.08fr 1fr; gap: 5rem; }
+  .chapter-flip .chapter-media { order: 2; }
+}
+.chapter-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -48px rgba(36, 38, 42, 0.55);
+}
+.chapter-media img { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.chapter:hover .chapter-media img { transform: scale(1.025); }
+.chapter-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(36, 38, 42, 0.14);
+}
+.chapter-num {
+  font-size: clamp(4rem, 7vw, 6.5rem);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px #a8843a;
+}
+.chapter-name { font-size: 0.72rem; color: var(--foreground); }
+.chapter-claim {
+  margin-top: 1.8rem;
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.chapter-body { margin-top: 1.4rem; max-width: 34rem; font-size: 1.05rem; line-height: 1.7; color: var(--muted); }
+.chapter-evidence {
+  position: relative;
+  margin-top: 1.8rem;
+  max-width: 34rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(36, 38, 42, 0.1);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  opacity: 0.85;
+}
+.chapter-evidence::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 3rem;
+  height: 1px;
+  background: #a8843a;
+}
+.chapter-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  min-height: 44px;
+  font-size: 0.72rem;
+  color: var(--foreground);
+  border-bottom: 1px solid rgba(36, 38, 42, 0.3);
+}
+.chapter-cta:hover { border-color: #a8843a; }
+@media (max-width: 899px) { .apps-chapters { gap: 4.5rem; } }
+
+/* ===== Research as an editorial index on iron (Dom, 2026-10-15) ===== */
+.papers-index { list-style: none; border-top: 1px solid rgba(232, 228, 220, 0.16); }
+.paper-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem 2rem;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid rgba(232, 228, 220, 0.16);
+  color: #ecebe7;
+}
+.paper-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: #c9a45a;
+  transition: width 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.paper-row:hover::after, .paper-row:focus-visible::after { width: 100%; }
+.paper-row-num {
+  font-size: 3rem;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px #c9a45a;
+}
+.paper-row-main { display: flex; flex-direction: column; gap: 0.9rem; }
+.paper-row-field { font-size: 0.68rem; color: #c9a45a; }
+.paper-row-title {
+  font-size: clamp(1.3rem, 2.1vw, 1.85rem);
+  line-height: 1.25;
+  max-width: 44rem;
+  transition: color 0.4s;
+}
+.paper-row:hover .paper-row-title { color: #fff; }
+.paper-row-side {
+  grid-column: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  font-size: 0.72rem;
+  color: rgba(236, 235, 231, 0.6);
+}
+.paper-row-id { font-family: var(--font-mono, ui-monospace, monospace); }
+.paper-row-read { font-size: 0.66rem; color: rgba(236, 235, 231, 0.85); }
+@media (min-width: 900px) {
+  .paper-row { grid-template-columns: 6rem 1fr 13rem; align-items: start; padding: 2.6rem 0; }
+  .paper-row-num { font-size: 4rem; }
+  .paper-row-side { grid-column: 3; flex-direction: column; align-items: flex-end; gap: 0.9rem; padding-top: 0.2rem; }
+}
+@media (max-width: 899px) {
+  .paper-row { grid-template-columns: 1fr; gap: 0.9rem; padding: 2rem 0; }
+  .paper-row-num { font-size: 2.4rem; }
+  .paper-row-side { grid-column: 1; }
+}
+.paper-row-read { white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
