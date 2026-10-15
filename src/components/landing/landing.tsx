@@ -55,8 +55,6 @@ type Copy = {
     headlineEnd: string;
     body: React.ReactNode;
     boundary: string;
-    /** Only what has been replayed by a third party: agents and C, not COBOL yet. */
-    proofLine: string;
     initiators: string;
     authorized: string;
     unauthorized: string;
@@ -215,8 +213,6 @@ const T: L<Copy> = {
       ),
       boundary:
         "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and mathematically verify key properties of system behavior.",
-      proofLine:
-        "Agent decisions and C verdicts ship with the evidence to re-check them — offline, without having to trust us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -586,8 +582,6 @@ const T: L<Copy> = {
       ),
       boundary:
         "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier mathématiquement des propriétés clés du comportement d’un système.",
-      proofLine:
-        "Les décisions d’agents et les verdicts sur le C partent avec de quoi les revérifier, hors ligne, sans avoir à nous faire confiance.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -970,14 +964,13 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <main className="flex-1">
         {/* 1. HERO — the product, in one sentence, before any mechanism */}
         <section id="top" className="hero-agent relative z-10 flex items-center overflow-hidden px-6 md:px-14">
-          {/* Any initiator, one gate: a person, an agent and a machine wait at a
-            * closed door with a gold seam (Dom, 2026-09-28, chosen on rendered
-            * variants after the hands photograph and eight stock photos). The
-            * studio render matches the rest of the page. Full-bleed and melted
-            * into the page on every edge. */}
+          {/* A round vault door left ajar, gold light spilling out (Dom, 2026-10-15, chosen
+            * among the brand backgrounds over the initiators-at-the-door render,
+            * which told the old "any initiator, one gate" page). Full-bleed and
+            * melted into the page on every edge. */}
           <div className="hero-agent-photo" aria-hidden="true">
             <Image
-              src="/media/hero-initiators.jpg"
+              src="/media/hero-vault-round.jpg"
               alt=""
               fill
               preload
@@ -986,11 +979,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             />
           </div>
           <div className="hero-agent-scrim" aria-hidden="true" />
-          {/* Phone: a 4:5 crop on the door and the three figures, above the copy,
+          {/* Phone: a 4:5 crop on the seam, above the copy,
             * instead of the desktop frame squeezed behind the text. */}
           <div className="hero-agent-mobile md:hidden" aria-hidden="true">
             <Image
-              src="/media/hero-initiators-m.jpg"
+              src="/media/hero-vault-round-m.jpg"
               alt=""
               fill
               preload
@@ -1020,9 +1013,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
                   * PERSON plates) and in #initiators; the hero keeps the claim only. */}
                 <span className="text-neutral-200">{t.hero.boundary}</span>
-              </p>
-              <p className="-mt-6 mb-10 max-w-md font-serif text-lg leading-snug text-neutral-100 md:text-xl">
-                {t.hero.proofLine}
               </p>
               {/* One primary action (the site-wide CTA) and one quiet way in.
                 * "Verify a real decision" left the first screen: the vault has
