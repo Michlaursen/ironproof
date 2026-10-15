@@ -15,9 +15,9 @@ import type { L } from "./i18n";
  *     proceed_iff_all_clauses_hold (lean/Ironproof/Fidelity.lean).
  * If one of those changes, this page changes with it.
  *
- * Deliberately NOT claimed: that a certificate reports an "undecided" verdict
- * to the customer. The three answers are described as what a solver can
- * return, not as a field of our artifact.
+ * Verdict labels are the site-wide three: Proven / Refuted / Not demonstrated
+ * (aligned 2026-10-15). Gate outcomes PROCEED / BLOCK / REFUSE are a different
+ * thing: one action, not the policy.
  */
 
 export type Card = { k: string; t: string; b: string };
@@ -92,7 +92,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     eyebrow: "NEURO-SYMBOLIC",
     h1: (
       <>
-        The model proposes. <span className="metal-shine">The proof decides.</span>
+        The model proposes. <span className="metal-shine">The solver decides.</span>
       </>
     ),
     heroLead: (
@@ -108,9 +108,9 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     archTag: "ARCHITECTURE",
     archSrc: "/media/architecture-en.webp",
     archAlt:
-      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts: holds, breaks, not covered. Then: enforce before execution, seal with a post-quantum signature, verify offline without having to trust us.",
+      "Ironproof architecture. Three inputs (an agent action with its policy, a COBOL program to migrate, a C vulnerability to fix) enter a cognitive operating system that governs the engineering agent: persistent memory, rules learned from past errors, no report without command and output. Inside it, a neuro-symbolic verification engine: the model proposes, the solver decides, counterexamples flow back. Every result is one of three verdicts, shown in the figure as holds, breaks, not covered: Proven, Refuted, Not demonstrated. Then: enforce before execution, seal every decision with a post-quantum signature, verify offline without having to trust us.",
     archCaption:
-      "The whole system on one page. The model never has the last word: the solver does, and the seal lets anyone check it afterward.",
+      "The whole system on one page. The model never has the last word: the solver does, and the seal lets anyone check afterward that the record was not changed.",
 
     s01: "01 — Two kinds of intelligence",
     s01Title: "One learns from examples. The other follows rules to the end.",
@@ -151,8 +151,9 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     s02b: (
       <>
         The order matters. A model that grades another model is still a model — it can be prompted,
-        persuaded, or simply wrong. A solver cannot be argued with: either the rule holds in every
-        case, or it hands back the exact case where it breaks.
+        persuaded, or simply wrong. A solver cannot be argued with: it proves the rule holds in every
+        case, or it hands back the exact case where it breaks, or it says it could not decide — and
+        that is never counted as a pass.
       </>
     ),
     s02Quote:
@@ -173,8 +174,9 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
         <span className="text-foreground">Automated</span> means the engine does that work itself.
         We use Z3 and its Spacer engine: you give it the rule and the system, and it searches for a
         proof — including the inductive invariant, the property that stays true at every step — or
-        for a counterexample. No mathematician in the loop. A solver can return three kinds of
-        answer:
+        for a counterexample. No mathematician writes the proof. A language model may read the code
+        or the policy and propose what to check; it never decides. The solver decides, and
+        independent checks re-examine its conclusion. Every result is one of three verdicts:
       </>
     ),
     answers: [
@@ -184,21 +186,21 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
         b: "Not “we didn’t find one.” The solver shows none can exist — the technical word is UNSAT, unsatisfiable.",
       },
       {
-        k: "COUNTEREXAMPLE",
+        k: "REFUTED",
         t: "Here is the exact case.",
-        b: "The inputs, the state, the step where the rule fails. Concrete enough to replay and fix.",
+        b: "A refuted result ships its counterexample: the inputs, the state, the step where the rule fails. Concrete enough to replay and fix.",
       },
       {
-        k: "UNDECIDED",
+        k: "NOT DEMONSTRATED",
         t: "Not settled.",
-        b: "Some questions are too hard to close in the time given. Undecided is not a pass, and an honest system never counts it as one.",
+        b: "Some questions are too hard to close in the time given, and the solver returns unknown. Not demonstrated is not a pass, and an honest system never counts it as one.",
       },
     ],
 
     s04: "04 — How it fits together in Ironproof",
     s04Title: "From a proposed action to a proof you hold.",
     s04Lead:
-      "One engine, the same steps on every surface. The model can only ever appear in the first one.",
+      "One engine, the same steps on every surface. A model may propose — the action, or a first draft of the rule to check — but it never decides: from the compiled rule onward, only the compiler, the solver and independent checks act.",
     steps: [
       {
         n: "01 · PROPOSE",
@@ -213,17 +215,17 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       {
         n: "03 · PROVE",
         t: "The engine decides",
-        b: "The solver proves the rule holds across sequences of actions, or returns the counterexample. At run time every action is checked against that same compiled rule, and nothing executes without a passing decision.",
+        b: "The solver proves the rule holds across sequences of actions of any length when the proof closes with an inductive invariant, returns the counterexample, or says it could not decide. At run time every action is checked against that same compiled rule: PROCEED runs; BLOCK and REFUSE do not. A gate decision is about one action; the proof is about the policy.",
       },
       {
         n: "04 · RE-CHECK",
         t: "Don’t trust the search",
-        b: "The invariant the solver found is re-checked in a fresh solver before anything is sealed. Finding a proof and checking it are kept apart on purpose.",
+        b: "The invariant the solver found is re-checked in a fresh solver before the kernel seals its verdict. Finding a proof and checking it are kept apart on purpose.",
       },
       {
         n: "05 · SEAL",
         t: "Post-quantum record",
-        b: "The decision and its proof are hash-chained and signed with Ed25519 and ML-DSA-65 (FIPS 204). Any later edit is detectable.",
+        b: "Every decision on the production gate, allowed or blocked, is hash-chained and signed with Ed25519 and ML-DSA-65 (FIPS 204); the kernel seals its proof verdict the same way. Any later edit is detectable. A seal shows the record was not changed and which keys signed it — not that the rule is true.",
       },
       {
         n: "06 · VERIFY",
@@ -268,7 +270,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       {
         k: "SCOPE",
         t: "Proven within a class, not everywhere.",
-        b: "Each proof covers a precisely stated class of actions and rules. Outside that class, it says nothing — and the record states the boundary.",
+        b: "Each proof covers a precisely stated class of actions and rules. Outside that class, it says nothing — and the verification dossier states the boundary.",
       },
       {
         k: "THE MODEL",
@@ -287,8 +289,8 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       { t: "SMT solver", d: "The engine that decides whether a logical formula can be satisfied. Z3 is one." },
       { t: "UNSAT", d: "“Unsatisfiable”: no case violates the rule. The answer a proof rests on." },
       { t: "Counterexample", d: "A concrete case where the rule breaks." },
-      { t: "Inductive invariant", d: "A property true at the start and preserved by every step — so true forever." },
-      { t: "Post-quantum seal", d: "A signature designed to stay unforgeable even against future quantum computers." },
+      { t: "Inductive invariant", d: "A property true at the start and preserved by every step — so true after any number of steps." },
+      { t: "Post-quantum seal", d: "Two signatures, Ed25519 and ML-DSA-65; the second is designed to stay unforgeable against future quantum computers. It shows a record was not changed, not that its content is true." },
     ],
 
     provableTag: "NEXT — THE CATEGORY",
@@ -299,7 +301,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     s08Phrase: "A model that is never wrong does not exist. A system where its mistakes cannot pass, can.",
 
     ctaTitle: "See the engine on one of your workflows",
-    ctaLead: "Pick one action your agents take. We write the rule with you, prove it, and hand you the record.",
+    ctaLead: "Pick one action your agents take. We write the rule with you, put it to the solver, and hand you the verification dossier.",
     logoTitle: "Ironproof",
   },
 
@@ -307,12 +309,12 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     eyebrow: "NEURO-SYMBOLIQUE",
     h1: (
       <>
-        Le modèle propose. <span className="metal-shine">La preuve décide.</span>
+        Le modèle propose. <span className="metal-shine">Le solveur décide.</span>
       </>
     ),
     heroLead: (
       <>
-        L’IA neuro-symbolique réunit deux formes d’intelligence : un{" "}
+        L’IA neuro-symbolique réunit deux formes d’intelligence : un{" "}
         <span className="metal-text">modèle neuronal</span> qui lit et écrit comme une personne, et un{" "}
         <span className="metal-text">moteur symbolique</span> qui raisonne comme un mathématicien.
         Cette page explique les deux, ce qu’est un moteur de vérification formelle automatisée, et
@@ -323,9 +325,9 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     archTag: "ARCHITECTURE",
     archSrc: "/media/architecture-fr.webp",
     archAlt:
-      "Architecture d’Ironproof. Trois entrées (une action d’agent avec sa politique, un programme COBOL à migrer, une faille C à corriger) entrent dans un système d’exploitation cognitif qui encadre l’agent d’ingénierie : mémoire persistante, règles apprises des erreurs passées, aucun rapport sans commande et sortie. À l’intérieur, un moteur de vérification neuro-symbolique : le modèle propose, le solveur tranche, les contre-exemples reviennent. Chaque résultat est un de trois verdicts : tient, tombe, non couvert. Puis : appliquer avant l’exécution, sceller par une signature post-quantique, vérifier hors ligne sans nous faire confiance.",
+      "Architecture d’Ironproof. Trois entrées (une action d’agent avec sa politique, un programme COBOL à migrer, une faille C à corriger) entrent dans un système d’exploitation cognitif qui encadre l’agent d’ingénierie : mémoire persistante, règles apprises des erreurs passées, aucun rapport sans commande et sortie. À l’intérieur, un moteur de vérification neuro-symbolique : le modèle propose, le solveur tranche, les contre-exemples reviennent. Chaque résultat est un de trois verdicts, nommés dans la figure tient, tombe, non couvert : Prouvé, Réfuté, Non démontré. Puis : appliquer avant l’exécution, sceller chaque décision par une signature post-quantique, vérifier hors ligne sans nous faire confiance.",
     archCaption:
-      "Tout le système sur une page. Le modèle n’a jamais le dernier mot : le solveur l’a, et le sceau permet à n’importe qui de le vérifier après coup.",
+      "Tout le système sur une page. Le modèle n’a jamais le dernier mot : le solveur l’a, et le sceau permet à n’importe qui de vérifier après coup que la trace n’a pas changé.",
 
     s01: "01 — Deux formes d’intelligence",
     s01Title: "L’une apprend par l’exemple. L’autre suit les règles jusqu’au bout.",
@@ -345,7 +347,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     weaknessLabel: "Faible pour",
     neuralGood: "Le langage, l’ambiguïté, la vitesse, l’étendue.",
     neuralBad:
-      "Les garanties. Il est probabiliste : il peut se tromper avec assurance, et on peut le faire changer d’avis.",
+      "Les garanties. Il est probabiliste : il peut se tromper avec assurance, et on peut le faire changer d’avis.",
     symbolicGood: "La certitude. Sa réponse vaut pour tous les cas de la classe examinée.",
     symbolicBad: "Lire le monde. Il lui faut une question déjà écrite avec précision.",
 
@@ -358,7 +360,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     s02a: (
       <>
         Un système neuro-symbolique place chaque partie là où elle est fiable. Le côté neuronal
-        s’occupe du langage : il propose une action, une traduction, une réponse candidate. Le côté
+        s’occupe du langage : il propose une action, une traduction, une réponse candidate. Le côté
         symbolique la confronte à des règles fixées d’avance, et{" "}
         <span className="text-foreground">seul le côté symbolique peut dire oui</span>.
       </>
@@ -366,8 +368,9 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     s02b: (
       <>
         L’ordre compte. Un modèle qui en note un autre reste un modèle — on peut l’influencer, le
-        convaincre, ou il peut simplement se tromper. Un solveur ne se laisse pas convaincre : soit la
-        règle tient dans tous les cas, soit il rend le cas exact où elle casse.
+        convaincre, ou il peut simplement se tromper. Un solveur ne se laisse pas convaincre : il
+        prouve que la règle tient dans tous les cas, ou il rend le cas exact où elle casse, ou il dit
+        qu’il n’a pas pu trancher — et cela ne compte jamais comme un succès.
       </>
     ),
     s02Quote:
@@ -380,40 +383,42 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
         La <span className="text-foreground">vérification formelle</span>, c’est prouver par les
         mathématiques qu’un système respecte une règle — pour toutes les entrées, pas seulement celles
         qu’on a testées. Pendant des décennies, il fallait des spécialistes qui écrivaient les preuves
-        à la main ; c’est pourquoi elle est restée dans l’aérospatial, les puces et la cryptographie.
+        à la main ; c’est pourquoi elle est restée dans l’aérospatial, les puces et la cryptographie.
       </>
     ),
     s03b: (
       <>
         <span className="text-foreground">Automatisée</span> veut dire que le moteur fait ce travail
-        lui-même. Nous utilisons Z3 et son moteur Spacer : on lui donne la règle et le système, et il
+        lui-même. Nous utilisons Z3 et son moteur Spacer : on lui donne la règle et le système, et il
         cherche une preuve — y compris l’invariant inductif, la propriété qui reste vraie à chaque
-        étape — ou un contre-exemple. Aucun mathématicien dans la boucle. Un solveur peut rendre trois
-        sortes de réponse :
+        étape — ou un contre-exemple. Aucun mathématicien n’écrit la preuve. Un modèle de langage peut
+        lire le code ou la politique et proposer quoi vérifier ; il ne décide jamais. Le solveur
+        décide, et des contrôles indépendants réexaminent sa conclusion. Chaque résultat est l’un de
+        trois verdicts :
       </>
     ),
     answers: [
       {
         k: "PROUVÉ",
         t: "Aucun cas ne viole la règle.",
-        b: "Pas « nous n’en avons pas trouvé ». Le solveur montre qu’il ne peut pas en exister — le mot technique est UNSAT, insatisfaisable.",
+        b: "Pas « nous n’en avons pas trouvé ». Le solveur montre qu’il ne peut pas en exister — le mot technique est UNSAT, insatisfaisable.",
       },
       {
-        k: "CONTRE-EXEMPLE",
+        k: "RÉFUTÉ",
         t: "Voici le cas exact.",
-        b: "Les entrées, l’état, l’étape où la règle tombe. Assez concret pour le rejouer et corriger.",
+        b: "Un résultat réfuté part avec son contre-exemple : les entrées, l’état, l’étape où la règle tombe. Assez concret pour le rejouer et corriger.",
       },
       {
-        k: "INDÉCIS",
+        k: "NON DÉMONTRÉ",
         t: "Pas tranché.",
-        b: "Certaines questions sont trop difficiles à fermer dans le temps donné. Indécis n’est pas un succès, et un système honnête ne le compte jamais comme tel.",
+        b: "Certaines questions sont trop difficiles à fermer dans le temps donné, et le solveur répond « inconnu ». Non démontré n’est pas un succès, et un système honnête ne le compte jamais comme tel.",
       },
     ],
 
     s04: "04 — Comment tout s’assemble dans Ironproof",
     s04Title: "D’une action proposée à une preuve entre vos mains.",
     s04Lead:
-      "Un seul moteur, les mêmes étapes sur chaque surface. Le modèle ne peut apparaître qu’à la première.",
+      "Un seul moteur, les mêmes étapes sur chaque surface. Un modèle peut proposer — l’action, ou une première version de la règle à vérifier — mais il ne décide jamais : à partir de la règle compilée, seuls le compilateur, le solveur et des contrôles indépendants agissent.",
     steps: [
       {
         n: "01 · PROPOSER",
@@ -428,22 +433,22 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       {
         n: "03 · PROUVER",
         t: "Le moteur tranche",
-        b: "Le solveur prouve que la règle tient sur les séquences d’actions, ou rend le contre-exemple. À l’exécution, chaque action est confrontée à cette même règle compilée, et rien ne s’exécute sans décision favorable.",
+        b: "Le solveur prouve que la règle tient sur les séquences d’actions de toute longueur quand la preuve se ferme par un invariant inductif, rend le contre-exemple, ou dit qu’il n’a pas pu trancher. À l’exécution, chaque action est confrontée à cette même règle compilée : PROCEED s’exécute ; BLOCK et REFUSE, non. Une décision de la barrière porte sur une action ; la preuve porte sur la politique.",
       },
       {
         n: "04 · REVÉRIFIER",
         t: "Ne pas faire confiance à la recherche",
-        b: "L’invariant trouvé par le solveur est revérifié dans un solveur neuf avant tout scellement. Trouver une preuve et la vérifier restent séparés, exprès.",
+        b: "L’invariant trouvé par le solveur est revérifié dans un solveur neuf avant que le noyau scelle son verdict. Trouver une preuve et la vérifier restent séparés, exprès.",
       },
       {
         n: "05 · SCELLER",
-        t: "Registre post-quantique",
-        b: "La décision et sa preuve sont chaînées par hachage et signées Ed25519 et ML-DSA-65 (FIPS 204). Toute modification ultérieure se détecte.",
+        t: "Trace post-quantique",
+        b: "Chaque décision de la barrière de production, autorisée ou bloquée, est chaînée par hachage et signée Ed25519 et ML-DSA-65 (FIPS 204) ; le noyau scelle son verdict de preuve de la même façon. Toute modification ultérieure se détecte. Un sceau montre que la trace n’a pas changé et quelles clés l’ont signée — pas que la règle est vraie.",
       },
       {
         n: "06 · VÉRIFIER",
         t: "Hors ligne, sans nous",
-        b: "Votre auditeur revérifie le registre scellé avec un vérificateur indépendant, sans jamais contacter Ironproof.",
+        b: "Votre auditeur revérifie la trace scellée avec un vérificateur indépendant, sans jamais contacter Ironproof.",
       },
     ],
 
@@ -457,7 +462,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       <>
         Le chemin de production qui autorise l’action d’un agent n’appelle aucun modèle de langage.
         Dans notre tribunal de recherche, un modèle peut lire la demande et donner son avis sur
-        l’intention — cet avis est consigné dans le registre scellé et{" "}
+        l’intention — cet avis est consigné dans la trace scellée et{" "}
         <span className="text-foreground">n’est jamais compté</span>. La même demande, dans le même
         état, sous la même politique, reçoit le même verdict, que le modèle soit d’accord, en
         désaccord ou injoignable.
@@ -466,7 +471,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     s05b: (
       <>
         La décision elle-même se prend en évaluant vos règles, et ce raccourci est autorisé par un
-        théorème vérifié en Lean 4 : décider par évaluation et décider par le solveur donnent la même
+        théorème vérifié en Lean 4 : décider par évaluation et décider par le solveur donnent la même
         réponse pour toute politique et toute action. Le côté neuronal apporte la compréhension. Le
         côté symbolique garde le dernier mot.
       </>
@@ -483,7 +488,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       {
         k: "PORTÉE",
         t: "Prouvé dans une classe, pas partout.",
-        b: "Chaque preuve couvre une classe d’actions et de règles énoncée avec précision. Hors de cette classe, elle ne dit rien — et le registre en déclare la frontière.",
+        b: "Chaque preuve couvre une classe d’actions et de règles énoncée avec précision. Hors de cette classe, elle ne dit rien — et le dossier de vérification en déclare la frontière.",
       },
       {
         k: "LE MODÈLE",
@@ -500,14 +505,14 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       { t: "Neuro-symbolique", d: "Un système qui combine les deux, chacun là où il est fiable." },
       { t: "Vérification formelle", d: "Une preuve mathématique qu’un système respecte une règle pour toute entrée." },
       { t: "Solveur SMT", d: "Le moteur qui décide si une formule logique peut être satisfaite. Z3 en est un." },
-      { t: "UNSAT", d: "« Insatisfaisable » : aucun cas ne viole la règle. La réponse sur laquelle repose une preuve." },
+      { t: "UNSAT", d: "« Insatisfaisable » : aucun cas ne viole la règle. La réponse sur laquelle repose une preuve." },
       { t: "Contre-exemple", d: "Un cas concret où la règle tombe." },
-      { t: "Invariant inductif", d: "Une propriété vraie au départ et préservée par chaque étape — donc vraie pour toujours." },
-      { t: "Sceau post-quantique", d: "Une signature conçue pour rester infalsifiable même face aux futurs ordinateurs quantiques." },
+      { t: "Invariant inductif", d: "Une propriété vraie au départ et préservée par chaque étape — donc vraie après n’importe quel nombre d’étapes." },
+      { t: "Sceau post-quantique", d: "Deux signatures, Ed25519 et ML-DSA-65 ; la seconde est conçue pour rester infalsifiable face aux futurs ordinateurs quantiques. Il montre qu’une trace n’a pas changé, pas que son contenu est vrai." },
     ],
 
     provableTag: "ENSUITE — LA CATÉGORIE",
-    provableTitle: "Qu’est-ce que l’IA prouvable ?",
+    provableTitle: "Qu’est-ce que l’IA prouvable ?",
     provableBody:
       "Pourquoi détecter n’est pas prouver, ce que contient un certificat scellé, et ce qu’il ne couvre pas.",
 
@@ -516,7 +521,7 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
 
     ctaTitle: "Voyez le moteur sur l’un de vos processus",
     ctaLead:
-      "Choisissez une action que prennent vos agents. Nous écrivons la règle avec vous, nous la prouvons, et nous vous remettons le registre.",
+      "Choisissez une action que prennent vos agents. Nous écrivons la règle avec vous, nous la soumettons au solveur, et nous vous remettons le dossier de vérification.",
     logoTitle: "Ironproof",
   },
 };

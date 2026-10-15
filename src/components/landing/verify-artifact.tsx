@@ -86,19 +86,21 @@ type Copy = {
 const T: L<Copy> = {
   en: {
     eyebrow: "DON’T TAKE OUR WORD FOR IT",
-    title: "Check a real proof yourself.",
+    title: "Check a sealed record yourself.",
     lead: (when) => (
       <>
-        Load a real sealed dossier and verify it right here — Ed25519 + ML-DSA-65 signatures, the
-        SHA3-512 chain, and the temporal anchor that pins {when}, entirely in your browser. Then
-        load a tampered one and watch it get rejected. No dashboard, no server, no trust required.
+        Load a sealed sample and check it right here — Ed25519 + ML-DSA-65 signatures, the
+        SHA3-512 chain, and, when the record carries one, the temporal anchor that pins {when}, entirely
+        in your browser. Then load a tampered one and watch it get rejected. This checks that nothing
+        changed after sealing. It does not check whether a decision was right: that is re-derived
+        separately, from its inputs.
       </>
     ),
     when: "when",
     dossierLabel: "SEALED DOSSIER",
     hsmLabel: "IRONPROOF · SEAL VERIFIER",
     hsmState: { idle: "READY", busy: "CHECKING", VERIFIED: "SEAL INTACT", FAILED: "SEAL BROKEN", CANNOT_VERIFY: "NO VERDICT" },
-    loadReal: "LOAD A REAL PROOF",
+    loadReal: "LOAD A SEALED SAMPLE",
     loadTampered: "LOAD A TAMPERED ONE",
     placeholder: "paste a sealed Sceal dossier (JSON) — or use the buttons above",
     verify: "VERIFY IN YOUR BROWSER",
@@ -108,18 +110,19 @@ const T: L<Copy> = {
       <>
         Both signatures check out — <span className="text-neutral-200">Ed25519</span> and{" "}
         <span className="text-neutral-200">ML-DSA-65</span> (dual: both must pass) — over a
-        SHA3-512 chain of {entries} sealed entries. Nothing was altered.
+        SHA3-512 chain of {entries} sealed entries. Nothing was changed after sealing. This shows
+        which keys signed, not who holds them, and not that the content is true.
       </>
     ),
     rejected: "✕ REJECTED",
-    rejectedBody: "The dossier does not verify — the proof caught it:",
+    rejectedBody: "The record does not verify — the seal caught it:",
     cannot: "⚠ CANNOT VERIFY",
     cannotDefault: "This input is not a sealed dossier.",
     sealedBy: (v) => `sealed by liboqs ${v}`,
     foot: (
       <>
         Runs entirely in your browser — pure-JavaScript Ed25519 + ML-DSA-65 (FIPS 204) + SHA3-512,
-        no server and no Ironproof code. The wire format is published, so anyone can write a second
+        no server, and no code shared with the software that seals. The wire format is published, so anyone can write a second
         verifier:{" "}
       </>
     ),
@@ -152,20 +155,21 @@ const T: L<Copy> = {
   },
   fr: {
     eyebrow: "NE NOUS CROYEZ PAS SUR PAROLE",
-    title: "Vérifiez vous-même une vraie preuve",
+    title: "Vérifiez vous-même une trace scellée",
     lead: (when) => (
       <>
-        Chargez un vrai dossier scellé et vérifiez-le ici même — signatures Ed25519 + ML-DSA-65,
-        chaîne SHA3-512, et l’ancrage temporel qui fixe le {when}, entièrement dans votre
-        navigateur. Chargez ensuite un dossier altéré et regardez-le se faire rejeter. Aucun tableau
-        de bord, aucun serveur, aucune confiance requise.
+        Chargez un exemple scellé et vérifiez-le ici même — signatures Ed25519 + ML-DSA-65, chaîne
+        SHA3-512 et, quand la trace en porte un, l’ancrage temporel qui fixe le {when}, entièrement
+        dans votre navigateur. Chargez ensuite un dossier altéré et regardez-le se faire rejeter. On
+        vérifie que rien n’a changé après le scellement. On ne vérifie pas si une décision était la
+        bonne{NBSP}: cela se recalcule à part, à partir de ses entrées.
       </>
     ),
     when: "quand",
     dossierLabel: "DOSSIER SCELLÉ",
     hsmLabel: "IRONPROOF · VÉRIFICATEUR DE SCEAU",
     hsmState: { idle: "PRÊT", busy: "VÉRIFICATION", VERIFIED: "SCEAU INTACT", FAILED: "SCEAU ROMPU", CANNOT_VERIFY: "AUCUN VERDICT" },
-    loadReal: "CHARGER UNE VRAIE PREUVE",
+    loadReal: "CHARGER UN EXEMPLE SCELLÉ",
     loadTampered: "CHARGER UN DOSSIER ALTÉRÉ",
     placeholder: "collez un dossier Sceal scellé (JSON) — ou utilisez les boutons ci-dessus",
     verify: "VÉRIFIER DANS VOTRE NAVIGATEUR",
@@ -175,18 +179,19 @@ const T: L<Copy> = {
       <>
         Les deux signatures sont bonnes — <span className="text-neutral-200">Ed25519</span> et{" "}
         <span className="text-neutral-200">ML-DSA-65</span> (double{NBSP}: les deux doivent passer)
-        — sur une chaîne SHA3-512 de {entries} entrées scellées. Rien n’a été altéré.
+        — sur une chaîne SHA3-512 de {entries} entrées scellées. Rien n’a changé après le
+        scellement. Cela montre quelles clés ont signé, pas qui les détient, ni que le contenu est vrai.
       </>
     ),
     rejected: "✕ REJETÉ",
-    rejectedBody: `Le dossier ne se vérifie pas — la preuve l’a attrapé${NBSP}:`,
+    rejectedBody: `La trace ne se vérifie pas — le sceau l’a attrapé${NBSP}:`,
     cannot: "⚠ VÉRIFICATION IMPOSSIBLE",
     cannotDefault: "Cette entrée n’est pas un dossier scellé.",
     sealedBy: (v) => `scellé par liboqs ${v}`,
     foot: (
       <>
         Tourne entièrement dans votre navigateur — Ed25519 + ML-DSA-65 (FIPS 204) + SHA3-512 en
-        JavaScript pur, sans serveur et sans code Ironproof. Le format est publié, donc n’importe
+        JavaScript pur, sans serveur et sans code partagé avec le logiciel qui scelle. Le format est publié, donc n’importe
         qui peut écrire un second vérificateur{NBSP}:{" "}
       </>
     ),

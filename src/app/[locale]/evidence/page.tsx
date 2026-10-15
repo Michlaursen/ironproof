@@ -182,7 +182,7 @@ const T: L<Copy> = {
       },
       {
         q: "Does each verdict follow from its own sealed inputs?",
-        how: "A second implementation, written from the published verdict specification rather than from our code, re-derives every decision.",
+        how: "A second implementation, written from our verdict specification (shipped in the full pack) rather than from our code, re-derives every decision.",
         here: "In the pack",
       },
     ],
@@ -206,10 +206,10 @@ const T: L<Copy> = {
     ctaLab: "ATTACK THIS POLICY",
   },
   fr: {
-    metaTitle: "Dossier de preuve — Ironproof",
+    metaTitle: "Dossier de vérification — Ironproof",
     metaDescription:
       "Une règle de paiement, six demandes, chaque décision scellée. Voyez ce qu’un examinateur peut vérifier sans Ironproof : les verdicts, qui a approuvé la politique, ce que le solveur a établi sur la règle, les choix faits pour le client, et ce que le dossier n’établit pas.",
-    eyebrow: "DOSSIER DE PREUVE",
+    eyebrow: "DOSSIER DE VÉRIFICATION",
     h1: "Ce que votre auditeur peut vérifier, sans nous.",
     lead: "Une règle de paiement, six demandes, chaque décision scellée. Cette page est construite à partir du dossier lui-même : les verdicts, les approbations et les limites ci-dessous sont lus dans les fichiers téléchargeables, pas écrits à la main.",
     provenance: (commit) => (
@@ -233,7 +233,7 @@ const T: L<Copy> = {
 
     runEyebrow: "SIX DEMANDES, TROIS ISSUES",
     runTitle: "Autorisé, bloqué ou refusé. Jamais deviné.",
-    runLead: "Chaque demande a été décidée avant d’atteindre l’outil de paiement, et chaque décision est une entrée du dossier scellé.",
+    runLead: "Chaque demande a été décidée avant d’atteindre l’outil de paiement, et chaque décision est une entrée de la trace scellée.",
     amount: "Montant",
     secondSig: "Deuxième signature",
     window: "Changements de bénéficiaire dans la fenêtre",
@@ -248,7 +248,7 @@ const T: L<Copy> = {
     verdictName: { PROCEED: "PROCEED", BLOCK: "BLOCK", REFUSE: "REFUSE" },
     verdictMeaning: {
       PROCEED: "S’exécute. Aucune règle n’est enfreinte.",
-      BLOCK: "Arrêtée. Une règle est enfreinte, et le dossier dit laquelle.",
+      BLOCK: "Arrêtée. Une règle est enfreinte, et la trace dit laquelle.",
       REFUSE: "Non décidée. La barrière n’a pas pu évaluer une règle avec ce qu’on lui a fourni : elle décline au lieu de deviner.",
     },
     reached: (ids) => (
@@ -271,14 +271,14 @@ const T: L<Copy> = {
       <>
         Ces quatre réponses viennent du solveur au moment de la construction et figurent dans le
         README du dossier. Elles ne sont <span className="text-neutral-200">pas sous le sceau</span>
-        {NBSP}: dans le dossier scellé, chaque règle est traitée comme{" "}
+        {NBSP}: dans la trace scellée, chaque règle est traitée comme{" "}
         <span className="font-mono text-neutral-300">{methods}</span>, une évaluation de chaque
         demande, pas un théorème.
       </>
     ),
 
     checkEyebrow: "VÉRIFIEZ LE SCEAU, ICI",
-    checkTitle: "Chargez le dossier. Puis chargez le faux.",
+    checkTitle: "Chargez la trace. Puis chargez le faux.",
     checkLead: (seq) => (
       <>
         La copie falsifiée change un seul champ{NBSP}: elle prétend que le paiement bloqué de
@@ -287,8 +287,8 @@ const T: L<Copy> = {
         nommer l’entrée <span className="font-mono text-neutral-200">seq={seq}</span>.
       </>
     ),
-    noAnchor: "Ce dossier ne porte aucun ancrage temporel : il prouve que les octets n’ont pas bougé depuis le scellement, pas quand ils ont été écrits.",
-    anchored: "Ce dossier porte aussi un ancrage temporel. Le vérificateur ci-dessous montre de quel côté chaque témoin public borne le temps.",
+    noAnchor: "Cette trace ne porte aucun ancrage temporel : elle prouve que les octets n’ont pas bougé depuis le scellement, pas quand ils ont été écrits.",
+    anchored: "Cette trace porte aussi un ancrage temporel. Le vérificateur ci-dessous montre de quel côté chaque témoin public borne le temps.",
 
     threeEyebrow: "TROIS CONTRÔLES, AUCUN COMPTE IRONPROOF",
     threeTitle: "Tout ce que nous avons conclu, re-dérivé sans notre code.",
@@ -299,13 +299,13 @@ const T: L<Copy> = {
         here: "Dans le dossier",
       },
       {
-        q: "Le dossier scellé a-t-il bougé depuis son scellement ?",
+        q: "La trace scellée a-t-elle bougé depuis son scellement ?",
         how: "Signatures Ed25519 et ML-DSA-65 sur une chaîne SHA3-512, les deux devant passer. C’est le contrôle qu’un adversaire ne peut pas falsifier.",
         here: "Sur cette page",
       },
       {
         q: "Chaque verdict découle-t-il de ses propres entrées scellées ?",
-        how: "Une seconde implémentation, écrite à partir de la spécification publiée des verdicts et non de notre code, re-dérive chaque décision.",
+        how: "Une seconde implémentation, écrite à partir de notre spécification des verdicts (livrée dans le dossier complet) et non de notre code, re-dérive chaque décision.",
         here: "Dans le dossier",
       },
     ],
@@ -323,7 +323,7 @@ const T: L<Copy> = {
     filesTitle: "FICHIERS DE CETTE PAGE",
     filesNote: "verify.sh, MANIFEST.sha3, la spécification des verdicts et le second vérificateur sont dans le dossier complet, remis dans le cadre d’un pilote. La spécification du sceau est publique.",
     ctaTitle: "Le même dossier, pour une de vos règles.",
-    ctaLead: "Un pilote commence par un type d’action et se termine par ceci : un dossier scellé que votre comité de risque vérifie sans nous.",
+    ctaLead: "Un pilote commence par un type d’action et se termine par ceci : une trace scellée que votre comité de risque vérifie sans nous.",
     ctaPilot: "DÉMARRER UN PILOTE",
     ctaVerify: "VÉRIFIER UN DOSSIER",
     ctaLab: "ATTAQUER CETTE POLITIQUE",

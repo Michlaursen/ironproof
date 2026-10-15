@@ -18,12 +18,20 @@ import { type L, pick } from "@/components/landing/i18n";
  * Dom's call and neither is decided (2026-09-26).
  */
 
+type Offer = { tag: string; name: string; question: string; deliver: string[]; success: string; limits: string };
+
 type Copy = {
   metaTitle: string;
   metaDescription: string;
   eyebrow: string;
   h1: string;
   lead: string;
+  offersEyebrow: string;
+  offersTitle: string;
+  offers: Offer[];
+  deliverLabel: string;
+  successLabel: string;
+  limitsLabel: string;
   stepsEyebrow: string;
   bringTitle: string;
   bring: string[];
@@ -47,7 +55,49 @@ function copy(r: string): L<Copy> {
       eyebrow: "PILOT",
       h1: "Pick one critical action. We prove your rules hold, or show you exactly where they break.",
       lead: "You pick one action your systems already perform, a wire transfer for example. We turn your rules into a check, block anything that breaks them before it runs, and seal every decision. At the end, your risk team re-checks everything themselves, without us.",
-      stepsEyebrow: "HOW IT RUNS",
+      offersEyebrow: "THREE PILOTS, ONE METHOD",
+      offersTitle: "Each pilot ends with a verification dossier your team can re-check.",
+      deliverLabel: "YOU RECEIVE",
+      successLabel: "SUCCESS MEANS",
+      limitsLabel: "LIMITS, IN WRITING",
+      offers: [
+        {
+          tag: "ENTRY PILOT",
+          name: "Verifiable authorization",
+          question: "Does this critical action follow your rules, every time it is requested?",
+          deliver: [
+            "Your rule written as logic, with the readings we chose.",
+            "A result per property: proven, refuted with the exact sequence that breaks it, or not demonstrated with the reason.",
+            "The gate in front of the action, and a sealed record of every decision.",
+          ],
+          success: "Your risk team re-derives the decisions from the sealed records on its own machine, and every gap the solver found is fixed or accepted in writing.",
+          limits: "Holds where the action can only run through the gate, within the model and bounds the dossier states.",
+        },
+        {
+          tag: "PILOT",
+          name: "Fix verification (C)",
+          question: "Does each fix remove the failure its vulnerability causes?",
+          deliver: [
+            "Per fix: the test harness, the bounds, and one result (closed, test fooled, or not analyzed) with the reason.",
+            "The decoy fixes the test had to reject, and the commands to re-run everything.",
+          ],
+          success: "Every fix has one of the three results, and nothing is reported as closed unless the test also rejected the decoys.",
+          limits: "A bounded check of the failure our test exhibits, not of every way an attacker reaches the code. Our C verdict judge is being rebuilt; results are reported as bounded checks, not complete proofs.",
+        },
+        {
+          tag: "EARLY ACCESS",
+          name: "Equivalence check (COBOL)",
+          question: "Does the Python translation compute what the COBOL computes?",
+          deliver: [
+            "Per program: the generated Python and the equivalence obligations.",
+            "One result per part: equivalent under our model, the input where they differ, or not covered with the reason.",
+            "The compiler and CICS assumptions the result depends on.",
+          ],
+          success: "Every part of each program falls in one of the three results, and the not-covered list is written down.",
+          limits: "Proofs hold against our model of the COBOL, not every compiler or CICS configuration. No third-party replay yet.",
+        },
+      ],
+      stepsEyebrow: "HOW THE AUTHORIZATION PILOT RUNS",
       bringTitle: "What you bring",
       bring: [
         "The action type, and where it runs today.",
@@ -60,7 +110,7 @@ function copy(r: string): L<Copy> {
         "The gate, running in front of that action.",
         <>
           A sealed record of every decision, like the{" "}
-          <a href={`${r}/evidence`} className={link}>evidence pack</a>.
+          <a href={`${r}/evidence`} className={link}>verification dossier</a>.
         </>,
         <>
           What the solver found in your rule, including where it leaks, like the{" "}
@@ -94,7 +144,49 @@ function copy(r: string): L<Copy> {
       eyebrow: "PILOTE",
       h1: "Choisissez une action critique. On prouve que vos règles tiennent, ou on vous montre exactement où elles cassent.",
       lead: "Vous choisissez une action que vos systèmes font déjà, par exemple un virement. On traduit vos règles en vérification, on bloque avant l’exécution tout ce qui les enfreint, et chaque décision est scellée. À la fin, votre équipe de risque revérifie tout elle-même, sans nous.",
-      stepsEyebrow: "COMMENT ÇA SE DÉROULE",
+      offersEyebrow: "TROIS PILOTES, UNE MÉTHODE",
+      offersTitle: "Chaque pilote se termine par un dossier de vérification que votre équipe peut revérifier.",
+      deliverLabel: "VOUS RECEVEZ",
+      successLabel: "RÉUSSI SI",
+      limitsLabel: "LES LIMITES, PAR ÉCRIT",
+      offers: [
+        {
+          tag: "PILOTE D’ENTRÉE",
+          name: "Autorisation vérifiable",
+          question: "Cette action critique respecte-t-elle vos règles, chaque fois qu’elle est demandée ?",
+          deliver: [
+            "Votre règle écrite en logique, avec les lectures que nous avons choisies.",
+            "Un résultat par propriété : prouvée, réfutée avec la séquence exacte qui la brise, ou non démontrée avec la raison.",
+            "La barrière devant l’action, et une trace scellée de chaque décision.",
+          ],
+          success: "Votre équipe de risque recalcule les décisions à partir des traces scellées sur sa propre machine, et chaque faille trouvée par le solveur est corrigée ou acceptée par écrit.",
+          limits: "Vaut là où l’action ne peut s’exécuter qu’à travers la barrière, dans le modèle et les bornes que le dossier énonce.",
+        },
+        {
+          tag: "PILOTE",
+          name: "Vérification de correctifs (C)",
+          question: "Chaque correctif supprime-t-il l’échec que cause sa faille ?",
+          deliver: [
+            "Par correctif : le harnais de test, les bornes, et un résultat (fermé, test trompé ou non analysé) avec la raison.",
+            "Les faux correctifs que le test devait rejeter, et les commandes pour tout rejouer.",
+          ],
+          success: "Chaque correctif a l’un des trois résultats, et rien n’est déclaré fermé si le test n’a pas aussi rejeté les leurres.",
+          limits: "Une vérification bornée de l’échec que notre test met en évidence, pas de tous les chemins d’un attaquant. Notre juge des verdicts C est en reconstruction ; les résultats sont présentés comme des vérifications bornées, pas comme des preuves complètes.",
+        },
+        {
+          tag: "ACCÈS ANTICIPÉ",
+          name: "Contrôle d’équivalence (COBOL)",
+          question: "La traduction Python calcule-t-elle ce que calcule le COBOL ?",
+          deliver: [
+            "Par programme : le Python généré et les obligations d’équivalence.",
+            "Un résultat par partie : équivalente sous notre modèle, l’entrée où elles diffèrent, ou non couverte avec la raison.",
+            "Les hypothèses sur le compilateur et CICS dont dépend le résultat.",
+          ],
+          success: "Chaque partie de chaque programme tombe dans l’un des trois résultats, et la liste du non couvert est écrite.",
+          limits: "Les preuves tiennent contre notre modèle du COBOL, pas contre tout compilateur ou toute configuration CICS. Pas encore de rejeu par un tiers.",
+        },
+      ],
+      stepsEyebrow: "COMMENT SE DÉROULE LE PILOTE D’AUTORISATION",
       bringTitle: "Ce que vous apportez",
       bring: [
         "Le type d’action, et où il s’exécute aujourd’hui.",
@@ -107,7 +199,7 @@ function copy(r: string): L<Copy> {
         "La barrière, devant cette action.",
         <>
           Une trace scellée de chaque décision, comme le{" "}
-          <a href={`${r}/evidence`} className={link}>dossier de preuve</a>.
+          <a href={`${r}/evidence`} className={link}>dossier de vérification</a>.
         </>,
         <>
           Ce que le solveur a trouvé dans votre règle, y compris ses fuites, comme le montre le{" "}
@@ -176,6 +268,35 @@ export default async function PilotPage({ params }: PageProps) {
             {t.h1}
           </h1>
           <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
+        </section>
+
+        {/* Three pilots, one method (Dom, 2026-10-15): what each delivers, what
+          * success means, and its limits, written before anyone signs. */}
+        <section className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
+          <p className="seal-label track-mid mb-4 text-xs">{t.offersEyebrow}</p>
+          <h2 className="metal-text max-w-3xl font-serif text-3xl font-medium leading-tight md:text-5xl">{t.offersTitle}</h2>
+          <ol className="fade-up mt-12 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 lg:grid-cols-3">
+            {t.offers.map((o) => (
+              <li key={o.name} className="flex flex-col bg-ink px-7 py-9">
+                <p className="track-mid text-xs text-seal">{o.tag}</p>
+                <h3 className="mt-4 font-serif text-2xl text-neutral-100">{o.name}</h3>
+                <p className="mt-3 text-base font-light leading-relaxed text-neutral-300">{o.question}</p>
+                <p className="track-mid mt-7 text-xs text-neutral-500">{t.deliverLabel}</p>
+                <ul className="mt-3 space-y-2.5">
+                  {o.deliver.map((d) => (
+                    <li key={d} className="flex items-baseline gap-3 text-sm font-light leading-relaxed text-neutral-400">
+                      <span className="h-px w-4 shrink-0 translate-y-[-0.3em] bg-white/30" aria-hidden="true" />
+                      <span>{d}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="track-mid mt-7 text-xs text-neutral-500">{t.successLabel}</p>
+                <p className="mt-3 text-sm font-light leading-relaxed text-neutral-300">{o.success}</p>
+                <p className="track-mid mt-7 text-xs text-neutral-500">{t.limitsLabel}</p>
+                <p className="mt-3 flex-1 text-sm font-light leading-relaxed text-neutral-400">{o.limits}</p>
+              </li>
+            ))}
+          </ol>
         </section>
 
         {/* The four steps: the same grammar and the same text as the home page. */}

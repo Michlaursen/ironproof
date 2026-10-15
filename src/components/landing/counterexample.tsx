@@ -145,7 +145,7 @@ type Copy = {
   totalReaches: (total: string, authority: string) => string;
   provenance: (over: string) => string;
   violatedLabel: string;
-  rerun: string;
+  rerun: (token: string, reproduced: boolean) => string;
 };
 
 const T: L<Copy> = {
@@ -162,7 +162,7 @@ const T: L<Copy> = {
     removeLabel: "02 · REMOVE ONE LINE",
     asWritten: "AS WRITTEN",
     asWrittenWhy:
-      "No sequence of allowed steps reaches a forbidden state — at any length, not for the cases someone thought to try.",
+      "No sequence of allowed steps reaches a forbidden state, at any length: Z3 found an inductive invariant (Spacer), so this holds for every sequence, not for the cases someone thought to try.",
     without: "WITHOUT",
     withoutWhy:
       "The gate still checks the refund in front of it. It no longer checks the total.",
@@ -178,7 +178,8 @@ const T: L<Copy> = {
     provenance: (over) =>
       `Z3 chose the actions and the amounts, not us — nobody writes a ${over} overshoot by hand.`,
     violatedLabel: "Violated:",
-    rerun: "re-run in a fresh process:",
+    rerun: (token, reproduced) =>
+      `as written: ${token}, ${reproduced ? "reproduced" : "NOT reproduced"} in a fresh process`,
   },
   fr: {
     eyebrow: "À QUOI RESSEMBLE UN CONTRE-EXEMPLE",
@@ -191,7 +192,7 @@ const T: L<Copy> = {
     coverageNote: `Un taux de couverture dont on ne voit pas les trous est une décoration. Et l’autorité, c’est votre chiffre, pas le nôtre — nous prouvons que l’agent la respecte, pas qu’elle est la bonne.`,
     removeLabel: "02 · RETIRER UNE LIGNE",
     asWritten: "TELLE QU’ÉCRITE",
-    asWrittenWhy: `Aucune séquence d’étapes autorisées n’atteint un état interdit — à n’importe quelle longueur, pas seulement pour les cas auxquels quelqu’un a pensé.`,
+    asWrittenWhy: `Aucune séquence d’étapes autorisées n’atteint un état interdit, à n’importe quelle longueur${NBSP}: Z3 a trouvé un invariant inductif (Spacer), donc cela vaut pour toute séquence, pas seulement pour les cas auxquels quelqu’un a pensé.`,
     without: "SANS",
     withoutWhy: `La barrière vérifie toujours le remboursement qu’elle a devant elle. Elle ne vérifie plus le total.`,
     wayOut: (steps) => `LA SORTIE QUE Z3 A TROUVÉE — ${steps} ÉTAPES`,
@@ -207,7 +208,8 @@ const T: L<Copy> = {
     provenance: (over) =>
       `C’est Z3 qui a choisi les actions et les montants, pas nous — personne n’écrit un dépassement de ${over} à la main.`,
     violatedLabel: `Violé${NBSP}:`,
-    rerun: `rejoué dans un processus neuf${NBSP}:`,
+    rerun: (token, reproduced) =>
+      `telle qu’écrite${NBSP}: ${token}, ${reproduced ? "reproduit" : "NON reproduit"} dans un processus neuf`,
   },
 };
 
@@ -334,8 +336,7 @@ export function Counterexample({ locale = defaultLocale }: { locale?: Locale }) 
             <span className="font-mono text-neutral-400">
               {bmc.violated_invariants.join(", ")}
             </span>{" "}
-            · {lab.proof_correct.verdict_token} · {t.rerun}{" "}
-            {String(lab.proof_correct.reproduced)} · {lab.solver}
+            · {t.rerun(lab.proof_correct.verdict_token, lab.proof_correct.reproduced)} · {lab.solver}
           </p>
         </div>
       </div>

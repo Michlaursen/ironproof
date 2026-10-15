@@ -22,18 +22,18 @@ const T: L<{
   en: {
     metaTitle: "The technical record — Ironproof",
     metaDescription:
-      "Inspect a sealed proof artifact field by field, and the public record behind the engine: published research, assigned CVEs and upstream acknowledgements credited by IBM, GnuPG, Mozilla, Red Hat, wolfSSL, VideoLAN and DCMTK.",
+      "A vulnerability shown in a solver, a refund policy proved then broken, the call site of the gate, and the public record behind the engine: published research, assigned CVEs and upstream acknowledgements credited by IBM, GnuPG, Mozilla, Red Hat, wolfSSL, VideoLAN and DCMTK.",
     eyebrow: "THE TECHNICAL RECORD",
     h1: "Read the proof, not the promise.",
-    lead: "The artifact below is the same one a decision produces. Every field is inspectable, and the record underneath it is hosted by other people — we cannot write it, retract it or edit it.",
+    lead: "Below: a vulnerability shown in a solver, a policy proved and then broken, and the call site of the gate. No sealed decision is shown here; the evidence pack has six. The public record at the end, CVEs and upstream commits, is hosted by other people — we cannot write it, retract it or edit it.",
   },
   fr: {
-    metaTitle: "Le dossier technique — Ironproof",
+    metaTitle: "Le registre technique — Ironproof",
     metaDescription:
-      "Inspectez un artefact de preuve scellé champ par champ, et le dossier public derrière le moteur\u00a0: recherche publiée, CVE assignées et remerciements en amont crédités par IBM, GnuPG, Mozilla, Red Hat, wolfSSL, VideoLAN et DCMTK.",
-    eyebrow: "LE DOSSIER TECHNIQUE",
+      "Une vulnérabilité démontrée dans un solveur, une politique de remboursement prouvée puis brisée, le site d’appel de la barrière, et le registre public derrière le moteur\u00a0: recherche publiée, CVE assignées et remerciements en amont crédités par IBM, GnuPG, Mozilla, Red Hat, wolfSSL, VideoLAN et DCMTK.",
+    eyebrow: "LE REGISTRE TECHNIQUE",
     h1: "Lisez la preuve, pas la promesse.",
-    lead: "L’artefact ci-dessous est exactement celui qu’une décision produit. Chaque champ est inspectable, et le dossier qui le soutient est hébergé par d’autres\u202f: nous ne pouvons ni l’écrire, ni le retirer, ni le modifier.",
+    lead: "Ci-dessous\u202f: une vulnérabilité démontrée dans un solveur, une politique prouvée puis brisée, et le site d’appel de la barrière. Aucune décision scellée n’est montrée ici\u202f; le dossier de vérification en contient six. Le registre public en fin de page, CVE et commits en amont, est hébergé par d’autres\u202f: nous ne pouvons ni l’écrire, ni le retirer, ni le modifier.",
   },
 };
 

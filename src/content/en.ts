@@ -4,11 +4,11 @@ export const en: SiteContent = {
   meta: {
     title: "Ironproof | Neuro-Symbolic AI and Formal Verification for Critical Systems",
     description:
-      "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and verify legacy-system modernization. Critical actions are checked against policy before they execute, and every decision is sealed so anyone can verify it independently, without having to trust us.",
+      "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and check legacy-code translations under stated assumptions. Critical actions are checked against policy before they execute, and each decision is sealed so anyone can check it was not altered, without having to trust us.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and verify legacy-system modernization. Critical actions are checked against policy before they execute, and every decision is sealed so anyone can verify it independently, without having to trust us.",
+      "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and check legacy-code translations under stated assumptions. Critical actions are checked against policy before they execute, and each decision is sealed so anyone can check it was not altered, without having to trust us.",
   },
   header: {
     nav: [

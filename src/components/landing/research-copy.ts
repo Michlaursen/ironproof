@@ -52,8 +52,8 @@ export type ResearchCopy = {
 const RELATED_HREFS = {
   provable: "/provable-ai",
   proof: "/proof",
-  initiators: "/#initiators",
-  try: "/#decide",
+  initiators: "/#applications",
+  try: "/lab",
   counter: "/proof#counterexample",
 } as const;
 
@@ -211,7 +211,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           },
           {
             t: "p",
-            text: "Sit with that one. Indistinguishable exposure, and one sector can evidence roughly a fifth as much of it. That is not a security gap. It is an *audit* gap, and it is the one that shows up in a supervisory review.",
+            text: "Sit with that one. Indistinguishable exposure, and one sector can evidence roughly a third as much of it. That is not a security gap. It is an *audit* gap, and it is the one that shows up in a supervisory review.",
           },
           {
             t: "p",
@@ -259,7 +259,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           },
           {
             t: "p",
-            text: "The alternative is not a better-behaved model. It is to move the decision out of the model altogether: express the controls as formal constraints, have a solver evaluate the proposed action *before* it executes, and return an allow or deny from a trust domain the requester cannot read, reason about, or modify. Same input, same answer, every time — with a proof of why.",
+            text: "The alternative is not a better-behaved model. It is to move the decision out of the model altogether: express the controls as formal constraints, have a solver evaluate the proposed action *before* it executes, and return an allow or deny from a trust domain the requester cannot read, reason about, or modify. Same input, same answer, every time — with a record of why that anyone can re-derive.",
           },
           {
             t: "p",
@@ -333,7 +333,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           {
             t: "ol",
             items: [
-              "**For your highest-consequence action, what evaluates it before it executes?** If the answer is the model’s own judgement, you have a probabilistic control with a known spread. If it is a human reviewer, ask whether that reviewer exists at 2.7 actions per minute for four and a half days. (There is [a small policy you can run live](/#decide) if you want to see what a pre-execution verdict looks like.)",
+              "**For your highest-consequence action, what evaluates it before it executes?** If the answer is the model’s own judgement, you have a probabilistic control with a known spread. If it is a human reviewer, ask whether that reviewer exists at 2.7 actions per minute for four and a half days. (There is [a payment policy you can attack live](/lab) if you want to see what a pre-execution verdict looks like.)",
               "**If a supervisor asked you to evidence every action taken last quarter and the rule that permitted each one, could you?** Financial services suspects 5.84 incidents for every one it can confirm. That is an evidence-retention problem, and it precedes any question about controls.",
               "**What did you grant for convenience that becomes an egress path under pressure?** Every incident here turned on a permission granted for a mundane reason — downloading tools, installing packages, loading a config.",
               "**How long would it take you to notice?** AISI took roughly 72 hours and contained it in one. The bottleneck was never response. A comparable agent needed 13 hours to own a production cluster.",
@@ -347,17 +347,17 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
         blocks: [
           {
             t: "p",
-            text: "We build [Ironproof](/), which is one implementation of the architecture described in section 4. A gate evaluates a proposed critical action against the policy in force and returns allow or deny before it executes — and [the gate does not ask who is asking](/#initiators). The same check applies whether the initiator is an AI agent, a script, an API call or a person, which matters here: the Hugging Face escalation looked exactly like a competent human attacker’s kill chain. A control that only guards the agent path is guarding one door in a building.",
+            text: "We build [Ironproof](/), which is one implementation of the architecture described in section 4. A gate evaluates a proposed critical action against the policy in force and returns PROCEED, BLOCK, or REFUSE when it cannot decide, before the action executes — and [the gate does not ask who is asking](/#applications). The same check applies whether the initiator is an AI agent, a script, an API call or a person, which matters here: the Hugging Face escalation looked exactly like a competent human attacker’s kill chain. A control that only guards the agent path is guarding one door in a building.",
           },
           {
             t: "p",
-            text: "Every decision is [sealed cryptographically and can be re-checked offline](/proof) by someone who does not trust us. We have an obvious interest in the argument above, which is why the limitations section is longer than the pitch and why every derived figure is shown with its arithmetic. If you disagree with a calculation, the inputs are all below.",
+            text: "On the production gate, every decision is [sealed cryptographically and can be re-checked offline](/evidence) by someone who does not trust us. We have an obvious interest in the argument above, which is why the limitations section is longer than the pitch and why every derived figure is shown with its arithmetic. If you disagree with a calculation, the inputs are all below.",
           },
           {
             t: "note",
             head: "The boundary of our own claim",
             text: [
-              "A solver guarantees that the rules you wrote are applied identically every time. It guarantees nothing about whether you wrote the right rules. A badly encoded constraint will deny legitimate work, or permit something it should not, and will now do so with a proof attached — which is arguably worse, because it looks authoritative.",
+              "The gate applies the rules you wrote identically every time, and each decision can be re-derived from its inputs and the policy. That guarantees nothing about whether you wrote the right rules. A badly encoded constraint will deny legitimate work, or permit something it should not, and will now do so with a proof attached — which is arguably worse, because it looks authoritative.",
               "The argument for externalising the decision is not that policy error disappears. It is that policy error becomes visible, versioned, diffable and attributable, which a model’s internal refusal boundary never is. That is a smaller and far more tractable problem than alignment. It is not no problem.",
             ],
           },
@@ -368,9 +368,9 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
       head: "RELATED",
       items: [
         [RELATED_HREFS.provable, "Provable AI", "What “provable” means, and the two layers on every surface"],
-        [RELATED_HREFS.proof, "Proof", "How a decision is sealed, and how you re-check it offline"],
+        [RELATED_HREFS.proof, "Proof", "A vulnerability shown in a solver, a policy proved then broken, the gate’s call site"],
         [RELATED_HREFS.initiators, "One gate, any initiator", "Agent, script, API call or person — the same check"],
-        [RELATED_HREFS.try, "Try a live decision", "A small refund policy, proved or broken in the browser"],
+        [RELATED_HREFS.try, "Try to get past the gate", "A sealed sample payment policy, attacked in your browser"],
         [RELATED_HREFS.counter, "What a counterexample looks like", "One clause removed, and the sequence the solver found"],
       ],
     },
@@ -566,7 +566,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           },
           {
             t: "p",
-            text: "Arrêtez-vous là-dessus. Une exposition indiscernable, et un secteur capable d’en établir environ un cinquième. Ce n’est pas un écart de sécurité. C’est un écart *d’auditabilité*, et c’est celui qui apparaît lors d’un contrôle prudentiel.",
+            text: "Arrêtez-vous là-dessus. Une exposition indiscernable, et un secteur capable d’en établir environ un tiers. Ce n’est pas un écart de sécurité. C’est un écart *d’auditabilité*, et c’est celui qui apparaît lors d’un contrôle prudentiel.",
           },
           {
             t: "p",
@@ -614,7 +614,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           },
           {
             t: "p",
-            text: "L’alternative n’est pas un modèle mieux élevé. C’est de sortir la décision du modèle : exprimer les contrôles sous forme de contraintes formelles, faire évaluer l’action proposée par un solveur *avant* qu’elle ne s’exécute, et renvoyer une autorisation ou un refus depuis un domaine de confiance que le demandeur ne peut ni lire, ni raisonner, ni modifier. Mêmes entrées, même réponse, à chaque fois — avec une preuve à l’appui.",
+            text: "L’alternative n’est pas un modèle mieux élevé. C’est de sortir la décision du modèle : exprimer les contrôles sous forme de contraintes formelles, faire évaluer l’action proposée par un solveur *avant* qu’elle ne s’exécute, et renvoyer une autorisation ou un refus depuis un domaine de confiance que le demandeur ne peut ni lire, ni raisonner, ni modifier. Mêmes entrées, même réponse, à chaque fois — avec la raison, que chacun peut re-dériver.",
           },
           {
             t: "p",
@@ -688,7 +688,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
           {
             t: "ol",
             items: [
-              "**Pour votre action la plus lourde de conséquences, qu’est-ce qui l’évalue avant qu’elle ne s’exécute ?** Si la réponse est le jugement du modèle lui-même, vous disposez d’un contrôle probabiliste à l’écart connu. Si c’est un relecteur humain, demandez-vous si ce relecteur existe à 2,7 actions par minute pendant quatre jours et demi. (Il existe [une petite politique que vous pouvez exécuter en direct](/#decide) si vous voulez voir à quoi ressemble un verdict rendu avant exécution.)",
+              "**Pour votre action la plus lourde de conséquences, qu’est-ce qui l’évalue avant qu’elle ne s’exécute ?** Si la réponse est le jugement du modèle lui-même, vous disposez d’un contrôle probabiliste à l’écart connu. Si c’est un relecteur humain, demandez-vous si ce relecteur existe à 2,7 actions par minute pendant quatre jours et demi. (Il existe [une politique de paiement que vous pouvez attaquer en direct](/lab) si vous voulez voir à quoi ressemble un verdict rendu avant exécution.)",
               "**Si un superviseur vous demandait de justifier chaque action prise le trimestre dernier et la règle qui l’a autorisée, le pourriez-vous ?** Les services financiers soupçonnent 5,84 incidents pour chacun qu’ils peuvent confirmer. C’est un problème de conservation des preuves, et il précède toute question de contrôles.",
               "**Qu’avez-vous accordé par commodité qui devient une voie de sortie sous pression ?** Chacun des incidents ici présents reposait sur une permission accordée pour une raison banale — télécharger des outils, installer des paquets, charger une configuration.",
               "**Combien de temps vous faudrait-il pour vous en apercevoir ?** L’AISI a mis environ 72 heures et l’a confiné en une. Le goulet d’étranglement n’a jamais été la réponse. Un agent comparable a eu besoin de 13 heures pour s’emparer d’un cluster de production.",
@@ -702,17 +702,17 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
         blocks: [
           {
             t: "p",
-            text: "Nous développons [Ironproof](/), l’une des implémentations de l’architecture décrite en section 4. Une porte évalue une action critique proposée au regard de la politique en vigueur et renvoie une autorisation ou un refus avant son exécution — et [cette porte ne demande pas qui la sollicite](/#initiators). Le même contrôle s’applique que l’initiateur soit un agent IA, un script, un appel d’API ou une personne, ce qui importe ici : l’escalade chez Hugging Face ressemblait exactement à la chaîne d’attaque d’un attaquant humain compétent. Un contrôle qui ne garde que la voie des agents garde une seule porte d’un bâtiment.",
+            text: "Nous développons [Ironproof](/), l’une des implémentations de l’architecture décrite en section 4. Une porte évalue une action critique proposée au regard de la politique en vigueur et renvoie PROCEED, BLOCK, ou REFUSE quand elle ne peut pas trancher, avant que l’action s’exécute — et [cette porte ne demande pas qui la sollicite](/#applications). Le même contrôle s’applique que l’initiateur soit un agent IA, un script, un appel d’API ou une personne, ce qui importe ici : l’escalade chez Hugging Face ressemblait exactement à la chaîne d’attaque d’un attaquant humain compétent. Un contrôle qui ne garde que la voie des agents garde une seule porte d’un bâtiment.",
           },
           {
             t: "p",
-            text: "Chaque décision est [scellée cryptographiquement et peut être revérifiée hors ligne](/proof) par quelqu’un qui ne nous fait pas confiance. Nous avons un intérêt évident dans l’argument ci-dessus, raison pour laquelle la section des limites est plus longue que l’argumentaire commercial et pour laquelle chaque chiffre dérivé est présenté avec son calcul. Si vous contestez un calcul, les données d’entrée sont toutes ci-dessous.",
+            text: "Sur la barrière de production, chaque décision est [scellée cryptographiquement et peut être revérifiée hors ligne](/evidence) par quelqu’un qui ne nous fait pas confiance. Nous avons un intérêt évident dans l’argument ci-dessus, raison pour laquelle la section des limites est plus longue que l’argumentaire commercial et pour laquelle chaque chiffre dérivé est présenté avec son calcul. Si vous contestez un calcul, les données d’entrée sont toutes ci-dessous.",
           },
           {
             t: "note",
             head: "La limite de notre propre affirmation",
             text: [
-              "Un solveur garantit que les règles que vous avez écrites sont appliquées à l’identique à chaque fois. Il ne garantit rien quant à savoir si vous avez écrit les bonnes règles. Une contrainte mal encodée refusera un travail légitime, ou autorisera ce qu’elle ne devrait pas, et le fera désormais avec une preuve à l’appui — ce qui est sans doute pire, car cela paraît faire autorité.",
+              "La barrière applique à l’identique, à chaque fois, les règles que vous avez écrites, et chaque décision se re-dérive de ses entrées et de la politique. Cela ne garantit rien quant à savoir si vous avez écrit les bonnes règles. Une contrainte mal encodée refusera un travail légitime, ou autorisera ce qu’elle ne devrait pas, et le fera désormais avec une preuve à l’appui — ce qui est sans doute pire, car cela paraît faire autorité.",
               "L’argument en faveur de l’externalisation de la décision n’est pas que l’erreur de politique disparaît. C’est qu’elle devient visible, versionnée, comparable et imputable, ce que la frontière de refus interne d’un modèle n’est jamais. C’est un problème bien plus petit et bien plus traitable que l’alignement. Ce n’est pas l’absence de problème.",
             ],
           },
@@ -723,9 +723,9 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
       head: "À LIRE AUSSI",
       items: [
         [RELATED_HREFS.provable, "Provable AI", "Ce que « prouvable » signifie, et les deux couches sur chaque surface"],
-        [RELATED_HREFS.proof, "Proof", "Comment une décision est scellée, et comment vous la revérifiez hors ligne"],
+        [RELATED_HREFS.proof, "Proof", "Une vulnérabilité démontrée dans un solveur, une politique prouvée puis brisée, le site d’appel de la barrière"],
         [RELATED_HREFS.initiators, "Une porte, tout initiateur", "Agent, script, appel d’API ou personne — le même contrôle"],
-        [RELATED_HREFS.try, "Essayer une décision en direct", "Une petite politique de remboursement, prouvée ou brisée dans le navigateur"],
+        [RELATED_HREFS.try, "Essayez de contourner la barrière", "Une politique de paiement d’exemple, scellée, attaquée dans votre navigateur"],
         [RELATED_HREFS.counter, "À quoi ressemble un contre-exemple", "Une clause retirée, et la séquence trouvée par le solveur"],
       ],
     },

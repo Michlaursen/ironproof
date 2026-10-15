@@ -212,14 +212,14 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof proves whether critical actions and critical software follow their rules, then hands you what you need to re-check that conclusion yourself, without having to trust us. Every result is Proven, Refuted or Not demonstrated, within a stated model.",
+        "Formal verification for critical actions and software. From modeled properties to enforcement and independently verifiable evidence. Every result is Proven, Refuted or Not demonstrated, within a stated model.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
       executes: "EXECUTES",
       refused: "BLOCKED",
       ctaDecide: "WATCH IT DECIDE",
-      ctaVerify: "VERIFY A REAL DECISION",
+      ctaVerify: "CHECK A SEALED RECORD",
       ctaPilot: "START A PILOT",
       ctaTech: "EXPLORE OUR TECHNOLOGY",
       ctaEvidence: "SEE THE EVIDENCE",
@@ -259,15 +259,15 @@ const T: L<Copy> = {
       pillars: [
         {
           title: "Checked before, not logged after",
-          body: "Every action waits at the gate until it clears your policy. No language model decides: the same request, in the same state, under the same policy always gets the same answer.",
+          body: "Every action waits at the gate until it clears your policy. On the production gate, no language model decides: the same request, in the same state, under the same policy always gets the same answer.",
         },
         {
           title: "Proven, not just tested",
-          body: "We don’t rely on testing alone: we prove what your rules permit. You leave with the exact case that breaks them, or the proof that no such case exists.",
+          body: "We don’t rely on testing alone: we prove what your rules permit. You leave with the exact case that breaks them, or the proof that no such case exists within the model you define.",
         },
         {
           title: "Sealed, so anyone can check",
-          body: "Every decision, allowed, blocked or refused, is sealed — an allowed action before it runs. Your auditor re-derives the policy verdict on their own machine, with a verifier written from the published specification, without us.",
+          body: "Every decision, allowed, blocked or refused, is sealed — an allowed action before it runs. Your auditor re-derives the policy verdict on their own machine, with a verifier written from our specification, without us.",
         },
       ],
     },
@@ -303,7 +303,7 @@ const T: L<Copy> = {
         },
         {
           label: "Not an AI guardrail",
-          body: "No language model sits in the decision path. The same request, in the same state, under the same policy always gets the same verdict.",
+          body: "No language model sits in the production decision path. The same request, in the same state, under the same policy always gets the same verdict.",
         },
         {
           label: "Not a penetration test",
@@ -325,25 +325,25 @@ const T: L<Copy> = {
       actionsLabel: "THE ACTIONS",
       rulesLabel: "THE RULES ALREADY WRITTEN",
       runEyebrow: "ALREADY RUN",
-      runTitle: "Proof demonstrations — with the misses left in.",
+      runTitle: "Verification runs — with the misses left in.",
       runNote: "Labs on published policies and open-source code, not client systems.",
       run: [
         {
           name: "Cloud authorization",
           what: "57 example IAM policies published by AWS, 185 guarantees written before the solver ran.",
-          result: "Proven: 139 guarantees, under two independent solvers. Refuted: 11 cases where a policy did not do what its description said, each confirmed in AWS’s own policy simulator.",
+          result: "Proven: 160 of 185 guarantees, each under two independent solvers (Z3 and cvc5). Refuted: 11 real findings, where a published policy does not do what its page says (8) or what a plain reading expects (3), each confirmed in AWS’s IAM policy simulator. Counterexamples traced to our own model are not counted.",
           date: "2026-09-30",
         },
         {
           name: "Energy",
-          what: "The NERC CIP-010-4 R1 change-management requirement, encoded as a gate.",
-          result: "23 of 23 test cases decided as the text says. 12 of 12 deliberate faults caught. Every signature re-verified from the file alone.",
+          what: "The pre-change parts of the NERC CIP-010-4 R1 change-management requirement, encoded as a gate. A lab, with fictitious assets and identities.",
+          result: "17 of 17 cases decided as NERC’s text says, plus 6 of 6 on two rules we added. 12 of 12 deliberate faults caught. Every signature re-verified from the sealed file alone.",
           date: "2026-10-09",
         },
         {
           name: "Open-source C",
           what: "20 fixes for real vulnerabilities drawn at random, from projects such as curl, libssh2 and Suricata.",
-          result: "Within stated bounds — Proven: 13 fixes close the hole. Refuted: 3 do not. Not demonstrated: 4. A third party replayed 4 of the archives and reached the same 8 verdicts.",
+          result: "Within stated CBMC bounds, on a test our AI wrote for each fix. Closed: for 13 fixes, the test failed before the fix, passed after it, and rejected two decoys. Test fooled: for 3, the test could not tell a plausible wrong fix from the real one, which says nothing against the real fix. Not analyzed: 4. A bounded check of a generated test, not a complete proof.",
           date: "2026-10-12",
         },
       ],
@@ -528,11 +528,11 @@ const T: L<Copy> = {
     how: {
       eyebrow: "HOW IT WORKS",
       title: "Prove. Enforce. Seal. Verify.",
-      lead: "For a rule over the history of approved actions, Ironproof mathematically proves that no sequence, of any length, can cross the defined authorization boundary — or returns the shortest one that does, replayed through the gate.",
+      lead: "For a rule over the history of approved actions, Ironproof either proves, with an inductive invariant, that no sequence of any length can cross the defined authorization boundary, or returns the shortest sequence that does, replayed through the gate. When neither closes, it says so, and states the bound it searched.",
       compiler:
         "Your written policy is compiled into mathematics by a deterministic compiler — the same one the gate runs. A differential check, run at every start and in CI, refuses a policy the proof reads differently from the gate.",
       recordPre:
-        "The theorem that ties the runtime fast path to the full formal model, and the equivalence checks behind it, are in the ",
+        "A policy proved and then broken, and the exact call site where the gate sits in front of the action, are in the ",
       recordLink: "technical record",
     },
 
@@ -555,7 +555,7 @@ const T: L<Copy> = {
       titleA: "Probably safe is not",
       titleB: "provably impossible.",
       body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action is checked before it executes: what’s authorized runs, sealed; what isn’t never executes.",
-      kicker: "Check every action. Run what’s proven. Stop the rest.",
+      kicker: "Check every action. Run what complies. Stop the rest.",
       // The fine print under "provably impossible": what the proof covers, and
       // the one condition it rests on (the action can only run through the gate).
       scope:
@@ -581,14 +581,14 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof démontre si une action critique ou un logiciel critique respecte ses règles, puis vous remet ce qu’il faut pour revérifier cette conclusion vous-même, sans avoir à nous faire confiance. Chaque résultat est Prouvé, Réfuté ou Non démontré, dans un modèle déclaré.",
+        "Vérification formelle des actions et des logiciels critiques. Des propriétés modélisées jusqu’à l’application avant l’exécution et à des preuves vérifiables de façon indépendante. Chaque résultat est Prouvé, Réfuté ou Non démontré, dans un modèle déclaré.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
       executes: "S’EXÉCUTE",
       refused: "BLOQUÉE",
       ctaDecide: "VOYEZ-LE DÉCIDER",
-      ctaVerify: "VÉRIFIEZ UNE VRAIE DÉCISION",
+      ctaVerify: "VÉRIFIEZ UNE TRACE SCELLÉE",
       ctaPilot: "DÉMARRER UN PILOTE",
       ctaTech: "DÉCOUVRIR NOTRE TECHNOLOGIE",
       ctaEvidence: "VOIR LES PREUVES",
@@ -627,15 +627,15 @@ const T: L<Copy> = {
       pillars: [
         {
           title: "Vérifié avant, pas journalisé après",
-          body: "Chaque action attend à la barrière tant qu’elle ne respecte pas votre politique. Aucun modèle de langage ne décide : la même demande, dans le même état, sous la même politique, reçoit toujours la même réponse.",
+          body: "Chaque action attend à la barrière tant qu’elle ne respecte pas votre politique. Sur la barrière de production, aucun modèle de langage ne décide : la même demande, dans le même état, sous la même politique, reçoit toujours la même réponse.",
         },
         {
           title: "Prouvé, pas seulement testé",
-          body: "On ne se fie pas qu’aux tests : on prouve ce que vos règles permettent. Vous ressortez avec le cas exact qui les brise, ou la preuve qu’il n’en existe aucun.",
+          body: "On ne se fie pas qu’aux tests : on prouve ce que vos règles permettent. Vous ressortez avec le cas exact qui les brise, ou la preuve qu’il n’en existe aucun dans le modèle que vous définissez.",
         },
         {
           title: "Scellé, vérifiable par tous",
-          body: "Chaque décision, autorisée, bloquée ou refusée, est scellée — une action autorisée, avant de s’exécuter. Votre auditeur recalcule le verdict de la politique sur sa propre machine, avec un vérificateur écrit à partir de la spécification publiée, sans nous.",
+          body: "Chaque décision, autorisée, bloquée ou refusée, est scellée — une action autorisée, avant de s’exécuter. Votre auditeur recalcule le verdict de la politique sur sa propre machine, avec un vérificateur écrit à partir de notre spécification, sans nous.",
         },
       ],
     },
@@ -671,7 +671,7 @@ const T: L<Copy> = {
         },
         {
           label: "Pas un garde-fou d’IA",
-          body: "Aucun modèle de langage dans le chemin de décision. La même demande, dans le même état, sous la même politique reçoit toujours le même verdict.",
+          body: "Aucun modèle de langage dans le chemin de décision de production. La même demande, dans le même état, sous la même politique reçoit toujours le même verdict.",
         },
         {
           label: "Pas un test d’intrusion",
@@ -693,25 +693,25 @@ const T: L<Copy> = {
       actionsLabel: "LES ACTIONS",
       rulesLabel: "LES RÈGLES DÉJÀ ÉCRITES",
       runEyebrow: "DÉJÀ FAIT",
-      runTitle: "Démonstrations de preuve — les échecs compris.",
+      runTitle: "Vérifications menées — les échecs compris.",
       runNote: "Des labos sur des politiques publiées et du code open source, pas des systèmes de clients.",
       run: [
         {
           name: "Autorisation infonuagique",
           what: "57 politiques IAM d’exemple publiées par AWS, 185 garanties écrites avant de lancer le solveur.",
-          result: "Prouvé : 139 garanties, sous deux solveurs indépendants. Réfuté : 11 cas où une politique ne faisait pas ce que sa description disait, chacun confirmé dans le simulateur de politiques d’AWS.",
+          result: "Prouvé : 160 garanties sur 185, chacune sous deux solveurs indépendants (Z3 et cvc5). Réfuté : 11 vraies trouvailles, où une politique publiée ne fait pas ce que sa page dit (8) ou ce qu’une lecture simple attend (3), chacune confirmée dans le simulateur de politiques IAM d’AWS. Les contre-exemples venus de notre propre modèle ne sont pas comptés.",
           date: "2026-09-30",
         },
         {
           name: "Énergie",
-          what: "L’exigence de gestion des changements NERC CIP-010-4 R1, encodée en barrière.",
-          result: "23 cas de test sur 23 tranchés comme le dit le texte. 12 fautes volontaires sur 12 attrapées. Chaque signature revérifiée depuis le dossier seul.",
+          what: "Les parties avant changement de l’exigence NERC CIP-010-4 R1, encodées en barrière. Un labo, avec des actifs et des identités fictifs.",
+          result: "17 cas sur 17 tranchés comme le dit le texte de NERC, plus 6 sur 6 sur deux règles que nous avons ajoutées. 12 fautes volontaires sur 12 attrapées. Chaque signature revérifiée depuis le dossier scellé seul.",
           date: "2026-10-09",
         },
         {
           name: "C open source",
           what: "20 correctifs de vraies failles tirés au hasard, dans des projets comme curl, libssh2 et Suricata.",
-          result: "Dans les bornes déclarées — Prouvé : 13 correctifs ferment la faille. Réfuté : 3 ne la ferment pas. Non démontré : 4. Un tiers a rejoué 4 des archives et retrouvé les mêmes 8 verdicts.",
+          result: "Dans les bornes CBMC déclarées, sur un test écrit par notre IA pour chaque correctif. Fermé : pour 13 correctifs, le test échouait avant, passait après et rejetait deux leurres. Test trompé : pour 3, le test ne distinguait pas un faux correctif plausible du vrai, ce qui ne dit rien contre le vrai correctif. Non analysé : 4. Une vérification bornée d’un test généré, pas une preuve complète.",
           date: "2026-10-12",
         },
       ],
@@ -893,12 +893,12 @@ const T: L<Copy> = {
     how: {
       eyebrow: "COMMENT ÇA MARCHE",
       title: "Prouver. Appliquer. Sceller. Vérifier.",
-      lead: "Pour une règle qui porte sur l’historique des actions autorisées, Ironproof prouve mathématiquement qu’aucune séquence, de n’importe quelle longueur, ne peut franchir la frontière d’autorisation définie — ou rend la plus courte qui la franchit, rejouée dans la barrière.",
+      lead: "Pour une règle qui porte sur l’historique des actions autorisées, Ironproof prouve, par un invariant inductif, qu’aucune séquence de n’importe quelle longueur ne peut franchir la frontière d’autorisation définie, ou rend la plus courte séquence qui la franchit, rejouée dans la barrière. Quand ni l’un ni l’autre n’aboutit, il le dit et donne la borne explorée.",
       compiler:
         "Votre politique écrite est compilée en mathématiques par un compilateur déterministe — le même que celui qu’exécute la barrière. Un contrôle différentiel, à chaque démarrage et en intégration continue, refuse une politique que la preuve lirait autrement que la barrière.",
       recordPre:
-        "Le théorème qui relie le chemin rapide du runtime au modèle formel complet, et les contrôles d’équivalence derrière lui, sont dans le ",
-      recordLink: "dossier technique",
+        "Une politique prouvée puis brisée, et l’endroit exact où la barrière se place devant l’action, sont dans le ",
+      recordLink: "registre technique",
     },
 
     engine: {
@@ -911,7 +911,7 @@ const T: L<Copy> = {
           remerciements publics en amont.
         </>
       ),
-      cta: "VOIR LE DOSSIER TECHNIQUE",
+      cta: "VOIR LE REGISTRE TECHNIQUE",
     },
 
     pilot: PILOT_COPY.fr,
@@ -920,7 +920,7 @@ const T: L<Copy> = {
       titleA: "Probablement sûr, ce n’est pas",
       titleB: "prouvé impossible.",
       body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; pour le reste, pas d’exécution.",
-      kicker: "Chaque action vérifiée. Ce qui est prouvé s’exécute. Le reste, jamais.",
+      kicker: "Chaque action vérifiée. Ce qui est conforme s’exécute. Le reste, jamais.",
       scope:
         "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
     },

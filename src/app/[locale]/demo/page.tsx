@@ -57,11 +57,11 @@ const T: L<{
   en: {
     metaTitle: "Demo — Ironproof",
     metaDescription:
-      "An AI agent wants to send $7.2 million. The bank’s rule is proven, the payment is blocked at the gate, and the refusal is sealed. Then the same engine in the terminal: a $50,000 transfer allowed, then blocked.",
+      "An AI agent wants to send CAD 7.2 million. Proven: no unsigned payment above CAD 5 million can be approved. The payment arrives unsigned, is blocked at the gate, and the refusal is sealed. Then the same engine in the terminal: a $50,000 transfer allowed, then blocked.",
     eyebrow: "DEMO",
-    h1: "$7.2 million. Should it go?",
-    lead: "An AI agent wants to send $7.2 million. The bank’s rule says no payment above $5 million leaves without a second signature. The rule is proven, the payment arrives without that signature, and it is blocked at the gate.",
-    filmLabel: "Film: a $7.2 million payment by an AI agent, blocked at the gate",
+    h1: "CAD 7.2 million. Should it go?",
+    lead: "An AI agent wants to send CAD 7.2 million. The bank’s rule says no payment above CAD 5 million leaves without a second signature. Proven: without that signature, no single payment above the ceiling can be approved. Refuted: that the rule caps every payment; a signed one of any size passes. This payment arrives unsigned, and it is blocked at the gate.",
+    filmLabel: "Film: a CAD 7.2 million payment by an AI agent, blocked at the gate",
     filmNote:
       "Animated film, 2 min 17 s, in English. The rule and its proof are real; the scene is an illustration. Near the end, the film says what this does not guard.",
     termEyebrow: "IN THE TERMINAL",
@@ -76,7 +76,7 @@ const T: L<{
     limits:
       "Recorded in the terminal on the real engine, 75 seconds. A sample bank policy, not a customer deployment.",
     videoLabel: "Terminal demo: a transfer allowed, then blocked, each decision sealed",
-    verifyCta: "More on verifying a proof →",
+    verifyCta: "More on verifying a sealed record →",
     sealEyebrow: "THE SEAL",
     sealTitle: "Check the refusal yourself.",
     sealLead:
@@ -89,11 +89,11 @@ const T: L<{
   fr: {
     metaTitle: "Démo — Ironproof",
     metaDescription:
-      "Un agent IA veut envoyer 7,2 millions $. La règle de la banque est prouvée, le paiement est bloqué à la porte, et le refus est scellé. Puis le même moteur dans le terminal : un virement de 50 000 $ autorisé, puis bloqué.",
+      "Un agent IA veut envoyer 7,2 millions $ CA. Prouvé : aucun paiement non signé de plus de 5 millions $ CA ne peut être approuvé. Le paiement arrive sans signature, il est bloqué à la barrière, et le refus est scellé. Puis le même moteur dans le terminal : un virement de 50 000 $ autorisé, puis bloqué.",
     eyebrow: "DÉMO",
-    h1: "7,2 millions $. Doit-il partir\u00a0?",
-    lead: "Un agent IA veut envoyer 7,2 millions $. La règle de la banque dit qu’aucun paiement de plus de 5 millions $ ne part sans une deuxième signature. La règle est prouvée, le paiement arrive sans cette signature, et il est bloqué à la porte.",
-    filmLabel: "Film : un paiement de 7,2 millions $ par un agent IA, bloqué à la porte",
+    h1: "7,2\u00a0millions\u00a0$\u00a0CA. Doit-il partir\u00a0?",
+    lead: "Un agent IA veut envoyer 7,2 millions $ CA. La règle de la banque dit qu’aucun paiement de plus de 5 millions $ CA ne part sans une deuxième signature. Prouvé : sans cette signature, aucun paiement unique au-dessus du plafond ne peut être approuvé. Réfuté : que la règle plafonne tout paiement ; un paiement signé de n’importe quel montant passe. Ce paiement arrive sans signature, et il est bloqué à la barrière.",
+    filmLabel: "Film : un paiement de 7,2 millions $ CA par un agent IA, bloqué à la barrière",
     filmNote:
       "Film d’animation, 2 min 17 s, en anglais. La règle et sa preuve sont réelles ; la scène est une illustration. Vers la fin, le film dit ce que cela ne protège pas.",
     termEyebrow: "DANS LE TERMINAL",
@@ -108,7 +108,7 @@ const T: L<{
     limits:
       "Enregistrée dans le terminal sur le vrai moteur, 75 secondes, en anglais. Une politique bancaire d’exemple, pas un déploiement client.",
     videoLabel: "Démo terminal : un virement autorisé, puis bloqué, chaque décision scellée",
-    verifyCta: "En savoir plus sur la vérification →",
+    verifyCta: "En savoir plus sur la vérification d’une trace scellée →",
     sealEyebrow: "LE SCEAU",
     sealTitle: "Vérifiez le refus vous-même.",
     sealLead:

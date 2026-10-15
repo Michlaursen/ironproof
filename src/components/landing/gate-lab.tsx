@@ -107,7 +107,8 @@ const T: L<Copy> = {
       <>
         <span className="text-neutral-100">Every payment followed the rule. Together they broke it.</span>{" "}
         The rule has no total, so no gate reading it one request at a time can refuse this. The
-        solver flagged it first (STRUCTURING, in the evidence pack). The fix belongs in the rule:
+        solver flagged it first (STRUCTURING in the evidence pack: a split found in a search
+        bounded at 200 payments). The fix belongs in the rule:
         a cumulative clause, which the policy grammar can express.
       </>
     ),
@@ -115,7 +116,7 @@ const T: L<Copy> = {
 
     a3Eyebrow: "ATTACK 3 · HIDE THE HISTORY",
     a3Title: "Four beneficiary changes is one too many. Make one disappear.",
-    a3Lead: "The account changed beneficiary four times this year; the rule allows three. The caller sends the rows AND declares which rows the window holds. Tamper with either, or both.",
+    a3Lead: "The account changed beneficiary four times in the declared window; the rule allows three. The caller sends the rows AND declares which rows the window holds. Tamper with either, or both.",
     sentGroup: "WHAT YOU SEND",
     declaredGroup: "WHAT YOU DECLARE",
     knob: {
@@ -163,7 +164,7 @@ const T: L<Copy> = {
       <>
         <span className="text-neutral-100">C’est passé, et la barrière a raison.</span> La règle
         n’a jamais plafonné un paiement signé, seulement un paiement non signé. Le solveur l’a dit
-        avant que quiconque essaie{NBSP}: c’est la ligne REFUTED du dossier de preuve. La barrière
+        avant que quiconque essaie{NBSP}: c’est la ligne REFUTED du dossier de vérification. La barrière
         applique la règle écrite{NBSP}; elle ne peut pas appliquer celle qu’on voulait écrire.
       </>
     ),
@@ -183,7 +184,8 @@ const T: L<Copy> = {
       <>
         <span className="text-neutral-100">Chaque paiement a respecté la règle. Ensemble, ils l’ont enfreinte.</span>{" "}
         La règle n’a pas de total{NBSP}: aucune barrière qui la lit demande par demande ne peut
-        refuser ceci. Le solveur l’avait signalé (STRUCTURING, dans le dossier de preuve). Le
+        refuser ceci. Le solveur l’avait signalé (STRUCTURING dans le dossier de vérification{NBSP}: un
+        fractionnement trouvé dans une recherche bornée à 200 paiements). Le
         correctif appartient à la règle{NBSP}: une clause cumulative, que la grammaire des
         politiques sait exprimer.
       </>
@@ -192,7 +194,7 @@ const T: L<Copy> = {
 
     a3Eyebrow: "ATTAQUE 3 · CACHER L’HISTORIQUE",
     a3Title: "Quatre changements de bénéficiaire, c’est un de trop. Faites-en disparaître un.",
-    a3Lead: "Le compte a changé de bénéficiaire quatre fois cette année\u202f; la règle en permet trois. L’appelant envoie les lignes ET déclare lesquelles la fenêtre contient. Trafiquez l’un, l’autre, ou les deux.",
+    a3Lead: "Le compte a changé de bénéficiaire quatre fois dans la fenêtre déclarée\u202f; la règle en permet trois. L’appelant envoie les lignes ET déclare lesquelles la fenêtre contient. Trafiquez l’un, l’autre, ou les deux.",
     sentGroup: "CE QUE VOUS ENVOYEZ",
     declaredGroup: "CE QUE VOUS DÉCLAREZ",
     knob: {
@@ -204,18 +206,18 @@ const T: L<Copy> = {
     },
     a3Leak: (
       <>
-        <span className="text-neutral-100">Ça passe si l’on ment deux fois</span>, dans les
+        <span className="text-neutral-100">Vous êtes passé en mentant deux fois</span>, dans les
         lignes et dans la déclaration, de façon cohérente. Aucune barrière ne voit un mensonge
         raconté pareil des deux côtés{NBSP}: la fenêtre vit dans un système que la barrière ne lit
         pas. Ce qu’elle peut faire, c’est sceller la déclaration avec le verdict{NBSP}: le mensonge
-        est au dossier, signé. Cette limite est écrite dans le dossier, pas cachée.
+        est dans la trace, signé. Cette limite est écrite dans le dossier, pas cachée.
       </>
     ),
     a3Caught: "Trafiquer un seul côté est attrapé : la fenêtre ne concorde plus, et la barrière refuse au lieu de deviner.",
 
-    a4Eyebrow: "ATTAQUE 4 · MODIFIER LE DOSSIER APRÈS COUP",
-    a4Title: "Changez le dossier scellé une fois la décision prise.",
-    a4Lead: "Modifiez un champ d’une décision scellée et remettez-la à un auditeur. Le dossier de preuve a le faux prêt, et un vérificateur qui tourne dans votre navigateur.",
+    a4Eyebrow: "ATTAQUE 4 · MODIFIER LA TRACE APRÈS COUP",
+    a4Title: "Changez la trace scellée une fois la décision prise.",
+    a4Lead: "Modifiez un champ d’une décision scellée et remettez-la à un auditeur. Le dossier de vérification a le faux prêt, et un vérificateur qui tourne dans votre navigateur.",
     a4Cta: "ESSAYER LE FAUX",
   },
 };

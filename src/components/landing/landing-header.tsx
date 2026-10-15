@@ -5,7 +5,7 @@ import { IronproofMark } from "@/components/ironproof-mark";
 import { IconMenu, IconClose } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
-import { siteNav, type NavItem } from "./site-nav";
+import { siteNav, type NavGroup, type NavItem } from "./site-nav";
 
 /**
  * Which page is rendering this header.
@@ -95,7 +95,7 @@ export function LandingHeader(props: HeaderProps) {
   const { variant = "home", locale = defaultLocale } = props;
   const page: Page = props.page ?? "home";
   const [open, setOpen] = useState(false);
-  const [menu, setMenu] = useState<null | "product" | "proof">(null);
+  const [menu, setMenu] = useState<null | NavGroup["id"]>(null);
   const nav = siteNav(locale);
   const t = pick(NAV, locale);
   const r = routePrefix(locale);
@@ -202,45 +202,16 @@ export function LandingHeader(props: HeaderProps) {
                 </div>
               ) : null}
             </div>
-            {g.id === "product" ? (
-              <a
-                href={nav.demo.href}
-                aria-current={isActive(nav.demo.page) ? "page" : undefined}
-                className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-                  isActive(nav.demo.page) ? "metal-shine" : "metal-text"
-                }`}
-              >
-                {nav.demo.label}
-              </a>
-            ) : null}
             </Fragment>
           ))}
           <a
-            href={nav.provableAi.href}
-            aria-current={isActive(nav.provableAi.page) ? "page" : undefined}
+            href={nav.research.href}
+            aria-current={isActive(nav.research.page) ? "page" : undefined}
             className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-              isActive(nav.provableAi.page) ? "metal-shine" : "metal-text"
+              isActive(nav.research.page) ? "metal-shine" : "metal-text"
             }`}
           >
-            {nav.provableAi.label}
-          </a>
-          <a
-            href={nav.neuroSymbolic.href}
-            aria-current={isActive(nav.neuroSymbolic.page) ? "page" : undefined}
-            className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-              isActive(nav.neuroSymbolic.page) ? "metal-shine" : "metal-text"
-            }`}
-          >
-            {nav.neuroSymbolic.label}
-          </a>
-          <a
-            href={nav.zeroTrust.href}
-            aria-current={isActive(nav.zeroTrust.page) ? "page" : undefined}
-            className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-              isActive(nav.zeroTrust.page) ? "metal-shine" : "metal-text"
-            }`}
-          >
-            {nav.zeroTrust.label}
+            {nav.research.label}
           </a>
 
           {/* No divider before it: the switch carries its own border box, and
@@ -310,37 +281,14 @@ export function LandingHeader(props: HeaderProps) {
                   </a>
                 ))}
               </div>
-              {g.id === "product" ? (
-                <a
-                  href={nav.demo.href}
-                  onClick={() => setOpen(false)}
-                  className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.demo.page) ? "metal-shine" : "metal-text"}`}
-                >
-                  {nav.demo.label}
-                </a>
-              ) : null}
               </Fragment>
             ))}
             <a
-              href={nav.provableAi.href}
+              href={nav.research.href}
               onClick={() => setOpen(false)}
-              className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.provableAi.page) ? "metal-shine" : "metal-text"}`}
+              className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.research.page) ? "metal-shine" : "metal-text"}`}
             >
-              {nav.provableAi.label}
-            </a>
-            <a
-              href={nav.neuroSymbolic.href}
-              onClick={() => setOpen(false)}
-              className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.neuroSymbolic.page) ? "metal-shine" : "metal-text"}`}
-            >
-              {nav.neuroSymbolic.label}
-            </a>
-            <a
-              href={nav.zeroTrust.href}
-              onClick={() => setOpen(false)}
-              className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.zeroTrust.page) ? "metal-shine" : "metal-text"}`}
-            >
-              {nav.zeroTrust.label}
+              {nav.research.label}
             </a>
             <a
               href={contactHref}

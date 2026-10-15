@@ -8,12 +8,12 @@ const META: L<{ title: string; description: string }> = {
   en: {
     title: "Zero Trust, extended to actions — Ironproof",
     description:
-      "Zero Trust (NIST SP 800-207) decides who reaches a resource. Ironproof decides whether this exact action may run: allowed or blocked against your formal policy before it executes, with sealed evidence you verify offline without having to trust us.",
+      "Zero Trust (NIST SP 800-207) decides who reaches a resource. Ironproof decides whether this exact action may run, against your formal policy, before it executes: PROCEED, BLOCK, or REFUSE when the solver cannot decide. Every decision on the production gate, allowed or blocked, is sealed, and you verify the record offline without having to trust us.",
   },
   fr: {
     title: "Le Zero Trust, étendu aux actions — Ironproof",
     description:
-      "Le Zero Trust (NIST SP 800-207) décide qui atteint une ressource. Ironproof décide si cette action précise peut s’exécuter : autorisée ou bloquée selon votre politique formelle avant l’exécution, avec une preuve scellée que vous vérifiez hors ligne sans avoir à nous croire.",
+      "Le Zero Trust (NIST SP 800-207) décide qui atteint une ressource. Ironproof décide si cette action précise peut s’exécuter, selon votre politique formelle, avant l’exécution : PROCEED, BLOCK, ou REFUSE quand le solveur ne peut pas trancher. Chaque décision de la barrière de production, autorisée ou bloquée, est scellée, et vous vérifiez la trace hors ligne sans avoir à nous croire.",
   },
 };
 

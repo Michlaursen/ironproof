@@ -59,7 +59,7 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
           <div className="fade-up mt-14">
           <ol className="grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-3">
             {t.pillars.map((p) => (
-              <li key={p.num} className="flex flex-col bg-ink px-7 py-9 md:px-8">
+              <li key={p.num} id={`app-${p.num}`} className="flex scroll-mt-24 flex-col bg-ink px-7 py-9 md:px-8">
                 <span className="num-badge font-serif text-2xl">{p.num}</span>
                 <p className="track-mid mt-4 text-xs text-neutral-300">{p.name.toUpperCase()}</p>
                 <h3 className="mt-4 font-serif text-2xl leading-snug text-neutral-100">{p.claim}</h3>

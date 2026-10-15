@@ -8,12 +8,12 @@ const META: L<{ title: string; description: string }> = {
   en: {
     title: "Neuro-symbolic AI and automated formal verification — Ironproof",
     description:
-      "What neuro-symbolic AI is, what an automated formal verification engine does, and where each sits in Ironproof: the model proposes, the solver decides, and you verify the sealed proof yourself.",
+      "What neuro-symbolic AI is, what an automated formal verification engine does, and where each sits in Ironproof: the model proposes, the solver decides, and you re-check the sealed record yourself.",
   },
   fr: {
     title: "IA neuro-symbolique et vérification formelle automatisée — Ironproof",
     description:
-      "Ce qu’est l’IA neuro-symbolique, ce que fait un moteur de vérification formelle automatisée, et où chacun se trouve dans Ironproof : le modèle propose, le solveur décide, et vous vérifiez vous-même la preuve scellée.",
+      "Ce qu’est l’IA neuro-symbolique, ce que fait un moteur de vérification formelle automatisée, et où chacun se trouve dans Ironproof : le modèle propose, le solveur décide, et vous revérifiez vous-même la trace scellée.",
   },
 };
 

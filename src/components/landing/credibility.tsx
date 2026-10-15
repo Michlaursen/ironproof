@@ -174,7 +174,7 @@ const T: L<{
     papers: "PUBLISHED RESEARCH",
   },
   fr: {
-    eyebrow: "DOSSIER TECHNIQUE PUBLIC",
+    eyebrow: "REGISTRE TECHNIQUE PUBLIC",
     titleA: "Crédités au grand jour,",
     titleB: "par les projets eux-mêmes",
     lead: "Des preuves que vous pouvez examiner en dehors de notre site — de vrais commits en amont, des correctifs et des fiches de bogue qui nomment le travail.",

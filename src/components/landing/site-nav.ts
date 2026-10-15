@@ -14,66 +14,74 @@ import { type L, pick } from "./i18n";
  */
 
 export type NavItem = { href: string; label: string; page?: string };
-export type NavGroup = { id: "product" | "proof"; label: string; items: NavItem[] };
+export type NavGroup = { id: "technology" | "solutions" | "evidence"; label: string; items: NavItem[] };
 
+/*
+ * Restructured 2026-10-15 (Dom): TECHNOLOGY, SOLUTIONS, EVIDENCE, then
+ * RESEARCH and START A PILOT. One core technology, three applications; the
+ * application links land on the matching pillar of the home page (#app-01..03).
+ */
 const LABELS: L<{
-  product: string;
-  proof: string;
-  how: string;
-  demo: string;
-  demoItem: string;
-  lab: string;
+  technology: string;
+  solutions: string;
   evidence: string;
+  how: string;
+  neuroSymbolic: string;
+  provableAi: string;
+  zeroTrust: string;
+  agents: string;
+  cSecurity: string;
+  cobol: string;
+  demo: string;
+  dossier: string;
   verify: string;
   record: string;
+  lab: string;
   research: string;
-  provableAi: string;
-  neuroSymbolic: string;
-  zeroTrust: string;
+  researchItem: string;
   pilot: string;
-  provableAiItem: string;
-  neuroSymbolicItem: string;
-  zeroTrustItem: string;
   pilotItem: string;
 }> = {
   en: {
-    product: "PRODUCT",
-    proof: "PROOF",
+    technology: "TECHNOLOGY",
+    solutions: "SOLUTIONS",
+    evidence: "EVIDENCE",
     how: "How it works",
-    demo: "DEMO",
-    demoItem: "Demo",
-    lab: "The lab",
-    evidence: "Evidence pack",
-    verify: "Verify a proof",
+    neuroSymbolic: "Neuro-symbolic",
+    provableAi: "Provable AI",
+    zeroTrust: "Zero Trust",
+    agents: "AI agents & critical actions",
+    cSecurity: "C software security",
+    cobol: "COBOL modernization",
+    demo: "Demo",
+    dossier: "Verification dossier",
+    verify: "Check a sealed record",
     record: "Technical record",
-    research: "Research",
-    provableAi: "PROVABLE AI",
-    neuroSymbolic: "NEURO-SYMBOLIC",
-    zeroTrust: "ZERO TRUST",
+    lab: "The lab",
+    research: "RESEARCH",
+    researchItem: "Research",
     pilot: "START A PILOT",
-    provableAiItem: "Provable AI",
-    neuroSymbolicItem: "Neuro-symbolic",
-    zeroTrustItem: "Zero Trust",
     pilotItem: "Start a pilot",
   },
   fr: {
-    product: "PRODUIT",
-    proof: "PREUVE",
+    technology: "TECHNOLOGIE",
+    solutions: "SOLUTIONS",
+    evidence: "PREUVES",
     how: "Fonctionnement",
-    demo: "DÉMO",
-    demoItem: "Démo",
+    neuroSymbolic: "Neuro-symbolique",
+    provableAi: "IA prouvable",
+    zeroTrust: "Zero Trust",
+    agents: "Agents IA et actions critiques",
+    cSecurity: "Sécurité du logiciel C",
+    cobol: "Modernisation COBOL",
+    demo: "Démo",
+    dossier: "Dossier de vérification",
+    verify: "Vérifier une trace scellée",
+    record: "Registre technique",
     lab: "Le labo",
-    evidence: "Dossier de preuve",
-    verify: "Vérifier une preuve",
-    record: "Dossier technique",
-    research: "Recherche",
-    provableAi: "IA PROUVABLE",
-    neuroSymbolic: "NEURO-SYMBOLIQUE",
-    zeroTrust: "ZERO TRUST",
+    research: "RECHERCHE",
+    researchItem: "Recherche",
     pilot: "DÉMARRER UN PILOTE",
-    provableAiItem: "IA prouvable",
-    neuroSymbolicItem: "Neuro-symbolique",
-    zeroTrustItem: "Zero Trust",
     pilotItem: "Démarrer un pilote",
   },
 };
@@ -85,50 +93,54 @@ function cap(s: string): string {
 
 export function siteNav(locale: Locale = defaultLocale) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
+  const home = r || "/";
   const t = pick(LABELS, locale);
   const actions = pick(ACTION_COPY, locale);
   const groups: NavGroup[] = [
     {
-      id: "product",
-      label: t.product,
+      id: "technology",
+      label: t.technology,
       items: [
-        { href: `${r || "/"}#how`, label: t.how },
-        ...ACTION_IDS.map((id) => ({
-          href: `${r}/actions/${id}`,
-          label: cap(actions[id].tab),
-          page: `act-${id}`,
-        })),
-        { href: `${r}/lab`, label: t.lab, page: "lab" },
+        { href: `${home}#method`, label: t.how },
+        { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" },
+        { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" },
+        { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" },
       ],
     },
     {
-      id: "proof",
-      label: t.proof,
+      id: "solutions",
+      label: t.solutions,
       items: [
-        { href: `${r}/evidence`, label: t.evidence, page: "evidence" },
+        { href: `${home}#app-01`, label: t.agents },
+        ...ACTION_IDS.map((id) => ({
+          href: `${r}/actions/${id}`,
+          label: `· ${cap(actions[id].tab)}`,
+          page: `act-${id}`,
+        })),
+        { href: `${home}#app-02`, label: t.cSecurity },
+        { href: `${home}#app-03`, label: t.cobol },
+      ],
+    },
+    {
+      id: "evidence",
+      label: t.evidence,
+      items: [
+        { href: `${r}/demo`, label: t.demo, page: "demo" },
+        { href: `${r}/evidence`, label: t.dossier, page: "evidence" },
         { href: `${r}/verify`, label: t.verify, page: "verify" },
         { href: `${r}/proof`, label: t.record, page: "proof" },
-        { href: `${r}/research`, label: t.research, page: "research-index" },
+        { href: `${r}/lab`, label: t.lab, page: "lab" },
       ],
     },
   ];
   return {
     groups,
-    /** Top level, right after PRODUCT (Dom, 2026-09-30): the demo is the first thing to open. */
-    demo: { href: `${r}/demo`, label: t.demo, page: "demo" } as NavItem,
-    provableAi: { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" } as NavItem,
-    /** Top level beside PROVABLE AI (Dom, 2026-10-12): what the engine is, in plain words. */
-    neuroSymbolic: { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" } as NavItem,
-    /** Top level beside NEURO-SYMBOLIC (Dom, 2026-10-12): where Ironproof sits in a Zero Trust architecture. */
-    zeroTrust: { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" } as NavItem,
+    research: { href: `${r}/research`, label: t.research, page: "research-index" } as NavItem,
     pilot: { href: `${r}/pilot`, label: t.pilot, page: "pilot" } as NavItem,
-    /** The same two pages, in sentence case, for lists (footer). */
+    /** Sentence case, for lists (footer). */
     company: [
-      { href: `${r}/demo`, label: t.demoItem, page: "demo" },
+      { href: `${r}/research`, label: t.researchItem, page: "research-index" },
       { href: `${r}/pilot`, label: t.pilotItem, page: "pilot" },
-      { href: `${r}/provable-ai`, label: t.provableAiItem, page: "provable-ai" },
-      { href: `${r}/neuro-symbolic`, label: t.neuroSymbolicItem, page: "neuro-symbolic" },
-      { href: `${r}/zero-trust`, label: t.zeroTrustItem, page: "zero-trust" },
     ] as NavItem[],
   };
 }

@@ -98,7 +98,6 @@ export type ProvableAICopy = {
   ctaTitle: string;
   ctaLead: string;
   logoTitle: string;
-  footer: string;
 };
 
 export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
@@ -141,7 +140,12 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s01Quote:
       "Detection tells you nothing looked wrong. A proof tells you the wrong thing is impossible.",
     researchTag: "RESEARCH — THE NUMBER BEHIND THAT SENTENCE",
-    researchTitle: <>The detection window was 5.5&times; longer than the whole attack</>,
+    researchTitle: (
+      <>
+        A ~72-hour detection window in one incident: 5.5&times; the 13 hours a comparable agent
+        took, in another, to reach cluster-admin
+      </>
+    ),
     researchBody:
       "Four 2026 agent containment failures, aggregated — with the derived figures, the arithmetic, and the limitations stated in full.",
 
@@ -152,7 +156,8 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
         A model that judges a model is <span className="text-foreground">promptable</span>: it can be
         talked out of its verdict, because it is itself a probabilistic system. A solver is not. When
         we prove a rule holds, we are not scoring a trajectory — we are showing that no execution in
-        that class violates the rule, for an unbounded number of steps.
+        that class violates the rule: for any number of steps when the proof closes with an
+        inductive invariant, and within the stated bound when it does not.
       </>
     ),
     s02b: (
@@ -185,11 +190,11 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     step1: "01 · PROVE",
     step1Title: "Z3 / Spacer",
     step1Body:
-      "The solver synthesizes the inductive invariant itself and proves the rule holds over every trajectory.",
+      "The solver synthesizes the inductive invariant itself. When that proof closes, the rule holds over every trajectory, of any length.",
     step2: "02 · SEAL",
     step2Title: "Post-quantum",
     step2Body:
-      "SHA3-512 hash chain, signed Ed25519 + ML-DSA-65 (FIPS 204). Tamper is detectable.",
+      "Every decision on the production gate, allowed or blocked: SHA3-512 hash chain, signed Ed25519 + ML-DSA-65 (FIPS 204). A change after sealing is detectable.",
     step3: "03 · VERIFY",
     step3Title: "Offline",
     step3Body:
@@ -200,8 +205,8 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s04a: (
       <>
         A solver that <span className="text-foreground">finds</span> an invariant is convenient but
-        not evidence — you would be trusting the search. So before anything is sealed, we re-extract
-        the inductive invariant and discharge its verification conditions as{" "}
+        not evidence — you would be trusting the search. So before the ontology kernel seals its
+        verdict, we re-extract the inductive invariant and discharge its verification conditions as{" "}
         <span className="text-foreground">UNSAT in a fresh solver</span>, derived from the proof
         obligation itself. Discovery and re-check are separated on purpose.
       </>
@@ -225,8 +230,8 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s04bA: (
       <>
         The cryptographic base is <span className="text-foreground">NIST standards</span> — SHA3-512,
-        Ed25519, ML-DSA-65 (FIPS 204) — not cryptography of our own. Those assumptions are negligible
-        in the security parameter.
+        Ed25519, ML-DSA-65 (FIPS 204) — not cryptography of our own. Under their standard
+        assumptions, an attacker&apos;s advantage is negligible in the security parameter.
       </>
     ),
     s04bB: (
@@ -245,12 +250,16 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s05Title: "A sealed certificate you can carry out the door.",
     s05a: (
       <>
-        Each governed decision emits a self-contained record binding{" "}
+        Each decision on the production gate, allowed or blocked, emits a self-contained record
+        binding{" "}
         <span className="text-foreground">
-          identity, scope, authority, the decision, the proof, and the resulting state change
+          identity, scope, authority, the decision, and the resulting state change
         </span>
         . Records accumulate into an append-only, hash-chained stream — editing one entry breaks
-        every entry after it.
+        every entry after it. The per-action decision is an evaluation against the policy, not a
+        theorem: the proof is about the policy, and it is not inside that seal. A seal shows the
+        record was not changed after sealing and which keys signed it — not that a property is
+        true, and not who holds the keys.
       </>
     ),
     s05b: (
@@ -308,7 +317,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "Composition has a frontier — and it moved",
-        b: "Six axes of structuring are proven closed over every sequence rather than a large sample: amount, time — at arbitrary window width — number of accounts — at unbounded fan-out width — combined action types, money routed through intermediary entities at arbitrary hop depth, and velocity, proven with all four amount controls in force, because the burst is the case they all approve. Five rest on an inductive invariant the solver had to discover; the fixed-window result closes by direct contradiction instead. We say which is which rather than let one word cover both.",
+        b: "Six axes of structuring are proven closed over every sequence rather than a large sample: amount, time — at arbitrary window width — number of accounts — at unbounded fan-out width — combined action types, money routed through intermediary entities at arbitrary hop depth, and velocity, proven with all four amount controls in force, because the burst is the case they all approve. Five rest on an inductive invariant the solver had to discover; the fixed-window result closes by direct contradiction instead. We say which is which rather than let one word cover both. The structuring search in the evidence pack is a separate check, bounded at k = 200.",
       },
       {
         t: "A proof cannot source what you cannot see",
@@ -340,7 +349,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "Post-quantum seal",
-        s: "SHA3-512 + Ed25519 + ML-DSA-65, hash-chained on every governed decision",
+        s: "SHA3-512 + Ed25519 + ML-DSA-65, hash-chained on every decision on the production gate, allowed or blocked",
       },
       {
         t: "Proof on code",
@@ -348,7 +357,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "Public offline verifier + canonical spec",
-        s: "the “verify it yourself” endpoint — a sealed dossier checks byte-for-byte with no network and no Ironproof code",
+        s: "the “verify it yourself” endpoint — a sealed record checks byte-for-byte with no network, by a verifier that shares no code with the software that seals",
       },
       {
         t: "Publicly anchored root of trust",
@@ -364,15 +373,14 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     ctaLead:
       "Start a pilot and turn policy into enforceable, independently verifiable guarantees.",
     logoTitle: "Ironproof monogram",
-    footer: "Automated formal verification for critical software and infrastructure.",
   },
 
   fr: {
     eyebrow: "IA PROUVABLE",
-    h1: "Qu’est-ce que l’IA prouvable ?",
+    h1: "Qu’est-ce que l’IA prouvable ?",
     heroLead: (
       <>
-        Un nom de catégorie pour ce qui manquait à l’IA en milieu réglementé : pouvoir prouver —{" "}
+        Un nom de catégorie pour ce qui manquait à l’IA en milieu réglementé : pouvoir prouver —{" "}
         <span className="metal-text">mathématiquement et cryptographiquement</span> — qu’un agent IA
         n’a pas pu franchir la ligne que vous avez tracée, et vous remettre un{" "}
         <span className="metal-text">artefact que vous vérifiez vous-même</span>, sans faire
@@ -383,7 +391,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s01: "01 — La question à laquelle personne ne pouvait répondre",
     s01Title: (
       <>
-        Pouvez-vous prouver que votre agent <span className="metal-shine">n’a pas pu</span> ?
+        Pouvez-vous prouver que votre agent <span className="metal-shine">n’a pas pu</span> ?
       </>
     ),
     s01a: (
@@ -407,7 +415,13 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s01Quote:
       "La détection vous dit que rien n’avait l’air anormal. Une preuve vous dit que la chose anormale est impossible.",
     researchTag: "RECHERCHE — LE CHIFFRE DERRIÈRE CETTE PHRASE",
-    researchTitle: <>La fenêtre de détection a duré 5,5&times; plus longtemps que toute l’attaque</>,
+    researchTitle: (
+      <>
+        Une fenêtre de détection d’environ 72 heures dans un incident : 5,5&times; les 13 heures
+        qu’il a fallu, dans un autre, à un agent comparable pour atteindre l’administration du
+        cluster
+      </>
+    ),
     researchBody:
       "Quatre échecs de confinement d’agents en 2026, agrégés — avec les chiffres dérivés, le calcul et les limites énoncées en entier.",
 
@@ -416,11 +430,12 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       "Pas « probablement sûr ». Prouvé impossible — et vous repartez avec la preuve.",
     s02a: (
       <>
-        Un modèle qui juge un modèle est <span className="text-foreground">influençable</span> : on
+        Un modèle qui juge un modèle est <span className="text-foreground">influençable</span> : on
         peut lui faire changer de verdict, parce qu’il est lui-même un système probabiliste. Un
         solveur, non. Quand nous prouvons qu’une règle tient, nous ne notons pas une trajectoire —
-        nous montrons qu’aucune exécution de cette classe ne viole la règle, pour un nombre d’étapes
-        non borné.
+        nous montrons qu’aucune exécution de cette classe ne viole la règle : pour tout nombre
+        d’étapes quand la preuve se ferme par un invariant inductif, et dans la borne déclarée quand
+        elle ne se ferme pas.
       </>
     ),
     s02b: (
@@ -437,7 +452,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s03: "03 — Ce que « prouvable » veut dire, précisément",
     s03Title: "Détecter un problème, ce n’est pas prouver qu’il n’y en a pas.",
     s03Lead:
-      "L’IA prouvable n’est pas une impression. Sur chaque surface où nous intervenons — actions d’agents, code, cryptographie — il y a deux couches distinctes, et une seule est la vraie barrière.",
+      "L’IA prouvable n’est pas une impression. Sur chaque surface où nous intervenons — actions d’agents, code, cryptographie — il y a deux couches distinctes, et une seule fait la différence.",
     layer1: "COUCHE 1 · DÉTECTION",
     layer1Title: "Large. Probabiliste.",
     layer1Body:
@@ -454,11 +469,11 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     step1: "01 · PROUVER",
     step1Title: "Z3 / Spacer",
     step1Body:
-      "Le solveur synthétise lui-même l’invariant inductif et prouve que la règle tient sur toutes les trajectoires.",
+      "Le solveur synthétise lui-même l’invariant inductif. Quand cette preuve se ferme, la règle tient sur toutes les trajectoires, de toute longueur.",
     step2: "02 · SCELLER",
     step2Title: "Post-quantique",
     step2Body:
-      "Chaîne d’empreintes SHA3-512, signée Ed25519 + ML-DSA-65 (FIPS 204). Toute altération est détectable.",
+      "Chaque décision de la barrière de production, autorisée ou bloquée : chaîne d’empreintes SHA3-512, signée Ed25519 + ML-DSA-65 (FIPS 204). Toute modification après scellement est détectable.",
     step3: "03 · VÉRIFIER",
     step3Title: "Hors ligne",
     step3Body:
@@ -469,16 +484,16 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s04a: (
       <>
         Un solveur qui <span className="text-foreground">trouve</span> un invariant est commode mais
-        n’est pas une preuve — il faudrait croire la recherche. Alors avant tout scellement, nous
-        ré-extrayons l’invariant inductif et déchargeons ses conditions de vérification en{" "}
+        n’est pas une preuve — il faudrait croire la recherche. Alors avant que le noyau d’ontologie
+        scelle son verdict, nous ré-extrayons l’invariant inductif et déchargeons ses conditions de vérification en{" "}
         <span className="text-foreground">UNSAT dans un solveur neuf</span>, dérivées de l’obligation
         de preuve elle-même. La découverte et le recontrôle sont séparés exprès.
       </>
     ),
     s04b: (
       <>
-        La politique que le prouveur lit et la politique que le runtime applique viennent d’{" "}
-        <span className="text-foreground">un seul compilateur</span>, pas de deux encodages recopiés
+        La politique que le prouveur lit et la politique que le runtime applique viennent
+        d’<span className="text-foreground">un seul compilateur</span>, pas de deux encodages recopiés
         à la main — un contrôle différentiel, à chaque démarrage et en intégration continue, refuse une
         politique que le prouveur lirait autrement.
         Deux artefacts qui doivent s’accorder, avec quelque chose qui casse quand ce n’est pas le
@@ -496,13 +511,13 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       <>
         La base cryptographique, ce sont les{" "}
         <span className="text-foreground">standards du NIST</span> — SHA3-512, Ed25519, ML-DSA-65
-        (FIPS 204) — pas de la cryptographie maison. Ces hypothèses sont négligeables dans le
-        paramètre de sécurité.
+        (FIPS 204) — pas de la cryptographie maison. Sous leurs hypothèses standard, l’avantage d’un
+        attaquant est négligeable dans le paramètre de sécurité.
       </>
     ),
     s04bB: (
       <>
-        Le reste, nous le nommons au lieu de le cacher : la décision UNSAT du solveur (atténuée par le
+        Le reste, nous le nommons au lieu de le cacher : la décision UNSAT du solveur (atténuée par le
         recontrôle indépendant ci-dessus), le fait que le modèle encode fidèlement la politique (tenu
         par la discipline du compilateur unique), et le fait que le seuil déclaré est{" "}
         <span className="text-foreground">le chiffre choisi par votre entreprise</span> — nous
@@ -516,18 +531,21 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     s05Title: "Un certificat scellé que vous emportez avec vous.",
     s05a: (
       <>
-        Chaque décision gouvernée émet une trace autonome qui lie{" "}
+        Chaque décision de la barrière de production, autorisée ou bloquée, émet une trace autonome
+        qui lie{" "}
         <span className="text-foreground">
-          l’identité, la portée, l’autorité, la décision, la preuve et le changement d’état qui en
-          résulte
+          l’identité, la portée, l’autorité, la décision et le changement d’état qui en résulte
         </span>
         . Les traces s’accumulent en un flux append-only chaîné par empreintes — modifier une entrée
-        casse toutes celles qui suivent.
+        casse toutes celles qui suivent. La décision sur une action est une évaluation contre la
+        politique, pas un théorème : la preuve porte sur la politique, et elle n’est pas dans ce
+        sceau. Un sceau montre que la trace n’a pas changé après le scellement et quelles clés l’ont
+        signée — pas qu’une propriété est vraie, ni qui détient les clés.
       </>
     ),
     s05b: (
       <>
-        Le sceau porte un témoin temporel, et il est honnête sur la force de ce témoin : il annonce
+        Le sceau porte un témoin temporel, et il est honnête sur la force de ce témoin : il annonce
         l’un de <span className="text-foreground">borné</span>, unilatéral, auto-déclaré ou aucun —
         de sorte que « conforme aux règles à ce moment-là » est étayé, jamais supposé. Si le
         réseau est coupé, le sceau se dégrade honnêtement au lieu de simuler un horodatage.
@@ -555,7 +573,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         n: "Pas la sûreté du planificateur",
-        d: "Une injection d’invite peut compromettre le planificateur. Nous sommes le confinement : même compromis, un planificateur ne peut pas produire une exécution valide au regard de la preuve hors de son contrat. Le durcissement en amont est distinct et nécessaire.",
+        d: "Une injection d’invite peut compromettre le planificateur. Nous sommes le confinement : même compromis, un planificateur ne peut pas produire une exécution valide au regard de la preuve hors de son contrat. Le durcissement en amont est distinct et nécessaire.",
       },
     ],
 
@@ -568,7 +586,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "Une preuve ne peut pas conférer l’autorité",
-        b: "Nous prouvons que l’action est restée dans la politique en vigueur, et que la politique n’est pas opérante tant qu’un quorum désigné n’a pas doublement signé son empreinte exacte — affaiblissez un garde après la signature et le schéma cesse d’être applicable. Ce que nous ne pouvons pas établir se situe en amont de tout code : que les personnes qui détiennent ces clés avaient le droit de les détenir, que leur mandat est toujours en cours et dans sa portée, ou que celui qui refuse de signer est protégé quand il le fait. On peut rendre une barrière incontournable. Le droit de l’ouvrir vient d’ailleurs.",
+        b: "Nous prouvons que l’action est restée dans la politique en vigueur, et que la politique n’est pas opérante tant qu’un quorum désigné n’a pas doublement signé son empreinte exacte — affaiblissez un garde après la signature et le schéma cesse d’être applicable. Ce que nous ne pouvons pas établir se situe en amont de tout code : que les personnes qui détiennent ces clés avaient le droit de les détenir, que leur mandat est toujours en cours et dans sa portée, ou que celui qui refuse de signer est protégé quand il le fait. On peut rendre une barrière incontournable. Le droit de l’ouvrir vient d’ailleurs.",
       },
       {
         t: "Autorisé n’est pas sûr",
@@ -580,11 +598,11 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "La composition a une frontière — et elle a bougé",
-        b: "Six axes de fractionnement sont prouvés fermés sur toutes les séquences plutôt que sur un large échantillon : le montant, le temps — à largeur de fenêtre arbitraire — le nombre de comptes — à largeur d’éclatement non bornée — les types d’action combinés, l’argent acheminé via des entités intermédiaires à profondeur de sauts arbitraire, et la vélocité, prouvée avec les quatre contrôles de montant en vigueur, parce que la rafale est précisément le cas qu’ils approuvent tous. Cinq reposent sur un invariant inductif que le solveur a dû découvrir ; le résultat à fenêtre fixe, lui, se ferme par contradiction directe. Nous disons lequel est lequel plutôt que de laisser un seul mot couvrir les deux.",
+        b: "Six axes de fractionnement sont prouvés fermés sur toutes les séquences plutôt que sur un large échantillon : le montant, le temps — à largeur de fenêtre arbitraire — le nombre de comptes — à largeur d’éclatement non bornée — les types d’action combinés, l’argent acheminé via des entités intermédiaires à profondeur de sauts arbitraire, et la vélocité, prouvée avec les quatre contrôles de montant en vigueur, parce que la rafale est précisément le cas qu’ils approuvent tous. Cinq reposent sur un invariant inductif que le solveur a dû découvrir ; le résultat à fenêtre fixe, lui, se ferme par contradiction directe. Nous disons lequel est lequel plutôt que de laisser un seul mot couvrir les deux. La recherche de fractionnement du dossier de vérification est un contrôle distinct, borné à k = 200.",
       },
       {
         t: "Une preuve ne peut pas sourcer ce que vous ne voyez pas",
-        b: "La preuve d’empilement ferme la route à une condition : que la valeur puisse être attribuée à son origine. Que cette attribution soit obtenable d’une institution à l’autre est une question de données et de droit, pas une question de solveur — une autre question, avec un autre responsable. Des origines simultanées partageant un intermédiaire, une réserve mélangée attribuée au prorata, et un rythme mesuré par entité à travers les comptes restent ouverts. L’anomalie comportementale — « inhabituel pour ce client » — n’est pas du tout une propriété de seuil, et rien ici ne la traite.",
+        b: "La preuve d’empilement ferme la route à une condition : que la valeur puisse être attribuée à son origine. Que cette attribution soit obtenable d’une institution à l’autre est une question de données et de droit, pas une question de solveur — une autre question, avec un autre responsable. Des origines simultanées partageant un intermédiaire, une réserve mélangée attribuée au prorata, et un rythme mesuré par entité à travers les comptes restent ouverts. L’anomalie comportementale — « inhabituel pour ce client » — n’est pas du tout une propriété de seuil, et rien ici ne la traite.",
         roadmap: true,
       },
     ],
@@ -600,7 +618,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       </>
     ),
     s08Foot:
-      "Angle d’entrée : les services financiers canadiens réglementés. La correspondance porte sur les objectifs de contrôle applicables par machine, ce n’est pas une revendication de couverture complète des cadres.",
+      "Angle d’entrée : les services financiers canadiens réglementés. La correspondance porte sur les objectifs de contrôle applicables par machine, ce n’est pas une revendication de couverture complète des cadres.",
 
     s09: "09 — Le rôle d’Ironproof",
     s09Title: "Un moteur. Plusieurs surfaces. Honnête sur chacune.",
@@ -613,7 +631,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "Sceau post-quantique",
-        s: "SHA3-512 + Ed25519 + ML-DSA-65, chaîné par empreintes sur chaque décision gouvernée",
+        s: "SHA3-512 + Ed25519 + ML-DSA-65, chaîné par empreintes sur chaque décision de la barrière de production, autorisée ou bloquée",
       },
       {
         t: "Preuve sur le code",
@@ -621,7 +639,7 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
       },
       {
         t: "Vérificateur hors ligne public + spécification canonique",
-        s: "le point d’entrée « vérifiez vous-même » — un dossier scellé se contrôle octet par octet, sans réseau et sans code Ironproof",
+        s: "le point d’entrée « vérifiez vous-même » — une trace scellée se contrôle octet par octet, sans réseau, par un vérificateur qui ne partage aucun code avec le logiciel qui scelle",
       },
       {
         t: "Racine de confiance ancrée publiquement",
@@ -637,7 +655,5 @@ export const PROVABLE_AI_COPY: L<ProvableAICopy> = {
     ctaLead:
       "Démarrez un pilote et transformez votre politique en garanties applicables et vérifiables de façon indépendante.",
     logoTitle: "Monogramme Ironproof",
-    footer:
-      "Vérification formelle automatisée pour les logiciels et les infrastructures critiques.",
   },
 };
