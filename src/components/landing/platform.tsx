@@ -38,7 +38,13 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="font-serif text-2xl text-neutral-100 md:text-3xl">{m.independent.title}</p>
             <p className="mt-4 text-base font-light leading-relaxed text-neutral-300">{m.independent.body}</p>
           </div>
-          <p className="fade-up mt-14 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{m.foot}</p>
+          {/* The company line, alone and at hero scale: the second clause in the
+            * same brushed steel as the hero's consequence (Dom, 2026-10-15). */}
+          <p className="fade-up hero-serif mx-auto mt-28 max-w-5xl text-center font-serif font-normal text-neutral-100 md:mt-36">
+            {m.foot.a}
+            <br />
+            <em className="iron-brushed not-italic font-semibold">{m.foot.b}</em>
+          </p>
         </div>
       </section>
 
