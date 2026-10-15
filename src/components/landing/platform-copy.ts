@@ -46,7 +46,8 @@ export type PlatformCopy = {
     verdicts: readonly Verdict[];
     /** Transversal to the three pillars (Dom, 2026-10-13): never drop it. */
     independent: { title: string; body: string };
-    foot: string;
+    /** The company line (Dom, 2026-10-15): set alone, at hero scale. */
+    foot: { a: string; b: string };
   };
   research: { eyebrow: string; title: string; lead: string; cta: string };
 };
@@ -94,7 +95,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         title: "Two ways to check us, neither needs us.",
         body: "In your browser: the sealed record — hash chain, Ed25519 and post-quantum ML-DSA-65 signatures — checked with no server and no account. On your machine: the proof itself, re-run in your own solver from the obligation we ship. Where an artifact cannot be shared, the result says so.",
       },
-      foot: "Others sell trust. We sell the right not to trust us.",
+      foot: { a: "Others sell trust.", b: "We sell the right not to trust us." },
     },
     research: {
       eyebrow: "PUBLISHED RESEARCH",
@@ -145,7 +146,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         title: "Deux façons de nous vérifier, aucune n’a besoin de nous.",
         body: "Dans votre navigateur : la trace scellée — chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65 — vérifiée sans serveur et sans compte. Sur votre machine : la preuve elle-même, rejouée dans votre propre solveur à partir de l’obligation fournie. Quand un élément ne peut pas être partagé, le résultat le dit.",
       },
-      foot: "Les autres vendent la confiance. Nous, on vend le droit de ne pas nous faire confiance.",
+      foot: { a: "Les autres vendent la confiance.", b: "Nous, on vend le droit de ne pas nous faire confiance." },
     },
     research: {
       eyebrow: "RECHERCHE PUBLIÉE",
