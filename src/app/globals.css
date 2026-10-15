@@ -2328,3 +2328,26 @@ p, li {
 }
 #now .fade-up.mb-12 .seal-label { color: #e3bf63; }
 @media (max-width: 767px) { #now .fade-up.mb-12, #now > div > p.font-serif { padding: 1.4rem 1.3rem; } }
+/* Hero entity K (Dom, 2026-10-15: "j'aime le robot, un peu effacé"): the
+   head multiplies into the page and fades out at its edges. NEURAL sits at
+   brain height and its line runs almost to the dome. */
+.hero-white-stage .hero-white-brain img { transform: none; object-position: 50% 40%; mix-blend-mode: multiply; }
+.hero-white-stage .hero-white-brain img { opacity: 0.8; }
+/* The chin stays whole (the neck fade is baked into the image); the frame
+   melts into the page on every side. */
+.hero-white-stage .hero-white-brain {
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 45%, #000 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 45%, #000 72%, transparent 100%);
+}
+@media (min-width: 1100px) {
+  .hero-stage-left { align-self: start; padding-top: 3.5rem; }
+  .hero-stage-left .hero-card::after { width: 15.5rem; }
+  .hero-stage-left .hero-card > .hero-card-kicker::after { left: calc(100% + 15.5rem - 0.4rem); }
+  .hero-stage-right .hero-card::before { width: 16.5rem; }
+  .hero-stage-right .hero-card > .hero-card-kicker::before { right: calc(100% + 16.5rem - 0.4rem); }
+}
+/* The bust floats: no floor shadow under the neck. */
+.hero-white-stage .hero-white-brain::after { display: none; }
+/* The image is tinted to the page colour and padded below, so the chin stays
+   whole and only the neck dissolves; no blend mode needed. */
+.hero-white-stage .hero-white-brain img { transform: none; object-position: 50% 0%; mix-blend-mode: normal; opacity: 1; }

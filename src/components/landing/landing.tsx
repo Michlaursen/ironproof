@@ -1054,7 +1054,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </div>
             </div>
             <div className="hero-white-brain" aria-hidden="true">
-              <Image src="/media/hero-brain-crop.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
+              <Image src="/media/hero-entity3.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
             </div>
             <div className="hero-stage-side hero-stage-right">
               <div className="hero-card hero-card-gold">
