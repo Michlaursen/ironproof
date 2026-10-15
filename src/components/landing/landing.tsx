@@ -1053,8 +1053,25 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <p className="hero-card-text">{eng.neuralLine}</p>
               </div>
             </div>
-            <div className="hero-white-brain" aria-hidden="true">
-              <Image src="/media/hero-entity3.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
+            <div className="hero-white-brain-wrap">
+              <div className="hero-white-brain" aria-hidden="true">
+                <Image src="/media/hero-entity3.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
+              </div>
+              {/* Phone only: the three roles drawn on the head (Dom, 2026-10-15:
+                * "faut que les gens comprennent"). Lines: neural -> brain,
+                * symbolic -> brain, symbolic -> proven. */}
+              <div className="hero-map" aria-hidden="true">
+                <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <polyline points="4,16 28,16 38,20" className="hero-map-line-iron" />
+                  <polyline points="96,16 72,16 58,18" className="hero-map-line-gold" />
+                  <polyline points="94,17 94,95 68,95" className="hero-map-line-gold hero-map-line-dash" />
+                </svg>
+                <span className="hero-map-dot hero-map-dot-iron" style={{ left: "38%", top: "20%" }} />
+                <span className="hero-map-dot hero-map-dot-gold" style={{ left: "58%", top: "18%" }} />
+                <p className="hero-map-tag hero-map-neural"><b>{eng.map.neural}</b>{eng.map.neuralRole}</p>
+                <p className="hero-map-tag hero-map-symbolic"><b>{eng.map.symbolic}</b>{eng.map.symbolicRole}</p>
+                <p className="hero-map-tag hero-map-proven"><b><span className="hero-dossier-dot" /> {eng.map.proven}</b>{eng.map.provenRole}</p>
+              </div>
             </div>
             <div className="hero-stage-side hero-stage-right">
               <div className="hero-card hero-card-gold">
