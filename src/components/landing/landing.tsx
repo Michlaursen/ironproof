@@ -85,10 +85,10 @@ type Copy = {
     eyebrow: string;
     title: string;
     lead: string;
-    allowed: string;
-    allowedResult: string;
-    blocked: string;
-    blockedResult: string;
+    refuse: string;
+    refuseResult: string;
+    evidence: string;
+    evidenceResult: string;
     pillars: readonly Step[];
   };
 
@@ -252,10 +252,10 @@ const T: L<Copy> = {
       eyebrow: "WHAT IRONPROOF IS",
       title: "A checkpoint between your automation and the actions it can’t undo.",
       lead: "AI agents, APIs and scripts can already move money, grant access, delete records and ship changes on their own. Ironproof sits in front of those actions and checks each one against your rules before it runs.",
-      allowed: "Authorized",
-      allowedResult: "actions run.",
-      blocked: "Unauthorized",
-      blockedResult: "actions never do.",
+      refuse: "No authorization.",
+      refuseResult: "No execution.",
+      evidence: "Every decision",
+      evidenceResult: "backed by verifiable evidence.",
       pillars: [
         {
           title: "Checked before, not logged after",
@@ -644,10 +644,10 @@ const T: L<Copy> = {
       eyebrow: "CE QU’EST IRONPROOF",
       title: "Un point de contrôle entre votre automatisation et les actions qu’on ne peut pas défaire.",
       lead: "Les agents IA, les API et les scripts peuvent déjà déplacer de l’argent, donner des accès, effacer des données et déployer du code, seuls. Ironproof se place devant ces actions et vérifie chacune contre vos règles avant qu’elle s’exécute.",
-      allowed: "Les actions autorisées",
-      allowedResult: "s’exécutent.",
-      blocked: "Les actions non autorisées,",
-      blockedResult: "jamais.",
+      refuse: "Pas d’autorisation.",
+      refuseResult: "Pas d’exécution.",
+      evidence: "Chaque décision",
+      evidenceResult: "appuyée par une preuve vérifiable.",
       pillars: [
         {
           title: "Vérifié avant, pas journalisé après",
@@ -1131,12 +1131,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
               <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-seal">{t.what.allowed}</span>{" "}
-                <span>{t.what.allowedResult}</span>
+                <span className="text-[#a3392f]">{t.what.refuse}</span>{" "}
+                <span>{t.what.refuseResult}</span>
               </p>
               <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-[#a3392f]">{t.what.blocked}</span>{" "}
-                <span>{t.what.blockedResult}</span>
+                <span className="text-seal">{t.what.evidence}</span>{" "}
+                <span>{t.what.evidenceResult}</span>
               </p>
             </div>
           </div>
