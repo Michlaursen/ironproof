@@ -39,7 +39,7 @@ export function ZeroTrust({ locale = defaultLocale }: { locale?: Locale }) {
     <div className="flex flex-1 flex-col">
       <LandingHeader variant="sub" locale={locale} page="zero-trust" />
 
-      <main className="flex-1">
+      <main className="blueprint flex-1">
         {/* HERO */}
         <section id="top" className="relative z-10 px-6 pb-20 pt-24 md:px-14 md:pt-28">
           <div className="halo" aria-hidden="true" />

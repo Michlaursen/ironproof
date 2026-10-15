@@ -431,7 +431,7 @@ export default async function EvidencePage({ params }: PageProps) {
     <div className="relative min-h-screen">
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page="evidence" />
-      <main>
+      <main className="blueprint">
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
           {/* Same anchor as /verify and /proof: the seal is what the page is about. */}
           <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">

@@ -260,7 +260,7 @@ export default async function PilotPage({ params }: PageProps) {
     <div className="relative min-h-screen">
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page="pilot" />
-      <main>
+      <main className="blueprint">
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
           <HeroPhoto src="/media/critical-switches-white.jpg" position="50% 55%" />
           <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>

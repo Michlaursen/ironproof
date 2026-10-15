@@ -101,7 +101,7 @@ export default async function LabPage({ params }: PageProps) {
     <div className="relative min-h-screen">
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page="lab" />
-      <main>
+      <main className="blueprint">
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
           <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
             <ProofSeal size={300} locale={locale} />

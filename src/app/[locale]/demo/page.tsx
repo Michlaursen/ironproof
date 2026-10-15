@@ -152,7 +152,7 @@ export default async function DemoPage({ params }: PageProps) {
     <div className="relative min-h-screen">
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page="demo" />
-      <main>
+      <main className="blueprint">
         <section className="relative z-10 mx-auto max-w-5xl px-6 pb-8 pt-32 md:px-14">
           <div className="pointer-events-none absolute right-6 top-24 hidden opacity-40 lg:block xl:opacity-55">
             <ProofSeal size={240} locale={locale} />
