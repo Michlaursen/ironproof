@@ -53,6 +53,7 @@ type Copy = {
     /** Two clauses: the condition (plain) and the consequence (gold italic). */
     headline: string;
     headlineEnd: string;
+    value: string;
     body: React.ReactNode;
     boundary: string;
     initiators: string;
@@ -212,7 +213,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Formal verification for critical actions and software. From modeled properties to enforcement and independently verifiable evidence. Every result is Proven, Refuted or Not demonstrated, within a stated model.",
+        "Ironproof combines neuro-symbolic AI and formal verification to prove properties of critical systems, find the counterexample when one exists, and seal the evidence with post-quantum signatures. We prove what can be proven, and say so when we cannot. Every conclusion states its assumptions and limits, and can be checked without having to trust us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -581,7 +582,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Vérification formelle des actions et des logiciels critiques. Des propriétés modélisées jusqu’à l’application avant l’exécution et à des preuves vérifiables de façon indépendante. Chaque résultat est Prouvé, Réfuté ou Non démontré, dans un modèle déclaré.",
+        "Ironproof allie l’IA neuro-symbolique et la vérification formelle pour prouver des propriétés de systèmes critiques, trouver le contre-exemple quand il existe, et sceller les éléments de preuve par des signatures post-quantiques. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas. Chaque conclusion énonce ses hypothèses et ses limites, et se vérifie sans avoir à nous faire confiance.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -1009,6 +1010,12 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <br />
                 <em className="iron-brushed not-italic font-semibold">{t.hero.headlineEnd}</em>
               </h1>
+              {/* The value line, right under the title (Dom, 2026-10-15). */}
+              <ul className="track-mid -mt-3 mb-8 space-y-1.5 text-xs text-seal">
+                {t.hero.value.split(" · ").map((part) => (
+                  <li key={part}>{part}</li>
+                ))}
+              </ul>
               <p className="mb-10 max-w-md text-sm font-light leading-relaxed text-neutral-400 md:text-base">
                 {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
                   * PERSON plates) and in #initiators; the hero keeps the claim only. */}

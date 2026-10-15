@@ -17,17 +17,21 @@ export type HeroCopy = {
   /** Two clauses: the condition (plain) and the consequence (gold italic). */
   headline: string;
   headlineEnd: string;
+  /** The value line right under the title (Dom, 2026-10-15): what every result carries. */
+  value: string;
 };
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "FORMAL VERIFICATION · EVIDENCE YOU RE-CHECK YOURSELF",
+    eyebrow: "NEURO-SYMBOLIC FORMAL VERIFICATION",
     headline: "Don’t trust the verdict.",
     headlineEnd: "Verify the evidence.",
+    value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
-    eyebrow: "VÉRIFICATION FORMELLE · DES PREUVES QUE VOUS REVÉRIFIEZ",
+    eyebrow: "VÉRIFICATION FORMELLE NEURO-SYMBOLIQUE",
     headline: "Ne vous fiez pas au verdict.",
     headlineEnd: "Vérifiez la preuve.",
+    value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
   },
 };
