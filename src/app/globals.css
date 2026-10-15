@@ -2091,3 +2091,16 @@ p, li {
 #now h2, #now h2 + p, #now > div > p.font-serif { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 0, 0, 0.55); }
 /* Breath photos in the white edition: a light ivory veil, not the black one. */
 .breath-photo::after { background: radial-gradient(ellipse at center, rgba(231, 229, 226, 0.55) 0%, rgba(231, 229, 226, 0.8) 80%); }
+/* Closing, white edition (Dom, 2026-10-15): our original guardian, ink on
+   ivory, one hand stopping what is not authorized, the other holding the gold
+   seal. The band takes the paper tone of the drawing; the card turns light. */
+.closing-band { background: #efece4; border-top: 1px solid rgba(168, 132, 58, 0.35); }
+.closing-photo { inset: 0 0 0 30%; }
+.closing-photo img { object-position: 100% 50%; }
+.closing-card {
+  background: rgba(248, 246, 240, 0.92);
+  border: 1px solid rgba(168, 132, 58, 0.45);
+  box-shadow: 0 30px 70px -36px rgba(36, 38, 42, 0.45);
+}
+.closing-card h2 { color: var(--foreground); }
+.closing-card p.text-neutral-300 { color: var(--muted); }

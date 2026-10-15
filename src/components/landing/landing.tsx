@@ -1354,8 +1354,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-vault-marble.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-vault-marble-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-guardian.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-guardian-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
