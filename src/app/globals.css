@@ -2416,3 +2416,5 @@ p, li {
 /* Phone: the map on the head already names the three roles; the long cards
    would repeat it. The hero CTA still opens /verify. */
 @media (max-width: 767px) { .hero-white-stage .hero-stage-side { display: none !important; } }
+/* Eyebrow in gold for contrast (Dom, 2026-10-15); a deep gold so it reads on ivory. */
+.hero-white-eyebrow { color: #9a7630; font-weight: 600; }
