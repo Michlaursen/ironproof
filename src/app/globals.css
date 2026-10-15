@@ -1233,3 +1233,53 @@ p, li {
 .closing-trio:has(.closing-band-photo) {
   padding-top: 0;
 }
+
+/* HERO, white edition (Dom, 2026-10-15): white, iron and gold. The page tone
+   matches the studio floor of the brain photograph so the image has no edge. */
+.hero-white {
+  --paper: #e6e4e1;
+  --iron: #24262a;
+  --graphite: #5b5f66;
+  --gold: #a8843a;
+  background: var(--paper);
+  color: var(--iron);
+}
+.hero-white-eyebrow { color: var(--graphite); }
+.hero-white-title { color: var(--iron); }
+.hero-white-title em { color: var(--iron); }
+.hero-white-value { color: var(--gold); }
+.hero-white-lead { color: var(--graphite); }
+.hero-white-cta {
+  background: var(--iron);
+  color: #f4f3f1;
+  transition: background 0.2s ease;
+}
+.hero-white-cta:hover { background: #000; }
+.hero-white-link {
+  color: var(--iron);
+  border-color: rgba(36, 38, 42, 0.3);
+  transition: border-color 0.2s ease;
+}
+.hero-white-link:hover { border-color: var(--gold); }
+.hero-white-brain {
+  position: relative;
+  width: 100%;
+  height: min(56vh, 40vw);
+  margin-top: 0.5rem;
+  /* Melted into the page at the top: the copy sits on the same floor. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 10%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 10%);
+}
+.hero-white-brain img { object-position: 50% 58%; }
+@media (max-width: 767px) {
+  /* Phone: the brain opens the screen, the statement follows on the same floor. */
+  .hero-white { display: flex; flex-direction: column; padding-bottom: 3rem; }
+  .hero-white-brain {
+    order: -1;
+    height: 34svh;
+    margin-top: 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+  }
+  .hero-white-brain img { object-position: 50% 62%; transform: scale(1.1); }
+}

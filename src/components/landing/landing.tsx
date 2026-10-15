@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { IronproofMark } from "@/components/ironproof-mark";
 import { CREDITED_STRIP } from "./credibility";
 import { HERO_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
@@ -1011,82 +1010,40 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <LandingHeader locale={locale} />
 
       <main className="flex-1">
-        {/* 1. HERO — the product, in one sentence, before any mechanism */}
-        <section id="top" className="hero-agent relative z-10 flex items-center overflow-hidden px-6 md:px-14">
-          {/* A round vault door left ajar, gold light spilling out (Dom, 2026-10-15, chosen
-            * among the brand backgrounds over the initiators-at-the-door render,
-            * which told the old "any initiator, one gate" page). Full-bleed and
-            * melted into the page on every edge. */}
-          <div className="hero-agent-photo" aria-hidden="true">
-            <Image
-              src="/media/hero-vault-round.jpg"
-              alt=""
-              fill
-              preload
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="hero-agent-scrim" aria-hidden="true" />
-          {/* Phone: a 4:5 crop on the seam, above the copy,
-            * instead of the desktop frame squeezed behind the text. */}
-          <div className="hero-agent-mobile md:hidden" aria-hidden="true">
-            <Image
-              src="/media/hero-vault-round-m.jpg"
-              alt=""
-              fill
-              preload
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative mx-auto grid w-full min-w-0 max-w-7xl grid-cols-1 items-center md:grid-cols-2">
+        {/* 1. HERO — white, iron and gold (Dom, 2026-10-15). The words on top,
+          * the statement left and the explanation right; the one brain of the
+          * site under them, full width: white marble for the intuition, iron
+          * for the rigour, gold where they meet. */}
+        <section id="top" className="hero-white relative z-10 overflow-hidden">
+          <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 pt-2 md:grid-cols-2 md:gap-16 md:px-14 md:pt-16">
             <div className="fade-up min-w-0">
-              {/* Three things, nothing else: what we are, the sentence, two doors.
-                * The explanation that used to sit here now opens the next screen. */}
-              {/* The full lockup opens the statement: a young name is learned by
-                * seeing it large once, even with the header 200 px above (Dom, 2026-09-26). */}
-              <div className="mb-8 flex items-center gap-5">
-                <IronproofMark height={112} preload className="h-16 w-auto md:h-24" />
-                <span className="track-logo iron-brushed text-2xl font-semibold max-[380px]:text-lg max-[380px]:tracking-[0.3em] md:text-4xl">IRONPROOF</span>
-              </div>
-              <p className="track-wide mb-7 text-xs text-neutral-300">{t.hero.eyebrow}</p>
-              {/* Set like a statement, not a poster: serif, sentence case, the
-                * consequence upright in the same brushed steel as the name (Dom, 2026-09-28: gold took the beauty out). */}
-              <h1 className="hero-serif mb-8 font-serif font-normal text-neutral-100">
+              <p className="hero-white-eyebrow track-wide mb-7 text-xs">{t.hero.eyebrow}</p>
+              <h1 className="hero-serif hero-white-title font-serif font-normal">
                 {t.hero.headline}
                 <br />
-                <em className="iron-brushed not-italic font-semibold">{t.hero.headlineEnd}</em>
+                <em className="not-italic font-semibold">{t.hero.headlineEnd}</em>
               </h1>
-              {/* The value line, right under the title (Dom, 2026-10-15). */}
-              <ul className="track-mid -mt-3 mb-8 space-y-1.5 text-xs text-seal">
+            </div>
+            <div className="fade-up min-w-0 md:pt-14">
+              {/* The value line (Dom, 2026-10-15), in gold, then the boundary. */}
+              <ul className="hero-white-value track-mid mb-6 space-y-1.5 text-xs">
                 {t.hero.value.split(" · ").map((part) => (
                   <li key={part}>{part}</li>
                 ))}
               </ul>
-              <p className="mb-10 max-w-md text-sm font-light leading-relaxed text-neutral-400 md:text-base">
-                {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
-                  * PERSON plates) and in #initiators; the hero keeps the claim only. */}
-                <span className="text-neutral-200">{t.hero.boundary}</span>
-              </p>
-              {/* One primary action (the site-wide CTA) and one quiet way in.
-                * "Verify a real decision" left the first screen: the vault has
-                * its own section further down. */}
+              <p className="hero-white-lead mb-9 max-w-md text-sm leading-relaxed md:text-base">{t.hero.boundary}</p>
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a
-                  href={`${r}/verify`}
-                  className="track-mid inline-flex items-center gap-3 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-                >
+                <a href={`${r}/verify`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
                 </a>
-                <a
-                  href={`${r}/evidence`}
-                  className="track-mid inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
-                >
+                <a href={`${r}/evidence`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
                   {t.hero.ctaEvidence} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
+          </div>
+          <div className="hero-white-brain" aria-hidden="true">
+            <Image src="/media/hero-brain.jpg" alt="" fill preload sizes="100vw" className="object-cover" />
           </div>
         </section>
 
