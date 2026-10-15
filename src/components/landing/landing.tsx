@@ -1214,7 +1214,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
+            <PhotoPlate src="/media/ill-switches.jpg" position="50% 55%" />
           </div>
           {/* What has run first, with its number; then where it applies, with its
             * rule. The two never share a list (2026-10-13). */}
@@ -1314,7 +1314,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * Brought from /proof, which most visitors never reach. */}
           <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
             <Image
-              src="/media/broken-chain-white.jpg"
+              src="/media/ill-chain.jpg"
               alt=""
               fill
               sizes="(min-width: 1152px) 1152px, 100vw"
@@ -1346,7 +1346,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             {/* The one image here: the decision struck into steel, with logo 09
               * (Dom, 2026-09-26). */}
-            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" />
+            <PhotoPlate src="/media/ill-seal.jpg" wide position="50% 55%" />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
@@ -1371,8 +1371,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-guardian.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-guardian-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/ill-guardian.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/ill-guardian-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
@@ -1409,7 +1409,7 @@ export function CounterexampleBreath({ locale = defaultLocale }: { locale?: Loca
       <section className="relative z-10 isolate overflow-hidden px-6 py-28 md:px-14 md:py-32">
         {/* One missing link and the chain parts: the removed clause, as an object. */}
         <div className="breath-photo" aria-hidden="true">
-          <Image src="/media/broken-chain-white.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          <Image src="/media/ill-chain.jpg" alt="" fill sizes="100vw" className="object-cover" />
         </div>
         <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
           <span className="breath-mark" aria-hidden="true" />
