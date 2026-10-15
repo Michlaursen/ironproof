@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { defaultLocale, type Locale } from "@/content";
 import { pick } from "./i18n";
 import { PLATFORM_COPY } from "./platform-copy";
@@ -9,6 +10,10 @@ import { PAPERS } from "./credibility";
  * in platform-copy.ts. The agent pillar points down to the sections that
  * already show the gate (#problem onward).
  */
+/* One image per application, same order as the pillars. */
+// One family with the trio (Dom, 2026-10-15): marble, iron and gold, one object each.
+const APP_IMAGES = ["/media/app-gate.jpg", "/media/app-c-chip.jpg", "/media/app-legacy-reel.jpg"] as const;
+
 export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(PLATFORM_COPY, locale);
   const m = t.method;
@@ -25,26 +30,48 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{m.lead}</p>
             <p className="mt-5 max-w-3xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{m.body}</p>
           </div>
-          <ul className="fade-up mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
-            {m.verdicts.map((v) => (
-              <li key={v.word} className="border-t border-white/10 pt-6">
-                <p className="font-serif text-3xl text-neutral-100">{v.word}</p>
-                <p className="mt-3 text-base font-light leading-relaxed text-neutral-400">{v.body}</p>
-                <p className="mt-4 text-sm font-light leading-relaxed text-neutral-200">{v.receive}</p>
+          {/* Three verdicts, three cards, each with its own mark (Dom, 2026-10-15):
+            * a full disc for proven, a broken line for refuted, an open dashed
+            * ring for not demonstrated. */}
+          <ul className="fade-up verdict-grid mt-14">
+            {m.verdicts.map((v, i) => (
+              <li key={v.word} className={`verdict-card verdict-${["proven", "refuted", "open"][i]}`}>
+                <span className="verdict-mark" aria-hidden="true" />
+                <p className="verdict-word font-serif">{v.word}</p>
+                <p className="verdict-body">{v.body}</p>
+                <p className="verdict-receive">{v.receive}</p>
               </li>
             ))}
           </ul>
-          <div className="fade-up card-premium mt-14 max-w-3xl p-8">
-            <p className="font-serif text-2xl text-neutral-100 md:text-3xl">{m.independent.title}</p>
-            <p className="mt-4 text-base font-light leading-relaxed text-neutral-300">{m.independent.body}</p>
+          {/* Two checks, two panels: the seal in the browser, the proof in a solver. */}
+          <div className="fade-up checks mt-16">
+            <p className="checks-title font-serif">{m.independent.title}</p>
+            <div className="checks-split">
+              <div className="checks-panel checks-browser">
+                <p className="checks-where track-mid">{m.independent.browser.where}</p>
+                <p className="checks-what font-serif">{m.independent.browser.what}</p>
+                <p className="checks-body">{m.independent.browser.body}</p>
+                <p className="checks-proves track-mid">{m.independent.browser.proves}</p>
+              </div>
+              <div className="checks-panel checks-solver">
+                <p className="checks-where track-mid">{m.independent.solver.where}</p>
+                <p className="checks-what font-serif">{m.independent.solver.what}</p>
+                <p className="checks-body">{m.independent.solver.body}</p>
+                <p className="checks-proves track-mid">{m.independent.solver.proves}</p>
+              </div>
+            </div>
+            <p className="checks-note">{m.independent.note}</p>
           </div>
-          {/* The company line, alone and at hero scale: the second clause in the
-            * same brushed steel as the hero's consequence (Dom, 2026-10-15). */}
-          <p className="fade-up hero-serif mx-auto mt-28 max-w-5xl text-center font-serif font-normal text-neutral-100 md:mt-36">
-            {m.foot.a}
-            <br />
-            <em className="iron-brushed not-italic font-semibold">{m.foot.b}</em>
-          </p>
+        </div>
+      </section>
+
+      {/* The company line as a manifesto: one iron band, the two clauses, a gold hairline. */}
+      <section className="manifesto relative z-10">
+        <div className="manifesto-inner">
+          <span className="manifesto-rule" aria-hidden="true" />
+          <p className="manifesto-a font-serif">{m.foot.a}</p>
+          <p className="manifesto-b font-serif">{m.foot.b}</p>
+          <span className="manifesto-rule" aria-hidden="true" />
         </div>
       </section>
 
@@ -54,54 +81,79 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="seal-label track-mid mb-5 text-xs">{t.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.title}</h2>
           </div>
-          {/* The ruled box sits inside the fade-up wrapper, not on it: `.fade-up > li`
-            * cascades each card 18 px down, which shows the box's grey fill. */}
-          <div className="fade-up mt-14">
-          <ol className="grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-3">
-            {t.pillars.map((p) => (
-              <li key={p.num} id={`app-${p.num}`} className="flex scroll-mt-24 flex-col bg-ink px-7 py-9 md:px-8">
-                <span className="num-badge font-serif text-2xl">{p.num}</span>
-                <p className="track-mid mt-4 text-xs text-neutral-300">{p.name.toUpperCase()}</p>
-                <h3 className="mt-4 font-serif text-2xl leading-snug text-neutral-100">{p.claim}</h3>
-                <p className="mt-4 flex-1 text-base font-light leading-relaxed text-neutral-400">{p.body}</p>
-                <p className="mt-6 border-t border-white/10 pt-4 text-sm font-light leading-relaxed text-neutral-300">{p.evidence}</p>
-                {p.href && p.cta ? (
-                  <a
-                    href={p.href}
-                    className="track-mid mt-8 inline-flex items-center gap-2 self-start border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
-                  >
-                    {p.cta} <span aria-hidden="true">&darr;</span>
-                  </a>
-                ) : null}
+          {/* Three chapters, editorial (Dom, 2026-10-15: "bien plus premium"): one
+            * large image per application in the marble, iron and gold family,
+            * the text set like a catalogue page, no boxes; alternating sides. */}
+          <ol className="apps-chapters mt-20">
+            {t.pillars.map((p, i) => (
+              <li key={p.num} id={`app-${p.num}`} className={`chapter scroll-mt-24 ${i % 2 === 1 ? "chapter-flip" : ""}`}>
+                <div className="chapter-media fade-up">
+                  <Image src={APP_IMAGES[i] ?? APP_IMAGES[0]} alt="" fill sizes="(min-width: 900px) 46vw, 100vw" className="object-cover" />
+                  <span className="plate-brackets" aria-hidden="true" />
+                </div>
+                <div className="chapter-text fade-up">
+                  <div className="chapter-head">
+                    <span className="chapter-num font-serif">{p.num}</span>
+                    <span className="chapter-name track-mid">{p.name.toUpperCase()}</span>
+                  </div>
+                  <h3 className="chapter-claim font-serif">{p.claim}</h3>
+                  <dl className="chapter-beats">
+                    <div className="chapter-beat">
+                      <dt className="track-mid">{t.beats.risk}</dt>
+                      <dd>{p.risk}</dd>
+                    </div>
+                    <div className="chapter-beat">
+                      <dt className="track-mid">{t.beats.does}</dt>
+                      <dd>{p.body}</dd>
+                    </div>
+                    {p.evidence ? (
+                      <div className="chapter-beat chapter-beat-today">
+                        <dt className="track-mid">{t.beats.today}</dt>
+                        <dd>{p.evidence}</dd>
+                      </div>
+                    ) : null}
+                  </dl>
+                  {p.href && p.cta ? (
+                    <a href={p.href} className="chapter-cta track-mid">
+                      {p.cta} <span aria-hidden="true">&darr;</span>
+                    </a>
+                  ) : null}
+                </div>
               </li>
             ))}
           </ol>
-          </div>
         </div>
       </section>
 
       {/* The same PAPERS list as /research: one source, never re-typed. */}
-      <section id="papers" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+      <section id="papers" className="papers-band relative z-10 px-6 py-28 md:px-14 md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="fade-up max-w-4xl">
             <p className="seal-label track-mid mb-5 text-xs">{rs.eyebrow}</p>
             <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{rs.title}</h2>
             <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{rs.lead}</p>
           </div>
-          <div className="fade-up mt-14 space-y-3">
-            {PAPERS.map((paper) => (
-              <a
-                key={paper.id}
-                href={paper.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-premium group flex flex-col gap-2 p-5 transition sm:flex-row sm:items-center sm:gap-4"
-              >
-                <span className="metal-text shrink-0 font-mono text-xs">{paper.id}</span>
-                <span className="flex-1 text-sm font-light leading-snug text-neutral-300">{paper.title}</span>
-              </a>
+          {/* An editorial index, not cards (Dom, 2026-10-15: "BIN PLUS PREMIUM").
+            * The field is read from the paper's own title. */}
+          <ol className="fade-up papers-index mt-16">
+            {PAPERS.map((paper, i) => (
+              <li key={paper.id}>
+                <a href={paper.href} target="_blank" rel="noopener noreferrer" className="paper-row">
+                  <span className="paper-row-num font-serif">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="paper-row-main">
+                    <span className="paper-row-field track-mid">{rs.fields[i] ?? ""}</span>
+                    <span className="paper-row-title font-serif">{paper.title}</span>
+                  </span>
+                  <span className="paper-row-side">
+                    <span className="paper-row-id">{paper.id}</span>
+                    <span className="paper-row-read track-mid">
+                      {rs.read} <span aria-hidden="true">&#8599;</span>
+                    </span>
+                  </span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ol>
           <a
             href={`${r}/research`}
             className="track-mid mt-10 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"

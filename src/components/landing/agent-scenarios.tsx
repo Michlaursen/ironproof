@@ -348,7 +348,7 @@ export function AgentScenarios({
               type="button"
               aria-pressed={blocked}
               onClick={() => setBlocked(true)}
-              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "bg-[#ffb4b4]/10 text-[#ffb4b4]" : "text-neutral-500 hover:text-neutral-200"}`}
+              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "bg-[#a3392f]/10 text-[#a3392f]" : "text-neutral-500 hover:text-neutral-200"}`}
             >
               {t.presetBlock}
             </button>
@@ -367,7 +367,7 @@ export function AgentScenarios({
             <ul className="mt-3 border-t border-white/10">
               {current.checks.map((k) => (
                 <li key={k.rule} className="flex items-baseline gap-4 border-b border-white/10 py-4 text-base font-light">
-                  <span aria-hidden="true" className={`w-4 shrink-0 font-mono ${k.ok ? "text-seal" : "text-[#ffb4b4]"}`}>
+                  <span aria-hidden="true" className={`w-4 shrink-0 font-mono ${k.ok ? "text-seal" : "text-[#a3392f]"}`}>
                     {k.ok ? "✓" : "✕"}
                   </span>
                   <span className={k.ok ? "text-neutral-400" : "text-neutral-100"}>{k.rule}</span>
@@ -376,7 +376,7 @@ export function AgentScenarios({
             </ul>
 
             <div className="mt-10">
-              <p className={`font-serif text-4xl md:text-5xl ${allowed ? "text-seal" : "text-[#ffb4b4]"}`}>
+              <p className={`font-serif text-4xl md:text-5xl ${allowed ? "text-seal" : "text-[#a3392f]"}`}>
                 {allowed ? t.allow : t.block}
               </p>
               <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-neutral-400">

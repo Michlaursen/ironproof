@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { IronproofMark } from "@/components/ironproof-mark";
 import { CREDITED_STRIP } from "./credibility";
-import { HERO_COPY } from "./hero-copy";
+import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -44,6 +43,8 @@ type NotItem = { label: string; body: string };
 type Domain = { name: string; actions: readonly string[]; rules: string };
 type Dated = { date: string; what: string; source: string; href: string };
 type Step = { title: string; body: string };
+/** One tile of the proven / sealed / verifiable trio. */
+type TrioItem = { tag: string; title: string; body: string; img: string };
 /** A case Ironproof has actually run, with its date and its number. */
 type RunCase = { name: string; what: string; result: string; date: string };
 
@@ -86,10 +87,10 @@ type Copy = {
     eyebrow: string;
     title: string;
     lead: string;
-    allowed: string;
-    allowedResult: string;
-    blocked: string;
-    blockedResult: string;
+    refuse: string;
+    refuseResult: string;
+    evidence: string;
+    evidenceResult: string;
     pillars: readonly Step[];
   };
 
@@ -104,6 +105,9 @@ type Copy = {
 
   creditedBy: string;
 
+  /** Three promises, three photographs of one family (Dom, 2026-10-15). */
+  trio: { eyebrow: string; title: string; items: readonly TrioItem[]; foot: string };
+
   not: { eyebrow: string; title: string; items: readonly NotItem[]; foot: string };
 
   domains: {
@@ -117,6 +121,8 @@ type Copy = {
     runEyebrow: string;
     runTitle: string;
     runNote: string;
+    /** Callouts drawn on the switch-panel photograph. */
+    plateNotes: readonly PlateNote[];
     run: readonly RunCase[];
     appliesEyebrow: string;
     items: readonly Domain[];
@@ -147,6 +153,8 @@ type Copy = {
     compiler: string;
     recordPre: string;
     recordLink: string;
+    /** Callouts drawn on the seal photograph. */
+    plateNotes: readonly PlateNote[];
   };
 
   engine: { eyebrow: string; title: string; lead: React.ReactNode; cta: string };
@@ -162,7 +170,15 @@ type Copy = {
   };
 
   cta: { title: string; lead: string };
-  closing: { titleA: string; titleB: string; body: string; kicker: string; scope: string };
+  closing: {
+    titleA: string;
+    titleB: string;
+    body: string;
+    kicker: string;
+    scope: string;
+    /** Callouts on the bust: what each material stands for (Dom, 2026-10-15). */
+    notes: readonly PlateNote[];
+  };
 
 };
 
@@ -253,10 +269,10 @@ const T: L<Copy> = {
       eyebrow: "WHAT IRONPROOF IS",
       title: "A checkpoint between your automation and the actions it can’t undo.",
       lead: "AI agents, APIs and scripts can already move money, grant access, delete records and ship changes on their own. Ironproof sits in front of those actions and checks each one against your rules before it runs.",
-      allowed: "Authorized",
-      allowedResult: "actions run.",
-      blocked: "Unauthorized",
-      blockedResult: "actions never do.",
+      refuse: "No authorization.",
+      refuseResult: "No execution.",
+      evidence: "Every decision",
+      evidenceResult: "backed by verifiable evidence.",
       pillars: [
         {
           title: "Checked before, not logged after",
@@ -294,6 +310,32 @@ const T: L<Copy> = {
 
     creditedBy: "SECURITY RESEARCH BY IRONPROOF — CREDITED BY",
 
+    trio: {
+      eyebrow: "WHAT YOU GET",
+      title: "Proven. Sealed. Checked without us.",
+      items: [
+        {
+          tag: "MATHEMATICALLY PROVEN",
+          title: "Certainty, where it can be had.",
+          body: "Whatever can be stated precisely, a policy, a C function, a COBOL translation, a solver proves it holds in every case the model allows, or returns the exact case that breaks it. When it cannot conclude, it says so.",
+          img: "/media/trio-proven.jpg",
+        },
+        {
+          tag: "POST-QUANTUM SEALED",
+          title: "Every decision, set in metal.",
+          body: "Every result, a proof, a counterexample or a gate decision, ships in a record sealed with Ed25519 and the post-quantum ML-DSA-65 signature. Change one figure and the seal breaks.",
+          img: "/media/trio-sealed.jpg",
+        },
+        {
+          tag: "INDEPENDENTLY VERIFIABLE",
+          title: "Measured by anyone. Not by us.",
+          body: "Your auditor checks the seal in a browser and re-runs the proof in their own solver, from the obligations we ship. Our word is never part of the check.",
+          img: "/media/trio-verifiable.jpg",
+        },
+      ],
+      foot: "We prove what can be proven, and say so when we cannot. A seal proves the record is intact, not that what it says is true.",
+    },
+
     not: {
       eyebrow: "WHAT IRONPROOF IS NOT",
       title: "Not another dashboard.",
@@ -328,6 +370,10 @@ const T: L<Copy> = {
       runEyebrow: "ALREADY RUN",
       runTitle: "Verification runs — with the misses left in.",
       runNote: "Labs on published policies and open-source code, not client systems.",
+      plateNotes: [
+        { x: 47, y: 14, label: "ARMED · CHECKED BEFORE IT RUNS", gold: true },
+        { x: 74, y: 82, label: "IRREVERSIBLE ONCE IT RUNS" },
+      ],
       run: [
         {
           name: "Cloud authorization",
@@ -559,6 +605,10 @@ const T: L<Copy> = {
       recordPre:
         "A policy proved and then broken, and the exact call site where the gate sits in front of the action, are in the ",
       recordLink: "technical record",
+      plateNotes: [
+        { x: 44, y: 20, label: "SEALED · Ed25519 + ML-DSA-65", gold: true },
+        { x: 6, y: 86, label: "EVERY DECISION · ALLOW OR BLOCK" },
+      ],
     },
 
     engine: {
@@ -579,12 +629,17 @@ const T: L<Copy> = {
     closing: {
       titleA: "Probably safe is not",
       titleB: "provably impossible.",
-      body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action is checked before it executes: what’s authorized runs, sealed; what isn’t never executes.",
+      body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action routed through the gate is checked before it executes: what’s authorized runs, sealed; what isn’t never executes. And every result comes with what you need to verify it without us.",
       kicker: "Check every action. Run what complies. Stop the rest.",
       // The fine print under "provably impossible": what the proof covers, and
       // the one condition it rests on (the action can only run through the gate).
       scope:
         "Proven for the actions and the policy you define, where the action can only execute through the gate. The certificate states that boundary.",
+      notes: [
+        { x: 57, y: 80, label: "MARBLE · HUMAN INTENT" },
+        { x: 79, y: 12, label: "IRON · MACHINE RIGOUR" },
+        { x: 82, y: 56, label: "GOLD · THE PROOF", gold: true },
+      ],
     },
 
     cta: {
@@ -645,10 +700,10 @@ const T: L<Copy> = {
       eyebrow: "CE QU’EST IRONPROOF",
       title: "Un point de contrôle entre votre automatisation et les actions qu’on ne peut pas défaire.",
       lead: "Les agents IA, les API et les scripts peuvent déjà déplacer de l’argent, donner des accès, effacer des données et déployer du code, seuls. Ironproof se place devant ces actions et vérifie chacune contre vos règles avant qu’elle s’exécute.",
-      allowed: "Les actions autorisées",
-      allowedResult: "s’exécutent.",
-      blocked: "Les actions non autorisées,",
-      blockedResult: "jamais.",
+      refuse: "Pas d’autorisation.",
+      refuseResult: "Pas d’exécution.",
+      evidence: "Chaque décision",
+      evidenceResult: "appuyée par une preuve vérifiable.",
       pillars: [
         {
           title: "Vérifié avant, pas journalisé après",
@@ -686,6 +741,32 @@ const T: L<Copy> = {
 
     creditedBy: "RECHERCHE EN SÉCURITÉ PAR IRONPROOF — CRÉDITÉE PAR",
 
+    trio: {
+      eyebrow: "CE QUE VOUS OBTENEZ",
+      title: "Prouvé. Scellé. Vérifié sans nous.",
+      items: [
+        {
+          tag: "PROUVÉ MATHÉMATIQUEMENT",
+          title: "La certitude, là où elle existe.",
+          body: "Tout ce qui s’énonce avec précision, une politique, une fonction C, une traduction COBOL, un solveur prouve que ça tient dans tous les cas que le modèle permet, ou rend le cas exact qui le brise. Quand il ne peut pas conclure, il le dit.",
+          img: "/media/trio-proven.jpg",
+        },
+        {
+          tag: "SCELLÉ POST-QUANTIQUE",
+          title: "Chaque décision, gravée dans le métal.",
+          body: "Chaque résultat, une preuve, un contre-exemple ou une décision de la barrière, part dans un registre scellé avec Ed25519 et la signature post-quantique ML-DSA-65. Changez un chiffre et le sceau se brise.",
+          img: "/media/trio-sealed.jpg",
+        },
+        {
+          tag: "VÉRIFIABLE DE FAÇON INDÉPENDANTE",
+          title: "Mesuré par n’importe qui. Pas par nous.",
+          body: "Votre auditeur vérifie le sceau dans un navigateur et rejoue la preuve dans son propre solveur, à partir des obligations que nous livrons. Notre parole ne fait jamais partie du contrôle.",
+          img: "/media/trio-verifiable.jpg",
+        },
+      ],
+      foot: "Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas. Un sceau prouve que le registre est intact, pas que son contenu est vrai.",
+    },
+
     not: {
       eyebrow: "CE QU’IRONPROOF N’EST PAS",
       title: "Ni un tableau de bord, ni un garde-fou.",
@@ -720,6 +801,10 @@ const T: L<Copy> = {
       runEyebrow: "DÉJÀ FAIT",
       runTitle: "Vérifications menées — les échecs compris.",
       runNote: "Des labos sur des politiques publiées et du code open source, pas des systèmes de clients.",
+      plateNotes: [
+        { x: 47, y: 14, label: "ARMÉ · VÉRIFIÉ AVANT D’AGIR", gold: true },
+        { x: 74, y: 82, label: "IRRÉVERSIBLE UNE FOIS EXÉCUTÉ" },
+      ],
       run: [
         {
           name: "Autorisation infonuagique",
@@ -948,6 +1033,10 @@ const T: L<Copy> = {
       recordPre:
         "Une politique prouvée puis brisée, et l’endroit exact où la barrière se place devant l’action, sont dans le ",
       recordLink: "registre technique",
+      plateNotes: [
+        { x: 40, y: 20, label: "SCELLÉ · Ed25519 + ML-DSA-65", gold: true },
+        { x: 6, y: 86, label: "CHAQUE DÉCISION · PERMISE OU BLOQUÉE" },
+      ],
     },
 
     engine: {
@@ -968,10 +1057,15 @@ const T: L<Copy> = {
     closing: {
       titleA: "Probablement sûr, ce n’est pas",
       titleB: "prouvé impossible.",
-      body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; pour le reste, pas d’exécution.",
+      body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action qui passe par la barrière est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; le reste ne s’exécute jamais. Et chaque résultat vient avec ce qu’il faut pour le vérifier sans nous.",
       kicker: "Chaque action vérifiée. Ce qui est conforme s’exécute. Le reste, jamais.",
       scope:
         "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
+      notes: [
+        { x: 57, y: 80, label: "MARBRE · L’INTENTION HUMAINE" },
+        { x: 76, y: 12, label: "FER · LA RIGUEUR DE LA MACHINE" },
+        { x: 82, y: 56, label: "OR · LA PREUVE", gold: true },
+      ],
     },
 
     cta: {
@@ -984,7 +1078,22 @@ const T: L<Copy> = {
 
 /* A decorative photograph from the steel-and-gold series. The copy around it
  * carries the meaning, so the image is hidden from assistive tech. */
-function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boolean; position?: string }) {
+/** A callout drawn on a photograph, like a note on an engineering drawing.
+ *  x and y are percentages of the plate; the label names what the object
+ *  stands for in the product, never a number we have not measured. */
+type PlateNote = { x: number; y: number; label: string; gold?: boolean };
+
+function PhotoPlate({
+  src,
+  wide = false,
+  position,
+  notes,
+}: {
+  src: string;
+  wide?: boolean;
+  position?: string;
+  notes?: readonly PlateNote[];
+}) {
   if (!src) return null;
   return (
     <div className={`photo-plate fade-up${wide ? " photo-plate-wide" : ""}`} aria-hidden="true">
@@ -997,6 +1106,16 @@ function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boole
         className="object-cover"
         style={position ? { objectPosition: position } : undefined}
       />
+      <span className="plate-brackets" />
+      {notes?.map((n) => (
+        <span
+          key={n.label}
+          className={`plate-note${n.gold ? " plate-note-gold" : ""}`}
+          style={{ left: `${n.x}%`, top: `${n.y}%` }}
+        >
+          {n.label}
+        </span>
+      ))}
     </div>
   );
 }
@@ -1004,162 +1123,111 @@ function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boole
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const t = pick(T, locale);
+  const eng = pick(HERO_ENGINE_COPY, locale);
 
   return (
     <div className="flex flex-1 flex-col">
       {/* NAV */}
       <LandingHeader locale={locale} />
 
-      <main className="flex-1">
-        {/* 1. HERO — the product, in one sentence, before any mechanism */}
-        <section id="top" className="hero-agent relative z-10 flex items-center overflow-hidden px-6 md:px-14">
-          {/* A round vault door left ajar, gold light spilling out (Dom, 2026-10-15, chosen
-            * among the brand backgrounds over the initiators-at-the-door render,
-            * which told the old "any initiator, one gate" page). Full-bleed and
-            * melted into the page on every edge. */}
-          <div className="hero-agent-photo" aria-hidden="true">
-            <Image
-              src="/media/hero-vault-round.jpg"
-              alt=""
-              fill
-              preload
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="hero-agent-scrim" aria-hidden="true" />
-          {/* Phone: a 4:5 crop on the seam, above the copy,
-            * instead of the desktop frame squeezed behind the text. */}
-          <div className="hero-agent-mobile md:hidden" aria-hidden="true">
-            <Image
-              src="/media/hero-vault-round-m.jpg"
-              alt=""
-              fill
-              preload
-              sizes="100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="relative mx-auto grid w-full min-w-0 max-w-7xl grid-cols-1 items-center md:grid-cols-2">
+      <main className="blueprint flex-1">
+        {/* 1. HERO — white, iron and gold (Dom, 2026-10-15). The words on top,
+          * the statement left and the explanation right; the one brain of the
+          * site under them, full width: white marble for the intuition, iron
+          * for the rigour, gold where they meet. */}
+        <section id="top" className="hero-white relative z-10 overflow-hidden">
+          <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 pt-2 md:grid-cols-2 md:gap-16 md:px-14 md:pt-16">
             <div className="fade-up min-w-0">
-              {/* Three things, nothing else: what we are, the sentence, two doors.
-                * The explanation that used to sit here now opens the next screen. */}
-              {/* The full lockup opens the statement: a young name is learned by
-                * seeing it large once, even with the header 200 px above (Dom, 2026-09-26). */}
-              <div className="mb-8 flex items-center gap-5">
-                <IronproofMark height={112} preload className="h-16 w-auto md:h-24" />
-                <span className="track-logo iron-brushed text-2xl font-semibold max-[380px]:text-lg max-[380px]:tracking-[0.3em] md:text-4xl">IRONPROOF</span>
-              </div>
-              <p className="track-wide mb-7 text-xs text-neutral-300">{t.hero.eyebrow}</p>
-              {/* Set like a statement, not a poster: serif, sentence case, the
-                * consequence upright in the same brushed steel as the name (Dom, 2026-09-28: gold took the beauty out). */}
-              <h1 className="hero-serif mb-8 font-serif font-normal text-neutral-100">
+              <p className="hero-white-eyebrow track-wide mb-7 text-xs">{t.hero.eyebrow}</p>
+              <h1 className="hero-serif hero-white-title font-serif font-normal">
                 {t.hero.headline}
                 <br />
-                <em className="iron-brushed not-italic font-semibold">{t.hero.headlineEnd}</em>
+                <em className="not-italic font-semibold">{t.hero.headlineEnd}</em>
               </h1>
-              {/* The value line, right under the title (Dom, 2026-10-15). */}
-              <ul className="track-mid -mt-3 mb-8 space-y-1.5 text-xs text-seal">
+            </div>
+            <div className="hero-white-aside fade-up min-w-0 md:pt-14">
+              {/* The value line (Dom, 2026-10-15), in gold, then the boundary. */}
+              <ul className="hero-white-value track-mid mb-6 space-y-1.5 text-xs md:text-sm">
                 {t.hero.value.split(" · ").map((part) => (
                   <li key={part}>{part}</li>
                 ))}
               </ul>
-              <p className="mb-10 max-w-md text-sm font-light leading-relaxed text-neutral-400 md:text-base">
-                {/* The initiator list lives on the gate itself (AI AGENT, API, SCRIPT,
-                  * PERSON plates) and in #initiators; the hero keeps the claim only. */}
-                <span className="text-neutral-200">{t.hero.boundary}</span>
-              </p>
-              {/* One primary action (the site-wide CTA) and one quiet way in.
-                * "Verify a real decision" left the first screen: the vault has
-                * its own section further down. */}
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a
-                  href={`${r}/verify`}
-                  className="track-mid inline-flex items-center gap-3 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-                >
+              <p className="hero-white-lead mb-9 max-w-lg text-base leading-relaxed md:text-lg">{t.hero.boundary}</p>
+              <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
+                <a href={`${r}/verify`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
                 </a>
-                <a
-                  href={`${r}/evidence`}
-                  className="track-mid inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
-                >
+                <a href={`${r}/evidence`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
                   {t.hero.ctaEvidence} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
             </div>
           </div>
-        </section>
-
-        {/* 1a. ONE TECHNOLOGY, THREE APPLICATIONS, then the method (2026-10-13).
-          * Everything below, from THE PROBLEM on, details pillar 01: the gate. */}
-        <Platform locale={locale} />
-
-        {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
-          * mechanism: the reader understands the gap before the technology.
-          * The door pane carries the condition of the hero's sentence (an action
-          * that goes THROUGH the gate), so screen 2 qualifies screen 1. */}
-        <section id="problem" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up max-w-4xl">
-              <p className="seal-label track-mid mb-5 text-xs">{t.sheet.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
-                {t.sheet.title}
-              </h2>
-            </div>
-            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-2">
-              <div className="bg-ink px-7 py-9 md:px-10">
-                <p className="track-mid mb-5 text-xs text-neutral-200">01 · {t.sheet.sheetLabel}</p>
-                <p className="text-base font-light leading-relaxed text-neutral-400 md:text-lg">{t.sheet.sheetBody}</p>
-              </div>
-              <div className="bg-ink px-7 py-9 md:px-10">
-                <p className="seal-label track-mid mb-5 text-xs">02 · {t.sheet.doorLabel}</p>
-                <p className="text-base font-light leading-relaxed text-neutral-200 md:text-lg">{t.sheet.doorBody}</p>
+          {/* Three columns that never overlap: the language model, the brain, the
+            * solver and an example dossier (Dom, 2026-10-15: the language model on
+            * iron, the solver on gold, the dossier white, nothing on the brain). */}
+          <div className="hero-white-stage">
+            <div className="hero-stage-side hero-stage-left">
+              <div className="hero-card hero-card-iron">
+                <p className="hero-card-kicker track-mid">{eng.neural}</p>
+                <p className="hero-card-text">{eng.neuralLine}</p>
               </div>
             </div>
-            <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
-              {t.sheet.foot}
-            </p>
+            <div className="hero-white-brain-wrap">
+              <div className="hero-white-brain" aria-hidden="true">
+                <Image src="/media/hero-entity3.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
+              </div>
+              {/* Phone only: the three roles drawn on the head (Dom, 2026-10-15:
+                * "faut que les gens comprennent"). Lines: neural -> brain,
+                * symbolic -> brain, symbolic -> proven. */}
+              <div className="hero-map" aria-hidden="true">
+                <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+                  <polyline points="4,16 28,16 38,20" className="hero-map-line-iron" />
+                  <polyline points="96,16 72,16 58,18" className="hero-map-line-gold" />
+                  <polyline points="94,17 94,95 68,95" className="hero-map-line-gold hero-map-line-dash" />
+                </svg>
+                <span className="hero-map-dot hero-map-dot-iron" style={{ left: "38%", top: "20%" }} />
+                <span className="hero-map-dot hero-map-dot-gold" style={{ left: "58%", top: "18%" }} />
+                <p className="hero-map-tag hero-map-neural"><b>{eng.map.neural}</b>{eng.map.neuralRole}</p>
+                <p className="hero-map-tag hero-map-symbolic"><b>{eng.map.symbolic}</b>{eng.map.symbolicRole}</p>
+                <p className="hero-map-tag hero-map-proven"><b><span className="hero-dossier-dot" /> {eng.map.proven}</b>{eng.map.provenRole}</p>
+              </div>
+            </div>
+            <div className="hero-stage-side hero-stage-right">
+              <div className="hero-card hero-card-gold">
+                <p className="hero-card-kicker track-mid">{eng.symbolic}</p>
+                <p className="hero-card-text">{eng.symbolicLine}</p>
+                {/* The real shape of a proof, not decoration: assert the negation; unsat means it holds. */}
+                <pre className="hero-card-smt" aria-hidden="true">{"(assert (not P))\n(check-sat)  ; unsat\n∴ P holds"}</pre>
+              </div>
+              {/* An example dossier, labelled as one, that opens the real thing:
+                * /verify checks sealed dossiers in the visitor's own browser. */}
+              <a href={`${r}/verify`} className="hero-dossier">
+                <p className="hero-dossier-tag track-mid">{eng.dossierTag}</p>
+                <p className="hero-dossier-verdict">
+                  <span className="hero-dossier-dot" aria-hidden="true" /> {eng.dossierVerdict}
+                </p>
+                <p className="hero-dossier-scope">{eng.dossierScope}</p>
+                <p className="hero-dossier-seal track-mid">{eng.dossierSeal}</p>
+                <p className="hero-dossier-link track-mid">
+                  {eng.dossierLink} <span aria-hidden="true">&rarr;</span>
+                </p>
+              </a>
+            </div>
           </div>
+          {/* The method in four words, on one hairline. */}
+          <ol className="hero-steps track-mid">
+            {eng.steps.map((step, i) => (
+              <li key={step} className={i === 2 ? "hero-step-seal" : undefined}>
+                <span className="hero-step-dot" aria-hidden="true" />
+                {step}
+              </li>
+            ))}
+          </ol>
         </section>
 
-        {/* 2. WHAT IRONPROOF IS — the product in plain words, before any mechanism */}
-        <section id="what" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up max-w-4xl">
-              <p className="seal-label track-mid mb-5 text-xs">{t.what.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
-                {t.what.title}
-              </h2>
-              <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
-                {t.what.lead}
-              </p>
-            </div>
-            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
-              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-seal">{t.what.allowed}</span>{" "}
-                <span>{t.what.allowedResult}</span>
-              </p>
-              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-[#ffb4b4]">{t.what.blocked}</span>{" "}
-                <span>{t.what.blockedResult}</span>
-              </p>
-            </div>
-            <ol className="fade-up mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
-              {t.what.pillars.map((p, i) => (
-                <li key={p.title} className="border-t border-white/10 pt-6">
-                  <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 font-serif text-2xl text-neutral-100">{p.title}</h3>
-                  <p className="mt-3 text-base font-light leading-relaxed text-neutral-400">{p.body}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* 3. WATCH IT DECIDE — four action classes, one gate */}
-        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
-
-        {/* CREDITED-BY STRIP */}
+        {/* CREDITED-BY STRIP — right under the hero (Dom, 2026-10-15: « plus au début »):
+          * the vendors who credited our research, before any explanation. */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <span className="track-mid text-xs text-neutral-500">{t.creditedBy}</span>
@@ -1178,6 +1246,110 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* 1a. THE TRIO — proven, sealed, verifiable: the hero's value line made
+          * into three tiles with three photographs of one family (Dom,
+          * 2026-10-15, after Pramaana's formal truth / accelerated trust row).
+          * Each body reuses a sentence already ratified elsewhere on the site. */}
+        <section id="trio" className="relative z-10 edge-t px-6 py-24 md:px-14 md:py-28">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.trio.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.trio.title}</h2>
+            </div>
+            <ol className="trio fade-up mt-14">
+              {t.trio.items.map((it, i) => (
+                <li key={it.tag} className="trio-tile">
+                  <div className="trio-media">
+                    <Image src={it.img} alt="" fill sizes="(min-width: 900px) 30vw, 100vw" className="object-cover" />
+                    <span className="plate-brackets" aria-hidden="true" />
+                    <span className="plate-note plate-note-gold trio-tag">{String(i + 1).padStart(2, "0")} · {it.tag}</span>
+                  </div>
+                  <h3 className="trio-title font-serif">{it.title}</h3>
+                  <p className="trio-body">{it.body}</p>
+                </li>
+              ))}
+            </ol>
+            <p className="fade-up mt-12 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{t.trio.foot}</p>
+          </div>
+        </section>
+
+        {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
+          * mechanism: the reader understands the gap before the technology.
+          * The door pane carries the condition of the hero's sentence (an action
+          * that goes THROUGH the gate), so screen 2 qualifies screen 1. */}
+        <section id="problem" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.sheet.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
+                {t.sheet.title}
+              </h2>
+            </div>
+            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-2">
+              <div className="bg-ink px-7 py-9 md:px-10">
+                <p className="sheet-label track-mid mb-5 text-xs">01 · {t.sheet.sheetLabel}</p>
+                <p className="text-base font-light leading-relaxed text-neutral-400 md:text-lg">{t.sheet.sheetBody}</p>
+              </div>
+              <div className="bg-ink px-7 py-9 md:px-10">
+                <p className="seal-label track-mid mb-5 text-xs">02 · {t.sheet.doorLabel}</p>
+                <p className="text-base font-light leading-relaxed text-neutral-200 md:text-lg">{t.sheet.doorBody}</p>
+              </div>
+            </div>
+            <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
+              {t.sheet.foot}
+            </p>
+          </div>
+        </section>
+
+        {/* 2. WHAT IRONPROOF IS — the product in plain words, before any mechanism */}
+        <section id="what" className="relative z-10 edge-t px-6 pt-28 pb-10 md:px-14 md:pt-32 md:pb-12">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.what.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
+                {t.what.title}
+              </h2>
+              <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
+                {t.what.lead}
+              </p>
+            </div>
+            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
+              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
+                <span className="text-[#a3392f]">{t.what.refuse}</span>{" "}
+                <span>{t.what.refuseResult}</span>
+              </p>
+              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
+                <span className="text-seal">{t.what.evidence}</span>{" "}
+                <span>{t.what.evidenceResult}</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
+          * under the checkpoint line (Dom, 2026-10-15: too much reading before
+          * the gate); the three pillars now follow the video. */}
+        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
+
+        {/* 3b. THE THREE PILLARS of the checkpoint, after the reader has seen it work. */}
+        <section id="pillars" className="relative z-10 px-6 pb-24 md:px-14 md:pb-28">
+          <div className="mx-auto max-w-6xl">
+            <ol className="fade-up grid gap-10 md:grid-cols-3 md:gap-12">
+              {t.what.pillars.map((p, i) => (
+                <li key={p.title} className="border-t border-white/10 pt-6">
+                  <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="mt-3 font-serif text-2xl text-neutral-100">{p.title}</h3>
+                  <p className="mt-3 text-base font-light leading-relaxed text-neutral-400">{p.body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* The method, the three applications and the research now come after the
+          * gate (Dom, 2026-10-15: the video was too far down the page). */}
+        <Platform locale={locale} />
+
         {/* WHERE IT APPLIES — three domains, with the rules that already exist */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
           <div className="fade-up mb-14 max-w-3xl">
@@ -1190,7 +1362,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/critical-switches.jpg" position="50% 55%" />
+            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" notes={t.domains.plateNotes} />
           </div>
           {/* What has run first, with its number; then where it applies, with its
             * rule. The two never share a list (2026-10-13). */}
@@ -1241,7 +1413,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * flowing between the towers like payments that no longer wait for a
             * person (Dom, 2026-09-26). Darkened so the dated cards stay the subject. */}
           <div className="breath-photo breath-photo-deep" aria-hidden="true">
-            <Image src="/media/district-night.jpg" alt="" fill sizes="100vw" className="object-cover" />
+            <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
           </div>
           <div className="mx-auto max-w-7xl">
           <div className="fade-up mb-12 max-w-3xl">
@@ -1290,7 +1462,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * Brought from /proof, which most visitors never reach. */}
           <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
             <Image
-              src="/media/broken-chain.jpg"
+              src="/media/broken-chain-white.jpg"
               alt=""
               fill
               sizes="(min-width: 1152px) 1152px, 100vw"
@@ -1322,7 +1494,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             {/* The one image here: the decision struck into steel, with logo 09
               * (Dom, 2026-09-26). */}
-            <PhotoPlate src="/media/seal-press-logo09.jpg" wide position="50% 55%" />
+            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" notes={t.how.plateNotes} />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
@@ -1339,16 +1511,30 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-
-        {/* CLOSING — a closed vault door with a gold ring in a black marble hall
+        {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
+          * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas
+          * le reste »), the same family as the trio and the applications.
+          * History: a closed vault door with a gold ring in a black marble hall
           * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
           * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
           * of the act in the body: what is proven runs, the rest never executes. */}
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-vault-marble.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-vault-marble-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+            </div>
+            {/* The bust read like a figure on a sheet: what each material stands for. */}
+            <div className="closing-notes" aria-hidden="true">
+              {t.closing.notes.map((n) => (
+                <span
+                  key={n.label}
+                  className={`plate-note${n.gold ? " plate-note-gold" : ""}`}
+                  style={{ left: `${n.x}%`, top: `${n.y}%` }}
+                >
+                  {n.label}
+                </span>
+              ))}
             </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
@@ -1365,12 +1551,21 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               >
                 {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
               </a>
+              {/* The hero's four steps again, as the page's last line: the story
+                * closes on the method it opened with. */}
+              <ol className="hero-steps closing-steps track-mid">
+                {eng.steps.map((step, i) => (
+                  <li key={step} className={i === 2 ? "hero-step-seal" : undefined}>
+                    <span className="hero-step-dot" aria-hidden="true" />
+                    {step}
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
 
       </main>
-
 
       <FadeUpInit />
     </div>
@@ -1385,7 +1580,7 @@ export function CounterexampleBreath({ locale = defaultLocale }: { locale?: Loca
       <section className="relative z-10 isolate overflow-hidden px-6 py-28 md:px-14 md:py-32">
         {/* One missing link and the chain parts: the removed clause, as an object. */}
         <div className="breath-photo" aria-hidden="true">
-          <Image src="/media/broken-chain.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          <Image src="/media/broken-chain-white.jpg" alt="" fill sizes="100vw" className="object-cover" />
         </div>
         <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
           <span className="breath-mark" aria-hidden="true" />

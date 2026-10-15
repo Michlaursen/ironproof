@@ -7,15 +7,17 @@
  * chrome silver. Every component reads these tokens, not hardcoded hex.
  */
 :root {
-  --background: #050506;
-  --surface: #0a0a0c;
-  --surface-2: #101014;
-  --foreground: #e9ecf3;
-  --muted: #8b8b92;
-  --border: #1c1c20;
-  --accent: #e8ebf5;
-  --accent-foreground: #050506;
-  --seal: #c9a24b;
+  /* White, iron and gold (Dom, 2026-10-15). The page is the studio floor of the
+   * brain photograph; text is forged iron; gold is kept for what is sealed. */
+  --background: #e7e5e2;
+  --surface: #efedea;
+  --surface-2: #f4f2ef;
+  --foreground: #1f2125;
+  --muted: #5b5f66;
+  --border: #cfccc7;
+  --accent: #24262a;
+  --accent-foreground: #f4f3f1;
+  --seal: #a8843a;
 }
 
 @theme inline {
@@ -23,8 +25,23 @@
      neutral-500 is 4.30:1 and neutral-600 is 2.61:1 -- both under WCAG AA
      (4.5:1) for body text. Lifted once, here, so every use follows:
      500 -> 5.90:1, 600 -> 4.75:1. 400 (8.08:1) already passes. */
-  --color-neutral-500: #8a8a8a;
-  --color-neutral-600: #7a7a7a;
+  /* The neutral scale is turned over for the white edition: the classes that
+     meant "light text on black" now mean "iron text on white", so every page
+     follows without touching each component. Contrast on #e7e5e2: 400 is
+     5.2:1, 500 4.5:1. */
+  --color-neutral-50: #16181b;
+  --color-neutral-100: #1d1f23;
+  --color-neutral-200: #2a2c31;
+  --color-neutral-300: #3a3d43;
+  --color-neutral-400: #4e5259;
+  --color-neutral-500: #5b5f66;
+  --color-neutral-600: #6b6f76;
+  --color-neutral-700: #a9aaad;
+  --color-neutral-800: #cfcdc9;
+  --color-neutral-900: #dddbd7;
+  --color-neutral-950: #ecebe8;
+  --color-white: #1d1f23;
+  --color-black: #f2f1ee;
   --color-background: var(--background);
   --color-surface: var(--surface);
   --color-surface-2: var(--surface-2);
@@ -34,8 +51,8 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-seal: var(--seal);
-  --color-ink: #050506;
-  --color-panel: #0a0a0c;
+  --color-ink: #f4f3f1;
+  --color-panel: #efedea;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-eb-garamond);
   --font-mono: var(--font-jetbrains);
@@ -49,7 +66,7 @@ html {
    * checkboxes, range tracks, form controls. Without it the UA paints its light
    * defaults — the demo's approval checkbox was a solid white square on black,
    * and the scrollbar a white bar on every platform that reserves one. */
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
@@ -180,23 +197,23 @@ summary:focus-visible {
 .metal-text {
   padding-bottom: 0.12em; /* descender clip — see note above */
   /* Brighter floor — no thin/dark bands (Miguel: white too thin). */
-  background: linear-gradient(180deg, #ffffff 0%, #f2f3f7 26%, #d8dbe4 50%, #f2f3f7 74%, #cfd3de 100%);
+  background: linear-gradient(180deg, #3a3d43 0%, #1d1f23 45%, #2a2c31 70%, #4e5259 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   /* No outer glow: a halo behind a serif headline reads as a game title, not a
    * statement (Dom, 2026-09-26). The 1px shadow keeps the edge on black. */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
+  filter: none;
 }
 
 .metal-shine {
   padding-bottom: 0.12em; /* descender clip — see note above */
-  background: linear-gradient(110deg, #c6cad4 0%, #ffffff 22%, #e4e7ee 38%, #ffffff 55%, #d2d6e0 72%, #ffffff 88%, #dfe2ea 100%);
+  background: linear-gradient(110deg, #1d1f23 0%, #4e5259 22%, #1d1f23 45%, #a8843a 55%, #1d1f23 70%, #3a3d43 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
+  filter: none;
   animation: sweep 7s linear infinite;
 }
 @keyframes sweep {
@@ -241,16 +258,15 @@ summary:focus-visible {
  * the PDF documents, which cannot load a texture from /media. */
 .iron-brushed {
   background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.25)),
+    linear-gradient(180deg, rgba(29, 31, 35, 0.72), rgba(29, 31, 35, 0.86) 50%, rgba(29, 31, 35, 0.7)),
     url("/media/steel-brushed.jpg");
   background-size: 100% 100%, 240px auto;
   background-position: 0 0, center;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter:
-    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.28))
-    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+  /* White edition: dark forged iron on a light floor, a hair of light on the lower edge. */
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.6));
 }
 
 .track-wide { letter-spacing: 0.5em; }
@@ -291,10 +307,11 @@ summary:focus-visible {
 
 .card-premium {
   position: relative;
-  background: linear-gradient(160deg, #0e0e12 0%, #070709 100%);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  /* White edition: a sheet of paper on the floor, iron hairline, soft shadow. */
+  background: linear-gradient(160deg, #f6f5f2 0%, #efedea 100%);
+  border: 1px solid rgba(36, 38, 42, 0.08);
   border-radius: 6px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 20px 50px -20px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 18px 40px -24px rgba(36, 38, 42, 0.35);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 /* Top-lit gradient edge — brushed-metal contour that catches light and fades down. */
@@ -306,9 +323,9 @@ summary:focus-visible {
   padding: 1px;
   background: linear-gradient(
     180deg,
-    rgba(228, 233, 255, 0.32),
-    rgba(228, 233, 255, 0.06) 34%,
-    rgba(228, 233, 255, 0.02) 100%
+    rgba(168, 132, 58, 0.35),
+    rgba(36, 38, 42, 0.06) 34%,
+    rgba(36, 38, 42, 0.02) 100%
   );
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -318,16 +335,15 @@ summary:focus-visible {
 .card-premium:hover {
   transform: translateY(-2px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 30px 64px -22px rgba(0, 0, 0, 0.92),
-    0 0 30px -6px rgba(150, 170, 255, 0.14);
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 26px 52px -24px rgba(36, 38, 42, 0.45);
 }
 .card-premium:hover::before {
   background: linear-gradient(
     180deg,
-    rgba(228, 233, 255, 0.52),
-    rgba(228, 233, 255, 0.1) 38%,
-    rgba(228, 233, 255, 0.03) 100%
+    rgba(168, 132, 58, 0.6),
+    rgba(36, 38, 42, 0.1) 38%,
+    rgba(36, 38, 42, 0.03) 100%
   );
 }
 @media (prefers-reduced-motion: reduce) {
@@ -346,7 +362,7 @@ summary:focus-visible {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(220, 225, 255, 0.16), transparent);
+  background: linear-gradient(90deg, transparent, rgba(36, 38, 42, 0.18), transparent);
 }
 
 .edge-b {
@@ -359,7 +375,7 @@ summary:focus-visible {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(220, 225, 255, 0.14), transparent);
+  background: linear-gradient(90deg, transparent, rgba(36, 38, 42, 0.16), transparent);
 }
 
 /* Soft radial halo used behind hero / key headings. */
@@ -373,9 +389,9 @@ summary:focus-visible {
 
 .chip-metal {
   position: relative;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.35));
+  border: 1px solid rgba(36, 38, 42, 0.12);
+  box-shadow: 0 1px 2px rgba(36, 38, 42, 0.08);
   border-radius: 5px;
 }
 /* Same top-lit contour as the cards, subtler — cohesion across the metal system. */
@@ -558,8 +574,8 @@ summary:focus-visible {
 }
 
 /* The verdict word on a sealed artifact. Same lift as .icon-metal, tinted. */
-.word-allow { color: #a7f3d0; filter: drop-shadow(0 0 14px rgba(52, 211, 153, 0.35)); }
-.word-block { color: #fecaca; filter: drop-shadow(0 0 14px rgba(248, 113, 113, 0.32)); }
+.word-allow { color: #2f6f4a; }
+.word-block { color: #a3392f; }
 
 /* Iron-lit card — the third register, and the only one without a hue.
  * Once ALLOW and BLOCK own green and red, a card that states a frame rather
@@ -982,7 +998,7 @@ p, li {
   font-size: 10px;
   letter-spacing: 0.22em;
   color: #9aa2b4;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 -1px 0 rgba(0, 0, 0, 0.9);
+  text-shadow: none;
 }
 .hsm-status {
   display: inline-flex;
@@ -1053,7 +1069,7 @@ p, li {
   background: linear-gradient(115deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.015) 22%, transparent 40%, transparent 70%, rgba(255, 255, 255, 0.04) 85%, transparent 100%);
 }
 .hsm[data-state="VERIFIED"] .hsm-bay { outline-color: rgba(201, 162, 75, 0.8); }
-.hsm[data-state="FAILED"] .hsm-bay { outline-color: rgba(255, 150, 150, 0.6); }
+.hsm[data-state="FAILED"] .hsm-bay { outline-color: rgba(163,57,47, 0.6); }
 .hsm-foot {
   display: flex;
   align-items: center;
@@ -1233,3 +1249,1681 @@ p, li {
 .closing-trio:has(.closing-band-photo) {
   padding-top: 0;
 }
+
+/* HERO, white edition (Dom, 2026-10-15): white, iron and gold. The page tone
+   matches the studio floor of the brain photograph so the image has no edge. */
+.hero-white {
+  --paper: #e6e4e1;
+  --iron: #24262a;
+  --graphite: #5b5f66;
+  --gold: #a8843a;
+  background: var(--paper);
+  color: var(--iron);
+}
+.hero-white-eyebrow { color: var(--graphite); }
+.hero-white-title { color: var(--iron); }
+.hero-white-title em { color: var(--iron); }
+.hero-white-value { color: var(--gold); }
+.hero-white-lead { color: var(--graphite); }
+.hero-white-cta {
+  background: var(--iron);
+  color: #f4f3f1;
+  transition: background 0.2s ease;
+}
+.hero-white-cta:hover { background: #000; }
+.hero-white-link {
+  color: var(--iron);
+  border-color: rgba(36, 38, 42, 0.3);
+  transition: border-color 0.2s ease;
+}
+.hero-white-link:hover { border-color: var(--gold); }
+.hero-white-brain {
+  position: relative;
+  width: 100%;
+  height: min(56vh, 40vw);
+  margin-top: 0.5rem;
+  /* Melted into the page at the top: the copy sits on the same floor. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 10%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 10%);
+}
+.hero-white-brain img { object-position: 50% 58%; }
+@media (max-width: 767px) {
+  /* Phone: the brain opens the screen, the statement follows on the same floor. */
+  .hero-white { display: flex; flex-direction: column; padding-bottom: 3rem; }
+  .hero-white-brain {
+    order: -1;
+    height: 34svh;
+    margin-top: 0;
+    -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
+  }
+  .hero-white-brain img { object-position: 50% 62%; transform: scale(1.1); }
+}
+
+/* Hero engine (Dom, 2026-10-15): three columns that never overlap. The brain
+   sits in its own column; the language model on an iron card to its left, the
+   solver on a gold card and an example dossier (white) to its right. */
+.hero-white-lead { color: var(--iron); opacity: 0.82; }
+.hero-white-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 46rem) minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 96rem;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+}
+.hero-white-stage .hero-white-brain {
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  /* The floor melts into the page on every side. */
+  -webkit-mask-image: radial-gradient(ellipse 54% 54% at 50% 50%, #000 58%, transparent 98%);
+  mask-image: radial-gradient(ellipse 54% 54% at 50% 50%, #000 58%, transparent 98%);
+}
+.hero-white-stage .hero-white-brain img { object-position: 50% 60%; transform: scale(1.3); }
+.hero-stage-side { display: flex; flex-direction: column; gap: 1rem; }
+.hero-stage-left { align-items: flex-end; }
+.hero-stage-right { align-items: flex-start; }
+.hero-card {
+  width: 100%;
+  max-width: 17rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.hero-card-kicker { font-size: 0.64rem; margin-bottom: 0.55rem; }
+/* Iron: the language model (Dom, 2026-10-15). */
+.hero-card-iron {
+  background: linear-gradient(160deg, #2c2e33 0%, #1b1d20 100%);
+  color: #d9d7d2;
+  box-shadow: 0 22px 44px -26px rgba(20, 22, 25, 0.7);
+}
+.hero-card-iron .hero-card-kicker { color: #f1efe9; }
+/* Gold: the solver (Dom, 2026-10-15). */
+.hero-card-gold {
+  background: linear-gradient(160deg, #d8b866 0%, #b8913f 100%);
+  color: #24262a;
+  box-shadow: 0 22px 44px -26px rgba(120, 90, 30, 0.6);
+}
+.hero-card-gold .hero-card-kicker { color: #1b1d20; }
+.hero-card-smt { color: #c9a24b; border-top-color: rgba(241, 239, 233, 0.15); }
+.hero-card-smt {
+  margin-top: 0.8rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(36, 38, 42, 0.25);
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.68rem;
+  line-height: 1.6;
+  white-space: pre;
+}
+.hero-dossier {
+  width: 100%;
+  max-width: 17rem;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  background: #f6f5f2;
+  border: 1px solid rgba(36, 38, 42, 0.12);
+  border-top: 1px solid var(--gold);
+  border-radius: 4px;
+  box-shadow: 0 18px 40px -26px rgba(36, 38, 42, 0.45);
+}
+.hero-dossier-tag { font-size: 0.6rem; color: var(--graphite); margin-bottom: 0.5rem; }
+.hero-dossier-verdict { font-family: var(--font-eb-garamond), serif; font-size: 1.35rem; color: var(--iron); line-height: 1.1; }
+.hero-dossier-dot { display: inline-block; width: 0.45rem; height: 0.45rem; margin-right: 0.35rem; border-radius: 50%; background: #2f6f4a; vertical-align: middle; }
+.hero-dossier-scope { margin-top: 0.25rem; font-size: 0.72rem; color: var(--graphite); }
+.hero-dossier-seal { margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px solid rgba(36, 38, 42, 0.1); font-size: 0.62rem; color: var(--gold); }
+.hero-dossier-check { margin-top: 0.2rem; font-size: 0.72rem; color: var(--graphite); }
+.hero-steps {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 1.6rem 1.5rem 3.5rem;
+  font-size: 0.68rem;
+  color: var(--iron);
+  list-style: none;
+}
+.hero-steps::before {
+  content: "";
+  position: absolute;
+  left: 2.5rem;
+  right: 2.5rem;
+  top: calc(1.6rem + 0.22rem);
+  height: 1px;
+  background: linear-gradient(90deg, rgba(36, 38, 42, 0.15), var(--gold) 50%, rgba(36, 38, 42, 0.15));
+}
+.hero-steps li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+.hero-step-dot { width: 0.45rem; height: 0.45rem; border-radius: 50%; background: var(--paper); border: 1px solid var(--iron); }
+.hero-step-seal .hero-step-dot { background: var(--gold); border-color: var(--gold); }
+/* Below a laptop: the brain on top, the three cards under it, side by side
+   when they fit, stacked on a phone. */
+@media (max-width: 1023px) {
+  .hero-white-stage { grid-template-columns: 1fr 1fr; }
+  .hero-white-stage .hero-white-brain { grid-column: 1 / -1; grid-row: 1; max-width: 40rem; width: 100%; justify-self: center; }
+  .hero-stage-left, .hero-stage-right { align-items: stretch; }
+  .hero-card, .hero-dossier { max-width: none; }
+}
+@media (max-width: 767px) {
+  .hero-white-stage { order: -1; grid-template-columns: 1fr; gap: 1rem; margin-top: 0; }
+  .hero-stage-side { display: none; }
+  .hero-steps { flex-wrap: wrap; gap: 1rem 0; padding: 1.6rem 1.5rem 0; font-size: 0.6rem; }
+  .hero-steps li { width: 50%; }
+  .hero-steps::before { display: none; }
+}
+
+/* Leader lines (Dom, 2026-10-15): each card is tied to its half of the brain,
+   in the colour that reads on what it touches: iron on the white marble half,
+   gold on the iron half. A dot marks where the line lands. */
+.hero-card { position: relative; z-index: 2; }
+.hero-card-iron { max-width: 18.5rem; }
+.hero-card-gold .hero-card-smt { color: #1b1d20; }
+.hero-stage-left .hero-card::after,
+.hero-stage-right .hero-card::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9rem;
+  height: 1px;
+}
+.hero-stage-left .hero-card::after {
+  left: 100%;
+  background: linear-gradient(90deg, #24262a 0%, #24262a calc(100% - 0.4rem), transparent calc(100% - 0.4rem));
+}
+.hero-stage-right .hero-card::before {
+  right: 100%;
+  width: 11rem;
+  background: linear-gradient(270deg, var(--gold) 0%, var(--gold) calc(100% - 0.4rem), transparent calc(100% - 0.4rem));
+}
+.hero-stage-left .hero-card > .hero-card-kicker::after,
+.hero-stage-right .hero-card > .hero-card-kicker::before {
+  content: "";
+  position: absolute;
+  top: calc(50% - 0.2rem);
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+}
+.hero-stage-left .hero-card > .hero-card-kicker::after { left: calc(100% + 9rem - 0.4rem); background: #24262a; }
+.hero-stage-right .hero-card > .hero-card-kicker::before { right: calc(100% + 11rem - 0.4rem); background: var(--gold); box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.25); }
+@media (max-width: 1023px) {
+  .hero-stage-left .hero-card::after,
+  .hero-stage-right .hero-card::before,
+  .hero-stage-left .hero-card > .hero-card-kicker::after,
+  .hero-stage-right .hero-card > .hero-card-kicker::before { display: none; }
+}
+
+/* Refinement (Dom, 2026-10-15): the brain ~20% larger and dominant, a lighter
+   gold, calmer type, and two micro-animations that carry meaning: the leader
+   lines draw from each card to the brain, and the method line lights its four
+   steps in order, once. Both are skipped under reduced motion. */
+.hero-white-stage { grid-template-columns: minmax(0, 1fr) minmax(0, 55rem) minmax(0, 1fr); gap: 1rem; }
+.hero-white-stage .hero-white-brain img { transform: scale(1.38); }
+.hero-card { padding: 1.25rem 1.35rem; font-size: 0.8rem; line-height: 1.65; }
+.hero-card-kicker { letter-spacing: 0.22em; font-size: 0.6rem; margin-bottom: 0.65rem; }
+.hero-card-gold {
+  background: linear-gradient(160deg, #f3ead6 0%, #eadbb6 100%);
+  color: #2a2c31;
+  border-left: 2px solid var(--gold);
+  box-shadow: 0 18px 40px -28px rgba(120, 90, 30, 0.45);
+}
+.hero-card-gold .hero-card-kicker { color: #8a6a2a; }
+.hero-card-smt { font-size: 0.66rem; opacity: 0.85; }
+.hero-dossier-check { display: none; }
+.hero-dossier { padding: 0.85rem 1.1rem; }
+/* The two leader lines draw in once the cards appear. */
+@keyframes hero-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes hero-dot { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes hero-step { from { background: var(--paper); border-color: rgba(36, 38, 42, 0.35); } to { background: var(--iron); border-color: var(--iron); } }
+.hero-stage-left .hero-card::after { transform-origin: left center; animation: hero-draw 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.6s both; }
+.hero-stage-right .hero-card::before { transform-origin: right center; animation: hero-draw 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.9s both; }
+.hero-stage-right .hero-card > .hero-card-kicker::before { animation: hero-dot 3.2s ease-in-out 2s infinite; }
+.hero-steps li:nth-child(1) .hero-step-dot { animation: hero-step 0.5s ease 1.4s both; }
+.hero-steps li:nth-child(2) .hero-step-dot { animation: hero-step 0.5s ease 1.9s both; }
+.hero-steps li:nth-child(4) .hero-step-dot { animation: hero-step 0.5s ease 2.9s both; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage-left .hero-card::after,
+  .hero-stage-right .hero-card::before,
+  .hero-stage-right .hero-card > .hero-card-kicker::before,
+  .hero-steps .hero-step-dot { animation: none; }
+}
+/* Phone: brain, then the statement, then the two cards and the method. */
+@media (max-width: 767px) {
+  .hero-white-stage { display: contents; }
+  .hero-white-stage .hero-white-brain { order: -1; aspect-ratio: 1 / 1; max-width: none; }
+  .hero-white-stage .hero-white-brain img { transform: scale(1.55); object-position: 50% 58%; }
+  .hero-stage-side { display: flex; order: 2; padding: 0 1.5rem; margin-top: 1rem; }
+  .hero-stage-right .hero-dossier { display: none; }
+  .hero-card { max-width: none; }
+  .hero-steps { order: 3; }
+}
+/* Sharp crop of the full-size photograph instead of a zoom (Dom, 2026-10-15). */
+.hero-white-stage .hero-white-brain img { transform: none; object-position: 50% 50%; }
+.hero-white-stage .hero-white-brain {
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 100%);
+}
+@media (max-width: 767px) {
+  .hero-white-stage .hero-white-brain img { transform: none; object-position: 50% 45%; }
+}
+/* The cards keep a readable width; the brain takes what is left, up to 55rem. */
+@media (min-width: 1024px) {
+  .hero-white-stage { grid-template-columns: minmax(15rem, 1fr) minmax(0, 55rem) minmax(15rem, 1fr); }
+}
+
+/* Final pass (Dom, 2026-10-15). SYMBOLIC on ivory with a thin gold border,
+   so the brain stays the loudest thing on the screen. */
+.hero-card-gold {
+  background: linear-gradient(160deg, #faf7ef 0%, #f3eee2 100%);
+  border: 1px solid rgba(168, 132, 58, 0.55);
+  border-left: 1px solid rgba(168, 132, 58, 0.55);
+  box-shadow: 0 18px 40px -30px rgba(120, 90, 30, 0.35);
+}
+.hero-card-gold .hero-card-kicker { color: #8a6a2a; }
+.hero-card-gold .hero-card-smt { border-top-color: rgba(168, 132, 58, 0.3); }
+
+/* One pulse, one direction, every 9 s: the language model proposes, the solver
+   decides, the dossier records PROVEN, the seal closes it. A point of light
+   runs the two leader lines; the cards and the dossier lines brighten in turn.
+   Nothing new on screen: only what is already there, lit in order. */
+.hero-stage-left .hero-card::after {
+  background-image:
+    linear-gradient(90deg, transparent, #c9a24b 45%, #f1dca4 50%, #c9a24b 55%, transparent),
+    linear-gradient(90deg, #24262a 0%, #24262a calc(100% - 0.4rem), transparent calc(100% - 0.4rem));
+  background-size: 2.5rem 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -2.5rem 0, 0 0;
+  animation: hero-draw 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.6s both, hero-run-left 9s ease-in-out 2.5s infinite;
+}
+.hero-stage-right .hero-card::before {
+  background-image:
+    linear-gradient(90deg, transparent, #fff3cf 45%, #ffffff 50%, #fff3cf 55%, transparent),
+    linear-gradient(270deg, var(--gold) 0%, var(--gold) calc(100% - 0.4rem), transparent calc(100% - 0.4rem));
+  background-size: 2.5rem 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: -2.5rem 0, 0 0;
+  animation: hero-draw 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.9s both, hero-run-right 9s ease-in-out 2.5s infinite;
+}
+@keyframes hero-run-left {
+  0% { background-position: -2.5rem 0, 0 0; }
+  14% { background-position: calc(100% + 2.5rem) 0, 0 0; }
+  100% { background-position: calc(100% + 2.5rem) 0, 0 0; }
+}
+@keyframes hero-run-right {
+  0%, 22% { background-position: -2.5rem 0, 0 0; }
+  36% { background-position: calc(100% + 2.5rem) 0, 0 0; }
+  100% { background-position: calc(100% + 2.5rem) 0, 0 0; }
+}
+@keyframes hero-glow-iron {
+  0%, 2% { box-shadow: 0 22px 44px -26px rgba(20, 22, 25, 0.7); }
+  6% { box-shadow: 0 22px 44px -26px rgba(20, 22, 25, 0.7), 0 0 0 1px rgba(201, 162, 75, 0.7); }
+  14%, 100% { box-shadow: 0 22px 44px -26px rgba(20, 22, 25, 0.7); }
+}
+@keyframes hero-glow-gold {
+  0%, 34% { box-shadow: 0 18px 40px -30px rgba(120, 90, 30, 0.35); border-color: rgba(168, 132, 58, 0.55); }
+  40% { box-shadow: 0 18px 40px -30px rgba(120, 90, 30, 0.35), 0 0 0 3px rgba(201, 162, 75, 0.18); border-color: rgba(168, 132, 58, 1); }
+  50%, 100% { box-shadow: 0 18px 40px -30px rgba(120, 90, 30, 0.35); border-color: rgba(168, 132, 58, 0.55); }
+}
+@keyframes hero-glow-proven {
+  0%, 46% { box-shadow: 0 0 0 0 rgba(47, 111, 74, 0); }
+  52% { box-shadow: 0 0 0 4px rgba(47, 111, 74, 0.18); }
+  60%, 100% { box-shadow: 0 0 0 0 rgba(47, 111, 74, 0); }
+}
+@keyframes hero-glow-seal {
+  0%, 56% { color: var(--gold); text-shadow: none; }
+  62% { color: #8a6a2a; text-shadow: 0 0 10px rgba(201, 162, 75, 0.45); }
+  72%, 100% { color: var(--gold); text-shadow: none; }
+}
+.hero-card-iron { animation: hero-glow-iron 9s ease-in-out 2.5s infinite; }
+.hero-card-gold { animation: hero-glow-gold 9s ease-in-out 2.5s infinite; }
+.hero-dossier-dot { animation: hero-glow-proven 9s ease-in-out 2.5s infinite; }
+.hero-dossier-seal { animation: hero-glow-seal 9s ease-in-out 2.5s infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-card-iron, .hero-card-gold, .hero-dossier-dot, .hero-dossier-seal,
+  .hero-stage-left .hero-card::after, .hero-stage-right .hero-card::before { animation: none; }
+}
+
+/* Last touches (Dom, 2026-10-15). The marble half had melted into the floor:
+   a little more contrast on the photograph and a soft shadow pool under it. */
+.hero-white-stage .hero-white-brain img { filter: contrast(1.1) brightness(0.98); }
+.hero-white-stage .hero-white-brain::after {
+  content: "";
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  bottom: 9%;
+  height: 7%;
+  background: radial-gradient(ellipse at center, rgba(36, 38, 42, 0.22), transparent 70%);
+  pointer-events: none;
+}
+/* The dossier is the result: iron hairline on top, a larger verdict, and it
+   opens /verify, where real sealed dossiers are checked in the browser. */
+.hero-dossier {
+  display: block;
+  border-top: 2px solid var(--iron);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.hero-dossier:hover { transform: translateY(-2px); box-shadow: 0 24px 46px -26px rgba(36, 38, 42, 0.5); }
+.hero-dossier:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.hero-dossier-verdict { font-size: 1.6rem; letter-spacing: 0.01em; }
+.hero-dossier-link {
+  margin-top: 0.7rem;
+  font-size: 0.6rem;
+  color: var(--iron);
+  border-bottom: 1px solid rgba(36, 38, 42, 0.25);
+  display: inline-block;
+  padding-bottom: 0.15rem;
+}
+.hero-dossier:hover .hero-dossier-link { border-color: var(--gold); }
+
+/* Final proportions (Dom, 2026-10-15): brain and cards about 12% larger, type
+   that reads at arm's length, the method line given real weight, and the
+   empty floor under the brain trimmed so the next section arrives sooner. */
+@media (min-width: 1024px) {
+  .hero-white-stage {
+    grid-template-columns: minmax(16.5rem, 1fr) minmax(0, 61rem) minmax(16.5rem, 1fr);
+    max-width: 104rem;
+    margin-top: 0.5rem;
+  }
+  /* Wider frame, same brain: the crop loses floor above and below, not cortex. */
+  .hero-white-stage .hero-white-brain { aspect-ratio: 16 / 11; }
+  .hero-white-stage .hero-white-brain img { object-position: 50% 46%; }
+}
+.hero-card, .hero-dossier { max-width: 20.5rem; }
+.hero-card { padding: 1.4rem 1.5rem; font-size: 0.9rem; line-height: 1.6; }
+.hero-card-kicker { font-size: 0.66rem; letter-spacing: 0.2em; margin-bottom: 0.7rem; }
+.hero-card-iron { color: #e4e2dd; }
+.hero-card-smt { font-size: 0.72rem; }
+.hero-dossier { padding: 1rem 1.25rem; }
+.hero-dossier-tag { font-size: 0.64rem; }
+.hero-dossier-verdict { font-size: 1.8rem; }
+.hero-dossier-scope { font-size: 0.8rem; }
+.hero-dossier-seal { font-size: 0.66rem; }
+.hero-dossier-link { font-size: 0.64rem; }
+/* The method: four steps in iron, SEAL in gold, on a firmer line. */
+.hero-steps {
+  max-width: 60rem;
+  padding: 1.2rem 1.5rem 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+}
+.hero-steps::before { top: calc(1.2rem + 0.3rem); height: 1px; background: linear-gradient(90deg, rgba(36, 38, 42, 0.35), var(--gold) 50%, rgba(36, 38, 42, 0.35)); }
+.hero-steps li { gap: 0.85rem; }
+.hero-step-dot { width: 0.6rem; height: 0.6rem; }
+.hero-step-seal { color: #8a6a2a; }
+/* Less floor between the hero and the method that follows it. */
+.hero-white { padding-bottom: 0; }
+.hero-white + section { padding-top: 5rem; }
+@media (min-width: 768px) {
+  .hero-white + section { padding-top: 6rem; }
+}
+/* Balance at laptop widths: the brain grows inside its own frame (the source
+   crop is 1560 px, enough for this size), the cards keep a readable width, and
+   the method line moves up into the faded floor. */
+@media (min-width: 1024px) {
+  .hero-white-stage {
+    grid-template-columns: minmax(15.5rem, 1fr) minmax(0, 61rem) minmax(15.5rem, 1fr);
+    gap: 0.75rem;
+  }
+  .hero-white-stage .hero-white-brain { aspect-ratio: 4 / 3; }
+  .hero-white-stage .hero-white-brain img { transform: scale(1.14); object-position: 50% 44%; }
+  .hero-steps { margin-top: -2.75rem; position: relative; z-index: 3; }
+}
+@media (min-width: 1024px) {
+  .hero-steps { margin-top: -0.75rem; }
+  .hero-stage-right { gap: 0.85rem; }
+  .hero-dossier-seal { letter-spacing: 0.14em; }
+}
+/* Phone (Dom, 2026-10-15): the method reads as a vertical timeline, one step
+   per line, and the example dossier comes back under the solver card. */
+@media (max-width: 767px) {
+  .hero-stage-right .hero-dossier { display: block; max-width: none; }
+  .hero-stage-side { gap: 0.85rem; }
+  .hero-card { font-size: 0.92rem; }
+  .hero-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.1rem;
+    margin: 1.75rem 1.5rem 0;
+    padding: 0 0 0 0;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+  .hero-steps li { width: auto; flex-direction: row; align-items: center; gap: 1rem; }
+  .hero-steps::before {
+    display: block;
+    left: calc(0.3rem - 0.5px);
+    right: auto;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, rgba(36, 38, 42, 0.35), var(--gold) 70%, rgba(36, 38, 42, 0.35));
+  }
+  .hero-white + section { padding-top: 4rem; }
+}
+@media (max-width: 767px) {
+  .hero-steps { margin-bottom: 2.5rem; }
+}
+/* Mobile polish (Dom, 2026-10-15). Desktop untouched: every rule below is
+   inside the phone breakpoint. */
+@media (max-width: 767px) {
+  /* A smaller brain so the statement and the button come up the screen. */
+  .hero-white-stage .hero-white-brain { aspect-ratio: 16 / 12; }
+  .hero-white-stage .hero-white-brain img { object-position: 50% 44%; }
+  .hero-white > .relative.z-10 { gap: 1.25rem; padding-top: 0.5rem; }
+  .hero-white-eyebrow { margin-bottom: 1rem; }
+  .hero-white-value { margin-bottom: 1rem; }
+  .hero-white-lead { font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+  /* Primary stays full weight; secondary becomes a quiet text link. */
+  .hero-white-cta { width: 100%; justify-content: space-between; padding: 1rem 1.4rem; }
+  .hero-white-link { font-size: 0.62rem; color: var(--graphite); border-color: rgba(36, 38, 42, 0.18); }
+  /* Cards closer together. */
+  .hero-stage-side { gap: 0.6rem; margin-top: 0.6rem; }
+  .hero-stage-left { margin-top: 2rem; }
+  /* The timeline: larger labels, firmer line, bigger dots. */
+  .hero-steps { gap: 1.25rem; font-size: 0.8rem; letter-spacing: 0.16em; margin-top: 2rem; }
+  .hero-steps li { gap: 1.1rem; }
+  .hero-steps::before { width: 2px; left: calc(0.35rem - 1px); }
+  .hero-step-dot { width: 0.7rem; height: 0.7rem; flex: none; }
+}
+/* Phone: the button right under the headline, before the explanation, so it
+   is on the first screen. Same content, same order on desktop. */
+@media (max-width: 767px) {
+  .hero-white-aside { display: flex; flex-direction: column; }
+  .hero-white-actions { order: -1; margin-bottom: 1.75rem; row-gap: 0.9rem; }
+  .hero-white-stage .hero-white-brain { aspect-ratio: 16 / 11; }
+  .hero-white > .relative.z-10 { gap: 1.5rem; }
+}
+@media (max-width: 767px) {
+  .hero-stage-left { margin-top: 0.75rem; }
+  .hero-white-lead { margin-bottom: 0.5rem; }
+}
+/* The gate video follows the checkpoint line directly (Dom, 2026-10-15):
+   no divider and no full section gap between them. */
+#what + #decide { padding-top: 3rem; }
+#what + #decide::before { display: none; }
+#what + #decide .fade-up.mb-10 { margin-bottom: 2rem; }
+@media (max-width: 767px) { #what + #decide { padding-top: 2rem; } }
+
+/* ============ Sections after the gate (Dom, 2026-10-15) ============
+   Same ivory, iron and gold; more contrast, clearer hierarchy, real rhythm. */
+
+/* 1. Three verdicts: three cards, three marks. */
+.verdict-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; list-style: none; }
+@media (min-width: 768px) { .verdict-grid { grid-template-columns: repeat(3, 1fr); } }
+.verdict-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.75rem 1.75rem;
+  background: linear-gradient(170deg, #f8f7f4 0%, #efedea 100%);
+  border: 1px solid rgba(36, 38, 42, 0.1);
+  border-top-width: 3px;
+  border-radius: 6px;
+  box-shadow: 0 22px 44px -32px rgba(36, 38, 42, 0.45);
+}
+.verdict-proven { border-top-color: #24262a; }
+.verdict-refuted { border-top-color: #a3392f; }
+.verdict-open { border-top: 3px dashed rgba(168, 132, 58, 0.8); }
+.verdict-mark { display: block; width: 1.6rem; height: 1.6rem; margin-bottom: 1.4rem; position: relative; }
+.verdict-proven .verdict-mark { border-radius: 50%; background: #2f6f4a; box-shadow: 0 0 0 5px rgba(47, 111, 74, 0.12); }
+.verdict-refuted .verdict-mark::before,
+.verdict-refuted .verdict-mark::after {
+  content: ""; position: absolute; left: 0; top: 50%; height: 2px; background: #a3392f;
+}
+.verdict-refuted .verdict-mark::before { width: 45%; transform: rotate(-18deg); transform-origin: left center; }
+.verdict-refuted .verdict-mark::after { left: 58%; width: 42%; transform: rotate(-18deg); transform-origin: left center; }
+.verdict-open .verdict-mark { border-radius: 50%; border: 2px dashed rgba(168, 132, 58, 0.9); }
+.verdict-word { font-size: 2.1rem; line-height: 1.05; color: var(--foreground); }
+.verdict-refuted .verdict-word { color: #8e2f26; }
+.verdict-body { margin-top: 0.9rem; font-size: 1rem; line-height: 1.6; color: var(--muted); }
+.verdict-receive {
+  margin-top: auto;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(36, 38, 42, 0.1);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+.verdict-body + .verdict-receive { margin-top: 1.4rem; }
+
+/* 2. Two checks, side by side: ivory for the seal, iron for the proof. */
+.checks-title { font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.15; color: var(--foreground); }
+.checks-split { display: grid; grid-template-columns: 1fr; margin-top: 1.75rem; border-radius: 8px; overflow: hidden; box-shadow: 0 28px 56px -36px rgba(36, 38, 42, 0.55); }
+@media (min-width: 768px) { .checks-split { grid-template-columns: 1fr 1fr; } }
+.checks-panel { display: flex; flex-direction: column; padding: 2.25rem 2rem 2rem; }
+.checks-browser { background: #f6f5f2; border: 1px solid rgba(36, 38, 42, 0.1); }
+.checks-solver { background: linear-gradient(160deg, #2c2e33 0%, #1b1d20 100%); color: #e4e2dd; }
+.checks-where { font-size: 0.66rem; color: var(--muted); }
+.checks-solver .checks-where { color: #b9b6ae; }
+.checks-what { margin-top: 0.7rem; font-size: 1.75rem; line-height: 1.15; color: var(--foreground); }
+.checks-solver .checks-what { color: #f4f3f1; }
+.checks-body { margin-top: 0.9rem; flex: 1; font-size: 1rem; line-height: 1.6; color: var(--muted); }
+.checks-solver .checks-body { color: #cfccc5; }
+.checks-proves {
+  margin-top: 1.6rem;
+  align-self: flex-start;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.64rem;
+  border-radius: 999px;
+  border: 1px solid rgba(36, 38, 42, 0.25);
+  color: var(--foreground);
+}
+.checks-solver .checks-proves { border-color: var(--gold); color: #e7cf8f; }
+.checks-note { margin-top: 1rem; font-size: 0.86rem; color: var(--muted); }
+
+/* 3. Manifesto: an iron band, the company line, gold hairlines. */
+.manifesto { background: linear-gradient(180deg, #1f2125 0%, #17191c 100%); }
+.manifesto-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 5.5rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.manifesto-rule { display: block; width: 4rem; height: 1px; background: var(--gold); }
+.manifesto-a { margin-top: 2.25rem; font-size: clamp(2rem, 4.6vw, 4rem); line-height: 1.05; color: #bdb9b1; }
+.manifesto-b { margin: 0.4rem 0 2.25rem; font-size: clamp(2.2rem, 5vw, 4.4rem); line-height: 1.05; font-weight: 600; color: #f4f3f1; }
+@media (max-width: 767px) { .manifesto-inner { padding: 4rem 1.5rem; } }
+#method { padding-bottom: 5rem; }
+
+/* 4. Applications: three large panels, the number as the entry. */
+#applications h2 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); }
+.apps-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; list-style: none; }
+@media (min-width: 900px) { .apps-grid { grid-template-columns: repeat(3, 1fr); } }
+.app-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 2.25rem 2rem 2rem;
+  background: linear-gradient(170deg, #f8f7f4 0%, #efedea 100%);
+  border: 1px solid rgba(36, 38, 42, 0.1);
+  border-radius: 6px;
+  box-shadow: 0 24px 48px -34px rgba(36, 38, 42, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.app-panel:hover { transform: translateY(-3px); box-shadow: 0 30px 56px -32px rgba(36, 38, 42, 0.55); }
+.app-panel:first-child { border-top: 3px solid var(--iron); }
+.app-head { display: flex; align-items: baseline; gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(36, 38, 42, 0.1); }
+.app-num { font-size: 3rem; line-height: 1; color: var(--gold); }
+.app-name { font-size: 0.68rem; color: var(--foreground); }
+.app-claim { margin-top: 1.4rem; font-size: 1.65rem; line-height: 1.2; color: var(--foreground); }
+.app-body { margin-top: 1rem; flex: 1; font-size: 0.98rem; line-height: 1.6; color: var(--muted); }
+.app-evidence {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  border-left: 2px solid var(--gold);
+  background: rgba(168, 132, 58, 0.06);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--foreground);
+}
+.app-cta {
+  margin-top: 1.5rem;
+  align-self: flex-start;
+  display: inline-flex;
+  gap: 0.5rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.7rem;
+  color: var(--foreground);
+  border-bottom: 1px solid rgba(36, 38, 42, 0.3);
+}
+.app-cta:hover { border-color: var(--gold); }
+/* Refuted: a firmer broken stroke, readable at a glance. */
+.verdict-refuted .verdict-mark { width: 2.4rem; }
+.verdict-refuted .verdict-mark::before,
+.verdict-refuted .verdict-mark::after { height: 3px; border-radius: 2px; }
+.verdict-refuted .verdict-mark::before { width: 44%; transform: rotate(-22deg); }
+.verdict-refuted .verdict-mark::after { left: 56%; width: 44%; top: calc(50% - 6px); transform: rotate(-22deg); }
+/* Application drawings: hairlines in graphite, the passing path in gold, the
+   stopped path and the counterexample in the refuted red. */
+.app-fig { display: block; width: 100%; height: auto; margin-top: 1.4rem; overflow: visible; }
+.app-fig .fig-node { fill: #f6f5f2; stroke: #3a3d43; stroke-width: 1.2; }
+.app-fig .fig-edge { fill: none; stroke: rgba(36, 38, 42, 0.45); stroke-width: 1.1; }
+.app-fig .fig-pass { fill: none; stroke: #a8843a; stroke-width: 1.4; }
+.app-fig .fig-stop { fill: none; stroke: #a3392f; stroke-width: 1.4; stroke-dasharray: 4 3; }
+.app-fig .fig-cex { fill: none; stroke: #a3392f; stroke-width: 1.6; }
+.app-fig .fig-x { fill: none; stroke: #a3392f; stroke-width: 1.6; stroke-linecap: round; }
+.app-fig .fig-gate { fill: #24262a; }
+.app-fig .fig-goal { fill: #a8843a; }
+.app-fig .fig-goal-ring { fill: #f6f5f2; stroke: #a8843a; stroke-width: 1.6; }
+.app-fig .fig-eq { fill: none; stroke: #a8843a; stroke-width: 1.6; }
+/* "What it proves" as a ruled statement, not a pill: the solver line is a full
+   sentence now (Dom, 2026-10-15) and a pill cannot hold one. */
+.checks-proves {
+  border: 0;
+  border-left: 2px solid rgba(36, 38, 42, 0.45);
+  border-radius: 0;
+  padding: 0.15rem 0 0.15rem 0.85rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  max-width: 26rem;
+}
+.checks-solver .checks-proves { border-left-color: var(--gold); color: #e7cf8f; }
+/* "Others sell trust." in polished gold on the iron band (Dom, 2026-10-15). */
+.manifesto-a {
+  font-size: clamp(2.4rem, 5.6vw, 5rem);
+  font-weight: 500;
+  background: linear-gradient(180deg, #fff1c2 0%, #f0cf74 28%, #c99a35 55%, #f3d684 78%, #b8862c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 22px rgba(232, 190, 92, 0.35)) drop-shadow(0 2px 0 rgba(0, 0, 0, 0.35));
+  padding-bottom: 0.08em;
+}
+.manifesto-a {
+  font-size: clamp(2.9rem, 6.6vw, 6rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: linear-gradient(180deg, #fff8dc 0%, #ffe08a 22%, #e8b84a 48%, #fff0b3 62%, #d29a2e 82%, #f7d77a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 28px rgba(245, 200, 90, 0.55)) drop-shadow(0 0 4px rgba(255, 220, 130, 0.5));
+}
+.manifesto .manifesto-rule { width: 6rem; height: 2px; background: linear-gradient(90deg, transparent, #f0c95e, transparent); }
+/* One notch down (Dom, 2026-10-15: "un peu trop"): same gold, softer halo. */
+.manifesto-a {
+  font-size: clamp(2.6rem, 6vw, 5.3rem);
+  font-weight: 500;
+  background: linear-gradient(180deg, #fbeab6 0%, #ecc767 35%, #c99a35 62%, #e9c876 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 16px rgba(232, 190, 92, 0.28));
+}
+.manifesto .manifesto-rule { width: 5rem; height: 1px; background: linear-gradient(90deg, transparent, #d9b25a, transparent); }
+/* Manifesto, final (Dom, 2026-10-15): no glow. "Others sell trust." in muted
+   silver; the answer in white, with gold only in the hairlines and a fine
+   underline under it. */
+.manifesto-a {
+  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+  font-weight: 400;
+  background: none;
+  -webkit-text-fill-color: #a9aab0;
+  color: #a9aab0;
+  filter: none;
+}
+.manifesto-b {
+  color: #f6f5f2;
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 162, 75, 0.55);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+.manifesto .manifesto-rule { width: 4rem; height: 1px; background: #c9a24b; }
+/* Touch targets on phones: every text link at least 44 px tall. */
+@media (max-width: 767px) {
+  .app-cta, .hero-white-link, .hero-dossier-link { min-height: 44px; display: inline-flex; align-items: center; }
+  .app-panel { padding: 1.75rem 1.4rem 1.5rem; }
+  .verdict-card { padding: 1.6rem 1.4rem 1.4rem; }
+  .checks-panel { padding: 1.75rem 1.4rem 1.6rem; }
+}
+/* White edition: photo plates lose the dark bottom scrim made for the black
+   site, and take the same soft shadow as the cards. */
+.photo-plate { border: 1px solid rgba(36, 38, 42, 0.08); box-shadow: 0 26px 52px -36px rgba(36, 38, 42, 0.5); }
+.photo-plate::after { display: none; }
+/* Why now, white edition (Dom, 2026-10-15): the city behind the dated list,
+   under an ivory veil instead of the black one. */
+#now .breath-photo img { opacity: 1; }
+#now .breath-photo-deep::after {
+  background: linear-gradient(180deg, rgba(231, 229, 226, 0.55) 0%, rgba(231, 229, 226, 0.35) 40%, rgba(231, 229, 226, 0.85) 100%);
+}
+#now ol { background: rgba(246, 245, 242, 0.92); box-shadow: 0 26px 52px -34px rgba(36, 38, 42, 0.45); }
+#now .breath-photo-deep::after {
+  background: linear-gradient(180deg, rgba(231, 229, 226, 0.9) 0%, rgba(231, 229, 226, 0.82) 30%, rgba(231, 229, 226, 0.5) 55%, rgba(231, 229, 226, 0.88) 100%);
+}
+/* Why now on iron (Dom, 2026-10-15: "on voit rien… trop de blanc"). The page
+   breathes dark between the white sections; the marble city stays visible,
+   lit like a model in a dark room; the dated list sits on an ivory card. */
+#now { background: #1b1d20; }
+#now .breath-photo img { opacity: 0.75; object-position: 50% 40%; }
+#now .breath-photo-deep::after {
+  background:
+    linear-gradient(90deg, rgba(27, 29, 32, 0.92) 0%, rgba(27, 29, 32, 0.55) 45%, rgba(27, 29, 32, 0.35) 100%),
+    linear-gradient(180deg, rgba(27, 29, 32, 0.2) 0%, rgba(27, 29, 32, 0) 40%, rgba(27, 29, 32, 0.85) 100%);
+}
+#now h2 { background: none; -webkit-text-fill-color: #f4f3f1; color: #f4f3f1; }
+#now .fade-up > p.text-lg, #now h2 + p { color: #cfccc5; }
+#now > div > p.font-serif { color: #e4e2dd; }
+#now .seal-label { color: #d9b25a; }
+#now ol .seal-label { color: #8a6a2a; }
+#now ol { background: rgba(246, 245, 242, 0.96); border-color: rgba(201, 162, 75, 0.35); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6); }
+#now.edge-t::before { display: none; }
+#now .breath-photo img { opacity: 0.95; filter: brightness(1.08) contrast(1.05); }
+#now .breath-photo-deep::after {
+  background:
+    linear-gradient(90deg, rgba(27, 29, 32, 0.88) 0%, rgba(27, 29, 32, 0.45) 45%, rgba(27, 29, 32, 0.15) 100%),
+    linear-gradient(180deg, rgba(27, 29, 32, 0.1) 0%, rgba(27, 29, 32, 0) 40%, rgba(27, 29, 32, 0.8) 100%);
+}
+/* Why now as a timeline of glass cards on the city (Dom, 2026-10-15: "le
+   carré blanc et l'écriture font trop plain"). One card per date; the date is
+   the headline, in gold serif; the source sits under a hairline. */
+#now ol {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  columns: auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+@media (min-width: 768px) { #now ol { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { #now ol { grid-template-columns: repeat(3, 1fr); } }
+#now ol > li {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.4rem 1.4rem 1.2rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-top: 1px solid rgba(217, 178, 90, 0.7) !important;
+  border-radius: 6px;
+  background: linear-gradient(160deg, rgba(44, 46, 51, 0.82) 0%, rgba(24, 26, 29, 0.88) 100%);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.7);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+#now ol > li:hover { transform: translateY(-2px); border-top-color: #e9c46a !important; }
+#now ol > li > p.seal-label {
+  font-family: var(--font-eb-garamond), serif;
+  font-size: 1.45rem !important;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #e3bf63 !important;
+  padding-top: 0;
+}
+#now ol > li p.text-\[13px\] { font-size: 0.95rem; line-height: 1.6; color: #e4e2dd; }
+#now ol > li a {
+  margin-top: 0.9rem !important;
+  padding-top: 0.75rem;
+  display: block !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  font-size: 0.78rem;
+  color: #b9b6ae !important;
+}
+#now ol > li a:hover { color: #e3bf63 !important; }
+/* The city must be seen (Dom, 2026-10-15): one row of glass cards that scrolls
+   sideways, a clear band of the photograph above it, lighter glass. */
+#now { padding-top: 7rem; padding-bottom: 6rem; }
+#now .fade-up.mb-12 { margin-bottom: 18rem; }
+@media (max-width: 767px) { #now .fade-up.mb-12 { margin-bottom: 10rem; } }
+#now ol {
+  grid-template-columns: none !important;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(17rem, 21rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 178, 90, 0.6) transparent;
+}
+#now ol > li {
+  scroll-snap-align: start;
+  background: linear-gradient(160deg, rgba(36, 38, 42, 0.62) 0%, rgba(20, 22, 25, 0.72) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+#now .breath-photo-deep::after {
+  background:
+    linear-gradient(90deg, rgba(27, 29, 32, 0.85) 0%, rgba(27, 29, 32, 0.35) 40%, rgba(27, 29, 32, 0.05) 100%),
+    linear-gradient(180deg, rgba(27, 29, 32, 0) 0%, rgba(27, 29, 32, 0) 50%, rgba(27, 29, 32, 0.75) 100%);
+}
+/* A fifth card cut at the edge says "there is more, scroll". */
+#now ol { grid-auto-columns: 18.5rem; }
+@media (max-width: 767px) { #now ol { grid-auto-columns: 82%; } }
+/* No more fog (Dom, 2026-10-15): the city at full strength, a touch more
+   contrast; only a narrow shadow behind the words keeps them readable. */
+#now .breath-photo img { opacity: 1; filter: contrast(1.18) brightness(1.02) saturate(1.05); }
+#now .breath-photo-deep::after {
+  background:
+    radial-gradient(ellipse 48% 42% at 18% 22%, rgba(20, 22, 25, 0.72) 0%, rgba(20, 22, 25, 0) 100%),
+    linear-gradient(180deg, rgba(20, 22, 25, 0) 70%, rgba(20, 22, 25, 0.55) 100%);
+}
+#now h2, #now h2 + p, #now > div > p.font-serif { text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55); }
+#now .fade-up.mb-12 .seal-label { color: #f3d27a; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7), 0 0 18px rgba(0, 0, 0, 0.6); }
+#now h2, #now h2 + p, #now > div > p.font-serif { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65), 0 0 24px rgba(0, 0, 0, 0.55); }
+/* Breath photos in the white edition: a light ivory veil, not the black one. */
+.breath-photo::after { background: radial-gradient(ellipse at center, rgba(231, 229, 226, 0.55) 0%, rgba(231, 229, 226, 0.8) 80%); }
+/* Closing, white edition (Dom, 2026-10-15): our original guardian, ink on
+   ivory, one hand stopping what is not authorized, the other holding the gold
+   seal. The band takes the paper tone of the drawing; the card turns light. */
+.closing-band { background: #efece4; border-top: 1px solid rgba(168, 132, 58, 0.35); }
+.closing-photo { inset: 0 0 0 30%; }
+.closing-photo img { object-position: 100% 50%; }
+.closing-card {
+  background: rgba(248, 246, 240, 0.92);
+  border: 1px solid rgba(168, 132, 58, 0.45);
+  box-shadow: 0 30px 70px -36px rgba(36, 38, 42, 0.45);
+}
+.closing-card h2 { color: var(--foreground); }
+.closing-card p.text-neutral-300 { color: var(--muted); }
+
+/* ===== Colour pass (Dom, 2026-10-15: "plus de couleur, c'est trop plain") =====
+   Each application gets its own accent, carried by the top rule, the number,
+   a tinted head and the evidence box: gold for actions, oxblood for C
+   security, deep teal for modernization. Research becomes publication cards
+   on an iron band, one accent per field. */
+.app-panel { --acc: #a8843a; --acc-soft: rgba(168, 132, 58, 0.1); position: relative; overflow: hidden; border-top: 3px solid var(--acc) !important; padding-top: 0; }
+.app-panel:nth-child(2) { --acc: #9b3a30; --acc-soft: rgba(155, 58, 48, 0.08); }
+.app-panel:nth-child(3) { --acc: #2f6b6a; --acc-soft: rgba(47, 107, 106, 0.09); }
+.app-panel .app-head {
+  margin: 0 -2rem;
+  padding: 1.6rem 2rem 1.3rem;
+  background: linear-gradient(180deg, var(--acc-soft) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(36, 38, 42, 0.08);
+}
+.app-panel .app-num { color: var(--acc); font-size: 3.4rem; }
+.app-panel .app-name { color: var(--acc); font-weight: 600; }
+.app-panel .app-evidence { border-left-color: var(--acc); background: var(--acc-soft); }
+.app-panel .app-cta { border-bottom-color: var(--acc); }
+.app-panel .app-fig .fig-pass, .app-panel .app-fig .fig-eq { stroke: var(--acc); }
+.app-panel .app-fig .fig-goal { fill: var(--acc); }
+.app-panel .app-fig .fig-goal-ring { stroke: var(--acc); }
+.app-panel:nth-child(3) .app-fig .fig-edge { stroke: rgba(47, 107, 106, 0.55); }
+.app-panel:hover { box-shadow: 0 30px 60px -32px var(--acc); }
+@media (max-width: 767px) { .app-panel .app-head { margin: 0 -1.4rem; padding: 1.4rem 1.4rem 1.1rem; } }
+
+/* Research on iron. */
+.papers-band { background: linear-gradient(180deg, #1f2125 0%, #17191c 100%); }
+.papers-band h2 { background: none; -webkit-text-fill-color: #f4f3f1; color: #f4f3f1; }
+.papers-band h2 + p { color: #c9c6bf; }
+.papers-band .seal-label { color: #d9b25a; }
+.papers-band > div > a { color: #e4e2dd; border-color: rgba(217, 178, 90, 0.5); }
+.papers-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+@media (min-width: 768px) { .papers-grid { grid-template-columns: repeat(2, 1fr); } }
+.paper-card {
+  --acc: #d9b25a;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-height: 13rem;
+  padding: 1.6rem 1.7rem 1.4rem;
+  border-radius: 6px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--acc);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+.paper-2 { --acc: #c9a24b; }
+.paper-3 { --acc: #6f9fa0; }
+.paper-4 { --acc: #c0624f; }
+.paper-1 { --acc: #e3bf63; }
+.paper-card:hover { transform: translateY(-3px); background: linear-gradient(160deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%); }
+.paper-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.paper-field { font-size: 0.62rem; color: var(--acc); font-weight: 600; }
+.paper-id { font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.72rem; color: #a9aab0; }
+.paper-title { flex: 1; font-size: 1.3rem; line-height: 1.3; color: #f4f3f1; }
+.paper-read { font-size: 0.62rem; color: #cfccc5; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 0.9rem; }
+.paper-card:hover .paper-read { color: var(--acc); }
+
+/* ===== Applications as editorial chapters (Dom, 2026-10-15) =====
+   No boxes. A large image, a big serif numeral, the claim as a headline,
+   hairlines for structure, gold only where it means something. */
+#applications { padding-bottom: 7rem; }
+#applications h2 { font-size: clamp(2.8rem, 5.6vw, 4.8rem); max-width: 14ch; }
+.apps-chapters { list-style: none; display: flex; flex-direction: column; gap: 7rem; }
+.chapter {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .chapter { grid-template-columns: 1.08fr 1fr; gap: 5rem; }
+  .chapter-flip .chapter-media { order: 2; }
+}
+.chapter-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px -48px rgba(36, 38, 42, 0.55);
+}
+.chapter-media img { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.chapter:hover .chapter-media img { transform: scale(1.025); }
+.chapter-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 1px solid rgba(36, 38, 42, 0.14);
+}
+.chapter-num {
+  font-size: clamp(4rem, 7vw, 6.5rem);
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1px #a8843a;
+}
+.chapter-name { font-size: 0.72rem; color: var(--foreground); }
+.chapter-claim {
+  margin-top: 1.8rem;
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.chapter-body { margin-top: 1.4rem; max-width: 34rem; font-size: 1.05rem; line-height: 1.7; color: var(--muted); }
+.chapter-evidence {
+  position: relative;
+  margin-top: 1.8rem;
+  max-width: 34rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(36, 38, 42, 0.1);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: var(--foreground);
+  opacity: 0.85;
+}
+.chapter-evidence::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 3rem;
+  height: 1px;
+  background: #a8843a;
+}
+.chapter-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  min-height: 44px;
+  font-size: 0.72rem;
+  color: var(--foreground);
+  border-bottom: 1px solid rgba(36, 38, 42, 0.3);
+}
+.chapter-cta:hover { border-color: #a8843a; }
+@media (max-width: 899px) { .apps-chapters { gap: 4.5rem; } }
+
+/* ===== Research as an editorial index on iron (Dom, 2026-10-15) ===== */
+.papers-index { list-style: none; border-top: 1px solid rgba(232, 228, 220, 0.16); }
+.paper-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem 2rem;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid rgba(232, 228, 220, 0.16);
+  color: #ecebe7;
+}
+.paper-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  background: #c9a45a;
+  transition: width 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.paper-row:hover::after, .paper-row:focus-visible::after { width: 100%; }
+.paper-row-num {
+  font-size: 3rem;
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px #c9a45a;
+}
+.paper-row-main { display: flex; flex-direction: column; gap: 0.9rem; }
+.paper-row-field { font-size: 0.68rem; color: #c9a45a; }
+.paper-row-title {
+  font-size: clamp(1.3rem, 2.1vw, 1.85rem);
+  line-height: 1.25;
+  max-width: 44rem;
+  transition: color 0.4s;
+}
+.paper-row:hover .paper-row-title { color: #fff; }
+.paper-row-side {
+  grid-column: 2;
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  font-size: 0.72rem;
+  color: rgba(236, 235, 231, 0.6);
+}
+.paper-row-id { font-family: var(--font-mono, ui-monospace, monospace); }
+.paper-row-read { font-size: 0.66rem; color: rgba(236, 235, 231, 0.85); }
+@media (min-width: 900px) {
+  .paper-row { grid-template-columns: 6rem 1fr 13rem; align-items: start; padding: 2.6rem 0; }
+  .paper-row-num { font-size: 4rem; }
+  .paper-row-side { grid-column: 3; flex-direction: column; align-items: flex-end; gap: 0.9rem; padding-top: 0.2rem; }
+}
+@media (max-width: 899px) {
+  .paper-row { grid-template-columns: 1fr; gap: 0.9rem; padding: 2rem 0; }
+  .paper-row-num { font-size: 2.4rem; }
+  .paper-row-side { grid-column: 1; }
+}
+.paper-row-read { white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
+/* Why now, zero fog (Dom, 2026-10-15: "encore brouillé, on voit mal les
+   towers"). No veil, no gradient, no frosted glass: the towers sharp. The
+   words hold by their own shadow; the cards are solid iron, not blurred glass. */
+#now .breath-photo-deep::after { background: none; }
+#now .breath-photo img { filter: contrast(1.32) brightness(0.9) saturate(1.08); }
+#now ol > li {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(22, 24, 27, 0.9);
+}
+#now h2, #now h2 + p, #now > div > p.font-serif {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.75), 0 0 28px rgba(0, 0, 0, 0.5);
+}
+#now .breath-photo img { filter: none; }
+/* The words sit on solid iron, like the cards: no smoky halo on the marble. */
+#now h2, #now h2 + p, #now > div > p.font-serif, #now .fade-up.mb-12 .seal-label { text-shadow: none; }
+#now .fade-up.mb-12, #now > div > p.font-serif {
+  width: fit-content;
+  padding: 2rem 2.2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(217, 178, 90, 0.7);
+  background: rgba(22, 24, 27, 0.9);
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.7);
+}
+#now .fade-up.mb-12 .seal-label { color: #e3bf63; }
+@media (max-width: 767px) { #now .fade-up.mb-12, #now > div > p.font-serif { padding: 1.4rem 1.3rem; } }
+/* Hero entity K (Dom, 2026-10-15: "j'aime le robot, un peu effacé"): the
+   head multiplies into the page and fades out at its edges. NEURAL sits at
+   brain height and its line runs almost to the dome. */
+.hero-white-stage .hero-white-brain img { transform: none; object-position: 50% 40%; mix-blend-mode: multiply; }
+.hero-white-stage .hero-white-brain img { opacity: 0.8; }
+/* The chin stays whole (the neck fade is baked into the image); the frame
+   melts into the page on every side. */
+.hero-white-stage .hero-white-brain {
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 45%, #000 72%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 45%, #000 72%, transparent 100%);
+}
+@media (min-width: 1100px) {
+  .hero-stage-left { align-self: start; padding-top: 0; }
+  .hero-stage-left .hero-card::after { width: 19rem; }
+  .hero-stage-left .hero-card > .hero-card-kicker::after { left: calc(100% + 19rem - 0.4rem); }
+  .hero-stage-right .hero-card::before { width: 16.5rem; }
+  .hero-stage-right .hero-card > .hero-card-kicker::before { right: calc(100% + 16.5rem - 0.4rem); }
+}
+/* The bust floats: no floor shadow under the neck. */
+.hero-white-stage .hero-white-brain::after { display: none; }
+/* The image is tinted to the page colour and padded below, so the chin stays
+   whole and only the neck dissolves; no blend mode needed. */
+.hero-white-stage .hero-white-brain img { transform: none; object-position: 50% 0%; mix-blend-mode: normal; opacity: 1; }
+
+/* The head sits in a wrapper so the phone map can draw on it unmasked. */
+.hero-white-brain-wrap { position: relative; min-width: 0; }
+.hero-map { display: none; }
+@media (max-width: 1023px) {
+  .hero-white-stage .hero-white-brain-wrap { grid-column: 1 / -1; grid-row: 1; max-width: 40rem; width: 100%; justify-self: center; }
+}
+@media (max-width: 767px) {
+  .hero-white-stage .hero-white-brain-wrap { order: -1; max-width: none; }
+  .hero-map { display: block; position: absolute; inset: 0; pointer-events: none; }
+  .hero-map-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .hero-map-lines polyline { fill: none; stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .hero-map-line-iron { stroke: #24262a; }
+  .hero-map-line-gold { stroke: var(--gold); }
+  .hero-map-line-dash { stroke-dasharray: 3 3; }
+  .hero-map-dot { position: absolute; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%; }
+  .hero-map-dot-iron { background: #24262a; }
+  .hero-map-dot-gold { background: var(--gold); box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.25); }
+  .hero-map-tag {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    max-width: 8.2rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.64rem;
+    line-height: 1.3;
+    box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.5);
+  }
+  .hero-map-tag b { font-weight: 600; font-size: 0.6rem; letter-spacing: 0.16em; }
+  .hero-map-neural { left: 0.75rem; top: 14%; background: #1d1f23; color: #e9e7e2; }
+  .hero-map-neural b { color: #f4f3f1; }
+  .hero-map-symbolic { right: 0.75rem; top: 4%; background: #f6f1e4; color: #3a3c40; border: 1px solid rgba(201, 162, 75, 0.7); }
+  .hero-map-symbolic b { color: #8a6a2a; }
+  .hero-map-proven { right: 0.75rem; top: 66%; background: #f8f7f4; color: #3a3c40; border-top: 2px solid #1d1f23; }
+  .hero-map-proven b { color: #1d1f23; display: flex; align-items: center; gap: 0.35rem; }
+}
+@media (max-width: 767px) {
+  .hero-white-stage .hero-white-brain-wrap .hero-white-brain { height: auto; aspect-ratio: 1 / 1.08; }
+  .hero-white-stage .hero-white-brain-wrap .hero-white-brain img { object-position: 46% 0%; transform: none; }
+  .hero-map-neural { left: 0.5rem; top: 30%; }
+  .hero-map-symbolic { right: 0.5rem; top: 1.5%; }
+  .hero-map-proven { right: 0.5rem; top: 70%; }
+  .hero-map-tag { max-width: 7.4rem; }
+}
+/* Phone map, text only (Dom, 2026-10-15: "pas les carrés, juste le writing,
+   avec la ligne qui relie"). */
+@media (max-width: 767px) {
+  .hero-map-tag { background: none !important; border: 0 !important; box-shadow: none; padding: 0; max-width: 6.2rem; color: #3a3c40 !important; }
+  .hero-map-neural { left: 0.75rem; top: 29%; }
+  .hero-map-neural b { color: #1d1f23 !important; }
+  .hero-map-symbolic { right: 0.75rem; top: 3%; text-align: right; align-items: flex-end; }
+  .hero-map-proven { right: 0.75rem; top: 73%; text-align: right; align-items: flex-end; }
+}
+/* Phone map layout (Dom, 2026-10-15): NEURAL top left, SYMBOLIC top right, PROVEN at the bottom. */
+@media (max-width: 767px) {
+  .hero-map-neural { left: 0.75rem; top: 3%; }
+  .hero-map-symbolic { right: 0.75rem; top: 3%; }
+  .hero-map-proven { left: 50%; right: auto; top: auto; bottom: 0; transform: translateX(-50%); text-align: center; align-items: center; max-width: 12rem; }
+}
+@media (max-width: 767px) { .hero-white-stage .hero-white-brain-wrap { margin-bottom: 1.75rem; } }
+/* Phone: the map on the head already names the three roles; the long cards
+   would repeat it. The hero CTA still opens /verify. */
+@media (max-width: 767px) { .hero-white-stage .hero-stage-side { display: none !important; } }
+/* Eyebrow in gold for contrast (Dom, 2026-10-15); a deep gold so it reads on ivory. */
+.hero-white-eyebrow { color: #9a7630; font-weight: 600; }
+
+/* ============================================================
+ * BLUEPRINT FRAME (Dom, 2026-10-15: « un design qui concorde avec
+ * l'histoire de la première section »). The hero is drawn like an
+ * engineering sheet: a figure, callouts, one hairline with four steps.
+ * The rest of the page now shares that drawing language instead of
+ * restarting a new template at every section:
+ *   - two column rails run the whole page, like the margins of a plan;
+ *   - every section opens on a full rule with a cross where it meets
+ *     the rails;
+ *   - section labels are set in mono with a gold square, one voice;
+ *   - photographs get corner marks and callouts, like a figure on a sheet.
+ * Scoped to main.blueprint (the landing) so other pages are untouched.
+ * ============================================================ */
+.blueprint {
+  --bp-col: min(77rem, calc(100% - 2rem));
+  --bp-line: rgba(128, 128, 128, 0.26);
+  --bp-mark: rgba(128, 128, 128, 0.7);
+  position: relative;
+}
+@media (min-width: 900px) {
+  .blueprint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    left: 50%;
+    width: var(--bp-col);
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 30;
+    background:
+      repeating-linear-gradient(180deg, var(--bp-line) 0 6px, transparent 6px 12px) left top / 1px 100% no-repeat,
+      repeating-linear-gradient(180deg, var(--bp-line) 0 6px, transparent 6px 12px) right top / 1px 100% no-repeat;
+  }
+  /* The section rule: full width, solid, with a cross at each rail. */
+  .blueprint .edge-t::before {
+    background: var(--bp-line);
+  }
+  .blueprint .edge-t::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    width: calc(var(--bp-col) + 12px);
+    height: 13px;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 31;
+    background:
+      linear-gradient(var(--bp-mark), var(--bp-mark)) 6px 0 / 1px 13px no-repeat,
+      linear-gradient(var(--bp-mark), var(--bp-mark)) 0 6px / 13px 1px no-repeat,
+      linear-gradient(var(--bp-mark), var(--bp-mark)) calc(100% - 6px) 0 / 1px 13px no-repeat,
+      linear-gradient(var(--bp-mark), var(--bp-mark)) 100% 6px / 13px 1px no-repeat;
+  }
+  /* Sections that are narrower than the page still draw their rule full width. */
+  .blueprint section.max-w-7xl.edge-t::before { left: calc(50% - 50vw); right: calc(50% - 50vw); }
+}
+
+/* One voice for every section label: mono, gold square, no glow. */
+.blueprint .seal-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  filter: none;
+  color: #8a6a2a;
+}
+.blueprint .seal-label::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.85em;
+  vertical-align: 0.08em;
+  background: var(--seal);
+}
+.blueprint .text-center .seal-label::before,
+.blueprint .items-center > .seal-label::before { vertical-align: 0.08em; }
+.blueprint .papers-band .seal-label,
+.blueprint #now .seal-label { color: #d9b25a; }
+
+/* Figures: corner marks inside the frame, like crop marks on a plate. */
+.plate-brackets {
+  position: absolute;
+  inset: 14px;
+  pointer-events: none;
+  z-index: 2;
+  --bk: rgba(168, 132, 58, 0.9);
+  background:
+    linear-gradient(var(--bk), var(--bk)) left top / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) left top / 1px 16px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right top / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right top / 1px 16px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) left bottom / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) left bottom / 1px 16px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right bottom / 16px 1px no-repeat,
+    linear-gradient(var(--bk), var(--bk)) right bottom / 1px 16px no-repeat;
+}
+/* White figures lose the dark bottom wash: it greyed the marble. */
+.blueprint .photo-plate { border: 1px solid rgba(36, 38, 42, 0.12); border-radius: 4px; }
+.blueprint .photo-plate::after { display: none; }
+.plate-note {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  padding: 0.38rem 0.7rem;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #24262a;
+  background: rgba(247, 246, 243, 0.92);
+  border: 1px solid rgba(36, 38, 42, 0.28);
+  border-radius: 2px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.plate-note::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #24262a;
+}
+.plate-note-gold { border-color: rgba(168, 132, 58, 0.7); color: #7a5c22; }
+.plate-note-gold::before { background: var(--seal); box-shadow: 0 0 8px rgba(168, 132, 58, 0.6); }
+@media (max-width: 767px) {
+  .plate-note { font-size: 8.5px; padding: 0.3rem 0.5rem; letter-spacing: 0.1em; }
+  .plate-note:nth-of-type(n + 3) { display: none; }
+}
+/* The first pane's label speaks in the same mono voice, in iron. */
+.blueprint .sheet-label { font-family: var(--font-jetbrains), ui-monospace, monospace; letter-spacing: 0.16em; color: #3a3d43; }
+.blueprint .sheet-label::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 0.85em; vertical-align: 0.08em; background: #3a3d43; }
+
+/* THE TRIO (Dom, 2026-10-15): three tall tiles, one photo family, the
+   hero's value line made concrete. Ruled like the rest of the sheet. */
+.trio {
+  display: grid;
+  gap: 2.5rem;
+}
+@media (min-width: 900px) {
+  .trio { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+}
+.trio-tile { display: flex; flex-direction: column; }
+.trio-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid rgba(36, 38, 42, 0.12);
+  border-radius: 4px;
+  background: #f1f0ed;
+}
+.trio-media img { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.trio-tile:hover .trio-media img { transform: scale(1.03); }
+.trio-tag { left: 14px; top: 14px; margin: 10px; }
+.trio-title {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(36, 38, 42, 0.14);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: #1f2125;
+}
+.trio-body { margin-top: 0.75rem; font-size: 0.98rem; line-height: 1.6; color: #5b5f66; }
+@media (max-width: 767px) {
+  .trio-media { aspect-ratio: 4 / 3; }
+  .trio .plate-note { display: inline-flex; }
+}
+
+/* Application chapters told in three beats (Dom, 2026-10-15). */
+.chapter-beats { margin-top: 1.6rem; max-width: 34rem; }
+.chapter-beat {
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(36, 38, 42, 0.12);
+}
+@media (min-width: 640px) {
+  .chapter-beat { grid-template-columns: 8.5rem 1fr; gap: 1.25rem; }
+}
+.chapter-beat dt {
+  padding-top: 0.25rem;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: #6b6f76;
+}
+.chapter-beat dd { font-size: 1rem; line-height: 1.6; color: #3a3d43; }
+.chapter-beat-today dt { color: #8a6a2a; }
+.chapter-beat-today dt::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 0.6em;
+  vertical-align: 0.1em;
+  background: var(--seal);
+}
+.chapter-beat-today dd { color: #1f2125; }
+
+/* CLOSING, full width (Dom, 2026-10-15: « le writing est trop à gauche,
+   faudrait remplir l'espace au complet »). No card: the words sit in the
+   page column at hero scale, the bust takes the right of the band with its
+   callouts, and the hero's four steps close the page. */
+.blueprint .closing-band-photo {
+  min-height: clamp(640px, 52vw, 860px);
+  padding: 6rem max(1.5rem, calc((100% - 77rem) / 2 + 2.5rem));
+  background: var(--background);
+}
+.blueprint .closing-card {
+  max-width: 40rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.blueprint .closing-card h2 { font-size: clamp(3rem, 5.4vw, 5.4rem); line-height: 1.02; }
+.blueprint .closing-card p.text-base { font-size: 1.12rem; max-width: 30rem; }
+.blueprint .closing-card p.text-xs { max-width: 30rem; }
+.blueprint .closing-photo {
+  inset: 0 0 0 34%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 26%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-composite: intersect;
+}
+.closing-notes { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.closing-steps { position: static; margin-top: 3.5rem; max-width: 34rem; padding: 0; }
+@media (max-width: 899px) {
+  .blueprint .closing-band-photo { padding: 0 1.5rem 4rem; }
+  .blueprint .closing-photo { inset: auto; }
+  .closing-notes { display: none; }
+  .blueprint .closing-card { margin-top: 0; }
+}
+.closing-steps { --iron: #24262a; --gold: #a8843a; --graphite: #5b5f66; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; max-width: 40rem; font-size: 0.62rem; }
+/* The steps' hairline belongs to the list, not to the card (it was drawn
+   through the kicker, Dom 2026-10-15). */
+.closing-steps { position: relative; --paper: #e7e5e2; padding-top: 0; }
+.closing-steps::before { top: 0.22rem !important; left: 1.6rem !important; right: 1.6rem !important; }
+
+/* ============================================================
+ * PLATES, NOT BOXES (Dom, 2026-10-15: « y'a encore des plain carrés,
+ * les borders, le vert rouge, ça fait basic »). Every flat card on the
+ * landing becomes an engraved plate: paper gradient, a hairline frame,
+ * gold crop marks, square corners. Green and red leave the page: the
+ * verdicts speak in gold (holds / runs), iron (breaks / blocked) and a
+ * dashed gold ring (not demonstrated) — the three metals of the site.
+ * ============================================================ */
+.blueprint {
+  --plate-bg: linear-gradient(168deg, #f8f6f1 0%, #efede7 62%, #e9e6df 100%);
+  --plate-line: rgba(36, 38, 42, 0.14);
+  --plate-mark: rgba(168, 132, 58, 0.85);
+  --crop:
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left top / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left top / 1px 12px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right top / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right top / 1px 12px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left bottom / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) left bottom / 1px 12px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right bottom / 12px 1px no-repeat,
+    linear-gradient(var(--plate-mark), var(--plate-mark)) right bottom / 1px 12px no-repeat;
+}
+/* Split panes (problem, what, already run): gold hairline between plates. */
+.blueprint .grid.gap-px.rounded-\[6px\] {
+  border-radius: 0 !important;
+  border-color: var(--plate-line) !important;
+  background: linear-gradient(180deg, rgba(168, 132, 58, 0.55), rgba(168, 132, 58, 0.25)) !important;
+  box-shadow: 0 40px 70px -50px rgba(36, 38, 42, 0.45);
+}
+.blueprint .grid.gap-px > .bg-ink {
+  position: relative;
+  background: var(--plate-bg) !important;
+}
+.blueprint .grid.gap-px > .bg-ink::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+
+/* The three verdicts: plates, each with its metal. */
+.blueprint .verdict-card {
+  position: relative;
+  border-radius: 0 !important;
+  background: var(--plate-bg) !important;
+  border: 1px solid var(--plate-line) !important;
+  box-shadow: 0 40px 70px -52px rgba(36, 38, 42, 0.5) !important;
+}
+.blueprint .verdict-card::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+.blueprint .verdict-proven { border-top: 3px solid #a8843a !important; }
+.blueprint .verdict-refuted { border-top: 3px solid #24262a !important; }
+.blueprint .verdict-proven .verdict-mark {
+  background: radial-gradient(circle at 35% 30%, #f3dca0 0%, #c9a24b 38%, #8a6a2a 100%);
+  box-shadow: 0 0 0 4px rgba(168, 132, 58, 0.16), inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+.blueprint .verdict-refuted .verdict-mark::before,
+.blueprint .verdict-refuted .verdict-mark::after { background: #24262a !important; }
+.blueprint .verdict-refuted .verdict-word { color: #24262a; }
+.blueprint .verdict-refuted .verdict-word::after {
+  content: "";
+  display: block;
+  width: 2.2rem;
+  height: 1px;
+  margin-top: 0.5rem;
+  background: #24262a;
+}
+
+/* Two checks: square the panels, crop marks, gold edge on the iron one. */
+.blueprint .checks-split { border-radius: 0 !important; overflow: visible; }
+.blueprint .checks-panel { position: relative; border-radius: 0 !important; }
+.blueprint .checks-browser { background: var(--plate-bg) !important; }
+.blueprint .checks-panel::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+
+/* Gate demo: no red. Blocked speaks in iron, allowed in gold. */
+.blueprint .text-\[\#a3392f\] { color: #24262a !important; }
+.blueprint .bg-\[\#a3392f\]\/10 { background: rgba(36, 38, 42, 0.08) !important; }
+#decide .font-serif.text-4xl.text-\[\#a3392f\] { font-style: italic; }
+
+/* Method steps 01-04: outlined gold numerals, like the chapters. */
+#how ol .font-serif.text-6xl {
+  color: transparent !important;
+  -webkit-text-stroke: 1px #a8843a;
+}
+#how ol .font-serif.text-6xl.text-neutral-600 { -webkit-text-stroke: 1px #5b5f66; }
+
+/* Square corners everywhere on the landing: engineered, not app-like. */
+.blueprint .rounded-\[6px\],
+.blueprint .rounded-\[5px\] { border-radius: 2px !important; }
+
+/* ============================================================
+ * MOTION ON SCROLL (Dom, 2026-10-15: « animation while scrolling, que
+ * ce soit moins plat »). CSS scroll-driven animations only: no library,
+ * no JavaScript, no layout shift. Browsers without animation-timeline
+ * (Safari today) keep the static page; reduced motion keeps it too.
+ * Where the motion goes, and why:
+ *   - the left rail fills with gold as you read: the page is a proof
+ *     being worked through, top to bottom;
+ *   - each section rule is drawn from the centre as the section arrives;
+ *   - photographs drift slower than the page (depth, like a plate under glass);
+ *   - callouts on a photograph light up once the photograph is in view;
+ *   - the closing bust comes forward as the page ends.
+ * ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* 1. Reading progress: gold on the left rail. */
+    @media (min-width: 900px) {
+      .blueprint::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: calc(50% - var(--bp-col) / 2);
+        width: 1px;
+        height: 100vh;
+        z-index: 32;
+        pointer-events: none;
+        background: linear-gradient(180deg, transparent, #a8843a 18%, #c9a24b 82%, transparent);
+        transform-origin: top;
+        animation: bp-progress linear both;
+        animation-timeline: scroll(root);
+      }
+    }
+    @keyframes bp-progress { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+    /* 2. Section rules drawn from the centre. */
+    .blueprint .edge-t::before {
+      transform-origin: center;
+      animation: bp-rule ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    @keyframes bp-rule { from { transform: scaleX(0); opacity: 0; } to { transform: scaleX(1); opacity: 1; } }
+
+    /* 3. Photographs drift slower than the page. */
+    .blueprint .photo-plate img,
+    .blueprint .chapter-media img,
+    .blueprint .trio-media img {
+      animation: bp-drift linear both;
+      animation-timeline: view();
+      scale: 1.08;
+    }
+    @keyframes bp-drift { from { translate: 0 -3.5%; } to { translate: 0 3.5%; } }
+
+    /* 4. Callouts light up once their photograph is in view. */
+    .blueprint .plate-note {
+      animation: bp-note ease-out both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 35%;
+    }
+    @keyframes bp-note { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+
+    /* 5. Plates rise and settle, a little later than their section. */
+    .blueprint .verdict-card,
+    .blueprint .trio-tile,
+    .blueprint .grid.gap-px > .bg-ink {
+      animation: bp-rise ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+    .blueprint .verdict-card:nth-child(2), .blueprint .trio-tile:nth-child(2) { animation-range: entry 10% cover 36%; }
+    .blueprint .verdict-card:nth-child(3), .blueprint .trio-tile:nth-child(3) { animation-range: entry 20% cover 42%; }
+    @keyframes bp-rise { from { opacity: 0; translate: 0 28px; } to { opacity: 1; translate: 0 0; } }
+
+    /* 6. The closing bust comes forward as the page ends. */
+    .blueprint .closing-photo img {
+      animation: bp-forward ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 60%;
+    }
+    @keyframes bp-forward { from { scale: 1.12; translate: 3% 0; filter: saturate(0.6); } to { scale: 1; translate: 0 0; filter: saturate(1); } }
+  }
+}
+
+/* ============================================================
+ * THE GATE DEMO AS ONE ENGRAVED PANEL (Dom, 2026-10-15). The request and
+ * its checks on a paper plate; what the sealed record carries on an iron
+ * inset, gold type, like the readout of an instrument.
+ * ============================================================ */
+#decide .scenario-swap {
+  position: relative;
+  padding: clamp(1.75rem, 3vw, 3rem);
+  background: var(--plate-bg, #f4f2ed);
+  border: 1px solid rgba(36, 38, 42, 0.14);
+  border-top: 2px solid #a8843a;
+  box-shadow: 0 50px 90px -60px rgba(36, 38, 42, 0.55);
+}
+#decide .scenario-swap::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  pointer-events: none;
+  background: var(--crop);
+}
+#decide .scenario-swap > div:last-child {
+  position: relative;
+  z-index: 1;
+  align-self: start;
+  padding: 2rem 1.9rem;
+  border: 0 !important;
+  background: linear-gradient(170deg, #26282d 0%, #17191c 100%);
+  box-shadow: inset 0 1px 0 rgba(201, 162, 75, 0.35), 0 30px 60px -40px rgba(0, 0, 0, 0.7);
+}
+#decide .scenario-swap > div:last-child .text-neutral-500 { color: #a9aaad !important; }
+#decide .scenario-swap > div:last-child .text-neutral-300 { color: #dddbd7 !important; }
+#decide .scenario-swap > div:last-child .text-neutral-200 { color: #f4f3f1 !important; }
+#decide .scenario-swap > div:last-child .text-seal { color: #d9b25a !important; }
+#decide .scenario-swap > div:last-child a { border-color: rgba(217, 178, 90, 0.5) !important; }
+
+/* ============================================================
+ * SECTORS AS A LEDGER, WHY NOW AS A TIMELINE (Dom, 2026-10-15).
+ * ============================================================ */
+#start ul.border-t { counter-reset: sector; border-top-color: rgba(168, 132, 58, 0.5) !important; }
+#start ul.border-t > li {
+  position: relative;
+  counter-increment: sector;
+  padding-left: 3.2rem;
+  transition: background 0.4s ease;
+}
+#start ul.border-t > li::before {
+  content: counter(sector, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.95rem;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: #a8843a;
+}
+#start ul.border-t > li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  background: #a8843a;
+  transition: width 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+#start ul.border-t > li:hover { background: linear-gradient(90deg, rgba(168, 132, 58, 0.06), transparent 70%); }
+#start ul.border-t > li:hover::after { width: 100%; }
+
+#now ol > li { position: relative; padding-left: 1rem; }
+#now ol > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.35rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d9b25a;
+  box-shadow: 0 0 10px rgba(217, 178, 90, 0.7);
+}
+#now ol { border-radius: 2px !important; border-color: rgba(217, 178, 90, 0.3) !important; }

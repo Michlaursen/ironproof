@@ -332,7 +332,7 @@ const T: L<Copy> = {
 
 const VERDICT_STYLE: Record<Verdict, { color: string; border: string }> = {
   PROCEED: { color: "var(--seal)", border: "rgba(212,175,95,0.35)" },
-  BLOCK: { color: "#ffb4b4", border: "rgba(255,150,150,0.3)" },
+  BLOCK: { color: "#a3392f", border: "rgba(163,57,47,0.3)" },
   REFUSE: { color: "#e5e5e5", border: "rgba(255,255,255,0.22)" },
 };
 
@@ -431,7 +431,7 @@ export default async function EvidencePage({ params }: PageProps) {
     <div className="relative min-h-screen">
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page="evidence" />
-      <main>
+      <main className="blueprint">
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
           {/* Same anchor as /verify and /proof: the seal is what the page is about. */}
           <div className="pointer-events-none absolute right-0 top-24 hidden opacity-40 lg:right-14 lg:block xl:opacity-55">
@@ -524,7 +524,7 @@ export default async function EvidencePage({ params }: PageProps) {
                   <p className="font-mono text-sm text-neutral-200">{row.question}</p>
                   <p className="mt-1 font-mono text-xs text-neutral-500">{row.method}</p>
                 </div>
-                <p className="track-mid text-xs" style={{ color: row.answer === "PROVEN" ? "var(--seal)" : row.answer === "NOT EXERCISED" ? "#a3a3a3" : "#ffb4b4" }}>
+                <p className="track-mid text-xs" style={{ color: row.answer === "PROVEN" ? "var(--seal)" : row.answer === "NOT EXERCISED" ? "#a3a3a3" : "#a3392f" }}>
                   {row.answer}
                 </p>
                 <p className="text-sm font-light text-neutral-300">{t.solverMeaning[row.answer]}</p>

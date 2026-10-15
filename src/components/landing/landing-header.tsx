@@ -134,22 +134,18 @@ export function LandingHeader(props: HeaderProps) {
     "whitespace-nowrap rounded-[5px] border border-white/15 px-2.5 py-1.5 transition hover:border-white/35 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60";
 
   return (
-    <header className="edge-b sticky top-0 z-40 bg-[#050506]/60 backdrop-blur-md">
+    <header className="edge-b sticky top-0 z-40 bg-background/60 backdrop-blur-md">
       <div className="relative z-20 flex items-center gap-4 px-6 py-6 sm:gap-8 md:px-14">
-        {/* Phone, home only: no mark up here. The full IRONPROOF lockup sits in
-          * the hero one screen below, and a lone mark above read as clutter
-          * (Dom, 2026-09-28; same rule as the stacked #69). Every other page
-          * keeps it: there it is also the way home. */}
+        {/* Mark and name on every page and every screen: the hero no longer
+          * carries the lockup, so the name lives up here (Dom, 2026-10-15,
+          * replacing the phone-home exception of 2026-09-28). */}
         <a
           href={logoHref}
-          className={`flex shrink-0 items-center gap-3 ${variant === "home" ? "max-md:hidden" : ""}`}
+          className="flex shrink-0 items-center gap-3"
           onClick={() => setOpen(false)}
         >
           <IronproofMark height={40} preload />
-          {/* Phone: the hero already carries the full lockup one screen below, so the
-            * header keeps the mark alone (Dom, 2026-09-26). sr-only, not hidden: the
-            * link still needs its name. */}
-          <span className="track-logo iron-brushed text-base font-semibold max-md:sr-only">IRONPROOF</span>
+          <span className="track-logo iron-brushed text-base font-semibold">IRONPROOF</span>
         </a>
 
         {/* Desktop nav: two groups that open on hover, click or keyboard focus,
@@ -183,7 +179,7 @@ export function LandingHeader(props: HeaderProps) {
               </button>
               {menu === g.id ? (
                 <div className="absolute left-1/2 top-full z-30 -translate-x-1/2 pt-3">
-                  <ul className="min-w-[15.5rem] rounded-[6px] border border-white/10 bg-[#0b0b0d]/95 p-2 shadow-2xl shadow-black/60 backdrop-blur-md">
+                  <ul className="min-w-[15.5rem] rounded-[6px] border border-white/10 bg-surface/95 p-2 shadow-2xl shadow-black/60 backdrop-blur-md">
                     {g.items.map((it) => (
                       <li key={it.href}>
                         <a

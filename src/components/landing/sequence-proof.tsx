@@ -114,8 +114,8 @@ const T: L<Copy> = {
   },
 };
 
-const OK = "#c8ffd8";
-const NO = "#ffb4b4";
+const OK = "#2f6f4a";
+const NO = "#a3392f";
 
 function Tick({ ok }: { ok: boolean }) {
   return (

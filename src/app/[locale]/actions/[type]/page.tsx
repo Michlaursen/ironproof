@@ -123,7 +123,7 @@ export default async function ActionPage({ params }: PageProps) {
     <div className="relative min-h-screen">
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page={`act-${type}`} />
-      <main>
+      <main className="blueprint">
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
           <HeroPhoto src="/media/gate-chip.jpg" position="50% 50%" />
           <p className="seal-label track-mid mb-4 text-xs">

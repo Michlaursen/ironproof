@@ -10,9 +10,9 @@ import type { L } from "./i18n";
  *     2026-09-14), any initiator (2026-09-03), and "without having to trust us"
  *     (2026-10-12, provable-ai-copy.tsx). Blocked decisions are sealed too:
  *     ironproof/inquest/governed_executor.py:323 requires the ledger.
- *   - pillar 2's replay line: on 2026-10-12 a context-free agent replayed our
- *     4 Cobalt archives and reached the same 8 verdicts out of 8. Pillar 3
- *     gets no such line until a COBOL proof has been replayed the same way.
+ *   - pillar 2's replay line (8 of 8 verdicts, 2026-10-12) was removed on
+ *     Dom's word (2026-10-15): the C judge is being rebuilt, the line read as
+ *     a caveat more than as evidence.
  *   - pillar 2 says C, not C/C++: every fix measured so far is C
  *     (cobalt-ai bench/lot20_2026-10-11, 20 fixes drawn at random).
  *   - pillar 3 says "defined equivalence properties" with explicit
@@ -25,11 +25,15 @@ export type Pillar = {
   num: string;
   name: string;
   claim: string;
+  /** The story in three beats (Dom, 2026-10-15: « écris l'histoire, comprenable »):
+   *  what goes wrong without us, what Ironproof does, what runs today. */
+  risk: string;
   body: string;
   href?: string;
   cta?: string;
   /** What a reader can re-check today for this application, said plainly, including "not yet". */
-  evidence: string;
+  /** Optional: a pillar with nothing measured today to show carries no line. */
+  evidence?: string;
 };
 
 export type Verdict = { word: string; body: string; receive: string };
@@ -37,6 +41,8 @@ export type Verdict = { word: string; body: string; receive: string };
 export type PlatformCopy = {
   eyebrow: string;
   title: string;
+  /** Labels of the three beats of each chapter. */
+  beats: { risk: string; does: string; today: string };
   pillars: readonly Pillar[];
   method: {
     eyebrow: string;
@@ -45,40 +51,51 @@ export type PlatformCopy = {
     body: string;
     verdicts: readonly Verdict[];
     /** Transversal to the three pillars (Dom, 2026-10-13): never drop it. */
-    independent: { title: string; body: string };
+    independent: {
+      title: string;
+      body: string;
+      /** The same body, split for the two-panel layout (Dom, 2026-10-15). Words unchanged. */
+      browser: { where: string; what: string; body: string; proves: string };
+      solver: { where: string; what: string; body: string; proves: string };
+      note: string;
+    };
     /** The company line (Dom, 2026-10-15): set alone, at hero scale. */
     foot: { a: string; b: string };
   };
-  research: { eyebrow: string; title: string; lead: string; cta: string };
+  research: { eyebrow: string; title: string; lead: string; cta: string; read: string; fields: readonly string[] };
 };
 
 export const PLATFORM_COPY: L<PlatformCopy> = {
   en: {
     eyebrow: "ONE CORE TECHNOLOGY",
     title: "Three applications. One standard of evidence.",
+    beats: { risk: "THE RISK", does: "WHAT IRONPROOF DOES", today: "TODAY" },
     pillars: [
       {
         num: "01",
         name: "AI agents & critical actions",
-        claim: "If it isn’t authorized, it never executes. If it is, it executes — with verifiable evidence.",
-        body: "Ironproof checks every critical action against your policy before it runs, whether an AI agent, a script, an API or a person started it. A compliant action proceeds; an unauthorized one is blocked. On the production gate, each decision is sealed, so anyone can later check offline that it was not altered, without having to trust us.",
+        claim: "Your agent can move money. It should never move it wrong.",
+        risk: "An AI agent, a script or a person with valid credentials asks to pay, delete, grant access or ship a change. Logged in is not the same as allowed.",
+        body: "Every request routed through Ironproof is checked against your rules before it runs. Allowed, it runs. Not allowed, it never does. Either way, the decision is sealed.",
         href: "#problem",
         cta: "HOW THE GATE WORKS",
-        evidence: "Today: the sealed record of a decision can be checked in your browser, with no server and no account. That checks integrity; the decision itself is re-derived from its inputs and the policy.",
+        evidence: "Open a sealed decision and check it yourself, in your browser, with no server and no account.",
       },
       {
         num: "02",
         name: "C software security",
-        claim: "Don’t just find vulnerabilities. Check, within stated bounds, that the fix closes them.",
-        body: "Our verification technology analyzes C software to check defined properties within stated bounds, and to test whether a fix removes the failure our test exhibits. Each result ships as a verification dossier — proven, refuted or not demonstrated — with what is needed to re-run it.",
-        evidence: "Today: an AI agent started without our context re-ran 4 archives, on the same machine and CBMC version, and reached the same 8 verdicts out of 8 (October 12, 2026). No outside party has replayed them yet, and our C verdict judge is being rebuilt after our own audit.",
+        claim: "A patch says the bug is fixed. We check that it is.",
+        risk: "Scanners find the hole and a developer writes the fix. Nobody shows that the fix actually closes it.",
+        body: "Ironproof writes a test that triggers the bug, runs it before and after the fix, and tells you whether the fix closes it, within stated bounds. Each result ships as a dossier you can re-run.",
+        evidence: "20 real fixes drawn at random from projects such as curl and libssh2: 13 closed, 3 where our test was fooled, 4 not analyzed (October 12, 2026).",
       },
       {
         num: "03",
-        name: "COBOL modernization",
-        claim: "Modernize the code. Check what the translation preserves.",
-        body: "Ironproof translates COBOL to Python and checks, under a stated model of the COBOL, whether both compute the same results, or returns the input where they differ. A proof holds against our model of the COBOL, not against every compiler or CICS configuration; what is not modeled is reported as not covered.",
-        evidence: "Today: real business programs (IBM’s GenApp) are checked only under a CICS model we write. No third-party replay yet; we will publish it when it exists.",
+        name: "Legacy modernization",
+        claim: "Leave COBOL behind. Check that the results stay the same.",
+        risk: "A translated program can compile, pass its tests and still compute a different amount on the one input nobody tried.",
+        body: "Ironproof translates COBOL into Python, then checks that both give the same results, or shows the exact input where they differ. What our model of the old system does not cover is marked as not covered, never as passed.",
+        evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. No outside party has replayed it yet.",
       },
     ],
     method: {
@@ -93,7 +110,20 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       independent: {
         title: "Two different checks. Neither needs us.",
-        body: "In your browser: the sealed record — hash chain, Ed25519 and post-quantum ML-DSA-65 signatures. It shows that nothing changed after sealing, not that a property is true. On your machine: the policy proofs themselves, re-run in your own solver from the obligations we ship. A seal proves integrity; only a solver result proves a property. Where an artifact cannot be shared, the result says so.",
+        body: "In your browser: the sealed record — hash chain, Ed25519 and post-quantum ML-DSA-65 signatures. It shows that nothing changed after sealing, not that a property is true. On your machine: the policy proofs themselves, re-run in your own solver from the obligations we ship. A seal proves integrity; formal verification establishes what holds within the stated model and assumptions. Where an artifact cannot be shared, the result says so.",
+        browser: {
+          where: "IN YOUR BROWSER",
+          what: "The sealed record",
+          body: "Hash chain, Ed25519 and post-quantum ML-DSA-65 signatures. It shows that nothing changed after sealing, not that a property is true.",
+          proves: "A seal proves integrity",
+        },
+        solver: {
+          where: "ON YOUR MACHINE",
+          what: "Verify the mathematical claim",
+          body: "Re-run in your own solver from the obligations we ship.",
+          proves: "Formal verification establishes what holds within the stated model and assumptions",
+        },
+        note: "Where an artifact cannot be shared, the result says so.",
       },
       foot: { a: "Others sell trust.", b: "We sell the right not to trust us." },
     },
@@ -102,34 +132,40 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Research-driven. Evidence-based.",
       lead: "Our research spans automated formal verification, software security, legacy-system modernization, post-quantum cryptography and quantum software security. Each paper states its method and its declared limits.",
       cta: "EXPLORE RESEARCH",
+      read: "READ ON ARXIV",
+      fields: ["LEGACY MODERNIZATION", "POST-QUANTUM CRYPTOGRAPHY", "QUANTUM SOFTWARE SECURITY", "AI-GENERATED CODE"],
     },
   },
   fr: {
     eyebrow: "UNE TECHNOLOGIE CENTRALE",
     title: "Trois applications. Une seule exigence de preuve.",
+    beats: { risk: "LE RISQUE", does: "CE QUE FAIT IRONPROOF", today: "AUJOURD’HUI" },
     pillars: [
       {
         num: "01",
         name: "Agents IA et actions critiques",
-        claim: "Si ce n’est pas autorisé, pas d’exécution. Si ça l’est, ça s’exécute — avec une preuve vérifiable.",
-        body: "Ironproof vérifie chaque action critique contre votre politique avant qu’elle s’exécute, qu’elle vienne d’un agent IA, d’un script, d’une API ou d’une personne. Une action conforme passe ; une action non autorisée est bloquée. Sur la barrière de production, chaque décision est scellée : n’importe qui peut ensuite vérifier hors ligne qu’elle n’a pas été modifiée, sans avoir à nous faire confiance.",
+        claim: "Votre agent peut déplacer de l’argent. Il ne doit jamais le déplacer de travers.",
+        risk: "Un agent IA, un script ou une personne avec des accès valides demande de payer, d’effacer, d’ouvrir un accès ou de déployer. Être connecté, ce n’est pas être autorisé.",
+        body: "Chaque demande qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter. Permise, elle s’exécute. Interdite, elle ne s’exécute jamais. Dans les deux cas, la décision est scellée.",
         href: "#problem",
         cta: "COMMENT FONCTIONNE LA BARRIÈRE",
-        evidence: "Aujourd’hui : la trace scellée d’une décision se vérifie dans votre navigateur, sans serveur et sans compte. C’est un contrôle d’intégrité ; la décision elle-même se recalcule à partir de ses entrées et de la politique.",
+        evidence: "Ouvrez une décision scellée et vérifiez-la vous-même, dans votre navigateur, sans serveur ni compte.",
       },
       {
         num: "02",
         name: "Sécurité du logiciel C",
-        claim: "Ne vous contentez pas de trouver les failles. Vérifiez, dans des bornes déclarées, que le correctif les ferme.",
-        body: "Notre technologie de vérification analyse du logiciel C pour vérifier des propriétés définies dans des bornes déclarées, et tester si un correctif supprime l’échec que notre test met en évidence. Chaque résultat part avec un dossier de vérification — prouvé, réfuté ou non démontré — et ce qu’il faut pour le rejouer.",
-        evidence: "Aujourd’hui : un agent IA lancé sans notre contexte a rejoué 4 archives, sur la même machine et la même version de CBMC, et retrouvé les mêmes 8 verdicts sur 8 (12 octobre 2026). Aucun tiers externe ne les a encore rejouées, et notre juge des verdicts C est en reconstruction après notre propre audit.",
+        claim: "Un correctif dit que la faille est fermée. Nous vérifions qu’elle l’est.",
+        risk: "Les scanneurs trouvent la faille et un développeur écrit le correctif. Personne ne montre que le correctif la ferme vraiment.",
+        body: "Ironproof écrit un test qui déclenche la faille, le roule avant et après le correctif, et vous dit si le correctif la ferme, dans des bornes déclarées. Chaque résultat part avec un dossier que vous pouvez rejouer.",
+        evidence: "20 vrais correctifs tirés au hasard dans des projets comme curl et libssh2 : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés (12 octobre 2026).",
       },
       {
         num: "03",
-        name: "Modernisation COBOL",
-        claim: "Modernisez le code. Vérifiez ce que la traduction préserve.",
-        body: "Ironproof traduit le COBOL en Python et vérifie, sous un modèle déclaré du COBOL, si les deux calculent les mêmes résultats, ou rend l’entrée où ils diffèrent. Une preuve tient contre notre modèle du COBOL, pas contre tout compilateur ou toute configuration CICS ; ce qui n’est pas modélisé est déclaré non couvert.",
-        evidence: "Aujourd’hui : les programmes métier réels (GenApp d’IBM) ne sont vérifiés que sous un modèle CICS que nous écrivons. Pas encore de rejeu par un tiers ; nous le publierons quand il existera.",
+        name: "Modernisation des systèmes hérités",
+        claim: "Quittez le COBOL. Vérifiez que les résultats restent les mêmes.",
+        risk: "Un programme traduit peut compiler, passer ses tests et calculer quand même un autre montant sur la seule entrée que personne n’a essayée.",
+        body: "Ironproof traduit le COBOL en Python, puis vérifie que les deux donnent les mêmes résultats, ou montre l’entrée exacte où ils diffèrent. Ce que notre modèle de l’ancien système ne couvre pas est déclaré non couvert, jamais réussi.",
+        evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
       },
     ],
     method: {
@@ -144,7 +180,20 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       independent: {
         title: "Deux vérifications différentes. Aucune n’a besoin de nous.",
-        body: "Dans votre navigateur : la trace scellée — chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65. Elle montre que rien n’a changé après le scellement, pas qu’une propriété est vraie. Sur votre machine : les preuves de politique elles-mêmes, rejouées dans votre propre solveur à partir des obligations fournies. Un sceau prouve l’intégrité ; seul un résultat de solveur prouve une propriété. Quand un élément ne peut pas être partagé, le résultat le dit.",
+        body: "Dans votre navigateur : la trace scellée — chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65. Elle montre que rien n’a changé après le scellement, pas qu’une propriété est vraie. Sur votre machine : les preuves de politique elles-mêmes, rejouées dans votre propre solveur à partir des obligations fournies. Un sceau prouve l’intégrité ; la vérification formelle établit ce qui tient dans le modèle déclaré et sous ses hypothèses. Quand un élément ne peut pas être partagé, le résultat le dit.",
+        browser: {
+          where: "DANS VOTRE NAVIGATEUR",
+          what: "La trace scellée",
+          body: "Chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65. Elle montre que rien n’a changé après le scellement, pas qu’une propriété est vraie.",
+          proves: "Un sceau prouve l’intégrité",
+        },
+        solver: {
+          where: "SUR VOTRE MACHINE",
+          what: "Vérifiez l’énoncé mathématique",
+          body: "Rejouées dans votre propre solveur à partir des obligations fournies.",
+          proves: "La vérification formelle établit ce qui tient dans le modèle déclaré et sous ses hypothèses",
+        },
+        note: "Quand un élément ne peut pas être partagé, le résultat le dit.",
       },
       foot: { a: "Les autres vendent la confiance.", b: "Nous, on vend le droit de ne pas nous faire confiance." },
     },
@@ -153,6 +202,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Portée par la recherche. Fondée sur la preuve.",
       lead: "Nos travaux couvrent la vérification formelle automatisée, la sécurité logicielle, la modernisation des systèmes patrimoniaux, la cryptographie post-quantique et la sécurité du logiciel quantique. Chaque papier expose sa méthode et ses limites déclarées.",
       cta: "VOIR LA RECHERCHE",
+      read: "LIRE SUR ARXIV",
+      fields: ["MODERNISATION DES SYSTÈMES HÉRITÉS", "CRYPTOGRAPHIE POST-QUANTIQUE", "SÉCURITÉ DU LOGICIEL QUANTIQUE", "CODE GÉNÉRÉ PAR IA"],
     },
   },
 };

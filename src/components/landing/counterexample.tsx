@@ -170,7 +170,7 @@ const T: L<Copy> = {
     eachInside: (authority, total, over) => (
       <>
         Each refund is inside the {authority} authority and clears its own gate. Together they are{" "}
-        {total} — <span className="text-[#ffb4b4]">{over} over</span>.
+        {total} — <span className="text-[#a3392f]">{over} over</span>.
       </>
     ),
     totalReaches: (total, authority) =>
@@ -199,7 +199,7 @@ const T: L<Copy> = {
     eachInside: (authority, total, over) => (
       <>
         Chaque remboursement est à l’intérieur de l’autorité de {authority} et franchit sa propre
-        barrière. Ensemble, ils font {total} — <span className="text-[#ffb4b4]">{over} de trop</span>
+        barrière. Ensemble, ils font {total} — <span className="text-[#a3392f]">{over} de trop</span>
         .
       </>
     ),
@@ -289,7 +289,7 @@ export function Counterexample({ locale = defaultLocale }: { locale?: Locale }) 
               {t.without}{" "}
               <span className="font-mono text-neutral-400">{lab.removed_clause}</span>
             </p>
-            <p className="font-serif text-4xl text-[#ffb4b4]">
+            <p className="font-serif text-4xl text-[#a3392f]">
               {verdict(lab.proof_broken.verdict, locale)}
             </p>
             <p className="mt-2 text-sm font-light leading-snug text-neutral-400">{t.withoutWhy}</p>
@@ -315,7 +315,7 @@ export function Counterexample({ locale = defaultLocale }: { locale?: Locale }) 
                       <td
                         className={
                           "py-2.5 text-right font-mono text-xs md:text-[13px] " +
-                          (over ? "text-[#ffb4b4]" : "text-neutral-500")
+                          (over ? "text-[#a3392f]" : "text-neutral-500")
                         }
                       >
                         {money(total)}

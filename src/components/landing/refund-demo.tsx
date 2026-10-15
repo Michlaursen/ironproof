@@ -115,9 +115,9 @@ const OkIcon = (
     height="56"
     viewBox="0 0 24 24"
     fill="none"
-    stroke="#c8ffd8"
+    stroke="#2f6f4a"
     strokeWidth="1.4"
-    style={{ filter: "drop-shadow(0 0 8px rgba(150,255,180,0.35))" }}
+    style={{ filter: "drop-shadow(0 0 8px rgba(47,111,74,0.35))" }}
     aria-hidden="true"
   >
     <circle cx="12" cy="12" r="9" />
@@ -131,9 +131,9 @@ const NoIcon = (
     height="56"
     viewBox="0 0 24 24"
     fill="none"
-    stroke="#ffb4b4"
+    stroke="#a3392f"
     strokeWidth="1.4"
-    style={{ filter: "drop-shadow(0 0 8px rgba(255,150,150,0.4))" }}
+    style={{ filter: "drop-shadow(0 0 8px rgba(163,57,47,0.4))" }}
     aria-hidden="true"
   >
     <circle cx="12" cy="12" r="9" />
