@@ -2618,3 +2618,41 @@ p, li {
   background: var(--seal);
 }
 .chapter-beat-today dd { color: #1f2125; }
+
+/* CLOSING, full width (Dom, 2026-10-15: « le writing est trop à gauche,
+   faudrait remplir l'espace au complet »). No card: the words sit in the
+   page column at hero scale, the bust takes the right of the band with its
+   callouts, and the hero's four steps close the page. */
+.blueprint .closing-band-photo {
+  min-height: clamp(640px, 52vw, 860px);
+  padding: 6rem max(1.5rem, calc((100% - 77rem) / 2 + 2.5rem));
+  background: var(--background);
+}
+.blueprint .closing-card {
+  max-width: 40rem;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.blueprint .closing-card h2 { font-size: clamp(3rem, 5.4vw, 5.4rem); line-height: 1.02; }
+.blueprint .closing-card p.text-base { font-size: 1.12rem; max-width: 30rem; }
+.blueprint .closing-card p.text-xs { max-width: 30rem; }
+.blueprint .closing-photo {
+  inset: 0 0 0 34%;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 26%), linear-gradient(180deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+  mask-composite: intersect;
+}
+.closing-notes { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.closing-steps { position: static; margin-top: 3.5rem; max-width: 34rem; padding: 0; }
+@media (max-width: 899px) {
+  .blueprint .closing-band-photo { padding: 0 1.5rem 4rem; }
+  .blueprint .closing-photo { inset: auto; }
+  .closing-notes { display: none; }
+  .blueprint .closing-card { margin-top: 0; }
+}
+.closing-steps { --iron: #24262a; --gold: #a8843a; --graphite: #5b5f66; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; max-width: 40rem; font-size: 0.62rem; }

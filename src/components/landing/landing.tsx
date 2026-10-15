@@ -170,7 +170,15 @@ type Copy = {
   };
 
   cta: { title: string; lead: string };
-  closing: { titleA: string; titleB: string; body: string; kicker: string; scope: string };
+  closing: {
+    titleA: string;
+    titleB: string;
+    body: string;
+    kicker: string;
+    scope: string;
+    /** Callouts on the bust: what each material stands for (Dom, 2026-10-15). */
+    notes: readonly PlateNote[];
+  };
 
 };
 
@@ -627,6 +635,11 @@ const T: L<Copy> = {
       // the one condition it rests on (the action can only run through the gate).
       scope:
         "Proven for the actions and the policy you define, where the action can only execute through the gate. The certificate states that boundary.",
+      notes: [
+        { x: 58, y: 16, label: "MARBLE · HUMAN INTENT" },
+        { x: 80, y: 30, label: "IRON · MACHINE RIGOUR" },
+        { x: 70, y: 74, label: "GOLD · THE PROOF", gold: true },
+      ],
     },
 
     cta: {
@@ -1048,6 +1061,11 @@ const T: L<Copy> = {
       kicker: "Chaque action vérifiée. Ce qui est conforme s’exécute. Le reste, jamais.",
       scope:
         "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
+      notes: [
+        { x: 58, y: 16, label: "MARBRE · L’INTENTION HUMAINE" },
+        { x: 80, y: 30, label: "FER · LA RIGUEUR DE LA MACHINE" },
+        { x: 70, y: 74, label: "OR · LA PREUVE", gold: true },
+      ],
     },
 
     cta: {
@@ -1506,6 +1524,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <Image src="/media/closing-bust.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
               <Image src="/media/closing-bust-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
+            {/* The bust read like a figure on a sheet: what each material stands for. */}
+            <div className="closing-notes" aria-hidden="true">
+              {t.closing.notes.map((n) => (
+                <span
+                  key={n.label}
+                  className={`plate-note${n.gold ? " plate-note-gold" : ""}`}
+                  style={{ left: `${n.x}%`, top: `${n.y}%` }}
+                >
+                  {n.label}
+                </span>
+              ))}
+            </div>
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
               <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">
@@ -1521,6 +1551,16 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               >
                 {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
               </a>
+              {/* The hero's four steps again, as the page's last line: the story
+                * closes on the method it opened with. */}
+              <ol className="hero-steps closing-steps track-mid">
+                {eng.steps.map((step, i) => (
+                  <li key={step} className={i === 2 ? "hero-step-seal" : undefined}>
+                    <span className="hero-step-dot" aria-hidden="true" />
+                    {step}
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </section>
