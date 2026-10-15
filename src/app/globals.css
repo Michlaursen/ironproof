@@ -664,7 +664,7 @@ p, li {
 }
 .hero-agent-photo {
   position: absolute;
-  /* Starts a fifth in, so the vault sits behind the guardian, not the headline. */
+  /* Starts a fifth in, so the door sits beside the headline, not behind it. */
   inset: 0 0 0 22%;
   /* Melted on every edge: no frame line between the scene and the page. */
   -webkit-mask-image:
@@ -677,7 +677,7 @@ p, li {
   mask-composite: intersect;
 }
 .hero-agent-photo img {
-  object-position: 72% 30%;
+  object-position: 64% 50%;
 }
 .hero-agent-scrim {
   position: absolute;
@@ -723,7 +723,7 @@ p, li {
   }
   .hero-agent-mobile img {
     opacity: 0.55;
-    object-position: 60% 20%;
+    object-position: 50% 40%;
   }
   /* Darken from the middle down so the copy sits on near-black. */
   .hero-agent-mobile::after {
