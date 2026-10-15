@@ -43,6 +43,8 @@ type NotItem = { label: string; body: string };
 type Domain = { name: string; actions: readonly string[]; rules: string };
 type Dated = { date: string; what: string; source: string; href: string };
 type Step = { title: string; body: string };
+/** One tile of the proven / sealed / verifiable trio. */
+type TrioItem = { tag: string; title: string; body: string; img: string };
 /** A case Ironproof has actually run, with its date and its number. */
 type RunCase = { name: string; what: string; result: string; date: string };
 
@@ -102,6 +104,9 @@ type Copy = {
   };
 
   creditedBy: string;
+
+  /** Three promises, three photographs of one family (Dom, 2026-10-15). */
+  trio: { eyebrow: string; title: string; items: readonly TrioItem[]; foot: string };
 
   not: { eyebrow: string; title: string; items: readonly NotItem[]; foot: string };
 
@@ -296,6 +301,32 @@ const T: L<Copy> = {
     },
 
     creditedBy: "SECURITY RESEARCH BY IRONPROOF — CREDITED BY",
+
+    trio: {
+      eyebrow: "WHAT YOU GET",
+      title: "Proven. Sealed. Checked without us.",
+      items: [
+        {
+          tag: "MATHEMATICALLY PROVEN",
+          title: "Certainty, where it can be had.",
+          body: "A solver proves the rule holds in every case the model allows, or returns the exact case that breaks it. When it cannot conclude, it says so.",
+          img: "/media/trio-proven.jpg",
+        },
+        {
+          tag: "POST-QUANTUM SEALED",
+          title: "Every decision, set in metal.",
+          body: "Each decision, allowed or blocked, is sealed with Ed25519 and the post-quantum ML-DSA-65 signature. Change one figure in the record and the seal breaks.",
+          img: "/media/trio-sealed.jpg",
+        },
+        {
+          tag: "INDEPENDENTLY VERIFIABLE",
+          title: "Measured by anyone. Not by us.",
+          body: "Your auditor re-checks the seal and re-derives the policy verdict on their own machine, with a verifier written from our specification.",
+          img: "/media/trio-verifiable.jpg",
+        },
+      ],
+      foot: "We prove what can be proven, and say so when we cannot. A seal proves the record is intact, not that what it says is true.",
+    },
 
     not: {
       eyebrow: "WHAT IRONPROOF IS NOT",
@@ -696,6 +727,32 @@ const T: L<Copy> = {
     },
 
     creditedBy: "RECHERCHE EN SÉCURITÉ PAR IRONPROOF — CRÉDITÉE PAR",
+
+    trio: {
+      eyebrow: "CE QUE VOUS OBTENEZ",
+      title: "Prouvé. Scellé. Vérifié sans nous.",
+      items: [
+        {
+          tag: "PROUVÉ MATHÉMATIQUEMENT",
+          title: "La certitude, là où elle existe.",
+          body: "Un solveur prouve que la règle tient dans tous les cas que le modèle permet, ou rend le cas exact qui la brise. Quand il ne peut pas conclure, il le dit.",
+          img: "/media/trio-proven.jpg",
+        },
+        {
+          tag: "SCELLÉ POST-QUANTIQUE",
+          title: "Chaque décision, gravée dans le métal.",
+          body: "Chaque décision, permise ou bloquée, est scellée avec Ed25519 et la signature post-quantique ML-DSA-65. Changez un chiffre dans le registre et le sceau se brise.",
+          img: "/media/trio-sealed.jpg",
+        },
+        {
+          tag: "VÉRIFIABLE DE FAÇON INDÉPENDANTE",
+          title: "Mesuré par n’importe qui. Pas par nous.",
+          body: "Votre auditeur revérifie le sceau et re-dérive le verdict de la politique sur sa propre machine, avec un vérificateur écrit à partir de notre spécification.",
+          img: "/media/trio-verifiable.jpg",
+        },
+      ],
+      foot: "Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas. Un sceau prouve que le registre est intact, pas que son contenu est vrai.",
+    },
 
     not: {
       eyebrow: "CE QU’IRONPROOF N’EST PAS",
@@ -1168,6 +1225,33 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {c.name}
               </a>
             ))}
+          </div>
+        </section>
+
+        {/* 1a. THE TRIO — proven, sealed, verifiable: the hero's value line made
+          * into three tiles with three photographs of one family (Dom,
+          * 2026-10-15, after Pramaana's formal truth / accelerated trust row).
+          * Each body reuses a sentence already ratified elsewhere on the site. */}
+        <section id="trio" className="relative z-10 edge-t px-6 py-24 md:px-14 md:py-28">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.trio.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.trio.title}</h2>
+            </div>
+            <ol className="trio fade-up mt-14">
+              {t.trio.items.map((it, i) => (
+                <li key={it.tag} className="trio-tile">
+                  <div className="trio-media">
+                    <Image src={it.img} alt="" fill sizes="(min-width: 900px) 30vw, 100vw" className="object-cover" />
+                    <span className="plate-brackets" aria-hidden="true" />
+                    <span className="plate-note plate-note-gold trio-tag">{String(i + 1).padStart(2, "0")} · {it.tag}</span>
+                  </div>
+                  <h3 className="trio-title font-serif">{it.title}</h3>
+                  <p className="trio-body">{it.body}</p>
+                </li>
+              ))}
+            </ol>
+            <p className="fade-up mt-12 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{t.trio.foot}</p>
           </div>
         </section>
 

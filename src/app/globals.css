@@ -2552,3 +2552,38 @@ p, li {
 /* The first pane's label speaks in the same mono voice, in iron. */
 .blueprint .sheet-label { font-family: var(--font-jetbrains), ui-monospace, monospace; letter-spacing: 0.16em; color: #3a3d43; }
 .blueprint .sheet-label::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 0.85em; vertical-align: 0.08em; background: #3a3d43; }
+
+/* THE TRIO (Dom, 2026-10-15): three tall tiles, one photo family, the
+   hero's value line made concrete. Ruled like the rest of the sheet. */
+.trio {
+  display: grid;
+  gap: 2.5rem;
+}
+@media (min-width: 900px) {
+  .trio { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+}
+.trio-tile { display: flex; flex-direction: column; }
+.trio-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid rgba(36, 38, 42, 0.12);
+  border-radius: 4px;
+  background: #f1f0ed;
+}
+.trio-media img { transition: transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.trio-tile:hover .trio-media img { transform: scale(1.03); }
+.trio-tag { left: 14px; top: 14px; margin: 10px; }
+.trio-title {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(36, 38, 42, 0.14);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: #1f2125;
+}
+.trio-body { margin-top: 0.75rem; font-size: 0.98rem; line-height: 1.6; color: #5b5f66; }
+@media (max-width: 767px) {
+  .trio-media { aspect-ratio: 4 / 3; }
+  .trio .plate-note { display: inline-flex; }
+}
