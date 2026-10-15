@@ -212,7 +212,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and mathematically verify key properties of system behavior.",
+        "Ironproof proves whether critical actions and critical software follow their rules, then hands you what you need to re-check that conclusion yourself, without having to trust us. Every result is Proven, Refuted or Not demonstrated, within a stated model.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -325,13 +325,13 @@ const T: L<Copy> = {
       actionsLabel: "THE ACTIONS",
       rulesLabel: "THE RULES ALREADY WRITTEN",
       runEyebrow: "ALREADY RUN",
-      runTitle: "On real, public material — with the numbers.",
+      runTitle: "Proof demonstrations — with the misses left in.",
       runNote: "Labs on published policies and open-source code, not client systems.",
       run: [
         {
           name: "Cloud authorization",
           what: "57 example IAM policies published by AWS, 185 guarantees written before the solver ran.",
-          result: "139 held under two independent solvers. 11 cases where a policy did not do what its description said, each confirmed in AWS’s own policy simulator.",
+          result: "Proven: 139 guarantees, under two independent solvers. Refuted: 11 cases where a policy did not do what its description said, each confirmed in AWS’s own policy simulator.",
           date: "2026-09-30",
         },
         {
@@ -343,7 +343,7 @@ const T: L<Copy> = {
         {
           name: "Open-source C",
           what: "20 fixes for real vulnerabilities drawn at random, from projects such as curl, libssh2 and Suricata.",
-          result: "Within stated bounds: 13 close the hole, 3 do not, 4 not analyzed. A third party replayed 4 of the archives and reached the same 8 verdicts.",
+          result: "Within stated bounds — Proven: 13 fixes close the hole. Refuted: 3 do not. Not demonstrated: 4. A third party replayed 4 of the archives and reached the same 8 verdicts.",
           date: "2026-10-12",
         },
       ],
@@ -581,7 +581,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier mathématiquement des propriétés clés du comportement d’un système.",
+        "Ironproof démontre si une action critique ou un logiciel critique respecte ses règles, puis vous remet ce qu’il faut pour revérifier cette conclusion vous-même, sans avoir à nous faire confiance. Chaque résultat est Prouvé, Réfuté ou Non démontré, dans un modèle déclaré.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -693,13 +693,13 @@ const T: L<Copy> = {
       actionsLabel: "LES ACTIONS",
       rulesLabel: "LES RÈGLES DÉJÀ ÉCRITES",
       runEyebrow: "DÉJÀ FAIT",
-      runTitle: "Sur du matériel réel et public — avec les chiffres.",
+      runTitle: "Démonstrations de preuve — les échecs compris.",
       runNote: "Des labos sur des politiques publiées et du code open source, pas des systèmes de clients.",
       run: [
         {
           name: "Autorisation infonuagique",
           what: "57 politiques IAM d’exemple publiées par AWS, 185 garanties écrites avant de lancer le solveur.",
-          result: "139 tiennent sous deux solveurs indépendants. 11 cas où une politique ne faisait pas ce que sa description disait, chacun confirmé dans le simulateur de politiques d’AWS.",
+          result: "Prouvé : 139 garanties, sous deux solveurs indépendants. Réfuté : 11 cas où une politique ne faisait pas ce que sa description disait, chacun confirmé dans le simulateur de politiques d’AWS.",
           date: "2026-09-30",
         },
         {
@@ -711,7 +711,7 @@ const T: L<Copy> = {
         {
           name: "C open source",
           what: "20 correctifs de vraies failles tirés au hasard, dans des projets comme curl, libssh2 et Suricata.",
-          result: "Dans les bornes déclarées : 13 ferment la faille, 3 ne la ferment pas, 4 non analysés. Un tiers a rejoué 4 des archives et retrouvé les mêmes 8 verdicts.",
+          result: "Dans les bornes déclarées — Prouvé : 13 correctifs ferment la faille. Réfuté : 3 ne la ferment pas. Non démontré : 4. Un tiers a rejoué 4 des archives et retrouvé les mêmes 8 verdicts.",
           date: "2026-10-12",
         },
       ],
@@ -1019,10 +1019,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * its own section further down. */}
               <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a
-                  href={`${r}/neuro-symbolic`}
+                  href={`${r}/verify`}
                   className="track-mid inline-flex items-center gap-3 bg-gradient-to-b from-white to-neutral-300 rounded-[5px] px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
                 >
-                  {t.hero.ctaTech} <span aria-hidden="true">&rarr;</span>
+                  {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
                 </a>
                 <a
                   href={`${r}/evidence`}
