@@ -40,7 +40,7 @@ const T: L<Copy> = {
     lead: "The gate holds your tools. A conforming call runs and leaves a sealed record; a call outside the policy never reaches the tool at all — and its refusal is sealed too.",
     callSite: "THE CALL SITE",
     disclaimer:
-      "The gate is the only entry — there is no underlying handle left to call around it. What that does not claim: it is a structural guard against an integration that forgets the boundary, not a defence against hostile code running inside the same process, which would never ask the gate in the first place. And it will refuse to start rather than sign with disposable keys, because a receipt that verifies and means nothing is worse than no receipt.",
+      "The gate is the only entry — there is no underlying handle left to call around it. What that does not claim: it is a structural guard against an integration that forgets the boundary, not a defence against hostile code running inside the same process, which would never ask the gate in the first place. And it never falls back to disposable keys: without a configured keyring it refuses to start, because a receipt that verifies and means nothing is worse than no receipt. Disposable keys must be asked for by name; the samples published on this site use keys minted for their build, and say so.",
     steps: [
       {
         n: "01",
@@ -66,7 +66,7 @@ const T: L<Copy> = {
     lead: "La barrière détient vos outils. Un appel conforme s’exécute et laisse une trace scellée\u202f; un appel hors politique n’atteint jamais l’outil — et son refus est scellé lui aussi.",
     callSite: "LE SITE D’APPEL",
     disclaimer:
-      "La barrière est la seule entrée — il ne reste aucune poignée sous-jacente à contourner. Ce que cela ne prétend pas\u00a0: c’est une garde structurelle contre une intégration qui oublie la frontière, pas une défense contre du code hostile exécuté dans le même processus, qui ne s’adresserait de toute façon jamais à la barrière. Et elle refusera de démarrer plutôt que de signer avec des clés jetables, parce qu’un reçu qui se vérifie et ne veut rien dire est pire que pas de reçu.",
+      "La barrière est la seule entrée — il ne reste aucune poignée sous-jacente à contourner. Ce que cela ne prétend pas\u00a0: c’est une garde structurelle contre une intégration qui oublie la frontière, pas une défense contre du code hostile exécuté dans le même processus, qui ne s’adresserait de toute façon jamais à la barrière. Et elle ne se rabat jamais sur des clés jetables\u00a0: sans trousseau configuré, elle refuse de démarrer, parce qu’un reçu qui se vérifie et ne veut rien dire est pire que pas de reçu. Des clés jetables se demandent explicitement\u00a0; les échantillons publiés sur ce site utilisent des clés générées pour leur construction, et le disent.",
     steps: [
       {
         n: "01",

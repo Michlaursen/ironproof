@@ -308,7 +308,7 @@ export function SpreadChart({ locale, label }: { locale: Locale; label: string }
 const DETECTION: L<{ header: string; bracket: string; rows: [string, string, string][] }> = {
   en: {
     header: "HOURS",
-    bracket: "5.5× wider than the whole attack",
+    bracket: "5.5× the 13\u00a0h to cluster-admin",
     rows: [
       ["Detection window", "AISI — BEHAVIOUR RAN UNNOTICED", "~72 h"],
       ["Time to full compromise", "HUGGING FACE — FOOTHOLD TO CLUSTER-ADMIN", "13 h"],
@@ -317,7 +317,7 @@ const DETECTION: L<{ header: string; bracket: string; rows: [string, string, str
   },
   fr: {
     header: "HEURES",
-    bracket: "5,5× plus large que l’attaque entière",
+    bracket: "5,5×\u00a0les 13\u00a0h jusqu’à cluster-admin",
     rows: [
       ["Fenêtre de détection", "AISI — COMPORTEMENT PASSÉ INAPERÇU", "~72 h"],
       ["Temps de compromission totale", "HUGGING FACE — ACCÈS INITIAL À ADMIN CLUSTER", "13 h"],

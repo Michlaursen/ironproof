@@ -59,7 +59,7 @@ export const ACTION_COPY: L<Record<ActionId, ActionCopy>> = {
         },
       ],
       evidence: "public",
-      evidenceBody: "A sealed evidence pack for a real payment control, verifiable in your browser, and a lab where you can attack the same policy.",
+      evidenceBody: "A sealed evidence pack for a sample payment control, verifiable in your browser, and a lab where you can attack the same policy.",
     },
     access: {
       tab: "GRANT ACCESS",
@@ -83,7 +83,7 @@ export const ACTION_COPY: L<Record<ActionId, ActionCopy>> = {
         },
       ],
       evidence: "onRequest",
-      evidenceBody: "Sealed decision benches on access policies published verbatim by AWS and Microsoft, decided by our reading of their documented semantics. AWS’s and Azure’s own engines were not run. Shown in a call, not published.",
+      evidenceBody: "Sealed decision benches on access policies published verbatim by AWS and Microsoft, decided by our reading of their documented semantics. On 57 AWS example IAM policies, 185 guarantees: 160 hold under both Z3 and cvc5, 5 under cvc5 only, 16 fail, 3 fail under cvc5 only without a witness, 1 is unknown. 11 real findings, each confirmed in AWS’s IAM policy simulator: in 8, the page’s prose and its policy disagree; 3 come from our reading. The live AWS and Azure services were not exercised. Shown in a call, not published.",
     },
     records: {
       tab: "DELETE RECORDS",
@@ -157,7 +157,7 @@ export const ACTION_COPY: L<Record<ActionId, ActionCopy>> = {
         },
       ],
       evidence: "public",
-      evidenceBody: "Un dossier de preuve scellé pour une vraie règle de paiement, vérifiable dans votre navigateur, et un labo où attaquer la même politique.",
+      evidenceBody: "Un dossier de vérification scellé pour une règle de paiement d’exemple, vérifiable dans votre navigateur, et un labo où attaquer la même politique.",
     },
     access: {
       tab: "DONNER UN ACCÈS",
@@ -181,18 +181,18 @@ export const ACTION_COPY: L<Record<ActionId, ActionCopy>> = {
         },
       ],
       evidence: "onRequest",
-      evidenceBody: "Des bancs de décision scellés sur des politiques d’accès publiées mot pour mot par AWS et Microsoft, décidées selon notre lecture de leur sémantique documentée. Les moteurs d’AWS et d’Azure n’ont pas été exécutés. Montrés en appel, non publiés.",
+      evidenceBody: "Des bancs de décision scellés sur des politiques d’accès publiées mot pour mot par AWS et Microsoft, décidées selon notre lecture de leur sémantique documentée. Sur 57 politiques IAM d’exemple publiées par AWS, 185 garanties : 160 tiennent sous Z3 et sous cvc5, 5 sous cvc5 seulement, 16 tombent, 3 tombent sous cvc5 seulement sans témoin, 1 reste inconnue. 11 constats réels, chacun confirmé dans le simulateur de politiques IAM d’AWS : dans 8, la prose de la page et sa politique se contredisent ; 3 viennent de notre lecture. Les services AWS et Azure eux-mêmes n’ont pas été sollicités. Montrés en appel, non publiés.",
     },
     records: {
-      tab: "SUPPRIMER DES DOSSIERS",
+      tab: "SUPPRIMER DES ENREGISTREMENTS",
       h1: "Des suppressions irréversibles, lancées par une tâche que personne ne surveille.",
-      lead: "Nettoyages de rétention, fermetures de comptes, demandes d’accès à l’information, rotation des journaux. La tâche a presque toujours raison, et la seule fois où elle a tort, la preuve qu’il fallait est ce qu’elle a supprimé.",
+      lead: "Nettoyages de rétention, fermetures de comptes, demandes des personnes concernées, rotation des journaux. La tâche a d’habitude raison, et la seule fois où elle a tort, la preuve qu’il fallait est ce qu’elle a supprimé.",
       initiators: "Scripts de nettoyage nocturnes, flux de demandes de confidentialité, agents de fermeture de comptes.",
       rules: [
-        "Seulement les dossiers dont la période de rétention est échue",
-        "Jamais un dossier sous gel juridique ou réglementaire",
+        "Seulement les enregistrements dont la période de rétention est échue",
+        "Jamais un enregistrement sous gel juridique ou réglementaire",
         "Les gros lots exigent une deuxième approbation",
-        "Certains types de dossiers ne sont jamais supprimés par l’automatisation",
+        "Certains types d’enregistrements ne sont jamais supprimés par l’automatisation",
       ],
       breaks: [
         {
@@ -205,7 +205,7 @@ export const ACTION_COPY: L<Record<ActionId, ActionCopy>> = {
         },
       ],
       evidence: "none",
-      evidenceBody: "Rien de public encore pour ce type d’action. Les décisions de l’accueil sont illustratives, sous une politique d’exemple. C’est d’un pilote que viendrait le premier dossier scellé pour la suppression de dossiers.",
+      evidenceBody: "Rien de public encore pour ce type d’action. Les décisions de l’accueil sont illustratives, sous une politique d’exemple. C’est d’un pilote que viendrait le premier dossier de vérification scellé pour la suppression d’enregistrements.",
     },
     deploy: {
       tab: "LIVRER UN CHANGEMENT",
@@ -229,7 +229,7 @@ export const ACTION_COPY: L<Record<ActionId, ActionCopy>> = {
         },
       ],
       evidence: "none",
-      evidenceBody: "Rien de public encore pour ce type d’action. Les décisions de l’accueil sont illustratives, sous une politique d’exemple. C’est d’un pilote que viendrait le premier dossier scellé pour les déploiements.",
+      evidenceBody: "Rien de public encore pour ce type d’action. Les décisions de l’accueil sont illustratives, sous une politique d’exemple. C’est d’un pilote que viendrait le premier dossier de vérification scellé pour les déploiements.",
     },
   },
 };

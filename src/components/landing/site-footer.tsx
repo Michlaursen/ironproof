@@ -12,12 +12,12 @@ import { siteNav } from "./site-nav";
 
 const T: L<{ tagline: string; company: string; contact: string }> = {
   en: {
-    tagline: "Deterministic authorization. Independently verifiable proof.",
+    tagline: "Others sell trust. We sell the right not to trust us.",
     company: "COMPANY",
     contact: "Contact",
   },
   fr: {
-    tagline: "Autorisation déterministe. Preuve vérifiable de façon indépendante.",
+    tagline: "Les autres vendent la confiance. Nous, on vend le droit de ne pas nous faire confiance.",
     company: "ENTREPRISE",
     contact: "Contact",
   },
@@ -30,7 +30,7 @@ export function SiteFooter({ locale = defaultLocale }: { locale?: Locale }) {
   const nav = siteNav(locale);
   return (
     <footer className="relative z-10 edge-t px-6 pb-12 pt-16 md:px-14">
-      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
         <div>
           <a href={locale === defaultLocale ? "/" : `/${locale}`} className="inline-flex items-center gap-3">
             <IronproofMark height={30} />

@@ -83,8 +83,9 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       <>
         Zero Trust decides who reaches a resource. Ironproof decides whether{" "}
         <span className="metal-text">this exact action</span> may run. Before each critical action
-        executes, Ironproof allows it or blocks it against your formal policy, and every allowed
-        action leaves sealed evidence anyone can verify offline, without having to trust us.
+        executes, Ironproof checks it against your formal policy: PROCEED, BLOCK, or REFUSE when the
+        solver cannot decide. Every decision on the production gate, allowed or blocked, leaves a
+        sealed record anyone can check offline, without having to trust us.
       </>
     ),
 
@@ -148,15 +149,15 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       },
       {
         zt: "Policy enforcement point in front of the resource",
-        ip: "A gate in front of the action: allow or block, nothing in between",
+        ip: "A gate in front of the action: PROCEED, BLOCK, or REFUSE when the solver cannot decide. Only PROCEED runs",
       },
       {
         zt: "Decisions logged",
-        ip: "Every allowed action sealed post-quantum, verifiable offline without having to trust us",
+        ip: "Every decision on the production gate sealed post-quantum, allowed or blocked, verifiable offline without having to trust us",
       },
       {
         zt: "Policy written by the enterprise",
-        ip: "The policy itself is proven: we show the exact case where it breaks, or prove there is none",
+        ip: "The policy itself goes to the solver: Proven, Refuted with the exact case where it breaks, or Not demonstrated. A gate decision is about one action; a proof is about the policy",
       },
     ],
 
@@ -191,19 +192,21 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
     s05a: (
       <>
         A Zero Trust page that asks you to take the vendor&apos;s word would contradict itself.
-        Every allowed action leaves a sealed record. You check it offline, with no network and no
-        Ironproof code, byte for byte.
+        Every decision on the production gate, allowed or blocked, leaves a sealed record. You check
+        it offline, byte for byte, with a verifier that shares no code with the software that seals.
+        The seal shows the record was not changed after sealing and which keys signed it. It does not
+        show the decision was right, or who holds the keys.
       </>
     ),
     s05b: <>The verifier is public, along with the canonical format it checks.</>,
-    verifyTag: "VERIFY A PROOF",
+    verifyTag: "VERIFY A SEALED RECORD",
     verifyTitle: "Check a sealed record yourself",
     verifyBody: "The offline verifier, the canonical format, and a sample record to run it on.",
 
     s06Phrase: "Zero Trust asked who gets in. We answer what runs.",
 
     ctaTitle: "See the gate on one of your workflows",
-    ctaLead: "Pick one action your agents take. We write the rule with you, prove it, and hand you the record.",
+    ctaLead: "Pick one action your agents take. We write the rule with you, put it to the solver, and hand you the verification dossier.",
     logoTitle: "Ironproof",
   },
 
@@ -218,9 +221,10 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       <>
         Le Zero Trust décide qui atteint une ressource. Ironproof décide si{" "}
         <span className="metal-text">cette action précise</span> peut s’exécuter. Avant chaque
-        action critique, Ironproof l’autorise ou la bloque selon votre politique formelle, et chaque
-        action autorisée laisse une preuve scellée que n’importe qui vérifie hors ligne, sans avoir
-        à nous croire.
+        action critique, Ironproof la confronte à votre politique formelle : PROCEED, BLOCK, ou REFUSE
+        quand le solveur ne peut pas trancher. Chaque décision de la barrière de production,
+        autorisée ou bloquée, laisse une trace scellée que n’importe qui vérifie hors ligne, sans
+        avoir à nous croire.
       </>
     ),
 
@@ -230,7 +234,7 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       <>
         Le Zero Trust est un modèle de sécurité publié par le National Institute of Standards and
         Technology des États-Unis dans la <span className="metal-text">NIST SP 800-207</span>. Sa
-        définition de travail :
+        définition de travail :
       </>
     ),
     s01Quote:
@@ -249,7 +253,7 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
     s02Lead: (
       <>
         La section 5.7 du même document traite des agents logiciels et d’IA, que le NIST appelle
-        entités non humaines (NPE) :
+        entités non humaines (NPE) :
       </>
     ),
     s02Quote:
@@ -258,8 +262,8 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
     s02b: (
       <>
         L’agent peut détenir des identifiants valides et une session légitime. L’accès est accordé.
-        Reste la question que le Zero Trust laisse ouverte au niveau d’un acte :{" "}
-        <span className="metal-text">cette action, avec ces paramètres, doit-elle s’exécuter maintenant ?</span>
+        Reste la question que le Zero Trust laisse ouverte au niveau d’un acte :{" "}
+        <span className="metal-text">cette action, avec ces paramètres, doit-elle s’exécuter maintenant ?</span>
       </>
     ),
 
@@ -268,7 +272,7 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
     s03Lead: (
       <>
         Ironproof applique l’idée du Zero Trust à l’action elle-même. Une action conforme passe sans
-        friction ; une action que la politique ne permet pas ne s’exécute jamais. Pour une action
+        friction ; une action que la politique ne permet pas ne s’exécute jamais. Pour une action
         qui passe par Ironproof, la décision est prise avant l’exécution, pas révisée après.
       </>
     ),
@@ -281,19 +285,19 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       },
       {
         zt: "Moindre privilège sur l’accès",
-        ip: "Moindre privilège sur l’acte : le montant, la cible, la séquence, pas seulement la session",
+        ip: "Moindre privilège sur l’acte : le montant, la cible, la séquence, pas seulement la session",
       },
       {
         zt: "Point d’application devant la ressource",
-        ip: "Une porte devant l’action : autoriser ou bloquer, rien entre les deux",
+        ip: "Une barrière devant l’action : PROCEED, BLOCK, ou REFUSE quand le solveur ne peut pas trancher. Seul PROCEED s’exécute",
       },
       {
         zt: "Décisions journalisées",
-        ip: "Chaque action autorisée scellée post-quantique, vérifiable hors ligne sans avoir à nous croire",
+        ip: "Chaque décision de la barrière de production scellée post-quantique, autorisée ou bloquée, vérifiable hors ligne sans avoir à nous croire",
       },
       {
         zt: "Politique écrite par l’entreprise",
-        ip: "La politique elle-même est prouvée : on montre le cas exact où elle cède, ou on prouve qu’il n’y en a aucun",
+        ip: "La politique elle-même passe au solveur : Prouvé, Réfuté avec le cas exact où elle cède, ou Non démontré. Une décision de la barrière porte sur une action ; une preuve porte sur la politique",
       },
     ],
 
@@ -314,7 +318,7 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
       },
       {
         k: "PÉRIMÈTRE",
-        t: "Seulement ce qui passe par la porte.",
+        t: "Seulement ce qui passe par la barrière.",
         b: "Une action qui atteint vos systèmes par un autre chemin est hors de la décision d’Ironproof. La garantie couvre les actions qui passent par lui, et le dit.",
       },
     ],
@@ -328,20 +332,23 @@ export const ZERO_TRUST_COPY: L<ZeroTrustCopy> = {
     s05a: (
       <>
         Une page Zero Trust qui vous demanderait de croire le fournisseur sur parole se contredirait.
-        Chaque action autorisée laisse un dossier scellé. Vous le vérifiez hors ligne, sans réseau
-        et sans code d’Ironproof, octet par octet.
+        Chaque décision de la barrière de production, autorisée ou bloquée, laisse une trace
+        scellée. Vous la vérifiez hors ligne, octet par octet, avec un vérificateur qui ne partage
+        aucun code avec le logiciel qui scelle. Le sceau montre que la trace n’a pas changé après le
+        scellement, et quelles clés l’ont signée. Il ne montre pas que la décision était juste, ni
+        qui détient les clés.
       </>
     ),
     s05b: <>Le vérificateur est public, avec le format canonique qu’il vérifie.</>,
-    verifyTag: "VÉRIFIER UNE PREUVE",
-    verifyTitle: "Vérifiez vous-même un dossier scellé",
-    verifyBody: "Le vérificateur hors ligne, le format canonique, et un dossier d’exemple pour l’essayer.",
+    verifyTag: "VÉRIFIER UNE TRACE SCELLÉE",
+    verifyTitle: "Vérifiez vous-même une trace scellée",
+    verifyBody: "Le vérificateur hors ligne, le format canonique, et une trace d’exemple pour l’essayer.",
 
     s06Phrase: "Le Zero Trust a demandé qui entre. Nous répondons à ce qui s’exécute.",
 
-    ctaTitle: "Voyez la porte sur l’un de vos processus",
+    ctaTitle: "Voyez la barrière sur l’un de vos processus",
     ctaLead:
-      "Choisissez une action que prennent vos agents. Nous écrivons la règle avec vous, nous la prouvons, et nous vous remettons le registre.",
+      "Choisissez une action que prennent vos agents. Nous écrivons la règle avec vous, nous la soumettons au solveur, et nous vous remettons le dossier de vérification.",
     logoTitle: "Ironproof",
   },
 };

@@ -180,7 +180,7 @@ const T: L<Copy> = {
     presetAllow: "✓ DANS LA POLITIQUE",
     presetBlock: "✕ HORS POLITIQUE",
     allow: "Autorisée. Exécution.",
-    block: "Bloquée. Pas d’exécution.",
+    block: "Bloquée. Elle ne s’exécute jamais.",
     allowWhy: "Toutes les règles tiennent. L’action s’exécute, et la décision est scellée.",
     blockWhy: "Une règle échoue. L’action ne s’exécute pas, et le refus est scellé avec sa raison.",
     receiptLabel: "CE QUE CONTIENT LA TRACE SCELLÉE",

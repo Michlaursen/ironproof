@@ -4,11 +4,11 @@ export const fr: SiteContent = {
   meta: {
     title: "Ironproof | IA neuro-symbolique et vérification formelle pour les systèmes critiques",
     description:
-      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier la modernisation des systèmes patrimoniaux. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui la vérifie de façon indépendante, sans avoir à nous faire confiance.",
+      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier, sous hypothèses déclarées, la traduction du code patrimonial. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui puisse vérifier qu’elle n’a pas été modifiée, sans avoir à nous faire confiance.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier la modernisation des systèmes patrimoniaux. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui la vérifie de façon indépendante, sans avoir à nous faire confiance.",
+      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier, sous hypothèses déclarées, la traduction du code patrimonial. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui puisse vérifier qu’elle n’a pas été modifiée, sans avoir à nous faire confiance.",
   },
   header: {
     nav: [
@@ -77,7 +77,7 @@ export const fr: SiteContent = {
     },
   },
   attributions: {
-    title: "Dossier technique public",
+    title: "Registre technique public",
     subtitle: "Des preuves que vous pouvez examiner en dehors de notre site.",
     items: [
       {
@@ -131,7 +131,7 @@ export const fr: SiteContent = {
     ],
     summary:
       "8 organisations nous créditent publiquement · 3 CVE assignées · 28 divulgations coordonnées · 4 prépublications en sécurité",
-    linkLabel: "Consulter le dossier technique complet",
+    linkLabel: "Consulter le registre technique complet",
     linkHref: "#corpus",
   },
   lab: {

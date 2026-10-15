@@ -59,9 +59,9 @@ const T: L<Copy> = {
   en: {
     tabs: { code: "1 · CODE", proof: "2 · PROOF", poc: "3 · POC", reprove: "4 · RE-PROVE" },
     eyebrow: "PROOF EXPLORER · CVE-2026-44673",
-    titleA: "We Mathematically Prove",
-    titleB: "a Critical Vulnerability",
-    sub: "Proven, then closed. Here's the proof.",
+    titleA: "We Show, in a Solver,",
+    titleB: "a High-Severity Vulnerability",
+    sub: "Shown in a model of the code, then shown closed in that model. Here are the obligations.",
     lead: (lib) => (
       <>
         A real, assigned vulnerability in {lib} (CVE-2026-44673, CVSS 7.5) — the YANG library behind
@@ -154,8 +154,8 @@ Z3  ->  UNSAT    no input undersizes — bounded, provably, over all 2^32 length
     notProven: (
       <>
         reachability of <span className="font-mono">lyb_read_string()</span> from a given network
-        path, and that this exact fix is the upstream libyang patch. It is a sufficient,
-        proven-correct fix — not necessarily the one deployed.
+        path, and that this exact fix is the upstream libyang patch. In this model, the widened
+        arithmetic admits no undersizing length; whether it matches the deployed patch is not checked here.
       </>
     ),
 
@@ -166,9 +166,9 @@ Z3  ->  UNSAT    no input undersizes — bounded, provably, over all 2^32 length
   fr: {
     tabs: { code: "1 · CODE", proof: "2 · PREUVE", poc: "3 · POC", reprove: "4 · RE-PROUVER" },
     eyebrow: "EXPLORATEUR DE PREUVE · CVE-2026-44673",
-    titleA: "Nous prouvons mathématiquement",
-    titleB: "une vulnérabilité critique",
-    sub: "Prouvée, puis fermée. Voici la preuve.",
+    titleA: "Nous démontrons, dans un solveur,",
+    titleB: "une vulnérabilité de gravité élevée",
+    sub: "Démontrée dans un modèle du code, puis fermée dans ce modèle. Voici les obligations.",
     lead: (lib) => (
       <>
         Une vulnérabilité réelle et assignée dans {lib} (CVE-2026-44673, CVSS 7,5) — la bibliothèque
@@ -265,8 +265,9 @@ Z3  ->  UNSAT    aucune entree ne sous-dimensionne — borne, prouve, sur les 2^
     notProven: (
       <>
         l’atteignabilité de <span className="font-mono">lyb_read_string()</span> depuis un chemin
-        réseau donné, et le fait que ce correctif exact soit celui de libyang en amont. C’est un
-        correctif suffisant et prouvé correct — pas nécessairement celui qui est déployé.
+        réseau donné, et le fait que ce correctif exact soit celui de libyang en amont. Dans ce modèle,
+        l’arithmétique élargie n’admet aucune longueur qui sous-dimensionne ; la correspondance avec
+        le correctif déployé n’est pas vérifiée ici.
       </>
     ),
 

@@ -32,11 +32,11 @@ const T: L<{
   en: {
     metaTitle: "Try to get past the gate — Ironproof",
     metaDescription:
-      "Attack a real sealed payment policy in your browser: push the amount, split the payment, hide the history, forge the record. Some attacks get through, and the page says exactly why.",
+      "Attack the sealed sample payment policy from the evidence pack, in your browser: push the amount, split the payment, hide the history, forge the record. Some attacks get through, and the page says exactly why.",
     eyebrow: "THE LAB",
     h1: "Try to get past the gate.",
     lead: "The policy below is the sealed one from the evidence pack, and every verdict on this page is computed in your browser by running it. Four attacks. Some get through, and the page says exactly why.",
-    how: "Nothing is sent anywhere. Change a control and the gate decides again, in this tab.",
+    how: "No request goes to our engine. Change a control and the gate decides again, in this tab.",
     honestTitle: "HOW THIS PAGE STAYS HONEST",
     honest: [
       "The site refuses to build unless its evaluator reaches all six verdicts sealed in the evidence pack.",
@@ -49,19 +49,19 @@ const T: L<{
   fr: {
     metaTitle: "Essayez de contourner la barrière — Ironproof",
     metaDescription:
-      "Attaquez une vraie politique de paiement scellée dans votre navigateur : montez le montant, fractionnez le paiement, cachez l’historique, falsifiez le dossier. Certaines attaques passent, et la page dit exactement pourquoi.",
+      "Attaquez la politique de paiement d’exemple, scellée, du dossier de vérification, dans votre navigateur : montez le montant, fractionnez le paiement, cachez l’historique, falsifiez la trace. Certaines attaques passent, et la page dit exactement pourquoi.",
     eyebrow: "LE LABO",
     h1: "Essayez de contourner la barrière.",
-    lead: "La politique ci-dessous est celle, scellée, du dossier de preuve, et chaque verdict de cette page est calculé dans votre navigateur en l’exécutant. Quatre attaques. Certaines passent, et la page dit exactement pourquoi.",
-    how: "Rien n’est envoyé nulle part. Changez un réglage et la barrière décide à nouveau, dans cet onglet.",
+    lead: "La politique ci-dessous est celle, scellée, du dossier de vérification, et chaque verdict de cette page est calculé dans votre navigateur en l’exécutant. Quatre attaques. Certaines passent, et la page dit exactement pourquoi.",
+    how: "Aucune requête ne part vers notre moteur. Changez un réglage et la barrière décide à nouveau, dans cet onglet.",
     honestTitle: "COMMENT CETTE PAGE RESTE HONNÊTE",
     honest: [
-      "Le site refuse de se construire si son évaluateur n’atteint pas les six verdicts scellés dans le dossier de preuve.",
+      "Le site refuse de se construire si son évaluateur n’atteint pas les six verdicts scellés dans le dossier de vérification.",
       "Avant publication, le même évaluateur est exécuté côte à côte avec la seconde implémentation du moteur, sur chaque action que cette page peut construire.",
       "Un labo où toutes les attaques échouent est une démo. Quand une attaque passe, la limite qu’elle touche est celle écrite dans le dossier.",
     ],
     ctaPilot: "DÉMARRER UN PILOTE",
-    ctaEvidence: "VOIR LE DOSSIER DE PREUVE",
+    ctaEvidence: "VOIR LE DOSSIER DE VÉRIFICATION",
   },
 };
 

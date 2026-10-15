@@ -47,6 +47,7 @@ const T: L<Copy> = {
     provingPoints: [
       "Reasons exhaustively over the formally defined state space",
       "If the formal model admits a violation, Ironproof produces a counterexample",
+      "If the solver cannot decide, the result is “Not demonstrated”, never counted as proven",
       <>
         &quot;Proven&quot; means the defined property cannot be violated within the formal model
       </>,
@@ -74,6 +75,7 @@ const T: L<Copy> = {
     provingPoints: [
       "Raisonne exhaustivement sur l’espace d’états défini formellement",
       "Si le modèle formel admet une violation, Ironproof produit un contre-exemple",
+      "Si le solveur ne peut pas trancher, le résultat est «\u202fNon démontré\u202f», jamais compté comme prouvé",
       <>
         «&#8239;Prouvé&#8239;» veut dire que la propriété définie ne peut pas être violée à
         l’intérieur du modèle formel

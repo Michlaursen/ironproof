@@ -19,12 +19,12 @@ const T: L<{
   evidence: string;
 }> = {
   en: {
-    metaTitle: "Verify a sealed proof — Ironproof",
+    metaTitle: "Verify a sealed record — Ironproof",
     metaDescription:
       "Paste a sealed Ironproof dossier and verify it entirely in your own browser: SHA3-512 chain, Ed25519 and ML-DSA-65 signatures, in pure JavaScript. No server call, no account, nothing sent to us. Two deliberately tampered dossiers are provided so you can watch a forgery be rejected.",
     eyebrow: "VERIFY IT YOURSELF",
     h1: "Do not trust us. Check.",
-    lead: "The verification below runs entirely in this tab. The SHA3-512 chain, the Ed25519 signature and the post-quantum ML-DSA-65 signature are all checked in pure JavaScript, with no request to any server and no account with anyone. Two of the sample dossiers have been tampered with on purpose, so you can watch a forgery be rejected rather than take our word that it would be.",
+    lead: "The verification below runs entirely in this tab. The SHA3-512 chain, the Ed25519 signature and the post-quantum ML-DSA-65 signature are all checked in pure JavaScript, with no request to any server and no account with anyone. Two of the sample dossiers have been tampered with on purpose, so you can watch a forgery be rejected rather than take our word that it would be. This is an integrity check: it shows a record was not changed after sealing, not that a property is proven.",
     specPre: "The exact bytes a dossier commits to are published in the ",
     specLink: "wire specification",
     specPost:
@@ -32,17 +32,17 @@ const T: L<{
     evidence: "See a full evidence pack: six gate decisions, sealed →",
   },
   fr: {
-    metaTitle: "Vérifier une preuve scellée — Ironproof",
+    metaTitle: "Vérifier une trace scellée — Ironproof",
     metaDescription:
       "Collez un dossier Ironproof scellé et vérifiez-le entièrement dans votre propre navigateur\u00a0: chaîne SHA3-512, signatures Ed25519 et ML-DSA-65, en JavaScript pur. Aucun appel serveur, aucun compte, rien ne nous est envoyé. Deux dossiers volontairement altérés sont fournis pour que vous voyiez un faux se faire rejeter.",
     eyebrow: "VÉRIFIEZ VOUS-MÊME",
     h1: "Ne nous croyez pas. Vérifiez.",
-    lead: "La vérification ci-dessous tourne entièrement dans cet onglet. La chaîne SHA3-512, la signature Ed25519 et la signature post-quantique ML-DSA-65 sont toutes contrôlées en JavaScript pur, sans une seule requête vers un serveur et sans compte chez qui que ce soit. Deux des dossiers d’exemple ont été altérés exprès\u202f: vous voyez un faux se faire rejeter au lieu de nous croire sur parole.",
+    lead: "La vérification ci-dessous tourne entièrement dans cet onglet. La chaîne SHA3-512, la signature Ed25519 et la signature post-quantique ML-DSA-65 sont toutes contrôlées en JavaScript pur, sans une seule requête vers un serveur et sans compte chez qui que ce soit. Deux des dossiers d’exemple ont été altérés exprès\u202f: vous voyez un faux se faire rejeter au lieu de nous croire sur parole. C’est une vérification d’intégrité\u202f: elle montre qu’une trace n’a pas changé après le scellement, pas qu’une propriété est prouvée.",
     specPre: "Les octets exacts sur lesquels un dossier s’engage sont publiés dans la ",
     specLink: "spécification du format",
     specPost:
       ", donc un vérificateur indépendant peut être écrit dans n’importe quel langage, par n’importe qui, sans notre code.",
-    evidence: "Voir un dossier de preuve complet : six décisions de la barrière, scellées →",
+    evidence: "Voir un dossier de vérification complet : six décisions de la barrière, scellées →",
   },
 };
 

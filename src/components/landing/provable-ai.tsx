@@ -12,6 +12,8 @@ import { PROVABLE_AI_COPY } from "./provable-ai-copy";
  * "What is Provable AI?" — the category page reached from the nav.
  *
  * Copy lives in provable-ai-copy.tsx, both languages, read through `pick`.
+ * The site footer comes from the [locale] layout; this page has no footer of
+ * its own (it rendered a second one until 2026-10-15).
  * Every claim is mapped to the real state: capabilities marked BUILT exist
  * today — including the public offline verifier (PR #10, merged) and the
  * publicly anchored root of trust (attested across two independent names,
@@ -321,29 +323,6 @@ export function ProvableAI({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
       </main>
-
-      {/* FOOTER */}
-      <footer className="relative z-10 edge-t px-6 py-12 md:px-14">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-xs text-neutral-400 md:flex-row">
-          <div className="flex items-center gap-3">
-            <IronproofMark height={30} />
-            <span className="track-logo iron-brushed font-semibold">IRONPROOF</span>
-          </div>
-          <div className="flex flex-col items-center gap-3 md:flex-row md:gap-8">
-            <span className="font-light">{t.footer}</span>
-            {/* The company page, so a buyer can check there are people behind the
-              * site without searching (URL given by Dom, 2026-09-26). */}
-            <a
-              href="https://www.linkedin.com/company/ironproof/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="track-mid border-b border-white/20 pb-0.5 text-xs text-neutral-300 transition hover:border-seal hover:text-white"
-            >
-              LinkedIn <span aria-hidden="true">&#8599;</span>
-            </a>
-          </div>
-        </div>
-      </footer>
 
       <FadeUpInit />
     </div>
