@@ -2656,3 +2656,7 @@ p, li {
   .blueprint .closing-card { margin-top: 0; }
 }
 .closing-steps { --iron: #24262a; --gold: #a8843a; --graphite: #5b5f66; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; max-width: 40rem; font-size: 0.62rem; }
+/* The steps' hairline belongs to the list, not to the card (it was drawn
+   through the kicker, Dom 2026-10-15). */
+.closing-steps { position: relative; --paper: #e7e5e2; padding-top: 0; }
+.closing-steps::before { top: 0.22rem !important; left: 1.6rem !important; right: 1.6rem !important; }

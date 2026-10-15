@@ -636,9 +636,9 @@ const T: L<Copy> = {
       scope:
         "Proven for the actions and the policy you define, where the action can only execute through the gate. The certificate states that boundary.",
       notes: [
-        { x: 58, y: 16, label: "MARBLE · HUMAN INTENT" },
-        { x: 80, y: 30, label: "IRON · MACHINE RIGOUR" },
-        { x: 70, y: 74, label: "GOLD · THE PROOF", gold: true },
+        { x: 57, y: 80, label: "MARBLE · HUMAN INTENT" },
+        { x: 79, y: 12, label: "IRON · MACHINE RIGOUR" },
+        { x: 82, y: 56, label: "GOLD · THE PROOF", gold: true },
       ],
     },
 
@@ -1062,9 +1062,9 @@ const T: L<Copy> = {
       scope:
         "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
       notes: [
-        { x: 58, y: 16, label: "MARBRE · L’INTENTION HUMAINE" },
-        { x: 80, y: 30, label: "FER · LA RIGUEUR DE LA MACHINE" },
-        { x: 70, y: 74, label: "OR · LA PREUVE", gold: true },
+        { x: 57, y: 80, label: "MARBRE · L’INTENTION HUMAINE" },
+        { x: 76, y: 12, label: "FER · LA RIGUEUR DE LA MACHINE" },
+        { x: 82, y: 56, label: "OR · LA PREUVE", gold: true },
       ],
     },
 
@@ -1521,8 +1521,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-bust.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-bust-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             {/* The bust read like a figure on a sheet: what each material stands for. */}
             <div className="closing-notes" aria-hidden="true">
