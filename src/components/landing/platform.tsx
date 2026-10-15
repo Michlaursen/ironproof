@@ -11,7 +11,7 @@ import { PAPERS } from "./credibility";
  * already show the gate (#problem onward).
  */
 /* One image per application, same order as the pillars. */
-const APP_IMAGES = ["/media/ill-gate-arch.jpg", "/media/ill-c-chip.jpg", "/media/ill-legacy-reel.jpg"] as const;
+const APP_IMAGES = ["/media/app-vault.jpg", "/media/app-loupe.jpg", "/media/app-punchcards.jpg"] as const;
 
 export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(PLATFORM_COPY, locale);
