@@ -2301,3 +2301,30 @@ p, li {
   .paper-row-side { grid-column: 1; }
 }
 .paper-row-read { white-space: nowrap; min-height: 44px; display: inline-flex; align-items: center; }
+/* Why now, zero fog (Dom, 2026-10-15: "encore brouillé, on voit mal les
+   towers"). No veil, no gradient, no frosted glass: the towers sharp. The
+   words hold by their own shadow; the cards are solid iron, not blurred glass. */
+#now .breath-photo-deep::after { background: none; }
+#now .breath-photo img { filter: contrast(1.32) brightness(0.9) saturate(1.08); }
+#now ol > li {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(22, 24, 27, 0.9);
+}
+#now h2, #now h2 + p, #now > div > p.font-serif {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 0, 0, 0.75), 0 0 28px rgba(0, 0, 0, 0.5);
+}
+#now .breath-photo img { filter: none; }
+/* The words sit on solid iron, like the cards: no smoky halo on the marble. */
+#now h2, #now h2 + p, #now > div > p.font-serif, #now .fade-up.mb-12 .seal-label { text-shadow: none; }
+#now .fade-up.mb-12, #now > div > p.font-serif {
+  width: fit-content;
+  padding: 2rem 2.2rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(217, 178, 90, 0.7);
+  background: rgba(22, 24, 27, 0.9);
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.7);
+}
+#now .fade-up.mb-12 .seal-label { color: #e3bf63; }
+@media (max-width: 767px) { #now .fade-up.mb-12, #now > div > p.font-serif { padding: 1.4rem 1.3rem; } }

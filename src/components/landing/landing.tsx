@@ -1248,7 +1248,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * flowing between the towers like payments that no longer wait for a
             * person (Dom, 2026-09-26). Darkened so the dated cards stay the subject. */}
           <div className="breath-photo breath-photo-deep" aria-hidden="true">
-            <Image src="/media/district-white.jpg" alt="" fill sizes="100vw" className="object-cover" />
+            <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
           </div>
           <div className="mx-auto max-w-7xl">
           <div className="fade-up mb-12 max-w-3xl">
