@@ -23,15 +23,67 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "NEURO-SYMBOLIC FORMAL VERIFICATION",
+    eyebrow: "NEURO-SYMBOLIC AI × FORMAL VERIFICATION",
     headline: "Don’t trust the verdict.",
     headlineEnd: "Verify the evidence.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
-    eyebrow: "VÉRIFICATION FORMELLE NEURO-SYMBOLIQUE",
+    eyebrow: "IA NEURO-SYMBOLIQUE × VÉRIFICATION FORMELLE",
     headline: "Ne vous fiez pas au verdict.",
     headlineEnd: "Vérifiez la preuve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
+  },
+};
+
+/*
+ * What the hero brain says (Dom, 2026-10-15): the white half proposes, the iron
+ * half decides, and every result leaves a dossier anyone can re-check. The
+ * dossier card is an example and says so; the SMT lines are the real shape of
+ * a proof: assert the negation, the solver answers unsat, the property holds.
+ */
+export type HeroEngineCopy = {
+  neural: string;
+  neuralLine: string;
+  symbolic: string;
+  symbolicLine: string;
+  steps: readonly [string, string, string, string];
+  dossierTag: string;
+  dossierVerdict: string;
+  dossierScope: string;
+  dossierSeal: string;
+  dossierCheck: string;
+  dossierLink: string;
+};
+
+export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
+  en: {
+    neural: "NEURAL · THE LANGUAGE MODEL",
+    // Verbatim from the site (platform-copy.ts, "WHAT YOU RECEIVE").
+    neuralLine: "AI reads the code or the policy and proposes what to check. It proves nothing on its own.",
+    symbolic: "SYMBOLIC · THE SOLVER",
+    // Bounded on purpose (Dom, 2026-10-15): within defined models, never "every case".
+    symbolicLine: "Mathematically verifies properties within defined models and assumptions.",
+    // Three verdicts, never two (Proven / Refuted / Not demonstrated).
+    steps: ["FORMALIZE", "PROVE / REFUTE / NOT DEMONSTRATED", "SEAL", "VERIFY"],
+    dossierTag: "EXAMPLE DOSSIER",
+    dossierVerdict: "PROVEN",
+    dossierScope: "within the stated model and assumptions",
+    dossierSeal: "SEALED · Ed25519 + ML-DSA-65",
+    dossierCheck: "re-checkable without us",
+    dossierLink: "Verify a real sealed dossier",
+  },
+  fr: {
+    neural: "NEURONAL · LE MODÈLE DE LANGAGE",
+    neuralLine: "L’IA lit le code ou la politique et propose quoi vérifier. Elle ne prouve rien seule.",
+    symbolic: "SYMBOLIQUE · LE SOLVEUR",
+    symbolicLine: "Vérifie mathématiquement des propriétés, dans des modèles et des hypothèses définis.",
+    steps: ["FORMALISER", "PROUVER / RÉFUTER / NON DÉMONTRÉ", "SCELLER", "VÉRIFIER"],
+    dossierTag: "DOSSIER D’EXEMPLE",
+    dossierVerdict: "PROUVÉ",
+    dossierScope: "dans le modèle et les hypothèses déclarés",
+    dossierSeal: "SCELLÉ · Ed25519 + ML-DSA-65",
+    dossierCheck: "revérifiable sans nous",
+    dossierLink: "Vérifier un vrai dossier scellé",
   },
 };

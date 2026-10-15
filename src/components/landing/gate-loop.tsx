@@ -53,11 +53,13 @@ const T: L<Copy> = {
   },
 };
 
-const POSTER = "/media/gate-poster.jpg";
-const FIRST_PLAY_AT = 2; // seconds: the first gold (an authorized action) lights up
+const POSTER = "/media/gate-white-poster.jpg";
+const FIRST_PLAY_AT = 0; // seconds: the white loop opens on gold already flowing
 const WATCHDOG_MS = 3500; // no progress by then: the animated image takes over
-// Same 15 s loop, starting at 2 s (gold first), 960 px, 12 fps.
-const ANIM_AVIF = "/media/gate.anim.avif"; // 309 KB, 182 frames
+// White edition (Dom, 2026-10-15): marble plate, iron gate, gold edge. Same
+// story as the black loop in 10 s: gold flows, the AI agent channel turns red,
+// the iron blade drops on BLOCKED, then lifts. 960 px, 12 fps.
+const ANIM_AVIF = "/media/gate-white.anim.avif"; // 98 KB
 
 export function GateLoop({ locale }: { locale: Locale }) {
   const t = pick(T, locale);
@@ -185,8 +187,8 @@ export function GateLoop({ locale }: { locale: Locale }) {
           preload="none"
           aria-label={t.label}
         >
-          <source src="/media/gate.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"' />
-          <source src="/media/gate.h264.mp4" type='video/mp4; codecs="avc1.640032"' />
+          <source src="/media/gate-white.av1.mp4" type='video/mp4; codecs="av01.0.08M.10"' />
+          <source src="/media/gate-white.h264.mp4" type='video/mp4; codecs="avc1.640032"' />
         </video>
       )}
       {!reduced && (

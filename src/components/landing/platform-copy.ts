@@ -45,7 +45,14 @@ export type PlatformCopy = {
     body: string;
     verdicts: readonly Verdict[];
     /** Transversal to the three pillars (Dom, 2026-10-13): never drop it. */
-    independent: { title: string; body: string };
+    independent: {
+      title: string;
+      body: string;
+      /** The same body, split for the two-panel layout (Dom, 2026-10-15). Words unchanged. */
+      browser: { where: string; what: string; body: string; proves: string };
+      solver: { where: string; what: string; body: string; proves: string };
+      note: string;
+    };
     /** The company line (Dom, 2026-10-15): set alone, at hero scale. */
     foot: { a: string; b: string };
   };
@@ -61,24 +68,24 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         num: "01",
         name: "AI agents & critical actions",
         claim: "If it isn’t authorized, it never executes. If it is, it executes — with verifiable evidence.",
-        body: "Ironproof checks every critical action against your policy before it runs, whether an AI agent, a script, an API or a person started it. A compliant action proceeds; an unauthorized one is blocked. On the production gate, each decision is sealed, so anyone can later check offline that it was not altered, without having to trust us.",
+        body: "Every critical action routed through Ironproof’s gate, whether an AI agent, a script, an API or a person started it, is checked against your policy before it runs. Unauthorized ones are blocked; each production decision is sealed and can be checked offline.",
         href: "#problem",
         cta: "HOW THE GATE WORKS",
-        evidence: "Today: the sealed record of a decision can be checked in your browser, with no server and no account. That checks integrity; the decision itself is re-derived from its inputs and the policy.",
+        evidence: "Today: a decision’s sealed record is checked in your browser, with no server and no account. That checks integrity; the decision itself is re-derived from its inputs and the policy.",
       },
       {
         num: "02",
         name: "C software security",
         claim: "Don’t just find vulnerabilities. Check, within stated bounds, that the fix closes them.",
-        body: "Our verification technology analyzes C software to check defined properties within stated bounds, and to test whether a fix removes the failure our test exhibits. Each result ships as a verification dossier — proven, refuted or not demonstrated — with what is needed to re-run it.",
-        evidence: "Today: an AI agent started without our context re-ran 4 archives, on the same machine and CBMC version, and reached the same 8 verdicts out of 8 (October 12, 2026). No outside party has replayed them yet, and our C verdict judge is being rebuilt after our own audit.",
+        body: "Checks defined properties of C code within stated bounds, and whether a fix removes the failure our test exhibits. Each result ships as a dossier you can re-run.",
+        evidence: "Today: an automated replay, run by an AI agent without our context, reproduced 8 of 8 verdicts from 4 archives (October 12, 2026). No independent third party has validated them, and our C verdict judge is being rebuilt after our own audit.",
       },
       {
         num: "03",
-        name: "COBOL modernization",
+        name: "Legacy modernization",
         claim: "Modernize the code. Check what the translation preserves.",
-        body: "Ironproof translates COBOL to Python and checks, under a stated model of the COBOL, whether both compute the same results, or returns the input where they differ. A proof holds against our model of the COBOL, not against every compiler or CICS configuration; what is not modeled is reported as not covered.",
-        evidence: "Today: real business programs (IBM’s GenApp) are checked only under a CICS model we write. No third-party replay yet; we will publish it when it exists.",
+        body: "Translates COBOL to Python and checks, under a stated model of the COBOL, that both compute the same results, or returns the input where they differ. What the model does not cover is reported as not covered.",
+        evidence: "Today: IBM’s GenApp business programs, checked only under a CICS model we write. No third-party replay yet.",
       },
     ],
     method: {
@@ -93,7 +100,20 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       independent: {
         title: "Two different checks. Neither needs us.",
-        body: "In your browser: the sealed record — hash chain, Ed25519 and post-quantum ML-DSA-65 signatures. It shows that nothing changed after sealing, not that a property is true. On your machine: the policy proofs themselves, re-run in your own solver from the obligations we ship. A seal proves integrity; only a solver result proves a property. Where an artifact cannot be shared, the result says so.",
+        body: "In your browser: the sealed record — hash chain, Ed25519 and post-quantum ML-DSA-65 signatures. It shows that nothing changed after sealing, not that a property is true. On your machine: the policy proofs themselves, re-run in your own solver from the obligations we ship. A seal proves integrity; formal verification establishes what holds within the stated model and assumptions. Where an artifact cannot be shared, the result says so.",
+        browser: {
+          where: "IN YOUR BROWSER",
+          what: "The sealed record",
+          body: "Hash chain, Ed25519 and post-quantum ML-DSA-65 signatures. It shows that nothing changed after sealing, not that a property is true.",
+          proves: "A seal proves integrity",
+        },
+        solver: {
+          where: "ON YOUR MACHINE",
+          what: "Verify the mathematical claim",
+          body: "Re-run in your own solver from the obligations we ship.",
+          proves: "Formal verification establishes what holds within the stated model and assumptions",
+        },
+        note: "Where an artifact cannot be shared, the result says so.",
       },
       foot: { a: "Others sell trust.", b: "We sell the right not to trust us." },
     },
@@ -112,24 +132,24 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         num: "01",
         name: "Agents IA et actions critiques",
         claim: "Si ce n’est pas autorisé, pas d’exécution. Si ça l’est, ça s’exécute — avec une preuve vérifiable.",
-        body: "Ironproof vérifie chaque action critique contre votre politique avant qu’elle s’exécute, qu’elle vienne d’un agent IA, d’un script, d’une API ou d’une personne. Une action conforme passe ; une action non autorisée est bloquée. Sur la barrière de production, chaque décision est scellée : n’importe qui peut ensuite vérifier hors ligne qu’elle n’a pas été modifiée, sans avoir à nous faire confiance.",
+        body: "Chaque action critique qui passe par la barrière d’Ironproof, qu’elle vienne d’un agent IA, d’un script, d’une API ou d’une personne, est vérifiée contre votre politique avant de s’exécuter. Les actions non autorisées sont bloquées ; chaque décision de production est scellée et vérifiable hors ligne.",
         href: "#problem",
         cta: "COMMENT FONCTIONNE LA BARRIÈRE",
-        evidence: "Aujourd’hui : la trace scellée d’une décision se vérifie dans votre navigateur, sans serveur et sans compte. C’est un contrôle d’intégrité ; la décision elle-même se recalcule à partir de ses entrées et de la politique.",
+        evidence: "Aujourd’hui : la trace scellée d’une décision se vérifie dans votre navigateur, sans serveur ni compte. C’est un contrôle d’intégrité ; la décision elle-même se recalcule à partir de ses entrées et de la politique.",
       },
       {
         num: "02",
         name: "Sécurité du logiciel C",
         claim: "Ne vous contentez pas de trouver les failles. Vérifiez, dans des bornes déclarées, que le correctif les ferme.",
-        body: "Notre technologie de vérification analyse du logiciel C pour vérifier des propriétés définies dans des bornes déclarées, et tester si un correctif supprime l’échec que notre test met en évidence. Chaque résultat part avec un dossier de vérification — prouvé, réfuté ou non démontré — et ce qu’il faut pour le rejouer.",
-        evidence: "Aujourd’hui : un agent IA lancé sans notre contexte a rejoué 4 archives, sur la même machine et la même version de CBMC, et retrouvé les mêmes 8 verdicts sur 8 (12 octobre 2026). Aucun tiers externe ne les a encore rejouées, et notre juge des verdicts C est en reconstruction après notre propre audit.",
+        body: "Vérifie des propriétés définies du code C dans des bornes déclarées, et si un correctif supprime l’échec que notre test met en évidence. Chaque résultat part avec un dossier que vous pouvez rejouer.",
+        evidence: "Aujourd’hui : un rejeu automatisé, lancé par un agent IA sans notre contexte, a reproduit 8 verdicts sur 8 à partir de 4 archives (12 octobre 2026). Aucun tiers indépendant ne les a validés, et notre juge des verdicts C est en reconstruction après notre propre audit.",
       },
       {
         num: "03",
-        name: "Modernisation COBOL",
+        name: "Modernisation des systèmes hérités",
         claim: "Modernisez le code. Vérifiez ce que la traduction préserve.",
-        body: "Ironproof traduit le COBOL en Python et vérifie, sous un modèle déclaré du COBOL, si les deux calculent les mêmes résultats, ou rend l’entrée où ils diffèrent. Une preuve tient contre notre modèle du COBOL, pas contre tout compilateur ou toute configuration CICS ; ce qui n’est pas modélisé est déclaré non couvert.",
-        evidence: "Aujourd’hui : les programmes métier réels (GenApp d’IBM) ne sont vérifiés que sous un modèle CICS que nous écrivons. Pas encore de rejeu par un tiers ; nous le publierons quand il existera.",
+        body: "Traduit le COBOL en Python et vérifie, sous un modèle déclaré du COBOL, que les deux calculent les mêmes résultats, ou rend l’entrée où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert.",
+        evidence: "Aujourd’hui : les programmes métier GenApp d’IBM, vérifiés seulement sous un modèle CICS que nous écrivons. Pas encore de rejeu par un tiers.",
       },
     ],
     method: {
@@ -144,7 +164,20 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       independent: {
         title: "Deux vérifications différentes. Aucune n’a besoin de nous.",
-        body: "Dans votre navigateur : la trace scellée — chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65. Elle montre que rien n’a changé après le scellement, pas qu’une propriété est vraie. Sur votre machine : les preuves de politique elles-mêmes, rejouées dans votre propre solveur à partir des obligations fournies. Un sceau prouve l’intégrité ; seul un résultat de solveur prouve une propriété. Quand un élément ne peut pas être partagé, le résultat le dit.",
+        body: "Dans votre navigateur : la trace scellée — chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65. Elle montre que rien n’a changé après le scellement, pas qu’une propriété est vraie. Sur votre machine : les preuves de politique elles-mêmes, rejouées dans votre propre solveur à partir des obligations fournies. Un sceau prouve l’intégrité ; la vérification formelle établit ce qui tient dans le modèle déclaré et sous ses hypothèses. Quand un élément ne peut pas être partagé, le résultat le dit.",
+        browser: {
+          where: "DANS VOTRE NAVIGATEUR",
+          what: "La trace scellée",
+          body: "Chaîne d’empreintes, signatures Ed25519 et post-quantique ML-DSA-65. Elle montre que rien n’a changé après le scellement, pas qu’une propriété est vraie.",
+          proves: "Un sceau prouve l’intégrité",
+        },
+        solver: {
+          where: "SUR VOTRE MACHINE",
+          what: "Vérifiez l’énoncé mathématique",
+          body: "Rejouées dans votre propre solveur à partir des obligations fournies.",
+          proves: "La vérification formelle établit ce qui tient dans le modèle déclaré et sous ses hypothèses",
+        },
+        note: "Quand un élément ne peut pas être partagé, le résultat le dit.",
       },
       foot: { a: "Les autres vendent la confiance.", b: "Nous, on vend le droit de ne pas nous faire confiance." },
     },

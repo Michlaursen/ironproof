@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CREDITED_STRIP } from "./credibility";
-import { HERO_COPY } from "./hero-copy";
+import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -1003,6 +1003,7 @@ function PhotoPlate({ src, wide = false, position }: { src: string; wide?: boole
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const t = pick(T, locale);
+  const eng = pick(HERO_ENGINE_COPY, locale);
 
   return (
     <div className="flex flex-1 flex-col">
@@ -1024,15 +1025,15 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <em className="not-italic font-semibold">{t.hero.headlineEnd}</em>
               </h1>
             </div>
-            <div className="fade-up min-w-0 md:pt-14">
+            <div className="hero-white-aside fade-up min-w-0 md:pt-14">
               {/* The value line (Dom, 2026-10-15), in gold, then the boundary. */}
-              <ul className="hero-white-value track-mid mb-6 space-y-1.5 text-xs">
+              <ul className="hero-white-value track-mid mb-6 space-y-1.5 text-xs md:text-sm">
                 {t.hero.value.split(" · ").map((part) => (
                   <li key={part}>{part}</li>
                 ))}
               </ul>
-              <p className="hero-white-lead mb-9 max-w-md text-sm leading-relaxed md:text-base">{t.hero.boundary}</p>
-              <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <p className="hero-white-lead mb-9 max-w-lg text-base leading-relaxed md:text-lg">{t.hero.boundary}</p>
+              <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a href={`${r}/verify`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
                 </a>
@@ -1042,14 +1043,51 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </div>
             </div>
           </div>
-          <div className="hero-white-brain" aria-hidden="true">
-            <Image src="/media/hero-brain.jpg" alt="" fill preload sizes="100vw" className="object-cover" />
+          {/* Three columns that never overlap: the language model, the brain, the
+            * solver and an example dossier (Dom, 2026-10-15: the language model on
+            * iron, the solver on gold, the dossier white, nothing on the brain). */}
+          <div className="hero-white-stage">
+            <div className="hero-stage-side hero-stage-left">
+              <div className="hero-card hero-card-iron">
+                <p className="hero-card-kicker track-mid">{eng.neural}</p>
+                <p className="hero-card-text">{eng.neuralLine}</p>
+              </div>
+            </div>
+            <div className="hero-white-brain" aria-hidden="true">
+              <Image src="/media/hero-brain-crop.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
+            </div>
+            <div className="hero-stage-side hero-stage-right">
+              <div className="hero-card hero-card-gold">
+                <p className="hero-card-kicker track-mid">{eng.symbolic}</p>
+                <p className="hero-card-text">{eng.symbolicLine}</p>
+                {/* The real shape of a proof, not decoration: assert the negation; unsat means it holds. */}
+                <pre className="hero-card-smt" aria-hidden="true">{"(assert (not P))\n(check-sat)  ; unsat\n∴ P holds"}</pre>
+              </div>
+              {/* An example dossier, labelled as one, that opens the real thing:
+                * /verify checks sealed dossiers in the visitor's own browser. */}
+              <a href={`${r}/verify`} className="hero-dossier">
+                <p className="hero-dossier-tag track-mid">{eng.dossierTag}</p>
+                <p className="hero-dossier-verdict">
+                  <span className="hero-dossier-dot" aria-hidden="true" /> {eng.dossierVerdict}
+                </p>
+                <p className="hero-dossier-scope">{eng.dossierScope}</p>
+                <p className="hero-dossier-seal track-mid">{eng.dossierSeal}</p>
+                <p className="hero-dossier-link track-mid">
+                  {eng.dossierLink} <span aria-hidden="true">&rarr;</span>
+                </p>
+              </a>
+            </div>
           </div>
+          {/* The method in four words, on one hairline. */}
+          <ol className="hero-steps track-mid">
+            {eng.steps.map((step, i) => (
+              <li key={step} className={i === 2 ? "hero-step-seal" : undefined}>
+                <span className="hero-step-dot" aria-hidden="true" />
+                {step}
+              </li>
+            ))}
+          </ol>
         </section>
-
-        {/* 1a. ONE TECHNOLOGY, THREE APPLICATIONS, then the method (2026-10-13).
-          * Everything below, from THE PROBLEM on, details pillar 01: the gate. */}
-        <Platform locale={locale} />
 
         {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
           * mechanism: the reader understands the gap before the technology.
@@ -1080,7 +1118,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
         {/* 2. WHAT IRONPROOF IS — the product in plain words, before any mechanism */}
-        <section id="what" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+        <section id="what" className="relative z-10 edge-t px-6 pt-28 pb-10 md:px-14 md:pt-32 md:pb-12">
           <div className="mx-auto max-w-6xl">
             <div className="fade-up max-w-4xl">
               <p className="seal-label track-mid mb-5 text-xs">{t.what.eyebrow}</p>
@@ -1097,11 +1135,22 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <span>{t.what.allowedResult}</span>
               </p>
               <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-[#ffb4b4]">{t.what.blocked}</span>{" "}
+                <span className="text-[#a3392f]">{t.what.blocked}</span>{" "}
                 <span>{t.what.blockedResult}</span>
               </p>
             </div>
-            <ol className="fade-up mt-14 grid gap-10 md:grid-cols-3 md:gap-12">
+          </div>
+        </section>
+
+        {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
+          * under the checkpoint line (Dom, 2026-10-15: too much reading before
+          * the gate); the three pillars now follow the video. */}
+        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
+
+        {/* 3b. THE THREE PILLARS of the checkpoint, after the reader has seen it work. */}
+        <section id="pillars" className="relative z-10 px-6 pb-24 md:px-14 md:pb-28">
+          <div className="mx-auto max-w-6xl">
+            <ol className="fade-up grid gap-10 md:grid-cols-3 md:gap-12">
               {t.what.pillars.map((p, i) => (
                 <li key={p.title} className="border-t border-white/10 pt-6">
                   <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
@@ -1113,8 +1162,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* 3. WATCH IT DECIDE — four action classes, one gate */}
-        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
+        {/* The method, the three applications and the research now come after the
+          * gate (Dom, 2026-10-15: the video was too far down the page). */}
+        <Platform locale={locale} />
 
         {/* CREDITED-BY STRIP */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
@@ -1147,7 +1197,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/critical-switches.jpg" position="50% 55%" />
+            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
           </div>
           {/* What has run first, with its number; then where it applies, with its
             * rule. The two never share a list (2026-10-13). */}
@@ -1198,7 +1248,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * flowing between the towers like payments that no longer wait for a
             * person (Dom, 2026-09-26). Darkened so the dated cards stay the subject. */}
           <div className="breath-photo breath-photo-deep" aria-hidden="true">
-            <Image src="/media/district-night.jpg" alt="" fill sizes="100vw" className="object-cover" />
+            <Image src="/media/district-white.jpg" alt="" fill sizes="100vw" className="object-cover" />
           </div>
           <div className="mx-auto max-w-7xl">
           <div className="fade-up mb-12 max-w-3xl">

@@ -430,13 +430,13 @@ export function VerifyArtifact({
                   ) : null}
                 </div>
               ) : result.status === "FAILED" ? (
-                <div className="chip-metal p-5" style={{ borderColor: "rgba(255,150,150,0.3)" }}>
+                <div className="chip-metal p-5" style={{ borderColor: "rgba(163,57,47,0.3)" }}>
                   <p className="mb-2 font-serif text-2xl text-neutral-100">{t.rejected}</p>
                   <p className="mb-3 text-sm font-light text-neutral-300">{t.rejectedBody}</p>
                   <ul className="space-y-1.5">
                     {result.failures.map((f, i) => (
                       <li key={i} className="flex gap-2 font-mono text-xs text-neutral-300">
-                        <span style={{ color: "#ffb4b4" }}>✕</span>
+                        <span style={{ color: "#a3392f" }}>✕</span>
                         <span className="break-all">{f}</span>
                       </li>
                     ))}

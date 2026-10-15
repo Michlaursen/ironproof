@@ -90,7 +90,7 @@ export function CtaForm({ locale = defaultLocale }: { locale?: Locale }) {
         <p className="mt-5 text-sm text-neutral-300">{t.done}</p>
       ) : null}
       {state === "error" ? (
-        <p className="mt-5 text-sm" style={{ color: "#ffb4b4" }}>
+        <p className="mt-5 text-sm" style={{ color: "#a3392f" }}>
           {t.error}
         </p>
       ) : null}

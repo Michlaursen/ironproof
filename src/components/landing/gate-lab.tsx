@@ -225,7 +225,7 @@ const T: L<Copy> = {
 // The same palette /evidence uses for the same three words.
 const STYLE: Record<Verdict, { color: string; border: string }> = {
   PROCEED: { color: "var(--seal)", border: "rgba(212,175,95,0.35)" },
-  BLOCK: { color: "#ffb4b4", border: "rgba(255,150,150,0.3)" },
+  BLOCK: { color: "#a3392f", border: "rgba(163,57,47,0.3)" },
   REFUSE: { color: "#e5e5e5", border: "rgba(255,255,255,0.22)" },
 };
 
@@ -395,14 +395,14 @@ export function GateLab({
               <div className="relative h-3 overflow-hidden rounded-full bg-white/5">
                 <div
                   className="absolute inset-y-0 left-0 rounded-full"
-                  style={{ width: `${Math.min(100, (reachedSum / (ceiling * 6)) * 100)}%`, background: reachedSum > ceiling ? "#ffb4b4" : "var(--seal)" }}
+                  style={{ width: `${Math.min(100, (reachedSum / (ceiling * 6)) * 100)}%`, background: reachedSum > ceiling ? "#a3392f" : "var(--seal)" }}
                 />
                 <div className="absolute inset-y-0 w-px bg-white/70" style={{ left: `${(ceiling / (ceiling * 6)) * 100}%` }} />
               </div>
               <p className="mt-2 text-sm font-light text-neutral-400">{t.moved(cad(reachedSum, locale), cad(ceiling, locale))}</p>
             </div>
             {reachedSum > ceiling ? (
-              <p className="border-l-2 border-[#ffb4b4]/60 pl-4 text-sm font-light text-neutral-300">{t.a2Leak}</p>
+              <p className="border-l-2 border-[#a3392f]/60 pl-4 text-sm font-light text-neutral-300">{t.a2Leak}</p>
             ) : total > ceiling ? (
               <p className="text-sm font-light text-neutral-400">{t.a2Held}</p>
             ) : null}
