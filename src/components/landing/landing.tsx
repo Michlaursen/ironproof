@@ -1297,7 +1297,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * Brought from /proof, which most visitors never reach. */}
           <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
             <Image
-              src="/media/broken-chain.jpg"
+              src="/media/broken-chain-white.jpg"
               alt=""
               fill
               sizes="(min-width: 1152px) 1152px, 100vw"
@@ -1329,7 +1329,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             {/* The one image here: the decision struck into steel, with logo 09
               * (Dom, 2026-09-26). */}
-            <PhotoPlate src="/media/seal-press-logo09.jpg" wide position="50% 55%" />
+            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
@@ -1392,7 +1392,7 @@ export function CounterexampleBreath({ locale = defaultLocale }: { locale?: Loca
       <section className="relative z-10 isolate overflow-hidden px-6 py-28 md:px-14 md:py-32">
         {/* One missing link and the chain parts: the removed clause, as an object. */}
         <div className="breath-photo" aria-hidden="true">
-          <Image src="/media/broken-chain.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          <Image src="/media/broken-chain-white.jpg" alt="" fill sizes="100vw" className="object-cover" />
         </div>
         <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
           <span className="breath-mark" aria-hidden="true" />
