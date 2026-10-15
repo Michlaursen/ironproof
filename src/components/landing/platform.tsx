@@ -97,7 +97,7 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
                   </div>
                   <h3 className="chapter-claim font-serif">{p.claim}</h3>
                   <p className="chapter-body">{p.body}</p>
-                  <p className="chapter-evidence">{p.evidence}</p>
+                  {p.evidence ? <p className="chapter-evidence">{p.evidence}</p> : null}
                   {p.href && p.cta ? (
                     <a href={p.href} className="chapter-cta track-mid">
                       {p.cta} <span aria-hidden="true">&darr;</span>

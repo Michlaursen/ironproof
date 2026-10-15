@@ -10,9 +10,9 @@ import type { L } from "./i18n";
  *     2026-09-14), any initiator (2026-09-03), and "without having to trust us"
  *     (2026-10-12, provable-ai-copy.tsx). Blocked decisions are sealed too:
  *     ironproof/inquest/governed_executor.py:323 requires the ledger.
- *   - pillar 2's replay line: on 2026-10-12 a context-free agent replayed our
- *     4 Cobalt archives and reached the same 8 verdicts out of 8. Pillar 3
- *     gets no such line until a COBOL proof has been replayed the same way.
+ *   - pillar 2's replay line (8 of 8 verdicts, 2026-10-12) was removed on
+ *     Dom's word (2026-10-15): the C judge is being rebuilt, the line read as
+ *     a caveat more than as evidence.
  *   - pillar 2 says C, not C/C++: every fix measured so far is C
  *     (cobalt-ai bench/lot20_2026-10-11, 20 fixes drawn at random).
  *   - pillar 3 says "defined equivalence properties" with explicit
@@ -29,7 +29,8 @@ export type Pillar = {
   href?: string;
   cta?: string;
   /** What a reader can re-check today for this application, said plainly, including "not yet". */
-  evidence: string;
+  /** Optional: a pillar with nothing measured today to show carries no line. */
+  evidence?: string;
 };
 
 export type Verdict = { word: string; body: string; receive: string };
@@ -78,7 +79,6 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         name: "C software security",
         claim: "Don’t just find vulnerabilities. Check, within stated bounds, that the fix closes them.",
         body: "Checks defined properties of C code within stated bounds, and whether a fix removes the failure our test exhibits. Each result ships as a dossier you can re-run.",
-        evidence: "Today: an automated replay, run by an AI agent without our context, reproduced 8 of 8 verdicts from 4 archives (October 12, 2026). No independent third party has validated them, and our C verdict judge is being rebuilt after our own audit.",
       },
       {
         num: "03",
@@ -144,7 +144,6 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         name: "Sécurité du logiciel C",
         claim: "Ne vous contentez pas de trouver les failles. Vérifiez, dans des bornes déclarées, que le correctif les ferme.",
         body: "Vérifie des propriétés définies du code C dans des bornes déclarées, et si un correctif supprime l’échec que notre test met en évidence. Chaque résultat part avec un dossier que vous pouvez rejouer.",
-        evidence: "Aujourd’hui : un rejeu automatisé, lancé par un agent IA sans notre contexte, a reproduit 8 verdicts sur 8 à partir de 4 archives (12 octobre 2026). Aucun tiers indépendant ne les a validés, et notre juge des verdicts C est en reconstruction après notre propre audit.",
       },
       {
         num: "03",

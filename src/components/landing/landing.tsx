@@ -1151,6 +1151,26 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </ol>
         </section>
 
+        {/* CREDITED-BY STRIP — right under the hero (Dom, 2026-10-15: « plus au début »):
+          * the vendors who credited our research, before any explanation. */}
+        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
+          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            <span className="track-mid text-xs text-neutral-500">{t.creditedBy}</span>
+            {/* Each name opens the public commit, bug or release note that credits us. */}
+            {CREDITED_STRIP.map((c) => (
+              <a
+                key={c.name}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="metal-text border-b border-transparent text-sm font-medium transition hover:border-white/40"
+              >
+                {c.name}
+              </a>
+            ))}
+          </div>
+        </section>
+
         {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
           * mechanism: the reader understands the gap before the technology.
           * The door pane carries the condition of the hero's sentence (an action
@@ -1227,25 +1247,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* The method, the three applications and the research now come after the
           * gate (Dom, 2026-10-15: the video was too far down the page). */}
         <Platform locale={locale} />
-
-        {/* CREDITED-BY STRIP */}
-        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
-          <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            <span className="track-mid text-xs text-neutral-500">{t.creditedBy}</span>
-            {/* Each name opens the public commit, bug or release note that credits us. */}
-            {CREDITED_STRIP.map((c) => (
-              <a
-                key={c.name}
-                href={c.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="metal-text border-b border-transparent text-sm font-medium transition hover:border-white/40"
-              >
-                {c.name}
-              </a>
-            ))}
-          </div>
-        </section>
 
         {/* WHERE IT APPLIES — three domains, with the rules that already exist */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
@@ -1408,7 +1409,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-
         {/* CLOSING — a closed vault door with a gold ring in a black marble hall
           * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
           * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
@@ -1439,7 +1439,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         </section>
 
       </main>
-
 
       <FadeUpInit />
     </div>
