@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { IronproofMark } from "@/components/ironproof-mark";
 import { LandingHeader } from "./landing-header";
 import { ProofSeal } from "./proof-seal";
@@ -8,6 +7,7 @@ import { IconCircuit, IconRule } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
 import { pick } from "./i18n";
 import { NEURO_SYMBOLIC_COPY } from "./neuro-symbolic-copy";
+import { ArchitecturePlate } from "./architecture-plate";
 
 /*
  * "Neuro-symbolic" — the explainer reached from the nav.
@@ -49,18 +49,7 @@ export function NeuroSymbolic({ locale = defaultLocale }: { locale?: Locale }) {
         {/* ARCHITECTURE — the whole system, before the explanation */}
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
           <figure className="fade-up">
-            <p className="seal-label track-mid mb-4 text-xs">{t.archTag}</p>
-            <a href={t.archSrc} target="_blank" rel="noopener" className="card-premium block overflow-hidden p-0">
-              <Image
-                src={t.archSrc}
-                alt={t.archAlt}
-                width={3200}
-                height={2000}
-                priority
-                sizes="(min-width: 1280px) 1200px, 100vw"
-                className="block h-auto w-full"
-              />
-            </a>
+            <ArchitecturePlate locale={locale} />
             <figcaption className="mt-5 max-w-3xl font-light leading-relaxed text-neutral-400">
               {t.archCaption}
             </figcaption>
