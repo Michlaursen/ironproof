@@ -19,15 +19,18 @@ const inter = Inter({
 // title (/fr carries 78 accented strings). Measured 2026-08-19 across the whole
 // Cormorant family -- Garamond, plain, and Infant all share the defect, so this
 // is not a weight or a subset issue. Same garalde register, correct accents.
+// No weight list: EB Garamond is a variable font, so one file serves 400-800
+// instead of one download per weight competing with the hero image.
 const ebGaramond = EB_Garamond({
   variable: "--font-eb-garamond",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
 });
 
+// Labels only: not preloaded, so it never delays the first paint.
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
+  preload: false,
 });
 
 export function generateStaticParams() {
@@ -74,7 +77,7 @@ export async function generateMetadata({
       locale: locale === "fr" ? "fr_CA" : "en_US",
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: content.meta.title,
       description: content.meta.ogDescription,
     },

@@ -1263,7 +1263,7 @@ p, li {
 .hero-white-eyebrow { color: var(--graphite); }
 .hero-white-title { color: var(--iron); }
 .hero-white-title em { color: var(--iron); }
-.hero-white-value { color: var(--gold); }
+.hero-white-value { color: #7a5c22; } /* text gold: --gold is 2.7:1 on the paper, kept for rules and marks */
 .hero-white-lead { color: var(--graphite); }
 .hero-white-cta {
   background: var(--iron);
@@ -1653,7 +1653,7 @@ p, li {
 .hero-steps::before { top: calc(1.2rem + 0.3rem); height: 1px; background: linear-gradient(90deg, rgba(36, 38, 42, 0.35), var(--gold) 50%, rgba(36, 38, 42, 0.35)); }
 .hero-steps li { gap: 0.85rem; }
 .hero-step-dot { width: 0.6rem; height: 0.6rem; }
-.hero-step-seal { color: #8a6a2a; }
+.hero-step-seal { color: #7a5c22; }
 /* Less floor between the hero and the method that follows it. */
 .hero-white { padding-bottom: 0; }
 .hero-white + section { padding-top: 5rem; }
@@ -2417,7 +2417,7 @@ p, li {
    would repeat it. The hero CTA still opens /verify. */
 @media (max-width: 767px) { .hero-white-stage .hero-stage-side { display: none !important; } }
 /* Eyebrow in gold for contrast (Dom, 2026-10-15); a deep gold so it reads on ivory. */
-.hero-white-eyebrow { color: #9a7630; font-weight: 600; }
+.hero-white-eyebrow { color: #7a5c22; font-weight: 600; }
 
 /* ============================================================
  * BLUEPRINT FRAME (Dom, 2026-10-15: « un design qui concorde avec
@@ -2482,7 +2482,7 @@ p, li {
   font-weight: 500;
   letter-spacing: 0.16em;
   filter: none;
-  color: #8a6a2a;
+  color: #7a5c22; /* 4.9:1 on the paper; #8a6a2a was 4.0 (Lighthouse 2026-10-15) */
 }
 .blueprint .seal-label::before {
   content: "";
@@ -2604,10 +2604,10 @@ p, li {
   font-family: var(--font-jetbrains), ui-monospace, monospace;
   font-size: 0.62rem;
   letter-spacing: 0.14em;
-  color: #6b6f76;
+  color: #5b5f66;
 }
 .chapter-beat dd { font-size: 1rem; line-height: 1.6; color: #3a3d43; }
-.chapter-beat-today dt { color: #8a6a2a; }
+.chapter-beat-today dt { color: #7a5c22; }
 .chapter-beat-today dt::before {
   content: "";
   display: inline-block;
@@ -3343,3 +3343,13 @@ p, li {
   .arch-block > div:nth-child(3) { border-left: 0; }
   .arch-block > div:nth-child(n + 3) { border-top: 1px solid rgba(36, 38, 42, 0.18); }
 }
+
+/* ============================================================
+ * READABLE GOLD (Lighthouse, 2026-10-15): small gold or grey type on the
+ * paper fell under 4.5:1. Text gold is #7a5c22 (4.9:1); the bright gold
+ * stays on rules, dots and marks, where contrast is not a reading matter.
+ * Dark bands (#now, the papers band) keep their own light gold.
+ * ============================================================ */
+footer .seal-label { color: #7a5c22; filter: none; }
+.closing-card h2 .text-seal { color: #8a6a2a; } /* 54px: large text, 3:1 required, 3.96 */
+#papers a.track-mid { min-height: 44px; }
