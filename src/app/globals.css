@@ -3575,3 +3575,42 @@ footer .seal-label { color: #7a5c22; filter: none; }
   .journey-rail li .journey-dot { background: #c9a24b; border-color: #a8843a; }
   .journey-rail li .journey-word { color: #8a6a2a; }
 }
+
+/* ============================================================
+ * THE ROBOT ALIVE (Dom, 2026-10-16). Two copies of the brain's gold veins,
+ * laid exactly over the picture (they share its classes, so they share its
+ * framing at every width): one glows like a slow pulse, one carries a band of
+ * light across. The head also comes forward a little as the page scrolls.
+ * ============================================================ */
+.hero-white-brain img.hero-gold-pulse,
+.hero-white-brain img.hero-gold-sheen { mix-blend-mode: screen; opacity: 0; pointer-events: none; }
+/* Lit veins: brighter, warmer, with a soft halo, so the pulse reads at a glance. */
+.hero-white-brain img.hero-gold-pulse { filter: brightness(2.1) saturate(1.5) drop-shadow(0 0 5px rgba(255, 196, 80, 0.95)) drop-shadow(0 0 14px rgba(255, 180, 60, 0.6)); }
+.hero-white-brain img.hero-gold-sheen { filter: brightness(2.6) saturate(1.2) drop-shadow(0 0 6px rgba(255, 236, 190, 1)); }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-white-brain img.hero-gold-pulse { animation: robot-pulse 4.8s ease-in-out 1.2s infinite; }
+  .hero-white-brain img.hero-gold-sheen {
+    opacity: 1;
+    -webkit-mask-image: linear-gradient(110deg, transparent 40%, #000 50%, transparent 60%);
+    mask-image: linear-gradient(110deg, transparent 40%, #000 50%, transparent 60%);
+    -webkit-mask-size: 300% 100%;
+    mask-size: 300% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    animation: robot-sheen 7s ease-in-out 2.4s infinite;
+  }
+}
+@keyframes robot-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+@keyframes robot-sheen {
+  0% { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  45%, 100% { -webkit-mask-position: 0% 0; mask-position: 0% 0; }
+}
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-white-brain-wrap { animation: robot-forward linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+  }
+}
+@keyframes robot-forward { from { transform: none; } to { transform: translateY(-2.5%) scale(1.04); } }
