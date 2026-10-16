@@ -117,27 +117,46 @@ export default async function ResearchIndexPage({ params }: PageProps) {
           </ul>
         </section>
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
-          <h2 className="seal-label track-mid mb-4 text-xs">INDEPENDENT COVERAGE</h2>
-          <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
+          <h2 className="seal-label track-mid mb-6 text-xs">INDEPENDENT COVERAGE</h2>
+          <div className="max-w-4xl space-y-6">
             {COVERAGE.map((c) => (
-              <li key={c.href}>
-                <a
-                  href={c.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block py-6"
-                >
+              <a
+                key={c.href}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-premium group block p-7 sm:p-10 md:p-12"
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                  <p className="metal-text font-serif text-2xl font-medium md:text-3xl">{c.outlet}</p>
                   <p className="text-xs uppercase tracking-widest text-neutral-500">
-                    {c.outlet} · <time dateTime={c.date}>{c.date}</time> · {c.language} · on {c.paper}
+                    {c.country} · <time dateTime={c.date}>{c.date}</time> · Editorial
                   </p>
-                  <p className="mt-2 font-serif text-xl font-medium text-neutral-100 group-hover:underline group-hover:underline-offset-4">
-                    <span lang="de">{c.title}</span>
+                </div>
+                <figure className="mt-8 border-l-2 border-[#a8843a] pl-4 sm:pl-6 md:mt-10 md:pl-8">
+                  <blockquote className="font-serif text-xl font-medium leading-snug text-neutral-100 sm:text-2xl md:text-[2.1rem] md:leading-[1.25]">
+                    {c.quoteEn}
+                  </blockquote>
+                  <p lang="de" className="mt-4 text-sm font-light italic leading-relaxed text-neutral-500">
+                    “{c.quote}”
                   </p>
-                  <p className="mt-2 font-light text-neutral-400">{c.gloss}</p>
-                </a>
-              </li>
+                  <figcaption className="mt-3 text-xs uppercase tracking-widest text-neutral-500">
+                    Translated from the {c.language} · on {c.paper}
+                  </figcaption>
+                </figure>
+                <div className="mt-8 flex flex-col gap-5 border-t border-[rgba(36,38,42,0.12)] pt-6 sm:flex-row sm:items-end sm:justify-between md:mt-10">
+                  <div className="min-w-0 sm:flex-1">
+                    <p lang="de" className="font-serif text-lg text-neutral-200">{c.title}</p>
+                    <p className="mt-1 text-sm font-light text-neutral-500">{c.gloss}</p>
+                  </div>
+                  <span className="track-mid inline-flex shrink-0 items-center gap-2 text-xs text-[#7a5c22]">
+                    READ THE ARTICLE
+                    <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+                  </span>
+                </div>
+              </a>
             ))}
-          </ul>
+          </div>
         </section>
       </main>
     </div>

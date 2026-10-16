@@ -171,8 +171,12 @@ export const COVERAGE: {
   outlet: string;
   date: string;
   language: string;
+  country: string;
   title: string;
   gloss: string;
+  /** Verbatim sentence from the article, and our translation. */
+  quote: string;
+  quoteEn: string;
   paper: string;
   href: string;
 }[] = [
@@ -180,8 +184,13 @@ export const COVERAGE: {
     outlet: "Legacy IT Center",
     date: "2026-10-16",
     language: "German",
+    country: "Germany",
     title: "COBOL nach Python: Studie zeigt Grenzen mathematisch überprüfter Code-Migration",
     gloss: "COBOL to Python: study shows the limits of mathematically verified code migration",
+    quote:
+      "Anders als gewöhnliche Testverfahren können sie innerhalb eines korrekt definierten Modells systematisch nach Eingaben suchen, die zu abweichenden Ergebnissen führen.",
+    quoteEn:
+      "Unlike conventional testing, [mathematical methods] can systematically search, within a correctly defined model, for inputs that lead to diverging results.",
     paper: "arXiv:2610.11073",
     href: "https://legacyit.de/cobol-nach-python-studie-zeigt-grenzen-mathematisch-ueberpruefter-code-migration/",
   },
