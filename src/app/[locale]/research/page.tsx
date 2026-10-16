@@ -5,6 +5,7 @@ import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { RESEARCH_COPY } from "@/components/landing/research-copy";
 import { PAPERS } from "@/components/landing/credibility";
+import { EngineState } from "@/components/landing/engine-state";
 
 /*
  * The research index. Before it existed, trimming the note's URL back to
@@ -77,6 +78,7 @@ export default async function ResearchIndexPage({ params }: PageProps) {
             {META.description}
           </p>
         </section>
+        <EngineState locale={locale} />
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 md:px-14">
           <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
             {NOTES.map((n) => (
