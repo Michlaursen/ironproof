@@ -1184,8 +1184,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <polyline points="4,16 28,16 38,20" className="hero-map-line-iron" />
                   <polyline points="96,16 72,16 58,18" className="hero-map-line-gold" />
-                  <polyline points="94,17 94,95 68,95" className="hero-map-line-gold hero-map-line-dash" />
                 </svg>
+                {/* Dotted route SYMBOLIC -> PROVEN, anchored to the PROVEN label rather than to
+                  * the image's percentages, so it never runs into a label at any width (Dom, 2026-10-16). */}
+                <span className="hero-map-route" />
                 <span className="hero-map-dot hero-map-dot-iron" style={{ left: "38%", top: "20%" }} />
                 <span className="hero-map-dot hero-map-dot-gold" style={{ left: "58%", top: "18%" }} />
                 <p className="hero-map-tag hero-map-neural"><b>{eng.map.neural}</b>{eng.map.neuralRole}</p>
