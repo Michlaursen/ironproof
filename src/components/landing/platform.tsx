@@ -115,7 +115,7 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
                   </dl>
                   {p.href && p.cta ? (
                     <a href={p.href} className="chapter-cta track-mid">
-                      {p.cta} <span aria-hidden="true">&darr;</span>
+                      {p.cta} <span aria-hidden="true">{p.href.startsWith("#") ? "\u2193" : "\u2192"}</span>
                     </a>
                   ) : null}
                 </div>

@@ -78,6 +78,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/software-security",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/software-security",
+          fr: "https://ironproof.ai/fr/software-security",
+        },
+      },
+    },
+    {
+      url: "https://ironproof.ai/modernization",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/modernization",
+          fr: "https://ironproof.ai/fr/modernization",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/proof",
       lastModified,
       changeFrequency: "monthly",
