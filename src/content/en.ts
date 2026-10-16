@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "Ironproof | Neuro-Symbolic AI and Formal Verification for Critical Systems",
+    title: "Ironproof | Don’t trust the verdict. Verify the evidence.",
     description:
-      "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and check legacy-code translations under stated assumptions. Critical actions are checked against policy before they execute, and each decision is sealed so anyone can check it was not altered, without having to trust us.",
+      "Formal verification for critical systems. Every result, a proof, a counterexample or a gate decision, is sealed and can be checked without trusting us.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "Ironproof combines AI-assisted reasoning with formal verification to secure AI agents, protect critical software, and check legacy-code translations under stated assumptions. Critical actions are checked against policy before they execute, and each decision is sealed so anyone can check it was not altered, without having to trust us.",
+      "Formal verification for critical systems. Every result, a proof, a counterexample or a gate decision, is sealed and can be checked without trusting us.",
   },
   header: {
     nav: [
