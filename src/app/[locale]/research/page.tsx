@@ -146,8 +146,8 @@ export default async function ResearchIndexPage({ params }: PageProps) {
                 </figure>
                 <div className="mt-8 flex flex-col gap-5 border-t border-[rgba(36,38,42,0.12)] pt-6 sm:flex-row sm:items-end sm:justify-between md:mt-10">
                   <div className="min-w-0 sm:flex-1">
-                    <p lang="de" className="font-serif text-lg text-neutral-200">{c.title}</p>
-                    <p className="mt-1 text-sm font-light text-neutral-500">{c.gloss}</p>
+                    <p className="font-serif text-lg text-neutral-200">{c.gloss}</p>
+                    <p lang="de" className="mt-1 text-sm font-light italic text-neutral-500">{c.title}</p>
                   </div>
                   <span className="track-mid inline-flex shrink-0 items-center gap-2 text-xs text-[#7a5c22]">
                     READ THE ARTICLE
