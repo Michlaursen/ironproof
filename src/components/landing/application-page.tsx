@@ -40,6 +40,7 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
             <p className="seal-label track-wide mb-6 text-xs md:text-sm">
               {pillar.name.toUpperCase()}
             </p>
+            <p className="chapter-status track-mid mb-6">{pillar.status}</p>
             <h1 className="metal-text mb-8 font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
               {pillar.claim}
             </h1>

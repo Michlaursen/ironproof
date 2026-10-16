@@ -2202,6 +2202,25 @@ p, li {
   -webkit-text-stroke: 1px #a8843a;
 }
 .chapter-name { font-size: 0.72rem; color: var(--foreground); }
+/* Where each application stands (Dom, 2026-10-16): the one sold today in gold
+   with a filled dot; the same engine in research in graphite with an open ring. */
+.chapter-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.62rem;
+  color: #5b5f66;
+}
+.chapter-status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+.chapter-status-live { color: #8a6a2a; }
+.chapter-status-live::before { background: currentColor; }
 .chapter-claim {
   margin-top: 1.8rem;
   font-size: clamp(1.9rem, 2.8vw, 2.6rem);
