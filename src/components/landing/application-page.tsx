@@ -4,9 +4,9 @@ import { ProofSeal } from "./proof-seal";
 import { FadeUpInit } from "./fade-up-init";
 import { CtaForm } from "./cta-form";
 import { defaultLocale, type Locale } from "@/content";
-import { pick } from "./i18n";
+import { type L, pick } from "./i18n";
 import { PLATFORM_COPY } from "./platform-copy";
-import { PAPERS } from "./credibility";
+import { PAPERS, PUBLISHED_CVES, publicRecord } from "./credibility";
 import { APP_LABELS, APP_PAPERS, APP_PILLAR, type AppId } from "./application-copy";
 
 /*
@@ -15,6 +15,25 @@ import { APP_LABELS, APP_PAPERS, APP_PILLAR, type AppId } from "./application-co
  * Every sentence comes from the landing's pillar or method block; see the
  * comment at the top of application-copy.ts.
  */
+
+/* Where the C work comes from (Dom, 2026-10-16): the flaws we found before we
+ * verified fixes. Shown on the C page only; the list itself lives in credibility.tsx. */
+const PROVENANCE: L<{ label: string; lead: string; cves: string; credits: string; note: string }> = {
+  en: {
+    label: "WHERE THIS COMES FROM",
+    lead: "Before checking fixes, we found flaws. The projects themselves published the CVEs and credited us by name.",
+    cves: "PUBLISHED CVES",
+    credits: "CREDITED IN THE PROJECTS’ OWN RECORDS",
+    note: "These come from our vulnerability research. Finding a flaw is not proving a fix; the check of the fix is described above.",
+  },
+  fr: {
+    label: "D’OÙ ÇA VIENT",
+    lead: "Avant de vérifier des correctifs, nous avons trouvé des failles. Les projets eux-mêmes ont publié les CVE et nous ont crédités par notre nom.",
+    cves: "CVE PUBLIÉES",
+    credits: "CRÉDITÉS DANS LES DOSSIERS DES PROJETS EUX-MÊMES",
+    note: "Ces résultats viennent de notre recherche de failles. Trouver une faille n’est pas prouver un correctif ; la vérification du correctif est décrite plus haut.",
+  },
+};
 
 function Snum({ children }: { children: React.ReactNode }) {
   return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
@@ -26,6 +45,8 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
   const t = pick(APP_LABELS, locale);
   const papers = PAPERS.filter((p) => APP_PAPERS[app].includes(p.id));
   const home = locale === defaultLocale ? "/" : `/${locale}`;
+  const pv = pick(PROVENANCE, locale);
+  const record = publicRecord(locale);
 
   if (!pillar) return null;
 
@@ -85,6 +106,42 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
             <div className="fade-up card-premium border-l-2 border-l-seal/50 p-8">
               <Snum>{t.s04}</Snum>
               <p className="max-w-2xl text-lg font-light leading-relaxed text-neutral-200">{pillar.evidence}</p>
+            </div>
+          </section>
+        ) : null}
+
+        {app === "software-security" ? (
+          <section id="provenance" className="relative z-10 edge-t mx-auto max-w-4xl px-6 py-20 md:px-14">
+            <div className="fade-up">
+              <Snum>{pv.label}</Snum>
+              <p className="max-w-2xl text-lg font-light leading-relaxed text-neutral-200">{pv.lead}</p>
+              <p className="track-mid mt-10 text-xs text-neutral-500">{pv.cves}</p>
+              <ul className="mt-3 border-t border-white/10">
+                {PUBLISHED_CVES.map((c) => (
+                  <li key={c.id} className="border-b border-white/10 py-4">
+                    <a href={c.href} target="_blank" rel="noopener noreferrer" className="group flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                      <span className="font-mono text-sm text-neutral-100 group-hover:underline group-hover:underline-offset-4">{c.id}</span>
+                      <span className="text-sm font-light text-neutral-400">{c.project}</span>
+                      <span aria-hidden="true" className="text-xs text-seal">&#8599;</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p className="track-mid mt-10 text-xs text-neutral-500">{pv.credits}</p>
+              <ul className="mt-3 border-t border-white/10">
+                {record.map((r) => (
+                  <li key={r.org} className="grid gap-1 border-b border-white/10 py-4 sm:grid-cols-[11rem_1fr] sm:gap-6">
+                    <span className="font-serif text-lg text-neutral-100">{r.org}</span>
+                    <span className="text-sm font-light leading-relaxed text-neutral-400">
+                      {r.body}{" "}
+                      <a href={r.href} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-neutral-200 underline decoration-white/20 underline-offset-4 hover:text-white">
+                        {r.cta} <span aria-hidden="true">&#8599;</span>
+                      </a>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-8 max-w-2xl text-sm font-light leading-relaxed text-neutral-500">{pv.note}</p>
             </div>
           </section>
         ) : null}
