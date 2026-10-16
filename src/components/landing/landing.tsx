@@ -1101,7 +1101,6 @@ function PhotoPlate({
         src={src}
         alt=""
         fill
-        loading="eager"
         sizes="(min-width: 1280px) 1200px, 100vw"
         className="object-cover"
         style={position ? { objectPosition: position } : undefined}
@@ -1528,8 +1527,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section className="closing-trio relative z-10 edge-t">
           <div className="closing-band closing-band-photo">
             <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill loading="eager" sizes="100vw" className="closing-photo-mob object-cover" />
+              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
             {/* The bust read like a figure on a sheet: what each material stands for. */}
             <div className="closing-notes" aria-hidden="true">
