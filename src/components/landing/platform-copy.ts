@@ -19,11 +19,20 @@ import type { L } from "./i18n";
  *     assumptions: results are proven under a stated model, never more.
  *   - the three verdicts are Dom's words (2026-10-13); the neuro-symbolic
  *     page says the same three states as holds / breaks / not covered.
+ *
+ * One product, one engine (Dom, 2026-10-16, after the positioning research):
+ * authorization of critical actions is the one thing sold today; C and COBOL
+ * stay on the page, with the same photographs, as the same engine in
+ * research -- no "product", no purchase button. Never "universal engine".
  */
 
 export type Pillar = {
   num: string;
   name: string;
+  /** Where this application stands: sold today, or the same engine in research (Dom, 2026-10-16). */
+  status: string;
+  /** True for the one thing sold today. */
+  available?: boolean;
   claim: string;
   /** The story in three beats (Dom, 2026-10-15: « écris l'histoire, comprenable »):
    *  what goes wrong without us, what Ironproof does, what runs today. */
@@ -67,37 +76,41 @@ export type PlatformCopy = {
 
 export const PLATFORM_COPY: L<PlatformCopy> = {
   en: {
-    eyebrow: "ONE CORE TECHNOLOGY",
-    title: "Three applications. One standard of evidence.",
+    eyebrow: "ONE ENGINE",
+    title: "One product today. The same engine, in research.",
     beats: { risk: "THE RISK", does: "WHAT IRONPROOF DOES", today: "TODAY" },
     pillars: [
       {
         num: "01",
         name: "AI agents & critical actions",
+        status: "AVAILABLE NOW · PILOTS OPEN",
+        available: true,
         claim: "Your agent can move money. It should never move it wrong.",
         risk: "An AI agent, a script or a person with valid credentials asks to pay, delete, grant access or ship a change. Logged in is not the same as allowed.",
         body: "Every request routed through Ironproof is checked against your rules before it runs. Allowed, it runs. Not allowed, it never does. Either way, the decision is sealed.",
-        href: "#problem",
-        cta: "HOW THE GATE WORKS",
+        href: "/pilot",
+        cta: "START A PILOT",
         evidence: "Open a sealed decision and check it yourself, in your browser, with no server and no account.",
       },
       {
         num: "02",
         name: "C software security",
+        status: "SAME ENGINE · IN RESEARCH",
         claim: "A patch says the bug is fixed. We check that it is.",
         risk: "Scanners find the hole and a developer writes the fix. Nobody shows that the fix actually closes it.",
         href: "/software-security",
-        cta: "SEE THE C SECURITY PAGE",
+        cta: "READ THE RESEARCH",
         body: "Ironproof writes a test that triggers the bug, runs it before and after the fix, and tells you whether the fix closes it, within stated bounds. Each result ships as a dossier you can re-run.",
         evidence: "20 real fixes drawn at random from projects such as curl and libssh2: 13 closed, 3 where our test was fooled, 4 not analyzed (October 12, 2026).",
       },
       {
         num: "03",
         name: "Legacy modernization",
+        status: "SAME ENGINE · IN RESEARCH",
         claim: "Leave COBOL behind. Check that the results stay the same.",
         risk: "A translated program can compile, pass its tests and still compute a different amount on the one input nobody tried.",
         href: "/modernization",
-        cta: "SEE THE MODERNIZATION PAGE",
+        cta: "READ THE RESEARCH",
         body: "Ironproof translates COBOL into Python, then checks that both give the same results, or shows the exact input where they differ. What our model of the old system does not cover is marked as not covered, never as passed.",
         evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. No outside party has replayed it yet.",
       },
@@ -141,37 +154,41 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
   },
   fr: {
-    eyebrow: "UNE TECHNOLOGIE CENTRALE",
-    title: "Trois applications. Une seule exigence de preuve.",
+    eyebrow: "UN SEUL MOTEUR",
+    title: "Un produit aujourd’hui. Le même moteur, en recherche.",
     beats: { risk: "LE RISQUE", does: "CE QUE FAIT IRONPROOF", today: "AUJOURD’HUI" },
     pillars: [
       {
         num: "01",
         name: "Agents IA et actions critiques",
+        status: "DISPONIBLE · PILOTES OUVERTS",
+        available: true,
         claim: "Votre agent peut déplacer de l’argent. Il ne doit jamais le déplacer de travers.",
         risk: "Un agent IA, un script ou une personne avec des accès valides demande de payer, d’effacer, d’ouvrir un accès ou de déployer. Être connecté, ce n’est pas être autorisé.",
         body: "Chaque demande qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter. Permise, elle s’exécute. Interdite, elle ne s’exécute jamais. Dans les deux cas, la décision est scellée.",
-        href: "#problem",
-        cta: "COMMENT FONCTIONNE LA BARRIÈRE",
+        href: "/fr/pilot",
+        cta: "DÉMARRER UN PILOTE",
         evidence: "Ouvrez une décision scellée et vérifiez-la vous-même, dans votre navigateur, sans serveur ni compte.",
       },
       {
         num: "02",
         name: "Sécurité du logiciel C",
+        status: "MÊME MOTEUR · EN RECHERCHE",
         claim: "Un correctif dit que la faille est fermée. Nous vérifions qu’elle l’est.",
         risk: "Les scanneurs trouvent la faille et un développeur écrit le correctif. Personne ne montre que le correctif la ferme vraiment.",
         href: "/fr/software-security",
-        cta: "VOIR LA PAGE SÉCURITÉ DU C",
+        cta: "LIRE LA RECHERCHE",
         body: "Ironproof écrit un test qui déclenche la faille, le roule avant et après le correctif, et vous dit si le correctif la ferme, dans des bornes déclarées. Chaque résultat part avec un dossier que vous pouvez rejouer.",
         evidence: "20 vrais correctifs tirés au hasard dans des projets comme curl et libssh2 : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés (12 octobre 2026).",
       },
       {
         num: "03",
         name: "Modernisation des systèmes hérités",
+        status: "MÊME MOTEUR · EN RECHERCHE",
         claim: "Quittez le COBOL. Vérifiez que les résultats restent les mêmes.",
         risk: "Un programme traduit peut compiler, passer ses tests et calculer quand même un autre montant sur la seule entrée que personne n’a essayée.",
         href: "/fr/modernization",
-        cta: "VOIR LA PAGE MODERNISATION",
+        cta: "LIRE LA RECHERCHE",
         body: "Ironproof traduit le COBOL en Python, puis vérifie que les deux donnent les mêmes résultats, ou montre l’entrée exacte où ils diffèrent. Ce que notre modèle de l’ancien système ne couvre pas est déclaré non couvert, jamais réussi.",
         evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
       },

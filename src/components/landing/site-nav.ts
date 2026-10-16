@@ -20,6 +20,8 @@ export type NavGroup = { id: "technology" | "solutions" | "evidence"; label: str
  * Restructured 2026-10-15 (Dom): TECHNOLOGY, SOLUTIONS, EVIDENCE, then
  * RESEARCH and START A PILOT. One core technology, three applications; the
  * application links land on the matching pillar of the home page (#app-01..03).
+ * 2026-10-16 (Dom): one product sold (agents and critical actions, under
+ * SOLUTIONS); C and COBOL moved under TECHNOLOGY as the same engine in research.
  */
 const LABELS: L<{
   technology: string;
@@ -51,8 +53,8 @@ const LABELS: L<{
     provableAi: "Provable AI",
     zeroTrust: "Zero Trust",
     agents: "AI agents & critical actions",
-    cSecurity: "C software security",
-    cobol: "Legacy modernization",
+    cSecurity: "Research · C software security",
+    cobol: "Research · Legacy modernization",
     demo: "Demo",
     dossier: "Verification dossier",
     verify: "Check a sealed record",
@@ -72,8 +74,8 @@ const LABELS: L<{
     provableAi: "IA prouvable",
     zeroTrust: "Zero Trust",
     agents: "Agents IA et actions critiques",
-    cSecurity: "Sécurité du logiciel C",
-    cobol: "Modernisation des systèmes hérités",
+    cSecurity: "Recherche · sécurité du logiciel C",
+    cobol: "Recherche · modernisation des systèmes hérités",
     demo: "Démo",
     dossier: "Dossier de vérification",
     verify: "Vérifier une trace scellée",
@@ -105,6 +107,10 @@ export function siteNav(locale: Locale = defaultLocale) {
         { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" },
         { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" },
         { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" },
+        // The same engine, in research (Dom, 2026-10-16): listed under the
+        // technology, not under what is sold.
+        { href: `${r}/software-security`, label: t.cSecurity, page: "software-security" },
+        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
       ],
     },
     {
@@ -117,8 +123,6 @@ export function siteNav(locale: Locale = defaultLocale) {
           label: `· ${cap(actions[id].tab)}`,
           page: `act-${id}`,
         })),
-        { href: `${r}/software-security`, label: t.cSecurity, page: "software-security" },
-        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
       ],
     },
     {

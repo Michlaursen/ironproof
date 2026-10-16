@@ -92,6 +92,7 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
                   <span className="plate-brackets" aria-hidden="true" />
                 </div>
                 <div className="chapter-text fade-up">
+                  <p className={`chapter-status track-mid ${p.available ? "chapter-status-live" : ""}`}>{p.status}</p>
                   <div className="chapter-head">
                     <span className="chapter-num font-serif">{p.num}</span>
                     <span className="chapter-name track-mid">{p.name.toUpperCase()}</span>
