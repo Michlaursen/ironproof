@@ -8,10 +8,11 @@ import { type L, pick } from "./i18n";
  * engineering agent's operating system as a rail on the side; each declared
  * limit pinned in the margin of the layer it belongs to.
  *
- * Every sentence is lifted from the audited copy of this same page
+ * Every claim comes from the audited copy of this same page
  * (neuro-symbolic-copy.tsx, read against ironproof on 2026-10-12) or from the
- * former architecture-en/fr.webp. Nothing here is new as a claim: if a step
- * changes there, it changes here.
+ * former architecture-en/fr.webp, rewritten as full sentences (Dom, 2026-10-15:
+ * « pk c ecrit bizarre »). Nothing here is new as a claim: if a step changes
+ * there, it changes here.
  */
 
 type Item = { t: string; d: string };
@@ -28,6 +29,8 @@ type ArchCopy = {
   layers: Layer[];
   inputs: Item[];
   untrusted: string;
+  proposesLead: string;
+  source: string;
   proposes: string[];
   forms: [string, string];
   formsNote: string;
@@ -55,7 +58,7 @@ const COPY: L<ArchCopy> = {
   en: {
     sheet: "SHEET IP-ARCH-01",
     title: "System architecture",
-    sub: "From a proposed action to a proof you hold. One engine, the same path on every surface.",
+    sub: "How a proposed action becomes a proof you can hold. One engine, the same path for every kind of request.",
     motto: "Prove · Enforce · Seal · Verify",
     block: [
       ["Drawing", "IP-ARCH-01"],
@@ -65,81 +68,95 @@ const COPY: L<ArchCopy> = {
     ],
     pathLabel: "Decision path",
     layers: [
-      { code: "L1", k: "Input", t: "What enters", d: "Three surfaces, one engine." },
+      { code: "L1", k: "Input", t: "What comes in", d: "Three kinds of request, one engine." },
       {
         code: "L2",
         k: "Propose",
-        t: "The model proposes",
-        d: "The neural side: language, ambiguity, breadth.",
-        note: { k: "Limit · the model", t: "We don’t make the model safe. We make sure it cannot get what the rule forbids." },
+        t: "A model makes a proposal",
+        d: "The neural part understands language, vague requests and context.",
+        note: { k: "Limit · the model", t: "We don’t make the model safe. We make sure it never gets what the rule forbids." },
       },
       {
         code: "L3",
         k: "Compile",
-        t: "Your rule becomes logic",
-        d: "Compiled once. One compiler, so proof and runtime cannot quietly disagree.",
-        note: { k: "Limit · specification", t: "A proof is only as good as the rule. Whether it says what you meant is human work — we do it with you." },
+        t: "The rule is compiled",
+        d: "Your policy is compiled once. The solver and the runtime read the same version, so they cannot quietly disagree.",
+        note: { k: "Limit · specification", t: "A proof is only as good as the rule. Making sure it says what you meant is human work — we do it with you." },
       },
       {
         code: "L4",
         k: "Prove",
         t: "The engine decides",
-        d: "Every case in the class, not a sample.",
-        note: { k: "Limit · scope", t: "Proven within a stated class. Outside it, the proof says nothing — and the dossier states the boundary." },
+        d: "It examines every possible case, not a sample.",
+        note: { k: "Limit · scope", t: "A proof holds within a stated class of cases. Outside it, the proof says nothing — and the dossier draws that boundary." },
       },
-      { code: "L5", k: "Enforce", t: "Every action, at run time", d: "Checked against the same compiled rule, before it executes." },
-      { code: "L6", k: "Seal", t: "Post-quantum record", d: "Hash-chained. Any later edit is detectable.", note: { k: "What a seal shows", t: "The record was not changed, and which keys signed it — integrity, not truth." } },
-      { code: "L7", k: "Verify", t: "Offline, without us", d: "Your auditor re-checks the sealed record with an independent verifier." },
+      { code: "L5", k: "Enforce", t: "Every action is checked", d: "Before it runs, each action is checked against the same compiled rule." },
+      {
+        code: "L6",
+        k: "Seal",
+        t: "Everything is sealed",
+        d: "Each decision is chained to the one before it, so any later change shows.",
+        note: { k: "What a seal shows", t: "That the record was not changed, and which keys signed it — integrity, not truth." },
+      },
+      { code: "L7", k: "Verify", t: "Checkable without us", d: "Your auditor re-checks the sealed record offline, with an independent verifier." },
     ],
     inputs: [
-      { t: "Agent action", d: "+ its policy · Actions" },
-      { t: "COBOL program", d: "Migration · arXiv 2610.11073" },
-      { t: "C vulnerability", d: "Fix · Cobalt" },
+      { t: "An agent action", d: "with the policy that governs it" },
+      { t: "A COBOL program", d: "to migrate to Python (arXiv 2610.11073)" },
+      { t: "A flaw in C code", d: "to fix" },
     ],
-    untrusted: "Untrusted · never decides",
+    untrusted: "Not trusted · never decides",
+    proposesLead: "What it may propose:",
     proposes: ["the action", "a translation", "a fix", "a first draft of the rule"],
-    forms: ["Solver form", "Runtime form"],
+    source: "Your policy",
+    forms: ["Version for the solver", "Version for the runtime"],
     formsNote: "same source",
     engine: "Neuro-symbolic verification engine",
     neuralK: "Neural",
-    neuralT: "Candidate",
-    neuralD: "A translation, a fix, an encoding of the policy. Never decides.",
+    neuralT: "The proposal",
+    neuralD: "A translation, a fix or an encoding of the policy. It never decides.",
     symbolicK: "Symbolic",
-    symbolicT: "Solver",
-    candidate: "candidate",
+    symbolicT: "The solver",
+    candidate: "proposal",
     counterexample: "counterexample",
     solvers: [
-      { t: "Z3", d: "SMT solver" },
-      { t: "Spacer", d: "inductive invariants" },
-      { t: "CBMC", d: "for C" },
-      { t: "cvc5", d: "second solver" },
+      { t: "Z3", d: "the main solver" },
+      { t: "Spacer", d: "finds inductive invariants" },
+      { t: "CBMC", d: "for C code" },
+      { t: "cvc5", d: "a second solver" },
     ],
-    recheck: { t: "Re-check", d: "The invariant is re-checked in a fresh solver before the kernel seals its verdict. Finding a proof and checking it are kept apart." },
+    recheck: {
+      t: "Cross-check",
+      d: "The invariant is checked again in a fresh solver before the kernel seals its verdict. Finding a proof and checking it are kept apart.",
+    },
     verdicts: [
-      { t: "Proven", d: "no case can break the rule" },
-      { t: "Refuted", d: "here is the exact case" },
-      { t: "Not demonstrated", d: "never counted as a pass" },
+      { t: "Proven", d: "no case can break the rule." },
+      { t: "Refuted", d: "here is the exact case that breaks it." },
+      { t: "Not demonstrated", d: "never counted as a pass." },
     ],
-    lean: { t: "Lean 4", d: "Deciding by evaluation and deciding by the solver give the same answer, for every policy and every action — a theorem checked in Lean 4." },
+    lean: {
+      t: "Lean 4",
+      d: "Deciding by evaluating the rule gives the same answer as deciding with the solver, for every policy and every action. That is a theorem checked in Lean 4.",
+    },
     outcomes: [
-      { t: "PROCEED", d: "runs" },
-      { t: "BLOCK", d: "does not run" },
-      { t: "REFUSE", d: "does not run" },
+      { t: "PROCEED", d: "the action runs" },
+      { t: "BLOCK", d: "it does not run" },
+      { t: "REFUSE", d: "it does not run" },
     ],
     noModel: "No language model votes on this path.",
     sealKeys: "Ed25519 + ML-DSA-65 · FIPS 204",
-    sealWhat: "Every gate decision, allowed or blocked · every proof verdict",
+    sealWhat: "Every gate decision, allowed or blocked, and every proof verdict.",
     verifyOut: "Verification dossier",
     rail: {
       k: "Cognitive operating system",
       t: "Governs the engineering agent",
-      items: ["Persistent memory", "Rules learned from its own errors", "No report without command and output"],
+      items: ["Persistent memory", "Rules learned from its own errors", "No report without the command and its output"],
     },
   },
   fr: {
     sheet: "PLANCHE IP-ARCH-01",
     title: "Architecture du système",
-    sub: "D’une action proposée à une preuve que vous détenez. Un moteur, le même chemin sur chaque surface.",
+    sub: "Comment une action proposée devient une preuve que vous détenez. Un seul moteur, le même chemin pour chaque type de demande.",
     motto: "Prouver · Appliquer · Sceller · Vérifier",
     block: [
       ["Dessin", "IP-ARCH-01"],
@@ -149,78 +166,98 @@ const COPY: L<ArchCopy> = {
     ],
     pathLabel: "Chemin de décision",
     layers: [
-      { code: "C1", k: "Entrée", t: "Ce qui entre", d: "Trois surfaces, un seul moteur." },
+      { code: "C1", k: "Entrée", t: "Ce qui arrive", d: "Trois types de demandes, un seul moteur." },
       {
         code: "C2",
         k: "Proposer",
-        t: "Le modèle propose",
-        d: "Le côté neuronal : le langage, l’ambiguïté, l’étendue.",
-        note: { k: "Limite · le modèle", t: "Nous ne rendons pas le modèle sûr. Nous faisons en sorte qu’il n’obtienne pas ce que la règle interdit." },
+        t: "Un modèle fait une proposition",
+        d: "La partie neuronale comprend le langage, les demandes floues et le contexte.",
+        note: { k: "Limite · le modèle", t: "Nous ne rendons pas le modèle sûr. Nous faisons en sorte qu’il n’obtienne jamais ce que la règle interdit." },
       },
       {
         code: "C3",
         k: "Compiler",
-        t: "Votre règle devient logique",
-        d: "Compilée une fois. Un seul compilateur : la preuve et l’exécution ne peuvent pas diverger en silence.",
-        note: { k: "Limite · spécification", t: "Une preuve vaut ce que vaut la règle. Qu’elle dise ce que vous vouliez dire est un travail humain — nous le faisons avec vous." },
+        t: "La règle est compilée",
+        d: "Votre politique est compilée une seule fois. Le solveur et l’exécution lisent la même version : ils ne peuvent pas diverger en silence.",
+        note: { k: "Limite · spécification", t: "Une preuve vaut ce que vaut la règle. S’assurer qu’elle dit ce que vous vouliez dire est un travail humain — nous le faisons avec vous." },
       },
       {
         code: "C4",
         k: "Prouver",
         t: "Le moteur tranche",
-        d: "Tous les cas de la classe, pas un échantillon.",
-        note: { k: "Limite · portée", t: "Prouvé dans une classe déclarée. Hors de cette classe, la preuve ne dit rien — et le dossier en trace la frontière." },
+        d: "Il examine tous les cas possibles, pas un échantillon.",
+        note: { k: "Limite · portée", t: "Une preuve vaut pour une classe de cas déclarée. Hors de cette classe, elle ne dit rien — et le dossier en trace la frontière." },
       },
-      { code: "C5", k: "Appliquer", t: "Chaque action, à l’exécution", d: "Vérifiée contre la même règle compilée, avant qu’elle s’exécute." },
-      { code: "C6", k: "Sceller", t: "Registre post-quantique", d: "Chaîné par empreintes. Toute modification ultérieure se détecte.", note: { k: "Ce que montre un sceau", t: "Que la trace n’a pas changé, et quelles clés l’ont signée — l’intégrité, pas la vérité." } },
-      { code: "C7", k: "Vérifier", t: "Hors ligne, sans nous", d: "Votre auditeur revérifie la trace scellée avec un vérificateur indépendant." },
+      { code: "C5", k: "Appliquer", t: "Chaque action est contrôlée", d: "Avant de s’exécuter, chaque action est vérifiée contre la même règle compilée." },
+      {
+        code: "C6",
+        k: "Sceller",
+        t: "Tout est scellé",
+        d: "Chaque décision est enchaînée à la précédente : toute modification ultérieure se voit.",
+        note: { k: "Ce que montre un sceau", t: "Que la trace n’a pas changé, et quelles clés l’ont signée — l’intégrité, pas la vérité." },
+      },
+      { code: "C7", k: "Vérifier", t: "Vérifiable sans nous", d: "Votre auditeur revérifie la trace scellée hors ligne, avec un vérificateur indépendant." },
     ],
     inputs: [
-      { t: "Action d’agent", d: "+ sa politique · Actions" },
-      { t: "Programme COBOL", d: "Migration · arXiv 2610.11073" },
-      { t: "Faille C", d: "Correctif · Cobalt" },
+      { t: "Une action d’agent", d: "avec la politique qui l’encadre" },
+      { t: "Un programme COBOL", d: "à migrer vers Python (arXiv 2610.11073)" },
+      { t: "Une faille dans du code C", d: "à corriger" },
     ],
     untrusted: "Non fiable · ne décide jamais",
+    proposesLead: "Ce qu’il peut proposer :",
     proposes: ["l’action", "une traduction", "un correctif", "une première version de la règle"],
-    forms: ["Forme du solveur", "Forme d’exécution"],
+    source: "Votre politique",
+    forms: ["Version pour le solveur", "Version pour l’exécution"],
     formsNote: "même source",
     engine: "Moteur de vérification neuro-symbolique",
     neuralK: "Neuronal",
-    neuralT: "Candidat",
-    neuralD: "Une traduction, un correctif, un encodage de la politique. Ne décide jamais.",
+    neuralT: "La proposition",
+    neuralD: "Une traduction, un correctif ou un encodage de la politique. Il ne décide jamais.",
     symbolicK: "Symbolique",
-    symbolicT: "Solveur",
-    candidate: "candidat",
+    symbolicT: "Le solveur",
+    candidate: "proposition",
     counterexample: "contre-exemple",
     solvers: [
-      { t: "Z3", d: "solveur SMT" },
-      { t: "Spacer", d: "invariants inductifs" },
-      { t: "CBMC", d: "pour le C" },
-      { t: "cvc5", d: "second solveur" },
+      { t: "Z3", d: "le solveur principal" },
+      { t: "Spacer", d: "trouve les invariants inductifs" },
+      { t: "CBMC", d: "pour le code C" },
+      { t: "cvc5", d: "un second solveur" },
     ],
-    recheck: { t: "Revérification", d: "L’invariant est revérifié dans un solveur neuf avant que le noyau scelle son verdict. Trouver une preuve et la vérifier restent séparés." },
+    recheck: {
+      t: "Contre-vérification",
+      d: "L’invariant est vérifié une seconde fois dans un solveur neuf, avant que le noyau scelle son verdict. Trouver une preuve et la vérifier restent séparés.",
+    },
     verdicts: [
-      { t: "Prouvé", d: "aucun cas ne peut briser la règle" },
-      { t: "Réfuté", d: "voici le cas exact" },
-      { t: "Non démontré", d: "jamais compté comme un succès" },
+      { t: "Prouvé", d: "aucun cas ne peut briser la règle." },
+      { t: "Réfuté", d: "voici le cas exact qui la brise." },
+      { t: "Non démontré", d: "jamais compté comme un succès." },
     ],
-    lean: { t: "Lean 4", d: "Décider par évaluation et décider par le solveur donnent la même réponse, pour toute politique et toute action — un théorème vérifié en Lean 4." },
+    lean: {
+      t: "Lean 4",
+      d: "Décider en évaluant la règle donne la même réponse que décider avec le solveur, pour toute politique et toute action. C’est un théorème vérifié en Lean 4.",
+    },
     outcomes: [
-      { t: "PROCEED", d: "s’exécute" },
-      { t: "BLOCK", d: "ne s’exécute pas" },
-      { t: "REFUSE", d: "ne s’exécute pas" },
+      { t: "PROCEED", d: "l’action s’exécute" },
+      { t: "BLOCK", d: "elle ne s’exécute pas" },
+      { t: "REFUSE", d: "elle ne s’exécute pas" },
     ],
     noModel: "Aucun modèle de langage ne vote sur ce chemin.",
     sealKeys: "Ed25519 + ML-DSA-65 · FIPS 204",
-    sealWhat: "Chaque décision de la barrière, permise ou bloquée · chaque verdict de preuve",
+    sealWhat: "Chaque décision de la barrière, permise ou bloquée, et chaque verdict de preuve.",
     verifyOut: "Dossier de vérification",
     rail: {
       k: "Système d’exploitation cognitif",
-      t: "Gouverne l’agent d’ingénierie",
-      items: ["Mémoire persistante", "Règles apprises de ses propres erreurs", "Aucun rapport sans commande et sortie"],
+      t: "Encadre l’agent d’ingénierie",
+      items: ["Mémoire persistante", "Règles apprises de ses propres erreurs", "Aucun rapport sans la commande et sa sortie"],
     },
   },
 };
+
+/* Visually hidden punctuation: the layout separates a term from its gloss, but
+ * copied text, screen readers and search engines only get the characters. */
+function Sep({ text = " — " }: { text?: string }) {
+  return <span className="arch-sr">{text}</span>;
+}
 
 const VERDICT_CLASS = ["arch-v-proven", "arch-v-refuted", "arch-v-open"];
 
@@ -279,7 +316,9 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
             {t.inputs.map((it, i) => (
               <li key={it.t}>
                 <span className="arch-mono arch-gold">0{i + 1}</span>
+                <Sep text=". " />
                 <span className="arch-in-t font-serif">{it.t}</span>
+                <Sep text=", " />
                 <span className="arch-mono arch-in-d">{it.d}</span>
               </li>
             ))}
@@ -292,6 +331,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
         <div className="arch-body">
           <div className="arch-propose">
             <p className="arch-mono arch-untrusted">{t.untrusted}</p>
+            <p className="arch-propose-lead">{t.proposesLead}</p>
             <ul>
               {t.proposes.map((p) => (
                 <li key={p}>{p}</li>
@@ -305,11 +345,14 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
         <LayerHead layer={l3} />
         <div className="arch-body">
           <div className="arch-compile">
-            <span className="arch-compile-src font-serif">{l3.t}</span>
+            <span className="arch-compile-src font-serif">{t.source}</span>
+            <Sep text=" : " />
             <span className="arch-fork" aria-hidden="true" />
             <div className="arch-forms">
               <span className="arch-mono">{t.forms[0]}</span>
+              <Sep text=" " />
               <span className="arch-mono arch-forms-eq">= {t.formsNote} =</span>
+              <Sep text=" " />
               <span className="arch-mono">{t.forms[1]}</span>
             </div>
           </div>
@@ -329,6 +372,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
               </div>
               <div className="arch-exchange" aria-hidden="true">
                 <span className="arch-mono">{t.candidate}</span>
+                <Sep text=" / " />
                 <span className="arch-wire arch-wire-fwd"><i /></span>
                 <span className="arch-wire arch-wire-back"><i /></span>
                 <span className="arch-mono">{t.counterexample}</span>
@@ -340,6 +384,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
                   {t.solvers.map((s) => (
                     <li key={s.t}>
                       <b>{s.t}</b>
+                      <Sep />
                       <span>{s.d}</span>
                     </li>
                   ))}
@@ -355,6 +400,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
                 <li key={v.t} className={VERDICT_CLASS[i]}>
                   <span className="arch-vmark" aria-hidden="true" />
                   <span className="arch-v-t font-serif">{v.t}</span>
+                  <Sep text=" : " />
                   <span className="arch-v-d">{v.d}</span>
                 </li>
               ))}
@@ -375,6 +421,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
               {t.outcomes.map((o, i) => (
                 <li key={o.t} className={i === 0 ? "arch-oc-go" : "arch-oc-stop"}>
                   <span className="arch-mono">{o.t}</span>
+                  <Sep />
                   <span>{o.d}</span>
                 </li>
               ))}
@@ -409,7 +456,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
         </div>
         <LayerNote note={l7.note} />
 
-        <p className="arch-mono arch-path-label" aria-hidden="true">{t.pathLabel}</p>
+        <p className="arch-mono arch-path-label" aria-hidden="true" data-label={t.pathLabel} />
       </div>
 
       {/* Title block, bottom right, like any engineering drawing */}
@@ -417,6 +464,7 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
         {t.block.map(([k, v]) => (
           <div key={k}>
             <p className="arch-mono">{k}</p>
+            <Sep text=" : " />
             <p className="arch-block-v">{v}</p>
           </div>
         ))}

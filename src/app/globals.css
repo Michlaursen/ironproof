@@ -2983,6 +2983,10 @@ p, li {
 }
 .arch-gold { color: var(--a-gold); }
 
+.arch-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: pre; border: 0; }
+.arch-path-label::before { content: attr(data-label); }
+.arch-propose-lead { margin-top: 0.7rem; font-size: 0.85rem; font-weight: 300; color: var(--a-graphite); }
+.arch-propose ul { margin-top: 0.45rem !important; }
 /* Header */
 .arch-top {
   position: relative;
@@ -3315,6 +3319,7 @@ p, li {
   .arch-grid { display: block; margin-top: 1.8rem; }
   .arch-lh { padding-bottom: 0.6rem; }
   .arch-body { padding-top: 0.6rem; }
+  .arch-engine { margin-top: 1.4rem; }
   .arch-body::before { display: none; }
   .arch-rail-os {
     display: block;
