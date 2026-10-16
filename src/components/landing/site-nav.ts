@@ -117,8 +117,8 @@ export function siteNav(locale: Locale = defaultLocale) {
           label: `· ${cap(actions[id].tab)}`,
           page: `act-${id}`,
         })),
-        { href: `${home}#app-02`, label: t.cSecurity },
-        { href: `${home}#app-03`, label: t.cobol },
+        { href: `${r}/software-security`, label: t.cSecurity, page: "software-security" },
+        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
       ],
     },
     {
