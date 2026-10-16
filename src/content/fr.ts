@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "Ironproof | IA neuro-symbolique et vérification formelle pour les systèmes critiques",
+    title: "Ironproof | Ne vous fiez pas au verdict. Vérifiez la preuve.",
     description:
-      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier, sous hypothèses déclarées, la traduction du code patrimonial. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui puisse vérifier qu’elle n’a pas été modifiée, sans avoir à nous faire confiance.",
+      "Vérification formelle des systèmes critiques. Chaque résultat, preuve, contre-exemple ou décision, est scellé et vérifiable sans nous faire confiance.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Ironproof allie le raisonnement assisté par IA à la vérification formelle pour sécuriser les agents IA, protéger le logiciel critique et vérifier, sous hypothèses déclarées, la traduction du code patrimonial. Les actions critiques sont vérifiées contre la politique avant de s’exécuter, et chaque décision est scellée pour que n’importe qui puisse vérifier qu’elle n’a pas été modifiée, sans avoir à nous faire confiance.",
+      "Vérification formelle des systèmes critiques. Chaque résultat, preuve, contre-exemple ou décision, est scellé et vérifiable sans nous faire confiance.",
   },
   header: {
     nav: [
