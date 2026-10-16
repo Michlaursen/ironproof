@@ -117,6 +117,20 @@ const RECORD: { org: string; strip?: string; body: L<string>; cta: L<string>; hr
   },
 ];
 
+/** The same public record, for the C page (Dom, 2026-10-16: « on parle pas des cve »).
+ *  One list: the strip, /proof and the C page cannot name an org without a source. */
+export function publicRecord(locale: Locale): { org: string; body: string; cta: string; href: string }[] {
+  return RECORD.map((r) => ({ org: r.org, body: pick(r.body, locale), cta: pick(r.cta, locale), href: r.href }));
+}
+
+/** Published CVEs with a public number (checked on the CVE registry, 2026-10-16).
+ *  A third report (Zephyr) has an advisory that is still not public: it is not
+ *  listed until it can be checked by anyone. */
+export const PUBLISHED_CVES: { id: string; project: string; href: string }[] = [
+  { id: "CVE-2026-44673", project: "libyang", href: "https://www.cve.org/CVERecord?id=CVE-2026-44673" },
+  { id: "CVE-2026-41682", project: "libupnp (pupnp)", href: "https://www.cve.org/CVERecord?id=CVE-2026-41682" },
+];
+
 export const CREDITED_STRIP: { name: string; href: string }[] = RECORD.flatMap((r) =>
   r.strip ? [{ name: r.strip, href: r.href }] : [],
 );
