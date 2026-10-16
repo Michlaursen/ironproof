@@ -46,7 +46,10 @@ type Step = { title: string; body: string };
 /** One tile of the proven / sealed / verifiable trio. */
 type TrioItem = { tag: string; title: string; body: string; img: string };
 /** A case Ironproof has actually run, with its date and its number. */
-type RunCase = { name: string; what: string; result: string; date: string };
+/** figure + figureLabel: the headline number of the run, set large above the
+ *  text (Dom, 2026-10-16: "les numbers pas buried"). Each figure is the first
+ *  number of its own result line, never a new claim. */
+type RunCase = { name: string; figure: string; figureLabel: string; what: string; result: string; date: string };
 
 type Copy = {
   hero: {
@@ -377,18 +380,24 @@ const T: L<Copy> = {
       run: [
         {
           name: "Cloud authorization",
+          figure: "160 / 185",
+          figureLabel: "guarantees proven",
           what: "57 example IAM policies published by AWS, 185 guarantees written before the solver ran.",
           result: "Proven: 160 of 185 guarantees, each under two independent solvers (Z3 and cvc5). Refuted: 11 real findings, where a published policy does not do what its page says (8) or what a plain reading expects (3), each confirmed in AWS’s IAM policy simulator. Counterexamples traced to our own model are not counted.",
           date: "2026-09-30",
         },
         {
           name: "Energy",
+          figure: "17 / 17",
+          figureLabel: "cases decided as NERC’s text says",
           what: "The pre-change parts of the NERC CIP-010-4 R1 change-management requirement, encoded as a gate. A lab, with fictitious assets and identities.",
           result: "17 of 17 cases decided as NERC’s text says, plus 6 of 6 on two rules we added. 12 of 12 deliberate faults caught. Every signature re-verified from the sealed file alone.",
           date: "2026-10-09",
         },
         {
           name: "Open-source C",
+          figure: "13 / 20",
+          figureLabel: "fixes shown to close the flaw, within stated bounds",
           what: "20 fixes for real vulnerabilities drawn at random, from projects such as curl, libssh2 and Suricata.",
           result: "Within stated CBMC bounds, on a test our AI wrote for each fix. Closed: for 13 fixes, the test failed before the fix, passed after it, and rejected two decoys. Test fooled: for 3, the test could not tell a plausible wrong fix from the real one, which says nothing against the real fix. Not analyzed: 4. A bounded check of a generated test, not a complete proof.",
           date: "2026-10-12",
@@ -808,18 +817,24 @@ const T: L<Copy> = {
       run: [
         {
           name: "Autorisation infonuagique",
+          figure: "160 / 185",
+          figureLabel: "garanties prouvées",
           what: "57 politiques IAM d’exemple publiées par AWS, 185 garanties écrites avant de lancer le solveur.",
           result: "Prouvé : 160 garanties sur 185, chacune sous deux solveurs indépendants (Z3 et cvc5). Réfuté : 11 vraies trouvailles, où une politique publiée ne fait pas ce que sa page dit (8) ou ce qu’une lecture simple attend (3), chacune confirmée dans le simulateur de politiques IAM d’AWS. Les contre-exemples venus de notre propre modèle ne sont pas comptés.",
           date: "2026-09-30",
         },
         {
           name: "Énergie",
+          figure: "17 / 17",
+          figureLabel: "cas tranchés comme le dit le texte de NERC",
           what: "Les parties avant changement de l’exigence NERC CIP-010-4 R1, encodées en barrière. Un labo, avec des actifs et des identités fictifs.",
           result: "17 cas sur 17 tranchés comme le dit le texte de NERC, plus 6 sur 6 sur deux règles que nous avons ajoutées. 12 fautes volontaires sur 12 attrapées. Chaque signature revérifiée depuis le dossier scellé seul.",
           date: "2026-10-09",
         },
         {
           name: "C open source",
+          figure: "13 / 20",
+          figureLabel: "correctifs qui ferment la faille, dans des bornes déclarées",
           what: "20 correctifs de vraies failles tirés au hasard, dans des projets comme curl, libssh2 et Suricata.",
           result: "Dans les bornes CBMC déclarées, sur un test écrit par notre IA pour chaque correctif. Fermé : pour 13 correctifs, le test échouait avant, passait après et rejetait deux leurres. Test trompé : pour 3, le test ne distinguait pas un faux correctif plausible du vrai, ce qui ne dit rien contre le vrai correctif. Non analysé : 4. Une vérification bornée d’un test généré, pas une preuve complète.",
           date: "2026-10-12",
@@ -1418,7 +1433,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               {t.domains.run.map((c) => (
                 <div key={c.name} className="flex flex-col bg-ink px-7 py-8">
                   <p className="track-mid text-xs text-neutral-300">{c.name.toUpperCase()}</p>
-                  <p className="mt-4 text-base font-light leading-relaxed text-neutral-400">{c.what}</p>
+                  <p className="run-figure mt-5 font-serif">{c.figure}</p>
+                  <p className="run-figure-label mt-1">{c.figureLabel}</p>
+                  <p className="mt-5 text-base font-light leading-relaxed text-neutral-400">{c.what}</p>
                   <p className="mt-4 flex-1 font-serif text-lg leading-snug text-neutral-100">{c.result}</p>
                   <p className="mt-6 font-mono text-xs text-neutral-500">{c.date}</p>
                 </div>
@@ -1430,7 +1447,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
             * and the rules that already say what must never happen there. */}
           <div className="fade-up">
-            <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-xs text-neutral-500 md:grid">
+            <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-xs text-neutral-500 lg:grid">
               <span />
               <span>{t.domains.actionsLabel}</span>
               <span>{t.domains.rulesLabel}</span>
@@ -1439,7 +1456,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               {t.domains.items.map((d) => (
                 <li
                   key={d.name}
-                  className="grid gap-3 border-b border-white/10 py-7 md:grid-cols-[16rem_1fr_18rem] md:items-baseline md:gap-10"
+                  className="grid gap-3 border-b border-white/10 py-7 lg:grid-cols-[16rem_1fr_18rem] lg:items-baseline lg:gap-10"
                 >
                   <h3 className="font-serif text-2xl text-neutral-100">{d.name}</h3>
                   <p className="text-base font-light leading-relaxed text-neutral-300">

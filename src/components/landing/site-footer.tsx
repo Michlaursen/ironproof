@@ -30,7 +30,7 @@ export function SiteFooter({ locale = defaultLocale }: { locale?: Locale }) {
   const nav = siteNav(locale);
   return (
     <footer className="relative z-10 edge-t px-6 pb-12 pt-16 md:px-14">
-      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-7xl gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
         <div>
           <a href={locale === defaultLocale ? "/" : `/${locale}`} className="inline-flex items-center gap-3">
             <IronproofMark height={30} />

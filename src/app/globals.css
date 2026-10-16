@@ -3473,3 +3473,19 @@ footer .seal-label { color: #7a5c22; filter: none; }
   .hero-map-spark, .hero-map-dot-iron, .hero-map-dot-gold, .hero-map-route { animation: none; }
   .hero-map-spark { display: none; }
 }
+
+/* Why now (Dom, 2026-10-16): the row of dated cards scrolls sideways by design
+   (2026-10-15, the city must be seen), but nothing said so -- the last card was
+   simply cut at the screen edge. The row now fades out on its right edge, the
+   classic cue that it continues, and leaves room at the end so the last card
+   can be scrolled fully clear of the fade. */
+#now ol {
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 5rem), transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 5rem), transparent 100%);
+  padding-right: 5rem;
+  scroll-padding-right: 5rem;
+}
+
+/* The headline number of each verification run (Dom, 2026-10-16). */
+.run-figure { font-size: clamp(2.6rem, 4.2vw, 3.6rem); line-height: 1; letter-spacing: -0.01em; color: #24262a; font-variant-numeric: lining-nums tabular-nums; }
+.run-figure-label { font-size: 0.85rem; line-height: 1.4; color: #8a6a2a; }

@@ -318,8 +318,8 @@ export function AgentScenarios({
         {/* Redesigned 2026-09-25 in the new grammar: text tabs on a hairline,
           * a two-state policy switch, ruled rows instead of cards, and the
           * verdict set large. Both halves of the act stay one click apart. */}
-        <div className="fade-up mb-12 flex flex-col gap-6 border-b border-white/10 md:flex-row md:items-end md:justify-between">
-          <div role="tablist" className="-mb-px flex flex-wrap gap-x-8 gap-y-2">
+        <div className="fade-up mb-12 flex flex-col gap-6 border-b border-white/10">
+          <div role="tablist" className="-mb-px grid grid-cols-1 items-end gap-x-6 gap-y-1 sm:grid-cols-2 lg:grid-cols-4">
             {t.scenarios.map((s, i) => (
               <button
                 key={s.id}
@@ -327,7 +327,7 @@ export function AgentScenarios({
                 role="tab"
                 aria-selected={i === tab}
                 onClick={() => setTab(i)}
-                className={`track-mid border-b-2 pb-4 text-xs transition ${
+                className={`track-mid border-b-2 pb-4 text-left text-xs transition ${
                   i === tab ? "border-seal text-white" : "border-transparent text-neutral-500 hover:text-neutral-200"
                 }`}
               >
@@ -335,12 +335,12 @@ export function AgentScenarios({
               </button>
             ))}
           </div>
-          <div className="mb-4 inline-flex self-start rounded-full border border-white/10 p-1 md:self-auto">
+          <div className="order-first inline-flex w-full self-start rounded-full border border-white/10 p-1 sm:w-auto">
             <button
               type="button"
               aria-pressed={!blocked}
               onClick={() => setBlocked(false)}
-              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
+              className={`track-mid flex-1 rounded-full px-4 py-2 text-xs transition sm:flex-none sm:whitespace-nowrap ${blocked ? "text-neutral-500 hover:text-neutral-200" : "bg-seal/15 text-seal"}`}
             >
               {t.presetAllow}
             </button>
@@ -348,7 +348,7 @@ export function AgentScenarios({
               type="button"
               aria-pressed={blocked}
               onClick={() => setBlocked(true)}
-              className={`track-mid rounded-full px-4 py-2 text-xs transition ${blocked ? "bg-[#a3392f]/10 text-[#a3392f]" : "text-neutral-500 hover:text-neutral-200"}`}
+              className={`track-mid flex-1 rounded-full px-4 py-2 text-xs transition sm:flex-none sm:whitespace-nowrap ${blocked ? "bg-[#a3392f]/10 text-[#a3392f]" : "text-neutral-500 hover:text-neutral-200"}`}
             >
               {t.presetBlock}
             </button>
