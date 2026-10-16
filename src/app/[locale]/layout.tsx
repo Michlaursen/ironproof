@@ -2,7 +2,6 @@ import { SiteFooter } from "@/components/landing/site-footer";
 import type { Metadata } from "next";
 import { Inter, EB_Garamond, JetBrains_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { Clarity } from "@/components/clarity";
 import { notFound } from "next/navigation";
 import { getContent, isLocale, locales } from "@/content";
 import { IronProofLogoDefs } from "@/components/ironproof-logo";
@@ -140,7 +139,6 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         {children}
         <SiteFooter locale={locale} />
         <Analytics />
-        <Clarity />
       </body>
     </html>
   );
