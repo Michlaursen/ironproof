@@ -338,7 +338,7 @@ export function GateLab({
     <>
       <Section eyebrow={t.a1Eyebrow} title={t.a1Title}>
         <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.a1Lead(cad(ceiling, locale))}</p>
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 [&>*]:min-w-0">
           <div className="space-y-6">
             <label className="block">
               <span className="flex justify-between text-sm text-neutral-400">
@@ -366,7 +366,7 @@ export function GateLab({
 
       <Section eyebrow={t.a2Eyebrow} title={t.a2Title}>
         <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.a2Lead}</p>
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 [&>*]:min-w-0">
           <div className="space-y-6">
             <label className="block">
               <span className="flex justify-between text-sm text-neutral-400">
@@ -412,7 +412,7 @@ export function GateLab({
               const d = d2[i];
               if (!d) return null;
               return (
-                <li key={String(a.id)} className="chip-metal flex items-center justify-between gap-3 px-4 py-3" style={{ borderColor: STYLE[d.decision].border }}>
+                <li key={String(a.id)} className="chip-metal flex flex-wrap items-center justify-between gap-3 px-4 py-3" style={{ borderColor: STYLE[d.decision].border }}>
                   <span className="whitespace-nowrap text-sm text-neutral-400">{t.payment(i + 1)}</span>
                   <span className="font-mono text-sm text-neutral-100">{cad(Number(a.amount), locale)}</span>
                   <Chip v={d.decision} t={t} />
@@ -425,7 +425,7 @@ export function GateLab({
 
       <Section eyebrow={t.a3Eyebrow} title={t.a3Title}>
         <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.a3Lead}</p>
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 [&>*]:min-w-0">
           <div className="grid gap-6 sm:grid-cols-2">
             <fieldset>
               <legend className="seal-label track-mid mb-2 text-xs">{t.sentGroup}</legend>

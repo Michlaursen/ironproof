@@ -102,7 +102,7 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
                     href={paper.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="card-premium group flex items-center gap-4 p-5 transition"
+                    className="card-premium group flex flex-wrap items-center gap-4 p-5 transition"
                   >
                     <span className="metal-text shrink-0 font-mono text-xs">{paper.id}</span>
                     <span className="flex-1 text-sm font-light leading-snug text-neutral-300">{paper.title}</span>

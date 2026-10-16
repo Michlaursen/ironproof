@@ -219,7 +219,7 @@ export function LandingHeader(props: HeaderProps) {
             onClick={keepHash}
             hrefLang={t.switchLang}
             lang={t.switchLang}
-            aria-label={t.switchAria}
+            aria-label={`${t.switchLabel} · ${t.switchAria}`}
             className={`metal-text ${switchClasses}`}
           >
             {t.switchLabel}
@@ -241,7 +241,7 @@ export function LandingHeader(props: HeaderProps) {
           onClick={keepHash}
           hrefLang={t.switchLang}
           lang={t.switchLang}
-          aria-label={t.switchAria}
+          aria-label={`${t.switchLabel} · ${t.switchAria}`}
           className={`metal-text ${trackNav} ml-auto text-[11px] xl:hidden ${switchClasses}`}
         >
           {t.switchLabel}
