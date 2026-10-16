@@ -1184,6 +1184,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <polyline points="4,18 28,18 38,20" className="hero-map-line-iron" />
                   <polyline points="96,18 72,18 58,18" className="hero-map-line-gold" />
+                  {/* The same point of light as on desktop (Dom, 2026-10-16: "je vois pas
+                    * l'animation sur le cell"): it runs neural -> brain, then symbolic -> brain. */}
+                  <polyline points="4,18 28,18 38,20" className="hero-map-spark hero-map-spark-iron" />
+                  <polyline points="96,18 72,18 58,18" className="hero-map-spark hero-map-spark-gold" />
                 </svg>
                 {/* Dotted route SYMBOLIC -> PROVEN, anchored to the PROVEN label rather than to
                   * the image's percentages, so it never runs into a label at any width (Dom, 2026-10-16). */}
