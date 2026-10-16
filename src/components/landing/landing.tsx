@@ -1175,7 +1175,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="hero-white-brain-wrap">
               <div className="hero-white-brain" aria-hidden="true">
-                <Image src="/media/hero-entity3.jpg" alt="" fill preload sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
+                <Image src="/media/hero-entity3.jpg" alt="" fill preload fetchPriority="high" sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
               </div>
               {/* Phone only: the three roles drawn on the head (Dom, 2026-10-15:
                 * "faut que les gens comprennent"). Lines: neural -> brain,
