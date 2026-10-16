@@ -256,14 +256,14 @@ const T: L<Copy> = {
 
     sheet: {
       eyebrow: "THE PROBLEM",
-      title: "A policy can say one thing while the system allows another.",
-      sheetLabel: "THE POLICY IS THE SHEET",
+      title: "Critical systems run on verdicts no one can check.",
+      sheetLabel: "WHAT YOU GET TODAY: A VERDICT",
       sheetBody:
-        "A doorman follows a sheet written by the owner: “Anyone may enter anywhere. Except the VIP lounge: card required.” The owner titles it “Card required” and believes everything is protected. A guest without a card walks into the stockroom. Nobody cheated: the sheet never said what the owner thought.",
-      doorLabel: "THE EXECUTION BOUNDARY IS THE DOOR",
+        "A test says pass. A scanner says safe. A model says compliant. A vendor says trust us. Each one is a verdict. None comes with evidence you can re-check yourself, so in the end you are asked to believe.",
+      doorLabel: "WHAT IRONPROOF RETURNS: THE EVIDENCE",
       doorBody:
-        "Ironproof proves what the sheet actually allows, and returns the exact case that opens the hole. Then it stands at the door: an action that goes through it and is not authorized does not execute. No ticket, no execution.",
-      foot: "On two lines, you can see it. On forty pages written by twelve people over five years, rereading is no longer enough.",
+        "What holds, proven. What breaks, with the exact case that breaks it. What could not be shown, said as such. Every result is sealed and can be checked without us.",
+      foot: "Three questions where a verdict costs the most: may this action run? Does this C fix really close the hole? Does the migrated COBOL do what the old one did?",
     },
     what: {
       eyebrow: "WHAT IRONPROOF IS",
@@ -687,14 +687,14 @@ const T: L<Copy> = {
 
     sheet: {
       eyebrow: "LE PROBLÈME",
-      title: "Une politique peut dire une chose pendant que le système en permet une autre.",
-      sheetLabel: "LA POLITIQUE, C’EST LA FEUILLE",
+      title: "Les systèmes critiques tournent sur des verdicts que personne ne peut vérifier.",
+      sheetLabel: "CE QU’ON VOUS DONNE AUJOURD’HUI : UN VERDICT",
       sheetBody:
-        "Un portier suit une feuille écrite par le patron : « Tout le monde peut entrer partout. Sauf le salon VIP : carte obligatoire. » Le patron l’intitule « Carte obligatoire » et croit que tout est protégé. Un client sans carte entre dans l’entrepôt. Personne n’a triché : la feuille ne disait pas ce que le patron croyait.",
-      doorLabel: "LA FRONTIÈRE D’EXÉCUTION, C’EST LA PORTE",
+        "Le test dit « réussi ». Le scanner dit « sûr ». Le modèle dit « conforme ». Le fournisseur dit « faites-nous confiance ». Chacun rend un verdict. Aucun ne vient avec une preuve que vous pouvez revérifier vous-même : au bout du compte, on vous demande de croire.",
+      doorLabel: "CE QU’IRONPROOF REND : LA PREUVE",
       doorBody:
-        "Ironproof prouve ce que la feuille permet vraiment, et rend le cas exact qui ouvre le trou. Puis il se place à la porte : une action qui y passe sans être autorisée ne s’exécute pas. Pas de ticket, pas d’exécution.",
-      foot: "Sur deux lignes, ça se voit. Sur quarante pages écrites par douze personnes en cinq ans, relire ne suffit plus.",
+        "Ce qui tient, prouvé. Ce qui casse, avec le cas exact qui le casse. Ce qui n’a pas pu être démontré, dit comme tel. Chaque résultat est scellé et se vérifie sans nous.",
+      foot: "Trois questions où un verdict coûte le plus cher : cette action peut-elle s’exécuter ? Ce correctif C ferme-t-il vraiment la faille ? Le COBOL migré fait-il ce que faisait l’ancien ?",
     },
     what: {
       eyebrow: "CE QU’EST IRONPROOF",
@@ -1273,10 +1273,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* 1b. THE PROBLEM — the sheet and the door (the portier), before any
-          * mechanism: the reader understands the gap before the technology.
-          * The door pane carries the condition of the hero's sentence (an action
-          * that goes THROUGH the gate), so screen 2 qualifies screen 1. */}
+        {/* 1b. THE PROBLEM — common to the three applications (Dom, 2026-10-16):
+          * critical systems run on verdicts no one can re-check; Ironproof returns
+          * the evidence instead (proven / refuted with its case / not demonstrated,
+          * sealed, checkable without us). Replaces the doorman story, which
+          * only described the authorization case. */}
         <section id="problem" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
           <div className="mx-auto max-w-6xl">
             <div className="fade-up max-w-4xl">
