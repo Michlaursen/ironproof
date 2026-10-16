@@ -1349,6 +1349,45 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* Moved up, right after the gate and its pillars (Dom, 2026-10-16): the split
+          * payment is the case only a proof catches, so it follows the moment the
+          * reader sees the gate decide. */}
+        {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
+        <section id="why" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14 md:py-32">
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
+            <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
+              {t.why.title}
+            </h2>
+            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
+              {t.why.lead}
+            </p>
+          </div>
+          {/* The title as an object: every link is a compliant payment, the chain is
+            * the sequence, the gap is where the policy gives way (Dom, 2026-09-30).
+            * Brought from /proof, which most visitors never reach. */}
+          <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
+            <Image
+              src="/media/broken-chain-white.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1152px) 1152px, 100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
+            <p className="track-mid text-xs text-neutral-400">{t.why.chainCaption}</p>
+            <div className="hairline my-10 h-px w-full max-w-md" />
+            <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
+              {t.why.testVsProof}
+            </p>
+            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
+              {t.why.scope}
+            </p>
+          </div>
+        </section>
+
+
         {/* The method, the three applications and the research now come after the
           * gate (Dom, 2026-10-15: the video was too far down the page). */}
         <Platform locale={locale} />
@@ -1446,41 +1485,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
             {t.now.foot}
           </p>
-          </div>
-        </section>
-
-        {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
-        <section id="why" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14 md:py-32">
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
-            <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
-              {t.why.title}
-            </h2>
-            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
-              {t.why.lead}
-            </p>
-          </div>
-          {/* The title as an object: every link is a compliant payment, the chain is
-            * the sequence, the gap is where the policy gives way (Dom, 2026-09-30).
-            * Brought from /proof, which most visitors never reach. */}
-          <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
-            <Image
-              src="/media/broken-chain-white.jpg"
-              alt=""
-              fill
-              sizes="(min-width: 1152px) 1152px, 100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <p className="track-mid text-xs text-neutral-400">{t.why.chainCaption}</p>
-            <div className="hairline my-10 h-px w-full max-w-md" />
-            <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
-              {t.why.testVsProof}
-            </p>
-            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
-              {t.why.scope}
-            </p>
           </div>
         </section>
 

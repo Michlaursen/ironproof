@@ -179,7 +179,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/fr/software-security",
         cta: "LIRE LA RECHERCHE",
         body: "Ironproof écrit un test qui déclenche la faille, le roule avant et après le correctif, et vous dit si le correctif la ferme, dans des bornes déclarées. Chaque résultat part avec un dossier que vous pouvez rejouer.",
-        evidence: "20 vrais correctifs tirés au hasard dans des projets comme curl et libssh2 : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés (12 octobre 2026).",
+        evidence: "20 vrais correctifs tirés au hasard dans des projets comme curl et libssh2 : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés (12 octobre 2026).",
       },
       {
         num: "03",

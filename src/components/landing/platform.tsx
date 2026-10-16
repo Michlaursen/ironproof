@@ -2,7 +2,6 @@ import Image from "next/image";
 import { defaultLocale, type Locale } from "@/content";
 import { pick } from "./i18n";
 import { PLATFORM_COPY } from "./platform-copy";
-import { PAPERS } from "./credibility";
 
 /*
  * Right below the hero (mockup 2026-10-15): what you receive first -- the
@@ -126,7 +125,9 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
         </div>
       </section>
 
-      {/* The same PAPERS list as /research: one source, never re-typed. */}
+      {/* Research on the home page is one band and a link (Dom, 2026-10-16): the
+        * papers themselves are listed on /research, next to the state of the
+        * engine, from the same PAPERS list -- one source, never re-typed. */}
       <section id="papers" className="papers-band relative z-10 px-6 py-28 md:px-14 md:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="fade-up max-w-4xl">
@@ -134,27 +135,6 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
             <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{rs.title}</h2>
             <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{rs.lead}</p>
           </div>
-          {/* An editorial index, not cards (Dom, 2026-10-15: "BIN PLUS PREMIUM").
-            * The field is read from the paper's own title. */}
-          <ol className="fade-up papers-index mt-16">
-            {PAPERS.map((paper, i) => (
-              <li key={paper.id}>
-                <a href={paper.href} target="_blank" rel="noopener noreferrer" className="paper-row">
-                  <span className="paper-row-num font-serif">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="paper-row-main">
-                    <span className="paper-row-field track-mid">{rs.fields[i] ?? ""}</span>
-                    <span className="paper-row-title font-serif">{paper.title}</span>
-                  </span>
-                  <span className="paper-row-side">
-                    <span className="paper-row-id">{paper.id}</span>
-                    <span className="paper-row-read track-mid">
-                      {rs.read} <span aria-hidden="true">&#8599;</span>
-                    </span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ol>
           <a
             href={`${r}/research`}
             className="track-mid mt-10 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
