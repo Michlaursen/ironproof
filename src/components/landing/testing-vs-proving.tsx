@@ -130,9 +130,9 @@ export function TestingVsProving({ locale = defaultLocale }: { locale?: Locale }
               ))}
             </ul>
             <div className="my-6 h-px w-full bg-white/5" />
-            <div className="flex items-baseline justify-between gap-6">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
               <span className="track-mid shrink-0 text-xs text-neutral-500">{t.confidence}</span>
-              <span className="metal-text font-serif text-2xl leading-snug text-right">
+              <span className="metal-text min-w-0 font-serif text-2xl leading-snug text-right">
                 {t.guarantee}
               </span>
             </div>

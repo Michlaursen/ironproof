@@ -1182,8 +1182,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * symbolic -> brain, symbolic -> proven. */}
               <div className="hero-map" aria-hidden="true">
                 <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <polyline points="4,16 28,16 38,20" className="hero-map-line-iron" />
-                  <polyline points="96,16 72,16 58,18" className="hero-map-line-gold" />
+                  <polyline points="4,18 28,18 38,20" className="hero-map-line-iron" />
+                  <polyline points="96,18 72,18 58,18" className="hero-map-line-gold" />
                 </svg>
                 {/* Dotted route SYMBOLIC -> PROVEN, anchored to the PROVEN label rather than to
                   * the image's percentages, so it never runs into a label at any width (Dom, 2026-10-16). */}

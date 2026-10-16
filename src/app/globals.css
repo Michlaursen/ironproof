@@ -2435,7 +2435,8 @@ p, li {
    The PROVEN label has a fixed height (title 1rem, gap 0.15rem, one line of 0.83rem),
    so its title sits 1.48rem above the bottom; the route stops 0.75rem short of the
    label's widest possible edge (max-width 12rem, centred) and starts under the
-   SYMBOLIC rule (17%). */
+   SYMBOLIC rule (19%). The two rules sit at 18% so they clear the labels down
+   to 320 px (measured 2026-10-16: at 16% they crossed the text by 2 px). */
 .hero-map-route { display: none; }
 @media (max-width: 767px) {
   .hero-map-proven b { line-height: 1rem; }
@@ -2443,7 +2444,7 @@ p, li {
   .hero-map-route {
     display: block;
     position: absolute;
-    top: 17%;
+    top: 19%;
     right: 6%;
     bottom: 1.48rem;
     left: calc(50% + 6rem + 0.75rem);
@@ -3393,6 +3394,18 @@ footer .seal-label { color: #7a5c22; filter: none; }
 .closing-card h2 .text-seal { color: #8a6a2a; } /* 54px: large text, 3:1 required, 3.96 */
 #papers a.track-mid { min-height: 44px; }
 
+/* Header on the narrowest phones (measured 2026-10-16): logo, name, language
+   and menu needed 372 px, so at 320-360 px the menu button sat off-screen and
+   the whole page was zoomed out to fit. Tighter name and side gutters below 380 px. */
+@media (max-width: 379px) {
+  header > div { padding-left: 1rem; padding-right: 1rem; gap: 0.75rem; }
+  header .track-logo { letter-spacing: 0.26em; font-size: 0.875rem; }
+}
+/* Paper rows at 320 px (measured 2026-10-16: 11 px too wide). The id and the
+   "read" link wrap instead of pushing the row past the screen. */
+.paper-row > * { min-width: 0; }
+.paper-row-title { overflow-wrap: anywhere; }
+@media (max-width: 899px) { .paper-row-side { flex-wrap: wrap; row-gap: 0.25rem; } }
 /* State of the engine (/research, Dom 2026-10-16): three columns that carry the
    marks of the three verdicts -- a filled disc for what works, an open ring for
    what is in progress, a dashed ring for what is open. */

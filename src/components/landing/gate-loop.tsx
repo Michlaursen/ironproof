@@ -53,7 +53,8 @@ const T: L<Copy> = {
   },
 };
 
-const POSTER = "/media/gate-white-poster.jpg";
+// 960 px is twice the widest the poster is shown (Lighthouse 2026-10-16: 1920 px shown at 358 px).
+const POSTER = "/media/gate-white-poster-960.jpg";
 const FIRST_PLAY_AT = 0; // seconds: the white loop opens on gold already flowing
 const WATCHDOG_MS = 3500; // no progress by then: the animated image takes over
 // White edition (Dom, 2026-10-15): marble plate, iron gate, gold edge. Same
