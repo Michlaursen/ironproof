@@ -237,3 +237,16 @@ export function loadEvidencePack(): EvidencePack {
   };
   return cached;
 }
+
+/** The entry hash of the first sealed decision in the published dossier, for the
+ *  home page's seal line (Dom, 2026-10-16). Read from the same bytes a visitor
+ *  downloads; a dossier without one breaks the build instead of showing a
+ *  made-up fingerprint. */
+export function firstSealedEntryHash(): string {
+  const d: unknown = JSON.parse(read("dossier.json"));
+  const entries = isRecord(d) ? d.entries : undefined;
+  const first = Array.isArray(entries) ? entries[0] : undefined;
+  const hash = isRecord(first) ? first.entry_hash : undefined;
+  if (typeof hash !== "string" || !/^[0-9a-f]{64,}$/.test(hash)) fail("dossier.json: first entry has no entry_hash");
+  return hash;
+}

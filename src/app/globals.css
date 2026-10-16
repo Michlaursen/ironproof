@@ -3489,3 +3489,89 @@ footer .seal-label { color: #7a5c22; filter: none; }
 /* The headline number of each verification run (Dom, 2026-10-16). */
 .run-figure { font-size: clamp(2.6rem, 4.2vw, 3.6rem); line-height: 1; letter-spacing: -0.01em; color: #24262a; font-variant-numeric: lining-nums tabular-nums; }
 .run-figure-label { font-size: 0.85rem; line-height: 1.4; color: #8a6a2a; }
+
+/* ============================================================
+ * ALIVE (Dom, 2026-10-16): the seal line, the paper grain, the journey rail.
+ * Everything here stands still under prefers-reduced-motion.
+ * ============================================================ */
+
+/* 1. The seal line: the fingerprint types itself, a gold light runs over it,
+   SEALED appears. The full text is in the page from the start (no layout jump). */
+.hero-seal { display: grid; gap: 0.45rem; max-width: 30rem; text-decoration: none; color: inherit; }
+.hero-seal-label { font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.62rem; letter-spacing: 0.16em; color: #5b5f66; }
+.hero-seal-hash {
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: #24262a;
+  white-space: nowrap;
+}
+.hero-seal-type { display: inline-block; vertical-align: bottom; overflow: hidden; white-space: nowrap; width: 34ch; }
+.hero-seal-hash::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -30%;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, rgba(232, 196, 106, 0.55), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.hero-seal-state { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.16em; color: #8a6a2a; font-weight: 600; }
+.hero-seal-mark { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #a8843a; box-shadow: 0 0 0 3px rgba(168, 132, 58, 0.18); }
+.hero-seal-check { color: #24262a; font-weight: 500; border-bottom: 1px solid rgba(168, 132, 58, 0.6); padding-bottom: 0.1rem; }
+.hero-seal:hover .hero-seal-check { color: #8a6a2a; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-seal-type { width: 0; animation: seal-type 1.4s steps(32, end) 0.9s forwards; }
+  .hero-seal-hash::after { animation: seal-sweep 1s ease-in-out 2.5s forwards; }
+  .hero-seal-state { opacity: 0; animation: seal-state 0.6s ease-out 3.2s forwards; }
+}
+@keyframes seal-type { to { width: 34ch; } }
+@keyframes seal-sweep { 0% { left: -30%; opacity: 1; } 100% { left: 110%; opacity: 1; } }
+@keyframes seal-state { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+/* 4. Paper grain: a very fine texture and a warm light from above on the light
+   page, so the background reads as engraved paper, not a flat screen. Behind
+   everything; dark bands cover it with their own background. */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(120% 60% at 50% -10%, rgba(255, 244, 220, 0.55), transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.15  0 0 0 0 0.14  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 100% 100%, 220px 220px;
+}
+
+/* 5. The journey rail: the four words of the method on the gold rail, lit as
+   the reader goes down. Desktop only, where the rail exists. */
+.journey-rail { display: none; }
+@media (min-width: 900px) {
+  .journey-rail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 22vh;
+    bottom: 22vh;
+    left: calc(50% - var(--bp-col, 77rem) / 2 - 3px);
+    z-index: 31;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+  }
+  .journey-rail li { display: flex; align-items: center; gap: 0.6rem; }
+  .journey-dot { width: 7px; height: 7px; border-radius: 50%; background: #e7e5e2; border: 1px solid rgba(91, 95, 102, 0.5); transition: background 0.5s, border-color 0.5s, box-shadow 0.5s; }
+  .journey-word { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.56rem; letter-spacing: 0.2em; color: rgba(91, 95, 102, 0.55); transition: color 0.5s; }
+  .journey-rail li.is-lit .journey-dot { background: #c9a24b; border-color: #a8843a; box-shadow: 0 0 0 3px rgba(201, 162, 75, 0.2); }
+  .journey-rail li.is-lit .journey-word { color: #8a6a2a; }
+}
+@media (min-width: 900px) and (prefers-reduced-motion: reduce) {
+  .journey-rail li .journey-dot { background: #c9a24b; border-color: #a8843a; }
+  .journey-rail li .journey-word { color: #8a6a2a; }
+}

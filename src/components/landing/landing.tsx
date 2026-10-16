@@ -7,6 +7,9 @@ import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
 import { Platform } from "./platform";
+import { CountUp } from "./count-up";
+import { JourneyRail } from "./journey-rail";
+import { firstSealedEntryHash } from "@/lib/evidence";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
 
@@ -1134,10 +1137,21 @@ function PhotoPlate({
   );
 }
 
+/* The seal line under the hero buttons (Dom, 2026-10-16): the fingerprint of a
+ * real sealed decision types itself, a gold light runs over it, and SEALED
+ * appears -- never "verified": the page does not verify anything at that
+ * moment; the link opens the page where the visitor does. */
+const SEAL_LINE: L<{ label: string; state: string; check: string }> = {
+  en: { label: "DECISION 1 · SHA3-512 FINGERPRINT", state: "SEALED", check: "CHECK IT YOURSELF" },
+  fr: { label: "DÉCISION 1 · EMPREINTE SHA3-512", state: "SCELLÉE", check: "VÉRIFIEZ-LA VOUS-MÊME" },
+};
+
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const t = pick(T, locale);
   const eng = pick(HERO_ENGINE_COPY, locale);
+  const seal = pick(SEAL_LINE, locale);
+  const sealHash = firstSealedEntryHash();
 
   return (
     <div className="flex flex-1 flex-col">
@@ -1145,6 +1159,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
       <LandingHeader locale={locale} />
 
       <main className="blueprint flex-1">
+        <div className="paper-grain" aria-hidden="true" />
+        <JourneyRail steps={eng.steps.map((s) => s.split(" / ")[0] ?? s)} />
         {/* 1. HERO — white, iron and gold (Dom, 2026-10-15). The words on top,
           * the statement left and the explanation right; the one brain of the
           * site under them, full width: white marble for the intuition, iron
@@ -1175,6 +1191,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   {t.hero.ctaEvidence} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
+              <a href={`${r}/verify`} className="hero-seal mt-9">
+                <span className="hero-seal-label">{seal.label}</span>
+                <span className="hero-seal-hash" title={sealHash}>
+                  <span className="hero-seal-type">{sealHash.slice(0, 32)}</span>…
+                </span>
+                <span className="hero-seal-state">
+                  <span className="hero-seal-mark" aria-hidden="true" /> {seal.state}
+                  <span className="hero-seal-check">
+                    {seal.check} <span aria-hidden="true">&rarr;</span>
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
           {/* Three columns that never overlap: the language model, the brain, the
@@ -1433,7 +1461,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               {t.domains.run.map((c) => (
                 <div key={c.name} className="flex flex-col bg-ink px-7 py-8">
                   <p className="track-mid text-xs text-neutral-300">{c.name.toUpperCase()}</p>
-                  <p className="run-figure mt-5 font-serif">{c.figure}</p>
+                  <CountUp figure={c.figure} className="run-figure mt-5 font-serif" />
                   <p className="run-figure-label mt-1">{c.figureLabel}</p>
                   <p className="mt-5 text-base font-light leading-relaxed text-neutral-400">{c.what}</p>
                   <p className="mt-4 flex-1 font-serif text-lg leading-snug text-neutral-100">{c.result}</p>
