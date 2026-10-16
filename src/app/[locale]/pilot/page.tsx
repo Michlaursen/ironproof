@@ -9,6 +9,8 @@ import { CtaForm } from "@/components/landing/cta-form";
 import { PILOT_COPY } from "@/components/landing/pilot-copy";
 import { type L, pick } from "@/components/landing/i18n";
 
+const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "";
+
 /*
  * /pilot — the one place a buyer lands from every "Start a pilot" button.
  *
@@ -42,6 +44,8 @@ type Copy = {
   not: { head: string; body: string }[];
   formTitle: string;
   formLead: string;
+  bookOr: string;
+  bookLink: string;
 };
 
 const link = "underline decoration-white/25 underline-offset-4 transition hover:decoration-white/60";
@@ -136,6 +140,8 @@ function copy(r: string): L<Copy> {
       ],
       formTitle: "Tell us which action.",
       formLead: "Leave a work email. We reply to set up a first call about the action and the rule behind it.",
+      bookOr: "Or pick a time directly:",
+      bookLink: "BOOK A 30-MINUTE CALL",
     },
     fr: {
       metaTitle: "Démarrer un pilote — Ironproof",
@@ -225,6 +231,8 @@ function copy(r: string): L<Copy> {
       ],
       formTitle: "Dites-nous quelle action.",
       formLead: "Laissez un courriel professionnel. Nous répondons pour fixer un premier appel sur l’action et la règle derrière elle.",
+      bookOr: "Ou choisissez un moment directement\u00a0:",
+      bookLink: "RÉSERVER UN APPEL",
     },
   };
 }
@@ -372,6 +380,23 @@ export default async function PilotPage({ params }: PageProps) {
               <div className="pilot-form">
                 <CtaForm locale={locale} />
               </div>
+              {/* Booking (Dom, 2026-10-16): shown only once a booking page exists,
+                * set in NEXT_PUBLIC_BOOKING_URL. No embed, so no third-party script
+                * or cookie on our page: the link opens the booking page itself. */}
+              {BOOKING_URL ? (
+                <p className="mt-6 text-sm font-light text-neutral-400">
+                  {t.bookOr}
+                  <br />
+                  <a
+                    href={BOOKING_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="track-mid mt-2 inline-block border-b border-seal/60 pb-0.5 text-xs text-neutral-200 transition hover:text-white"
+                  >
+                    {t.bookLink} <span aria-hidden="true">&#8599;</span>
+                  </a>
+                </p>
+              ) : null}
             </div>
           </div>
         </section>
