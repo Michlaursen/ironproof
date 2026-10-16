@@ -4,7 +4,7 @@ import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { RESEARCH_COPY } from "@/components/landing/research-copy";
-import { PAPERS } from "@/components/landing/credibility";
+import { COVERAGE, PAPERS } from "@/components/landing/credibility";
 import { EngineState } from "@/components/landing/engine-state";
 
 /*
@@ -96,7 +96,7 @@ export default async function ResearchIndexPage({ params }: PageProps) {
             ))}
           </ul>
         </section>
-        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 md:px-14">
           <h2 className="seal-label track-mid mb-4 text-xs">PUBLISHED PAPERS · ARXIV</h2>
           <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
             {PAPERS.map((p) => (
@@ -111,6 +111,29 @@ export default async function ResearchIndexPage({ params }: PageProps) {
                   <p className="mt-2 font-serif text-xl font-medium text-neutral-100 group-hover:underline group-hover:underline-offset-4">
                     {p.title}
                   </p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
+          <h2 className="seal-label track-mid mb-4 text-xs">INDEPENDENT COVERAGE</h2>
+          <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
+            {COVERAGE.map((c) => (
+              <li key={c.href}>
+                <a
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block py-6"
+                >
+                  <p className="text-xs uppercase tracking-widest text-neutral-500">
+                    {c.outlet} · <time dateTime={c.date}>{c.date}</time> · {c.language} · on {c.paper}
+                  </p>
+                  <p className="mt-2 font-serif text-xl font-medium text-neutral-100 group-hover:underline group-hover:underline-offset-4">
+                    <span lang="de">{c.title}</span>
+                  </p>
+                  <p className="mt-2 font-light text-neutral-400">{c.gloss}</p>
                 </a>
               </li>
             ))}

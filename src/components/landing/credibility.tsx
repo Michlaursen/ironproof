@@ -165,6 +165,28 @@ export const PAPERS: { id: string; title: string; href: string }[] = [
   },
 ];
 
+// Independent coverage of the papers (Dom, 2026-10-16). Written by others, about our
+// work, limits included. Title and date copied from the article page, never from memory.
+export const COVERAGE: {
+  outlet: string;
+  date: string;
+  language: string;
+  title: string;
+  gloss: string;
+  paper: string;
+  href: string;
+}[] = [
+  {
+    outlet: "Legacy IT Center",
+    date: "2026-10-16",
+    language: "German",
+    title: "COBOL nach Python: Studie zeigt Grenzen mathematisch überprüfter Code-Migration",
+    gloss: "COBOL to Python: study shows the limits of mathematically verified code migration",
+    paper: "arXiv:2610.11073",
+    href: "https://legacyit.de/cobol-nach-python-studie-zeigt-grenzen-mathematisch-ueberpruefter-code-migration/",
+  },
+];
+
 function ExternalArrow() {
   return (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
