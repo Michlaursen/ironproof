@@ -33,7 +33,7 @@ export const HERO_COPY: L<HeroCopy> = {
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
-    eyebrow: "INTELLIGENCE DE PREUVE",
+    eyebrow: "PROOF INTELLIGENCE",
     eyebrowSub: "POUR LES INFRASTRUCTURES CRITIQUES",
     headline: "Ne vous fiez pas au verdict.",
     headlineEnd: "Vérifiez la preuve.",

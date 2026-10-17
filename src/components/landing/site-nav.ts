@@ -76,7 +76,7 @@ const LABELS: L<{
     solutions: "SOLUTIONS",
     evidence: "PREUVES",
     how: "Fonctionnement",
-    proofIntelligence: "L’intelligence de preuve",
+    proofIntelligence: "La Proof Intelligence",
     neuroSymbolic: "Neuro-symbolique",
     provableAi: "IA prouvable",
     zeroTrust: "Zero Trust",
