@@ -1430,7 +1430,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.domains.lead}</p>
           </div>
           <div className="mb-14">
-            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" notes={t.domains.plateNotes} />
+            {/* Labels on the photo removed: they were cut off and unreadable (Dom, 2026-10-16). */}
+            <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
           </div>
           {/* What has run first, with its number; then where it applies, with its
             * rule. The two never share a list (2026-10-13). */}
@@ -1537,45 +1538,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* The method, the three applications and the research now come after the
           * gate (Dom, 2026-10-15: the video was too far down the page). */}
         <Platform locale={locale} />
-
-        {/* 6. WHY NOW — dated, each with its source */}
-        <section id="now" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14">
-          {/* The financial district at night behind the whole section, traffic
-            * flowing between the towers like payments that no longer wait for a
-            * person (Dom, 2026-09-26). Darkened so the dated cards stay the subject. */}
-          <div className="breath-photo breath-photo-deep" aria-hidden="true">
-            <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
-          </div>
-          <div className="mx-auto max-w-7xl">
-          <div className="fade-up mb-12 max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
-            <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
-          </div>
-          {/* Compact ruled list (Dom, 2026-10-15: « que les gens aient pas besoin de scroll 10 min »). */}
-          <ol className="fade-up gap-x-10 rounded-[6px] border border-white/10 bg-ink/90 px-6 py-2 md:columns-2 lg:columns-3">
-            {t.now.items.map((d) => (
-              <li key={d.date} className="grid break-inside-avoid gap-1 border-b sm:grid-cols-[6rem_1fr] sm:gap-3 border-white/10 py-4 last:border-b-0">
-                <p className="seal-label track-mid pt-0.5 text-[11px]">{d.date}</p>
-                <div>
-                  <p className="text-[13px] font-light leading-relaxed text-neutral-200">{d.what}</p>
-                  <a
-                    href={d.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-1.5 inline-block text-xs text-neutral-500 underline decoration-white/20 underline-offset-4 transition hover:text-white"
-                  >
-                    {d.source} &#8599;
-                  </a>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
-            {t.now.foot}
-          </p>
-          </div>
-        </section>
 
         {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
           * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas

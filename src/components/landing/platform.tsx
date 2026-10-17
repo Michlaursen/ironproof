@@ -16,54 +16,9 @@ const APP_IMAGES = ["/media/app-gate.jpg", "/media/app-c-chip.jpg", "/media/app-
 export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(PLATFORM_COPY, locale);
   const m = t.method;
-  const rs = t.research;
-  const r = locale === defaultLocale ? "" : `/${locale}`;
 
   return (
     <>
-      <section id="method" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="fade-up max-w-4xl">
-            <p className="seal-label track-mid mb-5 text-xs">{m.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{m.title}</h2>
-            <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{m.lead}</p>
-            <p className="mt-5 max-w-3xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{m.body}</p>
-          </div>
-          {/* Three verdicts, three cards, each with its own mark (Dom, 2026-10-15):
-            * a full disc for proven, a broken line for refuted, an open dashed
-            * ring for not demonstrated. */}
-          <ul className="fade-up verdict-grid mt-14">
-            {m.verdicts.map((v, i) => (
-              <li key={v.word} className={`verdict-card verdict-${["proven", "refuted", "open"][i]}`}>
-                <span className="verdict-mark" aria-hidden="true" />
-                <p className="verdict-word font-serif">{v.word}</p>
-                <p className="verdict-body">{v.body}</p>
-                <p className="verdict-receive">{v.receive}</p>
-              </li>
-            ))}
-          </ul>
-          {/* Two checks, two panels: the seal in the browser, the proof in a solver. */}
-          <div className="fade-up checks mt-16">
-            <p className="checks-title font-serif">{m.independent.title}</p>
-            <div className="checks-split">
-              <div className="checks-panel checks-browser">
-                <p className="checks-where track-mid">{m.independent.browser.where}</p>
-                <p className="checks-what font-serif">{m.independent.browser.what}</p>
-                <p className="checks-body">{m.independent.browser.body}</p>
-                <p className="checks-proves track-mid">{m.independent.browser.proves}</p>
-              </div>
-              <div className="checks-panel checks-solver">
-                <p className="checks-where track-mid">{m.independent.solver.where}</p>
-                <p className="checks-what font-serif">{m.independent.solver.what}</p>
-                <p className="checks-body">{m.independent.solver.body}</p>
-                <p className="checks-proves track-mid">{m.independent.solver.proves}</p>
-              </div>
-            </div>
-            <p className="checks-note">{m.independent.note}</p>
-          </div>
-        </div>
-      </section>
-
       {/* The company line as a manifesto: one iron band, the two clauses, a gold hairline. */}
       <section className="manifesto relative z-10">
         <div className="manifesto-inner">
@@ -122,25 +77,6 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* Research on the home page is one band and a link (Dom, 2026-10-16): the
-        * papers themselves are listed on /research, next to the state of the
-        * engine, from the same PAPERS list -- one source, never re-typed. */}
-      <section id="papers" className="papers-band relative z-10 px-6 py-28 md:px-14 md:py-32">
-        <div className="mx-auto max-w-6xl">
-          <div className="fade-up max-w-4xl">
-            <p className="seal-label track-mid mb-5 text-xs">{rs.eyebrow}</p>
-            <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{rs.title}</h2>
-            <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{rs.lead}</p>
-          </div>
-          <a
-            href={`${r}/research`}
-            className="track-mid mt-10 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
-          >
-            {rs.cta} <span aria-hidden="true">&rarr;</span>
-          </a>
         </div>
       </section>
     </>
