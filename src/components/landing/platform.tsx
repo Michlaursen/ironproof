@@ -139,7 +139,6 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
-        <p className="mt-14 font-serif text-2xl md:text-3xl">{u.foot}</p>
       </div>
     </section>
   );
