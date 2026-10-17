@@ -193,7 +193,7 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
             <p className="mb-10 text-lg font-light text-neutral-400">{t.ctaLead}</p>
             <CtaForm locale={locale} />
             <a
-              href={`${home}#applications`}
+              href={`${home}#start`}
               className="track-mid mt-12 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-300 transition hover:border-seal hover:text-white"
             >
               <span aria-hidden="true">&larr;</span> {t.backHome}
