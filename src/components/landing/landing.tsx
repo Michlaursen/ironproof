@@ -7,7 +7,6 @@ import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
 import { NorthStar, UseCases } from "./platform";
-import { CountUp } from "./count-up";
 import { JourneyRail } from "./journey-rail";
 import { firstSealedEntryHash } from "@/lib/evidence";
 import { defaultLocale, type Locale } from "@/content";
@@ -369,8 +368,8 @@ const T: L<Copy> = {
 
     domains: {
       eyebrow: "WHERE IT APPLIES",
-      titleA: "Move money. Grant access.",
-      titleB: "Delete records. Ship a change.",
+      titleA: "The rules already exist.",
+      titleB: "Ironproof enforces them.",
       lead: "The actions that cannot be taken back once they run. For those, authorization stops being a setting and becomes infrastructure.",
       actionsLabel: "THE ACTIONS",
       rulesLabel: "THE RULES ALREADY WRITTEN",
@@ -806,8 +805,8 @@ const T: L<Copy> = {
 
     domains: {
       eyebrow: "OÙ ÇA S’APPLIQUE",
-      titleA: "Déplacer de l’argent. Donner un accès.",
-      titleB: "Supprimer des dossiers. Livrer un changement.",
+      titleA: "Les règles existent déjà.",
+      titleB: "Ironproof les applique.",
       lead: "Les actions qu’on ne peut plus reprendre une fois exécutées. Pour celles-là, l’autorisation cesse d’être un réglage et devient une infrastructure.",
       actionsLabel: "LES ACTIONS",
       rulesLabel: "LES RÈGLES DÉJÀ ÉCRITES",
@@ -1330,25 +1329,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             {/* Labels on the photo removed: they were cut off and unreadable (Dom, 2026-10-16). */}
             <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
           </div>
-          {/* What has run first, with its number; then where it applies, with its
-            * rule. The two never share a list (2026-10-13). */}
-          <div className="fade-up mb-20">
-            <p className="seal-label track-mid mb-4 text-xs">{t.domains.runEyebrow}</p>
-            <h3 className="font-serif text-3xl text-neutral-100 md:text-4xl">{t.domains.runTitle}</h3>
-            <div className="mt-10 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-3">
-              {t.domains.run.map((c) => (
-                <div key={c.name} className="flex flex-col bg-ink px-7 py-8">
-                  <p className="track-mid text-xs text-neutral-300">{c.name.toUpperCase()}</p>
-                  <CountUp figure={c.figure} className="run-figure mt-5 font-serif" />
-                  <p className="run-figure-label mt-1">{c.figureLabel}</p>
-                  <p className="mt-5 text-base font-light leading-relaxed text-neutral-400">{c.what}</p>
-                  <p className="mt-4 flex-1 font-serif text-lg leading-snug text-neutral-100">{c.result}</p>
-                  <p className="mt-6 font-mono text-xs text-neutral-500">{c.date}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 max-w-3xl text-sm font-light leading-relaxed text-neutral-500">{t.domains.runNote}</p>
-          </div>
+          {/* The runs moved into « What it proves » near the top (Dom, 2026-10-16): no number twice. */}
           <p className="fade-up seal-label track-mid mb-6 text-xs">{t.domains.appliesEyebrow}</p>
           {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
             * and the rules that already say what must never happen there. */}
@@ -1383,8 +1364,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
                 {t.how.title}
               </h2>
-              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.how.lead}</p>
-              <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">{t.how.compiler}</p>
+              {/* The two long paragraphs left the home page (Dom, 2026-10-16: « clair et percutant »); the four steps carry it. */}
             </div>
             {/* The one image here: the decision struck into steel, with logo 09
               * (Dom, 2026-09-26). */}
@@ -1437,7 +1417,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <br />
                 <span className="text-seal">{t.closing.titleB}</span>
               </h2>
-              <p className="mt-6 text-base font-light leading-relaxed text-neutral-300">{t.closing.body}</p>
               <p className="mt-4 text-xs font-light leading-relaxed text-neutral-500">{t.closing.scope}</p>
               <a
                 href={`${r}/pilot`}

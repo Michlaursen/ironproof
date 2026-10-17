@@ -162,7 +162,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         {
           name: "AI agents & critical actions",
           body: "An agent, a script or a person asks to move money, grant access or ship a change. Ironproof checks the request against your policy before it runs, and seals the decision.",
-          ranOn: "A CAD 7.2 million payment from an AI agent, unsigned: blocked at the gate, refusal sealed.",
+          ranOn: "A CAD 7.2 million payment from an AI agent, unsigned: blocked at the gate, refusal sealed. In a lab, NERC CIP-010 change rules encoded as a gate: 17 of 17 cases decided as NERC’s text says.",
           href: "/demo",
           cta: "WATCH IT DECIDE",
         },
@@ -287,7 +287,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         {
           name: "Agents IA et actions critiques",
           body: "Un agent, un script ou une personne demande de déplacer de l’argent, d’ouvrir un accès ou de déployer. Ironproof vérifie la demande contre votre politique avant qu’elle s’exécute, et scelle la décision.",
-          ranOn: "Un paiement de 7,2 M$ CA envoyé par un agent IA, sans signature : bloqué à la barrière, refus scellé.",
+          ranOn: "Un paiement de 7,2 M$ CA envoyé par un agent IA, sans signature : bloqué à la barrière, refus scellé. En labo, les règles de changement NERC CIP-010 encodées comme barrière : 17 cas sur 17 tranchés comme le dit le texte de NERC.",
           href: "/fr/demo",
           cta: "LE VOIR DÉCIDER",
         },
