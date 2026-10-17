@@ -6,7 +6,7 @@ import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
-import { NorthStar } from "./platform";
+import { NorthStar, UseCases } from "./platform";
 import { CountUp } from "./count-up";
 import { JourneyRail } from "./journey-rail";
 import { firstSealedEntryHash } from "@/lib/evidence";
@@ -1308,6 +1308,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           * where it applies, how it works, the close. Everything else lives on its
           * own page. Design unchanged. */}
         <NorthStar locale={locale} />
+        <UseCases locale={locale} />
 
         {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
           * under the checkpoint line (Dom, 2026-10-15: too much reading before
