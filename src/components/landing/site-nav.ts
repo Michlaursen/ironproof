@@ -37,6 +37,7 @@ const LABELS: L<{
   cSecurity: string;
   cobol: string;
   demo: string;
+  pythonToC: string;
   dossier: string;
   verify: string;
   record: string;
@@ -58,6 +59,7 @@ const LABELS: L<{
     cSecurity: "Research · C software security",
     cobol: "Legacy modernization",
     demo: "Demo",
+    pythonToC: "Python to C, proven",
     dossier: "Verification dossier",
     verify: "Check a sealed record",
     record: "Technical record",
@@ -79,6 +81,7 @@ const LABELS: L<{
     cSecurity: "Recherche · sécurité du logiciel C",
     cobol: "Modernisation des systèmes hérités",
     demo: "Démo",
+    pythonToC: "Python vers C, prouvé",
     dossier: "Dossier de vérification",
     verify: "Vérifier une trace scellée",
     record: "Registre technique",
@@ -133,6 +136,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       label: t.evidence,
       items: [
         { href: `${r}/demo`, label: t.demo, page: "demo" },
+        { href: `${r}/demo/python-to-c`, label: t.pythonToC, page: "demo-python-c" },
         { href: `${r}/evidence`, label: t.dossier, page: "evidence" },
         { href: `${r}/verify`, label: t.verify, page: "verify" },
         { href: `${r}/proof`, label: t.record, page: "proof" },

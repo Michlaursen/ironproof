@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/", destination: "/en" },
       { source: "/demo", destination: "/en/demo" },
+      { source: "/demo/python-to-c", destination: "/en/demo/python-to-c" },
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/neuro-symbolic", destination: "/en/neuro-symbolic" },
       { source: "/zero-trust", destination: "/en/zero-trust" },

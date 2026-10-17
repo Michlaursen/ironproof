@@ -42,6 +42,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/demo/python-to-c",
+      lastModified: new Date("2026-10-17"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/demo/python-to-c",
+          fr: "https://ironproof.ai/fr/demo/python-to-c",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/provable-ai",
       lastModified,
       changeFrequency: "monthly",
