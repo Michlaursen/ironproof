@@ -199,7 +199,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         "Every critical action must be authorized before execution. Every migration must preserve the behavior that matters. Every claim must withstand independent verification.",
       ],
       lead: "Ironproof is building Proof Intelligence.",
-      body: "AI proposes, formal methods decide, and each result ships with evidence anyone can check. We prove what can be proven, and say so when we cannot.",
+      body: "AI proposes, formal methods decide, and each result ships with evidence anyone can check.",
       close: "We prove what holds. We show what breaks.",
     },
     research: {
@@ -324,7 +324,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         "Chaque action critique doit être autorisée avant de s’exécuter. Chaque migration doit préserver le comportement qui compte. Chaque affirmation doit résister à une vérification indépendante.",
       ],
       lead: "Ironproof bâtit l’intelligence de preuve.",
-      body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas.",
+      body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier.",
       close: "On prouve ce qui tient. On montre ce qui casse.",
     },
     research: {
