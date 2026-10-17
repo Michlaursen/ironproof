@@ -144,3 +144,28 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
   );
 }
 
+/* Three buyer benefits, right after the use cases (Dom, 2026-10-16). */
+export function WhyIronproof({ locale = defaultLocale }: { locale?: Locale }) {
+  const w = pick(PLATFORM_COPY, locale).whyUs;
+
+  return (
+    <section id="why-ironproof" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="fade-up max-w-4xl">
+          <p className="seal-label track-mid mb-5 text-xs">{w.eyebrow}</p>
+          <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{w.title}</h2>
+        </div>
+        <ol className="fade-up mt-16 grid gap-10 md:grid-cols-3 md:gap-12">
+          {w.items.map((it, i) => (
+            <li key={it.title} className="border-t border-white/10 pt-6">
+              <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-3 font-serif text-2xl text-neutral-100">{it.title}</h3>
+              <p className="mt-3 text-base font-light leading-relaxed text-neutral-400">{it.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
