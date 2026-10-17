@@ -23,13 +23,13 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "AUTOMATED FORMAL VERIFICATION FOR CRITICAL SYSTEMS",
+    eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE",
     headline: "Don’t trust the verdict.",
     headlineEnd: "Verify the evidence.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
-    eyebrow: "VÉRIFICATION FORMELLE AUTOMATISÉE DES SYSTÈMES CRITIQUES",
+    eyebrow: "INTELLIGENCE DE PREUVE POUR LES INFRASTRUCTURES CRITIQUES",
     headline: "Ne vous fiez pas au verdict.",
     headlineEnd: "Vérifiez la preuve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
