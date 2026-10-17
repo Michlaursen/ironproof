@@ -181,8 +181,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "SEE THE RESULTS",
         },
         {
-          name: "COBOL migration",
-          body: "Move COBOL to Python and know the new code computes what the old one did, or get the exact input where it differs.",
+          name: "Legacy modernization",
+          body: "Move legacy code like COBOL to a modern language and know the new code computes what the old one did, or get the exact input where it differs.",
           ranOn: "IBM’s GenApp insurance programs, under a CICS model we write ourselves. Not yet replayed by a third party.",
           href: "/modernization",
           cta: "SEE THE RESULTS",
@@ -306,8 +306,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "VOIR LES RÉSULTATS",
         },
         {
-          name: "Migration COBOL",
-          body: "Passez du COBOL au Python et sachez que le nouveau code calcule ce que l’ancien calculait, ou obtenez l’entrée exacte où ils diffèrent.",
+          name: "Modernisation des systèmes hérités",
+          body: "Faites passer du code hérité comme le COBOL à un langage moderne et sachez que le nouveau code calcule ce que l’ancien calculait, ou obtenez l’entrée exacte où ils diffèrent.",
           ranOn: "Les programmes d’assurance GenApp d’IBM, sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
           href: "/fr/modernization",
           cta: "VOIR LES RÉSULTATS",
