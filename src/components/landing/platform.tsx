@@ -129,7 +129,7 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
               <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="mt-3 font-serif text-2xl text-neutral-100 md:text-3xl">{c.name}</h3>
               <p className="mt-3 text-base font-light leading-relaxed text-neutral-400 md:text-lg">{c.body}</p>
-              <p className="mt-4 text-sm leading-relaxed text-neutral-300">{c.ranOn}</p>
+              {/* The run figures stay on each product page, not on the card (Dom, 2026-10-16). */}
               <a
                 href={c.href}
                 className="track-mid mt-5 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
