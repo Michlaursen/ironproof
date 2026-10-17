@@ -370,7 +370,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         "Mais la vitesse sans garantie ne suffit pas.",
         "Chaque action critique doit être autorisée avant de s’exécuter. Chaque migration doit préserver le comportement qui compte. Chaque affirmation doit résister à une vérification indépendante.",
       ],
-      lead: "Ironproof bâtit la Proof Intelligence.",
+      lead: "Ironproof, c’est la Proof Intelligence.",
       body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier.",
       close: "On prouve ce qui tient. On montre ce qui casse.",
     },
