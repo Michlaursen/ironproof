@@ -8,6 +8,7 @@ import { type L, pick } from "./i18n";
 import { PLATFORM_COPY } from "./platform-copy";
 import { PAPERS, PUBLISHED_CVES, publicRecord } from "./credibility";
 import { APP_LABELS, APP_PAPERS, APP_PILLAR, type AppId } from "./application-copy";
+import { ModernizationHow } from "./modernization-how";
 
 /*
  * One page per application that had none: /software-security and
@@ -82,6 +83,8 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
             <p className="max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{pillar.body}</p>
           </div>
         </section>
+
+        {app === "modernization" ? <ModernizationHow locale={locale} /> : null}
 
         <section className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
           <div className="fade-up mb-10 max-w-3xl">
