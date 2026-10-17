@@ -235,14 +235,14 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "We prove what holds and show what breaks. Today: every critical action, from an AI agent, a script or a person, checked against your rules before it runs. We prove what can be proven, and say so when we cannot.",
+        "An AI agent with valid credentials can still send the wrong payment. Every critical action routed through Ironproof is checked against your rules before it runs, and each decision is sealed so your auditor can check it without us. We prove what can be proven, and say so when we cannot.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
       executes: "EXECUTES",
       refused: "BLOCKED",
       ctaDecide: "WATCH IT DECIDE",
-      ctaVerify: "CHECK A SEALED RECORD",
+      ctaVerify: "VERIFY A REAL DECISION",
       ctaPilot: "START A PILOT",
       ctaTech: "EXPLORE OUR TECHNOLOGY",
       ctaEvidence: "SEE THE EVIDENCE",
@@ -673,14 +673,14 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "On prouve ce qui tient et on montre ce qui casse. Aujourd’hui : chaque action critique, d’un agent IA, d’un script ou d’une personne, vérifiée contre vos règles avant de s’exécuter. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas.",
+        "Un agent IA avec des accès valides peut quand même envoyer le mauvais paiement. Chaque action critique qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter, et chaque décision est scellée pour que votre auditeur puisse la vérifier sans nous. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
       executes: "S’EXÉCUTE",
       refused: "BLOQUÉE",
       ctaDecide: "VOYEZ-LE DÉCIDER",
-      ctaVerify: "VÉRIFIEZ UNE TRACE SCELLÉE",
+      ctaVerify: "VÉRIFIER UNE VRAIE DÉCISION",
       ctaPilot: "DÉMARRER UN PILOTE",
       ctaTech: "DÉCOUVRIR NOTRE TECHNOLOGIE",
       ctaEvidence: "VOIR LES PREUVES",
@@ -1176,19 +1176,17 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </h1>
             </div>
             <div className="hero-white-aside fade-up min-w-0 md:pt-14">
-              {/* The value line (Dom, 2026-10-15), in gold, then the boundary. */}
-              <ul className="hero-white-value track-mid mb-6 space-y-1.5 text-xs md:text-sm">
-                {t.hero.value.split(" · ").map((part) => (
-                  <li key={part}>{part}</li>
-                ))}
-              </ul>
+              {/* The buyer's risk first, then what Ironproof does, then the boundary.
+                * The gold value line moved to "What you get", which already says it;
+                * the pilot is the primary action (Dom, 2026-10-16, after the
+                * competitive review). */}
               <p className="hero-white-lead mb-9 max-w-lg text-base leading-relaxed md:text-lg">{t.hero.boundary}</p>
               <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a href={`${r}/verify`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
-                  {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
+                <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
+                  {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
                 </a>
-                <a href={`${r}/evidence`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
-                  {t.hero.ctaEvidence} <span aria-hidden="true">&rarr;</span>
+                <a href={`${r}/verify`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
+                  {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
               <a href={`${r}/verify`} className="hero-seal mt-9">
