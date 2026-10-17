@@ -19,6 +19,24 @@ export function Platform({ locale = defaultLocale }: { locale?: Locale }) {
 
   return (
     <>
+      {/* Why Ironproof exists, read just before the company line (Dom, 2026-10-16). */}
+      <section id="north-star" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="fade-up max-w-4xl">
+            <p className="seal-label track-mid mb-5 text-xs">{t.northStar.eyebrow}</p>
+            <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.northStar.title}</h2>
+            {t.northStar.paragraphs.map((para) => (
+              <p key={para} className="mt-6 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
+                {para}
+              </p>
+            ))}
+            <p className="mt-10 font-serif text-2xl font-medium md:text-3xl">{t.northStar.lead}</p>
+            <p className="mt-4 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{t.northStar.body}</p>
+            <p className="metal-text mt-10 font-serif text-3xl font-medium md:text-4xl">{t.northStar.close}</p>
+          </div>
+        </div>
+      </section>
+
       {/* The company line as a manifesto: one iron band, the two clauses, a gold hairline. */}
       <section className="manifesto relative z-10">
         <div className="manifesto-inner">

@@ -72,6 +72,8 @@ export type PlatformCopy = {
     foot: { a: string; b: string };
   };
   research: { eyebrow: string; title: string; lead: string; cta: string; read: string; fields: readonly string[] };
+  /** Why Ironproof exists (Dom, 2026-10-16, after reading Code Metal's North Star). */
+  northStar: { eyebrow: string; title: string; paragraphs: readonly string[]; lead: string; body: string; close: string };
 };
 
 export const PLATFORM_COPY: L<PlatformCopy> = {
@@ -143,6 +145,18 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         note: "Where an artifact cannot be shared, the result says so.",
       },
       foot: { a: "Others sell trust.", b: "We sell the right not to trust us." },
+    },
+    northStar: {
+      eyebrow: "OUR NORTH STAR",
+      title: "Ironproof brings proof to the systems that cannot fail.",
+      paragraphs: [
+        "AI now writes code, moves money, and changes critical systems faster than humans can review them.",
+        "But speed without assurance is not enough.",
+        "Every critical action must be authorized before execution. Every migration must preserve the behavior that matters. Every claim must withstand independent verification.",
+      ],
+      lead: "Ironproof is building Proof Intelligence.",
+      body: "AI proposes, formal methods decide, and each result ships with evidence anyone can check. We prove what can be proven, and say so when we cannot.",
+      close: "We prove what holds. We show what breaks.",
     },
     research: {
       eyebrow: "PUBLISHED RESEARCH",
@@ -221,6 +235,18 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         note: "Quand un élément ne peut pas être partagé, le résultat le dit.",
       },
       foot: { a: "Les autres vendent la confiance.", b: "Nous, on vend le droit de ne pas nous faire confiance." },
+    },
+    northStar: {
+      eyebrow: "NOTRE ÉTOILE POLAIRE",
+      title: "Ironproof apporte la preuve aux systèmes qui ne peuvent pas échouer.",
+      paragraphs: [
+        "L’IA écrit du code, déplace de l’argent et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
+        "Mais la vitesse sans garantie ne suffit pas.",
+        "Chaque action critique doit être autorisée avant de s’exécuter. Chaque migration doit préserver le comportement qui compte. Chaque affirmation doit résister à une vérification indépendante.",
+      ],
+      lead: "Ironproof bâtit l’intelligence de preuve.",
+      body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas.",
+      close: "On prouve ce qui tient. On montre ce qui casse.",
     },
     research: {
       eyebrow: "RECHERCHE PUBLIÉE",
