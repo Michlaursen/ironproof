@@ -198,7 +198,7 @@ export function ResearchZeroBarriers({
   locale?: Locale;
   navLocale?: Locale;
   copy?: ResearchCopy;
-  page?: "research" | "research-limits";
+  page?: "research" | "research-limits" | "proof-intelligence";
 }) {
   const c = copy ?? RESEARCH_COPY[locale] ?? RESEARCH_COPY.en;
 

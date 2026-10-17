@@ -202,6 +202,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.7,
     },
+    // The definition of the category the hero names. English only, same
+    // posture as the notes; lastModified is the date the definition changed.
+    {
+      url: "https://ironproof.ai/proof-intelligence",
+      lastModified: new Date("2026-10-17"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
     {
       url: "https://ironproof.ai/research/what-our-proofs-do-not-prove",
       lastModified: new Date("2026-10-16"),

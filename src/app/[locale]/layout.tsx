@@ -106,6 +106,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         email: "hello@ironproof.ai",
         areaServed: "Global",
         knowsAbout: [
+          "Proof Intelligence",
           "AI governance",
           "Formal verification",
           "AI agent security",

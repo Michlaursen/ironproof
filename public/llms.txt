@@ -1,6 +1,8 @@
 # Ironproof
 
-> Ironproof is policy enforcement for critical actions. It blocks a critical action before it executes if it violates the customer's written policy, and lets it through if it complies — whether the action was initiated by an AI agent, a script, an API call or a person. Every decision is sealed cryptographically (Ed25519 + ML-DSA-65) and can be verified independently afterwards, offline, without an Ironproof dashboard.
+> Ironproof builds Proof Intelligence for critical infrastructure. Proof Intelligence is AI that proposes, formal methods that decide, and evidence anyone can check without trusting the vendor. Every result is proven, refuted with the case that breaks it, or reported as not demonstrated. Definition: https://ironproof.ai/proof-intelligence
+
+Its product today is policy enforcement for critical actions. It blocks a critical action before it executes if it violates the customer's written policy, and lets it through if it complies — whether the action was initiated by an AI agent, a script, an API call or a person. Every decision is sealed cryptographically (Ed25519 + ML-DSA-65) and can be verified independently afterwards, offline, without an Ironproof dashboard.
 
 The written policy is compiled into mathematics by the same deterministic compiler the runtime uses, so the proof runs against that model rather than against a checklist. When an action can violate a rule or a cumulative limit, Ironproof returns the counterexample. When it cannot, it issues a single-use execution grant bound to that exact decision and to the policy in force, and seals the decision, the justification and the proof result into an artifact a third party can re-verify.
 
