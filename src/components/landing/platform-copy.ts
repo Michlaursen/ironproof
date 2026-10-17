@@ -88,7 +88,7 @@ export type PlatformCopy = {
   /** Three buyer benefits, after the use cases (Dom, 2026-10-16: « improve time to market doit être sur le site »).
    *  No figure here: each benefit is a consequence of what the cards already show. */
   whyUs: { eyebrow: string; title: string; items: readonly { title: string; body: string }[] };
-  /** Why Ironproof exists (Dom, 2026-10-16, after reading Code Metal's North Star). */
+  /** Why Ironproof exists (Dom, 2026-10-16). Label changed 2026-10-17 (Dom): « Our North Star » was Code Metal's own word. */
   northStar: { eyebrow: string; title: string; paragraphs: readonly string[]; lead: string; body: string; close: string };
 };
 
@@ -217,8 +217,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       foot: "Every result ships with what you need to check it without us.",
     },
     northStar: {
-      eyebrow: "OUR NORTH STAR",
-      title: "Ironproof brings proof to the systems that cannot fail.",
+      eyebrow: "WHAT WE BELIEVE",
+      title: "Ironproof brings proof to the decisions that cannot be undone.",
       paragraphs: [
         "AI now writes code, moves money, and changes critical systems faster than humans can review them.",
         "But speed without assurance is not enough.",
@@ -361,8 +361,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       foot: "Chaque résultat part avec de quoi le vérifier sans nous.",
     },
     northStar: {
-      eyebrow: "NOTRE ÉTOILE POLAIRE",
-      title: "Ironproof apporte la preuve aux systèmes qui ne peuvent pas échouer.",
+      eyebrow: "CE QUE NOUS CROYONS",
+      title: "Ironproof apporte la preuve aux décisions qu’on ne peut pas défaire.",
       paragraphs: [
         "L’IA écrit du code, déplace de l’argent et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
         "Mais la vitesse sans garantie ne suffit pas.",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
+import { FlowDiagram, type FlowCopy } from "./flow-diagram";
 
 /*
  * How the modernization service works, step by step (Dom, 2026-10-17, after
@@ -32,16 +33,7 @@ type HowCopy = {
   /** Notes on the photograph: punched cards (the old program) beside a drive (the new one). */
   plate: readonly { x: number; y: number; label: string; gold?: boolean }[];
   /** The path of one program, read left to right in the diagram. */
-  flow: {
-    caption: string;
-    cobol: [string, string];
-    model: [string, string];
-    python: [string, string];
-    solver: [string, string];
-    ibm: [string, string];
-    verdict: [string, string];
-    seal: [string, string];
-  };
+  flow: FlowCopy;
 };
 
 const COPY: L<HowCopy> = {
@@ -106,11 +98,13 @@ const COPY: L<HowCopy> = {
     ],
     flow: {
       caption: "The path of one program: two independent checks, one verdict, a sealed record.",
-      cobol: ["COBOL", "your program"],
-      model: ["MODEL", "written by our team"],
-      python: ["PYTHON", "generated"],
-      solver: ["SOLVER", "every input the model allows"],
-      ibm: ["IBM COMPILER", "the same cases, run for real"],
+      lead: [
+        ["COBOL", "your program"],
+        ["MODEL", "written by our team"],
+        ["PYTHON", "generated"],
+      ],
+      top: ["SOLVER", "every input the model allows"],
+      bottom: ["IBM COMPILER", "the same cases, run for real"],
       verdict: ["VERDICT", "same, or the input that differs"],
       seal: ["SEALED", "re-run without us"],
     },
@@ -176,11 +170,13 @@ const COPY: L<HowCopy> = {
     ],
     flow: {
       caption: "Le parcours d’un programme : deux vérifications indépendantes, un verdict, un dossier scellé.",
-      cobol: ["COBOL", "votre programme"],
-      model: ["MODÈLE", "écrit par notre équipe"],
-      python: ["PYTHON", "généré"],
-      solver: ["SOLVEUR", "toutes les entrées du modèle"],
-      ibm: ["COMPILATEUR IBM", "les mêmes cas, exécutés"],
+      lead: [
+        ["COBOL", "votre programme"],
+        ["MODÈLE", "écrit par notre équipe"],
+        ["PYTHON", "généré"],
+      ],
+      top: ["SOLVEUR", "toutes les entrées du modèle"],
+      bottom: ["COMPILATEUR IBM", "les mêmes cas, exécutés"],
       verdict: ["VERDICT", "identiques, ou l’écart exact"],
       seal: ["SCELLÉ", "revérifiable sans nous"],
     },
@@ -189,60 +185,6 @@ const COPY: L<HowCopy> = {
 
 function Snum({ children }: { children: React.ReactNode }) {
   return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
-}
-
-type Box = { x: number; y: number; w: number; label: [string, string]; gold?: boolean };
-
-const H = 64;
-
-function Node({ x, y, w, label, gold }: Box) {
-  return (
-    <g className={gold ? "text-seal" : "text-neutral-500"}>
-      <rect x={x} y={y} width={w} height={H} rx={3} fill="var(--surface, transparent)" stroke="currentColor" strokeWidth={gold ? 1.5 : 1} />
-      <text x={x + 16} y={y + 27} fill="currentColor" fontSize={15} letterSpacing={2.2} fontFamily="var(--font-mono, monospace)">
-        {label[0]}
-      </text>
-      <text x={x + 16} y={y + 48} fill="currentColor" fontSize={14} opacity={0.9}>
-        {label[1]}
-      </text>
-    </g>
-  );
-}
-
-/* The path of one program. A gold point leaves the COBOL, splits into the two
-   checks, meets again at the verdict and ends in the seal. SMIL, no script;
-   hidden for visitors who ask for reduced motion. */
-function ProgramFlow({ f }: { f: HowCopy["flow"] }) {
-  // Row centres: main 132, solver 62, IBM compiler 202.
-  return (
-    <figure className="fade-up mt-14">
-      <div className="card-premium overflow-x-auto p-6 md:p-8">
-        <svg viewBox="0 0 1330 268" className="w-full min-w-[900px]" role="img" aria-label={f.caption}>
-          <style>{`@media (prefers-reduced-motion: reduce){.flow-pulse{display:none}}`}</style>
-          <g className="text-neutral-400" stroke="currentColor" fill="none" strokeWidth={1}>
-            <path d="M160 132 H190 M370 132 H400 M560 132 H580 V62 H600 M580 132 V202 H600" />
-            <path d="M840 62 H860 V202 H840 M860 132 H890 M1120 132 H1150" />
-          </g>
-          <Node x={10} y={100} w={150} label={f.cobol} />
-          <Node x={190} y={100} w={180} label={f.model} />
-          <Node x={400} y={100} w={160} label={f.python} />
-          <Node x={600} y={30} w={240} label={f.solver} />
-          <Node x={600} y={170} w={240} label={f.ibm} />
-          <Node x={890} y={100} w={230} label={f.verdict} />
-          <Node x={1150} y={100} w={175} label={f.seal} gold />
-          <g className="flow-pulse text-seal">
-            <circle r={4.5} fill="currentColor">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M10 132 H580 V62 H860 V132 H1320" />
-            </circle>
-            <circle r={4.5} fill="currentColor">
-              <animateMotion dur="6s" repeatCount="indefinite" path="M10 132 H580 V202 H860 V132 H1320" />
-            </circle>
-          </g>
-        </svg>
-      </div>
-      <figcaption className="track-mid edge-t mt-5 pt-4 text-xs leading-relaxed text-neutral-500">{f.caption}</figcaption>
-    </figure>
-  );
 }
 
 export function ModernizationHow({ locale = defaultLocale }: { locale?: Locale }) {
@@ -282,7 +224,7 @@ export function ModernizationHow({ locale = defaultLocale }: { locale?: Locale }
             </li>
           ))}
         </ol>
-        <ProgramFlow f={t.flow} />
+        <FlowDiagram f={t.flow} />
       </section>
 
       <section className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
