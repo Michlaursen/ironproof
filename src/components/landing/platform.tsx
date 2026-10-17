@@ -110,3 +110,38 @@ export function NorthStar({ locale = defaultLocale }: { locale?: Locale }) {
     </>
   );
 }
+
+/* Four things the engine does, right after the North Star, each with the run
+ * that backs it and a link to check it (Dom, 2026-10-16). */
+export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
+  const u = pick(PLATFORM_COPY, locale).useCases;
+
+  return (
+    <section id="use-cases" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="fade-up max-w-4xl">
+          <p className="seal-label track-mid mb-5 text-xs">{u.eyebrow}</p>
+          <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{u.title}</h2>
+        </div>
+        <ol className="fade-up mt-16 grid gap-10 md:grid-cols-2 md:gap-12">
+          {u.cards.map((c, i) => (
+            <li key={c.name} className="border-t border-white/10 pt-6">
+              <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="mt-3 font-serif text-2xl text-neutral-100 md:text-3xl">{c.name}</h3>
+              <p className="mt-3 text-base font-light leading-relaxed text-neutral-400 md:text-lg">{c.body}</p>
+              <p className="mt-4 text-sm leading-relaxed text-neutral-300">{c.ranOn}</p>
+              <a
+                href={c.href}
+                className="track-mid mt-5 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+              >
+                {c.cta} <span aria-hidden="true">&rarr;</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-14 font-serif text-2xl md:text-3xl">{u.foot}</p>
+      </div>
+    </section>
+  );
+}
+

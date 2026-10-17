@@ -72,6 +72,15 @@ export type PlatformCopy = {
     foot: { a: string; b: string };
   };
   research: { eyebrow: string; title: string; lead: string; cta: string; read: string; fields: readonly string[] };
+  /** Four things the engine does, each with a run anyone can re-check (Dom, 2026-10-16:
+   *  « nous c'est exactement ça mais tu rajoutes AI agents against a policy »). Every
+   *  figure is copied from the results already published on this site. */
+  useCases: {
+    eyebrow: string;
+    title: string;
+    cards: readonly { name: string; body: string; ranOn: string; href: string; cta: string }[];
+    foot: string;
+  };
   /** Why Ironproof exists (Dom, 2026-10-16, after reading Code Metal's North Star). */
   northStar: { eyebrow: string; title: string; paragraphs: readonly string[]; lead: string; body: string; close: string };
 };
@@ -145,6 +154,41 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         note: "Where an artifact cannot be shared, the result says so.",
       },
       foot: { a: "Others sell trust.", b: "We sell the right not to trust us." },
+    },
+    useCases: {
+      eyebrow: "WHAT IT PROVES",
+      title: "One engine. Four places where a wrong answer costs too much.",
+      cards: [
+        {
+          name: "AI agents & critical actions",
+          body: "An agent, a script or a person asks to move money, grant access or ship a change. Ironproof checks the request against your policy before it runs, and seals the decision.",
+          ranOn: "A CAD 7.2 million payment from an AI agent, unsigned: blocked at the gate, refusal sealed.",
+          href: "/demo",
+          cta: "WATCH IT DECIDE",
+        },
+        {
+          name: "Cloud access policies",
+          body: "Your access policies say who can do what. Ironproof proves what they really allow, or shows the exact request that gets through.",
+          ranOn: "57 IAM policies published by AWS: 160 of 185 guarantees proven under two independent solvers, 11 real findings.",
+          href: "/#start",
+          cta: "SEE THE RUN",
+        },
+        {
+          name: "C security fixes",
+          body: "A patch says the flaw is closed. Ironproof shows whether it is, within stated bounds, or the case that reopens it.",
+          ranOn: "20 real fixes from curl, libssh2 and Suricata: 13 closed, 3 where our test was fooled, 4 not analyzed.",
+          href: "/software-security",
+          cta: "SEE THE RESULTS",
+        },
+        {
+          name: "COBOL migration",
+          body: "Move COBOL to Python and know the new code computes what the old one did, or get the exact input where it differs.",
+          ranOn: "IBM’s GenApp insurance programs, under a CICS model we write ourselves. Not yet replayed by a third party.",
+          href: "/modernization",
+          cta: "SEE THE RESULTS",
+        },
+      ],
+      foot: "Every result ships with what you need to check it without us.",
     },
     northStar: {
       eyebrow: "OUR NORTH STAR",
@@ -235,6 +279,41 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         note: "Quand un élément ne peut pas être partagé, le résultat le dit.",
       },
       foot: { a: "Les autres vendent la confiance.", b: "Nous, on vend le droit de ne pas nous faire confiance." },
+    },
+    useCases: {
+      eyebrow: "CE QU’IL PROUVE",
+      title: "Un moteur. Quatre endroits où une mauvaise réponse coûte trop cher.",
+      cards: [
+        {
+          name: "Agents IA et actions critiques",
+          body: "Un agent, un script ou une personne demande de déplacer de l’argent, d’ouvrir un accès ou de déployer. Ironproof vérifie la demande contre votre politique avant qu’elle s’exécute, et scelle la décision.",
+          ranOn: "Un paiement de 7,2 M$ CA envoyé par un agent IA, sans signature : bloqué à la barrière, refus scellé.",
+          href: "/fr/demo",
+          cta: "LE VOIR DÉCIDER",
+        },
+        {
+          name: "Politiques d’accès infonuagiques",
+          body: "Vos politiques d’accès disent qui peut faire quoi. Ironproof prouve ce qu’elles permettent vraiment, ou montre la demande exacte qui passe.",
+          ranOn: "57 politiques IAM publiées par AWS : 160 garanties prouvées sur 185 avec deux solveurs indépendants, 11 vraies trouvailles.",
+          href: "/fr#start",
+          cta: "VOIR LE RÉSULTAT",
+        },
+        {
+          name: "Correctifs de sécurité en C",
+          body: "Un correctif dit que la faille est fermée. Ironproof montre si c’est vrai, dans des bornes déclarées, ou le cas qui la rouvre.",
+          ranOn: "20 vrais correctifs de curl, libssh2 et Suricata : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés.",
+          href: "/fr/software-security",
+          cta: "VOIR LES RÉSULTATS",
+        },
+        {
+          name: "Migration COBOL",
+          body: "Passez du COBOL au Python et sachez que le nouveau code calcule ce que l’ancien calculait, ou obtenez l’entrée exacte où ils diffèrent.",
+          ranOn: "Les programmes d’assurance GenApp d’IBM, sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
+          href: "/fr/modernization",
+          cta: "VOIR LES RÉSULTATS",
+        },
+      ],
+      foot: "Chaque résultat part avec de quoi le vérifier sans nous.",
     },
     northStar: {
       eyebrow: "NOTRE ÉTOILE POLAIRE",
