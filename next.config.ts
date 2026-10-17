@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  // sharp ships a musl (Alpine) build next to the glibc one, and both were
+  // traced into every server function: 17 MB each that Vercel's glibc
+  // runtime never loads. Function storage hit the Hobby cap on 2026-10-17.
+  outputFileTracingExcludes: {
+    "*": ["node_modules/@img/*linuxmusl*/**"],
+  },
   async rewrites() {
     return [
       { source: "/", destination: "/en" },
