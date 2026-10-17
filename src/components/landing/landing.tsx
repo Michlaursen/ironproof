@@ -57,6 +57,7 @@ type RunCase = { name: string; figure: string; figureLabel: string; what: string
 type Copy = {
   hero: {
     eyebrow: string;
+    eyebrowSub: string;
     /** Two clauses: the condition (plain) and the consequence (gold italic). */
     headline: string;
     headlineEnd: string;
@@ -1168,7 +1169,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section id="top" className="hero-white relative z-10 overflow-hidden">
           <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 pt-2 md:grid-cols-2 md:gap-16 md:px-14 md:pt-16">
             <div className="fade-up min-w-0">
-              <p className="hero-white-eyebrow track-wide mb-7 text-xs">{t.hero.eyebrow}</p>
+              {/* The category on its own line, larger, so it hits; where it applies under it (Dom, 2026-10-16). */}
+              <p className="hero-white-eyebrow mb-7">
+                <span className="track-mid block text-lg font-semibold md:text-2xl">{t.hero.eyebrow}</span>
+                <span className="track-wide mt-2 block text-[11px] font-medium md:text-xs">{t.hero.eyebrowSub}</span>
+              </p>
               <h1 className="hero-serif hero-white-title font-serif font-normal">
                 {t.hero.headline}
                 <br />

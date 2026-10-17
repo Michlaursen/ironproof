@@ -13,7 +13,10 @@ import type { L } from "./i18n";
  * three pillars instead of the page (platform-copy.ts).
  */
 export type HeroCopy = {
+  /** The category, set on its own line so it hits (Dom, 2026-10-16). */
   eyebrow: string;
+  /** Where it applies, on the line under the category. */
+  eyebrowSub: string;
   /** Two clauses: the condition (plain) and the consequence (gold italic). */
   headline: string;
   headlineEnd: string;
@@ -23,13 +26,15 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE",
+    eyebrow: "PROOF INTELLIGENCE",
+    eyebrowSub: "FOR CRITICAL INFRASTRUCTURE",
     headline: "Don’t trust the verdict.",
     headlineEnd: "Verify the evidence.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
-    eyebrow: "INTELLIGENCE DE PREUVE POUR LES INFRASTRUCTURES CRITIQUES",
+    eyebrow: "INTELLIGENCE DE PREUVE",
+    eyebrowSub: "POUR LES INFRASTRUCTURES CRITIQUES",
     headline: "Ne vous fiez pas au verdict.",
     headlineEnd: "Vérifiez la preuve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
