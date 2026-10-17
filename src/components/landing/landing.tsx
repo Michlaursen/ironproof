@@ -6,7 +6,7 @@ import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
-import { Platform } from "./platform";
+import { NorthStar } from "./platform";
 import { CountUp } from "./count-up";
 import { JourneyRail } from "./journey-rail";
 import { firstSealedEntryHash } from "@/lib/evidence";
@@ -1303,120 +1303,16 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* Order of the page (Dom, 2026-10-16, after the competitive review): the
-          * buyer's problem first, then the gate deciding, then what it is and where
-          * it applies, then how it works and what you receive. Design unchanged. */}
-        {/* 1b. THE PROBLEM — common to the three applications (Dom, 2026-10-16):
-          * critical systems run on verdicts no one can re-check; Ironproof returns
-          * the evidence instead (proven / refuted with its case / not demonstrated,
-          * sealed, checkable without us). Replaces the doorman story, which
-          * only described the authorization case. */}
-        <section id="problem" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up max-w-4xl">
-              <p className="seal-label track-mid mb-5 text-xs">{t.sheet.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
-                {t.sheet.title}
-              </h2>
-            </div>
-            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 md:grid-cols-2">
-              <div className="bg-ink px-7 py-9 md:px-10">
-                <p className="sheet-label track-mid mb-5 text-xs">01 · {t.sheet.sheetLabel}</p>
-                <p className="text-base font-light leading-relaxed text-neutral-400 md:text-lg">{t.sheet.sheetBody}</p>
-              </div>
-              <div className="bg-ink px-7 py-9 md:px-10">
-                <p className="seal-label track-mid mb-5 text-xs">02 · {t.sheet.doorLabel}</p>
-                <p className="text-base font-light leading-relaxed text-neutral-200 md:text-lg">{t.sheet.doorBody}</p>
-              </div>
-            </div>
-            <p className="fade-up mt-10 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
-              {t.sheet.foot}
-            </p>
-          </div>
-        </section>
+        {/* Order of the page (Dom, 2026-10-16, after the research on pages that hit):
+          * the hero, why Ironproof exists and the company line, the gate deciding,
+          * where it applies, how it works, the close. Everything else lives on its
+          * own page. Design unchanged. */}
+        <NorthStar locale={locale} />
 
         {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
           * under the checkpoint line (Dom, 2026-10-15: too much reading before
           * the gate); the three pillars now follow the video. */}
         <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
-
-        {/* 2. WHAT IRONPROOF IS — the product in plain words, before any mechanism */}
-        <section id="what" className="relative z-10 edge-t px-6 pt-28 pb-10 md:px-14 md:pt-32 md:pb-12">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up max-w-4xl">
-              <p className="seal-label track-mid mb-5 text-xs">{t.what.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">
-                {t.what.title}
-              </h2>
-              <p className="mt-8 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
-                {t.what.lead}
-              </p>
-            </div>
-            <div className="fade-up mt-14 grid gap-px overflow-hidden rounded-[6px] border border-white/10 bg-white/10 sm:grid-cols-2">
-              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-[#a3392f]">{t.what.refuse}</span>{" "}
-                <span>{t.what.refuseResult}</span>
-              </p>
-              <p className="bg-ink px-7 py-7 font-serif text-2xl text-neutral-100 md:text-4xl">
-                <span className="text-seal">{t.what.evidence}</span>{" "}
-                <span>{t.what.evidenceResult}</span>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* 3b. THE THREE PILLARS of the checkpoint, after the reader has seen it work. */}
-        <section id="pillars" className="relative z-10 px-6 pb-24 md:px-14 md:pb-28">
-          <div className="mx-auto max-w-6xl">
-            <ol className="fade-up grid gap-10 md:grid-cols-3 md:gap-12">
-              {t.what.pillars.map((p, i) => (
-                <li key={p.title} className="border-t border-white/10 pt-6">
-                  <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
-                  <h3 className="mt-3 font-serif text-2xl text-neutral-100">{p.title}</h3>
-                  <p className="mt-3 text-base font-light leading-relaxed text-neutral-400">{p.body}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* Moved up, right after the gate and its pillars (Dom, 2026-10-16): the split
-          * payment is the case only a proof catches, so it follows the moment the
-          * reader sees the gate decide. */}
-        {/* 7. WHAT ONLY A PROOF DOES — the whole policy, not rule by rule */}
-        <section id="why" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14 md:py-32">
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <p className="seal-label track-mid mb-8 text-xs">{t.why.eyebrow}</p>
-            <h2 className="font-serif text-3xl font-medium leading-snug text-neutral-100 sm:text-4xl md:text-5xl">
-              {t.why.title}
-            </h2>
-            <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">
-              {t.why.lead}
-            </p>
-          </div>
-          {/* The title as an object: every link is a compliant payment, the chain is
-            * the sequence, the gap is where the policy gives way (Dom, 2026-09-30).
-            * Brought from /proof, which most visitors never reach. */}
-          <div className="proof-chain fade-up relative mx-auto max-w-6xl" aria-hidden="true">
-            <Image
-              src="/media/broken-chain-white.jpg"
-              alt=""
-              fill
-              sizes="(min-width: 1152px) 1152px, 100vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="fade-up mx-auto flex max-w-3xl flex-col items-center text-center">
-            <p className="track-mid text-xs text-neutral-400">{t.why.chainCaption}</p>
-            <div className="hairline my-10 h-px w-full max-w-md" />
-            <p className="font-serif text-xl font-medium leading-snug text-neutral-400 sm:text-2xl md:text-3xl">
-              {t.why.testVsProof}
-            </p>
-            <p className="mt-10 max-w-xl text-sm font-light leading-relaxed text-neutral-400">
-              {t.why.scope}
-            </p>
-          </div>
-        </section>
 
         {/* WHERE IT APPLIES — three domains, with the rules that already exist */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
@@ -1507,37 +1403,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             .
           </p>
         </section>
-
-        {/* 1a. THE TRIO — proven, sealed, verifiable: the hero's value line made
-          * into three tiles with three photographs of one family (Dom,
-          * 2026-10-15, after Pramaana's formal truth / accelerated trust row).
-          * Each body reuses a sentence already ratified elsewhere on the site. */}
-        <section id="trio" className="relative z-10 edge-t px-6 py-24 md:px-14 md:py-28">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up max-w-4xl">
-              <p className="seal-label track-mid mb-5 text-xs">{t.trio.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.trio.title}</h2>
-            </div>
-            <ol className="trio fade-up mt-14">
-              {t.trio.items.map((it, i) => (
-                <li key={it.tag} className="trio-tile">
-                  <div className="trio-media">
-                    <Image src={it.img} alt="" fill sizes="(min-width: 900px) 30vw, 100vw" className="object-cover" />
-                    <span className="plate-brackets" aria-hidden="true" />
-                    <span className="plate-note plate-note-gold trio-tag">{String(i + 1).padStart(2, "0")} · {it.tag}</span>
-                  </div>
-                  <h3 className="trio-title font-serif">{it.title}</h3>
-                  <p className="trio-body">{it.body}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="fade-up mt-12 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{t.trio.foot}</p>
-          </div>
-        </section>
-
-        {/* The method, the three applications and the research now come after the
-          * gate (Dom, 2026-10-15: the video was too far down the page). */}
-        <Platform locale={locale} />
 
         {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
           * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas

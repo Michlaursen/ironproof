@@ -103,7 +103,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       id: "technology",
       label: t.technology,
       items: [
-        { href: `${home}#method`, label: t.how },
+        { href: `${home}#how`, label: t.how },
         { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" },
         { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" },
         { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" },
@@ -117,7 +117,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       id: "solutions",
       label: t.solutions,
       items: [
-        { href: `${home}#app-01`, label: t.agents },
+        { href: `${home}#decide`, label: t.agents },
         ...ACTION_IDS.map((id) => ({
           href: `${r}/actions/${id}`,
           label: `· ${cap(actions[id].tab)}`,
