@@ -48,10 +48,6 @@ function bareTitle(meta: Metadata): string {
     .trim();
 }
 
-async function asset(rel: string): Promise<Buffer> {
-  return readFile(join(process.cwd(), rel));
-}
-
 export async function renderOgCard<P extends Params>(
   generateMetadata: (props: { params: Promise<P> }) => Promise<Metadata>,
   params: Promise<P>,
@@ -68,10 +64,13 @@ export async function renderOgCard<P extends Params>(
     console.error("og-card: generateMetadata failed", err);
   }
 
+  // Literal paths, not a helper taking a variable: the build traces exactly
+  // these three files into the function. A variable path made it trace the
+  // whole project (85 MB per OG route, 2026-10-17).
   const [garamond, mono, mark] = await Promise.all([
-    asset("assets/og/EBGaramond-Medium.woff"),
-    asset("assets/og/JetBrainsMono-Regular.woff"),
-    asset("public/media/ironproof-mark.png"),
+    readFile(join(process.cwd(), "assets/og/EBGaramond-Medium.woff")),
+    readFile(join(process.cwd(), "assets/og/JetBrainsMono-Regular.woff")),
+    readFile(join(process.cwd(), "public/media/ironproof-mark.png")),
   ]);
   const markSrc = `data:image/png;base64,${mark.toString("base64")}`;
   const titleSize = title.length > 70 ? 60 : title.length > 45 ? 70 : 82;
