@@ -38,6 +38,10 @@ const nextConfig: NextConfig = {
         source: "/research/zero-barriers-one-reviewer",
         destination: "/en/research/zero-barriers-one-reviewer",
       },
+      {
+        source: "/research/what-our-proofs-do-not-prove",
+        destination: "/en/research/what-our-proofs-do-not-prove",
+      },
     ];
   },
 };

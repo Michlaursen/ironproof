@@ -190,5 +190,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.7,
     },
+    {
+      url: "https://ironproof.ai/research/what-our-proofs-do-not-prove",
+      lastModified: new Date("2026-10-16"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
   ];
 }
