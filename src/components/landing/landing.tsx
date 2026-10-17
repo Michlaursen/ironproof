@@ -7,6 +7,7 @@ import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
 import { NorthStar, UseCases, WhyIronproof } from "./platform";
+import { PlatformHow } from "./platform-how";
 import { JourneyRail } from "./journey-rail";
 import { firstSealedEntryHash } from "@/lib/evidence";
 import { defaultLocale, type Locale } from "@/content";
@@ -1309,6 +1310,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <NorthStar locale={locale} />
         <UseCases locale={locale} />
         <WhyIronproof locale={locale} />
+        {/* How the platform works, right under why (Dom, 2026-10-17: the order of Code Metal's home). */}
+        <PlatformHow locale={locale} />
 
         {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
           * under the checkpoint line (Dom, 2026-10-15: too much reading before
