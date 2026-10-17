@@ -24,10 +24,12 @@ import type { L } from "./i18n";
  * of critical actions is sold today; C stays on the page as the same engine in
  * research -- no "product", no purchase button. Never "universal engine".
  *
- * Legacy modernization is sold as a SERVICE since 2026-10-17 (Dom: "GO"): our
- * team writes the model of each program by hand, so the offer says "done by
- * our team", never a tool that runs alone -- the automatic COBOL front end does
- * not model real business programs yet. The day it does, this line changes.
+ * Legacy modernization is sold as a SERVICE since 2026-10-17 (Dom: "GO"): the
+ * model of each program is built one program at a time (an AI drafts it, a
+ * solver and IBM's COBOL compiler judge it), so the offer says "done by our
+ * team", never a tool a client runs alone. 2026-10-17 (Dom): the copy no
+ * longer says who writes the model; the CICS evidence line keeps "a model we
+ * write ourselves" because it states that the model is ours, not IBM's.
  */
 
 export type Pillar = {
@@ -130,7 +132,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         risk: "A translated program can compile, pass its tests and still compute a different amount on the one input nobody tried.",
         href: "/modernization",
         cta: "SEND US A PROGRAM",
-        body: "Send us a program. Our team translates it into Python, then checks that both give the same results under a model we write for that program, or shows you the exact input where they differ. What the model does not cover is marked as not covered, never as passed.",
+        body: "Send us a program. Our team translates it into Python, then checks that both give the same results under a precise model of that program, or shows you the exact input where they differ. What the model does not cover is marked as not covered, never as passed.",
         evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. No outside party has replayed it yet.",
       },
     ],
@@ -274,7 +276,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         risk: "Un programme traduit peut compiler, passer ses tests et calculer quand même un autre montant sur la seule entrée que personne n’a essayée.",
         href: "/fr/modernization",
         cta: "ENVOYEZ-NOUS UN PROGRAMME",
-        body: "Envoyez-nous un programme. Notre équipe le traduit en Python, puis vérifie que les deux donnent les mêmes résultats sous un modèle que nous écrivons pour ce programme, ou vous montre l’entrée exacte où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert, jamais réussi.",
+        body: "Envoyez-nous un programme. Notre équipe le traduit en Python, puis vérifie que les deux donnent les mêmes résultats sous un modèle précis de ce programme, ou vous montre l’entrée exacte où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert, jamais réussi.",
         evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
       },
     ],

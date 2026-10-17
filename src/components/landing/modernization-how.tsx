@@ -8,8 +8,8 @@ import { FlowDiagram, type FlowCopy } from "./flow-diagram";
  * reading how Code Metal lays out its platform: « faut le faire pour nous, en
  * changeant les mots, avec en bas faster audit, why us »).
  *
- * Every step says what our team actually does today: the model of each
- * program is written by hand, the solver checks every input that model
+ * Every step says what is actually done today: the model of each program is
+ * built one program at a time, the solver checks every input that model
  * allows, the same cases go through IBM's own COBOL compiler. No figure here:
  * the figures live on the results already published. "Why us" contrasts with
  * testing in general and names no one.
@@ -47,7 +47,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Model and translate",
-        body: "Our team writes a precise model of what the COBOL computes, down to decimal rounding and truncation. Ironproof generates the Python from it.",
+        body: "Ironproof builds a precise model of what the COBOL computes, down to decimal rounding and truncation, and generates the Python from it.",
       },
       {
         title: "Prove and cross-check",
@@ -100,7 +100,7 @@ const COPY: L<HowCopy> = {
       caption: "The path of one program: two independent checks, one verdict, a sealed record.",
       lead: [
         ["COBOL", "your program"],
-        ["MODEL", "written by our team"],
+        ["MODEL", "what the COBOL computes"],
         ["PYTHON", "generated"],
       ],
       top: ["SOLVER", "every input the model allows"],
@@ -119,7 +119,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Modéliser et traduire",
-        body: "Notre équipe écrit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures. Ironproof en génère le Python.",
+        body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures, et en génère le Python.",
       },
       {
         title: "Prouver et confronter",
@@ -172,7 +172,7 @@ const COPY: L<HowCopy> = {
       caption: "Le parcours d’un programme : deux vérifications indépendantes, un verdict, un dossier scellé.",
       lead: [
         ["COBOL", "votre programme"],
-        ["MODÈLE", "écrit par notre équipe"],
+        ["MODÈLE", "ce que calcule le COBOL"],
         ["PYTHON", "généré"],
       ],
       top: ["SOLVEUR", "toutes les entrées du modèle"],
