@@ -4,6 +4,7 @@ import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { RESEARCH_COPY } from "@/components/landing/research-copy";
+import { LIMITS_COPY } from "@/components/landing/research-limits-copy";
 import { PAPERS } from "@/components/landing/credibility";
 import { EngineState } from "@/components/landing/engine-state";
 
@@ -21,6 +22,12 @@ import { EngineState } from "@/components/landing/engine-state";
  * here, so the index cannot disagree with what it points at.
  */
 const NOTES = [
+  {
+    slug: "/research/what-our-proofs-do-not-prove",
+    date: "2026-10-16",
+    author: "Ironproof Research",
+    copy: LIMITS_COPY,
+  },
   {
     slug: "/research/zero-barriers-one-reviewer",
     date: "2026-09-08",

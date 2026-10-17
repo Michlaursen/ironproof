@@ -2,7 +2,12 @@ import { Fragment } from "react";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { defaultLocale, type Locale } from "@/content";
-import { RESEARCH_COPY, type Block, type FigId } from "@/components/landing/research-copy";
+import {
+  RESEARCH_COPY,
+  type Block,
+  type FigId,
+  type ResearchCopy,
+} from "@/components/landing/research-copy";
 import {
   TimelineChart,
   RunsChart,
@@ -179,19 +184,27 @@ function Blocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
  * `locale` selects the copy; `navLocale` selects the header links. They differ
  * while French is written but unreviewed: /fr serves the English note, and the
  * header still needs to point at /fr for the rest of the site.
+ *
+ * `copy` and `page` let a second note reuse this layout: the copy carries the
+ * whole text, `page` tells the header which note is open. Both default to the
+ * first note, so its page is unchanged.
  */
 export function ResearchZeroBarriers({
   locale = defaultLocale,
   navLocale,
+  copy,
+  page = "research",
 }: {
   locale?: Locale;
   navLocale?: Locale;
+  copy?: ResearchCopy;
+  page?: "research" | "research-limits";
 }) {
-  const c = RESEARCH_COPY[locale] ?? RESEARCH_COPY.en;
+  const c = copy ?? RESEARCH_COPY[locale] ?? RESEARCH_COPY.en;
 
   return (
     <div className="flex flex-1 flex-col">
-      <LandingHeader variant="sub" locale={navLocale ?? locale} page="research" />
+      <LandingHeader variant="sub" locale={navLocale ?? locale} page={page} />
 
       <main className="blueprint flex-1">
         {/* HERO */}
