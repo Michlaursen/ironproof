@@ -11,7 +11,7 @@ import { PLATFORM_COPY } from "./platform-copy";
  * open problems are written here. Update AS_OF with every change.
  */
 
-const AS_OF = "2026-10-16";
+const AS_OF = "2026-10-17";
 
 type Item = { title: string; body: string; href?: string; link?: string };
 type Column = { key: "works" | "progress" | "open"; label: string; items: Item[] };
@@ -33,6 +33,12 @@ const T: L<{
   cobolTitle: string;
   readMore: string;
   cRebuild: string;
+  translateTitle: string;
+  translateBody: string;
+  misraTitle: string;
+  misraBody: string;
+  rustFixTitle: string;
+  rustFixBody: string;
   openItems: Item[];
   invite: string;
   inviteLink: string;
@@ -54,6 +60,12 @@ const T: L<{
     cobolTitle: "Legacy modernization",
     readMore: "READ THE RESEARCH",
     cRebuild: "The checker is being rebuilt; earlier results are not presented as complete proofs.",
+    translateTitle: "Code translation, checked by proof",
+    translateBody: "A Python module of four functions with loops, translated to Rust. Equivalence is proved for every input series of up to six values, and the loops are proved for any per-step calculation. Beyond six values, 100,000 random runs found no difference. Test files are available to reviewers on request.",
+    misraTitle: "MISRA C on translated code",
+    misraBody: "The C translation of a signal-processing function passes the open-source MISRA C:2012 checker (cppcheck) on the whole program, and its equivalence with the Python original is re-proved. This is a free tool covering part of the rules, not a certification.",
+    rustFixTitle: "Security fix in Rust",
+    rustFixBody: "A published flaw in a Rust library (RUSTSEC-2017-0004). The original code and a plausible false fix are both caught. The real fix is proved on the actual code for standard line lengths, and for any length on a hand-written model whose link to the code is not yet checked by a machine.",
     openItems: [
       {
         title: "Faithfulness",
@@ -88,6 +100,12 @@ const T: L<{
     cobolTitle: "Modernisation des systèmes hérités",
     readMore: "LIRE LA RECHERCHE",
     cRebuild: "Le vérificateur est en reconstruction ; les résultats antérieurs ne sont pas présentés comme des preuves complètes.",
+    translateTitle: "Traduction de code, vérifiée par preuve",
+    translateBody: "Un module Python de quatre fonctions avec boucles, traduit en Rust. L’équivalence est prouvée pour toute série d’au plus six valeurs, et les boucles sont prouvées pour n’importe quel calcul à chaque pas. Au-delà de six valeurs, 100 000 essais au hasard n’ont trouvé aucune différence. Les fichiers du test sont disponibles sur demande pour un examen.",
+    misraTitle: "MISRA C sur du code traduit",
+    misraBody: "La traduction C d’une fonction de traitement de signal passe le vérificateur libre MISRA C:2012 (cppcheck) sur le programme complet, et son équivalence avec l’original Python est reprouvée. C’est un outil libre qui couvre une partie des règles, pas une certification.",
+    rustFixTitle: "Correctif de sécurité en Rust",
+    rustFixBody: "Une faille publiée d’une librairie Rust (RUSTSEC-2017-0004). Le code d’origine et un faux correctif plausible sont tous deux attrapés. Le vrai correctif est prouvé sur le code réel pour les longueurs de ligne standard, et pour toute longueur sur un modèle écrit à la main, dont le lien avec le code n’est pas encore vérifié par une machine.",
     openItems: [
       {
         title: "La fidélité",
@@ -121,6 +139,8 @@ export function EngineState({ locale = defaultLocale }: { locale?: Locale }) {
       items: [
         { title: t.gateTitle, body: `${gate.body} ${gate.evidence ?? ""}`.trim(), href: `${r}/verify`, link: t.verifyLink },
         { title: t.labTitle, body: t.labBody, href: `${r}/lab`, link: t.labLink },
+        { title: t.translateTitle, body: t.translateBody },
+        { title: t.misraTitle, body: t.misraBody },
       ],
     },
     {
@@ -129,6 +149,7 @@ export function EngineState({ locale = defaultLocale }: { locale?: Locale }) {
       items: [
         { title: t.cTitle, body: `${c.evidence ?? ""} ${t.cRebuild}`.trim(), href: `${r}/software-security`, link: t.readMore },
         { title: t.cobolTitle, body: cobol.evidence ?? "", href: `${r}/modernization`, link: t.readMore },
+        { title: t.rustFixTitle, body: t.rustFixBody },
       ],
     },
     { key: "open", label: t.open, items: t.openItems },
