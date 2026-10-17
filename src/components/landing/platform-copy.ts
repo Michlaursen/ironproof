@@ -81,6 +81,9 @@ export type PlatformCopy = {
     cards: readonly { name: string; body: string; ranOn: string; href: string; cta: string }[];
     foot: string;
   };
+  /** Three buyer benefits, after the use cases (Dom, 2026-10-16: « improve time to market doit être sur le site »).
+   *  No figure here: each benefit is a consequence of what the cards already show. */
+  whyUs: { eyebrow: string; title: string; items: readonly { title: string; body: string }[] };
   /** Why Ironproof exists (Dom, 2026-10-16, after reading Code Metal's North Star). */
   northStar: { eyebrow: string; title: string; paragraphs: readonly string[]; lead: string; body: string; close: string };
 };
@@ -154,6 +157,24 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         note: "Where an artifact cannot be shared, the result says so.",
       },
       foot: { a: "Others sell trust.", b: "We sell the right not to trust us." },
+    },
+    whyUs: {
+      eyebrow: "WHY IRONPROOF",
+      title: "Faster to production. Easier to audit. Harder to break.",
+      items: [
+        {
+          title: "Improve time to market",
+          body: "Put AI agents, policy changes and migrations into production sooner. The checks run automatically, and the evidence is produced as you go, not assembled after the fact for the audit.",
+        },
+        {
+          title: "Pass the audit with evidence",
+          body: "Give your auditor and your regulator a sealed record of every decision that they can re-check themselves, instead of logs and screenshots.",
+        },
+        {
+          title: "Catch what tests miss",
+          body: "Get the exact input or sequence of actions that breaks your rule before production does, or the proof that none exists within the stated model.",
+        },
+      ],
     },
     useCases: {
       eyebrow: "WHAT IT PROVES",
@@ -279,6 +300,24 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         note: "Quand un élément ne peut pas être partagé, le résultat le dit.",
       },
       foot: { a: "Les autres vendent la confiance.", b: "Nous, on vend le droit de ne pas nous faire confiance." },
+    },
+    whyUs: {
+      eyebrow: "POURQUOI IRONPROOF",
+      title: "Plus vite en production. Plus simple à auditer. Plus dur à briser.",
+      items: [
+        {
+          title: "Accélérer la mise en marché",
+          body: "Mettez agents IA, changements de politique et migrations en production plus tôt. Les vérifications roulent automatiquement, et les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
+        },
+        {
+          title: "Passer l’audit avec des preuves",
+          body: "Remettez à votre auditeur et à votre régulateur une trace scellée de chaque décision, qu’ils revérifient eux-mêmes, plutôt que des journaux et des captures d’écran.",
+        },
+        {
+          title: "Attraper ce que les tests ratent",
+          body: "Obtenez l’entrée ou la suite d’actions exacte qui brise votre règle avant que la production la trouve, ou la preuve qu’il n’y en a aucune dans le modèle déclaré.",
+        },
+      ],
     },
     useCases: {
       eyebrow: "CE QU’IL PROUVE",
