@@ -1298,33 +1298,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* 1a. THE TRIO — proven, sealed, verifiable: the hero's value line made
-          * into three tiles with three photographs of one family (Dom,
-          * 2026-10-15, after Pramaana's formal truth / accelerated trust row).
-          * Each body reuses a sentence already ratified elsewhere on the site. */}
-        <section id="trio" className="relative z-10 edge-t px-6 py-24 md:px-14 md:py-28">
-          <div className="mx-auto max-w-6xl">
-            <div className="fade-up max-w-4xl">
-              <p className="seal-label track-mid mb-5 text-xs">{t.trio.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.trio.title}</h2>
-            </div>
-            <ol className="trio fade-up mt-14">
-              {t.trio.items.map((it, i) => (
-                <li key={it.tag} className="trio-tile">
-                  <div className="trio-media">
-                    <Image src={it.img} alt="" fill sizes="(min-width: 900px) 30vw, 100vw" className="object-cover" />
-                    <span className="plate-brackets" aria-hidden="true" />
-                    <span className="plate-note plate-note-gold trio-tag">{String(i + 1).padStart(2, "0")} · {it.tag}</span>
-                  </div>
-                  <h3 className="trio-title font-serif">{it.title}</h3>
-                  <p className="trio-body">{it.body}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="fade-up mt-12 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{t.trio.foot}</p>
-          </div>
-        </section>
-
+        {/* Order of the page (Dom, 2026-10-16, after the competitive review): the
+          * buyer's problem first, then the gate deciding, then what it is and where
+          * it applies, then how it works and what you receive. Design unchanged. */}
         {/* 1b. THE PROBLEM — common to the three applications (Dom, 2026-10-16):
           * critical systems run on verdicts no one can re-check; Ironproof returns
           * the evidence instead (proven / refuted with its case / not demonstrated,
@@ -1354,6 +1330,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
+          * under the checkpoint line (Dom, 2026-10-15: too much reading before
+          * the gate); the three pillars now follow the video. */}
+        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
+
         {/* 2. WHAT IRONPROOF IS — the product in plain words, before any mechanism */}
         <section id="what" className="relative z-10 edge-t px-6 pt-28 pb-10 md:px-14 md:pt-32 md:pb-12">
           <div className="mx-auto max-w-6xl">
@@ -1378,11 +1359,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
           </div>
         </section>
-
-        {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
-          * under the checkpoint line (Dom, 2026-10-15: too much reading before
-          * the gate); the three pillars now follow the video. */}
-        <AgentScenarios locale={locale} verifyHref={`${r}/verify`} />
 
         {/* 3b. THE THREE PILLARS of the checkpoint, after the reader has seen it work. */}
         <section id="pillars" className="relative z-10 px-6 pb-24 md:px-14 md:pb-28">
@@ -1436,11 +1412,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </p>
           </div>
         </section>
-
-
-        {/* The method, the three applications and the research now come after the
-          * gate (Dom, 2026-10-15: the video was too far down the page). */}
-        <Platform locale={locale} />
 
         {/* WHERE IT APPLIES — three domains, with the rules that already exist */}
         <section id="start" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
@@ -1501,6 +1472,67 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
+        <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up mb-16 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
+            <div className="max-w-3xl">
+              <p className="seal-label track-mid mb-4 text-xs">{t.how.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
+                {t.how.title}
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.how.lead}</p>
+              <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">{t.how.compiler}</p>
+            </div>
+            {/* The one image here: the decision struck into steel, with logo 09
+              * (Dom, 2026-09-26). */}
+            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" notes={t.how.plateNotes} />
+          </div>
+          <div className="fade-up">
+            <ProofPipeline locale={locale} />
+          </div>
+          <p className="fade-up mt-8 text-sm font-light text-neutral-400">
+            {t.how.recordPre}
+            <a
+              href={`${r}/proof`}
+              className="text-neutral-200 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+            >
+              {t.how.recordLink}
+            </a>
+            .
+          </p>
+        </section>
+
+        {/* 1a. THE TRIO — proven, sealed, verifiable: the hero's value line made
+          * into three tiles with three photographs of one family (Dom,
+          * 2026-10-15, after Pramaana's formal truth / accelerated trust row).
+          * Each body reuses a sentence already ratified elsewhere on the site. */}
+        <section id="trio" className="relative z-10 edge-t px-6 py-24 md:px-14 md:py-28">
+          <div className="mx-auto max-w-6xl">
+            <div className="fade-up max-w-4xl">
+              <p className="seal-label track-mid mb-5 text-xs">{t.trio.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.trio.title}</h2>
+            </div>
+            <ol className="trio fade-up mt-14">
+              {t.trio.items.map((it, i) => (
+                <li key={it.tag} className="trio-tile">
+                  <div className="trio-media">
+                    <Image src={it.img} alt="" fill sizes="(min-width: 900px) 30vw, 100vw" className="object-cover" />
+                    <span className="plate-brackets" aria-hidden="true" />
+                    <span className="plate-note plate-note-gold trio-tag">{String(i + 1).padStart(2, "0")} · {it.tag}</span>
+                  </div>
+                  <h3 className="trio-title font-serif">{it.title}</h3>
+                  <p className="trio-body">{it.body}</p>
+                </li>
+              ))}
+            </ol>
+            <p className="fade-up mt-12 max-w-3xl font-serif text-xl leading-snug text-neutral-200 md:text-2xl">{t.trio.foot}</p>
+          </div>
+        </section>
+
+        {/* The method, the three applications and the research now come after the
+          * gate (Dom, 2026-10-15: the video was too far down the page). */}
+        <Platform locale={locale} />
+
         {/* 6. WHY NOW — dated, each with its source */}
         <section id="now" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14">
           {/* The financial district at night behind the whole section, traffic
@@ -1538,36 +1570,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             {t.now.foot}
           </p>
           </div>
-        </section>
-
-        {/* PROVE -> ENFORCE -> SEAL -> VERIFY */}
-        <section id="how" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up mb-16 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
-            <div className="max-w-3xl">
-              <p className="seal-label track-mid mb-4 text-xs">{t.how.eyebrow}</p>
-              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">
-                {t.how.title}
-              </h2>
-              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.how.lead}</p>
-              <p className="mt-4 max-w-2xl text-lg font-light text-neutral-400">{t.how.compiler}</p>
-            </div>
-            {/* The one image here: the decision struck into steel, with logo 09
-              * (Dom, 2026-09-26). */}
-            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" notes={t.how.plateNotes} />
-          </div>
-          <div className="fade-up">
-            <ProofPipeline locale={locale} />
-          </div>
-          <p className="fade-up mt-8 text-sm font-light text-neutral-400">
-            {t.how.recordPre}
-            <a
-              href={`${r}/proof`}
-              className="text-neutral-200 underline decoration-white/20 underline-offset-4 transition hover:text-white"
-            >
-              {t.how.recordLink}
-            </a>
-            .
-          </p>
         </section>
 
         {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
