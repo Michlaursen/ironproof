@@ -235,7 +235,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof combines neuro-symbolic AI and formal verification to prove properties of critical systems, find the counterexample when one exists, and seal the evidence with post-quantum signatures. We prove what can be proven, and say so when we cannot. Every conclusion states its assumptions and limits, and can be checked without having to trust us.",
+        "We prove what holds and show what breaks. Today: every critical action, from an AI agent, a script or a person, checked against your rules before it runs. We prove what can be proven, and say so when we cannot.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -673,7 +673,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof allie l’IA neuro-symbolique et la vérification formelle pour prouver des propriétés de systèmes critiques, trouver le contre-exemple quand il existe, et sceller les éléments de preuve par des signatures post-quantiques. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas. Chaque conclusion énonce ses hypothèses et ses limites, et se vérifie sans avoir à nous faire confiance.",
+        "On prouve ce qui tient et on montre ce qui casse. Aujourd’hui : chaque action critique, d’un agent IA, d’un script ou d’une personne, vérifiée contre vos règles avant de s’exécuter. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
