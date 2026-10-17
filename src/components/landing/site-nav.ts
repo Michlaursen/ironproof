@@ -22,6 +22,8 @@ export type NavGroup = { id: "technology" | "solutions" | "evidence"; label: str
  * application links land on the matching pillar of the home page (#app-01..03).
  * 2026-10-16 (Dom): one product sold (agents and critical actions, under
  * SOLUTIONS); C and COBOL moved under TECHNOLOGY as the same engine in research.
+ * 2026-10-17 (Dom, "GO"): legacy modernization sold as a service, so it moves
+ * back under SOLUTIONS; C stays under TECHNOLOGY, in research.
  */
 const LABELS: L<{
   technology: string;
@@ -54,7 +56,7 @@ const LABELS: L<{
     zeroTrust: "Zero Trust",
     agents: "AI agents & critical actions",
     cSecurity: "Research · C software security",
-    cobol: "Research · Legacy modernization",
+    cobol: "Legacy modernization",
     demo: "Demo",
     dossier: "Verification dossier",
     verify: "Check a sealed record",
@@ -75,7 +77,7 @@ const LABELS: L<{
     zeroTrust: "Zero Trust",
     agents: "Agents IA et actions critiques",
     cSecurity: "Recherche · sécurité du logiciel C",
-    cobol: "Recherche · modernisation des systèmes hérités",
+    cobol: "Modernisation des systèmes hérités",
     demo: "Démo",
     dossier: "Dossier de vérification",
     verify: "Vérifier une trace scellée",
@@ -110,7 +112,6 @@ export function siteNav(locale: Locale = defaultLocale) {
         // The same engine, in research (Dom, 2026-10-16): listed under the
         // technology, not under what is sold.
         { href: `${r}/software-security`, label: t.cSecurity, page: "software-security" },
-        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
       ],
     },
     {
@@ -123,6 +124,8 @@ export function siteNav(locale: Locale = defaultLocale) {
           label: `· ${cap(actions[id].tab)}`,
           page: `act-${id}`,
         })),
+        // Sold as a service since 2026-10-17 (Dom, "GO").
+        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
       ],
     },
     {

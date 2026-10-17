@@ -20,10 +20,14 @@ import type { L } from "./i18n";
  *   - the three verdicts are Dom's words (2026-10-13); the neuro-symbolic
  *     page says the same three states as holds / breaks / not covered.
  *
- * One product, one engine (Dom, 2026-10-16, after the positioning research):
- * authorization of critical actions is the one thing sold today; C and COBOL
- * stay on the page, with the same photographs, as the same engine in
+ * One engine (Dom, 2026-10-16, after the positioning research): authorization
+ * of critical actions is sold today; C stays on the page as the same engine in
  * research -- no "product", no purchase button. Never "universal engine".
+ *
+ * Legacy modernization is sold as a SERVICE since 2026-10-17 (Dom: "GO"): our
+ * team writes the model of each program by hand, so the offer says "done by
+ * our team", never a tool that runs alone -- the automatic COBOL front end does
+ * not model real business programs yet. The day it does, this line changes.
  */
 
 export type Pillar = {
@@ -91,7 +95,7 @@ export type PlatformCopy = {
 export const PLATFORM_COPY: L<PlatformCopy> = {
   en: {
     eyebrow: "ONE ENGINE",
-    title: "One product today. The same engine, in research.",
+    title: "One engine. Two offers today. C, in research.",
     beats: { risk: "THE RISK", does: "WHAT IRONPROOF DOES", today: "TODAY" },
     pillars: [
       {
@@ -120,12 +124,13 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       {
         num: "03",
         name: "Legacy modernization",
-        status: "SAME ENGINE · IN RESEARCH",
+        status: "AVAILABLE NOW · DONE BY OUR TEAM",
+        available: true,
         claim: "Leave COBOL behind. Check that the results stay the same.",
         risk: "A translated program can compile, pass its tests and still compute a different amount on the one input nobody tried.",
         href: "/modernization",
-        cta: "READ THE RESEARCH",
-        body: "Ironproof translates COBOL into Python, then checks that both give the same results, or shows the exact input where they differ. What our model of the old system does not cover is marked as not covered, never as passed.",
+        cta: "SEND US A PROGRAM",
+        body: "Send us a program. Our team translates it into Python, then checks that both give the same results under a model we write for that program, or shows you the exact input where they differ. What the model does not cover is marked as not covered, never as passed.",
         evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. No outside party has replayed it yet.",
       },
     ],
@@ -203,10 +208,10 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         },
         {
           name: "Legacy modernization",
-          body: "For banks and insurers leaving the mainframe: move legacy code like COBOL to a modern language and show your risk committee the new code computes what the old one did, or the exact input where it differs.",
+          body: "For banks and insurers leaving the mainframe: send us a COBOL program. Our team moves it to a modern language and shows your risk committee the new code computes what the old one did, or the exact input where it differs.",
           ranOn: "IBM’s GenApp insurance programs, under a CICS model we write ourselves. Not yet replayed by a third party.",
           href: "/modernization",
-          cta: "SEE THE RESULTS",
+          cta: "SEND US A PROGRAM",
         },
       ],
       foot: "Every result ships with what you need to check it without us.",
@@ -234,7 +239,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
   },
   fr: {
     eyebrow: "UN SEUL MOTEUR",
-    title: "Un produit aujourd’hui. Le même moteur, en recherche.",
+    title: "Un moteur. Deux offres aujourd’hui. Le C, en recherche.",
     beats: { risk: "LE RISQUE", does: "CE QUE FAIT IRONPROOF", today: "AUJOURD’HUI" },
     pillars: [
       {
@@ -263,12 +268,13 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       {
         num: "03",
         name: "Modernisation des systèmes hérités",
-        status: "MÊME MOTEUR · EN RECHERCHE",
+        status: "DISPONIBLE · RÉALISÉ PAR NOTRE ÉQUIPE",
+        available: true,
         claim: "Quittez le COBOL. Vérifiez que les résultats restent les mêmes.",
         risk: "Un programme traduit peut compiler, passer ses tests et calculer quand même un autre montant sur la seule entrée que personne n’a essayée.",
         href: "/fr/modernization",
-        cta: "LIRE LA RECHERCHE",
-        body: "Ironproof traduit le COBOL en Python, puis vérifie que les deux donnent les mêmes résultats, ou montre l’entrée exacte où ils diffèrent. Ce que notre modèle de l’ancien système ne couvre pas est déclaré non couvert, jamais réussi.",
+        cta: "ENVOYEZ-NOUS UN PROGRAMME",
+        body: "Envoyez-nous un programme. Notre équipe le traduit en Python, puis vérifie que les deux donnent les mêmes résultats sous un modèle que nous écrivons pour ce programme, ou vous montre l’entrée exacte où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert, jamais réussi.",
         evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
       },
     ],
@@ -346,10 +352,10 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         },
         {
           name: "Modernisation des systèmes hérités",
-          body: "Pour les banques et assureurs qui quittent l’ordinateur central : faites passer du code hérité comme le COBOL à un langage moderne et montrez à votre comité des risques que le nouveau code calcule ce que l’ancien calculait, ou l’entrée exacte où ils diffèrent.",
+          body: "Pour les banques et assureurs qui quittent l’ordinateur central : envoyez-nous un programme COBOL. Notre équipe le fait passer à un langage moderne et montre à votre comité des risques que le nouveau code calcule ce que l’ancien calculait, ou l’entrée exacte où ils diffèrent.",
           ranOn: "Les programmes d’assurance GenApp d’IBM, sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
           href: "/fr/modernization",
-          cta: "VOIR LES RÉSULTATS",
+          cta: "ENVOYEZ-NOUS UN PROGRAMME",
         },
       ],
       foot: "Chaque résultat part avec de quoi le vérifier sans nous.",
