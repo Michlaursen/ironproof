@@ -41,6 +41,7 @@ const nextConfig: NextConfig = {
       { source: "/pilot", destination: "/en/pilot" },
       { source: "/actions/:type", destination: "/en/actions/:type" },
       { source: "/research", destination: "/en/research" },
+      { source: "/proof-intelligence", destination: "/en/proof-intelligence" },
       {
         source: "/research/zero-barriers-one-reviewer",
         destination: "/en/research/zero-barriers-one-reviewer",

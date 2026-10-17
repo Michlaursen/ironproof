@@ -30,6 +30,7 @@ const LABELS: L<{
   solutions: string;
   evidence: string;
   how: string;
+  proofIntelligence: string;
   neuroSymbolic: string;
   provableAi: string;
   zeroTrust: string;
@@ -52,6 +53,7 @@ const LABELS: L<{
     solutions: "SOLUTIONS",
     evidence: "EVIDENCE",
     how: "How it works",
+    proofIntelligence: "What is Proof Intelligence",
     neuroSymbolic: "Neuro-symbolic",
     provableAi: "Provable AI",
     zeroTrust: "Zero Trust",
@@ -74,6 +76,7 @@ const LABELS: L<{
     solutions: "SOLUTIONS",
     evidence: "PREUVES",
     how: "Fonctionnement",
+    proofIntelligence: "L’intelligence de preuve",
     neuroSymbolic: "Neuro-symbolique",
     provableAi: "IA prouvable",
     zeroTrust: "Zero Trust",
@@ -108,6 +111,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       id: "technology",
       label: t.technology,
       items: [
+        { href: `${r}/proof-intelligence`, label: t.proofIntelligence, page: "proof-intelligence" },
         { href: `${home}#how`, label: t.how },
         { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" },
         { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" },

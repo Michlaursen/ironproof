@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "Ironproof | Don’t trust the verdict. Verify the evidence.",
+    title: "Ironproof | Proof Intelligence for Critical Infrastructure",
     description:
-      "Formal verification for critical systems. Every result, a proof, a counterexample or a gate decision, is sealed and can be checked without trusting us.",
+      "Proof Intelligence for critical infrastructure. Don’t trust the verdict, verify the evidence: every result, a proof, a counterexample or a gate decision, is sealed and can be checked without trusting us.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "Formal verification for critical systems. Every result, a proof, a counterexample or a gate decision, is sealed and can be checked without trusting us.",
+      "Proof Intelligence for critical infrastructure. Don’t trust the verdict, verify the evidence: every result, a proof, a counterexample or a gate decision, is sealed and can be checked without trusting us.",
   },
   header: {
     nav: [
