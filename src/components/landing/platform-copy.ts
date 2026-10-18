@@ -133,7 +133,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/modernization",
         cta: "SEND US A PROGRAM",
         body: "Send us a program. Our team translates it into Python, then checks that both give the same results under a precise model of that program, or shows you the exact input where they differ. What the model does not cover is marked as not covered, never as passed.",
-        evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. No outside party has replayed it yet.",
+        evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. For one of them, 14 of the model’s 15 assumptions have been tested on IBM TXSeries, a real CICS, using a copy without the three lines that platform does not support. One assumption was wrong as written, and the certificate was corrected. The unchanged original still needs a run on z/OS, and no outside party has replayed it yet.",
       },
     ],
     method: {
@@ -277,7 +277,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/fr/modernization",
         cta: "ENVOYEZ-NOUS UN PROGRAMME",
         body: "Envoyez-nous un programme. Notre équipe le traduit en Python, puis vérifie que les deux donnent les mêmes résultats sous un modèle précis de ce programme, ou vous montre l’entrée exacte où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert, jamais réussi.",
-        evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Aucun tiers ne l’a encore rejoué.",
+        evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Pour l’un d’eux, 14 des 15 hypothèses du modèle ont été mises à l’épreuve sur IBM TXSeries, un vrai CICS, avec une copie privée des trois lignes que cette plateforme ne prend pas en charge. Une hypothèse était fausse telle qu’écrite, et le certificat a été corrigé. L’original inchangé doit encore tourner sur z/OS, et aucun tiers ne l’a encore rejoué.",
       },
     ],
     method: {
