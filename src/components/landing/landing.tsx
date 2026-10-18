@@ -132,6 +132,7 @@ type Copy = {
     plateNotes: readonly PlateNote[];
     run: readonly RunCase[];
     appliesEyebrow: string;
+    moreLabel: string;
     items: readonly Domain[];
   };
 
@@ -315,7 +316,7 @@ const T: L<Copy> = {
       foot: "An agent with valid credentials and a bad plan is still a valid session. The only place to stop it is before execution.",
     },
 
-    creditedBy: "SECURITY RESEARCH BY IRONPROOF — CREDITED BY",
+    creditedBy: "VULNERABILITIES FOUND BY IRONPROOF’S RESEARCH, FIXED AND CREDITED BY",
 
     trio: {
       eyebrow: "WHAT YOU GET",
@@ -369,8 +370,8 @@ const T: L<Copy> = {
 
     domains: {
       eyebrow: "WHERE IT APPLIES",
-      titleA: "The rules already exist.",
-      titleB: "Ironproof enforces them.",
+      titleA: "The rules your regulators already require.",
+      titleB: "Ironproof checks every action against them.",
       lead: "The actions that cannot be taken back once they run. For those, authorization stops being a setting and becomes infrastructure.",
       actionsLabel: "THE ACTIONS",
       rulesLabel: "THE RULES ALREADY WRITTEN",
@@ -408,6 +409,7 @@ const T: L<Copy> = {
         },
       ],
       appliesEyebrow: "WHERE IT APPLIES — THE RULES ALREADY WRITTEN",
+      moreLabel: "OTHER CRITICAL ACTIONS",
       items: [
         {
           name: "Banking & payments",
@@ -453,7 +455,7 @@ const T: L<Copy> = {
         {
           name: "Energy & critical infrastructure",
           actions: ["Remote setpoint and configuration changes", "Emergency shutdowns and safety-instrumented logic", "Water-treatment dosing and valve commands", "Configuration pushed to a telecom network core"],
-          rules: "IEC 62443 · NERC CIP · IEC 61511-1 · Bill C-8, S.C. 2026, c. 9 — Critical Cyber Systems Protection Act",
+          rules: "IEC 62443 · NERC CIP · IEC 61511-1 · Bill C-8, S.C. 2026, c. 9 — Critical Cyber Systems Protection Act (Royal Assent June 2026, not yet in force)",
         },
         // Pharma added 2026-10-13 (Dom), its rules opened at the source that day
         // (URLs in PR #102). Water, process safety and telecom were folded into
@@ -619,7 +621,7 @@ const T: L<Copy> = {
         "A policy proved and then broken, and the exact call site where the gate sits in front of the action, are in the ",
       recordLink: "technical record",
       plateNotes: [
-        { x: 44, y: 20, label: "SEALED · Ed25519 + ML-DSA-65", gold: true },
+        { x: 44, y: 20, label: "SEALED · POST-QUANTUM SIGNATURE", gold: true },
         { x: 6, y: 86, label: "EVERY DECISION · ALLOW OR BLOCK" },
       ],
     },
@@ -752,7 +754,7 @@ const T: L<Copy> = {
       foot: "Un agent aux identifiants valides et au mauvais plan reste une session valide. Le seul endroit pour l’arrêter, c’est avant l’exécution.",
     },
 
-    creditedBy: "RECHERCHE EN SÉCURITÉ PAR IRONPROOF — CRÉDITÉE PAR",
+    creditedBy: "FAILLES TROUVÉES PAR LA RECHERCHE D’IRONPROOF, CORRIGÉES ET CRÉDITÉES PAR",
 
     trio: {
       eyebrow: "CE QUE VOUS OBTENEZ",
@@ -806,8 +808,8 @@ const T: L<Copy> = {
 
     domains: {
       eyebrow: "OÙ ÇA S’APPLIQUE",
-      titleA: "Les règles existent déjà.",
-      titleB: "Ironproof les applique.",
+      titleA: "Les règles que vos régulateurs exigent déjà.",
+      titleB: "Ironproof y confronte chaque action.",
       lead: "Les actions qu’on ne peut plus reprendre une fois exécutées. Pour celles-là, l’autorisation cesse d’être un réglage et devient une infrastructure.",
       actionsLabel: "LES ACTIONS",
       rulesLabel: "LES RÈGLES DÉJÀ ÉCRITES",
@@ -845,6 +847,7 @@ const T: L<Copy> = {
         },
       ],
       appliesEyebrow: "OÙ ÇA S’APPLIQUE — LES RÈGLES DÉJÀ ÉCRITES",
+      moreLabel: "AUTRES ACTIONS CRITIQUES",
       items: [
         {
           name: "Banque et paiements",
@@ -888,7 +891,7 @@ const T: L<Copy> = {
         {
           name: "Énergie et infrastructures critiques",
           actions: ["Changements de consignes et de configuration à distance", "Arrêts d’urgence et logique instrumentée de sécurité", "Dosage chimique et commandes de vannes en traitement de l’eau", "Configuration poussée au cœur d’un réseau de télécommunications"],
-          rules: "IEC 62443 · NERC CIP · IEC 61511-1 · Projet de loi C-8, L.C. 2026, ch. 9 — Loi sur la protection des cybersystèmes essentiels",
+          rules: "IEC 62443 · NERC CIP · IEC 61511-1 · Projet de loi C-8, L.C. 2026, ch. 9 — Loi sur la protection des cybersystèmes essentiels (sanction royale juin 2026, pas encore en vigueur)",
         },
         // Pharma ajouté le 2026-10-13 (Dom), règles ouvertes à la source ce jour-là (PR #102).
         // Eau, procédés et télécoms fondus dans la ligne du dessus le même soir.
@@ -1053,7 +1056,7 @@ const T: L<Copy> = {
         "Une politique prouvée puis brisée, et l’endroit exact où la barrière se place devant l’action, sont dans le ",
       recordLink: "registre technique",
       plateNotes: [
-        { x: 40, y: 20, label: "SCELLÉ · Ed25519 + ML-DSA-65", gold: true },
+        { x: 40, y: 20, label: "SCELLÉ · SIGNATURE POST-QUANTIQUE", gold: true },
         { x: 6, y: 86, label: "CHAQUE DÉCISION · PERMISE OU BLOQUÉE" },
       ],
     },
@@ -1146,6 +1149,16 @@ const SEAL_LINE: L<{ label: string; state: string; check: string }> = {
   en: { label: "DECISION 1 · SHA3-512 FINGERPRINT", state: "SEALED", check: "CHECK IT YOURSELF" },
   fr: { label: "DÉCISION 1 · EMPREINTE SHA3-512", state: "SCELLÉE", check: "VÉRIFIEZ-LA VOUS-MÊME" },
 };
+
+function SectorRow({ d }: { d: { name: string; actions: readonly string[]; rules: string } }) {
+  return (
+    <li className="grid gap-3 border-b border-white/10 py-7 last:border-b-0 lg:grid-cols-[16rem_1fr_18rem] lg:items-baseline lg:gap-10">
+      <h3 className="font-serif text-2xl text-neutral-100">{d.name}</h3>
+      <p className="text-base font-light leading-relaxed text-neutral-300">{d.actions.join(" · ")}</p>
+      <p className="font-mono text-xs leading-relaxed text-neutral-400">{d.rules}</p>
+    </li>
+  );
+}
 
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
@@ -1344,19 +1357,21 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <span>{t.domains.rulesLabel}</span>
             </div>
             <ul className="border-t border-white/10">
-              {t.domains.items.map((d) => (
-                <li
-                  key={d.name}
-                  className="grid gap-3 border-b border-white/10 py-7 lg:grid-cols-[16rem_1fr_18rem] lg:items-baseline lg:gap-10"
-                >
-                  <h3 className="font-serif text-2xl text-neutral-100">{d.name}</h3>
-                  <p className="text-base font-light leading-relaxed text-neutral-300">
-                    {d.actions.join(" · ")}
-                  </p>
-                  <p className="font-mono text-xs leading-relaxed text-neutral-400">{d.rules}</p>
-                </li>
+              {t.domains.items.slice(0, 1).map((d) => (
+                <SectorRow key={d.name} d={d} />
               ))}
             </ul>
+            {/* Banking and payments in front, the other sectors folded (review, Dom go 2026-10-17). */}
+            <details className="group border-b border-white/10">
+              <summary className="track-mid cursor-pointer list-none py-6 text-xs text-neutral-400 transition hover:text-neutral-200">
+                {t.domains.moreLabel} ({t.domains.items.length - 1}) <span aria-hidden="true" className="inline-block transition group-open:rotate-90">&rarr;</span>
+              </summary>
+              <ul className="border-t border-white/10">
+                {t.domains.items.slice(1).map((d) => (
+                  <SectorRow key={d.name} d={d} />
+                ))}
+              </ul>
+            </details>
           </div>
         </section>
 
@@ -1402,18 +1417,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               <Image src="/media/closing-bust-blueprint.jpg" alt="" fill sizes="100vw" className="closing-photo-desk object-cover" />
               <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill sizes="100vw" className="closing-photo-mob object-cover" />
             </div>
-            {/* The bust read like a figure on a sheet: what each material stands for. */}
-            <div className="closing-notes" aria-hidden="true">
-              {t.closing.notes.map((n) => (
-                <span
-                  key={n.label}
-                  className={`plate-note${n.gold ? " plate-note-gold" : ""}`}
-                  style={{ left: `${n.x}%`, top: `${n.y}%` }}
-                >
-                  {n.label}
-                </span>
-              ))}
-            </div>
+            {/* The material labels (marble, iron, gold) left the page: they explained our look, not the product (review, Dom go 2026-10-17). */}
             <div className="closing-card fade-up">
               <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
               <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">

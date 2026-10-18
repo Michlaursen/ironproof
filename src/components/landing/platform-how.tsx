@@ -39,7 +39,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Seal and hand over",
-        body: "The proof, or the exact case that breaks the rule, sealed with Ed25519 and post-quantum ML-DSA-65. Your auditor re-runs it without us.",
+        body: "The proof, or the exact case that breaks the rule, sealed with a classical and a post-quantum signature. Your auditor re-runs it without us.",
       },
     ],
     flow: {
@@ -72,7 +72,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Sceller et remettre",
-        body: "La preuve, ou le cas exact qui brise la règle, scellée avec Ed25519 et ML-DSA-65 post-quantique. Votre auditeur la refait sans nous.",
+        body: "La preuve, ou le cas exact qui brise la règle, scellée avec une signature classique et une signature post-quantique. Votre auditeur la refait sans nous.",
       },
     ],
     flow: {

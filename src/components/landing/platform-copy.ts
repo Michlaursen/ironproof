@@ -85,6 +85,13 @@ export type PlatformCopy = {
     eyebrow: string;
     title: string;
     cards: readonly { name: string; body: string; ranOn: string; href: string; cta: string }[];
+    /** The cards after the first: the same engine, sold as a mandate, not as a product (review, Dom go 2026-10-17). */
+    alsoTitle: string;
+    alsoCta: string;
+    alsoHref: string;
+    /** How the gate plugs in, for the CTO's first question. */
+    plugsInLabel: string;
+    plugsIn: string;
     foot: string;
   };
   /** Three buyer benefits, after the use cases (Dom, 2026-10-16: « improve time to market doit être sur le site »).
@@ -185,7 +192,12 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     useCases: {
       eyebrow: "WHAT IT PROVES",
-      title: "One engine. Four places where a wrong answer costs too much.",
+      title: "One product: the gate in front of critical actions.",
+      alsoTitle: "Same engine, also on mandate.",
+      alsoCta: "TALK TO US",
+      alsoHref: "/pilot",
+      plugsInLabel: "HOW IT PLUGS IN",
+      plugsIn: "Your system calls the gate over an HTTPS API, authenticated in both directions, before the action runs; AI agents can reach it through the MCP adapter. The credentials that execute the action live behind the gate, so skipping the check leaves nothing to act with.",
       cards: [
         {
           name: "AI agents & critical actions",
@@ -329,7 +341,12 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     useCases: {
       eyebrow: "CE QU’IL PROUVE",
-      title: "Un moteur. Quatre endroits où une mauvaise réponse coûte trop cher.",
+      title: "Un produit : la barrière devant les actions critiques.",
+      alsoTitle: "Le même moteur, aussi en mandat.",
+      alsoCta: "PARLEZ-NOUS",
+      alsoHref: "/fr/pilot",
+      plugsInLabel: "COMMENT ÇA SE BRANCHE",
+      plugsIn: "Votre système appelle la barrière par une API HTTPS, authentifiée dans les deux sens, avant que l’action s’exécute ; les agents IA la rejoignent par l’adaptateur MCP. Les accès qui exécutent l’action vivent derrière la barrière : sauter la vérification ne laisse rien pour agir.",
       cards: [
         {
           name: "Agents IA et actions critiques",
