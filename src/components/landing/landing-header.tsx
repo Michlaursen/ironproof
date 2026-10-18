@@ -153,8 +153,8 @@ export function LandingHeader(props: HeaderProps) {
           <span className="track-logo iron-brushed text-base font-semibold">IRONPROOF</span>
         </a>
 
-        {/* Desktop nav: two groups that open on hover, click or keyboard focus,
-          * then the one page that is not part of a group. Escape closes. */}
+        {/* Desktop nav: groups that open on hover, click or keyboard focus,
+          * then RESEARCH, a plain link. Escape closes. */}
         <nav
           className={`${trackNav} hidden flex-1 items-center justify-end gap-x-9 text-[11px] xl:flex 2xl:text-xs`}
           onKeyDown={(e) => {
@@ -205,6 +205,16 @@ export function LandingHeader(props: HeaderProps) {
             </div>
             </Fragment>
           ))}
+
+          <a
+            href={nav.research.href}
+            aria-current={isActive(nav.research.page) ? "page" : undefined}
+            className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
+              isActive(nav.research.page) ? "metal-shine" : "metal-text"
+            }`}
+          >
+            {nav.research.label}
+          </a>
 
           {/* No divider before it: the switch carries its own border box, and
               at the xl tier the French labels need every pixel back. */}
@@ -275,6 +285,14 @@ export function LandingHeader(props: HeaderProps) {
               </div>
               </Fragment>
             ))}
+            <a
+              href={nav.research.href}
+              aria-current={isActive(nav.research.page) ? "page" : undefined}
+              onClick={() => setOpen(false)}
+              className={`seal-label track-mid block border-b border-white/10 py-5 text-[11px] ${isActive(nav.research.page) ? "text-white" : ""}`}
+            >
+              {nav.research.label}
+            </a>
             <a
               href={contactHref}
               onClick={() => setOpen(false)}
