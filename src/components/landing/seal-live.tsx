@@ -109,7 +109,9 @@ export function SealLive({ hash, locale = defaultLocale, verifyHref }: { hash: s
   return (
     <div className="hero-seal mt-9" aria-live="polite">
       <span className="hero-seal-label">{t.label}</span>
-      <span className="hero-seal-hash" title={hash}>
+      {/* The gold light runs once more, and the fingerprint turns gold, only when
+        * the verifier really returned VERIFIED: the shine is earned, never ambient. */}
+      <span className={`hero-seal-hash${status === "VERIFIED" ? " is-verified" : ""}`} title={hash}>
         <span className="hero-seal-type">{hash.slice(0, 32)}</span>…
       </span>
       <span className={`hero-seal-state${status === "FAILED" ? " is-broken" : ""}`}>

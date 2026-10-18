@@ -3663,3 +3663,30 @@ footer .seal-label { color: #7a5c22; filter: none; }
 @media (prefers-reduced-motion: reduce) {
   .chain-link, .chain-ring, .chain-ok, .chain-verdict, .chain-link::after { transition: none !important; }
 }
+
+/* Finishing touches (Dom, 2026-10-18).
+ * 1. Earned gold: when the living seal returns VERIFIED, the light runs over the
+ *    fingerprint once more and the fingerprint settles in gold. */
+.hero-seal-hash.is-verified { color: #8a6a2a; transition: color 0.6s ease 0.5s; }
+.hero-seal-hash.is-verified::after { animation: seal-sweep-earned 1s ease-in-out forwards; }
+@keyframes seal-sweep-earned { 0% { left: -30%; opacity: 1; } 100% { left: 110%; opacity: 1; } }
+
+/* 2. The seal press strikes once, when its plate comes into view (FadeUpInit adds
+ *    .in, so every browser gets it, Safari included): a short drop and settle. */
+.photo-plate-strike.in img { animation: press-strike 0.55s cubic-bezier(0.3, 0, 0.2, 1) 0.35s both; }
+@keyframes press-strike {
+  0% { transform: translateY(-10px) scale(1.015); }
+  55% { transform: translateY(2px) scale(1); }
+  70% { transform: translateY(-1px); }
+  85% { transform: translateY(1px); }
+  100% { transform: none; }
+}
+
+/* 3. Engraved headlines: a one-pixel highlight under the letters, like type
+ *    pressed into paper. Only the large serif titles. */
+.hero-white-title,
+.blueprint h2.font-serif { text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75), 0 -1px 0 rgba(36, 38, 42, 0.06); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-seal-hash.is-verified::after, .photo-plate-strike.in img { animation: none; }
+}
