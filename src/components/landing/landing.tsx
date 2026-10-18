@@ -1455,16 +1455,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               >
                 {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
               </a>
-              {/* The hero's four steps again, as the page's last line: the story
-                * closes on the method it opened with. */}
-              <ol className="hero-steps closing-steps track-mid">
-                {eng.steps.map((step, i) => (
-                  <li key={step} className={i === 2 ? "hero-step-seal" : undefined}>
-                    <span className="hero-step-dot" aria-hidden="true" />
-                    {step}
-                  </li>
-                ))}
-              </ol>
+              {/* The four steps no longer repeat here: the page already says them (Dom, 2026-10-18). */}
             </div>
           </div>
         </section>
