@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CREDITED_STRIP } from "./credibility";
+import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
 import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
@@ -1311,6 +1311,18 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 className="metal-text border-b border-transparent text-sm font-medium transition hover:border-white/40"
               >
                 {c.name}
+              </a>
+            ))}
+            {/* The CVE numbers themselves, each opening its record on cve.org (Dom, 2026-10-18). */}
+            {PUBLISHED_CVES.map((c) => (
+              <a
+                key={c.id}
+                href={c.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-neutral-400 border-b border-transparent transition hover:border-white/40 hover:text-white"
+              >
+                {c.id} · {c.project}
               </a>
             ))}
           </div>
