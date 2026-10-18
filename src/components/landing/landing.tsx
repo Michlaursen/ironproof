@@ -714,7 +714,7 @@ const T: L<Copy> = {
     },
     what: {
       eyebrow: "CE QU’EST IRONPROOF",
-      title: "Un point de contrôle entre votre automatisation et les actions qu’on ne peut pas défaire.",
+      title: "Un point de contrôle entre votre automatisation et les actions irréversibles.",
       lead: "Les agents IA, les API et les scripts peuvent déjà déplacer de l’argent, donner des accès, effacer des données et déployer du code, seuls. Ironproof se place devant ces actions et vérifie chacune contre vos règles avant qu’elle s’exécute.",
       refuse: "Pas d’autorisation.",
       refuseResult: "Pas d’exécution.",
@@ -823,7 +823,7 @@ const T: L<Copy> = {
       ],
       run: [
         {
-          name: "Autorisation infonuagique",
+          name: "Autorisation cloud",
           figure: "160 / 185",
           figureLabel: "garanties prouvées",
           what: "57 politiques IAM d’exemple publiées par AWS, 185 garanties écrites avant de lancer le solveur.",

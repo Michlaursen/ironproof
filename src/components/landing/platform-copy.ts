@@ -367,8 +367,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "LE VOIR DÉCIDER",
         },
         {
-          name: "Politiques d’accès infonuagiques",
-          body: "Pour les équipes infonuagiques et de sécurité : sachez ce que vos politiques d’accès permettent vraiment avant que quelqu’un d’autre le découvre, avec la demande exacte qui passe quand il y en a une.",
+          name: "Politiques d’accès cloud",
+          body: "Pour les équipes cloud et de sécurité : sachez ce que vos politiques d’accès permettent vraiment avant que quelqu’un d’autre le découvre, avec la demande exacte qui passe quand il y en a une.",
           ranOn: "57 politiques IAM publiées par AWS : 160 garanties prouvées sur 185 avec deux solveurs indépendants, 11 vraies trouvailles.",
           href: "/fr#start",
           cta: "VOIR LE RÉSULTAT",
@@ -392,7 +392,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     northStar: {
       eyebrow: "CE QUE NOUS CROYONS",
-      title: "Ironproof apporte la preuve aux décisions qu’on ne peut pas défaire.",
+      title: "Ironproof apporte la preuve aux décisions irréversibles.",
       paragraphs: [
         "L’IA écrit du code, déplace de l’argent et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
         "Mais la vitesse sans garantie ne suffit pas.",
