@@ -101,9 +101,8 @@ const COPY: L<ArchCopy> = {
       { code: "L7", k: "Verify", t: "Checkable without us", d: "Your auditor re-checks the sealed record offline, with an independent verifier." },
     ],
     inputs: [
-      { t: "An agent action", d: "with the policy that governs it" },
-      { t: "A COBOL program", d: "to migrate to Python (arXiv 2610.11073)" },
-      { t: "A flaw in C code", d: "to fix" },
+      // One input, not three products (Dom 2026-10-17): we prove what can be proven, whatever is asked.
+      { t: "What needs to be proven", d: "your request, whatever it is: we prove what can be proven, and say what cannot" },
     ],
     untrusted: "Not trusted · never decides",
     proposesLead: "What it may propose:",
@@ -199,9 +198,7 @@ const COPY: L<ArchCopy> = {
       { code: "C7", k: "Vérifier", t: "Vérifiable sans nous", d: "Votre auditeur revérifie la trace scellée hors ligne, avec un vérificateur indépendant." },
     ],
     inputs: [
-      { t: "Une action d’agent", d: "avec la politique qui l’encadre" },
-      { t: "Un programme COBOL", d: "à migrer vers Python (arXiv 2610.11073)" },
-      { t: "Une faille dans du code C", d: "à corriger" },
+      { t: "Ce qui doit être prouvé", d: "votre demande, quelle qu’elle soit : nous prouvons ce qui peut l’être, et disons ce qui ne le peut pas" },
     ],
     untrusted: "Non fiable · ne décide jamais",
     proposesLead: "Ce qu’il peut proposer :",
@@ -315,8 +312,12 @@ export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale 
           <ol className="arch-inputs">
             {t.inputs.map((it, i) => (
               <li key={it.t}>
-                <span className="arch-mono arch-gold">0{i + 1}</span>
-                <Sep text=". " />
+                {t.inputs.length > 1 ? (
+                  <>
+                    <span className="arch-mono arch-gold">0{i + 1}</span>
+                    <Sep text=". " />
+                  </>
+                ) : null}
                 <span className="arch-in-t font-serif">{it.t}</span>
                 <Sep text=", " />
                 <span className="arch-mono arch-in-d">{it.d}</span>
