@@ -3524,6 +3524,22 @@ footer .seal-label { color: #7a5c22; filter: none; }
 .hero-seal-mark { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #a8843a; box-shadow: 0 0 0 3px rgba(168, 132, 58, 0.18); }
 .hero-seal-check { color: #24262a; font-weight: 500; border-bottom: 1px solid rgba(168, 132, 58, 0.6); padding-bottom: 0.1rem; }
 .hero-seal:hover .hero-seal-check { color: #8a6a2a; }
+/* Living seal (2026-10-18): the line now runs the real verifier on click. */
+.hero-seal-btn { justify-self: start; text-align: left; padding-left: 0; padding-right: 0; background: none; border-top: 0; border-left: 0; border-right: 0; font: inherit; letter-spacing: inherit; cursor: pointer; min-height: 44px; }
+.hero-seal-btn:hover { color: #8a6a2a; }
+.hero-seal-btn:disabled { cursor: progress; color: #8a6a2a; }
+.hero-seal-result { display: grid; gap: 0.5rem; margin-top: 0.25rem; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.08em; color: #24262a; }
+.hero-seal-checks { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; list-style: none; margin: 0; padding: 0; }
+.hero-seal-checks li { opacity: 0; transform: translateY(2px); animation: seal-check-in 0.4s ease-out forwards; }
+.hero-seal-ok { color: #2f7a4f; font-weight: 700; }
+.hero-seal-verdict { color: #2f7a4f; font-weight: 600; letter-spacing: 0.12em; }
+.hero-seal-note { color: #5b5f66; letter-spacing: 0.06em; }
+.hero-seal-refused { color: #9a3b2a; font-weight: 700; letter-spacing: 0.14em; }
+.hero-seal-state.is-broken { color: #9a3b2a; }
+.hero-seal-state.is-broken .hero-seal-mark { background: #9a3b2a; box-shadow: 0 0 0 3px rgba(154, 59, 42, 0.18); }
+.hero-seal-failures { list-style: none; margin: 0; padding: 0; color: #9a3b2a; }
+@keyframes seal-check-in { to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-seal-checks li { animation: none; opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: no-preference) {
   .hero-seal-type { width: 0; animation: seal-type 1.4s steps(32, end) 0.9s forwards; }
   .hero-seal-hash::after { animation: seal-sweep 1s ease-in-out 2.5s forwards; }
