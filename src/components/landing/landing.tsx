@@ -1361,17 +1361,13 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <SectorRow key={d.name} d={d} />
               ))}
             </ul>
-            {/* Banking and payments in front, the other sectors folded (review, Dom go 2026-10-17). */}
-            <details className="group border-b border-white/10">
-              <summary className="track-mid cursor-pointer list-none py-6 text-xs text-neutral-400 transition hover:text-neutral-200">
-                {t.domains.moreLabel} ({t.domains.items.length - 1}) <span aria-hidden="true" className="inline-block transition group-open:rotate-90">&rarr;</span>
-              </summary>
-              <ul className="border-t border-white/10">
-                {t.domains.items.slice(1).map((d) => (
-                  <SectorRow key={d.name} d={d} />
-                ))}
-              </ul>
-            </details>
+            {/* Banking and payments in front; the other sectors under their own heading, always open (Dom 2026-10-17: no tab to click). */}
+            <p className="track-mid pb-4 pt-10 text-xs text-neutral-400">{t.domains.moreLabel}</p>
+            <ul className="border-t border-white/10">
+              {t.domains.items.slice(1).map((d) => (
+                <SectorRow key={d.name} d={d} />
+              ))}
+            </ul>
           </div>
         </section>
 
