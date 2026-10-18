@@ -1347,27 +1347,34 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
           </div>
           {/* The runs moved into « What it proves » near the top (Dom, 2026-10-16): no number twice. */}
-          <p className="fade-up seal-label track-mid mb-6 text-xs">{t.domains.appliesEyebrow}</p>
-          {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
-            * and the rules that already say what must never happen there. */}
-          <div className="fade-up">
-            <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-xs text-neutral-500 lg:grid">
-              <span />
-              <span>{t.domains.actionsLabel}</span>
-              <span>{t.domains.rulesLabel}</span>
+          {/* The white city behind the sectors, back on the page (Dom 2026-10-17: « jaimais la photo de la ville blanche »).
+            * The rows sit on a solid panel so the photo stays a background. */}
+          <div className="relative isolate overflow-hidden rounded-[6px] px-4 py-16 md:px-20 md:py-24">
+            <div className="absolute inset-0 -z-10" aria-hidden="true">
+              <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
             </div>
-            <ul className="border-t border-white/10">
-              {t.domains.items.slice(0, 1).map((d) => (
-                <SectorRow key={d.name} d={d} />
-              ))}
-            </ul>
-            {/* Banking and payments in front; the other sectors under their own heading, always open (Dom 2026-10-17: no tab to click). */}
-            <p className="track-mid pb-4 pt-10 text-xs text-neutral-400">{t.domains.moreLabel}</p>
-            <ul className="border-t border-white/10">
-              {t.domains.items.slice(1).map((d) => (
-                <SectorRow key={d.name} d={d} />
-              ))}
-            </ul>
+            <p className="fade-up seal-label track-mid mb-6 inline-block rounded-[4px] bg-ink/85 px-3 py-1.5 text-xs">{t.domains.appliesEyebrow}</p>
+            {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
+              * and the rules that already say what must never happen there. */}
+            <div className="fade-up rounded-[6px] border border-white/10 bg-ink/85 px-6 py-4 shadow-2xl md:px-10">
+              <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-xs text-neutral-500 lg:grid">
+                <span />
+                <span>{t.domains.actionsLabel}</span>
+                <span>{t.domains.rulesLabel}</span>
+              </div>
+              <ul className="border-t border-white/10">
+                {t.domains.items.slice(0, 1).map((d) => (
+                  <SectorRow key={d.name} d={d} />
+                ))}
+              </ul>
+              {/* Banking and payments in front; the other sectors under their own heading, always open (Dom 2026-10-17: no tab to click). */}
+              <p className="track-mid pb-4 pt-10 text-xs text-neutral-400">{t.domains.moreLabel}</p>
+              <ul className="border-t border-white/10">
+                {t.domains.items.slice(1).map((d) => (
+                  <SectorRow key={d.name} d={d} />
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
