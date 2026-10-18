@@ -140,20 +140,31 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
           </div>
         ))}
-        <div className="fade-up mt-16 border-t border-white/10 pt-6">
-          <p className="font-serif text-xl text-neutral-200 md:text-2xl">{u.alsoTitle}</p>
-          <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-sm text-neutral-400">
-            {u.cards.slice(1).map((c) => (
+        {/* The three mandates as cards with what the client walks away with (Dom 2026-10-17: « met le plus impactant, c trop facile pass by »). */}
+        <div className="fade-up mt-20 border-t border-white/10 pt-10">
+          <h3 className="metal-text font-serif text-3xl font-medium leading-tight md:text-5xl">{u.alsoTitle}</h3>
+          <p className="mt-4 max-w-2xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{u.alsoLead}</p>
+          <ol className="mt-10 grid gap-6 md:grid-cols-3">
+            {u.cards.slice(1).map((c, i) => (
               <li key={c.name}>
-                <a href={c.href} className="border-b border-transparent transition hover:border-white/40 hover:text-neutral-200">
-                  {c.name}
+                <a
+                  href={c.href}
+                  className="group flex h-full flex-col rounded-[6px] border border-white/10 bg-ink/60 p-7 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+                  style={{ borderTop: "2px solid #c9a24a" }}
+                >
+                  <span className="num-badge font-serif text-2xl">{String(i + 2).padStart(2, "0")}</span>
+                  <span className="mt-3 font-serif text-2xl text-neutral-100">{c.name}</span>
+                  <span className="mt-3 flex-1 text-base font-light leading-relaxed text-neutral-300">{u.alsoLines[i]}</span>
+                  <span className="track-mid mt-6 inline-flex items-center gap-2 text-xs text-neutral-200 transition group-hover:text-white">
+                    {c.cta} <span aria-hidden="true" className="transition group-hover:translate-x-1">&rarr;</span>
+                  </span>
                 </a>
               </li>
             ))}
-          </ul>
+          </ol>
           <a
             href={u.alsoHref}
-            className="track-mid mt-6 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+            className="track-mid mt-8 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
           >
             {u.alsoCta} <span aria-hidden="true">&rarr;</span>
           </a>

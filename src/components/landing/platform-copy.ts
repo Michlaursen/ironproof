@@ -87,6 +87,9 @@ export type PlatformCopy = {
     cards: readonly { name: string; body: string; ranOn: string; href: string; cta: string }[];
     /** The cards after the first: the same engine, sold as a mandate, not as a product (review, Dom go 2026-10-17). */
     alsoTitle: string;
+    /** One line per mandate, what the client walks away with. */
+    alsoLines: readonly string[];
+    alsoLead: string;
     alsoCta: string;
     alsoHref: string;
     /** How the gate plugs in, for the CTO's first question. */
@@ -194,6 +197,12 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       eyebrow: "WHAT IT PROVES",
       title: "One product: the gate in front of critical actions.",
       alsoTitle: "Same engine, also on mandate.",
+      alsoLead: "The engine behind the gate also takes on three hard questions, as a mandate delivered by our team.",
+      alsoLines: [
+        "Find the one request your access policy lets through, before an attacker does.",
+        "Know whether a patch really closes the flaw, before you ship it.",
+        "Leave COBOL with proof that the new code computes what the old one did.",
+      ],
       alsoCta: "TALK TO US",
       alsoHref: "/pilot",
       plugsInLabel: "HOW IT PLUGS IN",
@@ -343,6 +352,12 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       eyebrow: "CE QU’IL PROUVE",
       title: "Un produit : la barrière devant les actions critiques.",
       alsoTitle: "Le même moteur, aussi en mandat.",
+      alsoLead: "Le moteur derrière la barrière prend aussi trois questions difficiles, en mandat livré par notre équipe.",
+      alsoLines: [
+        "Trouvez la seule demande que votre politique d’accès laisse passer, avant un attaquant.",
+        "Sachez si un correctif ferme vraiment la faille, avant de le livrer.",
+        "Quittez le COBOL avec la preuve que le nouveau code calcule ce que l’ancien calculait.",
+      ],
       alsoCta: "PARLEZ-NOUS",
       alsoHref: "/fr/pilot",
       plugsInLabel: "COMMENT ÇA SE BRANCHE",
