@@ -123,22 +123,41 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="seal-label track-mid mb-5 text-xs">{u.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{u.title}</h2>
         </div>
-        <ol className="fade-up mt-16 grid gap-10 md:grid-cols-2 md:gap-12">
-          {u.cards.map((c, i) => (
-            <li key={c.name} className="border-t border-white/10 pt-6">
-              <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-3 font-serif text-2xl text-neutral-100 md:text-3xl">{c.name}</h3>
-              <p className="mt-3 text-base font-light leading-relaxed text-neutral-400 md:text-lg">{c.body}</p>
-              {/* The run figures stay on each product page, not on the card (Dom, 2026-10-16). */}
-              <a
-                href={c.href}
-                className="track-mid mt-5 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
-              >
-                {c.cta} <span aria-hidden="true">&rarr;</span>
-              </a>
-            </li>
-          ))}
-        </ol>
+        {/* One product in front; the other three are the same engine, on mandate (review, Dom go 2026-10-17). */}
+        {u.cards.slice(0, 1).map((c) => (
+          <div key={c.name} className="fade-up mt-16 border-t border-white/10 pt-6">
+            <h3 className="font-serif text-3xl text-neutral-100 md:text-4xl">{c.name}</h3>
+            <p className="mt-4 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{c.body}</p>
+            <a
+              href={c.href}
+              className="track-mid mt-6 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+            >
+              {c.cta} <span aria-hidden="true">&rarr;</span>
+            </a>
+            <div className="mt-10 max-w-3xl">
+              <p className="seal-label track-mid mb-3 text-xs">{u.plugsInLabel}</p>
+              <p className="text-base font-light leading-relaxed text-neutral-400">{u.plugsIn}</p>
+            </div>
+          </div>
+        ))}
+        <div className="fade-up mt-16 border-t border-white/10 pt-6">
+          <p className="font-serif text-xl text-neutral-200 md:text-2xl">{u.alsoTitle}</p>
+          <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-sm text-neutral-400">
+            {u.cards.slice(1).map((c) => (
+              <li key={c.name}>
+                <a href={c.href} className="border-b border-transparent transition hover:border-white/40 hover:text-neutral-200">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={u.alsoHref}
+            className="track-mid mt-6 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
+          >
+            {u.alsoCta} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
       </div>
     </section>
   );
