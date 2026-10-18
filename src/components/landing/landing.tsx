@@ -1347,34 +1347,62 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             <PhotoPlate src="/media/critical-switches-white.jpg" position="50% 55%" />
           </div>
           {/* The runs moved into « What it proves » near the top (Dom, 2026-10-16): no number twice. */}
-          {/* The white city behind the sectors, back on the page (Dom 2026-10-17: « jaimais la photo de la ville blanche »).
-            * The rows sit on a solid panel so the photo stays a background. */}
-          <div className="relative isolate overflow-hidden rounded-[6px] px-4 py-16 md:px-20 md:py-24">
-            <div className="absolute inset-0 -z-10" aria-hidden="true">
-              <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          <p className="fade-up seal-label track-mid mb-6 text-xs">{t.domains.appliesEyebrow}</p>
+          {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
+            * and the rules that already say what must never happen there. */}
+          <div className="fade-up">
+            <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-xs text-neutral-500 lg:grid">
+              <span />
+              <span>{t.domains.actionsLabel}</span>
+              <span>{t.domains.rulesLabel}</span>
             </div>
-            <p className="fade-up seal-label track-mid mb-6 inline-block rounded-[4px] bg-ink/85 px-3 py-1.5 text-xs">{t.domains.appliesEyebrow}</p>
-            {/* Sectors as ruled rows, not cards: sector, its irreversible actions,
-              * and the rules that already say what must never happen there. */}
-            <div className="fade-up rounded-[6px] border border-white/10 bg-ink/85 px-6 py-4 shadow-2xl md:px-10">
-              <div className="track-mid hidden grid-cols-[16rem_1fr_18rem] gap-10 pb-4 text-xs text-neutral-500 lg:grid">
-                <span />
-                <span>{t.domains.actionsLabel}</span>
-                <span>{t.domains.rulesLabel}</span>
-              </div>
-              <ul className="border-t border-white/10">
-                {t.domains.items.slice(0, 1).map((d) => (
-                  <SectorRow key={d.name} d={d} />
-                ))}
-              </ul>
-              {/* Banking and payments in front; the other sectors under their own heading, always open (Dom 2026-10-17: no tab to click). */}
-              <p className="track-mid pb-4 pt-10 text-xs text-neutral-400">{t.domains.moreLabel}</p>
-              <ul className="border-t border-white/10">
-                {t.domains.items.slice(1).map((d) => (
-                  <SectorRow key={d.name} d={d} />
-                ))}
-              </ul>
+            <ul className="border-t border-white/10">
+              {t.domains.items.slice(0, 1).map((d) => (
+                <SectorRow key={d.name} d={d} />
+              ))}
+            </ul>
+            {/* Banking and payments in front; the other sectors under their own heading, always open (Dom 2026-10-17: no tab to click). */}
+            <p className="track-mid pb-4 pt-10 text-xs text-neutral-400">{t.domains.moreLabel}</p>
+            <ul className="border-t border-white/10">
+              {t.domains.items.slice(1).map((d) => (
+                <SectorRow key={d.name} d={d} />
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        {/* WHY NOW — back after all the sectors, the white city in full behind
+          * light grey articles (Dom 2026-10-17: « voir un peu les articles mais
+          * voir tout le design en arrière »). No dark veil, no frosted glass. */}
+        <section id="now" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14">
+          <div className="absolute inset-0 -z-10" aria-hidden="true">
+            <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
+          </div>
+          <div className="mx-auto max-w-7xl">
+            <div className="fade-up mb-12 inline-block max-w-3xl rounded-[6px] bg-ink/70 px-6 py-5">
+              <p className="seal-label track-mid mb-4 text-xs">{t.now.eyebrow}</p>
+              <h2 className="metal-text font-serif text-4xl font-medium md:text-6xl">{t.now.title}</h2>
+              <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.now.lead}</p>
             </div>
+            <ol className="fade-up grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {t.now.items.map((d) => (
+                <li key={d.date} className="rounded-[6px] border border-white/10 bg-ink/55 px-5 py-4">
+                  <p className="seal-label track-mid text-[11px]">{d.date}</p>
+                  <p className="mt-1.5 text-[13px] font-light leading-relaxed text-neutral-200">{d.what}</p>
+                  <a
+                    href={d.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1.5 inline-block text-xs text-neutral-500 underline decoration-white/20 underline-offset-4 transition hover:text-white"
+                  >
+                    {d.source} &#8599;
+                  </a>
+                </li>
+              ))}
+            </ol>
+            <p className="fade-up mt-10 inline-block max-w-3xl rounded-[6px] bg-ink/70 px-6 py-4 font-serif text-xl leading-snug text-neutral-200 md:text-2xl">
+              {t.now.foot}
+            </p>
           </div>
         </section>
 
