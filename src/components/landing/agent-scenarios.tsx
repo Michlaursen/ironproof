@@ -48,6 +48,7 @@ type Copy = {
   receiptCta: string;
   illustrative: string;
   more: string;
+  lab: string;
   scenarios: readonly Scenario[];
 };
 
@@ -83,6 +84,7 @@ const T: L<Copy> = {
     receiptCta: "CHECK A REAL SEALED RECORD",
     illustrative: "Illustrative decisions under a sample policy.",
     more: "MORE ON THIS ACTION TYPE",
+    lab: "TRY TO GET PAST THE SEALED POLICY YOURSELF",
     scenarios: [
       {
         id: "money",
@@ -193,6 +195,7 @@ const T: L<Copy> = {
     receiptCta: "VÉRIFIEZ UNE VRAIE TRACE SCELLÉE",
     illustrative: "Décisions illustratives sous une politique d’exemple.",
     more: "EN SAVOIR PLUS SUR CE TYPE D’ACTION",
+    lab: "ESSAYEZ VOUS-MÊME DE CONTOURNER LA POLITIQUE SCELLÉE",
     scenarios: [
       {
         id: "money",
@@ -405,6 +408,15 @@ export function AgentScenarios({
         </div>
         <div className="fade-up mt-12 flex flex-wrap items-baseline justify-between gap-4">
           <p className="text-xs text-neutral-500">{t.illustrative}</p>
+          {/* The decisions above are illustrative; /lab runs decide() on the sealed
+            * policy in the visitor's tab, so the honest next step is one click away
+            * (Dom, 2026-10-18: "break it yourself"). */}
+          <a
+            href={`${locale === defaultLocale ? "" : `/${locale}`}/lab`}
+            className="track-mid border-b border-seal/60 pb-1 text-xs text-neutral-100 transition hover:border-seal hover:text-white"
+          >
+            {t.lab} <span aria-hidden="true">&rarr;</span>
+          </a>
           {/* The tab's own page: same id, so tab and page name the same thing. */}
           <a
             href={`${locale === defaultLocale ? "" : `/${locale}`}/actions/${scenario.id}`}
