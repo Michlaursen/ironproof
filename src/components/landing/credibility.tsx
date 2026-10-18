@@ -97,6 +97,7 @@ const RECORD: { org: string; strip?: string; body: L<string>; cta: L<string>; hr
   },
   {
     org: "pupnp · CVE-2026-41682",
+    strip: "pupnp",
     body: {
       en: 
         "The pupnp advisory credits the COBALT static analyzer and Dominik Blain for the finding. CWE-195, signed-to-unsigned conversion in parse_uri().",
@@ -108,6 +109,7 @@ const RECORD: { org: string; strip?: string; body: L<string>; cta: L<string>; hr
   },
   {
     org: "libmodbus",
+    strip: "libmodbus",
     body: {
       en: "The fix commit credits Dominik Blain and Cobalt formal verification as the reporter.",
       fr: "Le commit de correctif crédite Dominik Blain et la vérification formelle Cobalt comme rapporteur.",
