@@ -9,8 +9,8 @@ const PUBLISHED = "2026-10-17";
 const FILM = {
   src: "/media/proof-intelligence-film.h264.mp4",
   poster: "/media/proof-intelligence-film-poster.jpg",
-  label: "Film: Proof Intelligence, in 101 seconds",
-  note: "101 seconds, with sound. The payments in the film illustrate a cumulative limit; they are not a client case. The standards shown are the ones each sector already works under; naming a sector does not mean it uses Ironproof today.",
+  label: "Film: Proof Intelligence, in under three minutes",
+  note: "2 minutes 46 seconds, with sound. The payments in the film illustrate a payment policy; they are not a client case. Each application is shown with its status today. The standards shown are the ones each sector already works under; naming a sector does not mean it uses Ironproof today.",
 };
 
 /*
@@ -91,7 +91,7 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         thumbnailUrl: `https://ironproof.ai${FILM.poster}`,
         contentUrl: `https://ironproof.ai${FILM.src}`,
         uploadDate: PUBLISHED,
-        duration: "PT1M41S",
+        duration: "PT2M46S",
         publisher: { "@id": "https://ironproof.ai/#organization" },
       },
     ],
