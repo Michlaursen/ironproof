@@ -131,7 +131,6 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/software-security",
         cta: "READ THE RESEARCH",
         body: "Ironproof writes a test that triggers the bug, runs it before and after the fix, and tells you whether the fix closes it, within stated bounds. Each result ships as a dossier you can re-run.",
-        evidence: "20 real fixes drawn at random from projects such as curl and libssh2: 13 closed, 3 where our test was fooled, 4 not analyzed (October 12, 2026).",
       },
       {
         num: "03",
@@ -143,7 +142,6 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/modernization",
         cta: "SEND US A PROGRAM",
         body: "Send us a program. Our team translates it into Python, then checks that both give the same results under a precise model of that program, or shows you the exact input where they differ. What the model does not cover is marked as not covered, never as passed.",
-        evidence: "IBM’s GenApp sample insurance programs, checked under a CICS model we write ourselves. For one of them, 14 of the model’s 15 assumptions have been tested on IBM TXSeries, a real CICS, using a copy without the three lines that platform does not support. One assumption was wrong as written, and the certificate was corrected. The unchanged original still needs a run on z/OS, and no outside party has replayed it yet.",
       },
     ],
     method: {
@@ -225,7 +223,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         {
           name: "Security fixes",
           body: "For teams shipping security fixes: know whether a patch closes the flaw before you release it, within stated bounds, or get the case that reopens it.",
-          ranOn: "Run so far on C: 20 real fixes from curl, libssh2 and Suricata: 13 closed, 3 where our test was fooled, 4 not analyzed.",
+          ranOn: "Real fixes from open-source projects; the checker is being rebuilt.",
           href: "/software-security",
           cta: "SEE THE RESULTS",
         },
@@ -286,7 +284,6 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/fr/software-security",
         cta: "LIRE LA RECHERCHE",
         body: "Ironproof écrit un test qui déclenche la faille, le roule avant et après le correctif, et vous dit si le correctif la ferme, dans des bornes déclarées. Chaque résultat part avec un dossier que vous pouvez rejouer.",
-        evidence: "20 vrais correctifs tirés au hasard dans des projets comme curl et libssh2 : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés (12 octobre 2026).",
       },
       {
         num: "03",
@@ -298,7 +295,6 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         href: "/fr/modernization",
         cta: "ENVOYEZ-NOUS UN PROGRAMME",
         body: "Envoyez-nous un programme. Notre équipe le traduit en Python, puis vérifie que les deux donnent les mêmes résultats sous un modèle précis de ce programme, ou vous montre l’entrée exacte où ils diffèrent. Ce que le modèle ne couvre pas est déclaré non couvert, jamais réussi.",
-        evidence: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes. Pour l’un d’eux, 14 des 15 hypothèses du modèle ont été mises à l’épreuve sur IBM TXSeries, un vrai CICS, avec une copie privée des trois lignes que cette plateforme ne prend pas en charge. Une hypothèse était fausse telle qu’écrite, et le certificat a été corrigé. L’original inchangé doit encore tourner sur z/OS, et aucun tiers ne l’a encore rejoué.",
       },
     ],
     method: {
@@ -380,7 +376,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         {
           name: "Correctifs de sécurité",
           body: "Pour les équipes qui livrent des correctifs de sécurité : sachez si un correctif ferme la faille avant de le publier, dans des bornes déclarées, ou obtenez le cas qui la rouvre.",
-          ranOn: "Mené jusqu’ici sur du C : 20 vrais correctifs de curl, libssh2 et Suricata : 13 fermés, 3 où notre test s’est fait tromper, 4 non analysés.",
+          ranOn: "De vrais correctifs de projets open source ; le vérificateur est en reconstruction.",
           href: "/fr/software-security",
           cta: "VOIR LES RÉSULTATS",
         },
