@@ -6,6 +6,12 @@ import { PI_COPY, PI_DEFINITION } from "@/components/landing/proof-intelligence-
 
 const SLUG = "proof-intelligence";
 const PUBLISHED = "2026-10-17";
+const FILM = {
+  src: "/media/proof-intelligence-film.h264.mp4",
+  poster: "/media/proof-intelligence-film-poster.jpg",
+  label: "Film: Proof Intelligence, in 101 seconds",
+  note: "101 seconds, with sound. The payments in the film illustrate a cumulative limit; they are not a client case. The standards shown are the ones each sector already works under; naming a sector does not mean it uses Ironproof today.",
+};
 
 /*
  * The definition of the term the hero carries. English only, like the
@@ -78,6 +84,16 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         mainEntityOfPage: url,
         about: { "@id": `${url}#term` },
       },
+      {
+        "@type": "VideoObject",
+        name: FILM.label,
+        description: PI_DEFINITION,
+        thumbnailUrl: `https://ironproof.ai${FILM.poster}`,
+        contentUrl: `https://ironproof.ai${FILM.src}`,
+        uploadDate: PUBLISHED,
+        duration: "PT1M41S",
+        publisher: { "@id": "https://ironproof.ai/#organization" },
+      },
     ],
   };
 
@@ -92,6 +108,7 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         navLocale={locale}
         copy={PI_COPY}
         page="proof-intelligence"
+        film={FILM}
       />
     </>
   );
