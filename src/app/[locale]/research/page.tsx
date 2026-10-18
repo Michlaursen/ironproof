@@ -31,7 +31,7 @@ const NOTES = [
   {
     slug: "/research/zero-barriers-one-reviewer",
     date: "2026-09-08",
-    author: "Miguel Laursen",
+    author: "Ironproof Research",
     copy: RESEARCH_COPY.en,
   },
 ] as const;

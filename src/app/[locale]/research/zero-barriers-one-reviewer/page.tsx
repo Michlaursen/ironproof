@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    authors: [{ name: "Miguel Laursen" }],
+    authors: [{ name: "Ironproof Research" }],
     alternates: {
       canonical: `/${SLUG}`,
       languages: { en: `/${SLUG}`, "x-default": `/${SLUG}` },
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://ironproof.ai/${SLUG}`,
       locale: "en_US",
       publishedTime: "2026-09-08",
-      authors: ["Miguel Laursen"],
+      authors: ["Ironproof Research"],
     },
   };
 }
@@ -55,7 +55,7 @@ export default async function ResearchZeroBarriersPage({ params }: PageProps) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  // Named authorship plus dated citations: this is a research note whose value
+  // Authorship by Ironproof (Dom, 2026-10-17) plus dated citations: this is a research note whose value
   // is that its figures trace to primary sources, and answer engines weight
   // that. The four cited URLs are the ones the derived figures come from.
   const jsonLd = {
@@ -63,11 +63,7 @@ export default async function ResearchZeroBarriersPage({ params }: PageProps) {
     "@type": "Article",
     headline: RESEARCH_COPY[CONTENT_LOCALE].h1,
     description: RESEARCH_COPY[CONTENT_LOCALE].meta.description,
-    author: {
-      "@type": "Person",
-      name: "Miguel Laursen",
-      affiliation: { "@type": "Organization", name: "Ironproof" },
-    },
+    author: { "@type": "Organization", name: "Ironproof", url: "https://ironproof.ai" },
     publisher: { "@type": "Organization", name: "Ironproof", url: "https://ironproof.ai" },
     datePublished: "2026-09-08",
     inLanguage: "en",

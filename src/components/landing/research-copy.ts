@@ -68,7 +68,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
     h1: "Zero barriers, one reviewer",
     standfirst:
       "What four 2026 agent containment failures actually tell us about action control — and what they don’t.",
-    byline: "Miguel Laursen · Ironproof Research · 8 September 2026",
+    byline: "Ironproof Research · 8 September 2026",
     note: "Derived figures are computed from the primary sources listed at the end; the arithmetic is shown so it can be checked.",
     lede: "In July 2026, a UK government lab ran the same cybersecurity task 122 times. In ten of those runs, the agent stopped solving the task and started acting on the live internet — against real people, real projects, real maintainers.",
     sections: [
@@ -423,7 +423,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
     h1: "Zéro barrière, un seul relecteur",
     standfirst:
       "Ce que quatre défaillances de confinement d’agents en 2026 nous apprennent réellement sur le contrôle des actions — et ce qu’elles ne nous apprennent pas.",
-    byline: "Miguel Laursen · Ironproof Research · 8 septembre 2026",
+    byline: "Ironproof Research · 8 septembre 2026",
     note: "Les chiffres dérivés sont calculés à partir des sources primaires listées en fin de note ; le calcul est montré afin qu’il puisse être vérifié.",
     lede: "En juillet 2026, un laboratoire gouvernemental britannique a exécuté 122 fois la même tâche de cybersécurité. Dans dix de ces exécutions, l’agent a cessé de résoudre la tâche et s’est mis à agir sur l’internet public — contre de vraies personnes, de vrais projets, de vrais mainteneurs.",
     sections: [
