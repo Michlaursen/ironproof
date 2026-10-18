@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
+import { SealLive } from "./seal-live";
 import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
@@ -1141,15 +1142,6 @@ function PhotoPlate({
   );
 }
 
-/* The seal line under the hero buttons (Dom, 2026-10-16): the fingerprint of a
- * real sealed decision types itself, a gold light runs over it, and SEALED
- * appears -- never "verified": the page does not verify anything at that
- * moment; the link opens the page where the visitor does. */
-const SEAL_LINE: L<{ label: string; state: string; check: string }> = {
-  en: { label: "DECISION 1 · SHA3-512 FINGERPRINT", state: "SEALED", check: "CHECK IT YOURSELF" },
-  fr: { label: "DÉCISION 1 · EMPREINTE SHA3-512", state: "SCELLÉE", check: "VÉRIFIEZ-LA VOUS-MÊME" },
-};
-
 function SectorRow({ d }: { d: { name: string; actions: readonly string[]; rules: string } }) {
   return (
     <li className="grid gap-3 border-b border-white/10 py-7 last:border-b-0 lg:grid-cols-[16rem_1fr_18rem] lg:items-baseline lg:gap-10">
@@ -1164,7 +1156,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const t = pick(T, locale);
   const eng = pick(HERO_ENGINE_COPY, locale);
-  const seal = pick(SEAL_LINE, locale);
   const sealHash = firstSealedEntryHash();
 
   return (
@@ -1207,18 +1198,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                   {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
-              <a href={`${r}/verify`} className="hero-seal mt-9">
-                <span className="hero-seal-label">{seal.label}</span>
-                <span className="hero-seal-hash" title={sealHash}>
-                  <span className="hero-seal-type">{sealHash.slice(0, 32)}</span>…
-                </span>
-                <span className="hero-seal-state">
-                  <span className="hero-seal-mark" aria-hidden="true" /> {seal.state}
-                  <span className="hero-seal-check">
-                    {seal.check} <span aria-hidden="true">&rarr;</span>
-                  </span>
-                </span>
-              </a>
+              <SealLive hash={sealHash} locale={locale} verifyHref={`${r}/verify`} />
             </div>
           </div>
           {/* Three columns that never overlap: the language model, the brain, the
