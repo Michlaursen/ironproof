@@ -1111,15 +1111,17 @@ function PhotoPlate({
   wide = false,
   position,
   notes,
+  strike = false,
 }: {
   src: string;
   wide?: boolean;
+  strike?: boolean;
   position?: string;
   notes?: readonly PlateNote[];
 }) {
   if (!src) return null;
   return (
-    <div className={`photo-plate fade-up${wide ? " photo-plate-wide" : ""}`} aria-hidden="true">
+    <div className={`photo-plate fade-up${wide ? " photo-plate-wide" : ""}${strike ? " photo-plate-strike" : ""}`} aria-hidden="true">
       <Image
         src={src}
         alt=""
@@ -1410,7 +1412,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             {/* The one image here: the decision struck into steel, with logo 09
               * (Dom, 2026-09-26). */}
-            <PhotoPlate src="/media/seal-press-white.jpg" wide position="50% 55%" notes={t.how.plateNotes} />
+            <PhotoPlate src="/media/seal-press-white.jpg" wide strike position="50% 55%" notes={t.how.plateNotes} />
           </div>
           <div className="fade-up">
             <ProofPipeline locale={locale} />
