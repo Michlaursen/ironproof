@@ -13,6 +13,14 @@ const FILM = {
   note: "2 minutes 46 seconds, with sound. The payments in the film illustrate a payment policy; they are not a client case. Each application is shown with its status today. The standards shown are the ones each sector already works under; naming a sector does not mean it uses Ironproof today.",
 };
 
+const AGCO_DEMO = {
+  eyebrow: "AGCO DEMO",
+  src: "/media/agco-demo.h264.mp4",
+  poster: "/media/agco-demo-poster.jpg",
+  label: "Demo: does a player's deposit limit hold? Ontario Registrar's Standards 2.23 and 2.24",
+  note: "3 minutes, with sound. The rule is quoted from the AGCO Registrar's Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative, two of them from open-source projects, all replayed through the same checker; no operator's system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days.",
+};
+
 /*
  * The definition of the term the hero carries. English only, like the
  * research notes: /fr/… renders the English text with an English canonical,
@@ -94,6 +102,16 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         duration: "PT2M46S",
         publisher: { "@id": "https://ironproof.ai/#organization" },
       },
+      {
+        "@type": "VideoObject",
+        name: AGCO_DEMO.label,
+        description: AGCO_DEMO.note,
+        thumbnailUrl: `https://ironproof.ai${AGCO_DEMO.poster}`,
+        contentUrl: `https://ironproof.ai${AGCO_DEMO.src}`,
+        uploadDate: "2026-10-17",
+        duration: "PT3M3S",
+        publisher: { "@id": "https://ironproof.ai/#organization" },
+      },
     ],
   };
 
@@ -109,6 +127,7 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         copy={PI_COPY}
         page="proof-intelligence"
         film={FILM}
+        film2={AGCO_DEMO}
       />
     </>
   );
