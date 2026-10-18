@@ -197,7 +197,9 @@ summary:focus-visible {
 .metal-text {
   padding-bottom: 0.12em; /* descender clip — see note above */
   /* Brighter floor — no thin/dark bands (Miguel: white too thin). */
-  background: linear-gradient(180deg, #3a3d43 0%, #1d1f23 45%, #2a2c31 70%, #4e5259 100%);
+  /* Darker floor on paper (Dom, 2026-10-18: readable for people who see poorly):
+   * the palest stop is now 10.4:1 on #e7e5e2 (was #4e5259, 6.2:1). */
+  background: linear-gradient(180deg, #2e3136 0%, #141518 45%, #1d1f23 70%, #2e3136 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -208,7 +210,7 @@ summary:focus-visible {
 
 .metal-shine {
   padding-bottom: 0.12em; /* descender clip — see note above */
-  background: linear-gradient(110deg, #1d1f23 0%, #4e5259 22%, #1d1f23 45%, #a8843a 55%, #1d1f23 70%, #3a3d43 100%);
+  background: linear-gradient(110deg, #1d1f23 0%, #2e3136 22%, #1d1f23 45%, #6e521c 55%, #1d1f23 70%, #2e3136 100%);
   background-size: 250% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -3391,7 +3393,7 @@ p, li {
  * Dark bands (#now, the papers band) keep their own light gold.
  * ============================================================ */
 footer .seal-label { color: #7a5c22; filter: none; }
-.closing-card h2 .text-seal { color: #8a6a2a; } /* 54px: large text, 3:1 required, 3.96 */
+.closing-card h2 .text-seal { color: #6e521c; } /* 5.8:1 on paper (Dom, 2026-10-18: titles readable for low vision) */
 #papers a.track-mid { min-height: 44px; }
 
 /* Header on the narrowest phones (measured 2026-10-16): logo, name, language
@@ -3690,3 +3692,8 @@ footer .seal-label { color: #7a5c22; filter: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero-seal-hash.is-verified::after, .photo-plate-strike.in img { animation: none; }
 }
+
+/* Gold words inside headlines (Dom, 2026-10-18): #6e521c is 5.8:1 on the paper
+ * background, above the 4.5:1 of normal text; the light gold stays where the
+ * background is dark (#decide's iron inset keeps its own !important rule). */
+h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
