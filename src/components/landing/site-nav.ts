@@ -14,7 +14,7 @@ import { type L, pick } from "./i18n";
  */
 
 export type NavItem = { href: string; label: string; page?: string };
-export type NavGroup = { id: "technology" | "solutions" | "evidence"; label: string; items: NavItem[] };
+export type NavGroup = { id: "technology" | "solutions" | "evidence" | "research"; label: string; items: NavItem[] };
 
 /*
  * Restructured 2026-10-15 (Dom): TECHNOLOGY, SOLUTIONS, EVIDENCE, then
@@ -45,6 +45,7 @@ const LABELS: L<{
   lab: string;
   research: string;
   researchItem: string;
+  researchAll: string;
   pilot: string;
   pilotItem: string;
 }> = {
@@ -58,7 +59,7 @@ const LABELS: L<{
     provableAi: "Provable AI",
     zeroTrust: "Zero Trust",
     agents: "AI agents & critical actions",
-    cSecurity: "Research · C software security",
+    cSecurity: "C software security",
     cobol: "Legacy modernization",
     demo: "Demo",
     pythonToC: "Python to C, proven",
@@ -68,6 +69,7 @@ const LABELS: L<{
     lab: "The lab",
     research: "RESEARCH",
     researchItem: "Research",
+    researchAll: "All research notes",
     pilot: "START A PILOT",
     pilotItem: "Start a pilot",
   },
@@ -81,7 +83,7 @@ const LABELS: L<{
     provableAi: "IA prouvable",
     zeroTrust: "Zero Trust",
     agents: "Agents IA et actions critiques",
-    cSecurity: "Recherche · sécurité du logiciel C",
+    cSecurity: "Sécurité du logiciel C",
     cobol: "Modernisation des systèmes hérités",
     demo: "Démo",
     pythonToC: "Python vers C, prouvé",
@@ -91,6 +93,7 @@ const LABELS: L<{
     lab: "Le labo",
     research: "RECHERCHE",
     researchItem: "Recherche",
+    researchAll: "Toutes les notes de recherche",
     pilot: "DÉMARRER UN PILOTE",
     pilotItem: "Démarrer un pilote",
   },
@@ -116,9 +119,6 @@ export function siteNav(locale: Locale = defaultLocale) {
         { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" },
         { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" },
         { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" },
-        // The same engine, in research (Dom, 2026-10-16): listed under the
-        // technology, not under what is sold.
-        { href: `${r}/software-security`, label: t.cSecurity, page: "software-security" },
       ],
     },
     {
@@ -145,6 +145,15 @@ export function siteNav(locale: Locale = defaultLocale) {
         { href: `${r}/verify`, label: t.verify, page: "verify" },
         { href: `${r}/proof`, label: t.record, page: "proof" },
         { href: `${r}/lab`, label: t.lab, page: "lab" },
+      ],
+    },
+    {
+      // C research lives under RESEARCH, not TECHNOLOGY (Dom, 2026-10-17).
+      id: "research",
+      label: t.research,
+      items: [
+        { href: `${r}/research`, label: t.researchAll, page: "research-index" },
+        { href: `${r}/software-security`, label: t.cSecurity, page: "software-security" },
       ],
     },
   ];

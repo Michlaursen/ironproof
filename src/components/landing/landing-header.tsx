@@ -205,15 +205,6 @@ export function LandingHeader(props: HeaderProps) {
             </div>
             </Fragment>
           ))}
-          <a
-            href={nav.research.href}
-            aria-current={isActive(nav.research.page) ? "page" : undefined}
-            className={`whitespace-nowrap py-2 transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/40 ${
-              isActive(nav.research.page) ? "metal-shine" : "metal-text"
-            }`}
-          >
-            {nav.research.label}
-          </a>
 
           {/* No divider before it: the switch carries its own border box, and
               at the xl tier the French labels need every pixel back. */}
@@ -284,13 +275,6 @@ export function LandingHeader(props: HeaderProps) {
               </div>
               </Fragment>
             ))}
-            <a
-              href={nav.research.href}
-              onClick={() => setOpen(false)}
-              className={`track-mid border-b border-white/10 py-5 text-sm ${isActive(nav.research.page) ? "metal-shine" : "metal-text"}`}
-            >
-              {nav.research.label}
-            </a>
             <a
               href={contactHref}
               onClick={() => setOpen(false)}
