@@ -20,6 +20,9 @@ import { EngineState } from "@/components/landing/engine-state";
  * Titles and descriptions are read from each note's own copy, and the
  * papers from the same PAPERS list the home page renders — never re-typed
  * here, so the index cannot disagree with what it points at.
+ *
+ * Papers first, above the fold, then the notes, then the engine state (Dom,
+ * 2026-10-18): a reader who clicks RESEARCH came for the papers.
  */
 const NOTES = [
   {
@@ -76,34 +79,16 @@ export default async function ResearchIndexPage({ params }: PageProps) {
       <FadeUpInit />
       <LandingHeader variant="sub" locale={locale} page="research-index" />
       <main className="blueprint">
-        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-32 md:px-14">
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-8 pt-16 md:px-14">
           <p className="seal-label track-mid mb-4 text-xs">RESEARCH</p>
-          <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
+          <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] md:text-5xl">
             Research
           </h1>
-          <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">
+          <p className="mt-4 max-w-2xl text-lg font-light text-neutral-300">
             {META.description}
           </p>
         </section>
-        <EngineState locale={locale} />
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 md:px-14">
-          <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
-            {NOTES.map((n) => (
-              <li key={n.slug}>
-                <a href={n.slug} className="group block py-8">
-                  <p className="text-xs uppercase tracking-widest text-neutral-500">
-                    <time dateTime={n.date}>{n.date}</time> · {n.author}
-                  </p>
-                  <h2 className="mt-3 font-serif text-2xl font-medium text-neutral-100 group-hover:underline group-hover:underline-offset-4 md:text-3xl">
-                    {n.copy.h1}
-                  </h2>
-                  <p className="mt-3 font-light text-neutral-400">{n.copy.meta.description}</p>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
           <h2 className="seal-label track-mid mb-4 text-xs">PUBLISHED PAPERS · ARXIV</h2>
           <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
             {PAPERS.map((p) => (
@@ -123,6 +108,25 @@ export default async function ResearchIndexPage({ params }: PageProps) {
             ))}
           </ul>
         </section>
+        <section className="relative z-10 mx-auto max-w-7xl px-6 pb-16 md:px-14">
+          <h2 className="seal-label track-mid mb-4 text-xs">RESEARCH NOTES</h2>
+          <ul className="max-w-3xl divide-y divide-white/10 border-y border-white/10">
+            {NOTES.map((n) => (
+              <li key={n.slug}>
+                <a href={n.slug} className="group block py-8">
+                  <p className="text-xs uppercase tracking-widest text-neutral-500">
+                    <time dateTime={n.date}>{n.date}</time> · {n.author}
+                  </p>
+                  <h2 className="mt-3 font-serif text-2xl font-medium text-neutral-100 group-hover:underline group-hover:underline-offset-4 md:text-3xl">
+                    {n.copy.h1}
+                  </h2>
+                  <p className="mt-3 font-light text-neutral-400">{n.copy.meta.description}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+        <EngineState locale={locale} />
       </main>
     </div>
   );
