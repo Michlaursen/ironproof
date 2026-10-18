@@ -3630,3 +3630,36 @@ footer .seal-label { color: #7a5c22; filter: none; }
   }
 }
 @keyframes robot-forward { from { transform: none; } to { transform: translateY(-2.5%) scale(1.04); } }
+
+/* Chain break on /proof (2026-10-18): the Z3 trace as links that light one by
+ * one, then the last gap opens. Without .is-running nothing moves; reduced
+ * motion and no-observer browsers get .is-running at once (chain-break.tsx). */
+.chain-break { --step: 0.45s; }
+.chain-links { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 0; list-style: none; margin: 0; padding: 0; }
+.chain-link { position: relative; display: grid; justify-items: center; gap: 0.35rem; text-align: center; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.68rem; letter-spacing: 0.06em; color: #8a8e95; transition: color 0.4s ease, transform 0.6s ease; transition-delay: calc(var(--i) * var(--step)); }
+.chain-ring { width: 4.2rem; height: 2.4rem; border: 0.42rem solid #6b6f76; border-radius: 1.2rem; margin-bottom: 0.4rem; transition: border-color 0.4s ease, box-shadow 0.4s ease; transition-delay: inherit; }
+.chain-link:not(:last-child)::after { content: ""; position: absolute; top: 1.2rem; left: calc(50% + 2.1rem); right: calc(-50% + 2.1rem); height: 0.42rem; margin-top: -0.21rem; background: #6b6f76; transition: background 0.4s ease; transition-delay: inherit; }
+.chain-ok { color: #2f7a4f; opacity: 0; transition: opacity 0.4s ease; transition-delay: inherit; }
+.chain-total { opacity: 0.85; }
+.chain-act { font-weight: 600; letter-spacing: 0.04em; }
+.chain-break.is-running .chain-link { color: inherit; }
+.chain-break.is-running .chain-ring { border-color: #a8843a; box-shadow: 0 0 0 4px rgba(168, 132, 58, 0.14); }
+.chain-break.is-running .chain-link:not(:last-child)::after { background: #a8843a; }
+.chain-break.is-running .chain-ok { opacity: 1; }
+/* The break: the joint before the last link turns rust and the last link drifts away. */
+.chain-break.is-running .chain-link:nth-last-child(2)::after { background: transparent; border-top: 0.42rem dashed #9a3b2a; height: 0; transition-delay: calc(var(--n) * var(--step) + 0.2s); }
+.chain-break.is-running .chain-link-last { transform: translateX(0.9rem); transition-delay: calc(var(--n) * var(--step) + 0.2s); }
+.chain-break.is-running .chain-link-last .chain-ring { border-color: #9a3b2a; box-shadow: 0 0 0 4px rgba(154, 59, 42, 0.14); }
+.chain-break.is-running .chain-link-last .chain-total { color: #9a3b2a; font-weight: 700; }
+.chain-verdict { margin-top: 1.6rem; text-align: center; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; color: #9a3b2a; opacity: 0; transition: opacity 0.5s ease; }
+.chain-break.is-running .chain-verdict { opacity: 1; transition-delay: calc(var(--n) * var(--step) + 0.6s); }
+@media (max-width: 640px) {
+  .chain-links { grid-template-columns: 1fr; gap: 1.1rem; }
+  .chain-link { grid-template-columns: 3.2rem 1fr; justify-items: start; text-align: left; align-items: center; column-gap: 0.9rem; }
+  .chain-ring { grid-row: span 3; width: 2.4rem; height: 3.2rem; margin: 0; }
+  .chain-link:not(:last-child)::after { display: none; }
+  .chain-break.is-running .chain-link-last { transform: translateY(0.6rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chain-link, .chain-ring, .chain-ok, .chain-verdict, .chain-link::after { transition: none !important; }
+}
