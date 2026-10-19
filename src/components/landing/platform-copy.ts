@@ -214,7 +214,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         {
           name: "Code verification",
           body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We tell you if the new code still does what the old one did, under a stated model, or show the exact input where it differs.",
-          ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account. Coverage is still partial, and no third party has replayed it yet.",
+          ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account.",
           href: "/modernization",
           cta: "SEND US A TRANSLATION",
         },
@@ -367,7 +367,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         {
           name: "Vérification de code",
           body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. On vous dit si le nouveau code fait encore ce que faisait l’ancien, sous un modèle déclaré, ou on vous montre l’entrée précise où il diffère.",
-          ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte. La couverture reste partielle, et aucun tiers ne l’a encore rejouée.",
+          ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte.",
           href: "/fr/modernization",
           cta: "ENVOYEZ-NOUS UNE TRADUCTION",
         },
