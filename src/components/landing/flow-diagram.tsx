@@ -118,14 +118,48 @@ function Node({
   );
 }
 
-/** The frame around the diagram: who builds and runs it (architecture-plate.tsx, ENGINEERING_RAIL). */
-export type FlowRail = { k: string; t: string; items: readonly FlowLabel[] };
+/* The engineering system around the method, drawn as an architecture, not a
+ * list (Dom, 2026-10-19: « démontre-le en architecture, rends ça cool et
+ * innovant »): the foundation constrains every step from above, memory feeds
+ * the case on the way in, controls stand at the way out, and learning closes
+ * the loop: every refusal becomes a rule that memory hands to the next case. */
+export type OsGroup = { label: string; items: readonly FlowLabel[] };
+export type FlowRail = {
+  k: string;
+  t: string;
+  foundation: OsGroup;
+  memory: OsGroup;
+  learning: OsGroup;
+  control: OsGroup;
+  /** Arrow labels: constraint, way out, refusal, new rule, recall, loop. */
+  arrows: { constrains: string; out: string; refusal: string; rule: string; recall: string; loop: string };
+};
 
-const RAIL_TOP = 46;
-const RAIL_COLS = 4;
-const RAIL_CELL_H = 50;
-const RAIL_CELL_GAP = 10;
-const RAIL_PAD = 18;
+const OS_PAD = 18;
+const OS_TITLE = 38;
+const OS_FOUND_Y = 52;
+const OS_FOUND_H = 54;
+const OS_FOUND_LABEL = 136;
+const OS_GAP = 10;
+const OS_COL_GAP = 66;
+const OS_ITEM_H = 42;
+const OS_ITEM_GAP = 8;
+
+function OsItem({ x, y, w, it, tone }: { x: number; y: number; w: number; it: FlowLabel; tone: "paper" | "iron" }) {
+  const iron = tone === "iron";
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={OS_ITEM_H} rx={5} fill={iron ? "#23252a" : "rgba(255,255,255,0.75)"} stroke={iron ? "rgba(255,255,255,0.08)" : "rgba(201,162,74,0.55)"} />
+      <rect x={x} y={y} width={3} height={OS_ITEM_H} rx={1.5} fill={GOLD} />
+      <text x={x + 14} y={y + 18} fill={iron ? GOLD_SOFT : INK} fontSize={11.5} fontWeight={600} letterSpacing={1.5} fontFamily="var(--font-mono, monospace)">
+        {it[0]}
+      </text>
+      <text x={x + 14} y={y + 33} fill={iron ? "#c9c4b8" : "#55575c"} fontSize={10.5}>
+        {it[1]}
+      </text>
+    </g>
+  );
+}
 
 export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   if (f.lead.length === 0) return null;
@@ -158,15 +192,23 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
     `M${verdictX + VERDICT_W} ${mid} H${sealX}`,
   ].join(" ");
   const nums = (i: number) => String(i + 1).padStart(2, "0");
-  // With a rail, the diagram sits inside a frame: a title band on top, the
-  // agent's three disciplines along the bottom.
-  const ox = rail ? RAIL_PAD : 0;
-  const oy = rail ? RAIL_TOP : 0;
+  // With a rail: title, foundation strip, the method, then three columns
+  // (memory, learning, control) joined by the loop.
+  const ox = rail ? OS_PAD : 0;
+  const oy = rail ? OS_FOUND_Y + OS_FOUND_H + 40 : 0;
   const fullW = width + 2 * ox;
-  const rows = rail ? Math.ceil(rail.items.length / RAIL_COLS) : 0;
-  const railBottom = rail ? rows * (RAIL_CELL_H + RAIL_CELL_GAP) + 18 : 0;
-  const fullH = height + (rail ? RAIL_TOP + railBottom : 0);
-  const cellW = rail ? (fullW - 2 * RAIL_PAD - (RAIL_COLS - 1) * RAIL_CELL_GAP) / RAIL_COLS : 0;
+  const colsY = oy + height + 64;
+  const colW = (fullW - 2 * OS_PAD - 2 * OS_COL_GAP) / 3;
+  const colX = [OS_PAD, OS_PAD + colW + OS_COL_GAP, OS_PAD + 2 * (colW + OS_COL_GAP)];
+  const maxItems = rail ? Math.max(rail.memory.items.length, rail.learning.items.length, rail.control.items.length) : 0;
+  const colH = 22 + maxItems * (OS_ITEM_H + OS_ITEM_GAP);
+  const fullH = rail ? colsY + colH + 26 : height;
+  const foundN = rail ? rail.foundation.items.length : 0;
+  const foundW = rail ? (fullW - 2 * OS_PAD - OS_FOUND_LABEL - foundN * OS_GAP) / Math.max(foundN, 1) : 0;
+  const midCols = colsY + 22 + (colH - 22) / 2;
+  const caseX = ox + leadX[0] + LEAD_W / 2;
+  const sealCx = ox + sealX + SEAL_W / 2;
+  const nodeBottom = oy + mid + H / 2;
   const k = f.lead.length;
 
   return (
@@ -201,31 +243,80 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
           <style>{`.${id}-dash{stroke-dasharray:3 9;animation:${id}-run 1.6s linear infinite}@keyframes ${id}-run{to{stroke-dashoffset:-24}}@media (prefers-reduced-motion: reduce){.${id}-pulse{display:none}.${id}-dash{animation:none}}`}</style>
           {rail ? (
             <g>
-              <rect x={1} y={1} width={fullW - 2} height={fullH - 2} rx={10} fill="none" stroke={GOLD} strokeOpacity={0.55} strokeDasharray="2 6" strokeWidth={1.2} />
-              <rect x={1} y={1} width={fullW - 2} height={RAIL_TOP - 10} rx={10} fill={`url(#${id}-iron)`} />
-              <circle cx={RAIL_PAD + 6} cy={(RAIL_TOP - 10) / 2 + 1} r={3.5} fill={GOLD_SOFT} />
-              <text x={RAIL_PAD + 18} y={(RAIL_TOP - 10) / 2 + 5.5} fill="#f1efe9" fontSize={13} fontWeight={600} letterSpacing={2.4} fontFamily="var(--font-mono, monospace)">
+              <defs>
+                <marker id={`${id}-arrow`} viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 L10 5 L0 10 z" fill={GOLD} />
+                </marker>
+              </defs>
+              <rect x={1} y={1} width={fullW - 2} height={fullH - 2} rx={12} fill="none" stroke={GOLD} strokeOpacity={0.5} strokeDasharray="2 6" strokeWidth={1.2} />
+              {/* Title band */}
+              <rect x={1} y={1} width={fullW - 2} height={OS_TITLE} rx={12} fill={`url(#${id}-iron)`} />
+              <circle cx={OS_PAD + 6} cy={OS_TITLE / 2 + 1} r={3.5} fill={GOLD_SOFT} />
+              <text x={OS_PAD + 18} y={OS_TITLE / 2 + 5.5} fill="#f1efe9" fontSize={13} fontWeight={600} letterSpacing={2.6} fontFamily="var(--font-mono, monospace)">
                 {rail.k.toUpperCase()}
               </text>
-              <text x={fullW - RAIL_PAD} y={(RAIL_TOP - 10) / 2 + 5.5} textAnchor="end" fill="#b9b6af" fontSize={12.5}>
+              <text x={fullW - OS_PAD} y={OS_TITLE / 2 + 5.5} textAnchor="end" fill="#b9b6af" fontSize={12.5}>
                 {rail.t}
               </text>
-              {rail.items.map((it, i) => {
-                const px = RAIL_PAD + (i % RAIL_COLS) * (cellW + RAIL_CELL_GAP);
-                const py = fullH - railBottom + 4 + Math.floor(i / RAIL_COLS) * (RAIL_CELL_H + RAIL_CELL_GAP);
+              {/* Foundation: one beam across the top that constrains every step */}
+              <rect x={OS_PAD} y={OS_FOUND_Y} width={fullW - 2 * OS_PAD} height={OS_FOUND_H} rx={6} fill={`url(#${id}-iron)`} filter={`url(#${id}-shadow)`} />
+              <text x={OS_PAD + 16} y={OS_FOUND_Y + OS_FOUND_H / 2 + 4.5} fill={GOLD_SOFT} fontSize={12} fontWeight={600} letterSpacing={2.4} fontFamily="var(--font-mono, monospace)">
+                {rail.foundation.label}
+              </text>
+              {rail.foundation.items.map((it, i) => {
+                const x = OS_PAD + OS_FOUND_LABEL + i * (foundW + OS_GAP);
                 return (
                   <g key={it[0]}>
-                    <rect x={px} y={py} width={cellW} height={RAIL_CELL_H} rx={5} fill="rgba(201,162,74,0.08)" stroke={GOLD} strokeOpacity={0.6} />
-                    <rect x={px} y={py} width={3} height={RAIL_CELL_H} rx={1.5} fill={GOLD} />
-                    <text x={px + 14} y={py + 21} fill={INK} fontSize={12} fontWeight={600} letterSpacing={1.6} fontFamily="var(--font-mono, monospace)">
+                    <rect x={x} y={OS_FOUND_Y + 7} width={foundW} height={OS_FOUND_H - 14} rx={4} fill="rgba(201,162,74,0.10)" stroke={GOLD} strokeOpacity={0.55} />
+                    <text x={x + 12} y={OS_FOUND_Y + 25} fill={GOLD_SOFT} fontSize={11} fontWeight={600} letterSpacing={1.4} fontFamily="var(--font-mono, monospace)">
                       {it[0]}
                     </text>
-                    <text x={px + 14} y={py + 38} fill="#55575c" fontSize={11}>
+                    <text x={x + 12} y={OS_FOUND_Y + 39} fill="#cfcac0" fontSize={10}>
                       {it[1]}
                     </text>
                   </g>
                 );
               })}
+              {/* Constraint arrows from the beam onto the method */}
+              {[0.18, 0.5, 0.82].map((r) => (
+                <path key={r} d={`M${fullW * r} ${OS_FOUND_Y + OS_FOUND_H + 4} V${oy - 10}`} stroke={GOLD} strokeOpacity={0.7} strokeWidth={1.2} strokeDasharray="3 4" markerEnd={`url(#${id}-arrow)`} />
+              ))}
+              <text x={fullW * 0.5 + 10} y={oy - 16} fill="#8a8780" fontSize={10.5} fontStyle="italic">
+                {rail.arrows.constrains}
+              </text>
+              {/* The three columns */}
+              {(
+                [
+                  [rail.memory, "paper"],
+                  [rail.learning, "iron"],
+                  [rail.control, "paper"],
+                ] as const
+              ).map(([g, tone], c) => (
+                <g key={g.label}>
+                  <text x={colX[c]} y={colsY + 12} fill={GOLD} fontSize={12} fontWeight={600} letterSpacing={2.4} fontFamily="var(--font-mono, monospace)">
+                    {g.label}
+                  </text>
+                  {g.items.map((it, i) => (
+                    <OsItem key={it[0]} x={colX[c]} y={colsY + 22 + i * (OS_ITEM_H + OS_ITEM_GAP)} w={colW} it={it} tone={tone} />
+                  ))}
+                </g>
+              ))}
+              {/* The loop: seal -> control -> learning -> memory -> case */}
+              <g fill="none" stroke={GOLD} strokeWidth={1.5} strokeOpacity={0.85}>
+                <path d={`M${sealCx} ${nodeBottom + 4} V${colsY - 4}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
+                <path d={`M${colX[2] - 6} ${midCols} H${colX[1] + colW + 6}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
+                <path d={`M${colX[1] - 6} ${midCols} H${colX[0] + colW + 6}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
+                <path d={`M${caseX} ${colsY - 4} V${nodeBottom + 4}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
+              </g>
+              <g fill="#6f6c66" fontSize={10.5} fontStyle="italic">
+                <text x={sealCx + 8} y={(nodeBottom + colsY) / 2 + 4}>{rail.arrows.out}</text>
+                <text x={colX[2] - OS_COL_GAP / 2} y={midCols - 10} textAnchor="middle">{rail.arrows.refusal}</text>
+                <text x={colX[1] - OS_COL_GAP / 2} y={midCols - 10} textAnchor="middle">{rail.arrows.rule}</text>
+                <text x={caseX + 8} y={(nodeBottom + colsY) / 2 + 4}>{rail.arrows.recall}</text>
+              </g>
+              <text x={fullW / 2} y={fullH - 10} textAnchor="middle" fill={GOLD} fontSize={11} letterSpacing={2} fontFamily="var(--font-mono, monospace)">
+                {rail.arrows.loop}
+              </text>
             </g>
           ) : null}
           <g transform={`translate(${ox} ${oy})`}>

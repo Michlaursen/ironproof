@@ -23,6 +23,74 @@ type HowCopy = {
   os: FlowRail;
 };
 
+/* The method diagram, in English on every page too (Dom, 2026-10-19: « tout en anglais, zero french »). */
+const FLOW_EN: FlowCopy = {
+      caption: "The path of one case: two independent checks, one verdict, a sealed record.",
+      lead: [
+        ["YOUR CASE", "policy, fix, program"],
+        ["MODEL", "precise logic"],
+      ],
+      // The engines by name (Dom, 2026-10-19: « on parle pas des outils? »), the same set as the architecture plate.
+      top: ["SOLVER", "every case the model allows"],
+      bottom: ["SECOND CHECK", "independent of the first"],
+      topInset: [["Z3", "SMT solver"], ["SPACER", "loop invariants"], ["CBMC", "C code, bounded"]],
+      bottomInset: [["cvc5", "second solver"], ["IBM COBOL", "real runs"], ["LEAN 4", "gate logic"]],
+      verdict: ["VERDICT", "holds, or what breaks it"],
+      seal: ["SEALED", "re-run without us"],
+    };
+
+/* The cognitive operating system, in English on every page (Dom, 2026-10-19: « tout en anglais, zero french »). */
+const OS_EN: FlowRail = {
+      k: "Ironproof cognitive operating system",
+      t: "Governs the engineering agent that builds every check",
+      foundation: {
+        label: "FOUNDATION",
+        items: [
+          ["AXIOMS", "proven, conjecture or open"],
+          ["THREE LAWS", "the human decides, truth first"],
+          ["ACTION KERNEL", "a single-use key per action"],
+          ["SIGNED LEDGER", "SHA3 chain, Ed25519 events"],
+          ["OWN SERVER", "every repository on our hardware"],
+        ],
+      },
+      memory: {
+        label: "MEMORY",
+        items: [
+          ["RECALL", "the right memory on every request"],
+          ["PERSISTENT MEMORY", "each decision and lesson, versioned"],
+          ["KNOWLEDGE GRAPH", "rebuilt from the signed ledger"],
+          ["PROMISES", "every next action tracked, kept or open"],
+        ],
+      },
+      learning: {
+        label: "LEARNING",
+        items: [
+          ["OBSTACLE LOG", "each wall noted with its way around"],
+          ["LEARNED RULES", "an error seen 3 times in 14 days"],
+          ["RULE EFFICACY", "weak rules flagged for rewrite"],
+          ["WAGERS", "bets fixed before the result"],
+          ["CORRECTION RATE", "founder corrections, measured weekly"],
+        ],
+      },
+      control: {
+        label: "CONTROL",
+        items: [
+          ["CLAIM CHECK", "no claim without its command and output"],
+          ["INDEPENDENT REVIEWER", "objects before any risky action"],
+          ["COMMIT CHAIN", "types, secrets, named files only"],
+          ["CHECK HEALTH", "each check seen refusing"],
+        ],
+      },
+      arrows: {
+        constrains: "constrains every step",
+        out: "every result",
+        refusal: "each refusal",
+        rule: "a new rule",
+        recall: "recall",
+        loop: "EVERY REFUSAL BECOMES A RULE · EVERY RULE MEETS THE NEXT CASE",
+      },
+    };
+
 const COPY: L<HowCopy> = {
   en: {
     eyebrow: "HOW OUR PLATFORM WORKS",
@@ -45,34 +113,8 @@ const COPY: L<HowCopy> = {
         body: "The proof, or the exact case that differs or breaks the rule, sealed with a classical and a post-quantum signature. Your auditor re-runs it without us.",
       },
     ],
-    os: {
-      k: "Ironproof cognitive operating system",
-      t: "Governs the engineering agent that builds every check",
-      items: [
-        ["AXIOMS", "Truth first: proven, conjecture or open"],
-        ["PERSISTENT MEMORY", "Every decision and lesson, versioned"],
-        ["LEARNED RULES", "An error seen three times becomes a rule"],
-        ["CLAIM CHECK", "No report without its command and output"],
-        ["INDEPENDENT REVIEWER", "Objects before any risky action"],
-        ["COMMIT CHAIN", "Type check, secret scan, named files only"],
-        ["SIGNED LEDGER", "Every push authorized and recorded"],
-        ["SESSION CLOSE", "Ten checks before a session ends"],
-      ],
-    },
-    flow: {
-      caption: "The path of one case: two independent checks, one verdict, a sealed record.",
-      lead: [
-        ["YOUR CASE", "policy, fix, program"],
-        ["MODEL", "precise logic"],
-      ],
-      // The engines by name (Dom, 2026-10-19: « on parle pas des outils? »), the same set as the architecture plate.
-      top: ["SOLVER", "every case the model allows"],
-      bottom: ["SECOND CHECK", "independent of the first"],
-      topInset: [["Z3", "SMT solver"], ["SPACER", "loop invariants"], ["CBMC", "C code, bounded"]],
-      bottomInset: [["cvc5", "second solver"], ["IBM COBOL", "real runs"], ["LEAN 4", "gate logic"]],
-      verdict: ["VERDICT", "holds, or what breaks it"],
-      seal: ["SEALED", "re-run without us"],
-    },
+    os: OS_EN,
+    flow: FLOW_EN,
   },
   fr: {
     eyebrow: "COMMENT FONCTIONNE NOTRE PLATEFORME",
@@ -95,33 +137,8 @@ const COPY: L<HowCopy> = {
         body: "La preuve, ou le cas précis qui diffère ou qui brise la règle, scellée avec une signature classique et une signature post-quantique. Votre auditeur la refait sans nous.",
       },
     ],
-    os: {
-      k: "Système d’exploitation cognitif d’Ironproof",
-      t: "Encadre l’agent d’ingénierie qui bâtit chaque vérification",
-      items: [
-        ["AXIOMES", "La vérité d’abord : prouvé, conjecture ou ouvert"],
-        ["MÉMOIRE PERSISTANTE", "Chaque décision et leçon, versionnée"],
-        ["RÈGLES APPRISES", "Une erreur vue trois fois devient une règle"],
-        ["CONTRÔLE DES AFFIRMATIONS", "Aucun rapport sans commande ni sortie"],
-        ["RELECTEUR INDÉPENDANT", "Objecte avant toute action risquée"],
-        ["CHAÎNE DE COMMIT", "Types, secrets, fichiers nommés seulement"],
-        ["REGISTRE SIGNÉ", "Chaque envoi autorisé et consigné"],
-        ["FERMETURE DE SESSION", "Dix contrôles avant de fermer"],
-      ],
-    },
-    flow: {
-      caption: "Le parcours d’un cas : deux vérifications indépendantes, un verdict, un dossier scellé.",
-      lead: [
-        ["VOTRE CAS", "règle, correctif, code"],
-        ["MODÈLE", "logique précise"],
-      ],
-      top: ["SOLVEUR", "tous les cas du modèle"],
-      bottom: ["2E VÉRIFICATION", "indépendante de la 1re"],
-      topInset: [["Z3", "solveur SMT"], ["SPACER", "invariants"], ["CBMC", "code C, borné"]],
-      bottomInset: [["cvc5", "2e solveur"], ["IBM COBOL", "vraie exécution"], ["LEAN 4", "logique barrière"]],
-      verdict: ["VERDICT", "tient, ou ce qui casse"],
-      seal: ["SCELLÉ", "revérifiable sans nous"],
-    },
+    os: OS_EN,
+    flow: FLOW_EN,
   },
 };
 
