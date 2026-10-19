@@ -238,7 +238,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "An AI agent with valid credentials can still send the wrong payment. Every critical action routed through Ironproof is checked against your rules before it runs, and each decision is sealed so your auditor can check it without us. We prove what can be proven, and say so when we cannot.",
+        "An AI agent with valid credentials can still send the wrong payment. Every critical action routed through Ironproof is checked against your rules before it runs, and each decision is sealed so your auditor can check it without us. We prove what can be proven, and say so when we cannot. We don’t build the agents or the code we verify, so we have no reason to tell you it’s fine.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -677,7 +677,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Un agent IA avec des accès valides peut quand même envoyer le mauvais paiement. Chaque action critique qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter, et chaque décision est scellée pour que votre auditeur puisse la vérifier sans nous. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas.",
+        "Un agent IA avec des accès valides peut quand même envoyer le mauvais paiement. Chaque action critique qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter, et chaque décision est scellée pour que votre auditeur puisse la vérifier sans nous. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas. Nous ne construisons ni les agents ni le code que nous vérifions : nous n’avons aucune raison de vous dire que tout va bien.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",

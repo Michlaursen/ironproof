@@ -229,7 +229,7 @@ export const LIMITS_COPY: ResearchCopy = {
     items: [
       ["/proof", "How we prove", "Testing versus proving, and a proof you can open"],
       ["/provable-ai", "Provable AI", "What a proof adds to an AI system, and what it does not"],
-      ["/modernization", "Code translation", "Python to C, Python to Rust, COBOL to Python, checked for the same results"],
+      ["/modernization", "Translation check", "Translations made by others, checked for the same results"],
       ["/verify", "Verify a seal", "Check a sealed result in your browser"],
     ],
   },
