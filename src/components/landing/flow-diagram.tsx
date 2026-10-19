@@ -194,6 +194,38 @@ function OsItem({ x, y, w, it, tone }: { x: number; y: number; w: number; it: Fl
   );
 }
 
+/* A trace is a path of right-angle hops through the three columns; some hops
+ * stop inside an item, which lights up as the point arrives (Dom, 2026-10-19:
+ * « voir tout connecté proprement »). Each trace tells one true story of the
+ * system, so the light follows what really passes from one organ to the next. */
+type Hop = { x: number; y: number; lit?: readonly [number, number] };
+type Lit = { c: number; i: number; f: number };
+
+function traceOf(hops: readonly Hop[]): { d: string; lit: Lit[] } {
+  let s = 0;
+  const at: { c: number; i: number; s: number }[] = [];
+  hops.forEach((h, k) => {
+    const prev = hops[k - 1];
+    if (prev) s += Math.abs(h.x - prev.x) + Math.abs(h.y - prev.y);
+    if (h.lit) at.push({ c: h.lit[0], i: h.lit[1], s });
+  });
+  const d = hops.map((h, k) => `${k === 0 ? "M" : "L"}${h.x} ${h.y}`).join(" ");
+  return { d, lit: at.map((a) => ({ c: a.c, i: a.i, f: s > 0 ? a.s / s : 0 })) };
+}
+
+// One cycle for both traces: the first story, a breath, the second story.
+const TRACE_T = 18;
+const TRACE_ACT = 8;
+const TRACE_B_AT = 9;
+
+/** keyTimes for a light that peaks when the point arrives, then fades. */
+function glowTimes(f: number): string {
+  const t = Math.min(Math.max(f * (TRACE_ACT / TRACE_T), 0.002), 0.9);
+  const a = Math.max(t - 0.012, 0.001);
+  const e = Math.min(t + 0.1, 0.999);
+  return `0;${a.toFixed(4)};${t.toFixed(4)};${e.toFixed(4)};1`;
+}
+
 export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   if (f.lead.length === 0) return null;
   const id = `fd${hash(f.caption)}`;
@@ -268,7 +300,6 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   const fullH = rail ? colsY + colH + 26 : height;
   const foundN = rail ? rail.foundation.items.length : 0;
   const foundW = rail ? (fullW - 2 * OS_PAD - OS_FOUND_LABEL - foundN * OS_GAP) / Math.max(foundN, 1) : 0;
-  const midCols = colsY + 22 + (colH - 22) / 2;
   const caseX = ox + leadX[0] + LEAD_W / 2;
   const sealCx = ox + sealMidX;
   const nodeBottom = oy + mid + H / 2;
@@ -277,6 +308,55 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   // The whole loop, in the method's own coordinates: through the method to the
   // seal, down to the bus, back along it to the case, up into the next case.
   const loopPath = `${throughTop} V${busY - oy} H${cx0} V${mid}`;
+  // Item geometry, and the two stories that light the columns.
+  const itemTop = (i: number) => colsY + 22 + i * (OS_ITEM_H + OS_ITEM_GAP);
+  const itemMid = (i: number) => itemTop(i) + OS_ITEM_H / 2;
+  const gapCL = colX[2] - OS_COL_GAP / 2;
+  const gapML = colX[1] - OS_COL_GAP / 2;
+  const tx = Math.min(Math.max(sealCx, colX[2] + 24), colX[2] + colW - 24);
+  const lx = colX[1] + colW * 0.75;
+  const mx = colX[0] + colW * 0.7;
+  const entry: Hop[] = [
+    { x: sealCx, y: nodeBottom + 4 },
+    { x: sealCx, y: colsY - 12 },
+    { x: tx, y: colsY - 12 },
+  ];
+  // A: the orchestrator runs, a check refuses, the refusal is logged and
+  // becomes a rule, the rule is written to memory, recall hands it to the next case.
+  const traceA = traceOf([
+    ...entry,
+    { x: tx, y: itemMid(0), lit: [2, 0] },
+    { x: tx, y: itemMid(1), lit: [2, 1] },
+    { x: tx, y: itemMid(2), lit: [2, 2] },
+    { x: gapCL, y: itemMid(2) },
+    { x: gapCL, y: itemMid(0) },
+    { x: lx, y: itemMid(0), lit: [1, 0] },
+    { x: lx, y: itemMid(1), lit: [1, 1] },
+    { x: gapML, y: itemMid(1) },
+    { x: mx, y: itemMid(1), lit: [0, 1] },
+    { x: mx, y: itemMid(2), lit: [0, 2] },
+    { x: caseX, y: itemMid(2) },
+    { x: caseX, y: itemMid(0), lit: [0, 0] },
+    { x: caseX, y: nodeBottom + 4 },
+  ]);
+  // B: the commit chain and the health of the checks feed the measures, which
+  // judge each rule; what is still open becomes a tracked promise.
+  const traceB = traceOf([
+    ...entry,
+    { x: tx, y: itemMid(3), lit: [2, 3] },
+    { x: tx, y: itemMid(4), lit: [2, 4] },
+    { x: gapCL, y: itemMid(4) },
+    { x: lx, y: itemMid(4), lit: [1, 4] },
+    { x: lx, y: itemMid(3), lit: [1, 3] },
+    { x: lx, y: itemMid(2), lit: [1, 2] },
+    { x: gapML, y: itemMid(2) },
+    { x: gapML, y: itemMid(3) },
+    { x: mx, y: itemMid(3), lit: [0, 3] },
+  ]);
+  const traces = [
+    { t: traceA, begin: 0 },
+    { t: traceB, begin: TRACE_B_AT },
+  ] as const;
 
   return (
     <figure className="fade-up mt-14">
@@ -356,6 +436,12 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
               <text x={fullW * 0.5 + 10} y={oy - 16} fill="#8a8780" fontSize={10.5} fontStyle="italic">
                 {rail.arrows.constrains}
               </text>
+              {/* The wiring behind the columns */}
+              <g fill="none" stroke={GOLD} strokeOpacity={0.35} strokeWidth={1.1} strokeDasharray="2 5">
+                {traces.map(({ t, begin }) => (
+                  <path key={begin} d={t.d} />
+                ))}
+              </g>
               {/* The three columns */}
               {(
                 [
@@ -373,11 +459,27 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
                   ))}
                 </g>
               ))}
+              {/* Each item lights as the point arrives */}
+              <g className={`${id}-pulse`} filter={`url(#${id}-glow)`}>
+                {traces.flatMap(({ t, begin }) =>
+                  t.lit.map((l) => (
+                    <rect key={`${begin}-${l.c}-${l.i}`} x={colX[l.c]} y={itemTop(l.i)} width={colW} height={OS_ITEM_H} rx={5} fill={GOLD} fillOpacity={0.3} stroke={GOLD} strokeWidth={2.2} opacity={0}>
+                      <animate attributeName="opacity" dur={`${TRACE_T}s`} begin={`${begin}s`} repeatCount="indefinite" values="0;0;1;0;0" keyTimes={glowTimes(l.f)} />
+                    </rect>
+                  )),
+                )}
+              </g>
+              <g className={`${id}-pulse`} filter={`url(#${id}-glow)`} fill={GOLD_SOFT}>
+                {traces.map(({ t, begin }) => (
+                  <circle key={begin} r={4} opacity={0}>
+                    <animateMotion dur={`${TRACE_T}s`} begin={`${begin}s`} repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" keyTimes={`0;${(TRACE_ACT / TRACE_T).toFixed(4)};1`} path={t.d} />
+                    <animate attributeName="opacity" dur={`${TRACE_T}s`} begin={`${begin}s`} repeatCount="indefinite" values="1;1;0;0" keyTimes={`0;${(TRACE_ACT / TRACE_T).toFixed(4)};${(TRACE_ACT / TRACE_T + 0.005).toFixed(4)};1`} />
+                  </circle>
+                ))}
+              </g>
               {/* The loop: seal -> control -> learning -> memory -> case */}
               <g fill="none" stroke={GOLD} strokeWidth={1.5} strokeOpacity={0.85}>
                 <path d={`M${sealCx} ${nodeBottom + 4} V${colsY - 4}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
-                <path d={`M${colX[2] - 6} ${midCols} H${colX[1] + colW + 6}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
-                <path d={`M${colX[1] - 6} ${midCols} H${colX[0] + colW + 6}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
                 <path d={`M${caseX} ${colsY - 4} V${nodeBottom + 4}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
               </g>
               {/* The bus the loop rides on */}
@@ -389,17 +491,11 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
                     <animateMotion dur="2.4s" begin={`${i * 0.8}s`} repeatCount="indefinite" path={`M${fullW * r} ${OS_FOUND_Y + OS_FOUND_H + 4} V${oy - 12}`} />
                   </circle>
                 ))}
-                <circle r={3.2}>
-                  <animateMotion dur="2.2s" repeatCount="indefinite" path={`M${colX[2] - 6} ${midCols} H${colX[1] + colW + 8}`} />
-                </circle>
-                <circle r={3.2}>
-                  <animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path={`M${colX[1] - 6} ${midCols} H${colX[0] + colW + 8}`} />
-                </circle>
               </g>
               <g fill="#6f6c66" fontSize={10.5} fontStyle="italic">
                 <text x={sealCx + 8} y={(nodeBottom + colsY) / 2 + 4}>{rail.arrows.out}</text>
-                <text x={colX[2] - OS_COL_GAP / 2} y={midCols - 10} textAnchor="middle">{rail.arrows.refusal}</text>
-                <text x={colX[1] - OS_COL_GAP / 2} y={midCols - 10} textAnchor="middle">{rail.arrows.rule}</text>
+                <text x={gapCL} y={colsY + 12} textAnchor="middle">{rail.arrows.refusal}</text>
+                <text x={gapML} y={colsY + 12} textAnchor="middle">{rail.arrows.rule}</text>
                 <text x={caseX + 8} y={(nodeBottom + colsY) / 2 + 4}>{rail.arrows.recall}</text>
               </g>
               <text x={fullW / 2} y={fullH - 10} textAnchor="middle" fill={GOLD} fontSize={11} letterSpacing={2} fontFamily="var(--font-mono, monospace)">
