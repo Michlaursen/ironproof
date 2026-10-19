@@ -1,5 +1,4 @@
 import { defaultLocale, type Locale } from "@/content";
-import { ACTION_COPY, ACTION_IDS } from "./action-types";
 import { type L, pick } from "./i18n";
 
 /*
@@ -9,8 +8,8 @@ import { type L, pick } from "./i18n";
  * action pages shipped while the header still listed the six links of the
  * old one-page site.
  *
- * Action-type labels come from action-types.ts, the same strings as the home
- * page's tabs and the pages' own eyebrows.
+ * Since 2026-10-19 (Dom) the action types no longer sit in the menu: each
+ * tab of the home page's #decide section opens its own page.
  */
 
 export type NavItem = { href: string; label: string; page?: string };
@@ -49,15 +48,15 @@ const LABELS: L<{
 }> = {
   en: {
     technology: "TECHNOLOGY",
-    solutions: "SOLUTIONS",
+    solutions: "PRODUCTS",
     evidence: "EVIDENCE",
     how: "How it works",
     proofIntelligence: "What is Proof Intelligence",
     neuroSymbolic: "Neuro-symbolic",
     provableAi: "Provable AI",
     zeroTrust: "Zero Trust",
-    agents: "AI agents & critical actions",
-    cobol: "Translation check",
+    agents: "Critical actions",
+    cobol: "Code verification",
     demo: "Demo",
     pythonToC: "Python to C, proven",
     dossier: "Verification dossier",
@@ -71,15 +70,15 @@ const LABELS: L<{
   },
   fr: {
     technology: "TECHNOLOGIE",
-    solutions: "SOLUTIONS",
+    solutions: "PRODUITS",
     evidence: "PREUVES",
     how: "Fonctionnement",
     proofIntelligence: "Proof Intelligence",
     neuroSymbolic: "Neuro-symbolique",
     provableAi: "IA prouvable",
     zeroTrust: "Zero Trust",
-    agents: "Agents IA et actions critiques",
-    cobol: "Vérification de traduction",
+    agents: "Actions critiques",
+    cobol: "Vérification de code",
     demo: "Démo",
     pythonToC: "Python vers C, prouvé",
     dossier: "Dossier de vérification",
@@ -93,16 +92,10 @@ const LABELS: L<{
   },
 };
 
-function cap(s: string): string {
-  const lower = s.toLocaleLowerCase("fr");
-  return lower.charAt(0).toLocaleUpperCase("fr") + lower.slice(1);
-}
-
 export function siteNav(locale: Locale = defaultLocale) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const home = r || "/";
   const t = pick(LABELS, locale);
-  const actions = pick(ACTION_COPY, locale);
   const groups: NavGroup[] = [
     {
       id: "technology",
@@ -118,16 +111,12 @@ export function siteNav(locale: Locale = defaultLocale) {
     {
       id: "solutions",
       label: t.solutions,
+      // PRODUCTS, two entries (Dom, 2026-10-19, "go"): code first, critical
+      // actions second. The four action pages stay one click away: each tab of
+      // the #decide section links to its own page (agent-scenarios.tsx).
       items: [
-        // First since 2026-10-19 (Dom: the check of what a machine rewrote leads,
-        // the gate comes second). Sold as a service since 2026-10-17 (Dom, "GO").
         { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
         { href: `${home}#decide`, label: t.agents },
-        ...ACTION_IDS.map((id) => ({
-          href: `${r}/actions/${id}`,
-          label: `· ${cap(actions[id].tab)}`,
-          page: `act-${id}`,
-        })),
       ],
     },
     {

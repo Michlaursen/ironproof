@@ -239,7 +239,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Same behavior within the stated scope. Or the exact case that differs, replayed on your own compiler. Or we say we couldn’t tell.\nCritical actions: checked against your rules, allowed when they comply, blocked when they break them.\nIndependent. Sealed. Verifiable without trusting us.",
+        "Same behavior within the stated scope. Or the exact case that differs, replayed on your own compiler. Or we say we couldn’t tell.\nIndependent. Sealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -678,7 +678,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Même comportement, dans le périmètre annoncé. Sinon, le cas précis qui diffère, rejoué sur votre propre compilateur. Et quand on ne peut pas trancher, on vous le dit.\nActions critiques : vérifiées selon vos règles. Conformes, elles passent. Sinon, elles sont bloquées.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
+        "Même comportement, dans le périmètre annoncé. Sinon, le cas précis qui diffère, rejoué sur votre propre compilateur. Et quand on ne peut pas trancher, on vous le dit.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
