@@ -29,6 +29,9 @@ export type RewriteCopy = {
   method: { title: string; lead: string };
   answers: readonly [Answer, Answer, Answer];
   who: string;
+  /** Our model against IBM's compiler (.omg/oracle/confrontation_ibm_7b91abb_z416_2026-10-19.txt in omg-universe). Dated: the count moves with the suite. */
+  ibmLabel: string;
+  ibmLine: string;
   /** The audit comes first, the proof second: two reports (Dom, 2026-10-19). */
   audit: string;
   auditLink: string;
@@ -64,6 +67,8 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
     ],
     who: "We don’t translate. We check the translations others make, for the side that carries the risk if it breaks.",
+    ibmLabel: "CHECKED AGAINST IBM, NOT AGAINST OURSELVES",
+    ibmLine: "On 564 COBOL test programs, 1,232 values computed by our model were compared with what IBM’s own compiler produces: none contradicted it. As of October 19, 2026; programs that could not be compared are set aside, not counted.",
     audit: "It starts with a traceability audit: we check what the translation says about itself, its cited sources, its data mapping, its compliance sheets. The proof of behavior comes next, in its own report.",
     auditLink: "SEE THE AUDIT",
     exampleLabel: "ALREADY RUN",
@@ -96,6 +101,8 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
     ],
     who: "On ne traduit pas. On vérifie ce que d’autres ont traduit, pour vous, qui en portez le risque.",
+    ibmLabel: "CONFRONTÉ À IBM, PAS À NOUS-MÊMES",
+    ibmLine: "Sur 564 programmes COBOL de test, 1 232 valeurs calculées par notre modèle ont été comparées à ce que produit le compilateur d’IBM : aucune ne le contredit. Au 19 octobre 2026 ; les programmes qu’on n’a pas pu comparer sont mis de côté, pas comptés.",
     audit: "On commence par un audit de traçabilité : on vérifie ce que la traduction dit d’elle-même, ses sources citées, sa correspondance de données, ses fiches de conformité. La preuve de comportement vient ensuite, dans son propre rapport.",
     auditLink: "VOIR L’AUDIT",
     exampleLabel: "DÉJÀ FAIT",
@@ -132,6 +139,10 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
+        <div className="fade-up mt-12 max-w-3xl border-l-2 border-seal/60 pl-6">
+          <p className="seal-label track-mid mb-3 text-xs">{t.ibmLabel}</p>
+          <p className="text-base font-light leading-relaxed text-neutral-300 md:text-lg">{t.ibmLine}</p>
+        </div>
         <p className="fade-up mt-16 max-w-3xl font-serif text-2xl leading-snug text-neutral-200 md:text-3xl">{t.who}</p>
         <p className="fade-up mt-8 max-w-3xl text-base font-light leading-relaxed text-neutral-300 md:text-lg">
           {t.audit}{" "}
