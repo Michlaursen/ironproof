@@ -34,7 +34,7 @@ export const HERO_COPY: L<HeroCopy> = {
     // Dom, 2026-10-19: the company line under the category, kept short (« le tiers indépendant qui prouve »).
     eyebrowSub: "THE INDEPENDENT THIRD PARTY THAT PROVES",
     headline: "Your code was rewritten.",
-    headlineEnd: "Know if it still does the same thing.",
+    headlineEnd: "Does it still do the same thing?",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
