@@ -9,6 +9,7 @@ import { PLATFORM_COPY } from "./platform-copy";
 import { PAPERS, PUBLISHED_CVES, publicRecord } from "./credibility";
 import { APP_LABELS, APP_PAPERS, APP_PILLAR, type AppId } from "./application-copy";
 import { ModernizationHow } from "./modernization-how";
+import { REWRITE_COPY } from "./rewrite-check";
 
 /*
  * One page per application that had none: /software-security and
@@ -48,6 +49,10 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
   const home = locale === defaultLocale ? "/" : `/${locale}`;
   const pv = pick(PROVENANCE, locale);
   const record = publicRecord(locale);
+  // /modernization says the three answers of the home page, not the policy
+  // verdicts (Dom, 2026-10-19: behavior that differs, never "refuted").
+  const rw = pick(REWRITE_COPY, locale);
+  const method = app === "modernization" ? { ...rw.method, verdicts: rw.answers } : copy.method;
 
   if (!pillar) return null;
 
@@ -89,11 +94,11 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
         <section className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
           <div className="fade-up mb-10 max-w-3xl">
             <Snum>{t.s03}</Snum>
-            <h2 className="metal-text mb-6 font-serif text-3xl font-medium md:text-5xl">{copy.method.title}</h2>
-            <p className="font-light leading-relaxed text-neutral-300">{copy.method.lead}</p>
+            <h2 className="metal-text mb-6 font-serif text-3xl font-medium md:text-5xl">{method.title}</h2>
+            <p className="font-light leading-relaxed text-neutral-300">{method.lead}</p>
           </div>
           <ul className="fade-up verdict-grid">
-            {copy.method.verdicts.map((v, i) => (
+            {method.verdicts.map((v, i) => (
               <li key={v.word} className={`verdict-card verdict-${["proven", "refuted", "open"][i]}`}>
                 <span className="verdict-mark" aria-hidden="true" />
                 <p className="verdict-word font-serif">{v.word}</p>
@@ -196,7 +201,7 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
             <p className="mb-10 text-lg font-light text-neutral-400">{t.ctaLead}</p>
             <CtaForm locale={locale} />
             <a
-              href={`${home}#start`}
+              href={home}
               className="track-mid mt-12 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-300 transition hover:border-seal hover:text-white"
             >
               <span aria-hidden="true">&larr;</span> {t.backHome}

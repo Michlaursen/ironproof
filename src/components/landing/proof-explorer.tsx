@@ -70,8 +70,8 @@ const T: L<Copy> = {
     ),
     engine: (
       <>
-        <span className="metal-text">The same proof engine</span> certifies your money-moving
-        policies before an agent can act — this is that engine, shown here on a real, assigned CVE.
+        <span className="metal-text">The same proof engine</span> checks translated code against the
+        original, and your money-moving policies before an agent can act — this is that engine, shown here on a real, assigned CVE.
       </>
     ),
 
@@ -177,8 +177,8 @@ Z3  ->  UNSAT    no input undersizes — bounded, provably, over all 2^32 length
     ),
     engine: (
       <>
-        <span className="metal-text">Le même moteur de preuve</span> certifie vos politiques qui
-        déplacent de l’argent avant qu’un agent puisse agir — c’est ce moteur, montré ici sur une CVE
+        <span className="metal-text">Le même moteur de preuve</span> vérifie le code traduit contre
+        l’original, et vos politiques qui déplacent de l’argent avant qu’un agent puisse agir — c’est ce moteur, montré ici sur une CVE
         réelle et assignée.
       </>
     ),

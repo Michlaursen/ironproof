@@ -7,6 +7,7 @@ import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { ProofSeal } from "@/components/landing/proof-seal";
 import { VerifyArtifact } from "@/components/landing/verify-artifact";
 import { type L, pick } from "@/components/landing/i18n";
+import { PLATFORM_COPY } from "@/components/landing/platform-copy";
 
 /*
  * Two recordings. First the film (Dom, 2026-10-12: "quand ça ouvre ça doit
@@ -68,6 +69,12 @@ const T: L<{
   sealNote: string;
   dlAllowed: string;
   dlBlocked: string;
+  codeEyebrow: string;
+  codeTitle: string;
+  codeLead: string;
+  codeRunLabel: string;
+  codeDemo: string;
+  codeSend: string;
 }> = {
   en: {
     metaTitle: "Demo — Ironproof",
@@ -108,6 +115,12 @@ const T: L<{
       "Checked in this tab: both signatures (Ed25519 + ML-DSA-65) and the content hash. The receipts are signed with a demo key, not a customer key.",
     dlAllowed: "Download the allowed receipt (JSON)",
     dlBlocked: "Download the blocked receipt (JSON)",
+    codeEyebrow: "CODE VERIFICATION",
+    codeTitle: "Your code was rewritten. Does it still do the same thing?",
+    codeLead: "No film yet for this one. Two things you can open today: a translation checked by a solver step by step, with the files to re-run it, and a difference found in a public AI-generated translation.",
+    codeRunLabel: "ALREADY RUN",
+    codeDemo: "PYTHON TO C, PROVEN",
+    codeSend: "SEND US A TRANSLATION",
   },
   fr: {
     metaTitle: "Démo — Ironproof",
@@ -148,6 +161,12 @@ const T: L<{
       "Vérifié dans cet onglet\u00a0: les deux signatures (Ed25519 + ML-DSA-65) et l’empreinte du contenu. Les reçus sont signés avec une clé de démonstration, pas une clé client.",
     dlAllowed: "Télécharger le reçu autorisé (JSON)",
     dlBlocked: "Télécharger le reçu bloqué (JSON)",
+    codeEyebrow: "VÉRIFICATION DE CODE",
+    codeTitle: "Votre code a été réécrit. Fait-il toujours la même chose ?",
+    codeLead: "Pas encore de film pour celle-là. Deux choses à ouvrir dès aujourd’hui : une traduction vérifiée pas à pas par un solveur, avec les fichiers pour la refaire, et un écart trouvé dans une traduction publique générée par IA.",
+    codeRunLabel: "DÉJÀ FAIT",
+    codeDemo: "PYTHON VERS C, PROUVÉ",
+    codeSend: "ENVOYEZ-NOUS UNE TRADUCTION",
   },
 };
 
@@ -178,6 +197,9 @@ export default async function DemoPage({ params }: PageProps) {
   if (!isLocale(locale)) notFound();
   const t = pick(T, locale);
   const verifyHref = locale === "en" ? "/verify" : `/${locale}/verify`;
+  const r = locale === "en" ? "" : `/${locale}`;
+  // The CardDemo difference is the translation card's own line (platform-copy.ts): one source.
+  const codeRun = pick(PLATFORM_COPY, locale).useCases.cards.find((c) => c.href.endsWith("/modernization"));
 
   return (
     <div className="relative min-h-screen">
@@ -212,6 +234,27 @@ export default async function DemoPage({ params }: PageProps) {
             </video>
           </figure>
           <p className="mt-6 max-w-2xl text-sm text-neutral-500">{t.filmNote}</p>
+        </section>
+        {/* Code verification right after the film (Dom, 2026-10-19: code first). The
+          * page still opens on the film (Dom, 2026-10-12); there is no code film yet. */}
+        <section className="relative z-10 edge-t mx-auto max-w-5xl px-6 pb-24 pt-24 md:px-14">
+          <p className="seal-label track-mid mb-4 text-xs">{t.codeEyebrow}</p>
+          <h2 className="metal-text max-w-3xl font-serif text-3xl font-medium leading-tight md:text-5xl">{t.codeTitle}</h2>
+          <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.codeLead}</p>
+          {codeRun ? (
+            <div className="mt-10 max-w-2xl">
+              <p className="seal-label track-mid mb-3 text-xs">{t.codeRunLabel}</p>
+              <p className="text-base font-light leading-relaxed text-neutral-400">{codeRun.ranOn}</p>
+            </div>
+          ) : null}
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+            <Link href={`${r}/demo/python-to-c`} className="track-mid inline-flex items-center gap-2 border-b border-seal/60 pb-1 text-xs text-neutral-100 transition hover:border-seal hover:text-white">
+              {t.codeDemo} <span aria-hidden="true">&rarr;</span>
+            </Link>
+            <Link href={`${r}/modernization`} className="track-mid inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white">
+              {t.codeSend} <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
         </section>
         {[
           { eyebrow: t.piEyebrow, src: PI_FILM, poster: PI_POSTER, label: t.piLabel, note: t.piNote },

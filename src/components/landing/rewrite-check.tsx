@@ -19,12 +19,14 @@ import { PLATFORM_COPY } from "./platform-copy";
  *   - Dom's order of 2026-10-19: we show differences in behavior, never
  *     "errors" -- the translator may have changed it on purpose.
  */
-type Answer = { word: string; body: string };
+export type Answer = { word: string; body: string; receive: string };
 
-type RewriteCopy = {
+export type RewriteCopy = {
   eyebrow: string;
   title: string;
   lead: string;
+  /** The same three answers on /modernization, under its own title (application-page.tsx). */
+  method: { title: string; lead: string };
   answers: readonly [Answer, Answer, Answer];
   who: string;
   exampleLabel: string;
@@ -32,23 +34,30 @@ type RewriteCopy = {
   href: string;
 };
 
-const COPY: L<RewriteCopy> = {
+export const REWRITE_COPY: L<RewriteCopy> = {
   en: {
-    eyebrow: "TRANSLATION CHECK",
+    eyebrow: "CODE VERIFICATION",
     title: "Rewritten is not the same as equivalent.",
     lead: "A bank moves its COBOL to Java, with an integrator or an AI tool. The new code compiles and passes its tests. Ironproof tells you, module by module, whether it still does what the old code did.",
+    method: {
+      title: "Three answers. Each one comes with what you need to check it.",
+      lead: "Never a green checkmark. Every module gets one of three answers, and each comes with what was used to reach it.",
+    },
     answers: [
       {
         word: "Same behavior.",
         body: "Within the scope we state before we start. This answer rests on our model of the original code, and that model is itself confronted with IBM’s compiler.",
+        receive: "You get the scope, the assumptions and the proof, to re-run yourself.",
       },
       {
         word: "Different behavior.",
         body: "The exact input where the two differ, replayed on your own compiler. You don’t have to trust us: you run it and see the difference yourself.",
+        receive: "You get the input, to replay on the old program and on the new one.",
       },
       {
         word: "Not decided.",
         body: "Where we could not conclude, we say so, with the reason. Never shown as a pass.",
+        receive: "You get the reason it stopped, recorded with the result.",
       },
     ],
     who: "We don’t translate. We check the translations others make, for the side that carries the risk if it breaks.",
@@ -57,21 +66,28 @@ const COPY: L<RewriteCopy> = {
     href: "/modernization",
   },
   fr: {
-    eyebrow: "VÉRIFICATION DE TRADUCTION",
+    eyebrow: "VÉRIFICATION DE CODE",
     title: "Réécrit ne veut pas dire équivalent.",
     lead: "Une banque fait passer son COBOL à Java, avec un intégrateur ou un outil d’IA. Le nouveau code compile, il passe ses tests. Reste une question : fait-il encore ce que faisait l’ancien ? Ironproof y répond, module par module.",
+    method: {
+      title: "Trois réponses. Chacune vient avec de quoi la vérifier.",
+      lead: "Jamais un simple crochet vert. Chaque module reçoit l’une des trois réponses, avec ce qui a servi à l’obtenir.",
+    },
     answers: [
       {
         word: "Même comportement.",
         body: "Dans le périmètre fixé avant de commencer. Cette réponse s’appuie sur notre modèle du code d’origine, et ce modèle est lui-même confronté au compilateur d’IBM.",
+        receive: "Vous recevez le périmètre, les hypothèses et la preuve, à refaire vous-même.",
       },
       {
         word: "Comportement différent.",
         body: "L’entrée précise où les deux divergent, rejouée sur votre propre compilateur. Pas besoin de nous croire : vous la lancez et vous voyez l’écart de vos yeux.",
+        receive: "Vous recevez l’entrée, à rejouer sur l’ancien programme et sur le nouveau.",
       },
       {
         word: "Impossible à trancher.",
         body: "Quand on ne peut pas conclure, on le dit, raison à l’appui. Jamais présenté comme une réussite.",
+        receive: "Vous recevez la raison de l’arrêt, consignée avec le résultat.",
       },
     ],
     who: "On ne traduit pas. On vérifie ce que d’autres ont traduit, pour vous, qui en portez le risque.",
@@ -82,7 +98,7 @@ const COPY: L<RewriteCopy> = {
 };
 
 export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
-  const t = pick(COPY, locale);
+  const t = pick(REWRITE_COPY, locale);
   // The example is the translation card's own line: one source.
   const example = pick(PLATFORM_COPY, locale).useCases.cards.find((c) => c.href.endsWith("/modernization"));
   return (

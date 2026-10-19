@@ -139,7 +139,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       },
       {
         num: "03",
-        name: "Translation check",
+        name: "Code verification",
         status: "AVAILABLE NOW · DONE BY OUR TEAM",
         available: true,
         claim: "Someone else translated your code. We check it computes what the old code did, and you can re-run the check without us.",
@@ -200,7 +200,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       eyebrow: "WHAT IT PROVES",
       title: "First: the check of what was rewritten. Then the gate.",
       alsoTitle: "Same engine, three more questions.",
-      alsoLead: "The engine behind the translation check also guards critical actions, and takes on two hard questions as a mandate delivered by our team.",
+      alsoLead: "The engine behind code verification also guards critical actions, and takes on two hard questions as a mandate delivered by our team.",
       alsoLines: [
         "Every payment, access grant and change checked against your rules before it runs: allowed when it complies, blocked when it breaks them, and every decision sealed.",
         "Find the one request your access policy lets through, before an attacker does.",
@@ -212,7 +212,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       plugsIn: "Send us the original program and its translation. Our team returns, module by module, one of three answers, every difference with the exact input that shows it, and the files to replay that input on your own compiler.",
       cards: [
         {
-          name: "Translation check",
+          name: "Code verification",
           body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We show that the new code computes what the old one did, under a stated model, or the exact input where it differs.",
           ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account. Coverage is still partial, and no third party has replayed it yet.",
           href: "/modernization",
@@ -292,7 +292,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       },
       {
         num: "03",
-        name: "Vérification de traduction",
+        name: "Vérification de code",
         status: "DISPONIBLE · RÉALISÉ PAR NOTRE ÉQUIPE",
         available: true,
         claim: "Quelqu’un d’autre a traduit votre code. Nous vérifions qu’il calcule ce que calculait l’ancien, et vous refaites la vérification sans nous.",
@@ -365,7 +365,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       plugsIn: "Envoyez-nous le programme d’origine et sa traduction. Notre équipe vous rend, module par module, l’une des trois réponses, chaque écart avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
       cards: [
         {
-          name: "Vérification de traduction",
+          name: "Vérification de code",
           body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. Nous montrons que le nouveau code calcule ce que l’ancien calculait, sous un modèle déclaré, ou l’entrée exacte où ils diffèrent.",
           ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte. La couverture reste partielle, et aucun tiers ne l’a encore rejouée.",
           href: "/fr/modernization",
