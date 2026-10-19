@@ -32,6 +32,7 @@ const nextConfig: NextConfig = {
       { source: "/provable-ai", destination: "/en/provable-ai" },
       { source: "/neuro-symbolic", destination: "/en/neuro-symbolic" },
       { source: "/zero-trust", destination: "/en/zero-trust" },
+      { source: "/critical-actions", destination: "/en/critical-actions" },
       { source: "/software-security", destination: "/en/software-security" },
       { source: "/modernization", destination: "/en/modernization" },
       { source: "/proof", destination: "/en/proof" },

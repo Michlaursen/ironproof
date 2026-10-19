@@ -52,7 +52,7 @@ export type ResearchCopy = {
 const RELATED_HREFS = {
   provable: "/provable-ai",
   proof: "/proof",
-  initiators: "/#start",
+  initiators: "/critical-actions#start",
   try: "/lab",
   counter: "/proof#counterexample",
 } as const;
@@ -347,7 +347,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
         blocks: [
           {
             t: "p",
-            text: "We build [Ironproof](/), which is one implementation of the architecture described in section 4. A gate evaluates a proposed critical action against the policy in force and returns PROCEED, BLOCK, or REFUSE when it cannot decide, before the action executes — and [the gate does not ask who is asking](/#decide). The same check applies whether the initiator is an AI agent, a script, an API call or a person, which matters here: the Hugging Face escalation looked exactly like a competent human attacker’s kill chain. A control that only guards the agent path is guarding one door in a building.",
+            text: "We build [Ironproof](/), which is one implementation of the architecture described in section 4. A gate evaluates a proposed critical action against the policy in force and returns PROCEED, BLOCK, or REFUSE when it cannot decide, before the action executes — and [the gate does not ask who is asking](/critical-actions#decide). The same check applies whether the initiator is an AI agent, a script, an API call or a person, which matters here: the Hugging Face escalation looked exactly like a competent human attacker’s kill chain. A control that only guards the agent path is guarding one door in a building.",
           },
           {
             t: "p",
@@ -702,7 +702,7 @@ export const RESEARCH_COPY: Record<Locale, ResearchCopy> = {
         blocks: [
           {
             t: "p",
-            text: "Nous développons [Ironproof](/), l’une des implémentations de l’architecture décrite en section 4. Une porte évalue une action critique proposée au regard de la politique en vigueur et renvoie PROCEED, BLOCK, ou REFUSE quand elle ne peut pas trancher, avant que l’action s’exécute — et [cette porte ne demande pas qui la sollicite](/#decide). Le même contrôle s’applique que l’initiateur soit un agent IA, un script, un appel d’API ou une personne, ce qui importe ici : l’escalade chez Hugging Face ressemblait exactement à la chaîne d’attaque d’un attaquant humain compétent. Un contrôle qui ne garde que la voie des agents garde une seule porte d’un bâtiment.",
+            text: "Nous développons [Ironproof](/), l’une des implémentations de l’architecture décrite en section 4. Une porte évalue une action critique proposée au regard de la politique en vigueur et renvoie PROCEED, BLOCK, ou REFUSE quand elle ne peut pas trancher, avant que l’action s’exécute — et [cette porte ne demande pas qui la sollicite](/critical-actions#decide). Le même contrôle s’applique que l’initiateur soit un agent IA, un script, un appel d’API ou une personne, ce qui importe ici : l’escalade chez Hugging Face ressemblait exactement à la chaîne d’attaque d’un attaquant humain compétent. Un contrôle qui ne garde que la voie des agents garde une seule porte d’un bâtiment.",
           },
           {
             t: "p",
