@@ -43,19 +43,19 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Scope",
-        body: "Send one program with its copybooks and your compiler options. Before translating anything, we write down what the program reads, what it writes, and exactly what we will check.",
+        body: "Send the original program with its copybooks and compiler options, and the translation your integrator or AI tool produced. Before checking anything, we write down what the program reads, what it writes, and exactly what we will check.",
       },
       {
-        title: "Model and translate",
-        body: "Ironproof builds a precise model of what the COBOL computes, down to decimal rounding and truncation, and generates the Python from it.",
+        title: "Model the original",
+        body: "Ironproof builds a precise model of what the COBOL computes, down to decimal rounding and truncation. We do not translate: we have no stake in the new code being right.",
       },
       {
         title: "Prove and cross-check",
-        body: "A solver checks every input the model allows: same results, or the exact input where they differ. The same cases run through IBM’s own COBOL compiler, and we plant deliberate faults to show the check catches them.",
+        body: "The translation is confronted with the model: proven where the model covers it, or the exact input where they differ. The same cases run through IBM’s own COBOL compiler, and we plant deliberate faults to show the check catches them.",
       },
       {
         title: "Seal and hand over",
-        body: "You receive the Python, the proof or the counterexample, and the list of what the model does not cover. The record is sealed, and your team re-runs the check without us.",
+        body: "You receive the proof or the counterexample, and the list of what the model does not cover. The record is sealed, and your team re-runs the check without us.",
       },
     ],
     gainEyebrow: "WHAT CHANGES FOR YOU",
@@ -70,8 +70,8 @@ const COPY: L<HowCopy> = {
         body: "The input where old and new code disagree is found before production, not by a customer.",
       },
       {
-        title: "Code your team can own",
-        body: "Plain Python, readable by your developers, with the evidence that it computes what the COBOL did.",
+        title: "Keep your migration partner",
+        body: "We work on top of the translation you already paid for, from an integrator or an AI tool. We check it; we do not replace it.",
       },
     ],
     whyEyebrow: "WHY IRONPROOF",
@@ -94,14 +94,14 @@ const COPY: L<HowCopy> = {
     limitsLink: "read the note",
     plate: [
       { x: 10, y: 14, label: "THE PROGRAM YOU RUN TODAY" },
-      { x: 56, y: 18, label: "THE CODE YOU KEEP", gold: true },
+      { x: 56, y: 18, label: "THE TRANSLATION YOU RECEIVED", gold: true },
     ],
     flow: {
-      caption: "The path of one program: two independent checks, one verdict, a sealed record.",
+      caption: "The path of one translated program: two independent checks, one verdict, a sealed record.",
       lead: [
         ["COBOL", "your program"],
         ["MODEL", "what the COBOL computes"],
-        ["PYTHON", "generated"],
+        ["TRANSLATION", "made by others"],
       ],
       top: ["SOLVER", "every input the model allows"],
       bottom: ["IBM COMPILER", "the same cases, run for real"],
@@ -115,19 +115,19 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Cadrer",
-        body: "Envoyez-nous un programme avec ses copybooks et vos options de compilation. Avant de traduire quoi que ce soit, nous écrivons ce que le programme lit, ce qu’il écrit et exactement ce que nous allons vérifier.",
+        body: "Envoyez-nous le programme d’origine avec ses copybooks et ses options de compilation, et la traduction produite par votre intégrateur ou votre outil d’IA. Avant de vérifier quoi que ce soit, nous écrivons ce que le programme lit, ce qu’il écrit et exactement ce que nous allons vérifier.",
       },
       {
-        title: "Modéliser et traduire",
-        body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures, et en génère le Python.",
+        title: "Modéliser l’original",
+        body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures. Nous ne traduisons pas : nous n’avons aucun intérêt à ce que le nouveau code soit déclaré bon.",
       },
       {
         title: "Prouver et confronter",
-        body: "Un solveur vérifie toutes les entrées que le modèle permet : mêmes résultats, ou l’entrée exacte où ils diffèrent. Les mêmes cas passent dans le compilateur COBOL d’IBM lui-même, et nous plantons des fautes exprès pour montrer que la vérification les attrape.",
+        body: "La traduction est confrontée au modèle : prouvée là où le modèle la couvre, ou l’entrée exacte où ils diffèrent. Les mêmes cas passent dans le compilateur COBOL d’IBM lui-même, et nous plantons des fautes exprès pour montrer que la vérification les attrape.",
       },
       {
         title: "Sceller et remettre",
-        body: "Vous recevez le Python, la preuve ou le contre-exemple, et la liste de ce que le modèle ne couvre pas. Le dossier est scellé, et votre équipe refait la vérification sans nous.",
+        body: "Vous recevez la preuve ou le contre-exemple, et la liste de ce que le modèle ne couvre pas. Le dossier est scellé, et votre équipe refait la vérification sans nous.",
       },
     ],
     gainEyebrow: "CE QUI CHANGE POUR VOUS",
@@ -142,8 +142,8 @@ const COPY: L<HowCopy> = {
         body: "L’entrée où l’ancien et le nouveau code divergent est trouvée avant la production, pas par un client.",
       },
       {
-        title: "Un code que votre équipe peut garder",
-        body: "Du Python simple, lisible par vos développeurs, avec la preuve qu’il calcule ce que calculait le COBOL.",
+        title: "Gardez votre partenaire de migration",
+        body: "Nous travaillons par-dessus la traduction que vous avez déjà payée, faite par un intégrateur ou un outil d’IA. Nous la vérifions ; nous ne la remplaçons pas.",
       },
     ],
     whyEyebrow: "POURQUOI IRONPROOF",
@@ -166,14 +166,14 @@ const COPY: L<HowCopy> = {
     limitsLink: "lire la note (en anglais)",
     plate: [
       { x: 10, y: 14, label: "LE PROGRAMME D’AUJOURD’HUI" },
-      { x: 56, y: 18, label: "LE CODE QUE VOUS GARDEZ", gold: true },
+      { x: 56, y: 18, label: "LA TRADUCTION REÇUE", gold: true },
     ],
     flow: {
-      caption: "Le parcours d’un programme : deux vérifications indépendantes, un verdict, un dossier scellé.",
+      caption: "Le parcours d’un programme traduit : deux vérifications indépendantes, un verdict, un dossier scellé.",
       lead: [
         ["COBOL", "votre programme"],
         ["MODÈLE", "ce que calcule le COBOL"],
-        ["PYTHON", "généré"],
+        ["TRADUCTION", "faite par d’autres"],
       ],
       top: ["SOLVEUR", "toutes les entrées du modèle"],
       bottom: ["COMPILATEUR IBM", "les mêmes cas, exécutés"],

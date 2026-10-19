@@ -28,15 +28,15 @@ export const HERO_COPY: L<HeroCopy> = {
   en: {
     eyebrow: "PROOF INTELLIGENCE",
     eyebrowSub: "FOR CRITICAL INFRASTRUCTURE",
-    headline: "Don’t trust the verdict.",
-    headlineEnd: "Verify the evidence.",
+    headline: "Some actions can’t be undone.",
+    headlineEnd: "Prove them first.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
     eyebrowSub: "POUR LES INFRASTRUCTURES CRITIQUES",
-    headline: "Ne vous fiez pas au verdict.",
-    headlineEnd: "Vérifiez la preuve.",
+    headline: "Certaines actions sont sans retour.",
+    headlineEnd: "Prouvez-les d’abord.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
   },
 };
