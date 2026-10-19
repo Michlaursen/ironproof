@@ -119,10 +119,12 @@ function Node({
 }
 
 /** The frame around the diagram: who builds and runs it (architecture-plate.tsx, ENGINEERING_RAIL). */
-export type FlowRail = { k: string; t: string; items: readonly string[] };
+export type FlowRail = { k: string; t: string; items: readonly FlowLabel[] };
 
 const RAIL_TOP = 46;
-const RAIL_BOTTOM = 52;
+const RAIL_COLS = 4;
+const RAIL_CELL_H = 50;
+const RAIL_CELL_GAP = 10;
 const RAIL_PAD = 18;
 
 export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
@@ -161,8 +163,10 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   const ox = rail ? RAIL_PAD : 0;
   const oy = rail ? RAIL_TOP : 0;
   const fullW = width + 2 * ox;
-  const fullH = height + (rail ? RAIL_TOP + RAIL_BOTTOM : 0);
-  const pillW = rail ? (fullW - 2 * RAIL_PAD - (rail.items.length - 1) * 12) / rail.items.length : 0;
+  const rows = rail ? Math.ceil(rail.items.length / RAIL_COLS) : 0;
+  const railBottom = rail ? rows * (RAIL_CELL_H + RAIL_CELL_GAP) + 18 : 0;
+  const fullH = height + (rail ? RAIL_TOP + railBottom : 0);
+  const cellW = rail ? (fullW - 2 * RAIL_PAD - (RAIL_COLS - 1) * RAIL_CELL_GAP) / RAIL_COLS : 0;
   const k = f.lead.length;
 
   return (
@@ -207,14 +211,17 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
                 {rail.t}
               </text>
               {rail.items.map((it, i) => {
-                const px = RAIL_PAD + i * (pillW + 12);
-                const py = fullH - RAIL_BOTTOM + 10;
+                const px = RAIL_PAD + (i % RAIL_COLS) * (cellW + RAIL_CELL_GAP);
+                const py = fullH - railBottom + 4 + Math.floor(i / RAIL_COLS) * (RAIL_CELL_H + RAIL_CELL_GAP);
                 return (
-                  <g key={it}>
-                    <rect x={px} y={py} width={pillW} height={30} rx={15} fill="rgba(201,162,74,0.10)" stroke={GOLD} strokeOpacity={0.6} />
-                    <circle cx={px + 16} cy={py + 15} r={2.6} fill={GOLD} />
-                    <text x={px + 28} y={py + 19.5} fill={INK} fontSize={12}>
-                      {it}
+                  <g key={it[0]}>
+                    <rect x={px} y={py} width={cellW} height={RAIL_CELL_H} rx={5} fill="rgba(201,162,74,0.08)" stroke={GOLD} strokeOpacity={0.6} />
+                    <rect x={px} y={py} width={3} height={RAIL_CELL_H} rx={1.5} fill={GOLD} />
+                    <text x={px + 14} y={py + 21} fill={INK} fontSize={12} fontWeight={600} letterSpacing={1.6} fontFamily="var(--font-mono, monospace)">
+                      {it[0]}
+                    </text>
+                    <text x={px + 14} y={py + 38} fill="#55575c" fontSize={11}>
+                      {it[1]}
                     </text>
                   </g>
                 );
