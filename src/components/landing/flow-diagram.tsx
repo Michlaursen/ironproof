@@ -22,7 +22,21 @@ export type FlowCopy = {
   bottomInset?: readonly FlowLabel[];
   verdict: FlowLabel;
   seal: FlowLabel;
+  /* Optional, from the architecture plate (Dom, 2026-10-19: « oui add »):
+   * the model's proposal as a detour above the main line, a re-check in a
+   * fresh solver before the verdict, the verdict's three outcomes, a final
+   * step where the client verifies, and the stated scope around the checks. */
+  propose?: FlowLabel;
+  recheck?: FlowLabel;
+  outcomes?: readonly FlowLabel[];
+  verify?: FlowLabel;
+  scope?: string;
 };
+
+const PRO_W = 210;
+const RECHECK_W = 166;
+const VER_W = 224;
+const OUTCOME_H = 17;
 
 const H = 64;
 const GAP = 34;
@@ -66,6 +80,7 @@ function Node({
   h = H,
   inset,
   num,
+  list,
 }: {
   id: string;
   x: number;
@@ -76,6 +91,7 @@ function Node({
   h?: number;
   inset?: readonly FlowLabel[];
   num?: string;
+  list?: readonly FlowLabel[];
 }) {
   const n = inset?.length ?? 0;
   const cw = n > 0 ? (w - 2 * INSET_PAD - (n - 1) * INSET_GAP) / n : 0;
@@ -98,6 +114,21 @@ function Node({
       <text x={x + 18} y={y + 48} fill={sub} fontSize={13.5}>
         {label[1]}
       </text>
+      {list?.map((o, i) => {
+        const ly = y + H + 2 + i * OUTCOME_H;
+        const dot = i === 0 ? "#3f8f5a" : i === 1 ? "#b04a3c" : GOLD;
+        return (
+          <g key={o[0]}>
+            <circle cx={x + 22} cy={ly - 4} r={3.2} fill={dot} />
+            <text x={x + 32} y={ly} fill={INK} fontSize={11} fontWeight={600} letterSpacing={1.2} fontFamily="var(--font-mono, monospace)">
+              {o[0]}
+            </text>
+            <text x={x + 32 + o[0].length * 8.4 + 8} y={ly} fill="#55575c" fontSize={11}>
+              {o[1]}
+            </text>
+          </g>
+        );
+      })}
       {inset?.map((c, i) => {
         const cx = x + INSET_PAD + i * (cw + INSET_GAP);
         const cy = y + H - 2;
@@ -127,6 +158,8 @@ export type OsGroup = { label: string; items: readonly FlowLabel[] };
 export type FlowRail = {
   k: string;
   t: string;
+  /** Four words in the middle of the title band (Dom, 2026-10-19). */
+  tagline?: string;
   foundation: OsGroup;
   memory: OsGroup;
   learning: OsGroup;
@@ -166,7 +199,7 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   const id = `fd${hash(f.caption)}`;
 
   const insets = Boolean(f.topInset?.length || f.bottomInset?.length);
-  const checkW = insets ? 380 : CHECK_W;
+  const checkW = insets ? 356 : CHECK_W;
   const checkH = insets ? H + INSET_H + 14 : H;
   const topY = insets ? 30 : TOP_Y;
   const bottomY = insets ? topY + checkH + 40 : BOTTOM_Y;
@@ -177,21 +210,51 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   const branch = leadEnd + 22;
   const checkX = branch + 22;
   const join = checkX + checkW + 22;
-  const verdictX = join + GAP;
-  const sealX = verdictX + VERDICT_W + GAP;
+  const recheckX = join + GAP;
+  const verdictX = (f.recheck ? recheckX + RECHECK_W : join) + GAP;
+  const verdictW = f.outcomes ? 214 : VERDICT_W;
+  const verdictH = f.outcomes ? H + f.outcomes.length * OUTCOME_H + 6 : H;
+  const sealX = verdictX + verdictW + GAP;
+  const sealMidX = sealX + SEAL_W / 2;
+  const verX = sealMidX - VER_W / 2;
   const end = sealX + SEAL_W;
-  const width = end + 14;
+  const width = Math.max(end, f.verify ? verX + VER_W : 0) + 14;
+  // The proposal: a detour above the main line between the first two steps.
+  const proX = f.propose && leadX.length > 1 ? (leadX[0] + leadX[1] + LEAD_W) / 2 - PRO_W / 2 : 0;
+  const proY = topY;
+  const proMid = proY + H / 2;
+  const cx0 = leadX[0] + LEAD_W / 2;
+  const cx1 = leadX.length > 1 ? leadX[1] + LEAD_W / 2 : cx0;
   const topMid = topY + checkH / 2;
   const bottomMid = bottomY + checkH / 2;
 
-  const links = leadX.slice(1).map((x) => `M${x - GAP} ${mid} H${x}`).join(" ");
+  const links = leadX
+    .slice(1)
+    .map((x, i) => (f.propose && i === 0 ? "" : `M${x - GAP} ${mid} H${x}`))
+    .join(" ");
+  const detour = f.propose ? `M${cx0} ${mid - H / 2} V${proMid} H${proX} M${proX + PRO_W} ${proMid} H${cx1} V${mid - H / 2}` : "";
   const wires = [
     links,
+    detour,
     `M${leadEnd} ${mid} H${branch} V${topMid} H${checkX} M${branch} ${mid} V${bottomMid} H${checkX}`,
-    `M${checkX + checkW} ${topMid} H${join} V${bottomMid} H${checkX + checkW} M${join} ${mid} H${verdictX}`,
-    `M${verdictX + VERDICT_W} ${mid} H${sealX}`,
+    `M${checkX + checkW} ${topMid} H${join} V${bottomMid} H${checkX + checkW}`,
+    f.recheck ? `M${join} ${mid} H${recheckX} M${recheckX + RECHECK_W} ${mid} H${verdictX}` : `M${join} ${mid} H${verdictX}`,
+    `M${verdictX + verdictW} ${mid} H${sealX}`,
+    f.verify ? `M${sealMidX} ${mid - H / 2} V${proY + H}` : "",
   ].join(" ");
+  // One case through the method: through the proposal, either check, to the seal.
+  const head = f.propose ? `M${leadX[0]} ${mid} H${cx0} V${proMid} H${cx1} V${mid}` : `M${leadX[0]} ${mid}`;
+  const throughTop = `${head} H${branch} V${topMid} H${join} V${mid} H${sealMidX}`;
+  const throughBottom = `${head} H${branch} V${bottomMid} H${join} V${mid} H${sealMidX}`;
   const nums = (i: number) => String(i + 1).padStart(2, "0");
+  // Step numbers in reading order: case, proposal, the rest of the lead, the
+  // checks, the re-check, the verdict, the seal, the client's verification.
+  const p0 = f.propose ? 1 : 0;
+  const leadNum = (i: number) => nums(i === 0 ? 0 : i + p0);
+  const checkNum = f.lead.length + p0;
+  const afterChecks = checkNum + 1;
+  const recheckNum = afterChecks;
+  const verdictNum = afterChecks + (f.recheck ? 1 : 0);
   // With a rail: title, foundation strip, the method, then three columns
   // (memory, learning, control) joined by the loop.
   const ox = rail ? OS_PAD : 0;
@@ -207,14 +270,18 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   const foundW = rail ? (fullW - 2 * OS_PAD - OS_FOUND_LABEL - foundN * OS_GAP) / Math.max(foundN, 1) : 0;
   const midCols = colsY + 22 + (colH - 22) / 2;
   const caseX = ox + leadX[0] + LEAD_W / 2;
-  const sealCx = ox + sealX + SEAL_W / 2;
+  const sealCx = ox + sealMidX;
   const nodeBottom = oy + mid + H / 2;
-  const k = f.lead.length;
+  // The bus the loop rides on, just above the three columns.
+  const busY = colsY - 24;
+  // The whole loop, in the method's own coordinates: through the method to the
+  // seal, down to the bus, back along it to the case, up into the next case.
+  const loopPath = `${throughTop} V${busY - oy} H${cx0} V${mid}`;
 
   return (
     <figure className="fade-up mt-14">
       <div className="card-premium overflow-x-auto p-6 md:p-8">
-        <svg viewBox={`0 0 ${fullW} ${fullH}`} className="w-full min-w-[900px]" role="img" aria-label={f.caption}>
+        <svg viewBox={`0 0 ${fullW} ${fullH}`} className={rail ? "w-full min-w-[1100px]" : "w-full min-w-[900px]"} role="img" aria-label={f.caption}>
           <defs>
             <linearGradient id={`${id}-iron`} x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="#2c2e33" />
@@ -258,6 +325,11 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
               <text x={fullW - OS_PAD} y={OS_TITLE / 2 + 5.5} textAnchor="end" fill="#b9b6af" fontSize={12.5}>
                 {rail.t}
               </text>
+              {rail.tagline ? (
+                <text x={fullW * 0.47} y={OS_TITLE / 2 + 5.5} textAnchor="middle" fill={GOLD_SOFT} fontSize={12} letterSpacing={3} fontFamily="var(--font-mono, monospace)">
+                  {rail.tagline}
+                </text>
+              ) : null}
               {/* Foundation: one beam across the top that constrains every step */}
               <rect x={OS_PAD} y={OS_FOUND_Y} width={fullW - 2 * OS_PAD} height={OS_FOUND_H} rx={6} fill={`url(#${id}-iron)`} filter={`url(#${id}-shadow)`} />
               <text x={OS_PAD + 16} y={OS_FOUND_Y + OS_FOUND_H / 2 + 4.5} fill={GOLD_SOFT} fontSize={12} fontWeight={600} letterSpacing={2.4} fontFamily="var(--font-mono, monospace)">
@@ -308,6 +380,22 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
                 <path d={`M${colX[1] - 6} ${midCols} H${colX[0] + colW + 6}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
                 <path d={`M${caseX} ${colsY - 4} V${nodeBottom + 4}`} className={`${id}-dash`} markerEnd={`url(#${id}-arrow)`} />
               </g>
+              {/* The bus the loop rides on */}
+              <path d={`M${sealCx} ${busY} H${caseX}`} fill="none" stroke={GOLD} strokeOpacity={0.5} strokeWidth={1.2} strokeDasharray="2 5" />
+              {/* Gold points on every arrow of the system */}
+              <g className={`${id}-pulse`} filter={`url(#${id}-glow)`} fill={GOLD_SOFT}>
+                {[0.18, 0.5, 0.82].map((r, i) => (
+                  <circle key={r} r={3.2}>
+                    <animateMotion dur="2.4s" begin={`${i * 0.8}s`} repeatCount="indefinite" path={`M${fullW * r} ${OS_FOUND_Y + OS_FOUND_H + 4} V${oy - 12}`} />
+                  </circle>
+                ))}
+                <circle r={3.2}>
+                  <animateMotion dur="2.2s" repeatCount="indefinite" path={`M${colX[2] - 6} ${midCols} H${colX[1] + colW + 8}`} />
+                </circle>
+                <circle r={3.2}>
+                  <animateMotion dur="2.2s" begin="1.1s" repeatCount="indefinite" path={`M${colX[1] - 6} ${midCols} H${colX[0] + colW + 8}`} />
+                </circle>
+              </g>
               <g fill="#6f6c66" fontSize={10.5} fontStyle="italic">
                 <text x={sealCx + 8} y={(nodeBottom + colsY) / 2 + 4}>{rail.arrows.out}</text>
                 <text x={colX[2] - OS_COL_GAP / 2} y={midCols - 10} textAnchor="middle">{rail.arrows.refusal}</text>
@@ -322,20 +410,52 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
           <g transform={`translate(${ox} ${oy})`}>
           <path d={wires} fill="none" stroke={PAPER_LINE} strokeWidth={1.2} />
           <path d={wires} fill="none" stroke={GOLD} strokeOpacity={0.75} strokeWidth={1.4} className={`${id}-dash`} />
+          {f.scope ? (
+            <g>
+              <rect x={checkX - 14} y={topY - 26} width={checkW + 28} height={bottomY + checkH + 14 - (topY - 26)} rx={10} fill="none" stroke={GOLD} strokeOpacity={0.6} strokeDasharray="5 5" />
+              <text x={checkX + checkW + 6} y={topY - 12} textAnchor="end" fill={GOLD} fontSize={10.5} letterSpacing={2} fontFamily="var(--font-mono, monospace)">
+                {f.scope}
+              </text>
+            </g>
+          ) : null}
           {f.lead.map((l, i) => (
-            <Node key={l[0]} id={id} x={leadX[i]} y={mid - H / 2} w={LEAD_W} label={l} num={nums(i)} />
+            <Node key={l[0]} id={id} x={leadX[i]} y={mid - H / 2} w={LEAD_W} label={l} num={leadNum(i)} />
           ))}
-          <Node id={id} x={checkX} y={topY} w={checkW} h={checkH} label={f.top} tone="iron" inset={f.topInset} num={`${nums(k)}A`} />
-          <Node id={id} x={checkX} y={bottomY} w={checkW} h={checkH} label={f.bottom} tone="iron" inset={f.bottomInset} num={`${nums(k)}B`} />
-          <Node id={id} x={verdictX} y={mid - H / 2} w={VERDICT_W} label={f.verdict} num={nums(k + 1)} />
-          <Node id={id} x={sealX} y={mid - H / 2} w={SEAL_W} label={f.seal} tone="gold" num={nums(k + 2)} />
+          {f.propose ? <Node id={id} x={proX} y={proY} w={PRO_W} label={f.propose} tone="iron" num={nums(1)} /> : null}
+          <Node id={id} x={checkX} y={topY} w={checkW} h={checkH} label={f.top} tone="iron" inset={f.topInset} num={`${nums(checkNum)}A`} />
+          <Node id={id} x={checkX} y={bottomY} w={checkW} h={checkH} label={f.bottom} tone="iron" inset={f.bottomInset} num={`${nums(checkNum)}B`} />
+          {f.recheck ? <Node id={id} x={recheckX} y={mid - H / 2} w={RECHECK_W} label={f.recheck} tone="iron" num={nums(recheckNum)} /> : null}
+          <Node id={id} x={verdictX} y={mid - verdictH / 2} w={verdictW} h={verdictH} label={f.verdict} list={f.outcomes} num={nums(verdictNum)} />
+          <Node id={id} x={sealX} y={mid - H / 2} w={SEAL_W} label={f.seal} tone="gold" num={nums(verdictNum + 1)} />
+          {f.verify ? <Node id={id} x={verX} y={proY} w={VER_W} label={f.verify} num={nums(verdictNum + 2)} /> : null}
           <g className={`${id}-pulse`} filter={`url(#${id}-glow)`}>
-            <circle r={4.5} fill={GOLD_SOFT}>
-              <animateMotion dur="6s" repeatCount="indefinite" path={`M10 ${mid} H${branch} V${topMid} H${join} V${mid} H${end}`} />
-            </circle>
-            <circle r={4.5} fill={GOLD_SOFT}>
-              <animateMotion dur="6s" repeatCount="indefinite" path={`M10 ${mid} H${branch} V${bottomMid} H${join} V${mid} H${end}`} />
-            </circle>
+            {rail ? (
+              // The full loop: four points riding method, seal, bus and back.
+              [0, 3, 6, 9].map((b) => (
+                <circle key={b} r={4.5} fill={GOLD_SOFT}>
+                  <animateMotion dur="12s" begin={`-${b}s`} repeatCount="indefinite" path={loopPath} />
+                </circle>
+              ))
+            ) : (
+              <>
+                <circle r={4.5} fill={GOLD_SOFT}>
+                  <animateMotion dur="6s" repeatCount="indefinite" path={`${throughTop}${f.verify ? ` V${proY + H / 2}` : ` H${end}`}`} />
+                </circle>
+                <circle r={4.5} fill={GOLD_SOFT}>
+                  <animateMotion dur="6s" repeatCount="indefinite" path={`${throughBottom}${f.verify ? ` V${proY + H / 2}` : ` H${end}`}`} />
+                </circle>
+              </>
+            )}
+            {rail ? (
+              <circle r={4} fill={GOLD_SOFT}>
+                <animateMotion dur="6s" begin="-1.5s" repeatCount="indefinite" path={throughBottom} />
+              </circle>
+            ) : null}
+            {f.verify ? (
+              <circle r={3.5} fill={GOLD_SOFT}>
+                <animateMotion dur="2.4s" repeatCount="indefinite" path={`M${sealMidX} ${mid - H / 2} V${proY + H}`} />
+              </circle>
+            ) : null}
           </g>
           </g>
         </svg>
