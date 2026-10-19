@@ -31,14 +31,15 @@ export type HeroCopy = {
 export const HERO_COPY: L<HeroCopy> = {
   en: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "FOR CRITICAL SYSTEMS",
+    // Dom, 2026-10-19 (« bonne idée »): the company line under the category.
+    eyebrowSub: "THE INDEPENDENT PROOF LAYER FOR AI-DRIVEN CHANGE",
     headline: "Your code was rewritten.",
     headlineEnd: "Know if it still does the same thing.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "POUR LES SYSTÈMES CRITIQUES",
+    eyebrowSub: "LA PREUVE INDÉPENDANTE DE CE QUE L’IA CHANGE",
     headline: "Votre code a été réécrit.",
     headlineEnd: "Fait-il toujours la même chose ?",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
