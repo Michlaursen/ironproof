@@ -1,7 +1,6 @@
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
-import { FlowDiagram, type FlowCopy } from "./flow-diagram";
-import { ENGINEERING_RAIL } from "./architecture-plate";
+import { FlowDiagram, type FlowCopy, type FlowRail } from "./flow-diagram";
 
 /*
  * How the platform works, on the home page right under "Why Ironproof" (Dom,
@@ -19,6 +18,9 @@ type HowCopy = {
   title: string;
   steps: readonly { title: string; body: string }[];
   flow: FlowCopy;
+  /** The engineering system around the method (Dom, 2026-10-19: « ironproof cognitive operating system + axiomes + memory »).
+   *  Each module runs today in our own repository; none is shipped to the client, hence the label. */
+  os: FlowRail;
 };
 
 const COPY: L<HowCopy> = {
@@ -43,6 +45,20 @@ const COPY: L<HowCopy> = {
         body: "The proof, or the exact case that differs or breaks the rule, sealed with a classical and a post-quantum signature. Your auditor re-runs it without us.",
       },
     ],
+    os: {
+      k: "Ironproof cognitive operating system",
+      t: "Governs the engineering agent that builds every check",
+      items: [
+        ["AXIOMS", "Truth first: proven, conjecture or open"],
+        ["PERSISTENT MEMORY", "Every decision and lesson, versioned"],
+        ["LEARNED RULES", "An error seen three times becomes a rule"],
+        ["CLAIM CHECK", "No report without its command and output"],
+        ["INDEPENDENT REVIEWER", "Objects before any risky action"],
+        ["COMMIT CHAIN", "Type check, secret scan, named files only"],
+        ["SIGNED LEDGER", "Every push authorized and recorded"],
+        ["SESSION CLOSE", "Ten checks before a session ends"],
+      ],
+    },
     flow: {
       caption: "The path of one case: two independent checks, one verdict, a sealed record.",
       lead: [
@@ -79,6 +95,20 @@ const COPY: L<HowCopy> = {
         body: "La preuve, ou le cas précis qui diffère ou qui brise la règle, scellée avec une signature classique et une signature post-quantique. Votre auditeur la refait sans nous.",
       },
     ],
+    os: {
+      k: "Système d’exploitation cognitif d’Ironproof",
+      t: "Encadre l’agent d’ingénierie qui bâtit chaque vérification",
+      items: [
+        ["AXIOMES", "La vérité d’abord : prouvé, conjecture ou ouvert"],
+        ["MÉMOIRE PERSISTANTE", "Chaque décision et leçon, versionnée"],
+        ["RÈGLES APPRISES", "Une erreur vue trois fois devient une règle"],
+        ["CONTRÔLE DES AFFIRMATIONS", "Aucun rapport sans commande ni sortie"],
+        ["RELECTEUR INDÉPENDANT", "Objecte avant toute action risquée"],
+        ["CHAÎNE DE COMMIT", "Types, secrets, fichiers nommés seulement"],
+        ["REGISTRE SIGNÉ", "Chaque envoi autorisé et consigné"],
+        ["FERMETURE DE SESSION", "Dix contrôles avant de fermer"],
+      ],
+    },
     flow: {
       caption: "Le parcours d’un cas : deux vérifications indépendantes, un verdict, un dossier scellé.",
       lead: [
@@ -114,7 +144,7 @@ export function PlatformHow({ locale = defaultLocale }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
-        <FlowDiagram f={t.flow} rail={pick(ENGINEERING_RAIL, locale)} />
+        <FlowDiagram f={t.flow} rail={t.os} />
       </div>
     </section>
   );
