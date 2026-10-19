@@ -63,7 +63,7 @@ function copy(r: string): L<Copy> {
         "A fixed-scope pilot on one translated module, or on one critical action. You keep the answers, every case to replay, and the sealed record.",
       eyebrow: "PILOT",
       h1: "Bring one translated module. We tell you if it still does the same thing, or show you exactly where it differs.",
-      lead: "Your integrator or your AI tool translated a program. You send us the original and the translation. Each module comes back with one of three answers, and every difference replays on your own compiler. Critical actions have their own pilot, just below.",
+      lead: "Your integrator or your AI tool translated a program. You give us the original and the translation. Each module comes back with one of three answers, and every difference replays on your own compiler. Critical actions have their own pilot, just below.",
       offersEyebrow: "THREE PILOTS, ONE METHOD",
       offersTitle: "Each pilot ends with a verification dossier your team can re-check.",
       deliverLabel: "YOU RECEIVE",
@@ -75,7 +75,8 @@ function copy(r: string): L<Copy> {
           name: "Code verification",
           question: "Does the translation you received still do what the original did?",
           deliver: [
-            "Per module, one of three answers: same behavior within the stated scope, the exact input where it differs, or not decided with the reason.",
+            "First, a traceability audit report: what the translation’s own documents claim, checked against the code.",
+            "Then, per module, one of three answers: same behavior within the stated scope, the exact input where it differs, or not decided with the reason.",
             "Every difference, with what you need to replay it on your compiler and on the new code.",
             "The scope, and the compiler and CICS assumptions each answer depends on.",
           ],
@@ -170,7 +171,8 @@ function copy(r: string): L<Copy> {
           name: "Vérification de code",
           question: "La traduction que vous avez reçue fait-elle encore ce que faisait l’original ?",
           deliver: [
-            "Par module, l’une des trois réponses : même comportement dans le périmètre annoncé, l’entrée précise où il diffère, ou impossible à trancher, avec la raison.",
+            "D’abord, un rapport d’audit de traçabilité : ce que disent les documents de la traduction, comparé au code.",
+            "Ensuite, par module, l’une des trois réponses : même comportement dans le périmètre annoncé, l’entrée précise où il diffère, ou impossible à trancher, avec la raison.",
             "Chaque écart, avec de quoi le rejouer sur votre compilateur et sur le nouveau code.",
             "Le périmètre, et les hypothèses sur le compilateur et CICS dont dépend chaque réponse.",
           ],

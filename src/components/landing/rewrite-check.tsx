@@ -29,6 +29,9 @@ export type RewriteCopy = {
   method: { title: string; lead: string };
   answers: readonly [Answer, Answer, Answer];
   who: string;
+  /** The audit comes first, the proof second: two reports (Dom, 2026-10-19). */
+  audit: string;
+  auditLink: string;
   exampleLabel: string;
   cta: string;
   href: string;
@@ -51,7 +54,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
       {
         word: "Different behavior.",
-        body: "The exact input where the two differ, replayed on your own compiler. You don’t have to trust us: you run it and see the difference yourself.",
+        body: "The exact input where the two differ, replayed on your own compiler. You run it yourself and see the difference with your own eyes.",
         receive: "You get the input, to replay on the old program and on the new one.",
       },
       {
@@ -61,8 +64,10 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
     ],
     who: "We don’t translate. We check the translations others make, for the side that carries the risk if it breaks.",
+    audit: "It starts with a traceability audit: we check what the translation says about itself, its cited sources, its data mapping, its compliance sheets. The proof of behavior comes next, in its own report.",
+    auditLink: "SEE THE AUDIT",
     exampleLabel: "ALREADY RUN",
-    cta: "SEND US A TRANSLATION",
+    cta: "SEE HOW WE CHECK IT",
     href: "/modernization",
   },
   fr: {
@@ -81,7 +86,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
       {
         word: "Comportement différent.",
-        body: "L’entrée précise où les deux divergent, rejouée sur votre propre compilateur. Pas besoin de nous croire : vous la lancez et vous voyez l’écart de vos yeux.",
+        body: "L’entrée précise où les deux divergent, rejouée sur votre propre compilateur. Vous la lancez vous-même et vous voyez l’écart de vos yeux.",
         receive: "Vous recevez l’entrée, à rejouer sur l’ancien programme et sur le nouveau.",
       },
       {
@@ -91,8 +96,10 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
     ],
     who: "On ne traduit pas. On vérifie ce que d’autres ont traduit, pour vous, qui en portez le risque.",
+    audit: "On commence par un audit de traçabilité : on vérifie ce que la traduction dit d’elle-même, ses sources citées, sa correspondance de données, ses fiches de conformité. La preuve de comportement vient ensuite, dans son propre rapport.",
+    auditLink: "VOIR L’AUDIT",
     exampleLabel: "DÉJÀ FAIT",
-    cta: "ENVOYEZ-NOUS UNE TRADUCTION",
+    cta: "VOIR COMMENT ON VÉRIFIE",
     href: "/fr/modernization",
   },
 };
@@ -119,6 +126,12 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
           ))}
         </ol>
         <p className="fade-up mt-16 max-w-3xl font-serif text-2xl leading-snug text-neutral-200 md:text-3xl">{t.who}</p>
+        <p className="fade-up mt-8 max-w-3xl text-base font-light leading-relaxed text-neutral-300 md:text-lg">
+          {t.audit}{" "}
+          <a href={`${t.href}#traceability`} className="track-mid ml-1 whitespace-nowrap border-b border-white/25 pb-0.5 text-xs text-neutral-200 transition hover:border-seal hover:text-white">
+            {t.auditLink} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </p>
         {example ? (
           <div className="fade-up mt-12 max-w-3xl">
             <p className="seal-label track-mid mb-3 text-xs">{t.exampleLabel}</p>

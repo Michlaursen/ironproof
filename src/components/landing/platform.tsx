@@ -127,7 +127,15 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
         {u.cards.slice(0, 1).map((c) => (
           <div key={c.name} className="fade-up mt-16 border-t border-white/10 pt-6">
             <h3 className="font-serif text-3xl text-neutral-100 md:text-4xl">{c.name}</h3>
-            <p className="mt-4 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{c.body}</p>
+            {/* One paragraph per line; the last one, the promise, in a heavier weight (Dom's text, 2026-10-19). */}
+            {c.body.split("\n").map((para, i, all) => (
+              <p
+                key={para}
+                className={`mt-4 max-w-3xl text-lg leading-relaxed md:text-xl ${i === all.length - 1 && all.length > 1 ? "font-medium text-neutral-100" : "font-light text-neutral-300"}`}
+              >
+                {para}
+              </p>
+            ))}
             <a
               href={c.href}
               className="track-mid mt-6 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
