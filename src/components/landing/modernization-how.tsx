@@ -13,12 +13,25 @@ import { FlowDiagram, type FlowCopy } from "./flow-diagram";
  * allows, the same cases go through IBM's own COBOL compiler. No figure here:
  * the figures live on the results already published. "Why us" contrasts with
  * testing in general and names no one.
+ *
+ * Traceability audit (Dom, 2026-10-19: « audit de traçabilité, on oublie pas
+ * de mettre ça sur le website »), shown FIRST since 2026-10-19 (Dom: « c
+ * smartttt go »): the audit opens the door, the proof is the next sale, two
+ * separate reports. No figure on any third-party translation here, not even
+ * in this comment: this repository is public. The measurements live in the
+ * private cobalt-ai repository (verif_tierce) and come to this page only after
+ * the translator has answered.
  */
 
 type Step = { title: string; body: string };
 type Item = { title: string; body: string };
 
 type HowCopy = {
+  auditEyebrow: string;
+  auditTitle: string;
+  auditLead: string;
+  audit: readonly Item[];
+  auditNote: string;
   eyebrow: string;
   title: string;
   steps: readonly Step[];
@@ -38,6 +51,24 @@ type HowCopy = {
 
 const COPY: L<HowCopy> = {
   en: {
+    auditEyebrow: "TRACEABILITY AUDIT · BEFORE THE PROOF",
+    auditTitle: "First, we check what the translation says about itself.",
+    auditLead: "An AI translation ships with its own paperwork: where each piece of new code came from, how each field maps, which checks passed. Your migration team and your auditors rely on it. We check every one of those statements against the real code.",
+    audit: [
+      {
+        title: "Cited sources",
+        body: "“This method comes from that COBOL paragraph.” Does that paragraph exist in the program it cites?",
+      },
+      {
+        title: "Data mapping",
+        body: "“This Java field is that COBOL field, of this size.” Do both fields exist, with the stated size and a compatible type?",
+      },
+      {
+        title: "Compliance claims",
+        body: "“This calculation matches the original: passed.” Is the calculation actually in the new code?",
+      },
+    ],
+    auditNote: "These are simple checks, not a proof: they tell you whether the paperwork is true. The proof tells you whether the new code does the same thing.",
     eyebrow: "HOW IT WORKS",
     title: "One program at a time. Every step leaves evidence.",
     steps: [
@@ -110,6 +141,24 @@ const COPY: L<HowCopy> = {
     },
   },
   fr: {
+    auditEyebrow: "AUDIT DE TRAÇABILITÉ · AVANT LA PREUVE",
+    auditTitle: "D’abord, on vérifie ce que la traduction dit d’elle-même.",
+    auditLead: "Une traduction par IA arrive avec ses propres documents : d’où vient chaque morceau du nouveau code, à quoi correspond chaque champ, quels contrôles ont réussi. Votre équipe de migration et vos auditeurs s’y fient. On compare chacune de ces affirmations au vrai code.",
+    audit: [
+      {
+        title: "Les sources citées",
+        body: "« Cette méthode vient de tel paragraphe COBOL. » Ce paragraphe existe-t-il dans le programme cité ?",
+      },
+      {
+        title: "La correspondance des données",
+        body: "« Ce champ Java est tel champ COBOL, de telle taille. » Les deux champs existent-ils, avec la taille annoncée et un type compatible ?",
+      },
+      {
+        title: "Les fiches de conformité",
+        body: "« Ce calcul est conforme à l’original : réussi. » Le calcul est-il vraiment dans le nouveau code ?",
+      },
+    ],
+    auditNote: "Ce sont des contrôles simples, pas une preuve : ils vous disent si les documents disent vrai. La preuve, elle, vous dit si le nouveau code fait la même chose.",
     eyebrow: "COMMENT ÇA FONCTIONNE",
     title: "Un programme à la fois. Chaque étape laisse une preuve.",
     steps: [
@@ -193,6 +242,23 @@ export function ModernizationHow({ locale = defaultLocale }: { locale?: Locale }
 
   return (
     <>
+      <section id="traceability" className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
+        <div className="fade-up mb-10 max-w-3xl">
+          <Snum>{t.auditEyebrow}</Snum>
+          <h2 className="metal-text font-serif text-3xl font-medium md:text-5xl">{t.auditTitle}</h2>
+          <p className="mt-6 font-light leading-relaxed text-neutral-300">{t.auditLead}</p>
+        </div>
+        <ul className="fade-up grid gap-8 md:grid-cols-3">
+          {t.audit.map((a) => (
+            <li key={a.title} className="edge-t pt-6">
+              <h3 className="mb-3 font-serif text-xl text-foreground">{a.title}</h3>
+              <p className="font-light leading-relaxed text-neutral-300">{a.body}</p>
+            </li>
+          ))}
+        </ul>
+        <p className="fade-up mt-10 max-w-3xl text-sm font-light text-neutral-400">{t.auditNote}</p>
+      </section>
+
       <section id="how" className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
         <div className="fade-up mb-12 grid items-center gap-10 md:grid-cols-[1fr_1.1fr]">
           <div className="max-w-xl">

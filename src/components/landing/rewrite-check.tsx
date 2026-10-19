@@ -29,6 +29,9 @@ export type RewriteCopy = {
   method: { title: string; lead: string };
   answers: readonly [Answer, Answer, Answer];
   who: string;
+  /** The audit comes first, the proof second: two reports (Dom, 2026-10-19). */
+  audit: string;
+  auditLink: string;
   exampleLabel: string;
   cta: string;
   href: string;
@@ -61,6 +64,8 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
     ],
     who: "We don’t translate. We check the translations others make, for the side that carries the risk if it breaks.",
+    audit: "It starts with a traceability audit: we check what the translation says about itself, its cited sources, its data mapping, its compliance sheets. The proof of behavior comes next, in its own report.",
+    auditLink: "SEE THE AUDIT",
     exampleLabel: "ALREADY RUN",
     cta: "SEND US A TRANSLATION",
     href: "/modernization",
@@ -91,6 +96,8 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
     ],
     who: "On ne traduit pas. On vérifie ce que d’autres ont traduit, pour vous, qui en portez le risque.",
+    audit: "On commence par un audit de traçabilité : on vérifie ce que la traduction dit d’elle-même, ses sources citées, sa correspondance de données, ses fiches de conformité. La preuve de comportement vient ensuite, dans son propre rapport.",
+    auditLink: "VOIR L’AUDIT",
     exampleLabel: "DÉJÀ FAIT",
     cta: "ENVOYEZ-NOUS UNE TRADUCTION",
     href: "/fr/modernization",
@@ -119,6 +126,12 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
           ))}
         </ol>
         <p className="fade-up mt-16 max-w-3xl font-serif text-2xl leading-snug text-neutral-200 md:text-3xl">{t.who}</p>
+        <p className="fade-up mt-8 max-w-3xl text-base font-light leading-relaxed text-neutral-300 md:text-lg">
+          {t.audit}{" "}
+          <a href={`${t.href}#traceability`} className="track-mid ml-1 whitespace-nowrap border-b border-white/25 pb-0.5 text-xs text-neutral-200 transition hover:border-seal hover:text-white">
+            {t.auditLink} <span aria-hidden="true">&rarr;</span>
+          </a>
+        </p>
         {example ? (
           <div className="fade-up mt-12 max-w-3xl">
             <p className="seal-label track-mid mb-3 text-xs">{t.exampleLabel}</p>
