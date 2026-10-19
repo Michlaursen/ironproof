@@ -86,7 +86,7 @@ const T: L<{
     agcoEyebrow: "AGCO DEMO",
     agcoLabel: "Demo: does a player’s deposit limit hold? Ontario Registrar’s Standards 2.23 and 2.24",
     agcoNote:
-      "3 minutes 43 seconds, with sound; the mathematics section is on-screen text. The rule is quoted from the AGCO Registrar’s Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative: of the eight that break, seven are common mistakes written on purpose and one comes from an open-source project. All are replayed through the same checker; no operator’s system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days. The 2023 penalty shown is quoted from an AGCO news release of November 9, 2023.",
+      "3 minutes 43 seconds, with sound. The rule is quoted from the AGCO Registrar’s Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative: of the eight that break, seven are common mistakes written on purpose and one comes from an open-source project. All are replayed through the same checker; no operator’s system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days. The 2023 penalty shown is quoted from an AGCO news release of November 9, 2023.",
     termEyebrow: "IN THE TERMINAL",
     termTitle: "One transfer. Allowed, then blocked.",
     termLead: "A $50,000 transfer clears the bank’s policy and is sealed. Then the account is frozen: the same transfer is blocked, the money never moves, and the refusal is sealed too.",
@@ -126,7 +126,7 @@ const T: L<{
     agcoEyebrow: "DÉMO AGCO",
     agcoLabel: "Démo : la limite de dépôt d’un joueur tient-elle\u00a0? Normes du registrateur de l’Ontario 2.23 et 2.24",
     agcoNote:
-      "3 minutes 43 secondes, avec son, en anglais ; la partie mathématique est en texte à l’écran. La règle est citée des normes du registrateur de l’AGCO pour les jeux en ligne, 2.23 et 2.24. Les systèmes A, B et C et les douze implémentations sont illustratifs : des huit qui cassent, sept sont des erreurs courantes écrites exprès et une vient d’un projet libre. Toutes passent par le même vérificateur ; aucun système d’exploitant n’a été examiné. Les résultats tiennent dans les bornes montrées dans le film : jusqu’à 8 événements sur 75 jours. La pénalité de 2023 montrée est citée d’un communiqué de l’AGCO du 9 novembre 2023.",
+      "3 minutes 43 secondes, avec son, en anglais. La règle est citée des normes du registrateur de l’AGCO pour les jeux en ligne, 2.23 et 2.24. Les systèmes A, B et C et les douze implémentations sont illustratifs : des huit qui cassent, sept sont des erreurs courantes écrites exprès et une vient d’un projet libre. Toutes passent par le même vérificateur ; aucun système d’exploitant n’a été examiné. Les résultats tiennent dans les bornes montrées dans le film : jusqu’à 8 événements sur 75 jours. La pénalité de 2023 montrée est citée d’un communiqué de l’AGCO du 9 novembre 2023.",
     termEyebrow: "DANS LE TERMINAL",
     termTitle: "Un virement. Autorisé, puis bloqué.",
     termLead: "Un virement de 50 000 $ respecte la politique de la banque et il est scellé. Puis le compte est gelé : le même virement est bloqué, l’argent ne bouge jamais, et le refus est scellé lui aussi.",
