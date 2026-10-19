@@ -122,7 +122,7 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="seal-label track-mid mb-5 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.title}</h2>
           <p className="mt-6 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{t.lead}</p>
-          {/* The CardDemo case right under the lead (Dom, 2026-10-19, review). */}
+          {/* The example right under the lead (Dom, 2026-10-19, review). */}
           {example ? (
             <div className="mt-10 max-w-3xl border-l-2 border-seal/60 pl-6">
               <p className="seal-label track-mid mb-3 text-xs">{t.exampleLabel}</p>

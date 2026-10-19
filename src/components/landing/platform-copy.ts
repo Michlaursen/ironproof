@@ -25,7 +25,7 @@ import type { L } from "./i18n";
  * research -- no "product", no purchase button. Never "universal engine".
  *
  * 2026-10-19 evening (review relayed by Dom): no figure that lets a reader find a
- * translator before that translator has answered us; the CardDemo cents are gone.
+ * translator before that translator has answered us.
  *
  * 2026-10-19 (Dom, "PARFAIT LETS GO"): the translation check leads the use
  * cases (card 0, shown in full); the gate in front of critical actions comes

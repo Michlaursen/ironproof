@@ -1311,8 +1311,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </ol>
         </section>
 
-        {/* The check of what a machine rewrote, right under the hero, with the CardDemo
-          * case near its top (Dom, 2026-10-19, review: « remonte CardDemo »). */}
+        {/* The check of what a machine rewrote, right under the hero (Dom, 2026-10-19). */}
         <RewriteCheck locale={locale} />
 
         {/* CREDITED-BY STRIP — right under the hero (Dom, 2026-10-15: « plus au début »):
