@@ -188,26 +188,17 @@ function Blocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {
  * `copy` and `page` let a second note reuse this layout: the copy carries the
  * whole text, `page` tells the header which note is open. Both default to the
  * first note, so its page is unchanged.
- *
- * `film` puts a recording right under the definition (/proof-intelligence):
- * controls on, no autoplay, a film to watch rather than a background loop,
- * like the film on /demo.
  */
 export function ResearchZeroBarriers({
   locale = defaultLocale,
   navLocale,
   copy,
   page = "research",
-  film,
-  film2,
 }: {
   locale?: Locale;
   navLocale?: Locale;
   copy?: ResearchCopy;
   page?: "research" | "research-limits" | "proof-intelligence";
-  film?: { src: string; poster: string; label: string; note: string };
-  /** A second recording under the first, with its own eyebrow (/proof-intelligence: the AGCO demo). */
-  film2?: { eyebrow: string; src: string; poster: string; label: string; note: string };
 }) {
   const c = copy ?? RESEARCH_COPY[locale] ?? RESEARCH_COPY.en;
 
@@ -233,47 +224,6 @@ export function ResearchZeroBarriers({
             </div>
           </div>
         </section>
-
-        {film && (
-          <section className="relative z-10 mx-auto max-w-4xl px-6 pb-6 pt-6 md:px-14">
-            <figure className="fade-up overflow-hidden rounded-[6px] border border-white/10">
-              <video
-                className="block h-auto w-full"
-                width={1920}
-                height={1080}
-                poster={film.poster}
-                controls
-                playsInline
-                preload="metadata"
-                aria-label={film.label}
-              >
-                <source src={film.src} type="video/mp4" />
-              </video>
-            </figure>
-            <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed text-neutral-500">{film.note}</p>
-          </section>
-        )}
-
-        {film2 && (
-          <section className="relative z-10 mx-auto max-w-4xl px-6 pb-6 pt-10 md:px-14">
-            <p className="track-wide mb-4 text-xs text-neutral-400 md:text-sm">{film2.eyebrow}</p>
-            <figure className="fade-up overflow-hidden rounded-[6px] border border-white/10">
-              <video
-                className="block h-auto w-full"
-                width={1920}
-                height={1080}
-                poster={film2.poster}
-                controls
-                playsInline
-                preload="metadata"
-                aria-label={film2.label}
-              >
-                <source src={film2.src} type="video/mp4" />
-              </video>
-            </figure>
-            <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed text-neutral-500">{film2.note}</p>
-          </section>
-        )}
 
         {/* LEDE */}
         <section className="relative z-10 mx-auto max-w-4xl px-6 pb-4 pt-10 md:px-14">

@@ -6,21 +6,6 @@ import { PI_COPY, PI_DEFINITION } from "@/components/landing/proof-intelligence-
 
 const SLUG = "proof-intelligence";
 const PUBLISHED = "2026-10-17";
-const FILM = {
-  src: "/media/proof-intelligence-film.h264.mp4",
-  poster: "/media/proof-intelligence-film-poster.jpg",
-  label: "Film: Proof Intelligence, in under three minutes",
-  note: "2 minutes 46 seconds, with sound. The payments in the film illustrate a payment policy; they are not a client case. Each application is shown with its status today. The standards shown are the ones each sector already works under; naming a sector does not mean it uses Ironproof today.",
-};
-
-const AGCO_DEMO = {
-  eyebrow: "AGCO DEMO",
-  src: "/media/agco-demo-v6.h264.mp4",
-  poster: "/media/agco-demo-v6-poster.jpg",
-  label: "Demo: does a player's deposit limit hold? Ontario Registrar's Standards 2.23 and 2.24",
-  note: "3 minutes 43 seconds, with sound; the mathematics section is on-screen text. The rule is quoted from the AGCO Registrar's Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative: of the eight that break, seven are common mistakes written on purpose and one comes from an open-source project. All are replayed through the same checker; no operator's system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days. The 2023 penalty shown is quoted from an AGCO news release of November 9, 2023.",
-};
-
 /*
  * The definition of the term the hero carries. English only, like the
  * research notes: /fr/… renders the English text with an English canonical,
@@ -92,26 +77,6 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         mainEntityOfPage: url,
         about: { "@id": `${url}#term` },
       },
-      {
-        "@type": "VideoObject",
-        name: FILM.label,
-        description: PI_DEFINITION,
-        thumbnailUrl: `https://ironproof.ai${FILM.poster}`,
-        contentUrl: `https://ironproof.ai${FILM.src}`,
-        uploadDate: PUBLISHED,
-        duration: "PT2M46S",
-        publisher: { "@id": "https://ironproof.ai/#organization" },
-      },
-      {
-        "@type": "VideoObject",
-        name: AGCO_DEMO.label,
-        description: AGCO_DEMO.note,
-        thumbnailUrl: `https://ironproof.ai${AGCO_DEMO.poster}`,
-        contentUrl: `https://ironproof.ai${AGCO_DEMO.src}`,
-        uploadDate: "2026-10-17",
-        duration: "PT3M3S",
-        publisher: { "@id": "https://ironproof.ai/#organization" },
-      },
     ],
   };
 
@@ -126,8 +91,6 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         navLocale={locale}
         copy={PI_COPY}
         page="proof-intelligence"
-        film={FILM}
-        film2={AGCO_DEMO}
       />
     </>
   );
