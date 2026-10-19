@@ -40,7 +40,7 @@ export const HERO_COPY: L<HeroCopy> = {
     eyebrow: "PROOF INTELLIGENCE",
     eyebrowSub: "POUR LES SYSTÈMES CRITIQUES",
     headline: "Votre code a été réécrit.",
-    headlineEnd: "Sachez s’il fait encore la même chose.",
+    headlineEnd: "Fait-il toujours la même chose ?",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
   },
 };

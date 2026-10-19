@@ -59,22 +59,22 @@ const COPY: L<RewriteCopy> = {
   fr: {
     eyebrow: "VÉRIFICATION DE TRADUCTION",
     title: "Réécrit ne veut pas dire équivalent.",
-    lead: "Une banque migre son COBOL vers Java, avec un intégrateur ou un outil d’IA. Le nouveau code compile et passe ses tests. Ironproof vous dit, module par module, s’il fait encore ce que faisait l’ancien.",
+    lead: "Une banque fait passer son COBOL à Java, avec un intégrateur ou un outil d’IA. Le nouveau code compile, il passe ses tests. Reste une question : fait-il encore ce que faisait l’ancien ? Ironproof y répond, module par module.",
     answers: [
       {
         word: "Même comportement.",
-        body: "Dans le périmètre que nous annonçons avant de commencer. Cette réponse repose sur notre modèle du code d’origine, et ce modèle est lui-même confronté au compilateur d’IBM.",
+        body: "Dans le périmètre fixé avant de commencer. Cette réponse s’appuie sur notre modèle du code d’origine, et ce modèle est lui-même confronté au compilateur d’IBM.",
       },
       {
         word: "Comportement différent.",
-        body: "L’entrée exacte où les deux diffèrent, rejouée sur votre propre compilateur. Vous n’avez pas à nous croire : vous l’exécutez et vous voyez la différence vous-même.",
+        body: "L’entrée précise où les deux divergent, rejouée sur votre propre compilateur. Pas besoin de nous croire : vous la lancez et vous voyez l’écart de vos yeux.",
       },
       {
-        word: "Non tranché.",
-        body: "Là où nous n’avons pas pu conclure, nous le disons, avec la raison. Jamais affiché comme un succès.",
+        word: "Impossible à trancher.",
+        body: "Quand on ne peut pas conclure, on le dit, raison à l’appui. Jamais présenté comme une réussite.",
       },
     ],
-    who: "Nous ne traduisons pas. Nous vérifions les traductions faites par d’autres, pour le compte de celui qui porte le risque si ça casse.",
+    who: "On ne traduit pas. On vérifie les traductions des autres, pour celui qui paie la note si ça casse.",
     exampleLabel: "DÉJÀ FAIT",
     cta: "ENVOYEZ-NOUS UNE TRADUCTION",
     href: "/fr/modernization",

@@ -351,18 +351,18 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     useCases: {
       eyebrow: "CE QU’IL PROUVE",
-      title: "D’abord : la vérification de ce qui a été réécrit. Ensuite, la barrière.",
+      title: "D’abord, vérifier ce qui a été réécrit. Ensuite, la barrière.",
       alsoTitle: "Le même moteur, trois autres questions.",
-      alsoLead: "Le moteur derrière la vérification de traduction garde aussi les actions critiques, et prend deux questions difficiles en mandat livré par notre équipe.",
+      alsoLead: "Le même moteur protège aussi vos actions critiques. Et notre équipe le met au travail, en mandat, sur deux questions difficiles.",
       alsoLines: [
-        "Chaque paiement, accès et changement contrôlé contre vos règles avant de s’exécuter : autorisé s’il les respecte, bloqué s’il les enfreint, et chaque décision scellée.",
+        "Chaque paiement, accès ou changement vérifié selon vos règles avant de partir. Conforme, il passe. Sinon, il est bloqué. Chaque décision est scellée.",
         "Trouvez la seule demande que votre politique d’accès laisse passer, avant un attaquant.",
         "Sachez si un correctif ferme vraiment la faille, avant de le livrer.",
       ],
       alsoCta: "PARLEZ-NOUS",
       alsoHref: "/fr/pilot",
       plugsInLabel: "COMMENT ÇA COMMENCE",
-      plugsIn: "Envoyez-nous le programme d’origine et sa traduction. Notre équipe vous rend, module par module, l’une des trois réponses, chaque différence avec l’entrée exacte qui la montre, et de quoi rejouer cette entrée sur votre propre compilateur.",
+      plugsIn: "Envoyez-nous le programme d’origine et sa traduction. Notre équipe vous rend, module par module, l’une des trois réponses, chaque écart avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
       cards: [
         {
           name: "Vérification de traduction",
@@ -397,11 +397,11 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     northStar: {
       eyebrow: "CE QUE NOUS CROYONS",
-      title: "Ironproof apporte la preuve à ce que les machines réécrivent, et aux actions irréversibles.",
+      title: "Ironproof apporte la preuve à ce que les machines réécrivent, et aux actions sans retour.",
       paragraphs: [
         "L’IA écrit du code, déplace de l’argent et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
         "Mais la vitesse sans garantie ne suffit pas.",
-        "Chaque migration doit préserver le comportement qui compte. Chaque action critique doit être autorisée avant de s’exécuter. Chaque affirmation doit résister à une vérification indépendante.",
+        "Chaque migration doit garder le comportement qui compte. Chaque action critique doit être autorisée avant de partir. Chaque affirmation doit résister à une vérification indépendante.",
       ],
       lead: "Ironproof développe ce que nous appelons Proof Intelligence.",
       body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier.",

@@ -678,7 +678,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Même comportement dans le périmètre annoncé. Ou le cas exact qui diffère, rejoué sur votre propre compilateur. Ou nous disons que nous n’avons pas pu trancher.\nActions critiques : contrôlées contre vos règles, autorisées si elles les respectent, bloquées si elles les enfreignent.\nIndépendant. Scellé. Vérifiable sans nous faire confiance.",
+        "Même comportement, dans le périmètre annoncé. Sinon, le cas précis qui diffère, rejoué sur votre propre compilateur. Et quand on ne peut pas trancher, on vous le dit.\nActions critiques : vérifiées selon vos règles. Conformes, elles passent. Sinon, elles sont bloquées.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -915,8 +915,8 @@ const T: L<Copy> = {
 
     now: {
       eyebrow: "POURQUOI MAINTENANT",
-      title: "Les machines réécrivent maintenant les systèmes critiques, et agissent sur eux.",
-      lead: "Des outils d’IA traduisent le code patrimonial plus vite que quiconque peut le relire, et des agents, des scripts et des chaînes automatisées déplacent de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
+      title: "Les machines réécrivent les systèmes critiques. Et elles agissent dessus.",
+      lead: "Les outils d’IA traduisent le vieux code plus vite que quiconque peut le relire. Des agents, des scripts et des chaînes automatisées déplacent de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
         {
           date: "9 oct. 2025",
@@ -1082,9 +1082,9 @@ const T: L<Copy> = {
       titleA: "Probablement sûr, ce n’est pas",
       titleB: "prouvé impossible.",
       body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action qui passe par la barrière est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; le reste ne s’exécute jamais. Et chaque résultat vient avec ce qu’il faut pour le vérifier sans nous.",
-      kicker: "Ce qui a été réécrit, vérifié. Ce qui est conforme s’exécute. Le reste, jamais.",
+      kicker: "Ce qui est réécrit est vérifié. Ce qui est conforme passe. Le reste, jamais.",
       scope:
-        "Pour une traduction : prouvé dans le modèle et le périmètre que nous annonçons. Pour une action : prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Chaque certificat énonce sa frontière.",
+        "Pour une traduction : prouvé dans le modèle et le périmètre annoncés. Pour une action : prouvé pour les actions et la politique que vous définissez, à condition que l’action ne puisse passer que par la barrière. Chaque certificat dit où s’arrête sa preuve.",
       notes: [
         { x: 57, y: 80, label: "MARBRE · L’INTENTION HUMAINE" },
         { x: 76, y: 12, label: "FER · LA RIGUEUR DE LA MACHINE" },
