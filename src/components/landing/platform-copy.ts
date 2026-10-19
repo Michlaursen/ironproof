@@ -117,7 +117,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     pillars: [
       {
         num: "01",
-        name: "AI agents & critical actions",
+        name: "Critical actions",
         status: "AVAILABLE NOW · PILOTS OPEN",
         available: true,
         claim: "Your agent can move money. It should never move it wrong.",
@@ -184,20 +184,20 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       items: [
         {
           title: "Improve time to market",
-          body: "Put AI agents, policy changes and migrations into production sooner. The checks run automatically, and the evidence is produced as you go, not assembled after the fact for the audit.",
+          body: "Put migrations, AI agents and policy changes into production sooner. The checks run automatically, and the evidence is produced as you go, not assembled after the fact for the audit.",
         },
         {
           title: "Pass the audit with evidence",
-          body: "Give your auditor and your regulator a sealed record of every decision that they can re-check themselves, instead of logs and screenshots.",
+          body: "Give your auditor and your regulator a sealed record of every answer and every decision that they can re-check themselves, instead of logs and screenshots.",
         },
         {
           title: "Catch what tests miss",
-          body: "Get the exact input or sequence of actions that breaks your rule before production does, or the proof that none exists within the stated model.",
+          body: "Get the exact input where the new code behaves differently, or the sequence of actions that breaks your rule, before production does. Or the proof that none exists within the stated model.",
         },
       ],
     },
     useCases: {
-      eyebrow: "WHAT IT PROVES",
+      eyebrow: "WHAT WE CHECK",
       title: "First: the check of what was rewritten. Then the gate.",
       alsoTitle: "Same engine, three more questions.",
       alsoLead: "The engine behind code verification also guards critical actions, and takes on two hard questions as a mandate delivered by our team.",
@@ -213,13 +213,13 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Code verification",
-          body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We show that the new code computes what the old one did, under a stated model, or the exact input where it differs.",
+          body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We tell you if the new code still does what the old one did, under a stated model, or show the exact input where it differs.",
           ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account. Coverage is still partial, and no third party has replayed it yet.",
           href: "/modernization",
           cta: "SEND US A TRANSLATION",
         },
         {
-          name: "AI agents & critical actions",
+          name: "Critical actions",
           body: "For banks putting AI agents into production: keep every payment, access grant and change inside your policy, checked before it runs, and give your auditor a sealed record of each decision instead of a log.",
           ranOn: "A CAD 7.2 million payment from an AI agent, unsigned: blocked at the gate, refusal sealed. In a lab, NERC CIP-010 change rules encoded as a gate: 17 of 17 cases decided as NERC’s text says.",
           href: "/demo",
@@ -270,7 +270,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     pillars: [
       {
         num: "01",
-        name: "Agents IA et actions critiques",
+        name: "Actions critiques",
         status: "DISPONIBLE · PILOTES OUVERTS",
         available: true,
         claim: "Votre agent peut déplacer de l’argent. Il ne doit jamais le déplacer de travers.",
@@ -337,27 +337,27 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       items: [
         {
           title: "Accélérer la mise en marché",
-          body: "Mettez agents IA, changements de politique et migrations en production plus tôt. Les vérifications roulent automatiquement, et les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
+          body: "Mettez migrations, agents IA et changements de politique en production plus tôt. Les vérifications roulent automatiquement, et les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
         },
         {
           title: "Passer l’audit avec des preuves",
-          body: "Remettez à votre auditeur et à votre régulateur une trace scellée de chaque décision, qu’ils revérifient eux-mêmes, plutôt que des journaux et des captures d’écran.",
+          body: "Remettez à votre auditeur et à votre régulateur une trace scellée de chaque réponse et de chaque décision, qu’ils revérifient eux-mêmes, plutôt que des journaux et des captures d’écran.",
         },
         {
           title: "Attraper ce que les tests ratent",
-          body: "Obtenez l’entrée ou la suite d’actions exacte qui brise votre règle avant que la production la trouve, ou la preuve qu’il n’y en a aucune dans le modèle déclaré.",
+          body: "Obtenez l’entrée précise où le nouveau code se comporte autrement, ou la suite d’actions qui brise votre règle, avant que la production la trouve. Ou la preuve qu’il n’y en a aucune dans le modèle déclaré.",
         },
       ],
     },
     useCases: {
-      eyebrow: "CE QU’IL PROUVE",
+      eyebrow: "CE QU’ON VÉRIFIE",
       title: "D’abord, vérifier ce qui a été réécrit. Ensuite, la barrière.",
       alsoTitle: "Le même moteur, trois autres questions.",
       alsoLead: "Le même moteur protège aussi vos actions critiques. Et notre équipe le met au travail, en mandat, sur deux questions difficiles.",
       alsoLines: [
         "Chaque paiement, accès ou changement vérifié selon vos règles avant de partir. Conforme, il passe. Sinon, il est bloqué. Chaque décision est scellée.",
         "Trouvez la seule demande que votre politique d’accès laisse passer, avant un attaquant.",
-        "Sachez si un correctif ferme vraiment la faille, avant de le livrer.",
+        "Vérifiez qu’un correctif ferme vraiment la faille, avant de le livrer.",
       ],
       alsoCta: "PARLEZ-NOUS",
       alsoHref: "/fr/pilot",
@@ -366,13 +366,13 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Vérification de code",
-          body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. Nous montrons que le nouveau code calcule ce que l’ancien calculait, sous un modèle déclaré, ou l’entrée exacte où ils diffèrent.",
+          body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. On vous dit si le nouveau code fait encore ce que faisait l’ancien, sous un modèle déclaré, ou on vous montre l’entrée précise où il diffère.",
           ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte. La couverture reste partielle, et aucun tiers ne l’a encore rejouée.",
           href: "/fr/modernization",
           cta: "ENVOYEZ-NOUS UNE TRADUCTION",
         },
         {
-          name: "Agents IA et actions critiques",
+          name: "Actions critiques",
           body: "Pour les banques qui mettent des agents IA en production : chaque paiement, accès et changement reste dans votre politique, vérifié avant de s’exécuter, et votre auditeur reçoit une trace scellée de chaque décision plutôt qu’un journal.",
           ranOn: "Un paiement de 7,2 M$ CA envoyé par un agent IA, sans signature : bloqué à la barrière, refus scellé. En labo, les règles de changement NERC CIP-010 encodées comme barrière : 17 cas sur 17 tranchés comme le dit le texte de NERC.",
           href: "/fr/demo",

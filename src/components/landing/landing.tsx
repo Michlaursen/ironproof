@@ -568,7 +568,7 @@ const T: L<Copy> = {
           href: SRC_DND_PLAN,
         },
       ],
-      foot: "When a system can act on its own, the decision has to be made before the action runs, not read in a log afterwards.",
+      foot: "When machines rewrite and act on their own, the check has to come before the change goes live, not from a log afterwards.",
     },
 
     gate: {
@@ -614,7 +614,7 @@ const T: L<Copy> = {
     },
 
     how: {
-      eyebrow: "HOW IT WORKS",
+      eyebrow: "HOW THE GATE WORKS",
       title: "Prove. Enforce. Seal. Verify.",
       lead: "For a rule over the history of approved actions, Ironproof either proves, with an inductive invariant, that no sequence of any length can cross the defined authorization boundary, or returns the shortest sequence that does, replayed through the gate. When neither closes, it says so, and states the bound it searched.",
       compiler:
@@ -1003,7 +1003,7 @@ const T: L<Copy> = {
           href: SRC_DND_PLAN,
         },
       ],
-      foot: "Quand un système peut agir seul, la décision doit se prendre avant que l’action parte, pas se lire dans un journal après coup.",
+      foot: "Quand les machines réécrivent et agissent seules, la vérification doit venir avant la mise en service, pas d’un journal après coup.",
     },
 
     gate: {
@@ -1049,7 +1049,7 @@ const T: L<Copy> = {
     },
 
     how: {
-      eyebrow: "COMMENT ÇA MARCHE",
+      eyebrow: "COMMENT FONCTIONNE LA BARRIÈRE",
       title: "Prouver. Appliquer. Sceller. Vérifier.",
       lead: "Pour une règle qui porte sur l’historique des actions autorisées, Ironproof prouve, par un invariant inductif, qu’aucune séquence de n’importe quelle longueur ne peut franchir la frontière d’autorisation définie, ou rend la plus courte séquence qui la franchit, rejouée dans la barrière. Quand ni l’un ni l’autre n’aboutit, il le dit et donne la borne explorée.",
       compiler:

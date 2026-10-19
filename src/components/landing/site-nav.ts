@@ -102,7 +102,8 @@ export function siteNav(locale: Locale = defaultLocale) {
       label: t.technology,
       items: [
         { href: `${r}/proof-intelligence`, label: t.proofIntelligence, page: "proof-intelligence" },
-        { href: `${home}#how`, label: t.how },
+        // The general method (platform-how.tsx), not the gate pipeline at #how (Dom, 2026-10-19: code first).
+        { href: `${home}#how-platform`, label: t.how },
         { href: `${r}/neuro-symbolic`, label: t.neuroSymbolic, page: "neuro-symbolic" },
         { href: `${r}/provable-ai`, label: t.provableAi, page: "provable-ai" },
         { href: `${r}/zero-trust`, label: t.zeroTrust, page: "zero-trust" },
