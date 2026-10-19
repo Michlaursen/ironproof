@@ -119,14 +119,15 @@ export function siteNav(locale: Locale = defaultLocale) {
       id: "solutions",
       label: t.solutions,
       items: [
+        // First since 2026-10-19 (Dom: the check of what a machine rewrote leads,
+        // the gate comes second). Sold as a service since 2026-10-17 (Dom, "GO").
+        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
         { href: `${home}#decide`, label: t.agents },
         ...ACTION_IDS.map((id) => ({
           href: `${r}/actions/${id}`,
           label: `· ${cap(actions[id].tab)}`,
           page: `act-${id}`,
         })),
-        // Sold as a service since 2026-10-17 (Dom, "GO").
-        { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
       ],
     },
     {

@@ -11,6 +11,10 @@ import type { L } from "./i18n";
  * agents and critical actions, C software security, legacy modernization).
  * "If it isn't authorized, it never executes" now opens the first of the
  * three pillars instead of the page (platform-copy.ts).
+ *
+ * Repositioned 2026-10-19 (Dom, "PARFAIT LETS GO"): the check of what a
+ * machine rewrote leads; the gate in front of critical actions comes second,
+ * in the lines under the title (landing.tsx, hero.boundary).
  */
 export type HeroCopy = {
   /** The category, set on its own line so it hits (Dom, 2026-10-16). */
@@ -27,16 +31,16 @@ export type HeroCopy = {
 export const HERO_COPY: L<HeroCopy> = {
   en: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "FOR CRITICAL INFRASTRUCTURE",
-    headline: "Some actions can’t be undone.",
-    headlineEnd: "Prove them first.",
+    eyebrowSub: "FOR CRITICAL SYSTEMS",
+    headline: "Your code was rewritten.",
+    headlineEnd: "Know if it still does the same thing.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "POUR LES INFRASTRUCTURES CRITIQUES",
-    headline: "Certaines actions sont sans retour.",
-    headlineEnd: "Prouvez-les d’abord.",
+    eyebrowSub: "POUR LES SYSTÈMES CRITIQUES",
+    headline: "Votre code a été réécrit.",
+    headlineEnd: "Sachez s’il fait encore la même chose.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
   },
 };
