@@ -1,6 +1,7 @@
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
 import { FlowDiagram, type FlowCopy } from "./flow-diagram";
+import { ENGINEERING_RAIL } from "./architecture-plate";
 
 /*
  * How the platform works, on the home page right under "Why Ironproof" (Dom,
@@ -113,7 +114,7 @@ export function PlatformHow({ locale = defaultLocale }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
-        <FlowDiagram f={t.flow} />
+        <FlowDiagram f={t.flow} rail={pick(ENGINEERING_RAIL, locale)} />
       </div>
     </section>
   );

@@ -279,6 +279,10 @@ function LayerNote({ note }: { note?: Note }) {
   );
 }
 
+/* The engineering agent's rail, read by the method diagram on the home page
+ * (flow-diagram.tsx) so the two drawings say the same words (Dom, 2026-10-19). */
+export const ENGINEERING_RAIL: L<ArchCopy["rail"]> = { en: COPY.en.rail, fr: COPY.fr.rail };
+
 export function ArchitecturePlate({ locale = defaultLocale }: { locale?: Locale }) {
   const t = pick(COPY, locale);
   const [l1, l2, l3, l4, l5, l6, l7] = t.layers;
