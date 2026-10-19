@@ -118,7 +118,14 @@ function Node({
   );
 }
 
-export function FlowDiagram({ f }: { f: FlowCopy }) {
+/** The frame around the diagram: who builds and runs it (architecture-plate.tsx, ENGINEERING_RAIL). */
+export type FlowRail = { k: string; t: string; items: readonly string[] };
+
+const RAIL_TOP = 46;
+const RAIL_BOTTOM = 52;
+const RAIL_PAD = 18;
+
+export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   if (f.lead.length === 0) return null;
   const id = `fd${hash(f.caption)}`;
 
@@ -149,12 +156,19 @@ export function FlowDiagram({ f }: { f: FlowCopy }) {
     `M${verdictX + VERDICT_W} ${mid} H${sealX}`,
   ].join(" ");
   const nums = (i: number) => String(i + 1).padStart(2, "0");
+  // With a rail, the diagram sits inside a frame: a title band on top, the
+  // agent's three disciplines along the bottom.
+  const ox = rail ? RAIL_PAD : 0;
+  const oy = rail ? RAIL_TOP : 0;
+  const fullW = width + 2 * ox;
+  const fullH = height + (rail ? RAIL_TOP + RAIL_BOTTOM : 0);
+  const pillW = rail ? (fullW - 2 * RAIL_PAD - (rail.items.length - 1) * 12) / rail.items.length : 0;
   const k = f.lead.length;
 
   return (
     <figure className="fade-up mt-14">
       <div className="card-premium overflow-x-auto p-6 md:p-8">
-        <svg viewBox={`0 0 ${width} ${height}`} className="w-full min-w-[900px]" role="img" aria-label={f.caption}>
+        <svg viewBox={`0 0 ${fullW} ${fullH}`} className="w-full min-w-[900px]" role="img" aria-label={f.caption}>
           <defs>
             <linearGradient id={`${id}-iron`} x1="0" y1="0" x2="1" y2="1">
               <stop offset="0%" stopColor="#2c2e33" />
@@ -181,6 +195,33 @@ export function FlowDiagram({ f }: { f: FlowCopy }) {
             </filter>
           </defs>
           <style>{`.${id}-dash{stroke-dasharray:3 9;animation:${id}-run 1.6s linear infinite}@keyframes ${id}-run{to{stroke-dashoffset:-24}}@media (prefers-reduced-motion: reduce){.${id}-pulse{display:none}.${id}-dash{animation:none}}`}</style>
+          {rail ? (
+            <g>
+              <rect x={1} y={1} width={fullW - 2} height={fullH - 2} rx={10} fill="none" stroke={GOLD} strokeOpacity={0.55} strokeDasharray="2 6" strokeWidth={1.2} />
+              <rect x={1} y={1} width={fullW - 2} height={RAIL_TOP - 10} rx={10} fill={`url(#${id}-iron)`} />
+              <circle cx={RAIL_PAD + 6} cy={(RAIL_TOP - 10) / 2 + 1} r={3.5} fill={GOLD_SOFT} />
+              <text x={RAIL_PAD + 18} y={(RAIL_TOP - 10) / 2 + 5.5} fill="#f1efe9" fontSize={13} fontWeight={600} letterSpacing={2.4} fontFamily="var(--font-mono, monospace)">
+                {rail.k.toUpperCase()}
+              </text>
+              <text x={fullW - RAIL_PAD} y={(RAIL_TOP - 10) / 2 + 5.5} textAnchor="end" fill="#b9b6af" fontSize={12.5}>
+                {rail.t}
+              </text>
+              {rail.items.map((it, i) => {
+                const px = RAIL_PAD + i * (pillW + 12);
+                const py = fullH - RAIL_BOTTOM + 10;
+                return (
+                  <g key={it}>
+                    <rect x={px} y={py} width={pillW} height={30} rx={15} fill="rgba(201,162,74,0.10)" stroke={GOLD} strokeOpacity={0.6} />
+                    <circle cx={px + 16} cy={py + 15} r={2.6} fill={GOLD} />
+                    <text x={px + 28} y={py + 19.5} fill={INK} fontSize={12}>
+                      {it}
+                    </text>
+                  </g>
+                );
+              })}
+            </g>
+          ) : null}
+          <g transform={`translate(${ox} ${oy})`}>
           <path d={wires} fill="none" stroke={PAPER_LINE} strokeWidth={1.2} />
           <path d={wires} fill="none" stroke={GOLD} strokeOpacity={0.75} strokeWidth={1.4} className={`${id}-dash`} />
           {f.lead.map((l, i) => (
@@ -197,6 +238,7 @@ export function FlowDiagram({ f }: { f: FlowCopy }) {
             <circle r={4.5} fill={GOLD_SOFT}>
               <animateMotion dur="6s" repeatCount="indefinite" path={`M10 ${mid} H${branch} V${bottomMid} H${join} V${mid} H${end}`} />
             </circle>
+          </g>
           </g>
         </svg>
       </div>
