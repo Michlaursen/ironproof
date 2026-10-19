@@ -34,7 +34,7 @@ const COPY: L<HowCopy> = {
         body: "We turn it into precise logic a solver can read. Whatever we cannot model is listed as not covered, never skipped.",
       },
       {
-        title: "Prove and cross-check",
+        title: "Compare and cross-check",
         body: "A solver checks every case the model allows. A second, independent check confirms it: IBM’s compiler for COBOL, a second solver for policies, decoy fixes for C.",
       },
       {
@@ -67,7 +67,7 @@ const COPY: L<HowCopy> = {
         body: "Nous le traduisons en logique précise, lisible par un solveur. Ce que nous ne pouvons pas modéliser est déclaré non couvert, jamais escamoté.",
       },
       {
-        title: "Prouver et confronter",
+        title: "Comparer et recouper",
         body: "Un solveur vérifie tous les cas que le modèle permet. Une seconde vérification, indépendante, le confirme : le compilateur d’IBM pour le COBOL, un second solveur pour les politiques, des correctifs leurres pour le C.",
       },
       {
