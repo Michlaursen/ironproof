@@ -198,7 +198,7 @@ export default async function DemoPage({ params }: PageProps) {
   const t = pick(T, locale);
   const verifyHref = locale === "en" ? "/verify" : `/${locale}/verify`;
   const r = locale === "en" ? "" : `/${locale}`;
-  // The CardDemo difference is the translation card's own line (platform-copy.ts): one source.
+  // The code verification card is the single source for this line (platform-copy.ts).
   const codeRun = pick(PLATFORM_COPY, locale).useCases.cards.find((c) => c.href.endsWith("/modernization"));
 
   return (

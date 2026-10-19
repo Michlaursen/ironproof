@@ -33,7 +33,7 @@ const FLOW_EN: FlowCopy = {
       // The engines by name (Dom, 2026-10-19: « on parle pas des outils? »), the same set as the architecture plate.
       top: ["SOLVER", "every case the model allows"],
       bottom: ["SECOND CHECK", "independent of the first"],
-      topInset: [["Z3", "SMT solver"], ["SPACER", "loop invariants"], ["CBMC", "C code, bounded"]],
+      topInset: [["Z3", "SMT solver"], ["BITWUZLA", "bit-precise"], ["SPACER", "loop invariants"], ["CBMC", "C code, bounded"]],
       bottomInset: [["cvc5", "second solver"], ["IBM COBOL", "real runs"], ["LEAN 4", "gate logic"]],
       verdict: ["VERDICT", "one of three, always"],
       seal: ["SEALED", "Ed25519 + ML-DSA-65"],

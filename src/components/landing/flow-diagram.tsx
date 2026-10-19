@@ -231,7 +231,9 @@ export function FlowDiagram({ f, rail }: { f: FlowCopy; rail?: FlowRail }) {
   const id = `fd${hash(f.caption)}`;
 
   const insets = Boolean(f.topInset?.length || f.bottomInset?.length);
-  const checkW = insets ? 356 : CHECK_W;
+  // Each engine box needs about 100 units for a name like BITWUZLA.
+  const nInset = Math.max(f.topInset?.length ?? 0, f.bottomInset?.length ?? 0);
+  const checkW = insets ? Math.max(356, 2 * INSET_PAD + nInset * 100 + (nInset - 1) * INSET_GAP) : CHECK_W;
   const checkH = insets ? H + INSET_H + 14 : H;
   const topY = insets ? 30 : TOP_Y;
   const bottomY = insets ? topY + checkH + 40 : BOTTOM_Y;
