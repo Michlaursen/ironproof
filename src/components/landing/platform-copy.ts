@@ -213,7 +213,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Code verification",
-          body: "Your old code was translated into a new language, by an integrator or an AI tool. It compiles and it passes its tests. We check something else: does it still do exactly what the old code did, calculation by calculation? When it does, we show it, within limits stated up front. When it does not, we show you the exact input that gives a different result.",
+          body: "Your legacy software was modernized, by an integrator or by AI. The new code compiles and passes its tests. But one fundamental question remains: does it still do exactly what the old one did?\nThat is what Ironproof checks, calculation by calculation, behavior by behavior.\nWhen equivalence is shown, we provide the proof, within a clearly defined scope. When a difference exists, we identify the exact case that reproduces it.\nYou don’t have to take our word for it. You can check the results yourself.",
           ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account.",
           href: "/modernization",
           cta: "SEE HOW WE CHECK IT",
@@ -366,7 +366,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Vérification de code",
-          body: "Votre vieux code a été traduit dans un nouveau langage, par un intégrateur ou par un outil d’IA. Il compile, il passe ses tests. Nous, on vérifie autre chose : est-ce qu’il fait encore exactement ce que faisait l’ancien, calcul par calcul ? Quand c’est le cas, on le démontre, dans les limites annoncées d’avance. Quand ce ne l’est pas, on vous montre l’entrée précise qui donne un résultat différent.",
+          body: "Votre ancien logiciel a été modernisé, par un intégrateur ou par l’intelligence artificielle. Le nouveau code compile et passe ses tests. Mais une question fondamentale demeure : fait-il toujours exactement ce que faisait l’ancien ?\nC’est ce qu’Ironproof vérifie, calcul par calcul, comportement par comportement.\nLorsque l’équivalence est démontrée, nous en fournissons la preuve, dans un périmètre clairement défini. Lorsqu’une différence existe, nous identifions le cas précis qui permet de la reproduire.\nVous n’avez pas à nous croire sur parole. Vous pouvez vérifier les résultats vous-même.",
           ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte.",
           href: "/fr/modernization",
           cta: "VOIR COMMENT ON VÉRIFIE",
