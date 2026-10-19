@@ -81,7 +81,7 @@ const COPY: L<HowCopy> = {
         body: "Ironproof builds a precise model of what the COBOL computes, down to decimal rounding and truncation. We do not translate: we have no stake in the new code being right.",
       },
       {
-        title: "Prove and cross-check",
+        title: "Compare and cross-check",
         body: "The translation is confronted with the model: proven where the model covers it, or the exact input where they differ. The same cases run through IBM’s own COBOL compiler, and we plant deliberate faults to show the check catches them.",
       },
       {
@@ -171,7 +171,7 @@ const COPY: L<HowCopy> = {
         body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures. Nous ne traduisons pas : nous n’avons aucun intérêt à ce que le nouveau code soit déclaré bon.",
       },
       {
-        title: "Prouver et confronter",
+        title: "Comparer et recouper",
         body: "La traduction est confrontée au modèle : prouvée là où le modèle la couvre, ou l’entrée exacte où ils diffèrent. Les mêmes cas passent dans le compilateur COBOL d’IBM lui-même, et nous plantons des fautes exprès pour montrer que la vérification les attrape.",
       },
       {
