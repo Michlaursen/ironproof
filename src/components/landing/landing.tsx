@@ -238,7 +238,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "An AI agent with valid credentials can still send the wrong payment. Every critical action routed through Ironproof is checked against your rules before it runs, and each decision is sealed so your auditor can check it without us. We prove what can be proven, and say so when we cannot. We don’t build the agents or the code we verify, so we have no reason to tell you it’s fine.",
+        "Critical actions: checked against your rules, blocked if they break them.\nCode migrations: what holds, what doesn’t, and the exact case that shows it, before going live.\nIndependent. Sealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -677,7 +677,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Un agent IA avec des accès valides peut quand même envoyer le mauvais paiement. Chaque action critique qui passe par Ironproof est vérifiée contre vos règles avant de s’exécuter, et chaque décision est scellée pour que votre auditeur puisse la vérifier sans nous. Nous prouvons ce qui peut l’être, et nous le disons quand nous ne le pouvons pas. Nous ne construisons ni les agents ni le code que nous vérifions : nous n’avons aucune raison de vous dire que tout va bien.",
+        "Actions critiques : contrôlées contre vos règles, bloquées si elles les enfreignent.\nMigrations de code : ce qui tient, ce qui ne tient pas, et le cas exact qui le montre, avant la mise en service.\nIndépendant. Scellé. Vérifiable sans nous faire confiance.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -1191,7 +1191,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * The gold value line moved to "What you get", which already says it;
                 * the pilot is the primary action (Dom, 2026-10-16, after the
                 * competitive review). */}
-              <p className="hero-white-lead mb-9 max-w-lg text-base leading-relaxed md:text-lg">{t.hero.boundary}</p>
+              <p className="hero-white-lead mb-9 max-w-lg whitespace-pre-line text-base leading-relaxed md:text-lg">{t.hero.boundary}</p>
               <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
