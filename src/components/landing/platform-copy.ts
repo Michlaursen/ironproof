@@ -208,7 +208,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       alsoCta: "TALK TO US",
       alsoHref: "/pilot",
-      plugsInLabel: "HOW IT STARTS",
+      plugsInLabel: "IN PRACTICE",
       plugsIn: "Send us the original program and its translation. Our team returns, module by module, one of three answers, every difference with the exact input that shows it, and the files to replay that input on your own compiler.",
       cards: [
         {
@@ -361,7 +361,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       alsoCta: "PARLEZ-NOUS",
       alsoHref: "/fr/pilot",
-      plugsInLabel: "COMMENT ÇA COMMENCE",
+      plugsInLabel: "CONCRÈTEMENT",
       plugsIn: "Envoyez-nous le programme d’origine et sa traduction. Notre équipe vous rend, module par module, l’une des trois réponses, chaque écart avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
       cards: [
         {
