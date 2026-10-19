@@ -72,7 +72,7 @@ type Copy = {
     executes: string;
     refused: string;
     ctaDecide: string;
-    ctaVerify: string;
+    ctaSend: string;
     ctaPilot: string;
     ctaTech: string;
     ctaEvidence: string;
@@ -246,7 +246,7 @@ const T: L<Copy> = {
       executes: "EXECUTES",
       refused: "BLOCKED",
       ctaDecide: "WATCH IT DECIDE",
-      ctaVerify: "VERIFY A REAL DECISION",
+      ctaSend: "SEND US A TRANSLATION",
       ctaPilot: "START A PILOT",
       ctaTech: "EXPLORE OUR TECHNOLOGY",
       ctaEvidence: "SEE THE EVIDENCE",
@@ -685,7 +685,7 @@ const T: L<Copy> = {
       executes: "S’EXÉCUTE",
       refused: "BLOQUÉE",
       ctaDecide: "VOYEZ-LE DÉCIDER",
-      ctaVerify: "VÉRIFIER UNE VRAIE DÉCISION",
+      ctaSend: "ENVOYEZ-NOUS UNE TRADUCTION",
       ctaPilot: "DÉMARRER UN PILOTE",
       ctaTech: "DÉCOUVRIR NOTRE TECHNOLOGIE",
       ctaEvidence: "VOIR LES PREUVES",
@@ -1201,8 +1201,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
                 </a>
-                <a href={`${r}/verify`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
-                  {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
+                {/* The second action sends a translation (Dom, 2026-10-19: « ouais »); the
+                  * sealed decision just below still opens /verify. */}
+                <a href={`${r}/modernization`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
+                  {t.hero.ctaSend} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
               <SealLive hash={sealHash} locale={locale} verifyHref={`${r}/verify`} />
