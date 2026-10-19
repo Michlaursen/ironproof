@@ -198,7 +198,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     useCases: {
       eyebrow: "WHAT WE CHECK",
-      title: "First: the check of what was rewritten. Then the gate.",
+      title: "It starts with the code that was rewritten.",
       alsoTitle: "Same engine, three more questions.",
       alsoLead: "The engine behind code verification also guards critical actions, and takes on two hard questions as a mandate delivered by our team.",
       alsoLines: [
@@ -351,7 +351,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     useCases: {
       eyebrow: "CE QU’ON VÉRIFIE",
-      title: "D’abord, vérifier ce qui a été réécrit. Ensuite, la barrière.",
+      title: "Tout commence par le code qui a été réécrit.",
       alsoTitle: "Le même moteur, trois autres questions.",
       alsoLead: "Le même moteur protège aussi vos actions critiques. Et notre équipe le met au travail, en mandat, sur deux questions difficiles.",
       alsoLines: [
