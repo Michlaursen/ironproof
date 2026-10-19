@@ -119,7 +119,7 @@ const T: L<Copy> = {
       "Build the C (cc -O2 -shared -o libema.dylib ema.c on macOS; add -fPIC and name it libema.so on Linux), then run python3 check.py.",
     ],
     filesLabel: "THE FILES",
-    cta: "SEND US A PROGRAM",
+    cta: "SEND US YOUR CODE",
   },
   fr: {
     metaTitle: "Python vers C, prouvé — Ironproof",
@@ -165,7 +165,7 @@ const T: L<Copy> = {
       "Compilez le C (cc -O2 -shared -o libema.dylib ema.c sur macOS ; ajoutez -fPIC et nommez-le libema.so sur Linux), puis lancez python3 check.py.",
     ],
     filesLabel: "LES FICHIERS",
-    cta: "ENVOYEZ-NOUS UN PROGRAMME",
+    cta: "ENVOYEZ-NOUS VOTRE CODE",
   },
 };
 

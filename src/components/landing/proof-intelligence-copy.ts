@@ -108,7 +108,7 @@ export const PI_COPY: ResearchCopy = {
           t: "ol",
           items: [
             "**Critical actions.** Authorization before execution for actions that cannot be undone — moving money, granting access, deleting records, changing production — whether an AI agent, a script, an API call or a person initiates them. [How it works](/#how).",
-            "**Legacy modernization.** COBOL to Python, checked for the same results, available now as a service. [Send us a program](/modernization).",
+            "**Code translation.** Python or MATLAB to C, Python to Rust, COBOL to Python, checked for the same results, available now as a service. [Send us your code](/modernization).",
             "**Software security.** Proving that a fix to C code closes the flaw it targets. In research. [What we have run](/software-security).",
           ],
         },

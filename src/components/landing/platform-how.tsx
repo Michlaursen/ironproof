@@ -27,7 +27,7 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Scope",
-        body: "Bring one case: the policy behind an action, a security fix, a COBOL program. Before anything runs, we write down exactly what will be checked.",
+        body: "Bring one case: the policy behind an action, a security fix, a program to translate. Before anything runs, we write down exactly what will be checked.",
       },
       {
         title: "Model",
@@ -60,7 +60,7 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Cadrer",
-        body: "Apportez un cas : la politique derrière une action, un correctif de sécurité, un programme COBOL. Avant que quoi que ce soit s’exécute, nous écrivons exactement ce qui sera vérifié.",
+        body: "Apportez un cas : la politique derrière une action, un correctif de sécurité, un programme à traduire. Avant que quoi que ce soit s’exécute, nous écrivons exactement ce qui sera vérifié.",
       },
       {
         title: "Modéliser",
