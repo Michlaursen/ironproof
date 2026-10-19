@@ -171,7 +171,7 @@ const COPY: L<HowCopy> = {
         body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures. Nous ne traduisons pas : nous n’avons aucun intérêt à ce que le nouveau code soit déclaré bon.",
       },
       {
-        title: "Comparer et recouper",
+        title: "Compare and cross-check",
         body: "La traduction est confrontée au modèle : prouvée là où le modèle la couvre, ou l’entrée exacte où ils diffèrent. Les mêmes cas passent dans le compilateur COBOL d’IBM lui-même, et nous plantons des fautes exprès pour montrer que la vérification les attrape.",
       },
       {
