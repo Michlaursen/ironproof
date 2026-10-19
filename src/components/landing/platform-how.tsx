@@ -35,14 +35,25 @@ const FLOW_EN: FlowCopy = {
       bottom: ["SECOND CHECK", "independent of the first"],
       topInset: [["Z3", "SMT solver"], ["SPACER", "loop invariants"], ["CBMC", "C code, bounded"]],
       bottomInset: [["cvc5", "second solver"], ["IBM COBOL", "real runs"], ["LEAN 4", "gate logic"]],
-      verdict: ["VERDICT", "holds, or what breaks it"],
-      seal: ["SEALED", "re-run without us"],
+      verdict: ["VERDICT", "one of three, always"],
+      seal: ["SEALED", "Ed25519 + ML-DSA-65"],
+      // From the architecture plate (Dom, 2026-10-19: « oui add »).
+      propose: ["AI PROPOSES", "never decides"],
+      recheck: ["RE-CHECK", "fresh solver"],
+      outcomes: [
+        ["HOLDS", "proven in scope"],
+        ["BREAKS", "the exact case"],
+        ["NOT DECIDED", "never a pass"],
+      ],
+      verify: ["VERIFY", "your auditor, offline"],
+      scope: "STATED SCOPE",
     };
 
 /* The cognitive operating system, in English on every page (Dom, 2026-10-19: « tout en anglais, zero french »). */
 const OS_EN: FlowRail = {
       k: "Ironproof cognitive operating system",
       t: "Governs the engineering agent that builds every check",
+      tagline: "MEMORY · CONTEXT · REASONING · PLANNING",
       foundation: {
         label: "FOUNDATION",
         items: [
@@ -50,7 +61,6 @@ const OS_EN: FlowRail = {
           ["THREE LAWS", "the human decides, truth first"],
           ["ACTION KERNEL", "a single-use key per action"],
           ["SIGNED LEDGER", "SHA3 chain, Ed25519 events"],
-          ["OWN SERVER", "every repository on our hardware"],
         ],
       },
       memory: {
@@ -75,6 +85,7 @@ const OS_EN: FlowRail = {
       control: {
         label: "CONTROL",
         items: [
+          ["ORCHESTRATOR", "plans, picks the tools, runs them"],
           ["CLAIM CHECK", "no claim without its command and output"],
           ["INDEPENDENT REVIEWER", "objects before any risky action"],
           ["COMMIT CHAIN", "types, secrets, named files only"],
