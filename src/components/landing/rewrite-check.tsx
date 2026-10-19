@@ -74,7 +74,7 @@ const COPY: L<RewriteCopy> = {
         body: "Quand on ne peut pas conclure, on le dit, raison à l’appui. Jamais présenté comme une réussite.",
       },
     ],
-    who: "On ne traduit pas. On vérifie les traductions des autres, pour celui qui paie la note si ça casse.",
+    who: "On ne traduit pas. On vérifie ce que d’autres ont traduit, pour vous, qui en portez le risque.",
     exampleLabel: "DÉJÀ FAIT",
     cta: "ENVOYEZ-NOUS UNE TRADUCTION",
     href: "/fr/modernization",
