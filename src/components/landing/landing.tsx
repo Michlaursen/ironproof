@@ -239,7 +239,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Same behavior within the stated scope. Or the exact case that differs, replayed on your own compiler. Or we say we couldn’t tell.\nIndependent. Sealed. Verifiable without trusting us.",
+        "Same behavior: proven for every input, within the scope and model we state up front.\nDifferent behavior: the exact input where the old and new code disagree, replayed on your own compiler.\nNot decided: we say so, with the reason. Never counted as a pass.\nIndependent. Sealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -678,7 +678,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Même comportement, dans le périmètre annoncé. Sinon, le cas précis qui diffère, rejoué sur votre propre compilateur. Et quand on ne peut pas trancher, on vous le dit.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
+        "Même comportement : prouvé pour chaque entrée, dans le périmètre et le modèle annoncés d’avance.\nComportement différent : l’entrée précise où l’ancien et le nouveau code divergent, rejouée sur votre propre compilateur.\nImpossible à trancher : on vous le dit, avec la raison. Jamais compté comme un succès.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -1193,9 +1193,17 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * the pilot is the primary action (Dom, 2026-10-16, after the
                 * competitive review). */}
               <div className="hero-white-lead mb-9 max-w-lg space-y-4 text-base leading-relaxed md:text-lg">
-                {t.hero.boundary.split("\n").map((ligne) => (
-                  <p key={ligne}>{ligne}</p>
-                ))}
+                {/* Each answer's name in bold, the rest plain (Dom, 2026-10-19: « be more precise »). */}
+                {t.hero.boundary.split("\n").map((ligne) => {
+                  const cut = ligne.indexOf(":");
+                  if (cut < 0) return <p key={ligne}>{ligne}</p>;
+                  return (
+                    <p key={ligne}>
+                      <strong className="font-semibold">{ligne.slice(0, cut)}</strong>
+                      {ligne.slice(cut)}
+                    </p>
+                  );
+                })}
               </div>
               <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
