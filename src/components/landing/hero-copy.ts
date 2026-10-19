@@ -39,7 +39,7 @@ export const HERO_COPY: L<HeroCopy> = {
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "LA PREUVE INDÉPENDANTE DE CE QUE L’IA CHANGE",
+    eyebrowSub: "LA COUCHE DE PREUVE INDÉPENDANTE POUR LES CHANGEMENTS FAITS PAR L’IA",
     headline: "Votre code a été réécrit.",
     headlineEnd: "Fait-il toujours la même chose ?",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
