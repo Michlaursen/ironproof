@@ -63,7 +63,7 @@ function copy(r: string): L<Copy> {
         "A fixed-scope pilot on one translated module, or on one critical action. You keep the answers, every case to replay, and the sealed record.",
       eyebrow: "PILOT",
       h1: "Bring one translated module. We tell you if it still does the same thing, or show you exactly where it differs.",
-      lead: "Your integrator or your AI tool translated a program. You send us the original and the translation. Each module comes back with one of three answers, and every difference replays on your own compiler. Critical actions have their own pilot, just below.",
+      lead: "Your integrator or your AI tool translated a program. You give us the original and the translation. Each module comes back with one of three answers, and every difference replays on your own compiler. Critical actions have their own pilot, just below.",
       offersEyebrow: "THREE PILOTS, ONE METHOD",
       offersTitle: "Each pilot ends with a verification dossier your team can re-check.",
       deliverLabel: "YOU RECEIVE",

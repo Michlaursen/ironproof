@@ -67,7 +67,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
     audit: "It starts with a traceability audit: we check what the translation says about itself, its cited sources, its data mapping, its compliance sheets. The proof of behavior comes next, in its own report.",
     auditLink: "SEE THE AUDIT",
     exampleLabel: "ALREADY RUN",
-    cta: "SEND US A TRANSLATION",
+    cta: "SEE HOW WE CHECK IT",
     href: "/modernization",
   },
   fr: {
@@ -99,7 +99,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
     audit: "On commence par un audit de traçabilité : on vérifie ce que la traduction dit d’elle-même, ses sources citées, sa correspondance de données, ses fiches de conformité. La preuve de comportement vient ensuite, dans son propre rapport.",
     auditLink: "VOIR L’AUDIT",
     exampleLabel: "DÉJÀ FAIT",
-    cta: "ENVOYEZ-NOUS UNE TRADUCTION",
+    cta: "VOIR COMMENT ON VÉRIFIE",
     href: "/fr/modernization",
   },
 };

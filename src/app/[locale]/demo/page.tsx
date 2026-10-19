@@ -120,7 +120,7 @@ const T: L<{
     codeLead: "No film yet for this one. Two things you can open today: a translation checked by a solver step by step, with the files to re-run it, and a difference found in a public AI-generated translation.",
     codeRunLabel: "ALREADY RUN",
     codeDemo: "PYTHON TO C, PROVEN",
-    codeSend: "SEND US A TRANSLATION",
+    codeSend: "SEE HOW WE CHECK IT",
   },
   fr: {
     metaTitle: "Démo — Ironproof",
@@ -166,7 +166,7 @@ const T: L<{
     codeLead: "Pas encore de film pour celle-là. Deux choses à ouvrir dès aujourd’hui : une traduction vérifiée pas à pas par un solveur, avec les fichiers pour la refaire, et un écart trouvé dans une traduction publique générée par IA.",
     codeRunLabel: "DÉJÀ FAIT",
     codeDemo: "PYTHON VERS C, PROUVÉ",
-    codeSend: "ENVOYEZ-NOUS UNE TRADUCTION",
+    codeSend: "VOIR COMMENT ON VÉRIFIE",
   },
 };
 

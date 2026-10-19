@@ -145,7 +145,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         claim: "Someone else translated your code. We check it computes what the old code did, and you can re-run the check without us.",
         risk: "A translation can compile, pass its tests and still return a different number, on one input or under one compiler setting.",
         href: "/modernization",
-        cta: "SEND US A TRANSLATION",
+        cta: "SEE HOW WE CHECK IT",
         body: "Your integrator or your AI tool did the translation: COBOL to Java or Python, Python or MATLAB to C. We don’t translate, so we have no stake in saying it is right. We model exactly what the original computes and confront the new code with it: proven where the model covers it, the exact input where they differ, or not covered with the reason.",
       },
     ],
@@ -209,14 +209,14 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       alsoCta: "TALK TO US",
       alsoHref: "/pilot",
       plugsInLabel: "IN PRACTICE",
-      plugsIn: "Send us the original program and its translation. Our team returns, module by module, one of three answers, every difference with the exact input that shows it, and the files to replay that input on your own compiler.",
+      plugsIn: "You give us the original program and its translation. For each module, you get one of the three answers. Each difference comes with the input that shows it, and what you need to replay it on your own compiler.",
       cards: [
         {
           name: "Code verification",
-          body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We tell you if the new code still does what the old one did, under a stated model, or show the exact input where it differs.",
+          body: "Your old code was translated into a new language, by an integrator or an AI tool. It compiles and it passes its tests. We check something else: does it still do exactly what the old code did, calculation by calculation? When it does, we show it, within limits stated up front. When it does not, we show you the exact input that gives a different result.",
           ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account.",
           href: "/modernization",
-          cta: "SEND US A TRANSLATION",
+          cta: "SEE HOW WE CHECK IT",
         },
         {
           name: "Critical actions",
@@ -298,7 +298,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         claim: "Quelqu’un d’autre a traduit votre code. Nous vérifions qu’il calcule ce que calculait l’ancien, et vous refaites la vérification sans nous.",
         risk: "Une traduction peut compiler, passer ses tests et rendre quand même un autre nombre, sur une seule entrée ou sous un seul réglage du compilateur.",
         href: "/fr/modernization",
-        cta: "ENVOYEZ-NOUS UNE TRADUCTION",
+        cta: "VOIR COMMENT ON VÉRIFIE",
         body: "Votre intégrateur ou votre outil d’IA a fait la traduction : COBOL vers Java ou Python, Python ou MATLAB vers C. Nous ne traduisons pas, donc nous n’avons aucun intérêt à dire qu’elle est bonne. Nous modélisons exactement ce que calcule l’original et y confrontons le nouveau code : prouvé là où le modèle le couvre, l’entrée exacte où ils diffèrent, ou non couvert, avec la raison.",
       },
     ],
@@ -362,14 +362,14 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       alsoCta: "PARLEZ-NOUS",
       alsoHref: "/fr/pilot",
       plugsInLabel: "CONCRÈTEMENT",
-      plugsIn: "Envoyez-nous le programme d’origine et sa traduction. Notre équipe vous rend, module par module, l’une des trois réponses, chaque écart avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
+      plugsIn: "Vous nous confiez le programme d’origine et sa traduction. Pour chaque module, vous recevez l’une des trois réponses. Chaque écart vient avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
       cards: [
         {
           name: "Vérification de code",
-          body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. On vous dit si le nouveau code fait encore ce que faisait l’ancien, sous un modèle déclaré, ou on vous montre l’entrée précise où il diffère.",
+          body: "Votre vieux code a été traduit dans un nouveau langage, par un intégrateur ou par un outil d’IA. Il compile, il passe ses tests. Nous, on vérifie autre chose : est-ce qu’il fait encore exactement ce que faisait l’ancien, calcul par calcul ? Quand c’est le cas, on le démontre, dans les limites annoncées d’avance. Quand ce ne l’est pas, on vous montre l’entrée précise qui donne un résultat différent.",
           ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte.",
           href: "/fr/modernization",
-          cta: "ENVOYEZ-NOUS UNE TRADUCTION",
+          cta: "VOIR COMMENT ON VÉRIFIE",
         },
         {
           name: "Actions critiques",

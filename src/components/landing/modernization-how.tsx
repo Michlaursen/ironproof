@@ -164,7 +164,7 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Cadrer",
-        body: "Envoyez-nous le programme d’origine avec ses copybooks et ses options de compilation, et la traduction produite par votre intégrateur ou votre outil d’IA. Avant de vérifier quoi que ce soit, nous écrivons ce que le programme lit, ce qu’il écrit et exactement ce que nous allons vérifier.",
+        body: "Vous nous confiez le programme d’origine avec ses copybooks et ses options de compilation, et la traduction produite par votre intégrateur ou votre outil d’IA. Avant de vérifier quoi que ce soit, nous écrivons ce que le programme lit, ce qu’il écrit et exactement ce que nous allons vérifier.",
       },
       {
         title: "Modéliser l’original",
