@@ -143,18 +143,19 @@ export function EngineState({ locale = defaultLocale }: { locale?: Locale }) {
       key: "works",
       label: t.works,
       items: [
-        { title: t.gateTitle, body: `${gate.body} ${gate.evidence ?? ""}`.trim(), href: `${r}/verify`, link: t.verifyLink },
-        { title: t.labTitle, body: t.labBody, href: `${r}/lab`, link: t.labLink },
+        // Code first, then critical actions (Dom, 2026-10-19): order only, no line changed.
         { title: t.translateTitle, body: t.translateBody },
         { title: t.misraTitle, body: t.misraBody },
+        { title: t.gateTitle, body: `${gate.body} ${gate.evidence ?? ""}`.trim(), href: `${r}/verify`, link: t.verifyLink },
+        { title: t.labTitle, body: t.labBody, href: `${r}/lab`, link: t.labLink },
       ],
     },
     {
       key: "progress",
       label: t.progress,
       items: [
-        { title: t.cTitle, body: `${t.cBody} ${t.cRebuild}`, href: `${r}/software-security`, link: t.readMore },
         { title: t.cobolTitle, body: t.cobolBody, href: `${r}/modernization`, link: t.readMore },
+        { title: t.cTitle, body: `${t.cBody} ${t.cRebuild}`, href: `${r}/software-security`, link: t.readMore },
         { title: t.rustFixTitle, body: t.rustFixBody },
       ],
     },

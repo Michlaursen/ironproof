@@ -42,10 +42,11 @@ export const PILOT_COPY: L<PilotCopy> = {
       },
     ],
     fitLabel: "A GOOD FIT IF",
+    // Code first since 2026-10-19 (Dom); the action lines follow.
     fit: [
-      "An agent, API or script can already execute the action without a person clicking approve",
-      "The rules exist on paper — limits, approvals, windows, holds",
-      "Someone will be asked to show that those rules actually held",
+      "A program was translated, or is being translated, by an integrator or an AI tool",
+      "Or an agent, API or script can already execute a critical action without a person clicking approve",
+      "Someone will be asked to show that the new code, or the rules, actually held",
     ],
     cta: "START A PILOT",
   },
@@ -73,9 +74,9 @@ export const PILOT_COPY: L<PilotCopy> = {
     ],
     fitLabel: "UN BON CANDIDAT SI",
     fit: [
-      "Un agent, une API ou un script peut déjà exécuter l’action sans qu’une personne clique sur approuver",
-      "Les règles existent sur papier — limites, approbations, fenêtres, gels",
-      "Quelqu’un devra montrer que ces règles ont réellement tenu",
+      "Un programme a été traduit, ou est en train de l’être, par un intégrateur ou un outil d’IA",
+      "Ou un agent, une API ou un script peut déjà exécuter une action critique sans qu’une personne clique sur approuver",
+      "Quelqu’un devra montrer que le nouveau code, ou les règles, ont réellement tenu",
     ],
     cta: "DÉMARRER UN PILOTE",
   },

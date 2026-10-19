@@ -18,6 +18,11 @@ const BOOKING_URL = process.env.NEXT_PUBLIC_BOOKING_URL?.trim() || "";
  * #pilot section. What is new here is what a pilot takes, what it leaves
  * behind, and what it will not tell you. No price and no scarcity: both are
  * Dom's call and neither is decided (2026-09-26).
+ *
+ * 2026-10-19 (Dom, "les autres pages passe les au peigne fin"): code
+ * verification is the entry pilot; the authorization pilot comes second and
+ * keeps its steps, bring and keep lists, which are labelled as its own. The
+ * old COBOL card said "the generated Python": we no longer translate.
  */
 
 type Offer = { tag: string; name: string; question: string; deliver: string[]; success: string; limits: string };
@@ -55,10 +60,10 @@ function copy(r: string): L<Copy> {
     en: {
       metaTitle: "Start a pilot — Ironproof",
       metaDescription:
-        "A fixed-scope design-partner pilot on one action your automation already performs. You keep the gate, the sealed records, and what the solver found in your rule.",
+        "A fixed-scope pilot on one translated module, or on one critical action. You keep the answers, every case to replay, and the sealed record.",
       eyebrow: "PILOT",
-      h1: "Pick one critical action. We prove your rules hold, or show you exactly where they break.",
-      lead: "You pick one action your systems already perform, a wire transfer for example. We turn your rules into a check, block anything that breaks them before it runs, and seal every decision. At the end, your risk team re-checks everything themselves, without us.",
+      h1: "Bring one translated module. We tell you if it still does the same thing, or show you exactly where it differs.",
+      lead: "Your integrator or your AI tool translated a program. You send us the original and the translation. Each module comes back with one of three answers, and every difference replays on your own compiler. Critical actions have their own pilot, just below.",
       offersEyebrow: "THREE PILOTS, ONE METHOD",
       offersTitle: "Each pilot ends with a verification dossier your team can re-check.",
       deliverLabel: "YOU RECEIVE",
@@ -67,6 +72,18 @@ function copy(r: string): L<Copy> {
       offers: [
         {
           tag: "ENTRY PILOT",
+          name: "Code verification",
+          question: "Does the translation you received still do what the original did?",
+          deliver: [
+            "Per module, one of three answers: same behavior within the stated scope, the exact input where it differs, or not decided with the reason.",
+            "Every difference, with what you need to replay it on your compiler and on the new code.",
+            "The scope, and the compiler and CICS assumptions each answer depends on.",
+          ],
+          success: "Every module has one of the three answers, every difference replays on your side, and what was not covered is written down.",
+          limits: "Answers hold against our model of the original program, not every compiler or CICS configuration. No third-party replay yet.",
+        },
+        {
+          tag: "PILOT · CRITICAL ACTIONS",
           name: "Verifiable authorization",
           question: "Does this critical action follow your rules, every time it is requested?",
           deliver: [
@@ -78,7 +95,7 @@ function copy(r: string): L<Copy> {
           limits: "Holds where the action can only run through the gate, within the model and bounds the dossier states.",
         },
         {
-          tag: "PILOT",
+          tag: "RESEARCH PILOT",
           name: "Fix verification (C)",
           question: "Does each fix remove the failure its vulnerability causes?",
           deliver: [
@@ -87,18 +104,6 @@ function copy(r: string): L<Copy> {
           ],
           success: "Every fix has one of the three results, and nothing is reported as closed unless the test also rejected the decoys.",
           limits: "A bounded check of the failure our test exhibits, not of every way an attacker reaches the code. Our C verdict judge is being rebuilt; results are reported as bounded checks, not complete proofs.",
-        },
-        {
-          tag: "EARLY ACCESS",
-          name: "Equivalence check (COBOL)",
-          question: "Does the Python translation compute what the COBOL computes?",
-          deliver: [
-            "Per program: the generated Python and the equivalence obligations.",
-            "One result per part: equivalent under our model, the input where they differ, or not covered with the reason.",
-            "The compiler and CICS assumptions the result depends on.",
-          ],
-          success: "Every part of each program falls in one of the three results, and the not-covered list is written down.",
-          limits: "Proofs hold against our model of the COBOL, not every compiler or CICS configuration. No third-party replay yet.",
         },
       ],
       stepsEyebrow: "HOW THE AUTHORIZATION PILOT RUNS",
@@ -123,8 +128,12 @@ function copy(r: string): L<Copy> {
         "The readings we chose for your rule, and the limits of what was proven, in writing.",
       ],
       notEyebrow: "WHAT A PILOT WILL NOT TELL YOU",
-      notTitle: "Three things, said before you ask.",
+      notTitle: "Four things, said before you ask.",
       not: [
+        {
+          head: "Whether the old program was right.",
+          body: "We check that the new code does what the old one did, quirks included. Whether the old behavior was the right one stays yours to judge.",
+        },
         {
           head: "Whether your rule is the right rule.",
           body: "It shows exactly what your rule allows, including what nobody meant it to allow. Choosing the rule stays yours.",
@@ -138,18 +147,18 @@ function copy(r: string): L<Copy> {
           body: "A declared window or population is sealed with the verdict, not checked against your systems. A consistent lie is on the record, not prevented.",
         },
       ],
-      formTitle: "Tell us which action.",
-      formLead: "Leave a work email. We reply to set up a first call about the action and the rule behind it.",
+      formTitle: "Tell us which module, or which action.",
+      formLead: "Leave a work email. We reply to set up a first call about what you need checked.",
       bookOr: "Or pick a time directly:",
       bookLink: "BOOK A 30-MINUTE CALL",
     },
     fr: {
       metaTitle: "Démarrer un pilote — Ironproof",
       metaDescription:
-        "Un pilote de partenaire de conception, à périmètre fixe, sur une action que votre automatisation exécute déjà. Vous gardez la barrière, les traces scellées, et ce que le solveur a trouvé dans votre règle.",
+        "Un pilote à périmètre fixe sur un module traduit, ou sur une action critique. Vous gardez les réponses, chaque cas à rejouer et la trace scellée.",
       eyebrow: "PILOTE",
-      h1: "Choisissez une action critique. On prouve que vos règles tiennent, ou on vous montre exactement où elles cassent.",
-      lead: "Vous choisissez une action que vos systèmes font déjà, par exemple un virement. On traduit vos règles en vérification, on bloque avant l’exécution tout ce qui les enfreint, et chaque décision est scellée. À la fin, votre équipe de risque revérifie tout elle-même, sans nous.",
+      h1: "Apportez un module traduit. On vous dit s’il fait encore la même chose, ou on vous montre exactement où il diffère.",
+      lead: "Votre intégrateur ou votre outil d’IA a traduit un programme. Vous nous envoyez l’original et la traduction. Chaque module revient avec l’une des trois réponses, et chaque écart se rejoue sur votre propre compilateur. Les actions critiques ont leur propre pilote, juste en dessous.",
       offersEyebrow: "TROIS PILOTES, UNE MÉTHODE",
       offersTitle: "Chaque pilote se termine par un dossier de vérification que votre équipe peut revérifier.",
       deliverLabel: "VOUS RECEVEZ",
@@ -158,6 +167,18 @@ function copy(r: string): L<Copy> {
       offers: [
         {
           tag: "PILOTE D’ENTRÉE",
+          name: "Vérification de code",
+          question: "La traduction que vous avez reçue fait-elle encore ce que faisait l’original ?",
+          deliver: [
+            "Par module, l’une des trois réponses : même comportement dans le périmètre annoncé, l’entrée précise où il diffère, ou impossible à trancher, avec la raison.",
+            "Chaque écart, avec de quoi le rejouer sur votre compilateur et sur le nouveau code.",
+            "Le périmètre, et les hypothèses sur le compilateur et CICS dont dépend chaque réponse.",
+          ],
+          success: "Chaque module a l’une des trois réponses, chaque écart se rejoue chez vous, et ce qui n’a pas été couvert est écrit.",
+          limits: "Les réponses tiennent contre notre modèle du programme d’origine, pas contre tout compilateur ou toute configuration CICS. Pas encore de rejeu par un tiers.",
+        },
+        {
+          tag: "PILOTE · ACTIONS CRITIQUES",
           name: "Autorisation vérifiable",
           question: "Cette action critique respecte-t-elle vos règles, chaque fois qu’elle est demandée ?",
           deliver: [
@@ -169,7 +190,7 @@ function copy(r: string): L<Copy> {
           limits: "Vaut là où l’action ne peut s’exécuter qu’à travers la barrière, dans le modèle et les bornes que le dossier énonce.",
         },
         {
-          tag: "PILOTE",
+          tag: "PILOTE DE RECHERCHE",
           name: "Vérification de correctifs (C)",
           question: "Chaque correctif supprime-t-il l’échec que cause sa faille ?",
           deliver: [
@@ -178,18 +199,6 @@ function copy(r: string): L<Copy> {
           ],
           success: "Chaque correctif a l’un des trois résultats, et rien n’est déclaré fermé si le test n’a pas aussi rejeté les leurres.",
           limits: "Une vérification bornée de l’échec que notre test met en évidence, pas de tous les chemins d’un attaquant. Notre juge des verdicts C est en reconstruction ; les résultats sont présentés comme des vérifications bornées, pas comme des preuves complètes.",
-        },
-        {
-          tag: "ACCÈS ANTICIPÉ",
-          name: "Contrôle d’équivalence (COBOL)",
-          question: "La traduction Python calcule-t-elle ce que calcule le COBOL ?",
-          deliver: [
-            "Par programme : le Python généré et les obligations d’équivalence.",
-            "Un résultat par partie : équivalente sous notre modèle, l’entrée où elles diffèrent, ou non couverte avec la raison.",
-            "Les hypothèses sur le compilateur et CICS dont dépend le résultat.",
-          ],
-          success: "Chaque partie de chaque programme tombe dans l’un des trois résultats, et la liste du non couvert est écrite.",
-          limits: "Les preuves tiennent contre notre modèle du COBOL, pas contre tout compilateur ou toute configuration CICS. Pas encore de rejeu par un tiers.",
         },
       ],
       stepsEyebrow: "COMMENT SE DÉROULE LE PILOTE D’AUTORISATION",
@@ -214,8 +223,12 @@ function copy(r: string): L<Copy> {
         "Les lectures choisies pour votre règle, et les limites de ce qui a été prouvé, par écrit.",
       ],
       notEyebrow: "CE QU’UN PILOTE NE VOUS DIRA PAS",
-      notTitle: "Trois choses, dites avant que vous les demandiez.",
+      notTitle: "Quatre choses, dites avant que vous les demandiez.",
       not: [
+        {
+          head: "Si l’ancien programme avait raison.",
+          body: "On vérifie que le nouveau code fait ce que faisait l’ancien, bizarreries comprises. Savoir si l’ancien comportement était le bon, ça reste à vous de le juger.",
+        },
         {
           head: "Si votre règle est la bonne.",
           body: "Il montre exactement ce que votre règle permet, y compris ce que personne ne voulait permettre. Le choix de la règle vous appartient.",
@@ -229,8 +242,8 @@ function copy(r: string): L<Copy> {
           body: "Une fenêtre ou une population déclarée est scellée avec le verdict, pas vérifiée contre vos systèmes. Un mensonge cohérent est au dossier, pas empêché.",
         },
       ],
-      formTitle: "Dites-nous quelle action.",
-      formLead: "Laissez un courriel professionnel. Nous répondons pour fixer un premier appel sur l’action et la règle derrière elle.",
+      formTitle: "Dites-nous quel module, ou quelle action.",
+      formLead: "Laissez un courriel professionnel. On vous répond pour fixer un premier appel sur ce que vous voulez faire vérifier.",
       bookOr: "Ou choisissez un moment directement\u00a0:",
       bookLink: "RÉSERVER UN APPEL",
     },

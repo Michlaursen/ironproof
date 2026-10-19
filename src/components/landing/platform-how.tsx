@@ -27,7 +27,7 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Scope",
-        body: "Bring one case: the policy behind an action, a security fix, a program to translate. Before anything runs, we write down exactly what will be checked.",
+        body: "Bring one case: a translated program, the policy behind an action, a security fix. Before anything runs, we write down exactly what will be checked.",
       },
       {
         title: "Model",
@@ -35,11 +35,11 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Prove and cross-check",
-        body: "A solver checks every case the model allows. A second, independent check confirms it: a second solver for policies, IBM’s compiler for COBOL, decoy fixes for C.",
+        body: "A solver checks every case the model allows. A second, independent check confirms it: IBM’s compiler for COBOL, a second solver for policies, decoy fixes for C.",
       },
       {
         title: "Seal and hand over",
-        body: "The proof, or the exact case that breaks the rule, sealed with a classical and a post-quantum signature. Your auditor re-runs it without us.",
+        body: "The proof, or the exact case that differs or breaks the rule, sealed with a classical and a post-quantum signature. Your auditor re-runs it without us.",
       },
     ],
     flow: {
@@ -60,7 +60,7 @@ const COPY: L<HowCopy> = {
     steps: [
       {
         title: "Cadrer",
-        body: "Apportez un cas : la politique derrière une action, un correctif de sécurité, un programme à traduire. Avant que quoi que ce soit s’exécute, nous écrivons exactement ce qui sera vérifié.",
+        body: "Apportez un cas : un programme traduit, la politique derrière une action, un correctif de sécurité. Avant que quoi que ce soit s’exécute, nous écrivons exactement ce qui sera vérifié.",
       },
       {
         title: "Modéliser",
@@ -68,11 +68,11 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Prouver et confronter",
-        body: "Un solveur vérifie tous les cas que le modèle permet. Une seconde vérification, indépendante, le confirme : un second solveur pour les politiques, le compilateur d’IBM pour le COBOL, des correctifs leurres pour le C.",
+        body: "Un solveur vérifie tous les cas que le modèle permet. Une seconde vérification, indépendante, le confirme : le compilateur d’IBM pour le COBOL, un second solveur pour les politiques, des correctifs leurres pour le C.",
       },
       {
         title: "Sceller et remettre",
-        body: "La preuve, ou le cas exact qui brise la règle, scellée avec une signature classique et une signature post-quantique. Votre auditeur la refait sans nous.",
+        body: "La preuve, ou le cas précis qui diffère ou qui brise la règle, scellée avec une signature classique et une signature post-quantique. Votre auditeur la refait sans nous.",
       },
     ],
     flow: {

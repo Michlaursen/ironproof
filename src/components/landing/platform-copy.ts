@@ -24,6 +24,11 @@ import type { L } from "./i18n";
  * of critical actions is sold today; C stays on the page as the same engine in
  * research -- no "product", no purchase button. Never "universal engine".
  *
+ * 2026-10-19 (Dom, "PARFAIT LETS GO"): the translation check leads the use
+ * cases (card 0, shown in full); the gate in front of critical actions comes
+ * second, first of the "same engine" cards. The pillars keep their numbers:
+ * the application pages read them by index (application-copy.ts APP_PILLAR).
+ *
  * Legacy modernization is sold as a SERVICE since 2026-10-17 (Dom: "GO"): the
  * model of each program is built one program at a time (an AI drafts it, a
  * solver and IBM's COBOL compiler judge it), so the offer says "done by our
@@ -112,7 +117,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     pillars: [
       {
         num: "01",
-        name: "AI agents & critical actions",
+        name: "Critical actions",
         status: "AVAILABLE NOW · PILOTS OPEN",
         available: true,
         claim: "Your agent can move money. It should never move it wrong.",
@@ -134,7 +139,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       },
       {
         num: "03",
-        name: "Translation check",
+        name: "Code verification",
         status: "AVAILABLE NOW · DONE BY OUR TEAM",
         available: true,
         claim: "Someone else translated your code. We check it computes what the old code did, and you can re-run the check without us.",
@@ -179,35 +184,42 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       items: [
         {
           title: "Improve time to market",
-          body: "Put AI agents, policy changes and migrations into production sooner. The checks run automatically, and the evidence is produced as you go, not assembled after the fact for the audit.",
+          body: "Put migrations, AI agents and policy changes into production sooner. The checks run automatically, and the evidence is produced as you go, not assembled after the fact for the audit.",
         },
         {
           title: "Pass the audit with evidence",
-          body: "Give your auditor and your regulator a sealed record of every decision that they can re-check themselves, instead of logs and screenshots.",
+          body: "Give your auditor and your regulator a sealed record of every answer and every decision that they can re-check themselves, instead of logs and screenshots.",
         },
         {
           title: "Catch what tests miss",
-          body: "Get the exact input or sequence of actions that breaks your rule before production does, or the proof that none exists within the stated model.",
+          body: "Get the exact input where the new code behaves differently, or the sequence of actions that breaks your rule, before production does. Or the proof that none exists within the stated model.",
         },
       ],
     },
     useCases: {
-      eyebrow: "WHAT IT PROVES",
-      title: "One product: the gate in front of critical actions.",
-      alsoTitle: "Same engine, also on mandate.",
-      alsoLead: "The engine behind the gate also takes on three hard questions, as a mandate delivered by our team.",
+      eyebrow: "WHAT WE CHECK",
+      title: "First: the check of what was rewritten. Then the gate.",
+      alsoTitle: "Same engine, three more questions.",
+      alsoLead: "The engine behind code verification also guards critical actions, and takes on two hard questions as a mandate delivered by our team.",
       alsoLines: [
+        "Every payment, access grant and change checked against your rules before it runs: allowed when it complies, blocked when it breaks them, and every decision sealed.",
         "Find the one request your access policy lets through, before an attacker does.",
         "Know whether a patch really closes the flaw, before you ship it.",
-        "Someone else translated your code: check that it computes what the old code did, before it goes live.",
       ],
       alsoCta: "TALK TO US",
       alsoHref: "/pilot",
-      plugsInLabel: "HOW IT PLUGS IN",
-      plugsIn: "Your system calls the gate over an HTTPS API, authenticated in both directions, before the action runs; AI agents can reach it through the MCP adapter. The credentials that execute the action live behind the gate, so skipping the check leaves nothing to act with.",
+      plugsInLabel: "IN PRACTICE",
+      plugsIn: "Send us the original program and its translation. Our team returns, module by module, one of three answers, every difference with the exact input that shows it, and the files to replay that input on your own compiler.",
       cards: [
         {
-          name: "AI agents & critical actions",
+          name: "Code verification",
+          body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We tell you if the new code still does what the old one did, under a stated model, or show the exact input where it differs.",
+          ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account. Coverage is still partial, and no third party has replayed it yet.",
+          href: "/modernization",
+          cta: "SEND US A TRANSLATION",
+        },
+        {
+          name: "Critical actions",
           body: "For banks putting AI agents into production: keep every payment, access grant and change inside your policy, checked before it runs, and give your auditor a sealed record of each decision instead of a log.",
           ranOn: "A CAD 7.2 million payment from an AI agent, unsigned: blocked at the gate, refusal sealed. In a lab, NERC CIP-010 change rules encoded as a gate: 17 of 17 cases decided as NERC’s text says.",
           href: "/demo",
@@ -227,23 +239,16 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           href: "/software-security",
           cta: "SEE THE RESULTS",
         },
-        {
-          name: "Translation check",
-          body: "For teams whose code was translated by an integrator or an AI tool: send us the original and the translation. We show that the new code computes what the old one did, under a stated model, or the exact input where it differs.",
-          ranOn: "A public AI-generated Java translation of AWS CardDemo: an interest calculation that rounds where the COBOL truncates, 0.08 instead of 0.07 per account. Coverage is still partial, and no third party has replayed it yet.",
-          href: "/modernization",
-          cta: "SEND US A TRANSLATION",
-        },
       ],
       foot: "Every result ships with what you need to check it without us.",
     },
     northStar: {
       eyebrow: "WHAT WE BELIEVE",
-      title: "Ironproof brings proof to the decisions that cannot be undone.",
+      title: "Ironproof brings proof to what machines rewrite, and to the actions that cannot be undone.",
       paragraphs: [
         "AI now writes code, moves money, and changes critical systems faster than humans can review them.",
         "But speed without assurance is not enough.",
-        "Every critical action must be authorized before execution. Every migration must preserve the behavior that matters. Every claim must withstand independent verification.",
+        "Every migration must preserve the behavior that matters. Every critical action must be authorized before execution. Every claim must withstand independent verification.",
       ],
       lead: "Ironproof is building Proof Intelligence.",
       body: "AI proposes, formal methods decide, and each result ships with evidence anyone can check.",
@@ -265,7 +270,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     pillars: [
       {
         num: "01",
-        name: "Agents IA et actions critiques",
+        name: "Actions critiques",
         status: "DISPONIBLE · PILOTES OUVERTS",
         available: true,
         claim: "Votre agent peut déplacer de l’argent. Il ne doit jamais le déplacer de travers.",
@@ -287,7 +292,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       },
       {
         num: "03",
-        name: "Vérification de traduction",
+        name: "Vérification de code",
         status: "DISPONIBLE · RÉALISÉ PAR NOTRE ÉQUIPE",
         available: true,
         claim: "Quelqu’un d’autre a traduit votre code. Nous vérifions qu’il calcule ce que calculait l’ancien, et vous refaites la vérification sans nous.",
@@ -332,35 +337,42 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       items: [
         {
           title: "Accélérer la mise en marché",
-          body: "Mettez agents IA, changements de politique et migrations en production plus tôt. Les vérifications roulent automatiquement, et les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
+          body: "Mettez migrations, agents IA et changements de politique en production plus tôt. Les vérifications roulent automatiquement, et les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
         },
         {
           title: "Passer l’audit avec des preuves",
-          body: "Remettez à votre auditeur et à votre régulateur une trace scellée de chaque décision, qu’ils revérifient eux-mêmes, plutôt que des journaux et des captures d’écran.",
+          body: "Remettez à votre auditeur et à votre régulateur une trace scellée de chaque réponse et de chaque décision, qu’ils revérifient eux-mêmes, plutôt que des journaux et des captures d’écran.",
         },
         {
           title: "Attraper ce que les tests ratent",
-          body: "Obtenez l’entrée ou la suite d’actions exacte qui brise votre règle avant que la production la trouve, ou la preuve qu’il n’y en a aucune dans le modèle déclaré.",
+          body: "Obtenez l’entrée précise où le nouveau code se comporte autrement, ou la suite d’actions qui brise votre règle, avant que la production la trouve. Ou la preuve qu’il n’y en a aucune dans le modèle déclaré.",
         },
       ],
     },
     useCases: {
-      eyebrow: "CE QU’IL PROUVE",
-      title: "Un produit : la barrière devant les actions critiques.",
-      alsoTitle: "Le même moteur, aussi en mandat.",
-      alsoLead: "Le moteur derrière la barrière prend aussi trois questions difficiles, en mandat livré par notre équipe.",
+      eyebrow: "CE QU’ON VÉRIFIE",
+      title: "D’abord, vérifier ce qui a été réécrit. Ensuite, la barrière.",
+      alsoTitle: "Le même moteur, trois autres questions.",
+      alsoLead: "Le même moteur protège aussi vos actions critiques. Et notre équipe le met au travail, en mandat, sur deux questions difficiles.",
       alsoLines: [
+        "Chaque paiement, accès ou changement vérifié selon vos règles avant de partir. Conforme, il passe. Sinon, il est bloqué. Chaque décision est scellée.",
         "Trouvez la seule demande que votre politique d’accès laisse passer, avant un attaquant.",
-        "Sachez si un correctif ferme vraiment la faille, avant de le livrer.",
-        "Quelqu’un d’autre a traduit votre code : vérifiez qu’il calcule ce que calculait l’ancien, avant la mise en service.",
+        "Vérifiez qu’un correctif ferme vraiment la faille, avant de le livrer.",
       ],
       alsoCta: "PARLEZ-NOUS",
       alsoHref: "/fr/pilot",
-      plugsInLabel: "COMMENT ÇA SE BRANCHE",
-      plugsIn: "Votre système appelle la barrière par une API HTTPS, authentifiée dans les deux sens, avant que l’action s’exécute ; les agents IA la rejoignent par l’adaptateur MCP. Les accès qui exécutent l’action vivent derrière la barrière : sauter la vérification ne laisse rien pour agir.",
+      plugsInLabel: "CONCRÈTEMENT",
+      plugsIn: "Envoyez-nous le programme d’origine et sa traduction. Notre équipe vous rend, module par module, l’une des trois réponses, chaque écart avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
       cards: [
         {
-          name: "Agents IA et actions critiques",
+          name: "Vérification de code",
+          body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. On vous dit si le nouveau code fait encore ce que faisait l’ancien, sous un modèle déclaré, ou on vous montre l’entrée précise où il diffère.",
+          ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte. La couverture reste partielle, et aucun tiers ne l’a encore rejouée.",
+          href: "/fr/modernization",
+          cta: "ENVOYEZ-NOUS UNE TRADUCTION",
+        },
+        {
+          name: "Actions critiques",
           body: "Pour les banques qui mettent des agents IA en production : chaque paiement, accès et changement reste dans votre politique, vérifié avant de s’exécuter, et votre auditeur reçoit une trace scellée de chaque décision plutôt qu’un journal.",
           ranOn: "Un paiement de 7,2 M$ CA envoyé par un agent IA, sans signature : bloqué à la barrière, refus scellé. En labo, les règles de changement NERC CIP-010 encodées comme barrière : 17 cas sur 17 tranchés comme le dit le texte de NERC.",
           href: "/fr/demo",
@@ -380,23 +392,16 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           href: "/fr/software-security",
           cta: "VOIR LES RÉSULTATS",
         },
-        {
-          name: "Vérification de traduction",
-          body: "Pour les équipes dont le code a été traduit par un intégrateur ou un outil d’IA : envoyez-nous l’original et la traduction. Nous montrons que le nouveau code calcule ce que l’ancien calculait, sous un modèle déclaré, ou l’entrée exacte où ils diffèrent.",
-          ranOn: "Une traduction Java publique de CardDemo (AWS), générée par IA : un calcul d’intérêt qui arrondit là où le COBOL tronque, 0,08 au lieu de 0,07 par compte. La couverture reste partielle, et aucun tiers ne l’a encore rejouée.",
-          href: "/fr/modernization",
-          cta: "ENVOYEZ-NOUS UNE TRADUCTION",
-        },
       ],
       foot: "Chaque résultat part avec de quoi le vérifier sans nous.",
     },
     northStar: {
       eyebrow: "CE QUE NOUS CROYONS",
-      title: "Ironproof apporte la preuve aux décisions irréversibles.",
+      title: "Ironproof apporte la preuve à ce que les machines réécrivent, et aux actions sans retour.",
       paragraphs: [
         "L’IA écrit du code, déplace de l’argent et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
         "Mais la vitesse sans garantie ne suffit pas.",
-        "Chaque action critique doit être autorisée avant de s’exécuter. Chaque migration doit préserver le comportement qui compte. Chaque affirmation doit résister à une vérification indépendante.",
+        "Chaque migration doit garder le comportement qui compte. Chaque action critique doit être autorisée avant de partir. Chaque affirmation doit résister à une vérification indépendante.",
       ],
       lead: "Ironproof développe ce que nous appelons Proof Intelligence.",
       body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier.",

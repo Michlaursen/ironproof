@@ -107,6 +107,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         areaServed: "Global",
         knowsAbout: [
           "Proof Intelligence",
+          "Code translation verification",
+          "Legacy code modernization",
           "AI governance",
           "Formal verification",
           "AI agent security",

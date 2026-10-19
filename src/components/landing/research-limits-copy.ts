@@ -168,6 +168,7 @@ export const LIMITS_COPY: ResearchCopy = {
           head: "WHAT WE GUARANTEE",
           text: [
             "Ironproof translates COBOL into Python, then checks that both give the same results, or shows the exact input where they differ. The method is published: [arXiv:2610.11073](https://arxiv.org/abs/2610.11073).",
+            "*Updated 19 October 2026:* we no longer translate. We check translations made by others, an integrator or an AI tool, with the same method: the same behavior under our model, or the exact input where they differ. The sentence above is kept as it was published.",
           ],
         },
         {
@@ -229,7 +230,7 @@ export const LIMITS_COPY: ResearchCopy = {
     items: [
       ["/proof", "How we prove", "Testing versus proving, and a proof you can open"],
       ["/provable-ai", "Provable AI", "What a proof adds to an AI system, and what it does not"],
-      ["/modernization", "Translation check", "Translations made by others, checked for the same results"],
+      ["/modernization", "Code verification", "Translations made by others, checked for the same behavior"],
       ["/verify", "Verify a seal", "Check a sealed result in your browser"],
     ],
   },

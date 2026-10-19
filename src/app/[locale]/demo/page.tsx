@@ -7,6 +7,7 @@ import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { ProofSeal } from "@/components/landing/proof-seal";
 import { VerifyArtifact } from "@/components/landing/verify-artifact";
 import { type L, pick } from "@/components/landing/i18n";
+import { PLATFORM_COPY } from "@/components/landing/platform-copy";
 
 /*
  * Two recordings. First the film (Dom, 2026-10-12: "quand ça ouvre ça doit
@@ -14,6 +15,11 @@ import { type L, pick } from "@/components/landing/i18n";
  * ironproof/demo/film (commit 3802a08, every voice-over line audited against
  * its proof; the film states its own limits at 1:51). Web encode of
  * ironproof-chain.mp4 (sha256 9b134702f12f7b75…), H.264 CRF 30.
+ *
+ * Then the two recordings moved here from /proof-intelligence (Dom,
+ * 2026-10-19: the demos belong on the demo page): the Proof Intelligence
+ * film, cut to 137 s without its "where it applies" scene, and the AGCO
+ * deposit-limit demo.
  *
  * Then the terminal demo. That file stays at its original URL
  * (/media/ironproof-demo-a7f3c2.mp4): the link was already sent out, so it
@@ -23,6 +29,10 @@ const FILM = "/media/ironproof-film.h264.mp4";
 const FILM_POSTER = "/media/film-poster.jpg";
 const VIDEO = "/media/ironproof-demo-a7f3c2.mp4";
 const POSTER = "/media/demo-poster.jpg";
+const PI_FILM = "/media/proof-intelligence-film.h264.mp4";
+const PI_POSTER = "/media/proof-intelligence-film-poster.jpg";
+const AGCO = "/media/agco-demo-v6.h264.mp4";
+const AGCO_POSTER = "/media/agco-demo-v6-poster.jpg";
 // The two receipts the recorded run wrote (ironproof/demo/cdl_receipt*.json,
 // the accepted one carries the fingerprint 9e24ffff… shown in the video), and
 // the blocked one with a single number edited, 50000 -> 900000.
@@ -40,6 +50,12 @@ const T: L<{
   lead: string;
   filmLabel: string;
   filmNote: string;
+  piEyebrow: string;
+  piLabel: string;
+  piNote: string;
+  agcoEyebrow: string;
+  agcoLabel: string;
+  agcoNote: string;
   termEyebrow: string;
   termTitle: string;
   termLead: string;
@@ -53,6 +69,12 @@ const T: L<{
   sealNote: string;
   dlAllowed: string;
   dlBlocked: string;
+  codeEyebrow: string;
+  codeTitle: string;
+  codeLead: string;
+  codeRunLabel: string;
+  codeDemo: string;
+  codeSend: string;
 }> = {
   en: {
     metaTitle: "Demo — Ironproof",
@@ -64,6 +86,14 @@ const T: L<{
     filmLabel: "Film: a CAD 7.2 million payment by an AI agent, blocked at the gate",
     filmNote:
       "Animated film, 2 min 17 s, in English. The rule and its proof are real; the scene is an illustration. Near the end, the film says what this does not guard.",
+    piEyebrow: "PROOF INTELLIGENCE",
+    piLabel: "Film: Proof Intelligence, in under three minutes",
+    piNote:
+      "2 minutes 17 seconds, with sound. The payments in the film illustrate a payment policy; they are not a client case. The standards shown are the ones each sector already works under; naming a sector does not mean it uses Ironproof today.",
+    agcoEyebrow: "AGCO DEMO",
+    agcoLabel: "Demo: does a player’s deposit limit hold? Ontario Registrar’s Standards 2.23 and 2.24",
+    agcoNote:
+      "3 minutes 43 seconds, with sound. The rule is quoted from the AGCO Registrar’s Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative: of the eight that break, seven are common mistakes written on purpose and one comes from an open-source project. All are replayed through the same checker; no operator’s system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days. The 2023 penalty shown is quoted from an AGCO news release of November 9, 2023.",
     termEyebrow: "IN THE TERMINAL",
     termTitle: "One transfer. Allowed, then blocked.",
     termLead: "A $50,000 transfer clears the bank’s policy and is sealed. Then the account is frozen: the same transfer is blocked, the money never moves, and the refusal is sealed too.",
@@ -85,6 +115,12 @@ const T: L<{
       "Checked in this tab: both signatures (Ed25519 + ML-DSA-65) and the content hash. The receipts are signed with a demo key, not a customer key.",
     dlAllowed: "Download the allowed receipt (JSON)",
     dlBlocked: "Download the blocked receipt (JSON)",
+    codeEyebrow: "CODE VERIFICATION",
+    codeTitle: "Your code was rewritten. Does it still do the same thing?",
+    codeLead: "No film yet for this one. Two things you can open today: a translation checked by a solver step by step, with the files to re-run it, and a difference found in a public AI-generated translation.",
+    codeRunLabel: "ALREADY RUN",
+    codeDemo: "PYTHON TO C, PROVEN",
+    codeSend: "SEND US A TRANSLATION",
   },
   fr: {
     metaTitle: "Démo — Ironproof",
@@ -96,6 +132,14 @@ const T: L<{
     filmLabel: "Film : un paiement de 7,2 millions $ CA par un agent IA, bloqué à la barrière",
     filmNote:
       "Film d’animation, 2 min 17 s, en anglais. La règle et sa preuve sont réelles ; la scène est une illustration. Vers la fin, le film dit ce que cela ne protège pas.",
+    piEyebrow: "PROOF INTELLIGENCE",
+    piLabel: "Film : Proof Intelligence, en moins de trois minutes",
+    piNote:
+      "2 minutes 17 secondes, avec son, en anglais. Les paiements du film illustrent une politique de paiement ; ce n’est pas un cas client. Les normes montrées sont celles sous lesquelles chaque secteur travaille déjà ; nommer un secteur ne veut pas dire qu’il utilise Ironproof aujourd’hui.",
+    agcoEyebrow: "DÉMO AGCO",
+    agcoLabel: "Démo : la limite de dépôt d’un joueur tient-elle\u00a0? Normes du registrateur de l’Ontario 2.23 et 2.24",
+    agcoNote:
+      "3 minutes 43 secondes, avec son, en anglais. La règle est citée des normes du registrateur de l’AGCO pour les jeux en ligne, 2.23 et 2.24. Les systèmes A, B et C et les douze implémentations sont illustratifs : des huit qui cassent, sept sont des erreurs courantes écrites exprès et une vient d’un projet libre. Toutes passent par le même vérificateur ; aucun système d’exploitant n’a été examiné. Les résultats tiennent dans les bornes montrées dans le film : jusqu’à 8 événements sur 75 jours. La pénalité de 2023 montrée est citée d’un communiqué de l’AGCO du 9 novembre 2023.",
     termEyebrow: "DANS LE TERMINAL",
     termTitle: "Un virement. Autorisé, puis bloqué.",
     termLead: "Un virement de 50 000 $ respecte la politique de la banque et il est scellé. Puis le compte est gelé : le même virement est bloqué, l’argent ne bouge jamais, et le refus est scellé lui aussi.",
@@ -117,6 +161,12 @@ const T: L<{
       "Vérifié dans cet onglet\u00a0: les deux signatures (Ed25519 + ML-DSA-65) et l’empreinte du contenu. Les reçus sont signés avec une clé de démonstration, pas une clé client.",
     dlAllowed: "Télécharger le reçu autorisé (JSON)",
     dlBlocked: "Télécharger le reçu bloqué (JSON)",
+    codeEyebrow: "VÉRIFICATION DE CODE",
+    codeTitle: "Votre code a été réécrit. Fait-il toujours la même chose ?",
+    codeLead: "Pas encore de film pour celle-là. Deux choses à ouvrir dès aujourd’hui : une traduction vérifiée pas à pas par un solveur, avec les fichiers pour la refaire, et un écart trouvé dans une traduction publique générée par IA.",
+    codeRunLabel: "DÉJÀ FAIT",
+    codeDemo: "PYTHON VERS C, PROUVÉ",
+    codeSend: "ENVOYEZ-NOUS UNE TRADUCTION",
   },
 };
 
@@ -147,6 +197,9 @@ export default async function DemoPage({ params }: PageProps) {
   if (!isLocale(locale)) notFound();
   const t = pick(T, locale);
   const verifyHref = locale === "en" ? "/verify" : `/${locale}/verify`;
+  const r = locale === "en" ? "" : `/${locale}`;
+  // The CardDemo difference is the translation card's own line (platform-copy.ts): one source.
+  const codeRun = pick(PLATFORM_COPY, locale).useCases.cards.find((c) => c.href.endsWith("/modernization"));
 
   return (
     <div className="relative min-h-screen">
@@ -182,6 +235,50 @@ export default async function DemoPage({ params }: PageProps) {
           </figure>
           <p className="mt-6 max-w-2xl text-sm text-neutral-500">{t.filmNote}</p>
         </section>
+        {/* Code verification right after the film (Dom, 2026-10-19: code first). The
+          * page still opens on the film (Dom, 2026-10-12); there is no code film yet. */}
+        <section className="relative z-10 edge-t mx-auto max-w-5xl px-6 pb-24 pt-24 md:px-14">
+          <p className="seal-label track-mid mb-4 text-xs">{t.codeEyebrow}</p>
+          <h2 className="metal-text max-w-3xl font-serif text-3xl font-medium leading-tight md:text-5xl">{t.codeTitle}</h2>
+          <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.codeLead}</p>
+          {codeRun ? (
+            <div className="mt-10 max-w-2xl">
+              <p className="seal-label track-mid mb-3 text-xs">{t.codeRunLabel}</p>
+              <p className="text-base font-light leading-relaxed text-neutral-400">{codeRun.ranOn}</p>
+            </div>
+          ) : null}
+          <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+            <Link href={`${r}/demo/python-to-c`} className="track-mid inline-flex items-center gap-2 border-b border-seal/60 pb-1 text-xs text-neutral-100 transition hover:border-seal hover:text-white">
+              {t.codeDemo} <span aria-hidden="true">&rarr;</span>
+            </Link>
+            <Link href={`${r}/modernization`} className="track-mid inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white">
+              {t.codeSend} <span aria-hidden="true">&rarr;</span>
+            </Link>
+          </div>
+        </section>
+        {[
+          { eyebrow: t.piEyebrow, src: PI_FILM, poster: PI_POSTER, label: t.piLabel, note: t.piNote },
+          { eyebrow: t.agcoEyebrow, src: AGCO, poster: AGCO_POSTER, label: t.agcoLabel, note: t.agcoNote },
+        ].map((v) => (
+          <section key={v.src} className="relative z-10 edge-t mx-auto max-w-5xl px-6 pb-24 pt-24 md:px-14">
+            <p className="seal-label track-mid mb-6 text-xs">{v.eyebrow}</p>
+            <figure className="fade-up overflow-hidden rounded-[6px] border border-white/10">
+              <video
+                className="block h-auto w-full"
+                width={1920}
+                height={1080}
+                poster={v.poster}
+                controls
+                playsInline
+                preload="metadata"
+                aria-label={v.label}
+              >
+                <source src={v.src} type="video/mp4" />
+              </video>
+            </figure>
+            <p className="mt-6 max-w-2xl text-sm text-neutral-500">{v.note}</p>
+          </section>
+        ))}
         <section className="relative z-10 edge-t mx-auto max-w-5xl px-6 pb-24 pt-24 md:px-14">
           <p className="seal-label track-mid mb-4 text-xs">{t.termEyebrow}</p>
           <h2 className="font-serif text-3xl font-medium leading-tight sm:text-4xl md:text-5xl">{t.termTitle}</h2>

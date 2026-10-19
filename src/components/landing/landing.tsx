@@ -9,6 +9,7 @@ import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
 import { NorthStar, UseCases, WhyIronproof } from "./platform";
 import { PlatformHow } from "./platform-how";
+import { RewriteCheck } from "./rewrite-check";
 import { JourneyRail } from "./journey-rail";
 import { firstSealedEntryHash } from "@/lib/evidence";
 import { defaultLocale, type Locale } from "@/content";
@@ -71,7 +72,7 @@ type Copy = {
     executes: string;
     refused: string;
     ctaDecide: string;
-    ctaVerify: string;
+    ctaSend: string;
     ctaPilot: string;
     ctaTech: string;
     ctaEvidence: string;
@@ -238,14 +239,14 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Critical actions: checked against your rules, blocked if they break them.\nCode migrations: what holds, what doesn’t, and the exact case that shows it, before going live.\nIndependent. Sealed. Verifiable without trusting us.",
+        "Same behavior within the stated scope. Or the exact case that differs, replayed on your own compiler. Or we say we couldn’t tell.\nIndependent. Sealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
       executes: "EXECUTES",
       refused: "BLOCKED",
       ctaDecide: "WATCH IT DECIDE",
-      ctaVerify: "VERIFY A REAL DECISION",
+      ctaSend: "SEND US A TRANSLATION",
       ctaPilot: "START A PILOT",
       ctaTech: "EXPLORE OUR TECHNOLOGY",
       ctaEvidence: "SEE THE EVIDENCE",
@@ -479,8 +480,8 @@ const T: L<Copy> = {
 
     now: {
       eyebrow: "WHY NOW",
-      title: "Systems are starting to act on their own.",
-      lead: "Agents, scripts and automated pipelines now move money, change access and ship code without a person in the loop. Regulators, banks and defence departments have put dates on it. Each item links to its source.",
+      title: "Machines now rewrite critical systems, and act on them.",
+      lead: "AI tools translate legacy code faster than anyone can review it, and agents, scripts and automated pipelines move money, change access and ship code without a person in the loop. Regulators, banks and defence departments have put dates on it. Each item links to its source.",
       items: [
         {
           date: "Oct 9, 2025",
@@ -567,7 +568,7 @@ const T: L<Copy> = {
           href: SRC_DND_PLAN,
         },
       ],
-      foot: "When a system can act on its own, the decision has to be made before the action runs, not read in a log afterwards.",
+      foot: "When machines rewrite and act on their own, the check has to come before the change goes live, not from a log afterwards.",
     },
 
     gate: {
@@ -613,7 +614,7 @@ const T: L<Copy> = {
     },
 
     how: {
-      eyebrow: "HOW IT WORKS",
+      eyebrow: "HOW THE GATE WORKS",
       title: "Prove. Enforce. Seal. Verify.",
       lead: "For a rule over the history of approved actions, Ironproof either proves, with an inductive invariant, that no sequence of any length can cross the defined authorization boundary, or returns the shortest sequence that does, replayed through the gate. When neither closes, it says so, and states the bound it searched.",
       compiler:
@@ -646,11 +647,11 @@ const T: L<Copy> = {
       titleA: "Probably safe is not",
       titleB: "provably impossible.",
       body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action routed through the gate is checked before it executes: what’s authorized runs, sealed; what isn’t never executes. And every result comes with what you need to verify it without us.",
-      kicker: "Check every action. Run what complies. Stop the rest.",
+      kicker: "Check what was rewritten. Run what complies. Stop the rest.",
       // The fine print under "provably impossible": what the proof covers, and
       // the one condition it rests on (the action can only run through the gate).
       scope:
-        "Proven for the actions and the policy you define, where the action can only execute through the gate. The certificate states that boundary.",
+        "For a translation: proven within the model and the scope we state. For an action: proven for the actions and the policy you define, where the action can only execute through the gate. Each certificate states its boundary.",
       notes: [
         { x: 57, y: 80, label: "MARBLE · HUMAN INTENT" },
         { x: 79, y: 12, label: "IRON · MACHINE RIGOUR" },
@@ -677,14 +678,14 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Actions critiques : contrôlées contre vos règles, bloquées si elles les enfreignent.\nMigrations de code : ce qui tient, ce qui ne tient pas, et le cas exact qui le montre, avant la mise en service.\nIndépendant. Scellé. Vérifiable sans nous faire confiance.",
+        "Même comportement, dans le périmètre annoncé. Sinon, le cas précis qui diffère, rejoué sur votre propre compilateur. Et quand on ne peut pas trancher, on vous le dit.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
       executes: "S’EXÉCUTE",
       refused: "BLOQUÉE",
       ctaDecide: "VOYEZ-LE DÉCIDER",
-      ctaVerify: "VÉRIFIER UNE VRAIE DÉCISION",
+      ctaSend: "ENVOYEZ-NOUS UNE TRADUCTION",
       ctaPilot: "DÉMARRER UN PILOTE",
       ctaTech: "DÉCOUVRIR NOTRE TECHNOLOGIE",
       ctaEvidence: "VOIR LES PREUVES",
@@ -914,8 +915,8 @@ const T: L<Copy> = {
 
     now: {
       eyebrow: "POURQUOI MAINTENANT",
-      title: "Les systèmes commencent à agir seuls.",
-      lead: "Des agents, des scripts et des chaînes automatisées déplacent déjà de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
+      title: "Les machines réécrivent les systèmes critiques. Et elles agissent dessus.",
+      lead: "Les outils d’IA traduisent le vieux code plus vite que quiconque peut le relire. Des agents, des scripts et des chaînes automatisées déplacent de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
         {
           date: "9 oct. 2025",
@@ -1002,7 +1003,7 @@ const T: L<Copy> = {
           href: SRC_DND_PLAN,
         },
       ],
-      foot: "Quand un système peut agir seul, la décision doit se prendre avant que l’action parte, pas se lire dans un journal après coup.",
+      foot: "Quand les machines réécrivent et agissent seules, la vérification doit venir avant la mise en service, pas d’un journal après coup.",
     },
 
     gate: {
@@ -1048,7 +1049,7 @@ const T: L<Copy> = {
     },
 
     how: {
-      eyebrow: "COMMENT ÇA MARCHE",
+      eyebrow: "COMMENT FONCTIONNE LA BARRIÈRE",
       title: "Prouver. Appliquer. Sceller. Vérifier.",
       lead: "Pour une règle qui porte sur l’historique des actions autorisées, Ironproof prouve, par un invariant inductif, qu’aucune séquence de n’importe quelle longueur ne peut franchir la frontière d’autorisation définie, ou rend la plus courte séquence qui la franchit, rejouée dans la barrière. Quand ni l’un ni l’autre n’aboutit, il le dit et donne la borne explorée.",
       compiler:
@@ -1081,9 +1082,9 @@ const T: L<Copy> = {
       titleA: "Probablement sûr, ce n’est pas",
       titleB: "prouvé impossible.",
       body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action qui passe par la barrière est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; le reste ne s’exécute jamais. Et chaque résultat vient avec ce qu’il faut pour le vérifier sans nous.",
-      kicker: "Chaque action vérifiée. Ce qui est conforme s’exécute. Le reste, jamais.",
+      kicker: "Ce qui est réécrit est vérifié. Ce qui est conforme passe. Le reste, jamais.",
       scope:
-        "Prouvé pour les actions et la politique que vous définissez, là où l’action ne peut s’exécuter qu’en passant par la barrière. Le certificat énonce cette frontière.",
+        "Pour une traduction : prouvé dans le modèle et le périmètre annoncés. Pour une action : prouvé pour les actions et la politique que vous définissez, à condition que l’action ne puisse passer que par la barrière. Chaque certificat dit où s’arrête sa preuve.",
       notes: [
         { x: 57, y: 80, label: "MARBRE · L’INTENTION HUMAINE" },
         { x: 76, y: 12, label: "FER · LA RIGUEUR DE LA MACHINE" },
@@ -1200,8 +1201,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
                 </a>
-                <a href={`${r}/verify`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
-                  {t.hero.ctaVerify} <span aria-hidden="true">&rarr;</span>
+                {/* The second action sends a translation (Dom, 2026-10-19: « ouais »); the
+                  * sealed decision just below still opens /verify. */}
+                <a href={`${r}/modernization`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
+                  {t.hero.ctaSend} <span aria-hidden="true">&rarr;</span>
                 </a>
               </div>
               <SealLive hash={sealHash} locale={locale} verifyHref={`${r}/verify`} />
@@ -1318,6 +1321,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           * the hero, why Ironproof exists and the company line, the gate deciding,
           * where it applies, how it works, the close. Everything else lives on its
           * own page. Design unchanged. */}
+        {/* The check of what a machine rewrote, first (Dom, 2026-10-19: « what we
+          * should focus first is what we just said »); the gate follows. */}
+        <RewriteCheck locale={locale} />
         <NorthStar locale={locale} />
         <UseCases locale={locale} />
         <WhyIronproof locale={locale} />

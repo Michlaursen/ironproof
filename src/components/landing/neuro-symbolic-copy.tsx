@@ -293,8 +293,8 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
 
     s08Phrase: "A model that is never wrong does not exist. A system where its mistakes cannot pass, can.",
 
-    ctaTitle: "See the engine on one of your workflows",
-    ctaLead: "Pick one action your agents take. We write the rule with you, put it to the solver, and hand you the verification dossier.",
+    ctaTitle: "See the engine on your own case",
+    ctaLead: "Bring a translated program, or one action your agents take. We put it to the solver and hand you the verification dossier.",
     logoTitle: "Ironproof",
   },
 
@@ -508,9 +508,9 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
     s08Phrase:
       "Un modèle qui ne se trompe jamais n’existe pas. Un système où ses erreurs ne passent pas, oui.",
 
-    ctaTitle: "Voyez le moteur sur l’un de vos processus",
+    ctaTitle: "Voyez le moteur sur votre propre cas",
     ctaLead:
-      "Choisissez une action que prennent vos agents. Nous écrivons la règle avec vous, nous la soumettons au solveur, et nous vous remettons le dossier de vérification.",
+      "Apportez un programme traduit, ou une action que prennent vos agents. On le soumet au solveur et on vous remet le dossier de vérification.",
     logoTitle: "Ironproof",
   },
 };
