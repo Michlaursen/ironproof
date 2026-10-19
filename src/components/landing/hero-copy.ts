@@ -31,15 +31,15 @@ export type HeroCopy = {
 export const HERO_COPY: L<HeroCopy> = {
   en: {
     eyebrow: "PROOF INTELLIGENCE",
-    // Dom, 2026-10-19: the company line under the category, kept short (« le tiers indépendant qui prouve »).
-    eyebrowSub: "THE INDEPENDENT THIRD PARTY THAT PROVES",
+    // Dom, 2026-10-19 (review relayed, « fix »): "modernisation" is the commercial word for banks and governments; "transformation" stays for the long-term scope.
+    eyebrowSub: "INDEPENDENT VERIFICATION OF SOFTWARE MODERNIZATION",
     headline: "Your code was rewritten.",
     headlineEnd: "Does it still do the same thing?",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "LE TIERS INDÉPENDANT QUI PROUVE",
+    eyebrowSub: "LA VÉRIFICATION INDÉPENDANTE DES MODERNISATIONS LOGICIELLES",
     headline: "Votre code a été réécrit.",
     headlineEnd: "Fait-il toujours la même chose ?",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
