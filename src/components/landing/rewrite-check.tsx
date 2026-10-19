@@ -54,7 +54,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
       {
         word: "Different behavior.",
-        body: "The exact input where the two differ, replayed on your own compiler. You don’t have to trust us: you run it and see the difference yourself.",
+        body: "The exact input where the two differ, replayed on your own compiler. You run it yourself and see the difference with your own eyes.",
         receive: "You get the input, to replay on the old program and on the new one.",
       },
       {
@@ -86,7 +86,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
       },
       {
         word: "Comportement différent.",
-        body: "L’entrée précise où les deux divergent, rejouée sur votre propre compilateur. Pas besoin de nous croire : vous la lancez et vous voyez l’écart de vos yeux.",
+        body: "L’entrée précise où les deux divergent, rejouée sur votre propre compilateur. Vous la lancez vous-même et vous voyez l’écart de vos yeux.",
         receive: "Vous recevez l’entrée, à rejouer sur l’ancien programme et sur le nouveau.",
       },
       {
