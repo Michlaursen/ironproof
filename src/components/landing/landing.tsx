@@ -1191,7 +1191,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 * The gold value line moved to "What you get", which already says it;
                 * the pilot is the primary action (Dom, 2026-10-16, after the
                 * competitive review). */}
-              <p className="hero-white-lead mb-9 max-w-lg whitespace-pre-line text-base leading-relaxed md:text-lg">{t.hero.boundary}</p>
+              <div className="hero-white-lead mb-9 max-w-lg space-y-4 text-base leading-relaxed md:text-lg">
+                {t.hero.boundary.split("\n").map((ligne) => (
+                  <p key={ligne}>{ligne}</p>
+                ))}
+              </div>
               <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
                 <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
