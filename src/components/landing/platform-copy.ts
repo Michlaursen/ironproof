@@ -181,7 +181,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     whyUs: {
       eyebrow: "WHY IRONPROOF",
-      title: "Faster to production. Easier to audit. Harder to break.",
+      title: "Sign off with evidence. Pass the audit. Catch what breaks.",
       items: [
         {
           title: "Sign off with evidence, not hope",
@@ -334,7 +334,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     whyUs: {
       eyebrow: "POURQUOI IRONPROOF",
-      title: "Plus vite en production. Plus simple à auditer. Plus dur à briser.",
+      title: "Signer sur des preuves. Passer l’audit. Attraper ce qui casse.",
       items: [
         {
           title: "Signer sur des preuves, pas sur l’espoir",

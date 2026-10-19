@@ -78,7 +78,8 @@ export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
     // Bounded on purpose (Dom, 2026-10-15): within defined models, never "every case".
     symbolicLine: "Mathematically verifies properties within defined models and assumptions.",
     // Three verdicts, never two (Proven / Refuted / Not demonstrated).
-    steps: ["PROVE", "ENFORCE", "SEAL", "VERIFY"],
+    // The code method, not the gate's (Dom, 2026-10-19, review): the same four steps as /modernization.
+    steps: ["SCOPE", "MODEL", "COMPARE", "SEAL"],
     dossierTag: "EXAMPLE DOSSIER",
     dossierVerdict: "PROVEN",
     dossierScope: "within the stated model and assumptions",
@@ -99,7 +100,7 @@ export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
     neuralLine: "L’IA lit le code ou la politique et propose quoi vérifier. Elle ne prouve rien seule.",
     symbolic: "SYMBOLIQUE · LE SOLVEUR",
     symbolicLine: "Vérifie mathématiquement des propriétés, dans des modèles et des hypothèses définis.",
-    steps: ["PROUVER", "APPLIQUER", "SCELLER", "VÉRIFIER"],
+    steps: ["CADRER", "MODÉLISER", "COMPARER", "SCELLER"],
     dossierTag: "DOSSIER D’EXEMPLE",
     dossierVerdict: "PROUVÉ",
     dossierScope: "dans le modèle et les hypothèses déclarés",

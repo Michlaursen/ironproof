@@ -1303,7 +1303,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           {/* The method in four words, on one hairline. */}
           <ol className="hero-steps track-mid">
             {eng.steps.map((step, i) => (
-              <li key={step} className={i === 2 ? "hero-step-seal" : undefined}>
+              <li key={step} className={i === eng.steps.length - 1 ? "hero-step-seal" : undefined}>
                 <span className="hero-step-dot" aria-hidden="true" />
                 {step}
               </li>
