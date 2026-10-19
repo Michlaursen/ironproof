@@ -15,10 +15,10 @@ const FILM = {
 
 const AGCO_DEMO = {
   eyebrow: "AGCO DEMO",
-  src: "/media/agco-demo.h264.mp4",
-  poster: "/media/agco-demo-poster.jpg",
+  src: "/media/agco-demo-v6.h264.mp4",
+  poster: "/media/agco-demo-v6-poster.jpg",
   label: "Demo: does a player's deposit limit hold? Ontario Registrar's Standards 2.23 and 2.24",
-  note: "3 minutes, with sound. The rule is quoted from the AGCO Registrar's Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative, two of them from open-source projects, all replayed through the same checker; no operator's system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days.",
+  note: "3 minutes 43 seconds, with sound; the mathematics section is on-screen text. The rule is quoted from the AGCO Registrar's Standards for Internet Gaming, 2.23 and 2.24. Systems A, B and C and the twelve implementations are illustrative: of the eight that break, seven are common mistakes written on purpose and one comes from an open-source project. All are replayed through the same checker; no operator's system was examined. Results hold within the bounds shown in the film: up to 8 events over 75 days. The 2023 penalty shown is quoted from an AGCO news release of November 9, 2023.",
 };
 
 /*
