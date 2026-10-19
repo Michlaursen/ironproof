@@ -108,7 +108,7 @@ export const PI_COPY: ResearchCopy = {
           t: "ol",
           items: [
             "**Code verification.** Someone else translated your code (COBOL to Java or Python, Python or MATLAB to C); we check it still does what the original did, or show the exact input where it differs. Available now as a service. [Send us a translation](/modernization).",
-            "**Critical actions.** Authorization before execution for actions that cannot be undone — moving money, granting access, deleting records, changing production — whether an AI agent, a script, an API call or a person initiates them: allowed when they comply, blocked when they break the rule. [See it decide](/#decide).",
+            "**Critical actions.** Authorization before execution for actions that cannot be undone — moving money, granting access, deleting records, changing production — whether an AI agent, a script, an API call or a person initiates them: allowed when they comply, blocked when they break the rule. [See it decide](/critical-actions#decide).",
             "**Software security.** Proving that a fix to C code closes the flaw it targets. In research. [What we have run](/software-security).",
           ],
         },

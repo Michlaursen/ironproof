@@ -102,7 +102,8 @@ export type PlatformCopy = {
     plugsIn: string;
     foot: string;
   };
-  /** Three buyer benefits, after the use cases (Dom, 2026-10-16: « improve time to market doit être sur le site »).
+  /** Three buyer benefits, after the use cases (Dom, 2026-10-16: « improve time to market doit être sur le site »;
+   *  replaced 2026-10-19 by « sign off with evidence », Dom: « fait le best que tu penses », a verifier adds a step).
    *  No figure here: each benefit is a consequence of what the cards already show. */
   whyUs: { eyebrow: string; title: string; items: readonly { title: string; body: string }[] };
   /** Why Ironproof exists (Dom, 2026-10-16). Label changed 2026-10-17 (Dom): « Our North Star » was Code Metal's own word. */
@@ -183,8 +184,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Faster to production. Easier to audit. Harder to break.",
       items: [
         {
-          title: "Improve time to market",
-          body: "Put migrations, AI agents and policy changes into production sooner. The checks run automatically, and the evidence is produced as you go, not assembled after the fact for the audit.",
+          title: "Sign off with evidence, not hope",
+          body: "Your risk committee approves the migration on a record it can re-check: what holds, what differs, and the exact input behind each difference. The evidence is produced as you go, not assembled after the fact for the audit.",
         },
         {
           title: "Pass the audit with evidence",
@@ -229,7 +230,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           name: "Cloud access policies",
           body: "For cloud and security teams: know what your access policies really allow before someone else finds out, with the exact request that gets through when one does.",
           ranOn: "57 IAM policies published by AWS: 160 of 185 guarantees proven under two independent solvers, 11 real findings.",
-          href: "/#start",
+          href: "/critical-actions#start",
           cta: "SEE THE RUN",
         },
         {
@@ -336,8 +337,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Plus vite en production. Plus simple à auditer. Plus dur à briser.",
       items: [
         {
-          title: "Accélérer la mise en marché",
-          body: "Mettez migrations, agents IA et changements de politique en production plus tôt. Les vérifications roulent automatiquement, et les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
+          title: "Signer sur des preuves, pas sur l’espoir",
+          body: "Votre comité de risque approuve la migration sur un dossier qu’il peut revérifier : ce qui tient, ce qui diffère, et l’entrée précise derrière chaque écart. Les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
         },
         {
           title: "Passer l’audit avec des preuves",
@@ -382,7 +383,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           name: "Politiques d’accès cloud",
           body: "Pour les équipes cloud et de sécurité : sachez ce que vos politiques d’accès permettent vraiment avant que quelqu’un d’autre le découvre, avec la demande exacte qui passe quand il y en a une.",
           ranOn: "57 politiques IAM publiées par AWS : 160 garanties prouvées sur 185 avec deux solveurs indépendants, 11 vraies trouvailles.",
-          href: "/fr#start",
+          href: "/fr/critical-actions#start",
           cta: "VOIR LE RÉSULTAT",
         },
         {

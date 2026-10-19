@@ -78,6 +78,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/critical-actions",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/critical-actions",
+          fr: "https://ironproof.ai/fr/critical-actions",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/zero-trust",
       lastModified,
       changeFrequency: "monthly",

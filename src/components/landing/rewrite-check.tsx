@@ -115,6 +115,13 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
           <p className="seal-label track-mid mb-5 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.title}</h2>
           <p className="mt-6 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{t.lead}</p>
+          {/* The CardDemo case right under the lead (Dom, 2026-10-19, review). */}
+          {example ? (
+            <div className="mt-10 max-w-3xl border-l-2 border-seal/60 pl-6">
+              <p className="seal-label track-mid mb-3 text-xs">{t.exampleLabel}</p>
+              <p className="font-serif text-xl leading-snug text-neutral-100 md:text-2xl">{example.ranOn}</p>
+            </div>
+          ) : null}
         </div>
         <ol className="fade-up mt-16 grid gap-10 md:grid-cols-3 md:gap-12">
           {t.answers.map((a, i) => (
@@ -132,12 +139,6 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
             {t.auditLink} <span aria-hidden="true">&rarr;</span>
           </a>
         </p>
-        {example ? (
-          <div className="fade-up mt-12 max-w-3xl">
-            <p className="seal-label track-mid mb-3 text-xs">{t.exampleLabel}</p>
-            <p className="text-base font-light leading-relaxed text-neutral-400">{example.ranOn}</p>
-          </div>
-        ) : null}
         <a
           href={t.href}
           className="track-mid fade-up mt-10 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"

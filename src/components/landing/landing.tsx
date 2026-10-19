@@ -141,6 +141,8 @@ type Copy = {
   breathFrameworks: React.ReactNode;
 
   now: { eyebrow: string; title: string; lead: string; items: readonly Dated[]; foot: string };
+  /** The home page's why-now, three lines, no dates (Dom, 2026-10-19). */
+  nowShort: { eyebrow: string; lines: readonly string[] };
 
   gate: { eyebrow: string; title: string; lead: string; foot: string };
 
@@ -478,10 +480,18 @@ const T: L<Copy> = {
       </>
     ),
 
+    nowShort: {
+      eyebrow: "WHY NOW",
+      lines: [
+        "AI translates legacy code faster than anyone can review it.",
+        "Translation is getting cheap. Knowing it still behaves the same is not.",
+        "The side that carries the risk, the bank, the ministry, the insurer, needs a check that does not come from the translator.",
+      ],
+    },
     now: {
       eyebrow: "WHY NOW",
-      title: "Machines now rewrite critical systems, and act on them.",
-      lead: "AI tools translate legacy code faster than anyone can review it, and agents, scripts and automated pipelines move money, change access and ship code without a person in the loop. Regulators, banks and defence departments have put dates on it. Each item links to its source.",
+      title: "Systems are starting to act on their own.",
+      lead: "Agents, scripts and automated pipelines now move money, change access and ship code without a person in the loop. Regulators, banks and defence departments have put dates on it. Each item links to its source.",
       items: [
         {
           date: "Oct 9, 2025",
@@ -568,7 +578,7 @@ const T: L<Copy> = {
           href: SRC_DND_PLAN,
         },
       ],
-      foot: "When machines rewrite and act on their own, the check has to come before the change goes live, not from a log afterwards.",
+      foot: "When a system can act on its own, the decision has to be made before the action runs, not read in a log afterwards.",
     },
 
     gate: {
@@ -913,10 +923,18 @@ const T: L<Copy> = {
       </>
     ),
 
+    nowShort: {
+      eyebrow: "POURQUOI MAINTENANT",
+      lines: [
+        "L’IA traduit le vieux code plus vite que quiconque peut le relire.",
+        "Traduire coûte de moins en moins cher. Savoir si le code fait encore la même chose, non.",
+        "Celui qui porte le risque, la banque, le ministère, l’assureur, a besoin d’une vérification qui ne vient pas du traducteur.",
+      ],
+    },
     now: {
       eyebrow: "POURQUOI MAINTENANT",
-      title: "Les machines réécrivent les systèmes critiques. Et elles agissent dessus.",
-      lead: "Les outils d’IA traduisent le vieux code plus vite que quiconque peut le relire. Des agents, des scripts et des chaînes automatisées déplacent de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
+      title: "Les systèmes commencent à agir seuls.",
+      lead: "Des agents, des scripts et des chaînes automatisées déplacent déjà de l’argent, modifient des accès et déploient du code sans personne dans la boucle. Les régulateurs, les banques et les ministères de la défense y ont mis des dates. Chaque élément renvoie à sa source.",
       items: [
         {
           date: "9 oct. 2025",
@@ -1003,7 +1021,7 @@ const T: L<Copy> = {
           href: SRC_DND_PLAN,
         },
       ],
-      foot: "Quand les machines réécrivent et agissent seules, la vérification doit venir avant la mise en service, pas d’un journal après coup.",
+      foot: "Quand un système peut agir seul, la décision doit se prendre avant que l’action parte, pas se lire dans un journal après coup.",
     },
 
     gate: {
@@ -1293,6 +1311,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </ol>
         </section>
 
+        {/* The check of what a machine rewrote, right under the hero, with the CardDemo
+          * case near its top (Dom, 2026-10-19, review: « remonte CardDemo »). */}
+        <RewriteCheck locale={locale} />
+
         {/* CREDITED-BY STRIP — right under the hero (Dom, 2026-10-15: « plus au début »):
           * the vendors who credited our research, before any explanation. */}
         <section className="relative z-10 edge-t px-6 py-8 md:px-14">
@@ -1329,15 +1351,73 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           * the hero, why Ironproof exists and the company line, the gate deciding,
           * where it applies, how it works, the close. Everything else lives on its
           * own page. Design unchanged. */}
-        {/* The check of what a machine rewrote, first (Dom, 2026-10-19: « what we
-          * should focus first is what we just said »); the gate follows. */}
-        <RewriteCheck locale={locale} />
         <NorthStar locale={locale} />
         <UseCases locale={locale} />
         <WhyIronproof locale={locale} />
         {/* How the platform works, right under why (Dom, 2026-10-17: the order of Code Metal's home). */}
         <PlatformHow locale={locale} />
 
+        {/* WHY NOW, short: the code story only (Dom, 2026-10-19, review). The dated
+          * timeline and the sectors moved with the gate to /critical-actions. */}
+        <section id="now" className="relative z-10 mx-auto max-w-6xl edge-t px-6 py-28 md:px-14">
+          <div className="fade-up max-w-3xl">
+            <p className="seal-label track-mid mb-4 text-xs">{t.nowShort.eyebrow}</p>
+            {t.nowShort.lines.map((line) => (
+              <p key={line} className="mt-4 font-serif text-2xl leading-snug text-neutral-200 md:text-3xl">
+                {line}
+              </p>
+            ))}
+          </div>
+        </section>
+
+        {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
+          * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas
+          * le reste »), the same family as the trio and the applications.
+          * History: a closed vault door with a gold ring in a black marble hall
+          * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
+          * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
+          * of the act in the body: what is proven runs, the rest never executes. */}
+        <section className="closing-trio relative z-10 edge-t">
+          <div className="closing-band closing-band-photo">
+            <div className="closing-photo" aria-hidden="true">
+              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill sizes="100vw" className="closing-photo-desk object-cover" />
+              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill sizes="100vw" className="closing-photo-mob object-cover" />
+            </div>
+            {/* The material labels (marble, iron, gold) left the page: they explained our look, not the product (review, Dom go 2026-10-17). */}
+            <div className="closing-card fade-up">
+              <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
+              <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">
+                {t.closing.titleA}
+                <br />
+                <span className="text-seal">{t.closing.titleB}</span>
+              </h2>
+              <p className="mt-4 text-xs font-light leading-relaxed text-neutral-500">{t.closing.scope}</p>
+              <a
+                href={`${r}/pilot`}
+                className="track-mid mt-8 inline-flex items-center gap-3 rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+              >
+                {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
+              </a>
+              {/* The four steps no longer repeat here: the page already says them (Dom, 2026-10-18). */}
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+      <FadeUpInit />
+    </div>
+  );
+}
+
+/* The gate's sections, moved off the home page to /critical-actions (Dom,
+ * 2026-10-19: code first on the home page, the gate as its own product page).
+ * Same copy (T), same ids (#decide, #start, #now, #how), same order. */
+export function CriticalActionsSections({ locale = defaultLocale }: { locale?: Locale }) {
+  const r = locale === defaultLocale ? "" : `/${locale}`;
+  const t = pick(T, locale);
+  return (
+    <>
         {/* 3. WATCH IT DECIDE — four action classes, one gate. Moved up right
           * under the checkpoint line (Dom, 2026-10-15: too much reading before
           * the gate); the three pillars now follow the video. */}
@@ -1386,7 +1466,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         {/* WHY NOW — back after all the sectors, the white city in full behind
           * light grey articles (Dom 2026-10-17: « voir un peu les articles mais
           * voir tout le design en arrière »). No dark veil, no frosted glass. */}
-        <section id="now" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14">
+        <section id="timeline" className="relative z-10 isolate overflow-hidden edge-t px-6 py-28 md:px-14">
           <div className="absolute inset-0 -z-10" aria-hidden="true">
             <Image src="/media/district-clear.jpg" alt="" fill sizes="100vw" className="object-cover" />
           </div>
@@ -1447,43 +1527,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </p>
         </section>
 
-        {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
-          * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas
-          * le reste »), the same family as the trio and the applications.
-          * History: a closed vault door with a gold ring in a black marble hall
-          * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
-          * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
-          * of the act in the body: what is proven runs, the rest never executes. */}
-        <section className="closing-trio relative z-10 edge-t">
-          <div className="closing-band closing-band-photo">
-            <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill sizes="100vw" className="closing-photo-mob object-cover" />
-            </div>
-            {/* The material labels (marble, iron, gold) left the page: they explained our look, not the product (review, Dom go 2026-10-17). */}
-            <div className="closing-card fade-up">
-              <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
-              <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">
-                {t.closing.titleA}
-                <br />
-                <span className="text-seal">{t.closing.titleB}</span>
-              </h2>
-              <p className="mt-4 text-xs font-light leading-relaxed text-neutral-500">{t.closing.scope}</p>
-              <a
-                href={`${r}/pilot`}
-                className="track-mid mt-8 inline-flex items-center gap-3 rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-              >
-                {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
-              </a>
-              {/* The four steps no longer repeat here: the page already says them (Dom, 2026-10-18). */}
-            </div>
-          </div>
-        </section>
-
-      </main>
-
-      <FadeUpInit />
-    </div>
+    </>
   );
 }
 

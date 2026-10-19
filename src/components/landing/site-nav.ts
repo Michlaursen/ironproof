@@ -117,7 +117,7 @@ export function siteNav(locale: Locale = defaultLocale) {
       // the #decide section links to its own page (agent-scenarios.tsx).
       items: [
         { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
-        { href: `${home}#decide`, label: t.agents },
+        { href: `${r}/critical-actions`, label: t.agents, page: "critical-actions" },
       ],
     },
     {
