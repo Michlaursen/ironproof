@@ -35,6 +35,7 @@ const LABELS: L<{
   zeroTrust: string;
   agents: string;
   cobol: string;
+  audit: string;
   demo: string;
   pythonToC: string;
   dossier: string;
@@ -57,6 +58,7 @@ const LABELS: L<{
     zeroTrust: "Zero Trust",
     agents: "Critical actions",
     cobol: "Code verification",
+    audit: "Traceability audit",
     demo: "Demo",
     pythonToC: "Python to C, proven",
     dossier: "Verification dossier",
@@ -79,6 +81,7 @@ const LABELS: L<{
     zeroTrust: "Zero Trust",
     agents: "Actions critiques",
     cobol: "Vérification de code",
+    audit: "Audit de traçabilité",
     demo: "Démo",
     pythonToC: "Python vers C, prouvé",
     dossier: "Dossier de vérification",
@@ -115,7 +118,10 @@ export function siteNav(locale: Locale = defaultLocale) {
       // PRODUCTS, two entries (Dom, 2026-10-19, "go"): code first, critical
       // actions second. The four action pages stay one click away: each tab of
       // the #decide section links to its own page (agent-scenarios.tsx).
+      // The traceability audit joins first (Dom, 2026-10-19): it opens the
+      // door, code verification is the proof that follows.
       items: [
+        { href: `${r}/traceability-audit`, label: t.audit, page: "traceability-audit" },
         { href: `${r}/modernization`, label: t.cobol, page: "modernization" },
         { href: `${r}/critical-actions`, label: t.agents, page: "critical-actions" },
       ],
