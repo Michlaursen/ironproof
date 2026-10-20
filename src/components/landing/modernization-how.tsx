@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { defaultLocale, type Locale } from "@/content";
-import { type L, pick } from "./i18n";
+import { type L, NBSP, pick } from "./i18n";
 import { FlowDiagram, type FlowCopy } from "./flow-diagram";
 import { TRACE_CHECKS, TRACE_NOTE } from "./traceability-copy";
 
@@ -39,6 +39,11 @@ type HowCopy = {
   gainEyebrow: string;
   gainTitle: string;
   gains: readonly Item[];
+  /** Where the idea comes from: translation validation, and the same question in avionics. */
+  lineageEyebrow: string;
+  lineageTitle: string;
+  lineage: readonly string[];
+  sourcesLabel: string;
   whyEyebrow: string;
   whyTitle: string;
   why: readonly Item[];
@@ -92,6 +97,13 @@ const COPY: L<HowCopy> = {
         body: "We work on top of the translation you already paid for, from an integrator or an AI tool. We check it; we do not replace it.",
       },
     ],
+    lineageEyebrow: "WHERE THE IDEA COMES FROM",
+    lineageTitle: "Check each translation, not the translator.",
+    lineage: [
+      "The idea has had a name since 1998: translation validation (Pnueli, Siegel and Singerman, Weizmann Institute). Rather than proving once and for all that a translator is always right, you check each translation it produces. When the two disagree, you show the scenario where the new code behaves differently. We apply it to translations of COBOL.",
+      "Aviation asks the same question. A NASA report on DO-333, the formal methods supplement to the airborne software standard DO-178C, puts it plainly: what is shown on the source code counts for the compiled code only once the two are established as equivalent.",
+    ],
+    sourcesLabel: "Sources:",
     whyEyebrow: "WHY IRONPROOF",
     whyTitle: "A test tells you what it tried. We tell you what holds.",
     why: [
@@ -170,6 +182,13 @@ const COPY: L<HowCopy> = {
         body: "Nous travaillons par-dessus la traduction que vous avez déjà payée, faite par un intégrateur ou un outil d’IA. Nous la vérifions ; nous ne la remplaçons pas.",
       },
     ],
+    lineageEyebrow: "D’OÙ VIENT L’IDÉE",
+    lineageTitle: "On vérifie chaque traduction, pas le traducteur.",
+    lineage: [
+      "L’idée a un nom depuis 1998 : la validation de traduction (Pnueli, Siegel et Singerman, Institut Weizmann). Plutôt que de prouver une fois pour toutes qu’un traducteur a toujours raison, on vérifie chaque traduction qu’il produit. Quand les deux ne s’entendent pas, on montre le scénario où le nouveau code se comporte autrement. Nous l’appliquons aux traductions de COBOL.",
+      "L’aviation se pose la même question. Un rapport de la NASA sur DO-333, le supplément sur les méthodes formelles de la norme du logiciel embarqué DO-178C, le dit clairement : ce qu’on démontre sur le code source ne compte pour le code compilé qu’une fois l’équivalence des deux établie.",
+    ],
+    sourcesLabel: `Sources${NBSP}:`,
     whyEyebrow: "POURQUOI IRONPROOF",
     whyTitle: "Un test vous dit ce qu’il a essayé. Nous vous disons ce qui tient.",
     why: [
@@ -208,6 +227,8 @@ const COPY: L<HowCopy> = {
     },
   },
 };
+
+const srcLink = "underline decoration-white/25 underline-offset-4 transition hover:decoration-white/60";
 
 function Snum({ children }: { children: React.ReactNode }) {
   return <p className="seal-label track-mid mb-4 text-xs">{children}</p>;
@@ -288,6 +309,29 @@ export function ModernizationHow({ locale = defaultLocale }: { locale?: Locale }
             </li>
           ))}
         </ul>
+      </section>
+
+      {/*
+        Both sources read in full or at the cited passage (2026-10-20): Pnueli,
+        Siegel, Singerman, TACAS 1998, abstract and section 1; Cofer and Miller,
+        NASA/CR-2014-218244, section 4 conclusion (DO-333 paragraph 6.7.f, as
+        that report states it -- DO-333 itself was not opened). The 1998 paper
+        is not about aviation: the two are kept as two separate sentences.
+      */}
+      <section id="lineage" className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
+        <div className="fade-up max-w-3xl">
+          <Snum>{t.lineageEyebrow}</Snum>
+          <h2 className="metal-text font-serif text-3xl font-medium md:text-5xl">{t.lineageTitle}</h2>
+          {t.lineage.map((para) => (
+            <p key={para} className="mt-6 font-light leading-relaxed text-neutral-300">{para}</p>
+          ))}
+          <p className="mt-8 text-sm font-light text-neutral-400">
+            {t.sourcesLabel}{" "}
+            <a href="https://doi.org/10.1007/BFb0054170" className={srcLink}>Pnueli, Siegel, Singerman, “Translation Validation”, TACAS 1998</a>
+            {" · "}
+            <a href="https://ntrs.nasa.gov/citations/20140004055" className={srcLink}>Cofer, Miller, “Formal Methods Case Studies for DO-333”, NASA/CR-2014-218244</a>
+          </p>
+        </div>
       </section>
 
       <section className="relative z-10 edge-t mx-auto max-w-6xl px-6 py-20 md:px-14">
