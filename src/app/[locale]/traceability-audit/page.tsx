@@ -50,9 +50,9 @@ const COPY: L<Copy> = {
   en: {
     title: "Traceability audit — Ironproof",
     description:
-      "A COBOL translation ships with paperwork: cited sources, data mapping, compliance sheets marked PASS. We check every one of those statements against the real code: confirmed, does not hold, or cannot be checked, with the reason.",
+      "A COBOL translation ships with paperwork: cited sources, data mapping, compliance sheets marked as passed. We check every one of those statements against the real code: confirmed, does not hold, or cannot be checked, with the reason.",
     eyebrow: "TRACEABILITY AUDIT",
-    h1: "Your vendor says everything passed. Who checked?",
+    h1: "Your translation came with its paperwork. Who checked it?",
     lead: "When an AI tool or an integrator translates COBOL to Java, the code comes with documents: where each piece came from, how each field maps, which checks passed. Your reviewers, your auditor and the people who approve the switch all rely on them. We check whether those documents tell the truth.",
     cta: "Send us a translation",
     checksEyebrow: "WHAT WE CHECK",
@@ -91,9 +91,9 @@ const COPY: L<Copy> = {
   fr: {
     title: "Audit de traçabilité — Ironproof",
     description:
-      "Une traduction de COBOL arrive avec des documents : sources citées, correspondance des données, fiches de conformité marquées PASS. On vérifie chacune de ces affirmations contre le vrai code : confirmée, ne tient pas, ou non vérifiable, avec la raison.",
+      "Une traduction de COBOL arrive avec des documents : sources citées, correspondance des données, fiches de conformité marquées réussies. On vérifie chacune de ces affirmations contre le vrai code : confirmée, ne tient pas, ou non vérifiable, avec la raison.",
     eyebrow: "AUDIT DE TRAÇABILITÉ",
-    h1: "Votre fournisseur dit que tout est PASS. Qui a vérifié ses PASS ?",
+    h1: "Votre traduction arrive avec ses documents. Qui les a vérifiés ?",
     lead: "Quand une IA ou un intégrateur traduit du COBOL en Java, le code arrive avec des documents : d’où vient chaque morceau, à quoi correspond chaque champ, quels contrôles ont réussi. L’équipe qui révise, l’auditeur qui signe et la direction qui approuve la bascule s’y fient tous. Nous, on vérifie si ces documents disent vrai.",
     cta: "Envoyez-nous une traduction",
     checksEyebrow: "CE QU’ON VÉRIFIE",
