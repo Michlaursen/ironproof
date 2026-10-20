@@ -150,7 +150,7 @@ function copy(r: string): L<Copy> {
       ],
       formTitle: "Tell us which module, or which action.",
       formLead: "Leave a work email. We reply to set up a first call about what you need checked.",
-      bookOr: "Or pick a time directly:",
+      bookOr: "Or leave a work email, and we write back.",
       bookLink: "BOOK A 30-MINUTE CALL",
     },
     fr: {
@@ -246,7 +246,7 @@ function copy(r: string): L<Copy> {
       ],
       formTitle: "Dites-nous quel module, ou quelle action.",
       formLead: "Laissez un courriel professionnel. On vous répond pour fixer un premier appel sur ce que vous voulez faire vérifier.",
-      bookOr: "Ou choisissez un moment directement\u00a0:",
+      bookOr: "Ou laissez un courriel professionnel, on vous écrit.",
       bookLink: "RÉSERVER UN APPEL",
     },
   };
@@ -378,7 +378,7 @@ export default async function PilotPage({ params }: PageProps) {
 
         <section id="request" className="relative z-10 mx-auto max-w-7xl edge-t px-6 py-24 md:px-14">
           <div className="grid gap-12 lg:grid-cols-[1fr_32rem] lg:items-end">
-            <div>
+            <div className="order-2 lg:order-1">
               <p className="track-mid mb-6 text-xs text-neutral-500">{p.fitLabel}</p>
               <ul className="space-y-4">
                 {p.fit.map((f) => (
@@ -389,29 +389,26 @@ export default async function PilotPage({ params }: PageProps) {
                 ))}
               </ul>
             </div>
-            <div className="w-full min-w-0">
+            <div className="order-1 w-full min-w-0 lg:order-2">
               <h2 className="metal-text font-serif text-3xl md:text-4xl">{t.formTitle}</h2>
-              <p className="mb-6 mt-4 text-base font-light text-neutral-300">{t.formLead}</p>
+              {/* Booking first (Dom, 2026-10-19: « Parlez-nous » must land on the
+                * calendar, not on more reading). Shown only once a booking page
+                * exists, set in NEXT_PUBLIC_BOOKING_URL. No embed, so no third-party
+                * script or cookie on our page: the link opens the booking page. */}
+              {BOOKING_URL ? (
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="track-mid mt-6 inline-flex min-h-[44px] items-center rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-5 py-3 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
+                >
+                  {t.bookLink} <span aria-hidden="true" className="ml-2">&#8599;</span>
+                </a>
+              ) : null}
+              <p className="mb-6 mt-6 text-base font-light text-neutral-300">{BOOKING_URL ? t.bookOr : t.formLead}</p>
               <div className="pilot-form">
                 <CtaForm locale={locale} />
               </div>
-              {/* Booking (Dom, 2026-10-16): shown only once a booking page exists,
-                * set in NEXT_PUBLIC_BOOKING_URL. No embed, so no third-party script
-                * or cookie on our page: the link opens the booking page itself. */}
-              {BOOKING_URL ? (
-                <p className="mt-6 text-sm font-light text-neutral-400">
-                  {t.bookOr}
-                  <br />
-                  <a
-                    href={BOOKING_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="track-mid mt-2 inline-block border-b border-seal/60 pb-0.5 text-xs text-neutral-200 transition hover:text-white"
-                  >
-                    {t.bookLink} <span aria-hidden="true">&#8599;</span>
-                  </a>
-                </p>
-              ) : null}
             </div>
           </div>
         </section>

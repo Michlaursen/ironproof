@@ -211,7 +211,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         "Know whether a patch really closes the flaw, before you ship it.",
       ],
       alsoCta: "TALK TO US",
-      alsoHref: "/pilot",
+      alsoHref: "/pilot#request",
       plugsInLabel: "IN PRACTICE",
       plugsIn: "You give us the original program and its translation. For each module, you get one of the three answers. Each difference comes with the input that shows it, and what you need to replay it on your own compiler.",
       cards: [
@@ -364,7 +364,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         "Vérifiez qu’un correctif ferme vraiment la faille, avant de le livrer.",
       ],
       alsoCta: "PARLEZ-NOUS",
-      alsoHref: "/fr/pilot",
+      alsoHref: "/fr/pilot#request",
       plugsInLabel: "CONCRÈTEMENT",
       plugsIn: "Vous nous confiez le programme d’origine et sa traduction. Pour chaque module, vous recevez l’une des trois réponses. Chaque écart vient avec l’entrée qui le montre, et de quoi le rejouer sur votre propre compilateur.",
       cards: [
