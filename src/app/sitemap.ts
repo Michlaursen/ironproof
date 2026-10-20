@@ -114,6 +114,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     },
     {
+      url: "https://ironproof.ai/traceability-audit",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: "https://ironproof.ai/traceability-audit",
+          fr: "https://ironproof.ai/fr/traceability-audit",
+        },
+      },
+    },
+    {
       url: "https://ironproof.ai/modernization",
       lastModified,
       changeFrequency: "monthly",
