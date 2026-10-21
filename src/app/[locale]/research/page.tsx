@@ -5,6 +5,7 @@ import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { RESEARCH_COPY } from "@/components/landing/research-copy";
 import { LIMITS_COPY } from "@/components/landing/research-limits-copy";
+import { HUMAN_LOOP_COPY } from "@/components/landing/research-human-loop-copy";
 import { PAPERS } from "@/components/landing/credibility";
 import { EngineState } from "@/components/landing/engine-state";
 
@@ -25,6 +26,12 @@ import { EngineState } from "@/components/landing/engine-state";
  * 2026-10-18): a reader who clicks RESEARCH came for the papers.
  */
 const NOTES = [
+  {
+    slug: "/research/when-the-ai-hacks-the-human-in-the-loop",
+    date: "2026-10-21",
+    author: "Ironproof Research",
+    copy: HUMAN_LOOP_COPY.en,
+  },
   {
     slug: "/research/what-our-proofs-do-not-prove",
     date: "2026-10-16",
