@@ -52,6 +52,10 @@ const nextConfig: NextConfig = {
         source: "/research/what-our-proofs-do-not-prove",
         destination: "/en/research/what-our-proofs-do-not-prove",
       },
+      {
+        source: "/research/when-the-ai-hacks-the-human-in-the-loop",
+        destination: "/en/research/when-the-ai-hacks-the-human-in-the-loop",
+      },
     ];
   },
 };
