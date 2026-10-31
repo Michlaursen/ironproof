@@ -184,19 +184,19 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     whyUs: {
       eyebrow: "WHY IRONPROOF",
-      title: "Sign off with evidence. Pass the audit. Catch what breaks.",
+      title: "Sign off with evidence. Face the audit with a record. Catch what breaks.",
       items: [
         {
           title: "Sign off with evidence, not hope",
           body: "Your risk committee approves the migration on a record it can re-check: what holds, what differs, and the exact input behind each difference. The evidence is produced as you go, not assembled after the fact for the audit.",
         },
         {
-          title: "Pass the audit with evidence",
+          title: "Give your auditor a record to re-check",
           body: "Give your auditor and your regulator a sealed record of every answer and every decision that they can re-check themselves, instead of logs and screenshots.",
         },
         {
           title: "Catch what tests miss",
-          body: "Get the exact input where the new code behaves differently, or the sequence of actions that breaks your rule, before production does. Or the proof that none exists within the stated model.",
+          body: "Get the exact input where the new code behaves differently, or the sequence of actions that breaks your rule, before production does.",
         },
       ],
     },
@@ -337,19 +337,19 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     whyUs: {
       eyebrow: "POURQUOI IRONPROOF",
-      title: "Signer sur des preuves. Passer l’audit. Attraper ce qui casse.",
+      title: "Signer sur des preuves. Arriver à l’audit avec un dossier. Attraper ce qui casse.",
       items: [
         {
           title: "Signer sur des preuves, pas sur l’espoir",
           body: "Votre comité de risque approuve la migration sur un dossier qu’il peut revérifier : ce qui tient, ce qui diffère, et l’entrée précise derrière chaque écart. Les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
         },
         {
-          title: "Passer l’audit avec des preuves",
+          title: "Remettre à votre auditeur un dossier à revérifier",
           body: "Remettez à votre auditeur et à votre régulateur une trace scellée de chaque réponse et de chaque décision, qu’ils revérifient eux-mêmes, plutôt que des journaux et des captures d’écran.",
         },
         {
           title: "Attraper ce que les tests ratent",
-          body: "Obtenez l’entrée précise où le nouveau code se comporte autrement, ou la suite d’actions qui brise votre règle, avant que la production la trouve. Ou la preuve qu’il n’y en a aucune dans le modèle déclaré.",
+          body: "Obtenez l’entrée précise où le nouveau code se comporte autrement, ou la suite d’actions qui brise votre règle, avant que la production la trouve.",
         },
       ],
     },

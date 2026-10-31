@@ -15,6 +15,10 @@ import type { L } from "./i18n";
  * Repositioned 2026-10-19 (Dom, "PARFAIT LETS GO"): the check of what a
  * machine rewrote leads; the gate in front of critical actions comes second,
  * in the lines under the title (landing.tsx, hero.boundary).
+ *
+ * Repositioned 2026-10-31 (Dom, « go le site now »): the page opens on the
+ * change in the world, machines now write proofs, and on the question left.
+ * "Your code was rewritten" stays as the first product, in rewrite-check.tsx.
  */
 export type HeroCopy = {
   /** The category, set on its own line so it hits (Dom, 2026-10-16). */
@@ -32,16 +36,16 @@ export const HERO_COPY: L<HeroCopy> = {
   en: {
     eyebrow: "PROOF INTELLIGENCE",
     // Dom, 2026-10-19 (review relayed, « fix »): "modernisation" is the commercial word for banks and governments; "transformation" stays for the long-term scope.
-    eyebrowSub: "INDEPENDENT VERIFICATION OF SOFTWARE MODERNIZATION",
-    headline: "Your code was rewritten.",
-    headlineEnd: "Does it still do the same thing?",
+    eyebrowSub: "INDEPENDENT VERIFICATION OF CRITICAL SOFTWARE",
+    headline: "Machines can write the proof.",
+    headlineEnd: "The question is what it proves.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "LA VÉRIFICATION INDÉPENDANTE DES MODERNISATIONS LOGICIELLES",
-    headline: "Votre code a été réécrit.",
-    headlineEnd: "Fait-il toujours la même chose ?",
+    eyebrowSub: "LA VÉRIFICATION INDÉPENDANTE DES LOGICIELS CRITIQUES",
+    headline: "Les machines savent écrire la preuve.",
+    headlineEnd: "Reste à savoir ce qu’elle prouve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
   },
 };

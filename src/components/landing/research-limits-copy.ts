@@ -28,10 +28,27 @@ export const LIMITS_COPY: ResearchCopy = {
   h1: "What our proofs do not prove",
   standfirst:
     "A verification verdict is only as strong as the question it was asked. Here is what ours guarantee, what holds only within bounds, and what is still open.",
-  byline: "Ironproof Research · 16 October 2026",
-  note: "Every result cited here is one already published on this site; this note adds its limits, not new figures.",
+  byline: "Ironproof Research · 16 October 2026, clarified 31 October 2026",
+  note: "Results cited here were published on this site. The clarification below adds one new figure: 14 false answers from our own checker.",
   lede: "“Proven” is the most dangerous word in our field. It is true of a model, under a property, within a scope — and it travels alone, without any of the three.",
   sections: [
+    {
+      h: "Clarification, 31 October 2026",
+      blocks: [
+        {
+          t: "p",
+          text: "An internal audit of our checker for translations made by others reproduced 14 cases where the tool answered *equivalent*, while running the code on a JVM and on IBM’s COBOL compiler showed otherwise. These were cases written to attack the tool, not client code. The cause is how the tool reads code: it lost part of what the code does, then answered a question about the wrong thing. We also found a misreading in how our engine handles a COBOL IF closed by a period.",
+        },
+        {
+          t: "p",
+          text: "**What changes.** We don’t issue a same-behavior answer from this tool until this is corrected and measured again. We are rebuilding the COBOL reader so that whatever it doesn’t explicitly understand comes out as *not demonstrated*, never as proven.",
+        },
+        {
+          t: "p",
+          text: "**What stays.** A difference replayed on a compiler and a JVM rests on that execution, not on our model. Figures we published earlier, including in [arXiv:2610.11073](https://arxiv.org/abs/2610.11073), describe results relative to our model: read them as history, not as confirmed behavior. A corrected version follows the new measurement.",
+        },
+      ],
+    },
     {
       blocks: [
         {

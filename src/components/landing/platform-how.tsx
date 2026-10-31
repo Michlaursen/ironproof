@@ -121,7 +121,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Seal and hand over",
-        body: "The proof, or the exact case that differs or breaks the rule, sealed with a classical and a post-quantum signature. Your auditor re-runs it without us.",
+        body: "The proof, or the exact case that differs or breaks the rule, sealed with a classical and a post-quantum signature. Built so your auditor can re-run it without us.",
       },
     ],
     os: OS_EN,
@@ -145,7 +145,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Sceller et remettre",
-        body: "La preuve, ou le cas précis qui diffère ou qui brise la règle, scellée avec une signature classique et une signature post-quantique. Votre auditeur la refait sans nous.",
+        body: "La preuve, ou le cas précis qui diffère ou qui brise la règle, scellée avec une signature classique et une signature post-quantique. C’est fait pour que votre auditeur la refasse sans nous.",
       },
     ],
     os: OS_EN,
