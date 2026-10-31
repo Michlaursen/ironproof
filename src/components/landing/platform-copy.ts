@@ -248,11 +248,11 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     northStar: {
       eyebrow: "WHAT WE BELIEVE",
-      title: "Ironproof brings proof to what machines rewrite, and to the actions that cannot be undone.",
+      title: "Ironproof brings proof to what machines rewrite.",
       paragraphs: [
-        "AI now writes code, moves money, and changes critical systems faster than humans can review them.",
+        "AI now writes code and changes critical systems faster than humans can review them.",
         "But speed without assurance is not enough.",
-        "Every migration must preserve the behavior that matters. Every critical action must be authorized before execution. Every claim must withstand independent verification.",
+        "Every migration must preserve the behavior that matters. Every claim must withstand independent verification.",
       ],
       lead: "Ironproof is building Proof Intelligence.",
       body: "AI proposes, formal methods decide, and each result ships with evidence anyone can check.",
@@ -401,11 +401,11 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     northStar: {
       eyebrow: "CE QUE NOUS CROYONS",
-      title: "Ironproof apporte la preuve à ce que les machines réécrivent, et aux actions sans retour.",
+      title: "Ironproof apporte la preuve à ce que les machines réécrivent.",
       paragraphs: [
-        "L’IA écrit du code, déplace de l’argent et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
+        "L’IA écrit du code et modifie des systèmes critiques plus vite que des humains ne peuvent les relire.",
         "Mais la vitesse sans garantie ne suffit pas.",
-        "Chaque migration doit garder le comportement qui compte. Chaque action critique doit être autorisée avant de partir. Chaque affirmation doit résister à une vérification indépendante.",
+        "Chaque migration doit garder le comportement qui compte. Chaque affirmation doit résister à une vérification indépendante.",
       ],
       lead: "Ironproof développe ce que nous appelons Proof Intelligence.",
       body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier.",
