@@ -76,7 +76,7 @@ function copy(r: string): L<Copy> {
           question: "Does the translation you received still do what the original did?",
           deliver: [
             "First, a traceability audit report: what the translation’s own documents claim, checked against the code.",
-            "Then, per module, one of three answers: same behavior within the stated scope, the exact input where it differs, or not decided with the reason.",
+            "Then, per module, the exact input where it differs, or not decided with the reason. Same-behavior answers are suspended while we rebuild them.",
             "Every difference, with what you need to replay it on your compiler and on the new code.",
             "The scope, and the compiler and CICS assumptions each answer depends on.",
           ],
@@ -172,7 +172,7 @@ function copy(r: string): L<Copy> {
           question: "La traduction que vous avez reçue fait-elle encore ce que faisait l’original ?",
           deliver: [
             "D’abord, un rapport d’audit de traçabilité : ce que disent les documents de la traduction, comparé au code.",
-            "Ensuite, par module, l’une des trois réponses : même comportement dans le périmètre annoncé, l’entrée précise où il diffère, ou impossible à trancher, avec la raison.",
+            "Ensuite, par module, l’entrée précise où il diffère, ou impossible à trancher, avec la raison. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.",
             "Chaque écart, avec de quoi le rejouer sur votre compilateur et sur le nouveau code.",
             "Le périmètre, et les hypothèses sur le compilateur et CICS dont dépend chaque réponse.",
           ],

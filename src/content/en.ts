@@ -4,11 +4,11 @@ export const en: SiteContent = {
   meta: {
     title: "Ironproof | Independent verification of rewritten code",
     description:
-      "Your code was rewritten. Ironproof tells you if it still does the same thing: same behavior within the stated scope, the exact case that differs replayed on your own compiler, or we say we couldn’t tell. Every result is sealed and can be checked without trusting us.",
+      "Machines can write the proof. The question is what it proves. Ironproof independently verifies critical software: the exact case that differs replayed on your own compiler, or we say we couldn’t tell. Every result is sealed and can be checked without trusting us.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta
     // description on purpose: same positioning everywhere, nothing invented.
     ogDescription:
-      "Your code was rewritten. Ironproof tells you if it still does the same thing: same behavior within the stated scope, the exact case that differs replayed on your own compiler, or we say we couldn’t tell. Every result is sealed and can be checked without trusting us.",
+      "Machines can write the proof. The question is what it proves. Ironproof independently verifies critical software: the exact case that differs replayed on your own compiler, or we say we couldn’t tell. Every result is sealed and can be checked without trusting us.",
   },
   header: {
     nav: [

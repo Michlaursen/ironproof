@@ -241,7 +241,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Same behavior: proven for every input, within the scope and model we state up front.\nDifferent behavior: the exact input where the old and new code disagree, replayed on your own compiler.\nNot decided: we say so, with the reason. Never counted as a pass.\nIndependent. Sealed. Verifiable without trusting us.",
+        "Ironproof independently verifies critical software. We establish what holds, expose what breaks, and make the limits of every result explicit.\nWe don’t build what we verify.\nIndependent. Sealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -320,7 +320,7 @@ const T: L<Copy> = {
       foot: "An agent with valid credentials and a bad plan is still a valid session. The only place to stop it is before execution.",
     },
 
-    creditedBy: "VULNERABILITIES FOUND BY IRONPROOF’S RESEARCH, FIXED AND CREDITED BY",
+    creditedBy: "ISSUES FOUND BY IRONPROOF’S RESEARCH, FIXED AND CREDITED BY",
 
     trio: {
       eyebrow: "WHAT YOU GET",
@@ -688,7 +688,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Même comportement : prouvé pour chaque entrée, dans le périmètre et le modèle annoncés d’avance.\nComportement différent : l’entrée précise où l’ancien et le nouveau code divergent, rejouée sur votre propre compilateur.\nImpossible à trancher : on vous le dit, avec la raison. Jamais compté comme un succès.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
+        "Ironproof vérifie de façon indépendante les logiciels critiques. On établit ce qui tient, on montre ce qui casse, et on dit clairement les limites de chaque résultat.\nOn ne bâtit pas ce qu’on vérifie.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -766,7 +766,7 @@ const T: L<Copy> = {
       foot: "Un agent aux identifiants valides et au mauvais plan reste une session valide. Le seul endroit pour l’arrêter, c’est avant l’exécution.",
     },
 
-    creditedBy: "FAILLES TROUVÉES PAR LA RECHERCHE D’IRONPROOF, CORRIGÉES ET CRÉDITÉES PAR",
+    creditedBy: "DÉFAUTS TROUVÉS PAR LA RECHERCHE D’IRONPROOF, CORRIGÉS ET CRÉDITÉS PAR",
 
     trio: {
       eyebrow: "CE QUE VOUS OBTENEZ",
