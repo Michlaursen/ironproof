@@ -37,11 +37,11 @@ export const PI_COPY: ResearchCopy = {
       blocks: [
         {
           t: "p",
-          text: "AI now writes code, moves money, and changes critical systems faster than humans can review them. But speed without assurance is not enough.",
+          text: "AI now writes code and changes critical systems faster than humans can review them. But speed without assurance is not enough.",
         },
         {
           t: "p",
-          text: "Every migration must preserve the behavior that matters. Every critical action must be authorized before execution. Every claim must withstand independent verification. Proof Intelligence is the name for doing all three with a machine-checked answer instead of a confident one.",
+          text: "Every migration must preserve the behavior that matters. Every claim must withstand independent verification. Proof Intelligence is the name for doing both with a machine-checked answer instead of a confident one.",
         },
       ],
     },

@@ -148,7 +148,7 @@ const COPY: L<ArchCopy> = {
     verifyOut: "Verification dossier",
     rail: {
       k: "Cognitive operating system",
-      t: "Governs the engineering agent",
+      t: "Governs the engineering work",
       items: ["Persistent memory", "Rules learned from its own errors", "No report without the command and its output"],
     },
   },
@@ -244,7 +244,7 @@ const COPY: L<ArchCopy> = {
     verifyOut: "Dossier de vérification",
     rail: {
       k: "Système d’exploitation cognitif",
-      t: "Encadre l’agent d’ingénierie",
+      t: "Encadre le travail d’ingénierie",
       items: ["Mémoire persistante", "Règles apprises de ses propres erreurs", "Aucun rapport sans la commande et sa sortie"],
     },
   },

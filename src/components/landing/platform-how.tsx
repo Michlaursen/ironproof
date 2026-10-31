@@ -52,7 +52,7 @@ const FLOW_EN: FlowCopy = {
 /* The cognitive operating system, in English on every page (Dom, 2026-10-19: « tout en anglais, zero french »). */
 const OS_EN: FlowRail = {
       k: "Ironproof cognitive operating system",
-      t: "Governs the engineering agent that builds every check",
+      t: "Governs the engineering work behind every check",
       tagline: "MEMORY · CONTEXT · REASONING · PLANNING",
       foundation: {
         label: "FOUNDATION",
