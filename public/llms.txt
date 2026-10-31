@@ -1,6 +1,6 @@
 # Ironproof
 
-> Ironproof builds Proof Intelligence for critical infrastructure. Proof Intelligence is AI that proposes, formal methods that decide, and evidence anyone can check without trusting the vendor. Every result is proven, refuted with the case that breaks it, or reported as not demonstrated. Definition: https://ironproof.ai/proof-intelligence
+> Ironproof builds Proof Intelligence for critical infrastructure. Proof Intelligence establishes what a claim actually rests on: what is shown, under which assumptions, what breaks it, and what stays not demonstrated. AI proposes, formal methods decide, and anyone can check the evidence without trusting the vendor. Every result is proven, refuted with the case that breaks it, or reported as not demonstrated. Definition: https://ironproof.ai/proof-intelligence
 
 Its product today is policy enforcement for critical actions. It blocks a critical action before it executes if it violates the customer's written policy, and lets it through if it complies — whether the action was initiated by an AI agent, a script, an API call or a person. Every decision is sealed cryptographically (Ed25519 + ML-DSA-65) and can be verified independently afterwards, offline, without an Ironproof dashboard.
 

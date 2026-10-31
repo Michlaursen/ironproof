@@ -150,7 +150,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         risk: "A translation can compile, pass its tests and still return a different number, on one input or under one compiler setting.",
         href: "/modernization",
         cta: "SEE HOW WE CHECK IT",
-        body: "Your integrator or your AI tool did the translation: COBOL to Java or Python, Python or MATLAB to C. We don’t translate, so we have no stake in saying it is right. We model exactly what the original computes and confront the new code with it: proven where the model covers it, the exact input where they differ, or not covered with the reason.",
+        body: "Your integrator or your AI tool did the translation: COBOL to Java or Python, Python or MATLAB to C. We don’t translate, so we have no stake in saying it is right. We model exactly what the original computes and confront the new code with it: the exact input where they differ, or not covered with the reason. Same-behavior answers are suspended while we rebuild them.",
       },
     ],
     method: {
@@ -217,7 +217,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Code verification",
-          body: "Your legacy software was modernized, by an integrator or by AI. The new code compiles and passes its tests. But one fundamental question remains: does it still do exactly what the old one did?\nThat is what Ironproof checks, calculation by calculation, behavior by behavior.\nWhen equivalence is shown, we provide the proof, within a clearly defined scope. When a difference exists, we identify the exact case that reproduces it.\nEvery conclusion comes with what you need to check it.",
+          body: "Your legacy software was modernized, by an integrator or by AI. The new code compiles and passes its tests. But one fundamental question remains: does it still do exactly what the old one did?\nThat is what Ironproof checks, calculation by calculation, behavior by behavior.\nWhen a difference exists, we identify the exact case that reproduces it. Same-behavior answers are suspended while we rebuild them.\nEvery conclusion comes with what you need to check it.",
           ranOn: "On public AI-generated COBOL-to-Java translations, we found differences in behavior, confirmed on IBM’s COBOL compiler, and documentation that does not match the code it describes.",
           href: "/modernization",
           cta: "SEE HOW WE CHECK IT",
@@ -303,7 +303,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         risk: "Une traduction peut compiler, passer ses tests et rendre quand même un autre nombre, sur une seule entrée ou sous un seul réglage du compilateur.",
         href: "/fr/modernization",
         cta: "VOIR COMMENT ON VÉRIFIE",
-        body: "Votre intégrateur ou votre outil d’IA a fait la traduction : COBOL vers Java ou Python, Python ou MATLAB vers C. Nous ne traduisons pas, donc nous n’avons aucun intérêt à dire qu’elle est bonne. Nous modélisons exactement ce que calcule l’original et y confrontons le nouveau code : prouvé là où le modèle le couvre, l’entrée exacte où ils diffèrent, ou non couvert, avec la raison.",
+        body: "Votre intégrateur ou votre outil d’IA a fait la traduction : COBOL vers Java ou Python, Python ou MATLAB vers C. Nous ne traduisons pas, donc nous n’avons aucun intérêt à dire qu’elle est bonne. Nous modélisons exactement ce que calcule l’original et y confrontons le nouveau code : l’entrée exacte où ils diffèrent, ou non couvert, avec la raison. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.",
       },
     ],
     method: {
@@ -370,7 +370,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Vérification de code",
-          body: "Votre ancien logiciel a été modernisé, par un intégrateur ou par l’intelligence artificielle. Le nouveau code compile et passe ses tests. Mais une question fondamentale demeure : fait-il toujours exactement ce que faisait l’ancien ?\nC’est ce qu’Ironproof vérifie, calcul par calcul, comportement par comportement.\nLorsque l’équivalence est démontrée, nous en fournissons la preuve, dans un périmètre clairement défini. Lorsqu’une différence existe, nous identifions le cas précis qui permet de la reproduire.\nChaque conclusion s’accompagne des éléments nécessaires pour la vérifier.",
+          body: "Votre ancien logiciel a été modernisé, par un intégrateur ou par l’intelligence artificielle. Le nouveau code compile et passe ses tests. Mais une question fondamentale demeure : fait-il toujours exactement ce que faisait l’ancien ?\nC’est ce qu’Ironproof vérifie, calcul par calcul, comportement par comportement.\nLorsqu’une différence existe, nous identifions le cas exact qui la reproduit. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.\nChaque conclusion s’accompagne des éléments nécessaires pour la vérifier.",
           ranOn: "Sur des traductions publiques de COBOL vers Java générées par IA, on a trouvé des différences de comportement, confirmées sur le compilateur COBOL d’IBM, et des documents qui ne correspondent pas au code qu’ils décrivent.",
           href: "/fr/modernization",
           cta: "VOIR COMMENT ON VÉRIFIE",

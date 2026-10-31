@@ -99,7 +99,7 @@ export function ApplicationPage({ app, locale = defaultLocale }: { app: AppId; l
           </div>
           <ul className="fade-up verdict-grid">
             {method.verdicts.map((v, i) => (
-              <li key={v.word} className={`verdict-card verdict-${["proven", "refuted", "open"][i]}`}>
+              <li key={v.word} className={`verdict-card verdict-${(app === "modernization" ? ["refuted", "open", "open"] : ["proven", "refuted", "open"])[i]}`}>
                 <span className="verdict-mark" aria-hidden="true" />
                 <p className="verdict-word font-serif">{v.word}</p>
                 <p className="verdict-body">{v.body}</p>

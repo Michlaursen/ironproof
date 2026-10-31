@@ -46,7 +46,7 @@ export type RewriteCopy = {
 export const REWRITE_COPY: L<RewriteCopy> = {
   en: {
     eyebrow: "CODE VERIFICATION",
-    title: "Rewritten is not the same as equivalent.",
+    title: "Your code was rewritten. Does it still do the same thing?",
     lead: "A bank moves its COBOL to Java, with an integrator or an AI tool. The new code compiles and passes its tests. Ironproof shows you, module by module, where it no longer does what the old code did.",
     method: {
       title: "Three answers. Each one comes with what you need to check it.",
@@ -82,7 +82,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
   },
   fr: {
     eyebrow: "VÉRIFICATION DE CODE",
-    title: "Réécrit ne veut pas dire équivalent.",
+    title: "Votre code a été réécrit. Fait-il toujours la même chose ?",
     lead: "Une banque fait passer son COBOL à Java, avec un intégrateur ou un outil d’IA. Le nouveau code compile, il passe ses tests. Reste une question : fait-il encore ce que faisait l’ancien ? Ironproof vous montre, module par module, où ce n’est plus le cas.",
     method: {
       title: "Trois réponses. Chacune vient avec de quoi la vérifier.",

@@ -117,7 +117,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Compare and cross-check",
-        body: "A solver checks every case the model allows. A second, independent check confirms it: IBM’s compiler for COBOL, a second solver for policies, decoy fixes for C.",
+        body: "A solver checks every case the model allows. A second, independent check confronts it: IBM’s compiler for COBOL, a second solver for policies, decoy fixes for C.",
       },
       {
         title: "Seal and hand over",
@@ -141,7 +141,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Compare and cross-check",
-        body: "Un solveur vérifie tous les cas que le modèle permet. Une seconde vérification, indépendante, le confirme : le compilateur d’IBM pour le COBOL, un second solveur pour les politiques, des correctifs leurres pour le C.",
+        body: "Un solveur vérifie tous les cas que le modèle permet. Une seconde vérification, indépendante, le confronte : le compilateur d’IBM pour le COBOL, un second solveur pour les politiques, des correctifs leurres pour le C.",
       },
       {
         title: "Sceller et remettre",

@@ -11,7 +11,7 @@ import { PLATFORM_COPY } from "./platform-copy";
  * open problems are written here. Update AS_OF with every change.
  */
 
-const AS_OF = "2026-10-17";
+const AS_OF = "2026-10-31";
 
 type Item = { title: string; body: string; href?: string; link?: string };
 type Column = { key: "works" | "progress" | "open"; label: string; items: Item[] };
@@ -67,7 +67,7 @@ const T: L<{
     misraTitle: "MISRA C on translated code",
     misraBody: "The C translation of a signal-processing function passes the open-source MISRA C:2012 checker (cppcheck) on the whole program, and its equivalence with the Python original is re-proved. This is a free tool covering part of the rules, not a certification.",
     cBody: "Checking that a security fix really closes the flaw, on real fixes from open-source projects.",
-    cobolBody: "IBM’s GenApp insurance programs, checked under a CICS model we write ourselves and tested against a real CICS. A run on z/OS and an outside replay are still to come.",
+    cobolBody: "IBM’s GenApp insurance programs, checked under a CICS model we write ourselves and tested against a real CICS. A run on z/OS and an outside replay are still to come. Same-behavior answers from our translation checker are suspended after an audit reproduced 14 false ones.",
     rustFixTitle: "Security fix in Rust",
     rustFixBody: "A published flaw in a Rust library (RUSTSEC-2017-0004). The original code and a plausible false fix are both caught. The real fix is proved on the actual code for standard line lengths, and for any length on a hand-written model whose link to the code is not yet checked by a machine.",
     openItems: [
@@ -109,7 +109,7 @@ const T: L<{
     misraTitle: "MISRA C sur du code traduit",
     misraBody: "La traduction C d’une fonction de traitement de signal passe le vérificateur libre MISRA C:2012 (cppcheck) sur le programme complet, et son équivalence avec l’original Python est reprouvée. C’est un outil libre qui couvre une partie des règles, pas une certification.",
     cBody: "Vérifier qu’un correctif de sécurité ferme vraiment la faille, sur de vrais correctifs de projets open source.",
-    cobolBody: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes et confrontés à un vrai CICS. Une exécution sur z/OS et une reprise par un tiers restent à faire.",
+    cobolBody: "Les programmes d’assurance GenApp d’IBM, vérifiés sous un modèle CICS que nous écrivons nous-mêmes et confrontés à un vrai CICS. Une exécution sur z/OS et une reprise par un tiers restent à faire. Les réponses « même comportement » de notre vérificateur de traductions sont suspendues : un audit en a reproduit 14 fausses.",
     rustFixTitle: "Correctif de sécurité en Rust",
     rustFixBody: "Une faille publiée d’une librairie Rust (RUSTSEC-2017-0004). Le code d’origine et un faux correctif plausible sont tous deux attrapés. Le vrai correctif est prouvé sur le code réel pour les longueurs de ligne standard, et pour toute longueur sur un modèle écrit à la main, dont le lien avec le code n’est pas encore vérifié par une machine.",
     openItems: [
