@@ -74,7 +74,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Compare and cross-check",
-        body: "The translation is confronted with the model: proven where the model covers it, or the exact input where they differ. The same cases run through IBM’s own COBOL compiler, and we plant deliberate faults to show the check catches them.",
+        body: "The translation is confronted with the model: the exact input where they differ, or not covered with the reason. Same-behavior answers are suspended while we rebuild them. The same cases run through IBM’s own COBOL compiler, and we plant deliberate faults to show the check catches them.",
       },
       {
         title: "Seal and hand over",
@@ -159,7 +159,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Compare and cross-check",
-        body: "La traduction est confrontée au modèle : prouvée là où le modèle la couvre, ou l’entrée exacte où ils diffèrent. Les mêmes cas passent dans le compilateur COBOL d’IBM lui-même, et nous plantons des fautes exprès pour montrer que la vérification les attrape.",
+        body: "La traduction est confrontée au modèle : l’entrée exacte où ils diffèrent, ou non couvert, avec la raison. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit. Les mêmes cas passent dans le compilateur COBOL d’IBM lui-même, et nous plantons des fautes exprès pour montrer que la vérification les attrape.",
       },
       {
         title: "Sceller et remettre",

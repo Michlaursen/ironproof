@@ -19,7 +19,7 @@
 import type { ResearchCopy } from "@/components/landing/research-copy";
 
 export const PI_DEFINITION =
-  "Proof Intelligence is AI that proposes, formal methods that decide, and evidence anyone can check without trusting the vendor.";
+  "Proof Intelligence establishes what a claim actually rests on: what is shown, under which assumptions, what breaks it, and what stays not demonstrated. AI proposes, formal methods decide, and anyone can check the evidence without trusting the vendor.";
 
 export const PI_COPY: ResearchCopy = {
   meta: {
