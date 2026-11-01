@@ -25,7 +25,7 @@ type HowCopy = {
 
 /* The method diagram, in English on every page too (Dom, 2026-10-19: « tout en anglais, zero french »). */
 const FLOW_EN: FlowCopy = {
-      caption: "The path of one case: two independent checks, one verdict, a sealed record.",
+      caption: "The path of one case: two independent checks, one verdict, a sealed record. “Holds” applies to policies and critical actions; for rewritten code it is suspended.",
       lead: [
         ["YOUR CASE", "policy, fix, program"],
         ["MODEL", "precise logic"],

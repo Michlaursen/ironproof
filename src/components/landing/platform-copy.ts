@@ -188,7 +188,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       items: [
         {
           title: "Sign off with evidence, not hope",
-          body: "Your risk committee approves the migration on a record it can re-check: what holds, what differs, and the exact input behind each difference. The evidence is produced as you go, not assembled after the fact for the audit.",
+          body: "Your risk committee weighs the migration on a record it can re-check: what differs, the exact input behind each difference, and what could not be decided. The evidence is produced as you go, not assembled after the fact for the audit.",
         },
         {
           title: "Give your auditor a record to re-check",
@@ -217,7 +217,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Code verification",
-          body: "Your legacy software was modernized, by an integrator or by AI. The new code compiles and passes its tests. But one fundamental question remains: does it still do exactly what the old one did?\nThat is what Ironproof checks, calculation by calculation, behavior by behavior.\nWhen a difference exists, we identify the exact case that reproduces it. Same-behavior answers are suspended while we rebuild them.\nEvery conclusion comes with what you need to check it.",
+          body: "Your legacy software was modernized, by an integrator or by AI. The new code compiles and passes its tests. But one fundamental question remains: does it still do exactly what the old one did?\nThat is what Ironproof checks.\nWhen a difference exists, we identify the exact case that reproduces it. Same-behavior answers are suspended while we rebuild them.\nEvery conclusion comes with what you need to check it.",
           ranOn: "On public AI-generated COBOL-to-Java translations, we found differences in behavior, confirmed on IBM’s COBOL compiler, and documentation that does not match the code it describes.",
           href: "/modernization",
           cta: "SEE HOW WE CHECK IT",
@@ -256,7 +256,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       lead: "Ironproof is building Proof Intelligence.",
       body: "AI proposes, formal methods decide, and each result ships with evidence anyone can check.",
-      close: "We prove what holds. We show what breaks.",
+      close: "We show what breaks. We say what we couldn’t decide.",
     },
     research: {
       eyebrow: "PUBLISHED RESEARCH",
@@ -341,7 +341,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       items: [
         {
           title: "Signer sur des preuves, pas sur l’espoir",
-          body: "Votre comité de risque approuve la migration sur un dossier qu’il peut revérifier : ce qui tient, ce qui diffère, et l’entrée précise derrière chaque écart. Les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
+          body: "Votre comité de risque juge la migration sur un dossier qu’il peut revérifier : ce qui diffère, l’entrée précise derrière chaque écart, et ce qu’on n’a pas pu trancher. Les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
         },
         {
           title: "Remettre à votre auditeur un dossier à revérifier",
@@ -370,7 +370,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       cards: [
         {
           name: "Vérification de code",
-          body: "Votre ancien logiciel a été modernisé, par un intégrateur ou par l’intelligence artificielle. Le nouveau code compile et passe ses tests. Mais une question fondamentale demeure : fait-il toujours exactement ce que faisait l’ancien ?\nC’est ce qu’Ironproof vérifie, calcul par calcul, comportement par comportement.\nLorsqu’une différence existe, nous identifions le cas exact qui la reproduit. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.\nChaque conclusion s’accompagne des éléments nécessaires pour la vérifier.",
+          body: "Votre ancien logiciel a été modernisé, par un intégrateur ou par l’intelligence artificielle. Le nouveau code compile et passe ses tests. Mais une question fondamentale demeure : fait-il toujours exactement ce que faisait l’ancien ?\nC’est ce qu’Ironproof vérifie.\nLorsqu’une différence existe, nous identifions le cas exact qui la reproduit. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.\nChaque conclusion s’accompagne des éléments nécessaires pour la vérifier.",
           ranOn: "Sur des traductions publiques de COBOL vers Java générées par IA, on a trouvé des différences de comportement, confirmées sur le compilateur COBOL d’IBM, et des documents qui ne correspondent pas au code qu’ils décrivent.",
           href: "/fr/modernization",
           cta: "VOIR COMMENT ON VÉRIFIE",
@@ -409,7 +409,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       ],
       lead: "Ironproof développe ce que nous appelons Proof Intelligence.",
       body: "L’IA propose, les méthodes formelles tranchent, et chaque résultat part avec des éléments de preuve que n’importe qui peut vérifier.",
-      close: "On prouve ce qui tient. On montre ce qui casse.",
+      close: "On montre ce qui casse. On dit ce qu’on n’a pas pu trancher.",
     },
     research: {
       eyebrow: "RECHERCHE PUBLIÉE",

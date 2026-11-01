@@ -36,14 +36,14 @@ export const HERO_COPY: L<HeroCopy> = {
   en: {
     eyebrow: "PROOF INTELLIGENCE",
     // Dom, 2026-10-19 (review relayed, « fix »): "modernisation" is the commercial word for banks and governments; "transformation" stays for the long-term scope.
-    eyebrowSub: "INDEPENDENT VERIFICATION OF CRITICAL SOFTWARE",
+    eyebrowSub: "INDEPENDENT VERIFICATION OF REWRITTEN CODE",
     headline: "Machines can write the proof.",
     headlineEnd: "The question is what it proves.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "LA VÉRIFICATION INDÉPENDANTE DES LOGICIELS CRITIQUES",
+    eyebrowSub: "LA VÉRIFICATION INDÉPENDANTE DU CODE RÉÉCRIT",
     headline: "Les machines savent écrire la preuve.",
     headlineEnd: "Reste à savoir ce qu’elle prouve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
@@ -84,7 +84,7 @@ export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
     // Three verdicts, never two (Proven / Refuted / Not demonstrated).
     // The code method, not the gate's (Dom, 2026-10-19, review): the same four steps as /modernization.
     steps: ["SCOPE", "MODEL", "COMPARE", "SEAL"],
-    dossierTag: "EXAMPLE DOSSIER",
+    dossierTag: "EXAMPLE DOSSIER · CRITICAL ACTION",
     dossierVerdict: "PROVEN",
     dossierScope: "within the stated model and assumptions",
     dossierSeal: "SEALED · Ed25519 + ML-DSA-65",
@@ -105,7 +105,7 @@ export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
     symbolic: "SYMBOLIQUE · LE SOLVEUR",
     symbolicLine: "Vérifie mathématiquement des propriétés, dans des modèles et des hypothèses définis.",
     steps: ["CADRER", "MODÉLISER", "COMPARER", "SCELLER"],
-    dossierTag: "DOSSIER D’EXEMPLE",
+    dossierTag: "DOSSIER D’EXEMPLE · ACTION CRITIQUE",
     dossierVerdict: "PROUVÉ",
     dossierScope: "dans le modèle et les hypothèses déclarés",
     dossierSeal: "SCELLÉ · Ed25519 + ML-DSA-65",
