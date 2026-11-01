@@ -2,6 +2,7 @@ import Image from "next/image";
 import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
 import { SealLive } from "./seal-live";
 import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
+import { HeroConnectors } from "./hero-connectors";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -1236,6 +1237,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             * solver and an example dossier (Dom, 2026-10-15: the language model on
             * iron, the solver on gold, the dossier white, nothing on the brain). */}
           <div className="hero-white-stage">
+            <HeroConnectors />
             <div className="hero-stage-side hero-stage-left">
               <div className="hero-card hero-card-iron">
                 <p className="hero-card-kicker track-mid">{eng.neural}</p>
