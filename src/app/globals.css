@@ -3907,3 +3907,7 @@ h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
   .card-photo img, .rewrite-photo img, .why-cards > li, .verdict-cards > li, #use-cases ol > li > a, #how-platform ol > li,
   .hero-white-cta span, .hero-white-link span { transition: none; }
 }
+
+/* A centred title keeps its gold rule under it, not at the left edge of the page. */
+.blueprint .text-center h2.metal-text::after,
+.blueprint h2.metal-text.text-center::after { margin-left: auto; margin-right: auto; transform-origin: center; }
