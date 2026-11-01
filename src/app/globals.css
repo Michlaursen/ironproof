@@ -3821,3 +3821,16 @@ h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
 .credits-band span, .credits-band a, .credits-band a * { color: #e9e7e2 !important; -webkit-text-fill-color: #e9e7e2; background: none; }
 .credits-band > div > span:first-child { color: #d9b25a !important; -webkit-text-fill-color: #d9b25a; }
 .verdict-cards .num-badge, .why-cards .num-badge, #how-platform .num-badge, #use-cases .num-badge { color: #7a5c22; -webkit-text-fill-color: #7a5c22; background: none; opacity: 1; }
+
+/* Each line leaves its card at the height of its ring (hero-connectors.tsx sets the values). */
+@media (min-width: 1100px) {
+  .hero-stage-left .hero-card::after { top: var(--y-neural, 50%); }
+  .hero-stage-left .hero-card > .hero-card-kicker::after { top: calc(var(--y-neural, 50%) - 0.2rem); }
+  .hero-stage-right .hero-card::before { top: var(--y-symbolic, 50%); }
+  .hero-stage-right .hero-card > .hero-card-kicker::before { top: calc(var(--y-symbolic, 50%) - 0.2rem); }
+  .hero-stage-right .hero-dossier::before { top: var(--y-proof, 2.4rem); }
+  .hero-stage-right .hero-dossier::after { top: calc(var(--y-proof, 2.4rem) - 0.2rem + 0.5px); }
+  .hero-dossier-pq { top: calc(var(--y-proof, 2.4rem) - 0.95rem); }
+}
+/* Between 1100 and 1240 px the gap is too short: the label would run over the rings. The dossier still says SEALED. */
+@media (min-width: 1100px) and (max-width: 1240px) { .hero-dossier-pq { display: none; } }
