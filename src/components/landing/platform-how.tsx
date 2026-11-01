@@ -172,6 +172,21 @@ export function PlatformHow({ locale = defaultLocale }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
+        <FlowDiagram f={t.flow} />
+      </div>
+    </section>
+  );
+}
+
+/* The engineering system around the method, moved from the home to
+ * /proof-intelligence (Dom, 2026-11-01): it reads as our tooling, not as what a
+ * bank buys. Same content, same label. */
+export function EngineeringSystem({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = pick(COPY, locale);
+
+  return (
+    <section id="engineering-system" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
+      <div className="mx-auto max-w-6xl">
         <FlowDiagram f={t.flow} rail={t.os} />
       </div>
     </section>

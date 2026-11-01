@@ -3793,3 +3793,31 @@ h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
   }
   .hero-white-lead > p:nth-child(3) { font-size: 0.85rem; line-height: 1.5; color: #7a5c22; font-weight: 500; }
 }
+
+/* Punch (Dom, 2026-11-01: "il manque de photo, de border couleur"). */
+/* The engraved shadow painted over the clipped gradient and washed the titles out. */
+.blueprint h2.metal-text { text-shadow: none; }
+.rewrite-top { display: grid; gap: 2.5rem; align-items: start; }
+@media (min-width: 1024px) { .rewrite-top { grid-template-columns: minmax(0, 1fr) 24rem; gap: 4rem; } }
+.rewrite-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-top: 3px solid var(--gold, #a8843a); box-shadow: 0 28px 50px -30px rgba(36, 38, 42, 0.55); }
+.verdict-cards > li, .why-cards > li {
+  padding: 1.75rem;
+  background: #f6f5f2;
+  border-top: 3px solid #24262a;
+  box-shadow: 0 24px 46px -30px rgba(36, 38, 42, 0.45);
+}
+.why-cards > li { padding-top: 0; border-top-color: #a8843a; }
+.verdict-cards > li:nth-child(1) { background: #1b1d20; border-top-color: #a8843a; }
+.verdict-cards > li:nth-child(1) h3 { color: #f4f3f1 !important; }
+.verdict-cards > li:nth-child(1) p { color: #cfccc5 !important; }
+.verdict-cards > li:nth-child(1) .num-badge { color: #d9b25a; -webkit-text-fill-color: #d9b25a; background: none; }
+.verdict-cards > li:nth-child(2) { border-top-color: #5b5f66; }
+.verdict-cards > li:nth-child(3) { background: transparent; border-top: 3px dashed #a8843a; box-shadow: none; }
+.card-photo { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; margin: 0 -1.75rem 1.5rem; }
+.card-photo-mandate { margin: -1.75rem -1.75rem 1.25rem; }
+#how-platform ol > li { border-top: 3px solid #24262a !important; }
+#how-platform ol > li:last-child { border-top-color: #a8843a !important; }
+.credits-band { background: #1b1d20; }
+.credits-band span, .credits-band a, .credits-band a * { color: #e9e7e2 !important; -webkit-text-fill-color: #e9e7e2; background: none; }
+.credits-band > div > span:first-child { color: #d9b25a !important; -webkit-text-fill-color: #d9b25a; }
+.verdict-cards .num-badge, .why-cards .num-badge, #how-platform .num-badge, #use-cases .num-badge { color: #7a5c22; -webkit-text-fill-color: #7a5c22; background: none; opacity: 1; }

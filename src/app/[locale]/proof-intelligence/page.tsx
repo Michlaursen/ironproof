@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/content";
 import { ResearchZeroBarriers } from "@/components/landing/research-zero-barriers";
+import { NorthStar } from "@/components/landing/platform";
+import { EngineeringSystem } from "@/components/landing/platform-how";
+import { WhyNowShort } from "@/components/landing/landing";
 import { PI_COPY, PI_DEFINITION } from "@/components/landing/proof-intelligence-copy";
 
 const SLUG = "proof-intelligence";
@@ -91,7 +94,12 @@ export default async function ProofIntelligencePage({ params }: PageProps) {
         navLocale={locale}
         copy={PI_COPY}
         page="proof-intelligence"
-      />
+      >
+        {/* Moved from the home, same words (Dom, 2026-11-01). English, like this page. */}
+        <NorthStar locale="en" />
+        <WhyNowShort locale="en" />
+        <EngineeringSystem locale="en" />
+      </ResearchZeroBarriers>
     </>
   );
 }

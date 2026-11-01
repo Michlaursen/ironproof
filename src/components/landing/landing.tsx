@@ -7,10 +7,9 @@ import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
 import { ProofPipeline } from "./proof-pipeline";
 import { PILOT_COPY } from "./pilot-copy";
-import { NorthStar, UseCases, WhyIronproof } from "./platform";
+import { CompanyLine, UseCases, WhyIronproof } from "./platform";
 import { PlatformHow } from "./platform-how";
 import { RewriteCheck } from "./rewrite-check";
-import { JourneyRail } from "./journey-rail";
 import { firstSealedEntryHash } from "@/lib/evidence";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
@@ -59,7 +58,6 @@ type RunCase = { name: string; figure: string; figureLabel: string; what: string
 type Copy = {
   hero: {
     eyebrow: string;
-    eyebrowSub: string;
     /** Two clauses: the condition (plain) and the consequence (gold italic). */
     headline: string;
     headlineEnd: string;
@@ -1186,7 +1184,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
       <main className="blueprint flex-1">
         <div className="paper-grain" aria-hidden="true" />
-        <JourneyRail steps={eng.steps.map((s) => s.split(" / ")[0] ?? s)} />
         {/* 1. HERO — white, iron and gold (Dom, 2026-10-15). The words on top,
           * the statement left and the explanation right; the one brain of the
           * site under them, full width: white marble for the intuition, iron
@@ -1194,10 +1191,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <section id="top" className="hero-white relative z-10 overflow-hidden">
           <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 pt-2 md:grid-cols-2 md:gap-16 md:px-14 md:pt-16">
             <div className="fade-up min-w-0">
-              {/* The category on its own line, larger, so it hits; where it applies under it (Dom, 2026-10-16). */}
+              {/* The whole category on its own, nothing under it (Dom, 2026-11-01). */}
               <p className="hero-white-eyebrow mb-7">
-                <span className="track-mid block text-lg font-semibold md:text-2xl">{t.hero.eyebrow}</span>
-                <span className="track-wide mt-2 block text-[11px] font-medium md:text-xs">{t.hero.eyebrowSub}</span>
+                <span className="track-mid block text-sm font-semibold md:text-base">{t.hero.eyebrow}</span>
               </p>
               <h1 className="hero-serif hero-white-title font-serif font-normal">
                 {t.hero.headline}
@@ -1298,15 +1294,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </a>
             </div>
           </div>
-          {/* The method in four words, on one hairline. */}
-          <ol className="hero-steps track-mid">
-            {eng.steps.map((step, i) => (
-              <li key={step} className={i === eng.steps.length - 1 ? "hero-step-seal" : undefined}>
-                <span className="hero-step-dot" aria-hidden="true" />
-                {step}
-              </li>
-            ))}
-          </ol>
         </section>
 
         {/* The check of what a machine rewrote, right under the hero (Dom, 2026-10-19). */}
@@ -1314,7 +1301,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* CREDITED-BY STRIP — right under the hero (Dom, 2026-10-15: « plus au début »):
           * the vendors who credited our research, before any explanation. */}
-        <section className="relative z-10 edge-t px-6 py-8 md:px-14">
+        <section className="credits-band relative z-10 px-6 py-8 md:px-14">
           <div className="fade-up mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3">
             <span className="track-mid text-xs text-neutral-500">{t.creditedBy}</span>
             {/* Each name opens the public commit, bug or release note that credits us. */}
@@ -1344,28 +1331,14 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
-        {/* Order of the page (Dom, 2026-10-16, after the research on pages that hit):
-          * the hero, why Ironproof exists and the company line, the gate deciding,
-          * where it applies, how it works, the close. Everything else lives on its
-          * own page. Design unchanged. */}
-        <NorthStar locale={locale} />
-        <UseCases locale={locale} />
+        {/* Order of the page (Dom, 2026-11-01: fewer blocks, same words): the check, who
+          * credits us, why it matters, the other questions, how it works, the company
+          * line, the close. "What we believe", "Why now" and the engineering system
+          * live on /proof-intelligence. The four steps appear once, in PlatformHow. */}
         <WhyIronproof locale={locale} />
-        {/* How the platform works, right under why (Dom, 2026-10-17: the order of Code Metal's home). */}
+        <UseCases locale={locale} />
         <PlatformHow locale={locale} />
-
-        {/* WHY NOW, short: the code story only (Dom, 2026-10-19, review). The dated
-          * timeline and the sectors moved with the gate to /critical-actions. */}
-        <section id="now" className="relative z-10 mx-auto max-w-6xl edge-t px-6 py-28 md:px-14">
-          <div className="fade-up max-w-3xl">
-            <p className="seal-label track-mid mb-4 text-xs">{t.nowShort.eyebrow}</p>
-            {t.nowShort.lines.map((line) => (
-              <p key={line} className="mt-4 font-serif text-2xl leading-snug text-neutral-200 md:text-3xl">
-                {line}
-              </p>
-            ))}
-          </div>
-        </section>
+        <CompanyLine locale={locale} />
 
         {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
           * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas
@@ -1525,6 +1498,24 @@ export function CriticalActionsSections({ locale = defaultLocale }: { locale?: L
         </section>
 
     </>
+  );
+}
+
+/* Why now, short: the code story only (Dom, 2026-10-19, review). Moved from the
+ * home to /proof-intelligence (Dom, 2026-11-01). */
+export function WhyNowShort({ locale = defaultLocale }: { locale?: Locale }) {
+  const t = pick(T, locale);
+  return (
+    <section id="why-now" className="relative z-10 mx-auto max-w-6xl edge-t px-6 py-28 md:px-14">
+      <div className="fade-up max-w-3xl">
+        <p className="seal-label track-mid mb-4 text-xs">{t.nowShort.eyebrow}</p>
+        {t.nowShort.lines.map((line) => (
+          <p key={line} className="mt-4 font-serif text-2xl leading-snug text-neutral-200 md:text-3xl">
+            {line}
+          </p>
+        ))}
+      </div>
+    </section>
   );
 }
 
