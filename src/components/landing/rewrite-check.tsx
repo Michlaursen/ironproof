@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
@@ -125,7 +126,8 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <section id="rewrite-check" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
       <div className="mx-auto max-w-6xl">
-        <div className="fade-up max-w-4xl">
+        <div className="rewrite-top fade-up">
+        <div className="min-w-0">
           <p className="seal-label track-mid mb-5 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.title}</h2>
           <p className="mt-6 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{t.lead}</p>
@@ -137,7 +139,12 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
           ) : null}
         </div>
-        <ol className="fade-up mt-16 grid gap-10 md:grid-cols-3 md:gap-12">
+        {/* Paper cards tied with ribbon beside a drive: the old program and its rewrite (Dom, 2026-11-01). */}
+        <div className="rewrite-photo" aria-hidden="true">
+          <Image src="/media/app-punchcards.jpg" alt="" fill sizes="(min-width: 1024px) 26rem, 100vw" className="object-cover" />
+        </div>
+        </div>
+        <ol className="verdict-cards fade-up mt-16 grid gap-6 md:grid-cols-3">
           {t.answers.map((a, i) => (
             <li key={a.word} className="border-t border-white/10 pt-6">
               <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>

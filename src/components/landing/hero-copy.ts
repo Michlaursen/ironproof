@@ -23,8 +23,6 @@ import type { L } from "./i18n";
 export type HeroCopy = {
   /** The category, set on its own line so it hits (Dom, 2026-10-16). */
   eyebrow: string;
-  /** Where it applies, on the line under the category. */
-  eyebrowSub: string;
   /** Two clauses: the condition (plain) and the consequence (gold italic). */
   headline: string;
   headlineEnd: string;
@@ -34,16 +32,14 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    eyebrow: "PROOF INTELLIGENCE",
-    // Dom, 2026-10-19 (review relayed, « fix »): "modernisation" is the commercial word for banks and governments; "transformation" stays for the long-term scope.
-    eyebrowSub: "INDEPENDENT VERIFICATION OF REWRITTEN CODE",
+    // The whole category, alone on its line (Dom, 2026-11-01). "Independent" stays in the text beside the title.
+    eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE SOFTWARE",
     headline: "Machines can write the proof.",
     headlineEnd: "The question is what it proves.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
-    eyebrow: "PROOF INTELLIGENCE",
-    eyebrowSub: "LA VÉRIFICATION INDÉPENDANTE DU CODE RÉÉCRIT",
+    eyebrow: "PROOF INTELLIGENCE POUR LES LOGICIELS D’INFRASTRUCTURE CRITIQUE",
     headline: "Les machines savent écrire la preuve.",
     headlineEnd: "Reste à savoir ce qu’elle prouve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",

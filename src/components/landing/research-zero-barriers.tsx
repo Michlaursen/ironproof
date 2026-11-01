@@ -194,7 +194,9 @@ export function ResearchZeroBarriers({
   navLocale,
   copy,
   page = "research",
+  children,
 }: {
+  children?: React.ReactNode;
   locale?: Locale;
   navLocale?: Locale;
   copy?: ResearchCopy;
@@ -292,6 +294,7 @@ export function ResearchZeroBarriers({
             <p className="mt-10 max-w-2xl text-sm text-neutral-500">{c.sources.foot}</p>
           </div>
         </section>
+        {children}
       </main>
 
       {/* Every block above carries .fade-up, which is opacity:0 until this adds
