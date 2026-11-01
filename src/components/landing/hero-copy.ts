@@ -68,7 +68,9 @@ export type HeroEngineCopy = {
   dossierSeal: string;
   dossierCheck: string;
   dossierLink: string;
-  // Phone only: the three roles drawn on the head, so the method reads at a
+  // The small gold label on the line to the gold ring (Dom, 2026-11-01).
+  pqSeal: string;
+  // Phone only: the three roles drawn on the rings, so the method reads at a
   // glance on a small screen (Dom, 2026-10-15).
   map: { neural: string; neuralRole: string; symbolic: string; symbolicRole: string; proven: string; provenRole: string };
 };
@@ -90,6 +92,7 @@ export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
     dossierSeal: "SEALED · Ed25519 + ML-DSA-65",
     dossierCheck: "re-checkable without us",
     dossierLink: "Verify a real sealed dossier",
+    pqSeal: "POST-QUANTUM SEALED",
     map: {
       neural: "NEURAL",
       neuralRole: "proposes what to check",
@@ -111,6 +114,7 @@ export const HERO_ENGINE_COPY: L<HeroEngineCopy> = {
     dossierSeal: "SCELLÉ · Ed25519 + ML-DSA-65",
     dossierCheck: "revérifiable sans nous",
     dossierLink: "Vérifier un vrai dossier scellé",
+    pqSeal: "SCELLÉ POST-QUANTIQUE",
     map: {
       neural: "NEURONAL",
       neuralRole: "propose quoi vérifier",

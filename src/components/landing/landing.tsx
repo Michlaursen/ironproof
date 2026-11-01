@@ -1248,34 +1248,31 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="hero-white-brain-wrap">
               <div className="hero-white-brain" aria-hidden="true">
-                <Image src="/media/hero-entity3.jpg" alt="" fill preload fetchPriority="high" sizes="(min-width: 1024px) 55rem, 100vw" className="object-cover" />
-                {/* The robot alive (Dom, 2026-10-16): the gold veins of the brain,
-                  * cut from the same picture (hero-entity3-gold.webp, same size,
-                  * same framing), laid over it twice -- one breathes, one carries a
-                  * light that runs across. Nothing moves with reduced motion. */}
-                <Image src="/media/hero-entity3-gold.webp" alt="" fill sizes="(min-width: 1024px) 55rem, 100vw" className="hero-gold-pulse object-cover" />
-                <Image src="/media/hero-entity3-gold.webp" alt="" fill sizes="(min-width: 1024px) 55rem, 100vw" className="hero-gold-sheen object-cover" />
+                {/* The three rings (Dom, 2026-11-01): one object, one surface pattern per role. */}
+                <Image src="/media/hero-rings.jpg" alt="" fill preload fetchPriority="high" sizes="(min-width: 1024px) 46rem, 100vw" className="object-cover" />
               </div>
-              {/* Phone only: the three roles drawn on the head (Dom, 2026-10-15:
-                * "faut que les gens comprennent"). Lines: neural -> brain,
-                * symbolic -> brain, symbolic -> proven. */}
+              {/* Phone only: the three roles drawn on the rings (Dom, 2026-10-15:
+                * "faut que les gens comprennent"). Each line takes the colour of its
+                * ring (Dom, 2026-11-01), and symbolic also leads on to proven. */}
               <div className="hero-map" aria-hidden="true">
                 <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <polyline points="4,18 28,18 38,20" className="hero-map-line-iron" />
-                  <polyline points="96,18 72,18 58,18" className="hero-map-line-gold" />
+                  <polyline points="4,18 22,18 30,21" className="hero-map-line-iron hero-map-line-white" />
+                  <polyline points="96,18 72,18 58,29.5" className="hero-map-line-iron" />
+                  <polyline points="50,88 50,78 54,62" className="hero-map-line-gold" />
                   {/* The same point of light as on desktop (Dom, 2026-10-16: "je vois pas
-                    * l'animation sur le cell"): it runs neural -> brain, then symbolic -> brain. */}
-                  <polyline points="4,18 28,18 38,20" className="hero-map-spark hero-map-spark-iron" />
-                  <polyline points="96,18 72,18 58,18" className="hero-map-spark hero-map-spark-gold" />
+                    * l'animation sur le cell"): it runs neural -> white ring, then symbolic -> iron ring. */}
+                  <polyline points="4,18 22,18 30,21" className="hero-map-spark hero-map-spark-iron" />
+                  <polyline points="96,18 72,18 58,29.5" className="hero-map-spark hero-map-spark-gold" />
                 </svg>
                 {/* Dotted route SYMBOLIC -> PROVEN, anchored to the PROVEN label rather than to
                   * the image's percentages, so it never runs into a label at any width (Dom, 2026-10-16). */}
                 <span className="hero-map-route" />
-                <span className="hero-map-dot hero-map-dot-iron" style={{ left: "38%", top: "20%" }} />
-                <span className="hero-map-dot hero-map-dot-gold" style={{ left: "58%", top: "18%" }} />
+                <span className="hero-map-dot hero-map-dot-iron hero-map-dot-white" style={{ left: "30%", top: "21%" }} />
+                <span className="hero-map-dot hero-map-dot-iron" style={{ left: "58%", top: "29.5%" }} />
+                <span className="hero-map-dot hero-map-dot-gold" style={{ left: "54%", top: "62%" }} />
                 <p className="hero-map-tag hero-map-neural"><b>{eng.map.neural}</b>{eng.map.neuralRole}</p>
                 <p className="hero-map-tag hero-map-symbolic"><b>{eng.map.symbolic}</b>{eng.map.symbolicRole}</p>
-                <p className="hero-map-tag hero-map-proven"><b><span className="hero-dossier-dot" /> {eng.map.proven}</b>{eng.map.provenRole}</p>
+                <p className="hero-map-tag hero-map-proven"><b><span className="hero-dossier-dot" /> {eng.map.proven}</b>{eng.map.provenRole}<span className="hero-map-pq">{eng.pqSeal}</span></p>
               </div>
             </div>
             <div className="hero-stage-side hero-stage-right">
@@ -1288,6 +1285,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               {/* An example dossier, labelled as one, that opens the real thing:
                 * /verify checks sealed dossiers in the visitor's own browser. */}
               <a href={`${r}/verify`} className="hero-dossier">
+                <span className="hero-dossier-pq" aria-hidden="true">{eng.pqSeal}</span>
                 <p className="hero-dossier-tag track-mid">{eng.dossierTag}</p>
                 <p className="hero-dossier-verdict">
                   <span className="hero-dossier-dot" aria-hidden="true" /> {eng.dossierVerdict}
