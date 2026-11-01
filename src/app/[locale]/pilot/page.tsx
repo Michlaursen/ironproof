@@ -287,10 +287,11 @@ export default async function PilotPage({ params }: PageProps) {
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-12 pt-32 md:px-14">
           <HeroPhoto src="/media/critical-switches-white.jpg" position="50% 55%" />
           <p className="seal-label track-mid mb-4 text-xs">{t.eyebrow}</p>
-          <h1 className="metal-shine max-w-4xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">
+          {/* The title and the lead stay clear of the photo at every width (Dom, 2026-11-01). */}
+          <h1 className="metal-shine max-w-lg font-serif text-4xl font-medium leading-[1.02] md:text-5xl xl:max-w-2xl xl:text-6xl">
             {t.h1}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
+          <p className="mt-6 max-w-lg text-lg font-light text-neutral-300 xl:max-w-xl">{t.lead}</p>
         </section>
 
         {/* Three pilots, one method (Dom, 2026-10-15): what each delivers, what
