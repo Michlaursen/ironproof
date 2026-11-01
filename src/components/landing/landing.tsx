@@ -241,7 +241,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof independently verifies critical software. We establish what holds, expose what breaks, and make the limits of every result explicit.\nWe don’t build what we verify.\nIndependent. Sealed. Verifiable without trusting us.",
+        "When a machine rewrites your code, Ironproof compares it with the program it replaces. We show the exact input where they no longer do the same thing, and we say what we couldn’t decide.\nWe don’t build what we verify.\nIndependent. Sealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -661,7 +661,7 @@ const T: L<Copy> = {
       // The fine print under "provably impossible": what the proof covers, and
       // the one condition it rests on (the action can only run through the gate).
       scope:
-        "For a translation: proven within the model and the scope we state. For an action: proven for the actions and the policy you define, where the action can only execute through the gate. Each certificate states its boundary.",
+        "For a translation: the exact input that differs, replayed; same-behavior answers are suspended. For an action: proven for the actions and the policy you define, where the action can only execute through the gate. Each certificate states its boundary.",
       notes: [
         { x: 57, y: 80, label: "MARBLE · HUMAN INTENT" },
         { x: 79, y: 12, label: "IRON · MACHINE RIGOUR" },
@@ -688,7 +688,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Ironproof vérifie de façon indépendante les logiciels critiques. On établit ce qui tient, on montre ce qui casse, et on dit clairement les limites de chaque résultat.\nOn ne bâtit pas ce qu’on vérifie.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
+        "Quand une machine réécrit votre code, on le compare au programme qu’il remplace. On vous montre l’entrée précise où les deux ne font plus la même chose, et on vous dit ce qu’on n’a pas pu trancher.\nOn ne bâtit pas ce qu’on vérifie.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -1102,7 +1102,7 @@ const T: L<Copy> = {
       body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action qui passe par la barrière est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; le reste ne s’exécute jamais. Et chaque résultat vient avec ce qu’il faut pour le vérifier sans nous.",
       kicker: "Ce qui est réécrit est vérifié. Ce qui est conforme passe. Le reste, jamais.",
       scope:
-        "Pour une traduction : prouvé dans le modèle et le périmètre annoncés. Pour une action : prouvé pour les actions et la politique que vous définissez, à condition que l’action ne puisse passer que par la barrière. Chaque certificat dit où s’arrête sa preuve.",
+        "Pour une traduction : l’entrée précise qui diffère, rejouée ; les réponses « même comportement » sont suspendues. Pour une action : prouvé pour les actions et la politique que vous définissez, à condition que l’action ne puisse passer que par la barrière. Chaque certificat dit où s’arrête sa preuve.",
       notes: [
         { x: 57, y: 80, label: "MARBRE · L’INTENTION HUMAINE" },
         { x: 76, y: 12, label: "FER · LA RIGUEUR DE LA MACHINE" },

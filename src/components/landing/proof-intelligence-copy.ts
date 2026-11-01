@@ -114,7 +114,7 @@ export const PI_COPY: ResearchCopy = {
         },
         {
           t: "pull",
-          text: "We prove what holds. We show what breaks.",
+          text: "We show what breaks. We say what we couldn’t decide.",
         },
         {
           t: "p",
@@ -129,7 +129,7 @@ export const PI_COPY: ResearchCopy = {
       ["/research/what-our-proofs-do-not-prove", "What our proofs do not prove", "The limits of every verdict, stated in public"],
       ["/demo", "Watch the demos", "The Proof Intelligence film and the AGCO deposit-limit demo"],
       ["/proof", "How we prove", "Testing versus proving, and a proof you can open"],
-      ["/demo/python-to-c", "Python to C, proven", "A translation checked by a solver, step by step"],
+      ["/demo/python-to-c", "Python to C, method demo", "A translation from our own tests, checked by a solver, step by step"],
       ["/verify", "Verify a seal", "Check a sealed result in your browser"],
     ],
   },

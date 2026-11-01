@@ -76,12 +76,12 @@ type Copy = {
 
 const T: L<Copy> = {
   en: {
-    metaTitle: "Python to C, proven — Ironproof",
+    metaTitle: "Python to C, method demo — Ironproof",
     metaDescription:
       "A Python function translated to embedded C, and a proof that both return the same result on every one of 140 trillion inputs. Files and command included: re-run it yourself.",
     eyebrow: "LIVE PROOF · PYTHON TO C",
     h1: "Translated to C. Proven, not tested.",
-    lead: "A fixed-point filter step, the kind of signal-processing prototype teams port to a chip. Written in Python, translated to embedded C, then checked by a solver on every input the function can receive.",
+    lead: "A fixed-point filter step, the kind of signal-processing prototype teams port to a chip. Written in Python, translated to embedded C, then checked by a solver on every input the function can receive. This translation comes from our own tests: it shows the method, it is not an independent verification.",
     srcLabel: "PYTHON · THE ORIGINAL",
     dstLabel: "C · THE TRANSLATION",
     provedEyebrow: "WHAT WAS PROVEN",
@@ -127,7 +127,7 @@ const T: L<Copy> = {
       "Une fonction Python traduite en C embarqué, et la preuve que les deux donnent le même résultat sur chacune de 140 billions d’entrées. Fichiers et commande fournis : refaites-le vous-même.",
     eyebrow: "PREUVE EN DIRECT · PYTHON VERS C",
     h1: "Traduit en C. Prouvé, pas testé.",
-    lead: "Une étape de filtre en virgule fixe, le genre de prototype de traitement du signal qu’on porte vers une puce. Écrit en Python, traduit en C embarqué, puis vérifié par un solveur sur toutes les entrées que la fonction peut recevoir.",
+    lead: "Une étape de filtre en virgule fixe, le genre de prototype de traitement du signal qu’on porte vers une puce. Écrit en Python, traduit en C embarqué, puis vérifié par un solveur sur toutes les entrées que la fonction peut recevoir. Cette traduction vient de nos propres essais : elle montre la méthode, ce n’est pas une vérification indépendante.",
     srcLabel: "PYTHON · L’ORIGINAL",
     dstLabel: "C · LA TRADUCTION",
     provedEyebrow: "CE QUI EST PROUVÉ",

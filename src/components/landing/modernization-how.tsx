@@ -78,19 +78,19 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Seal and hand over",
-        body: "You receive the proof or the counterexample, and the list of what the model does not cover. The record is sealed, and your team re-runs the check without us.",
+        body: "You receive each counterexample, and the list of what the model does not cover. The record is sealed, and your team re-runs the check without us.",
       },
     ],
     gainEyebrow: "WHAT CHANGES FOR YOU",
-    gainTitle: "Faster sign-off. Fewer surprises. Nothing to take on faith.",
+    gainTitle: "Nothing to take on faith.",
     gains: [
       {
-        title: "A faster audit",
-        body: "Your risk committee receives evidence it can re-check, not a test report it has to trust. The questions it will ask are answered in the record.",
+        title: "A record your risk committee can re-check",
+        body: "Your risk committee receives evidence it can re-check, not a test report it has to trust.",
       },
       {
-        title: "No surprise after go-live",
-        body: "The input where old and new code disagree is found before production, not by a customer.",
+        title: "Differences found before go-live",
+        body: "When old and new code disagree on an input we find, you see it before production, not after.",
       },
       {
         title: "Keep your migration partner",
@@ -105,15 +105,15 @@ const COPY: L<HowCopy> = {
     ],
     sourcesLabel: "Sources:",
     whyEyebrow: "WHY IRONPROOF",
-    whyTitle: "A test tells you what it tried. We tell you what holds.",
+    whyTitle: "A test tells you what it tried. We tell you what differs, and what we couldn’t decide.",
     why: [
       {
-        title: "Every input, not a sample",
-        body: "Testing runs the cases someone thought of. The solver covers every input the model allows, including the one nobody tried.",
+        title: "Beyond the cases someone thought of",
+        body: "Testing runs the cases someone thought of. The solver searches the inputs the model allows, including ones nobody tried. Finding nothing is not a same-behavior answer.",
       },
       {
         title: "Evidence, not a verdict",
-        body: "You do not take our word for it. The proof, the cases and the seal can be re-checked on your own machine.",
+        body: "You do not take our word for it. The cases and the seal can be re-checked on your own machine.",
       },
       {
         title: "The limits, in writing",
@@ -137,7 +137,7 @@ const COPY: L<HowCopy> = {
       topInset: [["Z3", "SMT solver"], ["SPACER", "loop invariants"]],
       bottom: ["REAL RUNS", "the same cases, executed"],
       bottomInset: [["IBM COBOL", "the original"], ["JVM", "the translation"]],
-      verdict: ["VERDICT", "same, or the input that differs"],
+      verdict: ["RESULT", "the input that differs, or not decided"],
       seal: ["SEALED", "re-run without us"],
     },
   },
@@ -163,19 +163,19 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Sceller et remettre",
-        body: "Vous recevez la preuve ou le contre-exemple, et la liste de ce que le modèle ne couvre pas. Le dossier est scellé, et votre équipe refait la vérification sans nous.",
+        body: "Vous recevez chaque contre-exemple, et la liste de ce que le modèle ne couvre pas. Le dossier est scellé, et votre équipe refait la vérification sans nous.",
       },
     ],
     gainEyebrow: "CE QUI CHANGE POUR VOUS",
-    gainTitle: "Une approbation plus rapide. Moins de surprises. Rien à croire sur parole.",
+    gainTitle: "Rien à croire sur parole.",
     gains: [
       {
-        title: "Un audit plus rapide",
-        body: "Votre comité des risques reçoit une preuve qu’il peut revérifier, pas un rapport de tests qu’il doit croire. Les questions qu’il posera trouvent leur réponse dans le dossier.",
+        title: "Un dossier que votre comité peut revérifier",
+        body: "Votre comité des risques reçoit des éléments qu’il peut revérifier, pas un rapport de tests qu’il doit croire.",
       },
       {
-        title: "Pas de surprise après la mise en service",
-        body: "L’entrée où l’ancien et le nouveau code divergent est trouvée avant la production, pas par un client.",
+        title: "Des écarts trouvés avant la mise en service",
+        body: "Quand l’ancien et le nouveau code divergent sur une entrée qu’on trouve, vous le voyez avant la production, pas après.",
       },
       {
         title: "Gardez votre partenaire de migration",
@@ -190,15 +190,15 @@ const COPY: L<HowCopy> = {
     ],
     sourcesLabel: `Sources${NBSP}:`,
     whyEyebrow: "POURQUOI IRONPROOF",
-    whyTitle: "Un test vous dit ce qu’il a essayé. Nous vous disons ce qui tient.",
+    whyTitle: "Un test vous dit ce qu’il a essayé. Nous, on vous dit ce qui diffère et ce qu’on n’a pas pu trancher.",
     why: [
       {
-        title: "Toutes les entrées, pas un échantillon",
-        body: "Un test exécute les cas auxquels quelqu’un a pensé. Le solveur couvre toutes les entrées que le modèle permet, y compris celle que personne n’a essayée.",
+        title: "Plus loin que les cas prévus",
+        body: "Un test exécute les cas auxquels quelqu’un a pensé. Le solveur cherche parmi les entrées que le modèle permet, y compris celles que personne n’a essayées. Ne rien trouver n’est pas une réponse « même comportement ».",
       },
       {
-        title: "Une preuve, pas un verdict",
-        body: "Vous n’avez pas à nous croire sur parole. La preuve, les cas et le sceau se revérifient sur votre propre machine.",
+        title: "De quoi vérifier, pas un verdict",
+        body: "Vous n’avez pas à nous croire sur parole. Les cas et le sceau se revérifient sur votre propre machine.",
       },
       {
         title: "Les limites, par écrit",
@@ -222,7 +222,7 @@ const COPY: L<HowCopy> = {
       topInset: [["Z3", "solveur SMT"], ["SPACER", "invariants"]],
       bottom: ["VRAIES EXÉCUTIONS", "les mêmes cas, exécutés"],
       bottomInset: [["IBM COBOL", "l’original"], ["JVM", "la traduction"]],
-      verdict: ["VERDICT", "identiques, ou l’écart exact"],
+      verdict: ["RÉSULTAT", "l’entrée qui diffère, ou impossible à trancher"],
       seal: ["SCELLÉ", "revérifiable sans nous"],
     },
   },

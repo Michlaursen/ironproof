@@ -29,7 +29,7 @@ export const LIMITS_COPY: ResearchCopy = {
   standfirst:
     "A verification verdict is only as strong as the question it was asked. Here is what ours guarantee, what holds only within bounds, and what is still open.",
   byline: "Ironproof Research · 16 October 2026, clarified 31 October 2026",
-  note: "Results cited here were published on this site. The clarification below adds one new figure: 14 false answers from our own checker.",
+  note: "Results cited here were published on this site. The clarification below adds one new finding: dozens of false answers from our own checker, on cases written to attack it.",
   lede: "“Proven” is the most dangerous word in our field. It is true of a model, under a property, within a scope — and it travels alone, without any of the three.",
   sections: [
     {
@@ -37,7 +37,7 @@ export const LIMITS_COPY: ResearchCopy = {
       blocks: [
         {
           t: "p",
-          text: "An internal audit of our checker for translations made by others reproduced 14 cases where the tool answered *equivalent*, while running the code on a JVM and on IBM’s COBOL compiler showed otherwise. These were cases written to attack the tool, not client code. The cause is how the tool reads code: it lost part of what the code does, then answered a question about the wrong thing. We also found a misreading in how our engine handles a COBOL IF closed by a period.",
+          text: "Internal audits of our checker for translations made by others have reproduced dozens of cases where the tool answered *equivalent*, while running the code on a JVM and on IBM’s COBOL compiler showed otherwise. These were cases written to attack the tool, not client code. The cause is how the tool reads code: it lost part of what the code does, then answered a question about the wrong thing. We also found a misreading in how our engine handles a COBOL IF closed by a period.",
         },
         {
           t: "p",
