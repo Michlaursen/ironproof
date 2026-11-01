@@ -3773,3 +3773,23 @@ footer .seal-label { color: #7a5c22; filter: none; }
  * background, above the 4.5:1 of normal text; the light gold stays where the
  * background is dark (#decide's iron inset keeps its own !important rule). */
 h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
+/* Phone hero: same words, three distinct levels instead of one block of text
+   (Dom, 2026-11-01: "bcp de writing colle"). */
+@media (max-width: 767px) {
+  .hero-white-eyebrow { margin-bottom: 1.5rem; }
+  .hero-white-title { text-wrap: balance; }
+  .hero-white-title em { display: block; text-wrap: balance; }
+  .hero-white-actions { margin-top: 0.5rem; margin-bottom: 2.75rem; }
+  .hero-white-lead { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2.5rem; opacity: 1; }
+  .hero-white-lead > p { margin: 0 !important; }
+  .hero-white-lead > p:first-child { color: var(--iron); opacity: 0.8; font-size: 1rem; line-height: 1.6; }
+  .hero-white-lead > p:nth-child(2) {
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(36, 38, 42, 0.16);
+    font-family: var(--font-eb-garamond), serif;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: var(--iron);
+  }
+  .hero-white-lead > p:nth-child(3) { font-size: 0.85rem; line-height: 1.5; color: #7a5c22; font-weight: 500; }
+}
