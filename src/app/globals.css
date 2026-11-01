@@ -2362,10 +2362,18 @@ p, li {
 }
 @media (min-width: 1100px) {
   .hero-stage-left { align-self: start; padding-top: 0; }
-  .hero-stage-left .hero-card::after { width: 19rem; }
-  .hero-stage-left .hero-card > .hero-card-kicker::after { left: calc(100% + 19rem - 0.4rem); }
-  .hero-stage-right .hero-card::before { width: 16.5rem; }
-  .hero-stage-right .hero-card > .hero-card-kicker::before { right: calc(100% + 16.5rem - 0.4rem); }
+  /* Each line lands on its own ring at every width (Dom, 2026-11-01): the rings
+     grow from 1440 to 1680 px, so the lines grow with them. */
+  .hero-white-stage {
+    --line-neural: clamp(23rem, calc(23rem + (100vw - 1440px) * 0.667), 33rem);
+    --line-symbolic: clamp(21rem, calc(21rem + (100vw - 1440px) * 0.553), 29.3rem);
+    --line-proof: clamp(19.4rem, calc(19.4rem + (100vw - 1440px) * 0.667), 29.4rem);
+  }
+  .hero-stage-left { padding-top: clamp(0rem, calc((100vw - 1440px) * 0.0867), 3.4rem); }
+  .hero-stage-left .hero-card::after { width: var(--line-neural); }
+  .hero-stage-left .hero-card > .hero-card-kicker::after { left: calc(100% + var(--line-neural) - 0.4rem); }
+  .hero-stage-right .hero-card::before { width: var(--line-symbolic); }
+  .hero-stage-right .hero-card > .hero-card-kicker::before { right: calc(100% + var(--line-symbolic) - 0.4rem); }
 }
 /* The bust floats: no floor shadow under the neck. */
 .hero-white-stage .hero-white-brain::after { display: none; }
@@ -2458,6 +2466,74 @@ p, li {
 /* Phone: the map on the head already names the three roles; the long cards
    would repeat it. The hero CTA still opens /verify. */
 @media (max-width: 767px) { .hero-white-stage .hero-stage-side { display: none !important; } }
+/* One colour per ring (Dom, 2026-11-01): the line takes the colour of the ring it
+   lands on. White neural, iron symbolic, gold proof with its small gold seal label. */
+.hero-stage-left .hero-card::after {
+  background-image:
+    linear-gradient(90deg, transparent, #c9a24b 45%, #f1dca4 50%, #c9a24b 55%, transparent),
+    linear-gradient(90deg, #fff 0%, #fff calc(100% - 0.4rem), transparent calc(100% - 0.4rem));
+  height: 2px;
+  filter: drop-shadow(0 0 0.5px rgba(36, 38, 42, 0.55));
+}
+.hero-stage-left .hero-card > .hero-card-kicker::after { background: #fff; box-shadow: 0 0 0 1px rgba(36, 38, 42, 0.55); }
+.hero-stage-right .hero-card::before {
+  background-image:
+    linear-gradient(90deg, transparent, #fff3cf 45%, #ffffff 50%, #fff3cf 55%, transparent),
+    linear-gradient(270deg, var(--iron) 0%, var(--iron) calc(100% - 0.4rem), transparent calc(100% - 0.4rem));
+}
+.hero-stage-right .hero-card > .hero-card-kicker::before { background: var(--iron); box-shadow: none; }
+@media (min-width: 1100px) and (max-width: 1439px) {
+  /* The rings shrink faster than the cards below 1440 px. */
+  .hero-white-stage {
+    --line-neural: calc(23rem + (100vw - 1440px) * 0.24);
+    --line-symbolic: calc(21rem + (100vw - 1440px) * 0.075);
+    --line-drop: calc((1440px - 100vw) * 0.18);
+  }
+  .hero-stage-right .hero-card::before { top: calc(50% + var(--line-drop)); }
+  .hero-stage-right .hero-card > .hero-card-kicker::before { top: calc(50% - 0.2rem + var(--line-drop)); }
+}
+.hero-dossier-pq { display: none; }
+@media (min-width: 1100px) {
+  .hero-stage-right .hero-dossier { position: relative; }
+  .hero-stage-right .hero-dossier::before {
+    content: "";
+    position: absolute;
+    top: 2.4rem;
+    right: 100%;
+    width: var(--line-proof);
+    height: 1px;
+    background: var(--gold);
+  }
+  .hero-stage-right .hero-dossier::after {
+    content: "";
+    position: absolute;
+    top: calc(2.4rem - 0.2rem + 0.5px);
+    right: calc(100% + var(--line-proof) - 0.4rem);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 2px rgba(201, 162, 75, 0.25);
+  }
+  .hero-dossier-pq {
+    display: block;
+    position: absolute;
+    top: 1.45rem;
+    right: calc(100% + 0.75rem);
+    white-space: nowrap;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--gold);
+  }
+}
+@media (max-width: 767px) {
+  .hero-map-line-white { stroke: #fff !important; stroke-width: 2px !important; filter: drop-shadow(0 0 0.5px rgba(36, 38, 42, 0.55)); }
+  .hero-map-dot-white { background: #fff !important; box-shadow: 0 0 0 1px rgba(36, 38, 42, 0.55) !important; }
+  .hero-map-symbolic b { color: var(--iron) !important; }
+  .hero-map-pq { display: block; margin-top: 0.2rem; font-size: 0.56rem; line-height: 0.85rem; font-weight: 600; letter-spacing: 0.14em; color: var(--gold); }
+  .hero-map-route { bottom: calc(1.48rem + 1.05rem); }
+}
 /* Eyebrow in gold for contrast (Dom, 2026-10-15); a deep gold so it reads on ivory. */
 .hero-white-eyebrow { color: #7a5c22; font-weight: 600; }
 
