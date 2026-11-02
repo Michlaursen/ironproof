@@ -1246,8 +1246,23 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
             <div className="hero-white-brain-wrap">
               <div className="hero-white-brain" aria-hidden="true">
-                {/* The three rings (Dom, 2026-11-01): one object, one surface pattern per role. */}
-                <Image src="/media/hero-rings.jpg" alt="" fill preload fetchPriority="high" sizes="(min-width: 1024px) 46rem, 100vw" className="object-cover" />
+                {/* The three rings (Dom, 2026-11-01): one object, one surface pattern per role.
+                  * They turn (Dom, 2026-11-02: « faut voir l'anneau bouger »): the white ring holds
+                  * its place, iron and gold turn inside it, a 9.5 s loop from Higgsfield (Kling 3.0)
+                  * framed and tinted like the still. The still is the first frame of the loop, so
+                  * the lines (hero-connectors.tsx) and reduced motion keep the same picture. */}
+                <Image src="/media/hero-rings-loop-poster.jpg" alt="" fill preload fetchPriority="high" sizes="(min-width: 1024px) 46rem, 100vw" className="object-cover" />
+                <video
+                  className="hero-rings-video absolute inset-0 h-full w-full object-cover"
+                  src="/media/hero-rings-loop.mp4"
+                  poster="/media/hero-rings-loop-poster.jpg"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  aria-hidden="true"
+                />
               </div>
               {/* Phone only: the three roles drawn on the rings (Dom, 2026-10-15:
                 * "faut que les gens comprennent"). Each line takes the colour of its
