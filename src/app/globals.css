@@ -3911,3 +3911,94 @@ h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
 /* A centred title keeps its gold rule under it, not at the left edge of the page. */
 .blueprint .text-center h2.metal-text::after,
 .blueprint h2.metal-text.text-center::after { margin-left: auto; margin-right: auto; transform-origin: center; }
+
+/* ============================================================
+ * PREMIUM MOTION (Dom, 2026-11-02: « plus premium, plus le fun à naviguer,
+ * il manque de punch »). Driven by motion-layer.tsx, which only writes CSS
+ * variables and classes. Rules of this block:
+ *   - nothing waits invisible on JavaScript: the load entrances are plain CSS
+ *     animations that always finish, the rest only moves what is already painted;
+ *   - the hero geometry never moves (the lines from the cards land on their
+ *     rings, Dom 2026-11-01): the rings catch the light, they do not travel;
+ *   - prefers-reduced-motion: everything below stands still.
+ * ============================================================ */
+
+/* Inertial scroll (Lenis) owns the scroll while it runs. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 1. Hero entrance: the rings surface from a soft focus, the second line of the
+     title arrives after the first, the side cards are wiped in from their side.
+     Opacity, blur and clip only: hero-connectors.tsx measures these boxes to land
+     each line on its ring, so nothing here may move or scale them. */
+  .hero-white-stage .hero-white-brain { animation: mo-surface 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both; }
+  .hero-white-title em { animation: mo-focus 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both; }
+  .hero-stage-left { animation: mo-from-left 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s backwards; }
+  .hero-stage-right { animation: mo-from-right 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.85s backwards; }
+  @keyframes mo-surface { from { opacity: 0; filter: blur(14px) brightness(1.08); } to { opacity: 1; filter: none; } }
+  @keyframes mo-focus { from { opacity: 0; filter: blur(8px); letter-spacing: 0.04em; } to { opacity: 1; filter: none; letter-spacing: normal; } }
+  @keyframes mo-from-left { from { opacity: 0; clip-path: inset(0 0 0 100%); } to { opacity: 1; clip-path: inset(-100vh -100vw -100vh -100vw); } }
+  @keyframes mo-from-right { from { opacity: 0; clip-path: inset(0 100% 0 0); } to { opacity: 1; clip-path: inset(-100vh -100vw -100vh -100vw); } }
+
+  /* 2. The rings catch the light where the pointer is. */
+  .hero-white-stage .hero-white-brain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      circle at calc(50% + var(--mo-px, 0) * 32%) calc(50% + var(--mo-py, 0) * 32%),
+      rgba(255, 246, 220, 0.75) 0%,
+      rgba(241, 220, 164, 0.32) 16%,
+      transparent 42%
+    );
+    mix-blend-mode: soft-light;
+    transition: opacity 0.6s ease;
+  }
+  .hero-white-stage.mo-live:hover .hero-white-brain::before { opacity: 1; }
+
+  /* 3. Cards lean under the pointer and carry a gold light where it points. */
+  .blueprint .mo-tilt { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, background-image 0.3s ease; will-change: transform; }
+  .blueprint .mo-tilt.mo-tilt-on {
+    transform: perspective(900px) rotateX(var(--mo-rx, 0deg)) rotateY(var(--mo-ry, 0deg)) translateY(-4px);
+    transition: transform 0.12s linear, box-shadow 0.35s ease;
+  }
+  .blueprint .why-cards > li.mo-tilt-on,
+  .blueprint .verdict-cards > li.mo-tilt-on,
+  .blueprint #use-cases ol > li > a.mo-tilt-on,
+  .blueprint #how-platform ol > li.mo-tilt-on {
+    background-image: radial-gradient(circle at var(--mo-x, 50%) var(--mo-y, 50%), rgba(201, 162, 75, 0.16), transparent 55%);
+  }
+
+  /* 4. The pilot buttons pull toward the pointer, and come back with a spring. */
+  .mo-magnet-on { translate: var(--mo-mx, 0) var(--mo-my, 0); transition: translate 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+  /* 5. A gold light crosses each section title once, when the section arrives. */
+  .blueprint .fade-up.in h2.metal-text {
+    background-image:
+      linear-gradient(105deg, transparent 42%, rgba(232, 200, 120, 0.95) 50%, transparent 58%),
+      linear-gradient(180deg, #2e3136 0%, #141518 45%, #1d1f23 70%, #2e3136 100%);
+    background-size: 300% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    animation: mo-sheen 1.8s cubic-bezier(0.45, 0, 0.2, 1) 0.35s both;
+  }
+  @keyframes mo-sheen { from { background-position: 110% 0, 0 0; } to { background-position: -10% 0, 0 0; } }
+}
+
+/* 6. Card photographs open like a curtain as they enter (scroll-driven, no JS). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .blueprint .card-photo,
+    .blueprint .rewrite-photo {
+      animation: mo-curtain linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 85%;
+    }
+    @keyframes mo-curtain { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+  }
+}

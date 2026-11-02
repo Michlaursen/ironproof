@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getContent, isLocale, locales } from "@/content";
 import { IronProofLogoDefs } from "@/components/ironproof-logo";
 import { HERO_COPY } from "@/components/landing/hero-copy";
+import { MotionLayer } from "@/components/motion-layer";
 import "../globals.css";
 
 const inter = Inter({
@@ -142,6 +143,8 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         {children}
         <SiteFooter locale={locale} />
         <Analytics />
+        {/* Inertial scroll and pointer light (Dom, 2026-11-02: « plus premium »). */}
+        <MotionLayer />
       </body>
     </html>
   );
