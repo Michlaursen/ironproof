@@ -98,6 +98,8 @@ export type PlatformCopy = {
     /** One line per mandate, what the client walks away with. */
     alsoLines: readonly string[];
     alsoLead: string;
+    /** The two ways to work with us, as on slide 6 of the deck (Dom 2026-11-07). */
+    waysLead: string;
     alsoCta: string;
     alsoHref: string;
     /** How the gate plugs in, for the CTO's first question. */
@@ -205,6 +207,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "It starts with the code that was rewritten.",
       alsoTitle: "One engine, one question, three more doors.",
       alsoLead: "Does this change open a vulnerability? The engine that verifies rewritten code also guards critical actions, access policies and security fixes.",
+      waysLead: "Two ways to work with us. The service: we verify your critical code (COBOL, Java, Python, C, Rust), or our engine translates it and compares the translation with the original. The product: critical-action control, installed on your side.",
       alsoLines: [
         "Every critical action checked against your rules before it runs, from an AI agent’s payment to a change on power-grid equipment (NERC CIP-010): allowed when it complies, blocked when it breaks them, and every decision sealed.",
         "Find the one request your access policy lets through, before an attacker does.",
@@ -358,6 +361,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Tout commence par le code qui a été réécrit.",
       alsoTitle: "Un seul moteur, une question, trois autres portes.",
       alsoLead: "Ce changement ouvre-t-il une faille ? Le moteur qui vérifie le code réécrit protège aussi vos actions critiques, vos politiques d’accès et vos correctifs de sécurité.",
+      waysLead: "Deux façons de travailler avec nous. Le service : on vérifie votre code critique (COBOL, Java, Python, C, Rust), ou notre moteur le traduit et compare la traduction à l’original. Le produit : le contrôle des actions critiques, installé chez vous.",
       alsoLines: [
         "Chaque action critique vérifiée selon vos règles avant de partir, du paiement d’un agent IA au changement sur un équipement du réseau électrique (norme NERC CIP-010). Conforme, elle passe. Sinon, elle est bloquée. Chaque décision est scellée.",
         "Trouvez la seule demande que votre politique d’accès laisse passer, avant un attaquant.",

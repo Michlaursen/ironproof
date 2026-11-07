@@ -134,6 +134,7 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
         {/* The three mandates as cards with what the client walks away with (Dom 2026-10-17: « met le plus impactant, c trop facile pass by »). */}
         <div className="fade-up mt-6">
           <p className="max-w-2xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{u.alsoLead}</p>
+          <p className="mt-4 max-w-2xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{u.waysLead}</p>
           <ol className="mt-10 grid gap-6 md:grid-cols-3">
             {u.cards.slice(1).map((c, i) => (
               <li key={c.name}>
