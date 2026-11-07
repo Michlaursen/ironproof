@@ -48,7 +48,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
   en: {
     eyebrow: "CODE VERIFICATION",
     title: "Your code was rewritten. Does it still do the same thing?",
-    lead: "A bank moves its COBOL to Java, with an integrator or an AI tool. The new code compiles and passes its tests. Ironproof shows you, module by module, where it no longer does what the old code did.",
+    lead: "A bank moves its COBOL to Java, with an integrator or an AI tool. The new code compiles and passes its tests. Yet in a real translation made by a third party, a transaction over the credit limit went through: a security control was gone. Ironproof shows you, module by module, where the new code no longer does what the old code did.",
     method: {
       title: "Three answers. Each one comes with what you need to check it.",
       lead: "Never a green checkmark. Every module gets one of three answers, and each comes with what was used to reach it.",
@@ -70,7 +70,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
         receive: "You get the reason, in the clarification below.",
       },
     ],
-    who: "We don’t build what we verify. We check the translations others make, for the side that carries the risk if it breaks.",
+    who: "Two roles. Our engine translates your code and compares its translation with the original. And it verifies translations made by others, for the side that carries the risk if it breaks.",
     partner: "You modernize, we check. Hand your client a report from someone who didn’t write the code. Every result reaches your client, including the ones you won’t like.",
     clarifyLabel: "CLARIFICATION, OCTOBER 31, 2026",
     clarifyLine: "Audits of our own checker have reproduced dozens of false “same behavior” answers, on cases written to attack it. So we are rebuilding that answer, and we don’t issue it in the meantime. The figures we published before describe our model: read them as history, not as confirmed behavior.",
@@ -84,7 +84,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
   fr: {
     eyebrow: "VÉRIFICATION DE CODE",
     title: "Votre code a été réécrit. Fait-il toujours la même chose ?",
-    lead: "Une banque fait passer son COBOL à Java, avec un intégrateur ou un outil d’IA. Le nouveau code compile, il passe ses tests. Reste une question : fait-il encore ce que faisait l’ancien ? Ironproof vous montre, module par module, où ce n’est plus le cas.",
+    lead: "Une banque fait passer son COBOL à Java, avec un intégrateur ou un outil d’IA. Le nouveau code compile, il passe ses tests. Pourtant, dans une vraie traduction faite par un tiers, une transaction au-delà de la limite de crédit passait : un contrôle de sécurité avait disparu. Ironproof vous montre, module par module, où le nouveau code ne fait plus ce que faisait l’ancien.",
     method: {
       title: "Trois réponses. Chacune vient avec de quoi la vérifier.",
       lead: "Jamais un simple crochet vert. Chaque module reçoit l’une des trois réponses, avec ce qui a servi à l’obtenir.",
@@ -106,7 +106,7 @@ export const REWRITE_COPY: L<RewriteCopy> = {
         receive: "Vous recevez la raison, dans la clarification ci-dessous.",
       },
     ],
-    who: "On ne bâtit pas ce qu’on vérifie. On vérifie ce que d’autres ont traduit, pour vous, qui en portez le risque.",
+    who: "Deux rôles. Notre moteur traduit votre code et compare sa traduction à l’original. Et il vérifie les traductions faites par d’autres, pour vous, qui en portez le risque.",
     partner: "Vous modernisez, on vérifie. Remettez à votre client un rapport signé par quelqu’un qui n’a pas écrit le code. Tous les résultats se rendent à votre client, même ceux qui ne font pas votre affaire.",
     clarifyLabel: "CLARIFICATION, 31 OCTOBRE 2026",
     clarifyLine: "Des audits de notre propre vérificateur ont reproduit des dizaines de fausses réponses « même comportement », sur des cas écrits pour l’attaquer. On reconstruit donc cette réponse, et on ne la donne pas d’ici là. Les chiffres publiés avant décrivent notre modèle : lisez-les comme un historique, pas comme un comportement confirmé.",

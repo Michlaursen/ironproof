@@ -2,7 +2,7 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "Ironproof | La vérification indépendante du code réécrit",
+    title: "Ironproof | Proof Intelligence pour les logiciels d’infrastructure critique",
     description:
       "Les machines savent écrire la preuve. Reste à savoir ce qu’elle prouve. Ironproof vérifie de façon indépendante le code réécrit : le cas précis qui diffère rejoué sur votre propre compilateur, ou on vous dit qu’on n’a pas pu trancher. Chaque résultat est scellé et vérifiable sans avoir à nous croire.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta

@@ -203,10 +203,10 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     useCases: {
       eyebrow: "WHAT WE CHECK",
       title: "It starts with the code that was rewritten.",
-      alsoTitle: "Same engine, three more questions.",
-      alsoLead: "The engine behind code verification also guards critical actions, and takes on two hard questions as a mandate delivered by our team.",
+      alsoTitle: "One engine, one question, three more doors.",
+      alsoLead: "Does this change open a vulnerability? The engine that verifies rewritten code also guards critical actions, access policies and security fixes.",
       alsoLines: [
-        "Every payment, access grant and change checked against your rules before it runs: allowed when it complies, blocked when it breaks them, and every decision sealed.",
+        "Every critical action checked against your rules before it runs, from an AI agent’s payment to a change on power-grid equipment (NERC CIP-010): allowed when it complies, blocked when it breaks them, and every decision sealed.",
         "Find the one request your access policy lets through, before an attacker does.",
         "Know whether a patch really closes the flaw, before you ship it.",
       ],
@@ -356,10 +356,10 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     useCases: {
       eyebrow: "CE QU’ON VÉRIFIE",
       title: "Tout commence par le code qui a été réécrit.",
-      alsoTitle: "Le même moteur, trois autres questions.",
-      alsoLead: "Le même moteur protège aussi vos actions critiques. Et notre équipe le met au travail, en mandat, sur deux questions difficiles.",
+      alsoTitle: "Un seul moteur, une question, trois autres portes.",
+      alsoLead: "Ce changement ouvre-t-il une faille ? Le moteur qui vérifie le code réécrit protège aussi vos actions critiques, vos politiques d’accès et vos correctifs de sécurité.",
       alsoLines: [
-        "Chaque paiement, accès ou changement vérifié selon vos règles avant de partir. Conforme, il passe. Sinon, il est bloqué. Chaque décision est scellée.",
+        "Chaque action critique vérifiée selon vos règles avant de partir, du paiement d’un agent IA au changement sur un équipement du réseau électrique (norme NERC CIP-010). Conforme, elle passe. Sinon, elle est bloquée. Chaque décision est scellée.",
         "Trouvez la seule demande que votre politique d’accès laisse passer, avant un attaquant.",
         "Vérifiez qu’un correctif ferme vraiment la faille, avant de le livrer.",
       ],

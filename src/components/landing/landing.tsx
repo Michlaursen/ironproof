@@ -241,7 +241,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "When a machine rewrites your code, Ironproof compares it with the program it replaces. We show the exact input where they no longer do the same thing, and we say what we couldn’t decide.\nWe don’t build what we verify.\nIndependent. Sealed. Verifiable without trusting us.",
+        "AI proposes, mathematics decides. Our engine translates your code or verifies what others rewrote, checks that a fix really closes the vulnerability, and checks your critical actions before they execute. You see the exact breaking case, and what we could not decide.\nOne engine. One question: does this change open a vulnerability?\nSealed. Verifiable without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -688,7 +688,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Quand une machine réécrit votre code, on le compare au programme qu’il remplace. On vous montre l’entrée précise où les deux ne font plus la même chose, et on vous dit ce qu’on n’a pas pu trancher.\nOn ne bâtit pas ce qu’on vérifie.\nIndépendant. Scellé. Vérifiable sans avoir à nous croire.",
+        "L’IA propose, les mathématiques tranchent. Notre moteur traduit votre code ou vérifie celui que d’autres ont réécrit, vérifie qu’un correctif ferme vraiment la faille, et contrôle vos actions critiques avant qu’elles s’exécutent. Vous voyez le cas exact qui casse, et ce qu’on n’a pas pu trancher.\nUn seul moteur. Une question : ce changement ouvre-t-il une faille ?\nScellé. Vérifiable sans avoir à nous croire.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
