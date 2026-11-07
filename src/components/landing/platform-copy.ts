@@ -213,7 +213,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       alsoTitle: "One engine, one question, three more doors.",
       alsoLead: "Does this change open a vulnerability? The engine that verifies rewritten code also guards critical actions, access policies and security fixes.",
       casesEyebrow: "WHY TEAMS USE IRONPROOF",
-      casesTitle: "Move fast, and prove it.",
+      casesTitle: "Fast and rigorous.",
       casesLead: "One engine. As a service on your code, or as a product installed on your side.",
       cases: [
         {
@@ -400,7 +400,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       alsoTitle: "Un seul moteur, une question, trois autres portes.",
       alsoLead: "Ce changement ouvre-t-il une faille ? Le moteur qui vérifie le code réécrit protège aussi vos actions critiques, vos politiques d’accès et vos correctifs de sécurité.",
       casesEyebrow: "POURQUOI ON CHOISIT IRONPROOF",
-      casesTitle: "Aller vite, et le prouver.",
+      casesTitle: "Rapide et rigoureux.",
       casesLead: "Un seul moteur. En service sur votre code, ou en produit installé chez vous.",
       cases: [
         {
