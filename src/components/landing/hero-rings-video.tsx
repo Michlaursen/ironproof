@@ -30,14 +30,17 @@ const EASE = 0.12;
 const SETTLE = 0.05;
 
 // Engraving, in the video's own pixels (1440 x 1080).
-const ROW_GAP = 7; // one line every 7 px (Dom, 2026-11-07: « moins intense »)
-const COL_STEP = 3; // sampled every 3 px along the line
-const INK_MIN = 0.1;
-const IRON = "rgba(36,38,42,.7)";
-const GOLD = "rgba(168,132,58,.82)";
-const WHITE_LINE = "rgba(36,38,42,.42)";
-
-type Metal = "iron" | "gold" | "white";
+// Cleaner pass (Dom, 2026-11-07: « trop intense », « moins griché, plus propre »): finer sampling,
+// each line smoothed along its length so it swells and tapers instead of breaking, specks dropped,
+// softer ink.
+const ROW_GAP = 7; // one line every 7 px
+const COL_STEP = 2; // sampled every 2 px along the line
+const SMOOTH = 2; // box-blur radius along the line, in samples
+const MIN_RUN = 6; // shorter runs are specks, not metal
+const INK_MIN = 0.18;
+const IRON = "rgba(36,38,42,.86)";
+const GOLD = "rgba(160,124,50,.95)";
+const WHITE_LINE = "rgba(36,38,42,.45)";
 
 export function HeroRingsVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -78,52 +81,71 @@ export function HeroRingsVideo() {
       if (!bg) bg = [d[0] ?? 230, d[1] ?? 228, d[2] ?? 224];
       const bl = (0.3 * bg[0] + 0.59 * bg[1] + 0.11 * bg[2]) / 255;
 
-      const read = (k: number, floor: boolean): { ink: number; metal: Metal } => {
-        const r = d[k] ?? 0;
-        const g = d[k + 1] ?? 0;
-        const b = d[k + 2] ?? 0;
-        const lum = (0.3 * r + 0.59 * g + 0.11 * b) / 255;
-        const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
-        // The cast shadow is only a little darker than the floor: it does not count.
-        // Below the rings, only a clearly dark pixel is metal; the soft shadow on the floor is not.
-        const dark = bl - lum > (floor ? 0.3 : 0.12) ? (bl - lum) * 1.9 : 0;
-        const light = lum - bl > (floor ? 0.08 : 0) ? (lum - bl) * 2.6 : 0;
-        const ink = dark + sat * 1.5 + light;
-        const metal: Metal = lum > bl + 0.02 && sat < 0.12 ? "white" : sat > 0.12 ? "gold" : "iron";
-        return { ink, metal };
-      };
+      // Per sample: how much metal (ink), and how much of it is gold or the white ring.
+      const ink = new Float32Array(cols);
+      const gold = new Float32Array(cols);
+      const white = new Float32Array(cols);
+      const sInk = new Float32Array(cols);
+      const sGold = new Float32Array(cols);
+      const sWhite = new Float32Array(cols);
 
       ctx.clearRect(0, 0, vw, vh);
       for (let j = 0; j < rows; j++) {
         const y0 = j * ROW_GAP + ROW_GAP / 2;
+        // Below the rings, only clearly dark or clearly light pixels are metal; the soft shadow is not.
+        const floor = j / rows > 0.76;
+        for (let i = 0; i < cols; i++) {
+          const k = (j * cols + i) * 4;
+          const r = d[k] ?? 0;
+          const g = d[k + 1] ?? 0;
+          const b = d[k + 2] ?? 0;
+          const lum = (0.3 * r + 0.59 * g + 0.11 * b) / 255;
+          const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
+          const dark = bl - lum > (floor ? 0.3 : 0.12) ? (bl - lum) * 1.9 : 0;
+          const light = lum - bl > (floor ? 0.08 : 0) ? (lum - bl) * 2.6 : 0;
+          ink[i] = dark + sat * 1.5 + light;
+          gold[i] = sat > 0.12 ? 1 : 0;
+          white[i] = lum > bl + 0.02 && sat < 0.12 ? 1 : 0;
+        }
+        // Smooth along the line: one sliding window, so each line swells and tapers.
+        let aI = 0;
+        let aG = 0;
+        let aW = 0;
+        for (let i = -SMOOTH; i < cols + SMOOTH; i++) {
+          const add = i + SMOOTH;
+          const drop = i - SMOOTH - 1;
+          if (add < cols) { aI += ink[add] ?? 0; aG += gold[add] ?? 0; aW += white[add] ?? 0; }
+          if (drop >= 0) { aI -= ink[drop] ?? 0; aG -= gold[drop] ?? 0; aW -= white[drop] ?? 0; }
+          if (i >= 0 && i < cols) {
+            const n = Math.min(cols - 1, i + SMOOTH) - Math.max(0, i - SMOOTH) + 1;
+            sInk[i] = aI / n;
+            sGold[i] = aG / n;
+            sWhite[i] = aW / n;
+          }
+        }
+        // Metal of a sample, read on the smoothed values so a line does not flicker between colours.
+        const kind = (q: number): 0 | 1 | 2 => ((sGold[q] ?? 0) > 0.5 ? 1 : (sWhite[q] ?? 0) > 0.6 ? 2 : 0);
         let i = 0;
         while (i < cols) {
-          const floor = j / rows > 0.76;
-          const first = read((j * cols + i) * 4, floor);
-          if (first.ink < INK_MIN) {
+          if ((sInk[i] ?? 0) < INK_MIN) {
             i++;
             continue;
           }
-          // One run of the same metal is drawn as one filled stroke.
-          const top: number[] = [];
-          const bot: number[] = [];
+          const m = kind(i);
           let i2 = i;
-          for (; i2 < cols; i2++) {
-            const p = read((j * cols + i2) * 4, floor);
-            if (p.ink < INK_MIN || p.metal !== first.metal) break;
-            const w = first.metal === "white" ? 1.1 : Math.min(ROW_GAP * 0.55, 0.5 + p.ink * ROW_GAP * 0.4);
-            const x = i2 * COL_STEP + COL_STEP / 2;
-            const wave = Math.sin(x * 0.015 + j * 0.6) * 0.6; // the burin's slight tremor
-            top.push(x, y0 - w / 2 + wave);
-            bot.push(x, y0 + w / 2 + wave);
-          }
-          if (top.length > 2) {
+          while (i2 < cols && (sInk[i2] ?? 0) >= INK_MIN && kind(i2) === m) i2++;
+          if (i2 - i >= MIN_RUN) {
+            const width = (q: number): number =>
+              m === 2 ? 0.9 : Math.min(ROW_GAP * 0.5, 0.5 + (sInk[q] ?? 0) * ROW_GAP * 0.46);
             ctx.beginPath();
-            ctx.moveTo(top[0] ?? 0, top[1] ?? 0);
-            for (let q = 2; q < top.length; q += 2) ctx.lineTo(top[q] ?? 0, top[q + 1] ?? 0);
-            for (let q = bot.length - 2; q >= 0; q -= 2) ctx.lineTo(bot[q] ?? 0, bot[q + 1] ?? 0);
+            for (let q = i; q < i2; q++) {
+              const x = q * COL_STEP + COL_STEP / 2;
+              if (q === i) ctx.moveTo(x, y0 - width(q) / 2);
+              else ctx.lineTo(x, y0 - width(q) / 2);
+            }
+            for (let q = i2 - 1; q >= i; q--) ctx.lineTo(q * COL_STEP + COL_STEP / 2, y0 + width(q) / 2);
             ctx.closePath();
-            ctx.fillStyle = first.metal === "gold" ? GOLD : first.metal === "white" ? WHITE_LINE : IRON;
+            ctx.fillStyle = m === 1 ? GOLD : m === 2 ? WHITE_LINE : IRON;
             ctx.fill();
           }
           i = Math.max(i2, i + 1);
