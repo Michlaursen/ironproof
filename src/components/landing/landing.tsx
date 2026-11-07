@@ -181,15 +181,7 @@ type Copy = {
   };
 
   cta: { title: string; lead: string };
-  closing: {
-    titleA: string;
-    titleB: string;
-    body: string;
-    kicker: string;
-    scope: string;
-    /** Callouts on the bust: what each material stands for (Dom, 2026-10-15). */
-    notes: readonly PlateNote[];
-  };
+
 
 };
 
@@ -652,21 +644,7 @@ const T: L<Copy> = {
 
     pilot: PILOT_COPY.en,
 
-    closing: {
-      titleA: "Probably safe is not",
-      titleB: "provably impossible.",
-      body: "Agents now move money, grant access and change production on their own. We show you exactly where your policy breaks, or prove that it can’t. Then every action routed through the gate is checked before it executes: what’s authorized runs, sealed; what isn’t never executes. And every result comes with what you need to verify it without us.",
-      kicker: "Check what was rewritten. Run what complies. Stop the rest.",
-      // The fine print under "provably impossible": what the proof covers, and
-      // the one condition it rests on (the action can only run through the gate).
-      scope:
-        "For a translation: the exact input that differs, replayed; same-behavior answers are suspended. For an action: proven for the actions and the policy you define, where the action can only execute through the gate. Each certificate states its boundary.",
-      notes: [
-        { x: 57, y: 80, label: "MARBLE · HUMAN INTENT" },
-        { x: 79, y: 12, label: "IRON · MACHINE RIGOUR" },
-        { x: 82, y: 56, label: "GOLD · THE PROOF", gold: true },
-      ],
-    },
+
 
     cta: {
       title: "Put one critical action behind the boundary.",
@@ -1095,19 +1073,7 @@ const T: L<Copy> = {
 
     pilot: PILOT_COPY.fr,
 
-    closing: {
-      titleA: "Probablement sûr, ce n’est pas",
-      titleB: "prouvé impossible.",
-      body: "Les agents déplacent déjà de l’argent, donnent des accès et modifient la production, seuls. On vous montre exactement où votre politique casse, ou on prouve qu’elle ne peut pas casser. Ensuite, chaque action qui passe par la barrière est vérifiée avant de s’exécuter : ce qui est autorisé passe, scellé ; le reste ne s’exécute jamais. Et chaque résultat vient avec ce qu’il faut pour le vérifier sans nous.",
-      kicker: "Ce qui est réécrit est vérifié. Ce qui est conforme passe. Le reste, jamais.",
-      scope:
-        "Pour une traduction : l’entrée précise qui diffère, rejouée ; les réponses « même comportement » sont suspendues. Pour une action : prouvé pour les actions et la politique que vous définissez, à condition que l’action ne puisse passer que par la barrière. Chaque certificat dit où s’arrête sa preuve.",
-      notes: [
-        { x: 57, y: 80, label: "MARBRE · L’INTENTION HUMAINE" },
-        { x: 76, y: 12, label: "FER · LA RIGUEUR DE LA MACHINE" },
-        { x: 82, y: 56, label: "OR · LA PREUVE", gold: true },
-      ],
-    },
+
 
     cta: {
       title: "Mettez une action critique derrière la frontière.",
@@ -1346,41 +1312,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <PlatformHow locale={locale} />
         <CompanyLine locale={locale} />
 
-        {/* CLOSING — the guardian robot replaced by a closed iron vault door in a
-          * marble block, gold wheel (Dom, 2026-10-15: « le robot à la fin match pas
-          * le reste »), the same family as the trio and the applications.
-          * History: a closed vault door with a gold ring in a black marble hall
-          * (Dom, 2026-09-26: closed says "impossible" better than open), full-bleed behind
-          * a glass card. Documentary like the hero (Dom, 2026-09-26). Both halves
-          * of the act in the body: what is proven runs, the rest never executes. */}
-        <section className="closing-trio relative z-10 edge-t">
-          <div className="closing-band closing-band-photo">
-            <div className="closing-photo" aria-hidden="true">
-              <Image src="/media/closing-bust-blueprint.jpg" alt="" fill sizes="100vw" className="closing-photo-desk object-cover" />
-              <Image src="/media/closing-bust-blueprint-mobile.jpg" alt="" fill sizes="100vw" className="closing-photo-mob object-cover" />
-            </div>
-            {/* The material labels (marble, iron, gold) left the page: they explained our look, not the product (review, Dom go 2026-10-17). */}
-            <div className="closing-card fade-up">
-              <p className="seal-label track-mid mb-5 text-xs">{t.closing.kicker}</p>
-              <h2 className="font-serif text-4xl font-medium leading-[1.05] text-neutral-100 md:text-5xl">
-                {t.closing.titleA}
-                <br />
-                <span className="text-seal">{t.closing.titleB}</span>
-              </h2>
-              <p className="mt-4 text-xs font-light leading-relaxed text-neutral-500">{t.closing.scope}</p>
-              <a
-                href={`${r}/pilot`}
-                className="track-mid mt-8 inline-flex items-center gap-3 rounded-[5px] bg-gradient-to-b from-white to-neutral-300 px-8 py-3.5 text-xs font-semibold text-ink shadow-lg shadow-white/10 transition hover:from-neutral-100 hover:to-white"
-              >
-                {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
-              </a>
-              {/* The four steps no longer repeat here: the page already says them (Dom, 2026-10-18). */}
-            </div>
-          </div>
-        </section>
-
         {/* The last screen (Dom, 2026-11-07): "probably" locks into "provably." under a gold
-          * sweep, between the hero rings, a transmission tower and a telecom mast. */}
+          * sweep, between the hero rings, a transmission tower and a telecom mast. It replaces
+          * the bust and « Probably safe is not provably impossible » (Dom, 2026-11-07: « c'était
+          * la statue qui devait être remplacée »). */}
         <ProvablyFinale locale={locale} pilotHref={`${r}/pilot`} />
 
       </main>
