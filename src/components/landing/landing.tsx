@@ -3,7 +3,7 @@ import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
 import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { HeroConnectors } from "./hero-connectors";
 import { HeroRingsVideo } from "./hero-rings-video";
-import { ProvablyFinale } from "./provably-finale";
+import { OneLineFinale } from "./one-line-finale";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -232,7 +232,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Translate legacy code, prove a fix closes the flaw, and decide every critical action before it runs. Sealed evidence anyone can re-check without us.",
+        "Translate legacy code. Prove a fix closes the flaw. Decide every critical action before it runs. Every result is sealed, and anyone can re-check it without trusting us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -665,7 +665,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Traduire le code ancien, prouver qu’un correctif ferme la faille, décider de chaque action critique avant qu’elle s’exécute. Une preuve scellée que n’importe qui revérifie sans nous.",
+        "Traduire le code ancien. Prouver qu’un correctif ferme la faille. Décider de chaque action critique avant qu’elle s’exécute. Chaque résultat est scellé, et n’importe qui peut le revérifier sans nous faire confiance.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -1312,11 +1312,11 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <PlatformHow locale={locale} />
         <CompanyLine locale={locale} />
 
-        {/* The last screen (Dom, 2026-11-07): "probably" locks into "provably." under a gold
-          * sweep, between the hero rings, a transmission tower and a telecom mast. It replaces
-          * the bust and « Probably safe is not provably impossible » (Dom, 2026-11-07: « c'était
-          * la statue qui devait être remplacée »). */}
-        <ProvablyFinale locale={locale} pilotHref={`${r}/pilot`} />
+        {/* The last screen (Dom, 2026-11-07): a one-line diagram on an engineering sheet, in
+          * iron and gold. Every request passes the gate; what complies runs and is sealed, the
+          * rest never executes. It replaced the dotted « From probably / to provably. » screen,
+          * which itself replaced the bust. */}
+        <OneLineFinale locale={locale} pilotHref={`${r}/pilot`} />
 
       </main>
 
