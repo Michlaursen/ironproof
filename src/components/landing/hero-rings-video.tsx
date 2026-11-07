@@ -33,14 +33,14 @@ const SETTLE = 0.05;
 // Cleaner pass (Dom, 2026-11-07: « trop intense », « moins griché, plus propre »): finer sampling,
 // each line smoothed along its length so it swells and tapers instead of breaking, specks dropped,
 // softer ink.
-const ROW_GAP = 7; // one line every 7 px
+const ROW_GAP = 11; // one line every 11 px: fewer lines (Dom, 2026-11-07: « trop pâle et trop intense »)
 const COL_STEP = 2; // sampled every 2 px along the line
 const SMOOTH = 2; // box-blur radius along the line, in samples
 const MIN_RUN = 6; // shorter runs are specks, not metal
 const INK_MIN = 0.18;
-const IRON = "rgba(36,38,42,.86)";
-const GOLD = "rgba(160,124,50,.95)";
-const WHITE_LINE = "rgba(36,38,42,.45)";
+const IRON = "#24262a";
+const GOLD = "#a8843a";
+const WHITE_LINE = "rgba(36,38,42,.6)";
 
 export function HeroRingsVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -136,7 +136,7 @@ export function HeroRingsVideo() {
           while (i2 < cols && (sInk[i2] ?? 0) >= INK_MIN && kind(i2) === m) i2++;
           if (i2 - i >= MIN_RUN) {
             const width = (q: number): number =>
-              m === 2 ? 0.9 : Math.min(ROW_GAP * 0.5, 0.5 + (sInk[q] ?? 0) * ROW_GAP * 0.46);
+              m === 2 ? 1.2 : Math.min(ROW_GAP * 0.34, 0.9 + (sInk[q] ?? 0) * ROW_GAP * 0.3);
             ctx.beginPath();
             for (let q = i; q < i2; q++) {
               const x = q * COL_STEP + COL_STEP / 2;
