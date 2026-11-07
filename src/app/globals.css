@@ -4008,3 +4008,84 @@ html.lenis, html.lenis body { height: auto; }
 /* Engraved rings (Dom, 2026-11-07): once the canvas has drawn, the plastic still under it goes.
    Reduced motion keeps the canvas: it shows the first frame, engraved, and does not move. */
 .hero-white-brain[data-engraved] > img { opacity: 0; }
+
+/* The last screen: a one-line diagram on an engineering sheet, in the site's iron and gold
+   (Dom, 2026-11-07). Colours are tokens so the drawing reads the site, never a second palette. */
+.one-line-finale {
+  --olf-paper: #1b1d20;
+  --olf-panel: #24262a;
+  --olf-ink: #e9e7e2;
+  --olf-ink2: #a3a6ac;
+  --olf-ink3: #6f737a;
+  --olf-rule: #3a3d43;
+  --olf-off: #3a3d43;
+  --olf-gold: #d9b25a;
+  --olf-red: #c4493c;
+  --olf-dot: #2c2f34;
+  background: var(--olf-paper);
+  padding: clamp(10px, 1.6vw, 24px);
+}
+.one-line-finale svg { display: block; width: 100%; height: auto; max-height: 100svh; margin: 0 auto; }
+.one-line-finale text { font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; fill: var(--olf-ink2); }
+.one-line-finale .t-k { fill: var(--olf-ink); font-weight: 500; }
+.one-line-finale .t-g { fill: var(--olf-gold); font-weight: 500; }
+.one-line-finale .t-r { fill: var(--olf-red); font-weight: 500; }
+.one-line-finale .t-s { font-size: 8.5px; fill: var(--olf-ink3); }
+.one-line-finale .t-h, .one-line-finale .t-h2 { font-family: var(--font-eb-garamond), Georgia, serif; font-size: 74px; letter-spacing: -1.4px; font-weight: 500; }
+.one-line-finale .t-h { fill: var(--olf-ink); }
+.one-line-finale .t-h2 { fill: #5b5f66; }
+.one-line-finale .t-h tspan.v { fill: var(--olf-gold); }
+.one-line-finale .t-p { font-family: var(--font-inter), Inter, sans-serif; font-size: 13px; letter-spacing: 0; fill: var(--olf-ink2); }
+.one-line-finale .w { stroke: var(--olf-ink); stroke-width: 1.1; fill: none; }
+.one-line-finale .w2 { stroke: var(--olf-ink); stroke-width: 2.4; fill: none; }
+.one-line-finale .l { stroke: var(--olf-rule); stroke-width: 1; fill: none; }
+.one-line-finale .g { stroke: var(--olf-gold); stroke-width: 1.6; fill: none; }
+.one-line-finale .flow { stroke: var(--olf-gold); stroke-width: 1.6; fill: none; stroke-dasharray: 3 9; animation: olf-flow .9s linear infinite; }
+.one-line-finale a.cta text { fill: var(--olf-ink); font-weight: 500; letter-spacing: .18em; font-size: 11.5px; }
+.one-line-finale a.cta:hover text { fill: var(--olf-gold); }
+@keyframes olf-flow { to { stroke-dashoffset: -12; } }
+@media (prefers-reduced-motion: reduce) { .one-line-finale .flow { animation: none; } }
+
+/* The theorem scene under « How it works » (Dom, 2026-11-07): a real Z3 query typed out,
+   the field of every payment, the counterexample, then the repaired policy and unsat. */
+.thm-stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); background: #1b1d20;
+  background-image: radial-gradient(#2c2f34 1px, transparent 1px); background-size: 18px 18px; border: 1px solid #24262a; padding: 22px;
+  box-shadow: 0 30px 60px -30px rgba(20, 21, 24, .55); }
+.thm-stage::before, .thm-stage::after, .thm-c1, .thm-c2 { content: ""; position: absolute; width: 18px; height: 18px; border: 1.6px solid #d9b25a; }
+.thm-stage::before { left: 8px; top: 8px; border-right: 0; border-bottom: 0; }
+.thm-stage::after { right: 8px; top: 8px; border-left: 0; border-bottom: 0; }
+.thm-c1 { left: 8px; bottom: 8px; border-right: 0; border-top: 0; }
+.thm-c2 { right: 8px; bottom: 8px; border-left: 0; border-top: 0; }
+.thm-panel { position: relative; display: flex; flex-direction: column; min-height: 460px; border: 1px solid #3a3d43; background: rgba(22, 24, 27, .92); }
+.thm-panel + .thm-panel { border-left: 0; }
+.thm-panel header { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; border-bottom: 1px solid #3a3d43;
+  font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 10.5px; font-weight: 500; letter-spacing: .16em; color: #8d9096; }
+.thm-panel header b { color: #e9e7e2; font-weight: 500; }
+.thm pre { flex: 1; overflow: hidden; white-space: pre; padding: 14px 14px 14px 0; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 11.2px; font-weight: 400; line-height: 1.62; color: #a3a6ac; }
+.thm pre .ln { display: inline-block; width: 34px; padding-right: 12px; text-align: right; color: #4a4d53; user-select: none; }
+.thm pre .kw { color: #e9e7e2; }
+.thm pre .num { color: #d9b25a; }
+.thm pre .op { color: #c8b48a; }
+.thm pre .new, .thm pre .new * { color: #d9b25a !important; background: rgba(217, 178, 90, .12); }
+.thm pre .caret { display: inline-block; width: 7px; height: 13px; vertical-align: -2px; background: #d9b25a; animation: thm-blink 1s steps(1) infinite; }
+@keyframes thm-blink { 50% { opacity: 0; } }
+.thm-result { display: flex; justify-content: space-between; align-items: center; min-height: 48px; padding: 12px 14px; border-top: 1px solid #3a3d43;
+  font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 12px; font-weight: 500; letter-spacing: .14em; }
+.thm-result .v { font-size: 16px; letter-spacing: .24em; }
+.thm-result .sat { color: #e0614f; text-shadow: 0 0 12px rgba(224, 97, 79, .45); }
+.thm-result .unsat { color: #d9b25a; text-shadow: 0 0 12px rgba(217, 178, 90, .45); }
+.thm-phase { font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 10.5px; font-weight: 500; letter-spacing: .16em; color: #8d9096; }
+.thm-field { position: relative; flex: 1; }
+.thm-field canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.thm-yax { position: absolute; left: 12px; top: 10px; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 9.5px; font-weight: 400; letter-spacing: .14em; color: #6f737a; }
+.thm-tag { position: absolute; opacity: 0; transition: opacity .4s; pointer-events: none; white-space: nowrap; padding: 6px 8px; line-height: 1.5;
+  font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 10.5px; font-weight: 500; letter-spacing: .08em; color: #e0614f; background: #16181b; border: 1px solid #e0614f;
+  box-shadow: 0 0 18px rgba(224, 97, 79, .25); }
+.thm-verdict { margin-top: 22px; min-height: 70px; }
+.thm-verdict p { font-family: var(--font-eb-garamond), Georgia, serif; font-size: clamp(22px, 2.8vw, 36px); line-height: 1.2; opacity: 0; transition: opacity .6s; }
+.thm-verdict p.k { color: #a3392f; }
+.thm-verdict p.g { color: #a8843a; }
+.thm-foot { margin-top: 10px; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 10.5px; font-weight: 400; line-height: 1.7; letter-spacing: .04em; color: #8d9096; }
+.thm-foot code { color: #5b5f66; }
+@media (max-width: 900px) { .thm-stage { grid-template-columns: 1fr; padding: 14px; } .thm-panel { min-height: 360px; } .thm-panel + .thm-panel { border-left: 1px solid #3a3d43; border-top: 0; } }
+@media (prefers-reduced-motion: reduce) { .thm pre .caret { animation: none; } }

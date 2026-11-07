@@ -1,6 +1,7 @@
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
 import { FlowDiagram, type FlowCopy, type FlowRail } from "./flow-diagram";
+import { TheoremScene } from "./theorem-scene";
 
 /*
  * How the platform works, on the home page right under "Why Ironproof" (Dom,
@@ -172,7 +173,9 @@ export function PlatformHow({ locale = defaultLocale }: { locale?: Locale }) {
             </li>
           ))}
         </ol>
-        <FlowDiagram f={t.flow} />
+        {/* The method diagram left the home (Dom, 2026-11-07: « l'architecture… c'est ça qu'on enlève »);
+          * it stays on /proof-intelligence (EngineeringSystem) and /modernization. */}
+        <TheoremScene />
       </div>
     </section>
   );
