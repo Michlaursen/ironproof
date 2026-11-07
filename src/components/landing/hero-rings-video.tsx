@@ -3,194 +3,180 @@
 import { useEffect, useRef } from "react";
 
 /*
- * The hero rings turn (Dom, 2026-11-02): very slowly on their own, faster while the
- * page scrolls (« vrm slow si sa bouge sans scroll »).
+ * The hero rings, drawn as a wireframe gyroscope (Dom, 2026-11-07: « le logo au début
+ * j'aime pas le design, trouve autre chose », then « j'aime bien » on the wireframe).
+ * It replaced the engraved video, which replaced the 3D loop (« moins plastique »).
  *
- * Engraved (Dom, 2026-11-07: « rends ça moins plastique », then « gravure, nice »):
- * the video is never shown. Each frame is redrawn as line engraving, the technique of
- * banknotes and certificates: one horizontal line per row, thicker where the metal is
- * darker. Iron in ink, gold in gold, the white ring as a fine line. The canvas carries
- * the same class as the video did, so every framing rule in globals.css (object-position,
- * scale) applies to it unchanged, and the lines (hero-connectors.tsx) keep their places.
+ * Three bands, the same three as the logo: an outer ring in fine iron lines with a
+ * knurl, an iron ring cross-hatched, a gold ring with grooves. Each turns on its own
+ * axis; the far side of every band fades, so depth comes from the drawing, not a
+ * render. The outer ring's pivot is a dashed axis held by two gold bearings.
  *
- * The file is a 9.5 s loop interpolated to 96 fps, so even at the idle rate (0.2x,
- * about 19 frames a second on screen) it stays smooth. No autoPlay attribute: this
- * component starts playback at the idle rate, so the first frame never runs at full
- * speed. Without JavaScript the still under it shows. With reduced motion, the first
- * frame is engraved once and nothing moves.
- *
- * Rate: target = IDLE + scroll speed * GAIN, capped at MAX; the shown rate eases
- * toward the target and the target falls back to IDLE when the scrolling stops.
- * The loop only runs while the hero is on screen.
+ * They turn slowly on their own and faster while the page scrolls (Dom, 2026-11-02:
+ * « vrm slow si sa bouge sans scroll »). Drawn only while the hero is on screen.
+ * Reduced motion: one still drawing. Without JavaScript, the still image under it shows.
  */
-const IDLE_RATE = 0.2;
-const MAX_RATE = 2.4;
-const GAIN = 0.035; // rate added per pixel scrolled in one frame
-const EASE = 0.12;
+
+type Ring = {
+  R: number;
+  w: number;
+  gold: boolean;
+  alpha: number;
+  ribs: number;
+  rails: number;
+  tilt: readonly [number, number, number];
+  spin: readonly [number, number, number];
+};
+
+const RINGS: readonly Ring[] = [
+  { R: 1.0, w: 0.16, gold: false, alpha: 0.55, ribs: 72, rails: 4, tilt: [0.35, -0.25, 0], spin: [0, 0.05, 0] },
+  { R: 0.78, w: 0.2, gold: false, alpha: 0.95, ribs: 56, rails: 4, tilt: [1.05, 0.3, 0.2], spin: [0, 0.16, 0] },
+  { R: 0.55, w: 0.26, gold: true, alpha: 1, ribs: 0, rails: 11, tilt: [-0.6, 0.9, -0.3], spin: [0.22, 0, 0.07] },
+];
+const INK = "36,38,42";
+const GOLD = "168,124,44";
+const SEGMENTS = 160;
+
+const IDLE_RATE = 1;
+const MAX_RATE = 7;
+const GAIN = 0.12; // rate added per pixel scrolled in one frame
+const EASE = 0.1;
 const SETTLE = 0.05;
 
-// Engraving, in the video's own pixels (1440 x 1080).
-// Cleaner pass (Dom, 2026-11-07: « trop intense », « moins griché, plus propre »): finer sampling,
-// each line smoothed along its length so it swells and tapers instead of breaking, specks dropped,
-// softer ink.
-const ROW_GAP = 11; // one line every 11 px: fewer lines (Dom, 2026-11-07: « trop pâle et trop intense »)
-const COL_STEP = 2; // sampled every 2 px along the line
-const SMOOTH = 2; // box-blur radius along the line, in samples
-const MIN_RUN = 6; // shorter runs are specks, not metal
-const INK_MIN = 0.18;
-const IRON = "#24262a";
-const GOLD = "#a8843a";
-const WHITE_LINE = "rgba(36,38,42,.6)";
+type V3 = [number, number, number];
+const rotX = (p: V3, a: number): V3 => [p[0], p[1] * Math.cos(a) - p[2] * Math.sin(a), p[1] * Math.sin(a) + p[2] * Math.cos(a)];
+const rotY = (p: V3, a: number): V3 => [p[0] * Math.cos(a) + p[2] * Math.sin(a), p[1], -p[0] * Math.sin(a) + p[2] * Math.cos(a)];
+const rotZ = (p: V3, a: number): V3 => [p[0] * Math.cos(a) - p[1] * Math.sin(a), p[0] * Math.sin(a) + p[1] * Math.cos(a), p[2]];
+const orient = (p: V3, o: V3): V3 => rotZ(rotY(rotX(p, o[0]), o[1]), o[2]);
+
+type Seg = { ax: number; ay: number; bx: number; by: number; z: number; ring: Ring; width: number };
 
 export function HeroRingsVideo() {
-  const ref = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const video = ref.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas) return;
+    if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    const sampler = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
-    if (!ctx || !sampler) return;
+    if (!ctx) return;
 
-    let bg: [number, number, number] | null = null;
-    let lastDrawn = -1;
-
-    const engrave = () => {
-      const vw = video.videoWidth;
-      const vh = video.videoHeight;
-      if (video.readyState < 2 || vw === 0 || vh === 0) return;
-      if (video.currentTime === lastDrawn) return; // same frame: nothing to redraw
-      lastDrawn = video.currentTime;
-      if (canvas.width !== vw || canvas.height !== vh) {
-        canvas.width = vw;
-        canvas.height = vh;
-      }
-      const cols = Math.floor(vw / COL_STEP);
-      const rows = Math.floor(vh / ROW_GAP);
-      sampler.canvas.width = cols;
-      sampler.canvas.height = rows;
-      sampler.drawImage(video, 0, 0, cols, rows);
-      let d: Uint8ClampedArray;
-      try {
-        d = sampler.getImageData(0, 0, cols, rows).data;
-      } catch {
-        return; // unreadable frame: the still under the canvas stays visible
-      }
-      if (!bg) bg = [d[0] ?? 230, d[1] ?? 228, d[2] ?? 224];
-      const bl = (0.3 * bg[0] + 0.59 * bg[1] + 0.11 * bg[2]) / 255;
-
-      // Per sample: how much metal (ink), and how much of it is gold or the white ring.
-      const ink = new Float32Array(cols);
-      const gold = new Float32Array(cols);
-      const white = new Float32Array(cols);
-      const sInk = new Float32Array(cols);
-      const sGold = new Float32Array(cols);
-      const sWhite = new Float32Array(cols);
-
-      ctx.clearRect(0, 0, vw, vh);
-      for (let j = 0; j < rows; j++) {
-        const y0 = j * ROW_GAP + ROW_GAP / 2;
-        // Below the rings, only clearly dark or clearly light pixels are metal; the soft shadow is not.
-        const floor = j / rows > 0.76;
-        for (let i = 0; i < cols; i++) {
-          const k = (j * cols + i) * 4;
-          const r = d[k] ?? 0;
-          const g = d[k + 1] ?? 0;
-          const b = d[k + 2] ?? 0;
-          const lum = (0.3 * r + 0.59 * g + 0.11 * b) / 255;
-          const sat = (Math.max(r, g, b) - Math.min(r, g, b)) / 255;
-          const dark = bl - lum > (floor ? 0.3 : 0.12) ? (bl - lum) * 1.9 : 0;
-          const light = lum - bl > (floor ? 0.08 : 0) ? (lum - bl) * 2.6 : 0;
-          ink[i] = dark + sat * 1.5 + light;
-          gold[i] = sat > 0.12 ? 1 : 0;
-          white[i] = lum > bl + 0.02 && sat < 0.12 ? 1 : 0;
-        }
-        // Smooth along the line: one sliding window, so each line swells and tapers.
-        let aI = 0;
-        let aG = 0;
-        let aW = 0;
-        for (let i = -SMOOTH; i < cols + SMOOTH; i++) {
-          const add = i + SMOOTH;
-          const drop = i - SMOOTH - 1;
-          if (add < cols) { aI += ink[add] ?? 0; aG += gold[add] ?? 0; aW += white[add] ?? 0; }
-          if (drop >= 0) { aI -= ink[drop] ?? 0; aG -= gold[drop] ?? 0; aW -= white[drop] ?? 0; }
-          if (i >= 0 && i < cols) {
-            const n = Math.min(cols - 1, i + SMOOTH) - Math.max(0, i - SMOOTH) + 1;
-            sInk[i] = aI / n;
-            sGold[i] = aG / n;
-            sWhite[i] = aW / n;
-          }
-        }
-        // Metal of a sample, read on the smoothed values so a line does not flicker between colours.
-        const kind = (q: number): 0 | 1 | 2 => ((sGold[q] ?? 0) > 0.5 ? 1 : (sWhite[q] ?? 0) > 0.6 ? 2 : 0);
-        let i = 0;
-        while (i < cols) {
-          if ((sInk[i] ?? 0) < INK_MIN) {
-            i++;
-            continue;
-          }
-          const m = kind(i);
-          let i2 = i;
-          while (i2 < cols && (sInk[i2] ?? 0) >= INK_MIN && kind(i2) === m) i2++;
-          if (i2 - i >= MIN_RUN) {
-            const width = (q: number): number =>
-              m === 2 ? 1.2 : Math.min(ROW_GAP * 0.34, 0.9 + (sInk[q] ?? 0) * ROW_GAP * 0.3);
-            ctx.beginPath();
-            for (let q = i; q < i2; q++) {
-              const x = q * COL_STEP + COL_STEP / 2;
-              if (q === i) ctx.moveTo(x, y0 - width(q) / 2);
-              else ctx.lineTo(x, y0 - width(q) / 2);
-            }
-            for (let q = i2 - 1; q >= i; q--) ctx.lineTo(q * COL_STEP + COL_STEP / 2, y0 + width(q) / 2);
-            ctx.closePath();
-            ctx.fillStyle = m === 1 ? GOLD : m === 2 ? WHITE_LINE : IRON;
-            ctx.fill();
-          }
-          i = Math.max(i2, i + 1);
-        }
-      }
-      // The engraving now carries the picture: the plastic still under it goes.
-      canvas.parentElement?.setAttribute("data-engraved", "");
+    let W = 0;
+    let H = 0;
+    const size = () => {
+      const r = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = Math.max(1, r.width);
+      H = Math.max(1, r.height);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      // Still: engrave the first frame once.
-      const once = () => engrave();
-      if (video.readyState >= 2) once();
-      else video.addEventListener("loadeddata", once, { once: true });
-      return () => video.removeEventListener("loadeddata", once);
-    }
+    // Phase accumulates so a change of speed never jumps the drawing.
+    let phase = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      const s = Math.min(W, H) * 0.4;
+      const cx = W / 2;
+      const cy = H / 2;
+      const project = (p: V3): V3 => {
+        const f = 3.2 / (3.2 - p[2]);
+        return [cx + p[0] * s * f, cy + p[1] * s * f, p[2]];
+      };
+      const segs: Seg[] = [];
+      for (const ring of RINGS) {
+        const o: V3 = [ring.tilt[0] + phase * ring.spin[0], ring.tilt[1] + phase * ring.spin[1], ring.tilt[2] + phase * ring.spin[2]];
+        const at = (u: number, v: number): V3 => project(orient([Math.cos(u) * ring.R, Math.sin(u) * ring.R, (v * ring.w) / 2], o));
+        const bold = ring.gold ? 1.3 : 1;
+        for (let r = 0; r < ring.rails; r++) {
+          const v = -1 + (2 * r) / (ring.rails - 1);
+          let prev = at(0, v);
+          for (let i = 1; i <= SEGMENTS; i++) {
+            const q = at((i / SEGMENTS) * Math.PI * 2, v);
+            segs.push({ ax: prev[0], ay: prev[1], bx: q[0], by: q[1], z: (prev[2] + q[2]) / 2, ring, width: (r === 0 || r === ring.rails - 1 ? 1.15 : 0.7) * bold });
+            prev = q;
+          }
+        }
+        for (let i = 0; i < ring.ribs; i++) {
+          const u = (i / ring.ribs) * Math.PI * 2;
+          const a = at(u, -1);
+          const b = at(u, 1);
+          segs.push({ ax: a[0], ay: a[1], bx: b[0], by: b[1], z: (a[2] + b[2]) / 2, ring, width: 0.7 });
+        }
+      }
+      // Back to front; the far side of each band fades.
+      segs.sort((p, q) => p.z - q.z);
+      for (const g of segs) {
+        const depth = Math.max(0, Math.min(1, (g.z + 1.1) / 2.2));
+        const a = g.ring.alpha * (g.ring.gold ? 0.35 + 0.65 * depth : 0.18 + 0.82 * depth);
+        ctx.strokeStyle = `rgba(${g.ring.gold ? GOLD : INK},${a})`;
+        ctx.lineWidth = g.width;
+        ctx.beginPath();
+        ctx.moveTo(g.ax, g.ay);
+        ctx.lineTo(g.bx, g.by);
+        ctx.stroke();
+      }
+      // The outer ring's pivot: a dashed axis and two gold bearings.
+      const outer = RINGS[0];
+      if (outer) {
+        const o: V3 = [outer.tilt[0] + phase * outer.spin[0], outer.tilt[1] + phase * outer.spin[1], outer.tilt[2]];
+        const p1 = project(orient([0, 1.14, 0], o));
+        const p2 = project(orient([0, -1.14, 0], o));
+        ctx.setLineDash([4, 5]);
+        ctx.strokeStyle = `rgba(${INK},.28)`;
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(p1[0], p1[1]);
+        ctx.lineTo(p2[0], p2[1]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        for (const p of [p1, p2]) {
+          ctx.fillStyle = `rgb(${GOLD})`;
+          ctx.beginPath();
+          ctx.arc(p[0], p[1], 3.2, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = `rgba(${INK},.6)`;
+          ctx.beginPath();
+          ctx.arc(p[0], p[1], 6, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
+    };
 
-    video.defaultPlaybackRate = IDLE_RATE;
-    video.playbackRate = IDLE_RATE;
+    size();
+    draw();
+    // The drawing now carries the picture: the still under it goes.
+    canvas.parentElement?.setAttribute("data-engraved", "");
+    const onResize = () => {
+      size();
+      draw();
+    };
+    window.addEventListener("resize", onResize);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return () => window.removeEventListener("resize", onResize);
+    }
 
     let rate = IDLE_RATE;
     let target = IDLE_RATE;
     let lastY = window.scrollY;
+    let last = 0;
     let raf = 0;
     let visible = false;
 
-    const start = () => {
-      video.playbackRate = rate;
-      const p = video.play();
-      // Autoplay refused (data saver, policy): the still stays, nothing breaks.
-      if (p !== undefined) p.catch(() => undefined);
-    };
-
-    const tick = () => {
+    const tick = (now: number) => {
       raf = 0;
       if (!visible) return;
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
+      last = now;
       const y = window.scrollY;
       const dy = Math.abs(y - lastY);
       lastY = y;
       if (dy > 0) target = Math.min(MAX_RATE, Math.max(target, IDLE_RATE + dy * GAIN));
       target += (IDLE_RATE - target) * SETTLE;
       rate += (target - rate) * EASE;
-      // Only touch the element when the change is visible; setting it every frame stutters.
-      if (Math.abs(video.playbackRate - rate) > 0.02) video.playbackRate = rate;
-      engrave();
+      phase += dt * rate;
+      draw();
       raf = window.requestAnimationFrame(tick);
     };
 
@@ -199,10 +185,8 @@ export function HeroRingsVideo() {
         visible = Boolean(entry?.isIntersecting);
         if (visible) {
           lastY = window.scrollY;
-          start();
+          last = 0;
           if (!raf) raf = window.requestAnimationFrame(tick);
-        } else {
-          video.pause();
         }
       },
       { threshold: 0 },
@@ -212,26 +196,9 @@ export function HeroRingsVideo() {
     return () => {
       io.disconnect();
       if (raf) window.cancelAnimationFrame(raf);
-      video.pause();
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
-  return (
-    <>
-      {/* Read, never shown: the canvas draws each of its frames as engraving. */}
-      <video
-        ref={ref}
-        className="pointer-events-none absolute h-px w-px"
-        style={{ opacity: 0 }}
-        src="/media/hero-rings-loop.mp4"
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-        tabIndex={-1}
-      />
-      <canvas ref={canvasRef} className="hero-rings-video absolute inset-0 h-full w-full object-cover" aria-hidden="true" />
-    </>
-  );
+  return <canvas ref={canvasRef} className="hero-gyro absolute inset-0 h-full w-full" aria-hidden="true" />;
 }
