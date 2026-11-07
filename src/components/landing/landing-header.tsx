@@ -14,7 +14,7 @@ import { siteNav, type NavGroup, type NavItem } from "./site-nav";
  * the language switch which page to cross to. Those used to be the same idea
  * split across two props, which is a mirror waiting to disagree.
  */
-type Page = "home" | "demo" | "proof" | "provable-ai" | "neuro-symbolic" | "zero-trust" | "software-security" | "modernization" | "verify" | "evidence" | "lab" | "pilot" | "act-money" | "act-access" | "act-records" | "act-deploy" | "research" | "research-limits" | "proof-intelligence" | "research-index" | "demo-python-c" | "critical-actions" | "traceability-audit";
+type Page = "home" | "demo" | "proof" | "provable-ai" | "neuro-symbolic" | "zero-trust" | "software-security" | "modernization" | "verify" | "evidence" | "lab" | "pilot" | "act-money" | "act-access" | "act-records" | "act-deploy" | "research" | "research-limits" | "research-human-loop" | "proof-intelligence" | "research-index" | "demo-python-c" | "critical-actions" | "traceability-audit";
 
 /**
  * Each page's path WITHOUT a locale prefix. The single source for both link
@@ -42,6 +42,7 @@ const PATHS: Record<Page, string> = {
   "act-deploy": "/actions/deploy",
   research: "/research/zero-barriers-one-reviewer",
   "research-limits": "/research/what-our-proofs-do-not-prove",
+  "research-human-loop": "/research/when-the-ai-hacks-the-human-in-the-loop",
   "proof-intelligence": "/proof-intelligence",
   "research-index": "/research",
   "demo-python-c": "/demo/python-to-c",
