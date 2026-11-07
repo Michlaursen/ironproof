@@ -1195,9 +1195,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <span className="track-mid block text-sm font-semibold md:text-base">{t.hero.eyebrow}</span>
               </p>
               <h1 className="hero-serif hero-white-title font-serif font-normal">
-                {t.hero.headline}
-                <br />
-                <em className="not-italic font-semibold">{t.hero.headlineEnd}</em>
+                {/* One sentence that wraps on its own (Dom, 2026-11-07: « you can verify » sat alone underneath). */}
+                {t.hero.headline} {t.hero.headlineEnd}
               </h1>
             </div>
             <div className="hero-white-aside fade-up min-w-0 md:pt-14">
@@ -1300,6 +1299,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           </div>
         </section>
 
+        {/* Four uses, right under the hero, as Code Metal does (Dom, 2026-11-07). */}
+        <UseCases locale={locale} />
+
         {/* The check of what a machine rewrote, right under the hero (Dom, 2026-10-19). */}
         <RewriteCheck locale={locale} />
 
@@ -1340,7 +1342,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           * line, the close. "What we believe", "Why now" and the engineering system
           * live on /proof-intelligence. The four steps appear once, in PlatformHow. */}
         <WhyIronproof locale={locale} />
-        <UseCases locale={locale} />
         <PlatformHow locale={locale} />
         <CompanyLine locale={locale} />
 

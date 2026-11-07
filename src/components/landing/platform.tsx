@@ -125,44 +125,35 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <section id="use-cases" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
       <div className="mx-auto max-w-6xl">
-        {/* Code verification left this block: the section under the hero already says it,
-          * and links to /modernization (Dom, 2026-11-01: fewer blocks, same words). */}
+        {/* Code Metal's format (Dom, 2026-11-07: « simple comme Code Metal »): a title,
+          * then four uses, each one line and one real result. */}
         <div className="fade-up max-w-4xl">
-          <p className="seal-label track-mid mb-5 text-xs">{u.eyebrow}</p>
-          <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{u.alsoTitle}</h2>
+          <p className="seal-label track-mid mb-5 text-xs">{u.casesEyebrow}</p>
+          <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{u.casesTitle}</h2>
+          <p className="mt-6 max-w-2xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{u.casesLead}</p>
         </div>
-        {/* The three mandates as cards with what the client walks away with (Dom 2026-10-17: « met le plus impactant, c trop facile pass by »). */}
-        <div className="fade-up mt-6">
-          <p className="max-w-2xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{u.alsoLead}</p>
-          <p className="mt-4 max-w-2xl text-base font-light leading-relaxed text-neutral-400 md:text-lg">{u.waysLead}</p>
-          <ol className="mt-10 grid gap-6 md:grid-cols-3">
-            {u.cards.slice(1).map((c, i) => (
-              <li key={c.name}>
-                <a
-                  href={c.href}
-                  className="group flex h-full flex-col rounded-[6px] border border-white/10 bg-ink/60 p-7 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
-                  style={{ borderTop: "3px solid #a8843a" }}
-                >
-                  <span className="card-photo card-photo-mandate" aria-hidden="true">
-                    <Image src={MANDATE_PHOTOS[i] ?? "/media/app-gate.jpg"} alt="" fill sizes="(min-width: 768px) 24rem, 100vw" className="object-cover" />
-                  </span>
-                  <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="mt-3 font-serif text-2xl text-neutral-100">{c.name}</span>
-                  <span className="mt-3 flex-1 text-base font-light leading-relaxed text-neutral-300">{u.alsoLines[i]}</span>
-                  <span className="track-mid mt-6 inline-flex items-center gap-2 text-xs text-neutral-200 transition group-hover:text-white">
-                    {c.cta} <span aria-hidden="true" className="transition group-hover:translate-x-1">&rarr;</span>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ol>
-          <a
-            href={u.alsoHref}
-            className="track-mid mt-8 inline-flex items-center gap-2 border-b border-white/25 pb-1 text-xs text-neutral-200 transition hover:border-seal hover:text-white"
-          >
-            {u.alsoCta} <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
+        <ol className="fade-up mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {u.cases.map((c, i) => (
+            <li key={c.name}>
+              <a
+                href={c.href}
+                className="group flex h-full flex-col rounded-[6px] border border-white/10 bg-ink/60 p-7 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+                style={{ borderTop: "3px solid #a8843a" }}
+              >
+                <span className="card-photo card-photo-mandate" aria-hidden="true">
+                  <Image src={CASE_PHOTOS[i] ?? "/media/app-gate.jpg"} alt="" fill sizes="(min-width: 1280px) 18rem, (min-width: 768px) 24rem, 100vw" className="object-cover" />
+                </span>
+                <span className="num-badge font-serif text-2xl">{String(i + 1).padStart(2, "0")}</span>
+                <span className="mt-3 font-serif text-2xl text-neutral-100">{c.name}</span>
+                <span className="mt-3 text-base font-light leading-relaxed text-neutral-300">{c.line}</span>
+                <span className="mt-4 flex-1 border-t border-white/10 pt-4 text-sm font-light leading-relaxed text-neutral-400">{c.example}</span>
+                <span className="track-mid mt-6 inline-flex items-center gap-2 text-xs text-neutral-200 transition group-hover:text-white">
+                  {c.cta} <span aria-hidden="true" className="transition group-hover:translate-x-1">&rarr;</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -171,7 +162,7 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
 /* Three buyer benefits, right after the use cases (Dom, 2026-10-16). */
 /* Marble, iron and gold objects already on the site, one per promise (Dom, 2026-11-01). */
 const WHY_PHOTOS = ["/media/seal-press-white.jpg", "/media/trio-sealed.jpg", "/media/trio-verifiable.jpg"] as const;
-const MANDATE_PHOTOS = ["/media/critical-switches-white.jpg", "/media/app-gate.jpg", "/media/app-c-chip.jpg"] as const;
+const CASE_PHOTOS = ["/media/app-legacy-reel.jpg", "/media/gap-two-chips.jpg", "/media/app-c-chip.jpg", "/media/critical-switches-white.jpg"] as const;
 
 export function WhyIronproof({ locale = defaultLocale }: { locale?: Locale }) {
   const w = pick(PLATFORM_COPY, locale).whyUs;
