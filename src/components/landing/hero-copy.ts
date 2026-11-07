@@ -34,14 +34,14 @@ export const HERO_COPY: L<HeroCopy> = {
   en: {
     // The whole category, alone on its line (Dom, 2026-11-01). "Independent" stays in the text beside the title.
     eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE SOFTWARE",
-    headline: "Machines can write the proof.",
-    headlineEnd: "The question is what it proves.",
+    headline: "AI rewrites critical code faster than anyone can review it.",
+    headlineEnd: "Ironproof is the layer that proves.",
     value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
   },
   fr: {
     eyebrow: "PROOF INTELLIGENCE POUR LES LOGICIELS D’INFRASTRUCTURE CRITIQUE",
-    headline: "Les machines savent écrire la preuve.",
-    headlineEnd: "Reste à savoir ce qu’elle prouve.",
+    headline: "L’IA réécrit le code critique plus vite qu’on peut le relire.",
+    headlineEnd: "Ironproof est la couche qui prouve.",
     value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
   },
 };
