@@ -1,0 +1,53 @@
+{
+  "name": "Ironproof Gate Demo Agent",
+  "description": "Demo agent for the Concordium Trusted Agents Hackathon. Before any action runs, Ironproof allows or blocks it against a formal policy and seals the decision; each sealed decision is anchored on Concordium from this agent owner account, and anyone can re-check it without trusting Ironproof.",
+  "url": "https://ironproof.ai/agents/ironproof-gate-demo.json",
+  "version": "1.0.0",
+  "defaultInputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "text/markdown",
+    "application/json"
+  ],
+  "authentication": {
+    "schemes": []
+  },
+  "skills": [],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extensions": [
+      {
+        "uri": "https://docs.concordium.com/a2a-extensions/concordium-badge/v1",
+        "description": "Verified by Concordium badge — on-chain agent identity in a CIS-8004 registry",
+        "required": false,
+        "params": {
+          "tokenAddress": "ccd:4221332d34e1694168c2a0c0b3fd0f27/cis-2:JyP9YgRFnQXPC2H1vypoS",
+          "owner": {
+            "account": "ccd:4221332d34e1694168c2a0c0b3fd0f27:3M6v4mdHoLE3AewnHn1q6TovZHcKFBdSCWa77B9JEMrtXz7CBJ"
+          },
+          "agentWallet": "ccd:4221332d34e1694168c2a0c0b3fd0f27:3M6v4mdHoLE3AewnHn1q6TovZHcKFBdSCWa77B9JEMrtXz7CBJ",
+          "contracts": {
+            "cis8004": "ccd:4221332d34e1694168c2a0c0b3fd0f27:12802.0",
+            "cis8": "ccd:4221332d34e1694168c2a0c0b3fd0f27:12801.0"
+          },
+          "verify": "Resolve tokenAddress via CIS-8004 agent_of; confirm owner + status=Active + card SHA-256 == metadata_hash.",
+          "verification": {
+            "service": "Concordium Agent Registry",
+            "verifyUrl": "https://agent-registry-mcp.concordium.com/v1/badge-check/JyP9YgRFnQXPC2H1vypoS",
+            "mcp": "https://agent-registry-mcp.concordium.com/mcp",
+            "docs": "https://docs.concordium.com/en/mainnet/technical-reference/agent-registry/concordium-badge.html"
+          }
+        }
+      }
+    ]
+  },
+  "registrations": [
+    {
+      "agentId": 1022,
+      "agentRegistry": "ccd:4221332d34e1694168c2a0c0b3fd0f27:12802.0"
+    }
+  ]
+}
