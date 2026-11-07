@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
-import { SealLive } from "./seal-live";
 import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { HeroConnectors } from "./hero-connectors";
 import { HeroRingsVideo } from "./hero-rings-video";
@@ -12,7 +11,6 @@ import { PILOT_COPY } from "./pilot-copy";
 import { CompanyLine, UseCases, WhyIronproof } from "./platform";
 import { PlatformHow } from "./platform-how";
 import { RewriteCheck } from "./rewrite-check";
-import { firstSealedEntryHash } from "@/lib/evidence";
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick, NBSP } from "./i18n";
 
@@ -241,7 +239,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "AI proposes, mathematics decides. Our engine translates your code or verifies what others rewrote, checks that a fix really closes the vulnerability, and checks your critical actions before they execute. You see the exact breaking case, and what we could not decide.\nOne engine. One question: does this change open a vulnerability?\nSealed. Verifiable without trusting us.",
+        "Translate legacy code, prove a fix closes the flaw, and decide every critical action before it runs. Sealed evidence anyone can re-check without us.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -688,7 +686,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "L’IA propose, les mathématiques tranchent. Notre moteur traduit votre code ou vérifie celui que d’autres ont réécrit, vérifie qu’un correctif ferme vraiment la faille, et contrôle vos actions critiques avant qu’elles s’exécutent. Vous voyez le cas exact qui casse, et ce qu’on n’a pas pu trancher.\nUn seul moteur. Une question : ce changement ouvre-t-il une faille ?\nScellé. Vérifiable sans avoir à nous croire.",
+        "Traduire le code ancien, prouver qu’un correctif ferme la faille, décider de chaque action critique avant qu’elle s’exécute. Une preuve scellée que n’importe qui revérifie sans nous.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -1177,7 +1175,6 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const t = pick(T, locale);
   const eng = pick(HERO_ENGINE_COPY, locale);
-  const sealHash = firstSealedEntryHash();
 
   return (
     <div className="flex flex-1 flex-col">
@@ -1225,13 +1222,9 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
                   {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
                 </a>
-                {/* The second action sends a translation (Dom, 2026-10-19: « ouais »); the
-                  * sealed decision just below still opens /verify. */}
-                <a href={`${r}/modernization`} className="hero-white-link track-mid inline-flex items-center gap-2 border-b pb-1 text-xs">
-                  {t.hero.ctaSend} <span aria-hidden="true">&rarr;</span>
-                </a>
+                {/* One action only, like the Code Metal hero (Dom, 2026-11-07: « trop d'écriture »).
+                  * Sending a translation lives on /modernization; the sealed dossier on /verify. */}
               </div>
-              <SealLive hash={sealHash} locale={locale} verifyHref={`${r}/verify`} />
             </div>
           </div>
           {/* Three columns that never overlap: the language model, the brain, the
