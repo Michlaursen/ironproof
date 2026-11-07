@@ -1288,7 +1288,7 @@ p, li {
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 10%);
   mask-image: linear-gradient(180deg, transparent 0%, #000 10%);
 }
-.hero-white-brain img, .hero-white-brain video.hero-rings-video { object-position: 50% 58%; }
+.hero-white-brain img, .hero-white-brain .hero-rings-video { object-position: 50% 58%; }
 @media (max-width: 767px) {
   /* Phone: the brain opens the screen, the statement follows on the same floor. */
   .hero-white { display: flex; flex-direction: column; padding-bottom: 3rem; }
@@ -1299,7 +1299,7 @@ p, li {
     -webkit-mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
     mask-image: linear-gradient(180deg, #000 80%, transparent 100%);
   }
-  .hero-white-brain img, .hero-white-brain video.hero-rings-video { object-position: 50% 62%; transform: scale(1.1); }
+  .hero-white-brain img, .hero-white-brain .hero-rings-video { object-position: 50% 62%; transform: scale(1.1); }
 }
 
 /* Hero engine (Dom, 2026-10-15): three columns that never overlap. The brain
@@ -1323,7 +1323,7 @@ p, li {
   -webkit-mask-image: radial-gradient(ellipse 54% 54% at 50% 50%, #000 58%, transparent 98%);
   mask-image: radial-gradient(ellipse 54% 54% at 50% 50%, #000 58%, transparent 98%);
 }
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { object-position: 50% 60%; transform: scale(1.3); }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { object-position: 50% 60%; transform: scale(1.3); }
 .hero-stage-side { display: flex; flex-direction: column; gap: 1rem; }
 .hero-stage-left { align-items: flex-end; }
 .hero-stage-right { align-items: flex-start; }
@@ -1462,7 +1462,7 @@ p, li {
    lines draw from each card to the brain, and the method line lights its four
    steps in order, once. Both are skipped under reduced motion. */
 .hero-white-stage { grid-template-columns: minmax(0, 1fr) minmax(0, 55rem) minmax(0, 1fr); gap: 1rem; }
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: scale(1.38); }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: scale(1.38); }
 .hero-card { padding: 1.25rem 1.35rem; font-size: 0.8rem; line-height: 1.65; }
 .hero-card-kicker { letter-spacing: 0.22em; font-size: 0.6rem; margin-bottom: 0.65rem; }
 .hero-card-gold {
@@ -1495,20 +1495,20 @@ p, li {
 @media (max-width: 767px) {
   .hero-white-stage { display: contents; }
   .hero-white-stage .hero-white-brain { order: -1; aspect-ratio: 1 / 1; max-width: none; }
-  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: scale(1.55); object-position: 50% 58%; }
+  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: scale(1.55); object-position: 50% 58%; }
   .hero-stage-side { display: flex; order: 2; padding: 0 1.5rem; margin-top: 1rem; }
   .hero-stage-right .hero-dossier { display: none; }
   .hero-card { max-width: none; }
   .hero-steps { order: 3; }
 }
 /* Sharp crop of the full-size photograph instead of a zoom (Dom, 2026-10-15). */
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: none; object-position: 50% 50%; }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: none; object-position: 50% 50%; }
 .hero-white-stage .hero-white-brain {
   -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 100%);
   mask-image: radial-gradient(ellipse 50% 50% at 50% 48%, #000 58%, transparent 100%);
 }
 @media (max-width: 767px) {
-  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: none; object-position: 50% 45%; }
+  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: none; object-position: 50% 45%; }
 }
 /* The cards keep a readable width; the brain takes what is left, up to 55rem. */
 @media (min-width: 1024px) {
@@ -1589,7 +1589,7 @@ p, li {
 
 /* Last touches (Dom, 2026-10-15). The marble half had melted into the floor:
    a little more contrast on the photograph and a soft shadow pool under it. */
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { filter: contrast(1.1) brightness(0.98); }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { filter: contrast(1.1) brightness(0.98); }
 .hero-white-stage .hero-white-brain::after {
   content: "";
   position: absolute;
@@ -1631,7 +1631,7 @@ p, li {
   }
   /* Wider frame, same brain: the crop loses floor above and below, not cortex. */
   .hero-white-stage .hero-white-brain { aspect-ratio: 16 / 11; }
-  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { object-position: 50% 46%; }
+  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { object-position: 50% 46%; }
 }
 .hero-card, .hero-dossier { max-width: 20.5rem; }
 .hero-card { padding: 1.4rem 1.5rem; font-size: 0.9rem; line-height: 1.6; }
@@ -1671,7 +1671,7 @@ p, li {
     gap: 0.75rem;
   }
   .hero-white-stage .hero-white-brain { aspect-ratio: 4 / 3; }
-  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: scale(1.14); object-position: 50% 44%; }
+  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: scale(1.14); object-position: 50% 44%; }
   .hero-steps { margin-top: -2.75rem; position: relative; z-index: 3; }
 }
 @media (min-width: 1024px) {
@@ -1715,7 +1715,7 @@ p, li {
 @media (max-width: 767px) {
   /* A smaller brain so the statement and the button come up the screen. */
   .hero-white-stage .hero-white-brain { aspect-ratio: 16 / 12; }
-  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { object-position: 50% 44%; }
+  .hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { object-position: 50% 44%; }
   .hero-white > .relative.z-10 { gap: 1.25rem; padding-top: 0.5rem; }
   .hero-white-eyebrow { margin-bottom: 1rem; }
   .hero-white-value { margin-bottom: 1rem; }
@@ -2352,8 +2352,8 @@ p, li {
 /* Hero entity K (Dom, 2026-10-15: "j'aime le robot, un peu effacé"): the
    head multiplies into the page and fades out at its edges. NEURAL sits at
    brain height and its line runs almost to the dome. */
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: none; object-position: 50% 40%; mix-blend-mode: multiply; }
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { opacity: 0.8; }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: none; object-position: 50% 40%; mix-blend-mode: multiply; }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { opacity: 0.8; }
 /* The chin stays whole (the neck fade is baked into the image); the frame
    melts into the page on every side. */
 .hero-white-stage .hero-white-brain {
@@ -2379,7 +2379,7 @@ p, li {
 .hero-white-stage .hero-white-brain::after { display: none; }
 /* The image is tinted to the page colour and padded below, so the chin stays
    whole and only the neck dissolves; no blend mode needed. */
-.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain video.hero-rings-video { transform: none; object-position: 50% 0%; mix-blend-mode: normal; opacity: 1; }
+.hero-white-stage .hero-white-brain img, .hero-white-stage .hero-white-brain .hero-rings-video { transform: none; object-position: 50% 0%; mix-blend-mode: normal; opacity: 1; }
 
 /* The head sits in a wrapper so the phone map can draw on it unmasked. */
 .hero-white-brain-wrap { position: relative; min-width: 0; }
@@ -2419,7 +2419,7 @@ p, li {
 }
 @media (max-width: 767px) {
   .hero-white-stage .hero-white-brain-wrap .hero-white-brain { height: auto; aspect-ratio: 1 / 1.08; }
-  .hero-white-stage .hero-white-brain-wrap .hero-white-brain img, .hero-white-stage .hero-white-brain-wrap .hero-white-brain video.hero-rings-video { object-position: 46% 0%; transform: none; }
+  .hero-white-stage .hero-white-brain-wrap .hero-white-brain img, .hero-white-stage .hero-white-brain-wrap .hero-white-brain .hero-rings-video { object-position: 46% 0%; transform: none; }
   .hero-map-neural { left: 0.5rem; top: 30%; }
   .hero-map-symbolic { right: 0.5rem; top: 1.5%; }
   .hero-map-proven { right: 0.5rem; top: 70%; }
@@ -4005,4 +4005,6 @@ html.lenis, html.lenis body { height: auto; }
 
 /* The rings turn (Dom, 2026-11-02). The video sits on the still with the same framing
    rules; with reduced motion only the still shows. */
-@media (prefers-reduced-motion: reduce) { .hero-rings-video { display: none; } }
+/* Engraved rings (Dom, 2026-11-07): once the canvas has drawn, the plastic still under it goes.
+   Reduced motion keeps the canvas: it shows the first frame, engraved, and does not move. */
+.hero-white-brain[data-engraved] > img { opacity: 0; }
