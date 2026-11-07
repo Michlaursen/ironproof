@@ -3,6 +3,7 @@ import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
 import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
 import { HeroConnectors } from "./hero-connectors";
 import { HeroRingsVideo } from "./hero-rings-video";
+import { ProvablyFinale } from "./provably-finale";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -1377,6 +1378,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
           </div>
         </section>
+
+        {/* The last screen (Dom, 2026-11-07): "probably" locks into "provably." under a gold
+          * sweep, between the hero rings, a transmission tower and a telecom mast. */}
+        <ProvablyFinale locale={locale} pilotHref={`${r}/pilot`} />
 
       </main>
 
