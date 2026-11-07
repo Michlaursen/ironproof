@@ -100,6 +100,11 @@ export type PlatformCopy = {
     alsoLead: string;
     /** The two ways to work with us, as on slide 6 of the deck (Dom 2026-11-07). */
     waysLead: string;
+    /** Four uses, one line and one real result each, in Code Metal's format (Dom 2026-11-07: « simple comme Code Metal »). */
+    casesEyebrow: string;
+    casesTitle: string;
+    casesLead: string;
+    cases: readonly { name: string; line: string; example: string; href: string; cta: string }[];
     alsoCta: string;
     alsoHref: string;
     /** How the gate plugs in, for the CTO's first question. */
@@ -207,6 +212,39 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "It starts with the code that was rewritten.",
       alsoTitle: "One engine, one question, three more doors.",
       alsoLead: "Does this change open a vulnerability? The engine that verifies rewritten code also guards critical actions, access policies and security fixes.",
+      casesEyebrow: "WHY TEAMS USE IRONPROOF",
+      casesTitle: "Move fast, and prove it.",
+      casesLead: "One engine. As a service on your code, or as a product installed on your side.",
+      cases: [
+        {
+          name: "Legacy modernization",
+          line: "Move COBOL to Java or Python. We audit what the translation claims, then show exactly where the new code behaves differently.",
+          example: "A third-party COBOL → Java translation: 15 findings, 11 replayed in execution, including a credit-limit check that disappeared.",
+          href: "/modernization",
+          cta: "SEE HOW WE CHECK IT",
+        },
+        {
+          name: "Prototype to production",
+          line: "Port a prototype to the language of its target, with proof it returns the same result.",
+          example: "A Python signal-processing step translated to embedded C: the same result on all 140 trillion inputs. One short function, from our own tests.",
+          href: "/demo/python-to-c",
+          cta: "SEE THE PROOF",
+        },
+        {
+          name: "Security fixes",
+          line: "Prove a patch really closes the flaw, before you ship it.",
+          example: "Blind test: 20 drawn from 268 recent vulnerabilities, 13 proven closed within declared limits. Fixes credited by wolfSSL, IBM and Red Hat.",
+          href: "/software-security",
+          cta: "SEE THE RESULTS",
+        },
+        {
+          name: "Critical actions",
+          line: "Decide every critical action before it runs: allowed if it complies, blocked if it does not.",
+          example: "Power grid, NERC CIP-010: 44 of 44 cases at the expected verdict, 22 of 22 sabotages refused.",
+          href: "/demo",
+          cta: "WATCH IT DECIDE",
+        },
+      ],
       waysLead: "Two ways to work with us. The service: we verify your critical code (COBOL, Java, Python, C, Rust), or our engine translates it and compares the translation with the original. The product: critical-action control, installed on your side.",
       alsoLines: [
         "Every critical action checked against your rules before it runs, from an AI agent’s payment to a change on power-grid equipment (NERC CIP-010): allowed when it complies, blocked when it breaks them, and every decision sealed.",
@@ -361,6 +399,39 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Tout commence par le code qui a été réécrit.",
       alsoTitle: "Un seul moteur, une question, trois autres portes.",
       alsoLead: "Ce changement ouvre-t-il une faille ? Le moteur qui vérifie le code réécrit protège aussi vos actions critiques, vos politiques d’accès et vos correctifs de sécurité.",
+      casesEyebrow: "POURQUOI ON CHOISIT IRONPROOF",
+      casesTitle: "Aller vite, et le prouver.",
+      casesLead: "Un seul moteur. En service sur votre code, ou en produit installé chez vous.",
+      cases: [
+        {
+          name: "Modernisation du code ancien",
+          line: "Passez du COBOL à Java ou à Python. On audite ce que la traduction affirme, puis on montre exactement où le nouveau code se comporte autrement.",
+          example: "Une traduction COBOL → Java faite par un tiers : 15 constats, 11 rejoués en exécution, dont un contrôle de limite de crédit disparu.",
+          href: "/fr/modernization",
+          cta: "VOIR COMMENT ON VÉRIFIE",
+        },
+        {
+          name: "Du prototype à la production",
+          line: "Portez un prototype vers le langage de sa cible, avec la preuve qu’il rend le même résultat.",
+          example: "Une étape de traitement du signal en Python traduite en C embarqué : le même résultat sur les 140 billions d’entrées. Une seule fonction courte, tirée de nos propres essais.",
+          href: "/fr/demo/python-to-c",
+          cta: "VOIR LA PREUVE",
+        },
+        {
+          name: "Correctifs de sécurité",
+          line: "Prouvez qu’un correctif ferme vraiment la faille, avant de le livrer.",
+          example: "Test à l’aveugle : 20 tirés parmi 268 failles récentes, 13 prouvés fermés dans des limites déclarées. Correctifs crédités par wolfSSL, IBM et Red Hat.",
+          href: "/fr/software-security",
+          cta: "VOIR LES RÉSULTATS",
+        },
+        {
+          name: "Actions critiques",
+          line: "Décidez de chaque action critique avant qu’elle s’exécute : conforme, elle passe ; sinon, elle est bloquée.",
+          example: "Réseau électrique, norme NERC CIP-010 : 44 cas sur 44 au verdict attendu, 22 sabotages sur 22 refusés.",
+          href: "/fr/demo",
+          cta: "VOYEZ-LE DÉCIDER",
+        },
+      ],
       waysLead: "Deux façons de travailler avec nous. Le service : on vérifie votre code critique (COBOL, Java, Python, C, Rust), ou notre moteur le traduit et compare la traduction à l’original. Le produit : le contrôle des actions critiques, installé chez vous.",
       alsoLines: [
         "Chaque action critique vérifiée selon vos règles avant de partir, du paiement d’un agent IA au changement sur un équipement du réseau électrique (norme NERC CIP-010). Conforme, elle passe. Sinon, elle est bloquée. Chaque décision est scellée.",
