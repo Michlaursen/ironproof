@@ -4087,5 +4087,23 @@ html.lenis, html.lenis body { height: auto; }
 .thm-verdict p.g { color: #a8843a; }
 .thm-foot { margin-top: 10px; font-family: var(--font-jetbrains), ui-monospace, monospace; font-size: 10.5px; font-weight: 400; line-height: 1.7; letter-spacing: .04em; color: #8d9096; }
 .thm-foot code { color: #5b5f66; }
-@media (max-width: 900px) { .thm-stage { grid-template-columns: 1fr; padding: 14px; } .thm-panel { min-height: 360px; } .thm-panel + .thm-panel { border-left: 1px solid #3a3d43; border-top: 0; } }
+@media (max-width: 900px) { .thm-stage { grid-template-columns: minmax(0, 1fr); padding: 14px; } .thm-panel { min-height: 360px; } .thm-panel + .thm-panel { border-left: 1px solid #3a3d43; border-top: 0; } }
 @media (prefers-reduced-motion: reduce) { .thm pre .caret { animation: none; } }
+/* Phone (Dom, 2026-11-07: « sur le cell ... c zéro propre »): the code shrinks to fit and fades at
+ * the right edge instead of widening the page; each header stacks its two labels. */
+@media (max-width: 640px) {
+  .thm-stage { padding: 10px; }
+  .thm-panel { min-height: 0; }
+  .thm pre { flex: none; height: 318px; }
+  .thm-panel header { flex-direction: column; gap: 2px; padding: 9px 12px; }
+  .thm pre { font-size: 8.4px; line-height: 1.6; padding: 10px 8px 10px 0;
+    -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+  .thm pre .ln { width: 22px; padding-right: 8px; }
+  .thm pre .caret { width: 5px; height: 10px; }
+  .thm-field { flex: none; height: 300px; }
+  .thm-result { flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px 12px; min-height: 64px; }
+  .thm-result .v { font-size: 13px; }
+  .thm-phase { font-size: 9.5px; letter-spacing: .12em; }
+  .thm-tag { font-size: 9px; padding: 5px 7px; }
+  .thm-yax { top: 3px; left: 8px; font-size: 8.5px; }
+}

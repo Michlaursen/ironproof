@@ -7,9 +7,9 @@ import { useEffect, useRef } from "react";
  * moins intense, plus slick », then « met un anneau iron » on the glass-and-gold study).
  * It replaced the wireframe gyroscope, which replaced the engraved video and the 3D loop.
  *
- * The same three bands as the logo: an outer ring of frosted glass, an iron ring, a polished
- * gold ring. Each is a flat band with rounded edges turned on its own axis, lit by a soft room
- * so the glass bends what is behind it and the metals catch the light.
+ * The same three bands as the logo: two rings of frosted glass and a polished gold ring.
+ * Each is a flat band with rounded edges turned on its own axis, lit by a soft room
+ * so the glass bends what is behind it and the gold catches the light.
  *
  * They turn slowly on their own and faster while the page scrolls (Dom, 2026-11-02:
  * « vrm slow si sa bouge sans scroll »). Drawn only while the hero is on screen.
@@ -27,9 +27,12 @@ type Band = {
 
 const HALF_PI = Math.PI / 2;
 const BANDS: readonly Band[] = [
-  { R: 1.0, w: 0.2, t: 0.05, tilt: [0.35 + HALF_PI, -0.25, 0], spin: [0, 0, 0.05] },
-  { R: 0.76, w: 0.22, t: 0.06, tilt: [1.05 + HALF_PI, 0.3, 0.2], spin: [0, 0, -0.11] },
-  { R: 0.52, w: 0.26, t: 0.07, tilt: [-0.6 + HALF_PI, 0.9, -0.3], spin: [0.07, 0, 0.16] },
+  // A spin on z alone turns a band within itself and shows nothing; each ring tumbles on x or y
+  // too, so all three move from the first frame (Dom, 2026-11-07: « l'anneau blanc ... bouger au
+  // début comme les autres »). The glass ring is a little smaller (« un peu plus petit »).
+  { R: 0.9, w: 0.19, t: 0.05, tilt: [0.35 + HALF_PI, -0.25, 0], spin: [0.09, 0.06, 0] },
+  { R: 0.72, w: 0.22, t: 0.06, tilt: [1.05 + HALF_PI, 0.3, 0.2], spin: [-0.06, 0.11, 0] },
+  { R: 0.5, w: 0.26, t: 0.07, tilt: [-0.6 + HALF_PI, 0.9, -0.3], spin: [0.07, 0.05, 0.16] },
 ];
 const FALLBACK_BG = "#e7e5e2";
 
@@ -116,13 +119,17 @@ export function HeroRingsVideo() {
         return g;
       };
 
-      const materials = [
+      // Two rings of frosted glass and one of polished gold (Dom, 2026-11-07: the iron ring
+      // « blanche transparent comme l'autre finalement »).
+      const glass = () =>
         new THREE.MeshPhysicalMaterial({
           color: 0xffffff, metalness: 0, roughness: 0.22, transmission: 1, thickness: 0.22, ior: 1.45,
           iridescence: 0.45, iridescenceIOR: 1.3, iridescenceThicknessRange: [180, 520],
           clearcoat: 1, clearcoatRoughness: 0.2, envMapIntensity: 1.1,
-        }),
-        new THREE.MeshPhysicalMaterial({ color: 0x3a3d43, metalness: 1, roughness: 0.34, clearcoat: 0.35, clearcoatRoughness: 0.3, envMapIntensity: 1.15 }),
+        });
+      const materials = [
+        glass(),
+        glass(),
         new THREE.MeshPhysicalMaterial({ color: 0xc9a14e, metalness: 1, roughness: 0.18, clearcoat: 0.6, envMapIntensity: 1.25 }),
       ];
       const geometries = BANDS.map(bandGeometry);
