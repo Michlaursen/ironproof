@@ -46,9 +46,13 @@ const Q2 = Q1.replace(
   "(and (< 1000000 amount_cents) is_cash (not lctr_filed))\n                    §(< 500000000 amount_cents)§))))\n  (and a!1 (< 500000000 amount_cents))))",
 );
 
-const COLS = 150;
+// On a phone the field is about 300 px wide: 150 columns of dots turn to grey mush, so it
+// draws 60 (Dom, 2026-11-07: « sur le cell ... c zéro propre »). The rows stay the 64 flag
+// combinations. Chosen once, when the scene mounts.
+const COLS_WIDE = 150;
+const COLS_NARROW = 60;
+const NARROW = 640;
 const ROWS = 64;
-const PAD = 34;
 const KW = new Set(["declare-fun", "assert", "let", "not", "or", "and", "check-sat", "Bool", "Int"]);
 
 type Tok = { t: string; cls: string; hl: boolean };
@@ -71,9 +75,9 @@ function tokens(text: string): Tok[] {
 }
 
 const esc = (c: string) => (c === "<" ? "&lt;" : c === ">" ? "&gt;" : c === "&" ? "&amp;" : c);
-const colOf = (a: number) => Math.min(COLS - 1, Math.max(0, Math.floor((Math.log10(a) / 7) * COLS)));
+const colAt = (a: number, cols: number) => Math.min(cols - 1, Math.max(0, Math.floor((Math.log10(a) / 7) * cols)));
 // Row bits: dual, register, treasury, frozen, not-authorized, enhanced.
-const HOLE = { c: colOf(50000.01), r: (0 << 5) | (1 << 4) | (0 << 3) | (0 << 2) | (0 << 1) | 0 };
+const HOLE_ROW = (0 << 5) | (1 << 4) | (0 << 3) | (0 << 2) | (0 << 1) | 0;
 
 export function TheoremScene() {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -96,6 +100,11 @@ export function TheoremScene() {
     if (!q || !cv || !field || !tag || !qname || !qphase || !qres || !fphase || !fres || !v1 || !v2) return;
     const ctx = cv.getContext("2d");
     if (!ctx) return;
+    const narrow = root.getBoundingClientRect().width < NARROW;
+    const COLS = narrow ? COLS_NARROW : COLS_WIDE;
+    const PAD = narrow ? 20 : 34;
+    const colOf = (a: number) => colAt(a, COLS);
+    const HOLE = { c: colOf(50000.01), r: HOLE_ROW };
 
     let alive = true;
     const timers = new Set<number>();
@@ -147,7 +156,7 @@ export function TheoremScene() {
       const lab = capCol === colOf(50000) ? "CAP · CAD 50,000" : "CAP · CAD 5,000,000";
       const lw = ctx.measureText(lab).width;
       ctx.fillText(lab, cx + 6 + lw > W - 8 ? cx - 6 - lw : cx + 6, PAD - 10);
-      const base = Math.min(cw, ch) * 0.32;
+      const base = Math.min(cw, ch) * (narrow ? 0.26 : 0.32);
       for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
           const s = state[r * COLS + c] ?? 0;
@@ -291,8 +300,11 @@ export function TheoremScene() {
     const placeTag = () => {
       const x = PAD + HOLE.c * cw + cw / 2;
       const y = PAD + HOLE.r * ch + ch / 2;
-      tag.style.left = `${Math.min(W - 250, x + 14)}px`;
-      tag.style.top = `${Math.max(8, y - 54)}px`;
+      // Measured, so the tag never runs past the edge of a narrow field.
+      const tw = tag.offsetWidth || 240;
+      tag.style.left = `${Math.max(8, Math.min(W - tw - 8, x + 14))}px`;
+      // Narrow: below the hole, clear of the cap label along the top edge.
+      tag.style.top = `${narrow ? y + 18 : Math.max(8, y - 54)}px`;
     };
     const setRes = (el: HTMLElement, text: string, cls: string) => {
       el.textContent = text;
@@ -364,8 +376,12 @@ export function TheoremScene() {
     };
 
     size();
+    // The field can change size without the window doing so (fonts, the phone layout settling):
+    // watch the field itself, so the canvas never keeps a stale size.
     const onResize = () => size();
     window.addEventListener("resize", onResize);
+    const ro = new ResizeObserver(onResize);
+    ro.observe(field);
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       q.textContent = Q2.replace(/§/g, "");
@@ -378,6 +394,7 @@ export function TheoremScene() {
       draw(0);
       return () => {
         alive = false;
+        ro.disconnect();
         window.removeEventListener("resize", onResize);
       };
     }
@@ -400,6 +417,7 @@ export function TheoremScene() {
       if (raf) window.cancelAnimationFrame(raf);
       timers.forEach((id) => window.clearTimeout(id));
       timers.clear();
+      ro.disconnect();
       window.removeEventListener("resize", onResize);
     };
   }, []);
