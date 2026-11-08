@@ -3,38 +3,27 @@
 import { useEffect, useRef } from "react";
 
 /*
- * The hero rings, rendered as three real rings (Dom, 2026-11-07: « remet le vibe à la Code Metal,
- * moins intense, plus slick », then « met un anneau iron » on the glass-and-gold study).
- * It replaced the wireframe gyroscope, which replaced the engraved video and the 3D loop.
+ * The opening object: a solid gold seal turning slowly inside a ring of glass (Dom, 2026-11-08:
+ * « le sceau, fond clair »). It replaced the glass-and-gold rings, which replaced the wireframe
+ * gyroscope, the engraved video and the 3D loop.
  *
- * The same three bands as the logo: two rings of frosted glass and a polished gold ring.
- * Each is a flat band with rounded edges turned on its own axis, lit by a soft room
- * so the glass bends what is behind it and the gold catches the light.
+ * Every word engraved on it is true and already on the site (Dom: « des trucs écrits relevant,
+ * no bs »): the promise around the rim, VERIFY WITHOUT TRUSTING US; the two signatures of the
+ * seal on the inner ring, as the example dossier card names them (Ed25519 + ML-DSA-65); and the
+ * verdict with its limit in the centre, PROVED / WITHIN DECLARED BOUNDS, as the dossier card says
+ * « proved, within the declared model and hypotheses ». No decorative formula.
  *
- * They turn slowly on their own and faster while the page scrolls (Dom, 2026-11-02:
- * « vrm slow si sa bouge sans scroll »). Drawn only while the hero is on screen.
- * The 3D library loads after the page, on its own. Reduced motion: one still frame.
- * Without WebGL or JavaScript, the still image under the canvas stays.
+ * The engraving is drawn once on a canvas in the site's own fonts and used as a relief map.
+ * It turns slowly on its own and faster while the page scrolls (Dom, 2026-11-02: « vrm slow si
+ * sa bouge sans scroll »). Drawn only while the hero is on screen. The 3D library loads after
+ * the page, on its own. Reduced motion: one still frame. Without WebGL or JavaScript, the still
+ * image under the canvas stays.
  */
 
-type Band = {
-  R: number;
-  w: number;
-  t: number;
-  tilt: readonly [number, number, number];
-  spin: readonly [number, number, number];
-};
-
-const HALF_PI = Math.PI / 2;
-const BANDS: readonly Band[] = [
-  // A spin on z alone turns a band within itself and shows nothing; each ring tumbles on x or y
-  // too, so all three move from the first frame (Dom, 2026-11-07: « l'anneau blanc ... bouger au
-  // début comme les autres »). The glass ring is a little smaller (« un peu plus petit »).
-  { R: 0.9, w: 0.19, t: 0.05, tilt: [0.35 + HALF_PI, -0.25, 0], spin: [0.09, 0.06, 0] },
-  { R: 0.72, w: 0.22, t: 0.06, tilt: [1.05 + HALF_PI, 0.3, 0.2], spin: [-0.06, 0.11, 0] },
-  { R: 0.5, w: 0.26, t: 0.07, tilt: [-0.6 + HALF_PI, 0.9, -0.3], spin: [0.07, 0.05, 0.16] },
-];
+const RIM = "VERIFY WITHOUT TRUSTING US · VERIFY WITHOUT TRUSTING US · ";
+const INNER = "SIGNED Ed25519 + ML-DSA-65 · POST-QUANTUM · ";
 const FALLBACK_BG = "#e7e5e2";
+const SEAL_R = 1.15;
 
 const IDLE_RATE = 1;
 const MAX_RATE = 7;
@@ -53,6 +42,54 @@ function pageBackground(el: HTMLElement | null): string {
   return FALLBACK_BG;
 }
 
+/** A font family the site has loaded (next/font sets it as a CSS variable), with a fallback. */
+function siteFont(variable: string, fallback: string): string {
+  const v = window.getComputedStyle(document.body).getPropertyValue(variable).trim();
+  return v ? `${v}, ${fallback}` : fallback;
+}
+
+/** The engraving: grey = flat gold, white = raised. Drawn at 1024 px, used as a relief map. */
+function engraving(): HTMLCanvasElement | null {
+  const c = document.createElement("canvas");
+  c.width = 1024;
+  c.height = 1024;
+  const g = c.getContext("2d");
+  if (!g) return null;
+  const mono = siteFont("--font-jetbrains", "ui-monospace, monospace");
+  const serif = siteFont("--font-eb-garamond", "Georgia, serif");
+  g.fillStyle = "#808080";
+  g.fillRect(0, 0, 1024, 1024);
+  g.strokeStyle = "#ffffff";
+  for (const [r, w] of [[470, 10], [380, 4], [300, 3]] as const) {
+    g.lineWidth = w;
+    g.beginPath();
+    g.arc(512, 512, r, 0, Math.PI * 2);
+    g.stroke();
+  }
+  g.fillStyle = "#ffffff";
+  g.textAlign = "center";
+  g.textBaseline = "middle";
+  const ring = (txt: string, rad: number, size: number) => {
+    g.font = `600 ${size}px ${mono}`;
+    const n = txt.length;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      g.save();
+      g.translate(512 + Math.cos(a) * rad, 512 + Math.sin(a) * rad);
+      g.rotate(a + Math.PI / 2);
+      g.fillText(txt.charAt(i), 0, 0);
+      g.restore();
+    }
+  };
+  ring(RIM, 425, 46);
+  ring(INNER, 340, 30);
+  g.font = `500 132px ${serif}`;
+  g.fillText("PROVED", 512, 480);
+  g.font = `500 34px ${mono}`;
+  g.fillText("WITHIN DECLARED BOUNDS", 512, 590);
+  return c;
+}
+
 export function HeroRingsVideo() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -68,17 +105,21 @@ export function HeroRingsVideo() {
       try {
         THREE = await import("three");
         ({ RoomEnvironment } = await import("three/examples/jsm/environments/RoomEnvironment.js"));
+        // The engraving uses the site's fonts: wait for them, or the canvas draws a fallback.
+        await document.fonts.ready;
       } catch (err: unknown) {
-        console.warn("hero rings: 3D library did not load, the still image stays", err);
+        console.warn("hero seal: 3D library did not load, the still image stays", err);
         return;
       }
       if (disposed) return;
+      const art = engraving();
+      if (!art) return;
 
       let renderer: import("three").WebGLRenderer;
       try {
         renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "low-power" });
       } catch (err: unknown) {
-        console.warn("hero rings: WebGL unavailable, the still image stays", err);
+        console.warn("hero seal: WebGL unavailable, the still image stays", err);
         return;
       }
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
@@ -92,55 +133,36 @@ export function HeroRingsVideo() {
       const envTarget = pmrem.fromScene(new RoomEnvironment(), 0.04);
       scene.environment = envTarget.texture;
       const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 50);
-      camera.position.set(0, 0, 4.4);
-      const key = new THREE.DirectionalLight(0xffffff, 1.2);
-      key.position.set(-2, 3, 4);
+      camera.position.set(0, 0, 6.4);
+      const key = new THREE.DirectionalLight(0xffffff, 1.3);
+      key.position.set(-3, 4, 5);
       scene.add(key);
 
-      // A flat band with rounded edges, turned around its axis: a ring you could wear, not a tube.
-      const bandGeometry = (b: Band) => {
-        const pts: import("three").Vector2[] = [];
-        const r = Math.min(b.t, b.w) * 0.45;
-        const steps = 6;
-        const corner = (cx: number, cy: number, a0: number) => {
-          for (let i = 0; i <= steps; i++) {
-            const a = a0 + (i / steps) * HALF_PI;
-            pts.push(new THREE.Vector2(cx + Math.cos(a) * r, cy + Math.sin(a) * r));
-          }
-        };
-        corner(b.R - r, -b.w / 2 + r, -HALF_PI);
-        corner(b.R - r, b.w / 2 - r, 0);
-        corner(b.R - b.t + r, b.w / 2 - r, HALF_PI);
-        corner(b.R - b.t + r, -b.w / 2 + r, Math.PI);
-        const first = pts[0];
-        if (first) pts.push(first.clone());
-        const g = new THREE.LatheGeometry(pts, 220);
-        g.computeVertexNormals();
-        return g;
-      };
-
-      // Two rings of frosted glass and one of polished gold (Dom, 2026-11-07: the iron ring
-      // « blanche transparent comme l'autre finalement »).
-      const glass = () =>
-        new THREE.MeshPhysicalMaterial({
-          color: 0xffffff, metalness: 0, roughness: 0.22, transmission: 1, thickness: 0.22, ior: 1.45,
-          iridescence: 0.45, iridescenceIOR: 1.3, iridescenceThicknessRange: [180, 520],
-          clearcoat: 1, clearcoatRoughness: 0.2, envMapIntensity: 1.1,
-        });
-      const materials = [
-        glass(),
-        glass(),
-        new THREE.MeshPhysicalMaterial({ color: 0xc9a14e, metalness: 1, roughness: 0.18, clearcoat: 0.6, envMapIntensity: 1.25 }),
-      ];
-      const geometries = BANDS.map(bandGeometry);
-      const group = new THREE.Group();
-      scene.add(group);
-      const meshes = BANDS.map((b, i) => {
-        const mesh = new THREE.Mesh(geometries[i], materials[i]);
-        mesh.rotation.set(b.tilt[0], b.tilt[1], b.tilt[2]);
-        group.add(mesh);
-        return mesh;
+      const relief = new THREE.CanvasTexture(art);
+      relief.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+      const faceMat = new THREE.MeshPhysicalMaterial({ color: 0xc9a14e, metalness: 1, roughness: 0.24, bumpMap: relief, bumpScale: 3.2, clearcoat: 0.5, envMapIntensity: 1.3 });
+      const edgeMat = new THREE.MeshPhysicalMaterial({ color: 0xc9a14e, metalness: 1, roughness: 0.3, envMapIntensity: 1.3 });
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff, metalness: 0, roughness: 0.1, transmission: 1, thickness: 0.3, ior: 1.5,
+        iridescence: 0.4, iridescenceIOR: 1.3, iridescenceThicknessRange: [180, 520], clearcoat: 1, envMapIntensity: 1.1,
       });
+      const discGeo = new THREE.CylinderGeometry(SEAL_R, SEAL_R, 0.2, 160);
+      const faceGeo = new THREE.CircleGeometry(SEAL_R, 160);
+      const haloGeo = new THREE.TorusGeometry(1.48, 0.03, 16, 160);
+
+      // The edge is a cylinder; each face is a flat disc, so the lettering reads upright, never mirrored.
+      const seal = new THREE.Group();
+      const disc = new THREE.Mesh(discGeo, edgeMat);
+      disc.rotation.x = Math.PI / 2;
+      const front = new THREE.Mesh(faceGeo, faceMat);
+      front.position.z = 0.101;
+      const back = new THREE.Mesh(faceGeo, faceMat);
+      back.position.z = -0.101;
+      back.rotation.y = Math.PI;
+      seal.add(disc, front, back);
+      scene.add(seal);
+      const halo = new THREE.Mesh(haloGeo, glassMat);
+      scene.add(halo);
 
       const size = () => {
         const rect = canvas.getBoundingClientRect();
@@ -148,18 +170,18 @@ export function HeroRingsVideo() {
         const h = Math.max(1, rect.height);
         renderer.setSize(w, h, false);
         camera.aspect = w / h;
+        // Keep the whole seal and its ring in frame on a narrow (portrait) box.
+        camera.position.z = w < h ? 6.4 * Math.min(1.6, h / w) : 6.4;
         camera.updateProjectionMatrix();
       };
 
       // Phase accumulates so a change of speed never jumps the drawing.
-      let phase = 6;
+      let phase = 2;
       const draw = () => {
-        meshes.forEach((m, i) => {
-          const b = BANDS[i];
-          if (!b) return;
-          m.rotation.set(b.tilt[0] + phase * b.spin[0], b.tilt[1] + phase * b.spin[1], b.tilt[2] + phase * b.spin[2]);
-        });
-        group.rotation.y = Math.sin(phase * 0.12) * 0.25;
+        seal.rotation.y = Math.sin(phase * 0.35) * 0.75;
+        seal.rotation.x = Math.sin(phase * 0.23) * 0.18;
+        halo.rotation.x = 1.2 + Math.sin(phase * 0.3) * 0.2;
+        halo.rotation.y = phase * 0.25;
         renderer.render(scene, camera);
       };
 
@@ -179,8 +201,9 @@ export function HeroRingsVideo() {
         io?.disconnect();
         if (raf) window.cancelAnimationFrame(raf);
         window.removeEventListener("resize", onResize);
-        geometries.forEach((g) => g.dispose());
-        materials.forEach((m) => m.dispose());
+        [discGeo, faceGeo, haloGeo].forEach((g) => g.dispose());
+        [faceMat, edgeMat, glassMat].forEach((m) => m.dispose());
+        relief.dispose();
         envTarget.dispose();
         pmrem.dispose();
         renderer.dispose();
@@ -227,7 +250,7 @@ export function HeroRingsVideo() {
       else cleanup = release;
     };
 
-    start().catch((err: unknown) => console.warn("hero rings: render failed, the still image stays", err));
+    start().catch((err: unknown) => console.warn("hero seal: render failed, the still image stays", err));
 
     return () => {
       disposed = true;
