@@ -232,7 +232,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Translate legacy code. Prove a fix closes the flaw. Decide every critical action before it runs. Every result is sealed, and anyone can re-check it without trusting us.",
+        "Write: AI agents translate legacy code and fix flaws, fast.\nProve: a solver covers every input in the model, not a sample. Any difference is replayed on the real machine.\nSeal: every result ships signed and post-quantum sealed. Re-check it without trusting us. Where we can’t decide, the report says so first.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -665,7 +665,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Traduire le code ancien. Prouver qu’un correctif ferme la faille. Décider de chaque action critique avant qu’elle s’exécute. Chaque résultat est scellé, et n’importe qui peut le revérifier sans nous faire confiance.",
+        "Écrire\u00a0: des agents IA traduisent le code ancien et corrigent les failles, vite.\nProuver\u00a0: un solveur couvre chaque entrée du modèle, pas un échantillon. Chaque différence est rejouée sur la vraie machine.\nSceller\u00a0: chaque résultat sort signé et scellé post-quantique. Revérifiez-le sans nous faire confiance. Ce qu’on ne peut pas trancher, le rapport le dit d’abord.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
