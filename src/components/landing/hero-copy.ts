@@ -36,14 +36,15 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    // Proof-carrying code: the term is George Necula's, not a brand of ours (Dom, 2026-11-09).
-    eyebrow: "PROOF-CARRYING CODE FOR CRITICAL SOFTWARE",
+    // The category (Dom, 2026-11-09). Proof-carrying code is Necula and Lee's term (1996), not a brand of ours.
+    eyebrow: "PROOF-CARRYING SOFTWARE ENGINEERING",
     headline: "Code that carries",
     headlineEnd: "its proof.",
     value: "WRITTEN · PROVEN · TESTED · AUDITED · SEALED",
   },
   fr: {
-    eyebrow: "PROOF-CARRYING CODE · LOGICIELS CRITIQUES",
+    // The category stays in English, like Proof Intelligence (Dom, 2026-11-09).
+    eyebrow: "PROOF-CARRYING SOFTWARE ENGINEERING",
     headline: "Du code qui porte",
     headlineEnd: "sa preuve.",
     value: "ÉCRIT · PROUVÉ · TESTÉ · AUDITÉ · SCELLÉ",
