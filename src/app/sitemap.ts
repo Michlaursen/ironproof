@@ -240,5 +240,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.7,
     },
+    {
+      url: "https://ironproof.ai/research/when-the-ai-hacks-the-human-in-the-loop",
+      lastModified: new Date("2026-10-21"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
   ];
 }
