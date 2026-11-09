@@ -2,13 +2,13 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "Ironproof | Proof Intelligence pour les logiciels d’infrastructure critique",
+    title: "Ironproof | Du code qui porte sa preuve",
     description:
-      "Les machines savent écrire la preuve. Reste à savoir ce qu’elle prouve. Ironproof vérifie de façon indépendante le code réécrit : le cas précis qui diffère rejoué sur votre propre compilateur, ou on vous dit qu’on n’a pas pu trancher. Chaque résultat est scellé et vérifiable sans avoir à nous croire.",
+      "Ironproof écrit et vérifie le code critique, et chaque résultat porte sa preuve : le cas précis qui diffère, rejoué sur le vrai compilateur, ou ce qu’on n’a pas pu trancher, dit clairement. Chaque résultat est scellé et vérifiable sans avoir à nous croire.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
     // description a dessein : meme positionnement partout, rien d’invente.
     ogDescription:
-      "Les machines savent écrire la preuve. Reste à savoir ce qu’elle prouve. Ironproof vérifie de façon indépendante le code réécrit : le cas précis qui diffère rejoué sur votre propre compilateur, ou on vous dit qu’on n’a pas pu trancher. Chaque résultat est scellé et vérifiable sans avoir à nous croire.",
+      "Ironproof écrit et vérifie le code critique, et chaque résultat porte sa preuve : le cas précis qui diffère, rejoué sur le vrai compilateur, ou ce qu’on n’a pas pu trancher, dit clairement. Chaque résultat est scellé et vérifiable sans avoir à nous croire.",
   },
   header: {
     nav: [

@@ -232,7 +232,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Write: AI agents translate and modernize legacy code.\nProve: a solver covers every input in the model, not a sample. Any difference is replayed on the real machine.\nSeal: every result ships signed and post-quantum sealed. Re-check it without trusting us. Where we can’t decide, the report says so first.",
+        "Write: AI agents translate and modernize legacy code.\nProve: a solver checks every input in the model, not a sample. Every difference it finds is replayed on the real compiler.\nSeal: every result ships signed and post-quantum sealed. Re-check it without trusting us. Where we can’t decide, the report says so first.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -665,7 +665,7 @@ const T: L<Copy> = {
         </>
       ),
       boundary:
-        "Écrire\u00a0: des agents IA traduisent et modernisent le code ancien.\nProuver\u00a0: un solveur couvre chaque entrée du modèle, pas un échantillon. Chaque différence est rejouée sur la vraie machine.\nSceller\u00a0: chaque résultat sort signé et scellé post-quantique. Revérifiez-le sans nous faire confiance. Ce qu’on ne peut pas trancher, le rapport le dit d’abord.",
+        "Écrire\u00a0: des agents IA traduisent et modernisent le code ancien.\nProuver\u00a0: un solveur vérifie chaque entrée du modèle, pas un échantillon. Chaque différence trouvée est rejouée sur le vrai compilateur.\nSceller\u00a0: chaque résultat sort signé et scellé post-quantique. Revérifiez-le sans nous faire confiance. Ce qu’on ne peut pas trancher, le rapport le dit d’abord.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
