@@ -19,6 +19,10 @@ import type { L } from "./i18n";
  * Repositioned 2026-10-31 (Dom, « go le site now »): the page opens on the
  * change in the world, machines now write proofs, and on the question left.
  * "Your code was rewritten" stays as the first product, in rewrite-check.tsx.
+ *
+ * Repositioned 2026-11-09 (Dom, « c sa que on est »): Ironproof writes the code
+ * and ships it with its proof. Write, prove, test, audit, seal. The limit is
+ * said in the hero itself: where we cannot decide, the report says so.
  */
 export type HeroCopy = {
   /** The category, set on its own line so it hits (Dom, 2026-10-16). */
@@ -32,17 +36,18 @@ export type HeroCopy = {
 
 export const HERO_COPY: L<HeroCopy> = {
   en: {
-    // The whole category, alone on its line (Dom, 2026-11-01). "Independent" stays in the text beside the title.
-    eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE SOFTWARE",
-    headline: "Automated software proof",
-    headlineEnd: "you can verify.",
-    value: "MATHEMATICALLY PROVEN · POST-QUANTUM SEALED · INDEPENDENTLY VERIFIABLE",
+    // The category (Dom, 2026-11-09). Proof-carrying code is Necula and Lee's term (1996), not a brand of ours.
+    eyebrow: "PROOF-CARRYING SOFTWARE ENGINEERING",
+    headline: "Code that carries",
+    headlineEnd: "its proof.",
+    value: "WRITTEN · PROVEN · TESTED · AUDITED · SEALED",
   },
   fr: {
-    eyebrow: "PROOF INTELLIGENCE POUR LES LOGICIELS D’INFRASTRUCTURE CRITIQUE",
-    headline: "La preuve logicielle automatisée,",
-    headlineEnd: "vérifiable par vous.",
-    value: "PROUVÉ MATHÉMATIQUEMENT · SCELLÉ POST-QUANTIQUE · VÉRIFIABLE DE FAÇON INDÉPENDANTE",
+    // The category stays in English, like Proof Intelligence (Dom, 2026-11-09).
+    eyebrow: "PROOF-CARRYING SOFTWARE ENGINEERING",
+    headline: "Du code qui porte",
+    headlineEnd: "sa preuve.",
+    value: "ÉCRIT · PROUVÉ · TESTÉ · AUDITÉ · SCELLÉ",
   },
 };
 
