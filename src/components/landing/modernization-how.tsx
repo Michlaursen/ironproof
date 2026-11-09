@@ -70,7 +70,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Model the original",
-        body: "Ironproof builds a precise model of what the COBOL computes, down to decimal rounding and truncation. We do not translate: we have no stake in the new code being right.",
+        body: "Ironproof builds a precise model of what the COBOL computes, down to decimal rounding and truncation. Whoever translated it, your integrator, your AI tool or our own agents, the new code faces the same check.",
       },
       {
         title: "Compare and cross-check",
@@ -155,7 +155,7 @@ const COPY: L<HowCopy> = {
       },
       {
         title: "Modéliser l’original",
-        body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures. Nous ne traduisons pas : nous n’avons aucun intérêt à ce que le nouveau code soit déclaré bon.",
+        body: "Ironproof construit un modèle précis de ce que le COBOL calcule, jusqu’aux arrondis et aux troncatures. Qui que soit le traducteur, votre intégrateur, votre outil d’IA ou nos propres agents, le nouveau code passe la même vérification.",
       },
       {
         title: "Compare and cross-check",

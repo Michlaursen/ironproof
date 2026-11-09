@@ -157,7 +157,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         risk: "A translation can compile, pass its tests and still return a different number, on one input or under one compiler setting.",
         href: "/modernization",
         cta: "SEE HOW WE CHECK IT",
-        body: "Your integrator or your AI tool did the translation: COBOL to Java or Python, Python or MATLAB to C. We don’t translate, so we have no stake in saying it is right. We model exactly what the original computes and confront the new code with it: the exact input where they differ, or not covered with the reason. Same-behavior answers are suspended while we rebuild them.",
+        body: "Your integrator or your AI tool did the translation: COBOL to Java or Python, Python or MATLAB to C. Or our own agents did it. Either way, the new code faces the same check. We model exactly what the original computes and confront the new code with it: the exact input where they differ, or not covered with the reason. Same-behavior answers are suspended while we rebuild them.",
       },
     ],
     method: {
@@ -344,7 +344,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
         risk: "Une traduction peut compiler, passer ses tests et rendre quand même un autre nombre, sur une seule entrée ou sous un seul réglage du compilateur.",
         href: "/fr/modernization",
         cta: "VOIR COMMENT ON VÉRIFIE",
-        body: "Votre intégrateur ou votre outil d’IA a fait la traduction : COBOL vers Java ou Python, Python ou MATLAB vers C. Nous ne traduisons pas, donc nous n’avons aucun intérêt à dire qu’elle est bonne. Nous modélisons exactement ce que calcule l’original et y confrontons le nouveau code : l’entrée exacte où ils diffèrent, ou non couvert, avec la raison. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.",
+        body: "Votre intégrateur ou votre outil d’IA a fait la traduction : COBOL vers Java ou Python, Python ou MATLAB vers C. Ou nos propres agents l’ont faite. Dans les deux cas, le nouveau code passe la même vérification. Nous modélisons exactement ce que calcule l’original et y confrontons le nouveau code : l’entrée exacte où ils diffèrent, ou non couvert, avec la raison. Les réponses « même comportement » sont suspendues pendant qu’on les reconstruit.",
       },
     ],
     method: {
