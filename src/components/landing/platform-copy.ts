@@ -191,11 +191,11 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     whyUs: {
       eyebrow: "WHY IRONPROOF",
-      title: "Sign off with evidence. Face the audit with a record. Catch what breaks.",
+      title: "Ship it with its proof. Face the audit with a record. Catch what breaks.",
       items: [
         {
-          title: "Sign off with evidence, not hope",
-          body: "Your risk committee weighs the migration on a record it can re-check: what differs, the exact input behind each difference, and what could not be decided. The evidence is produced as you go, not assembled after the fact for the audit.",
+          title: "Ship code that carries its proof",
+          body: "Every module we write or check arrives with what proves it: what differs, the exact input behind each difference, and what could not be decided. Your risk committee signs on evidence, not hope.",
         },
         {
           title: "Give your auditor a record to re-check",
@@ -212,13 +212,13 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "It starts with the code that was rewritten.",
       alsoTitle: "One engine, one question, three more doors.",
       alsoLead: "Does this change open a vulnerability? The engine that verifies rewritten code also guards critical actions, access policies and security fixes.",
-      casesEyebrow: "WHY TEAMS USE IRONPROOF",
-      casesTitle: "Fast and rigorous.",
-      casesLead: "One engine. As a service on your code, or as a product installed on your side.",
+      casesEyebrow: "WHERE THE PROOF WORKS TODAY",
+      casesTitle: "Four jobs. Each one ships with its proof.",
+      casesLead: "We write the code, or we check code someone else wrote. Either way, you get the proof, not a promise.",
       cases: [
         {
           name: "Legacy modernization",
-          line: "Move COBOL to Java or Python. We audit what the translation claims, then show exactly where the new code behaves differently.",
+          line: "Move COBOL to Java or Python. We translate it, or check the translation you already have, and show exactly where the new code behaves differently.",
           example: "A third-party COBOL → Java translation: 15 findings, 11 replayed in execution, including a credit-limit check that disappeared.",
           href: "/modernization",
           cta: "SEE HOW WE CHECK IT",
@@ -378,11 +378,11 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
     },
     whyUs: {
       eyebrow: "POURQUOI IRONPROOF",
-      title: "Signer sur des preuves. Arriver à l’audit avec un dossier. Attraper ce qui casse.",
+      title: "Livrer avec la preuve. Arriver à l’audit avec un dossier. Attraper ce qui casse.",
       items: [
         {
-          title: "Signer sur des preuves, pas sur l’espoir",
-          body: "Votre comité de risque juge la migration sur un dossier qu’il peut revérifier : ce qui diffère, l’entrée précise derrière chaque écart, et ce qu’on n’a pas pu trancher. Les éléments de preuve se produisent au fur et à mesure, pas rassemblés après coup pour l’audit.",
+          title: "Livrer du code qui porte sa preuve",
+          body: "Chaque module qu’on écrit ou qu’on vérifie arrive avec ce qui le prouve : ce qui diffère, l’entrée précise derrière chaque écart, et ce qu’on n’a pas pu trancher. Votre comité de risque signe sur des preuves, pas sur l’espoir.",
         },
         {
           title: "Remettre à votre auditeur un dossier à revérifier",
@@ -399,13 +399,13 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       title: "Tout commence par le code qui a été réécrit.",
       alsoTitle: "Un seul moteur, une question, trois autres portes.",
       alsoLead: "Ce changement ouvre-t-il une faille ? Le moteur qui vérifie le code réécrit protège aussi vos actions critiques, vos politiques d’accès et vos correctifs de sécurité.",
-      casesEyebrow: "POURQUOI ON CHOISIT IRONPROOF",
-      casesTitle: "Rapide et rigoureux.",
-      casesLead: "Un seul moteur. En service sur votre code, ou en produit installé chez vous.",
+      casesEyebrow: "OÙ LA PREUVE TRAVAILLE AUJOURD’HUI",
+      casesTitle: "Quatre métiers. Chacun livré avec sa preuve.",
+      casesLead: "On écrit le code, ou on vérifie le code qu’un autre a écrit. Dans les deux cas, vous recevez la preuve, pas une promesse.",
       cases: [
         {
           name: "Modernisation du code ancien",
-          line: "Passez du COBOL à Java ou à Python. On audite ce que la traduction affirme, puis on montre exactement où le nouveau code se comporte autrement.",
+          line: "Passez du COBOL à Java ou à Python. On le traduit, ou on vérifie la traduction que vous avez déjà, et on montre exactement où le nouveau code se comporte autrement.",
           example: "Une traduction COBOL → Java faite par un tiers : 15 constats, 11 rejoués en exécution, dont un contrôle de limite de crédit disparu.",
           href: "/fr/modernization",
           cta: "VOIR COMMENT ON VÉRIFIE",

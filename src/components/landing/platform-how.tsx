@@ -106,7 +106,7 @@ const OS_EN: FlowRail = {
 const COPY: L<HowCopy> = {
   en: {
     eyebrow: "HOW OUR PLATFORM WORKS",
-    title: "From your case to evidence you can re-check.",
+    title: "From your code to code that carries its proof.",
     steps: [
       {
         title: "Scope",
@@ -130,7 +130,7 @@ const COPY: L<HowCopy> = {
   },
   fr: {
     eyebrow: "COMMENT FONCTIONNE NOTRE PLATEFORME",
-    title: "De votre cas à une preuve que vous pouvez revérifier.",
+    title: "De votre code à du code qui porte sa preuve.",
     steps: [
       {
         title: "Cadrer",
