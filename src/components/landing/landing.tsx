@@ -61,6 +61,7 @@ type Copy = {
     /** Two clauses: the condition (plain) and the consequence (gold italic). */
     headline: string;
     headlineEnd: string;
+    subline: string;
     value: string;
     body: React.ReactNode;
     boundary: string;
@@ -1163,6 +1164,8 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
                 {/* One sentence that wraps on its own (Dom, 2026-11-07: « you can verify » sat alone underneath). */}
                 {t.hero.headline} {t.hero.headlineEnd}
               </h1>
+              {/* What the two verbs apply to, one line (Dom, 2026-11-11). */}
+              <p className="hero-white-lead mt-6 max-w-xl text-lg leading-relaxed md:text-xl">{t.hero.subline}</p>
             </div>
             <div className="hero-white-aside fade-up min-w-0 md:pt-14">
               {/* The buyer's risk first, then what Ironproof does, then the boundary.
