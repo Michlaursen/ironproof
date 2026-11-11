@@ -29,7 +29,6 @@ export type NeuroSymbolicCopy = {
   h1: React.ReactNode;
   heroLead: React.ReactNode;
 
-  archCaption: string;
 
   s01: string;
   s01Title: string;
@@ -102,8 +101,6 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       </>
     ),
 
-    archCaption:
-      "The whole system on one page. The model never has the last word: the solver does, and the seal lets anyone check afterward that the record was not changed.",
 
     s01: "01 — Two kinds of intelligence",
     s01Title: "One learns from examples. The other follows rules to the end.",
@@ -315,8 +312,6 @@ export const NEURO_SYMBOLIC_COPY: L<NeuroSymbolicCopy> = {
       </>
     ),
 
-    archCaption:
-      "Tout le système sur une page. Le modèle n’a jamais le dernier mot : le solveur l’a, et le sceau permet à n’importe qui de vérifier après coup que la trace n’a pas changé.",
 
     s01: "01 — Deux formes d’intelligence",
     s01Title: "L’une apprend par l’exemple. L’autre suit les règles jusqu’au bout.",

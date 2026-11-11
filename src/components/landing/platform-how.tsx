@@ -1,6 +1,6 @@
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
-import { FlowDiagram, type FlowCopy, type FlowRail } from "./flow-diagram";
+import { CognitiveOsFigure } from "./cognitive-os-figure";
 import { TheoremScene } from "./theorem-scene";
 
 /*
@@ -18,90 +18,7 @@ type HowCopy = {
   eyebrow: string;
   title: string;
   steps: readonly { title: string; body: string }[];
-  flow: FlowCopy;
-  /** The engineering system around the method (Dom, 2026-10-19: « ironproof cognitive operating system + axiomes + memory »).
-   *  Each module runs today in our own repository; none is shipped to the client, hence the label. */
-  os: FlowRail;
 };
-
-/* The method diagram, in English on every page too (Dom, 2026-10-19: « tout en anglais, zero french »). */
-const FLOW_EN: FlowCopy = {
-      caption: "The path of one case: two independent checks, one verdict, a sealed record. “Holds” applies to policies and critical actions; for rewritten code it is suspended.",
-      lead: [
-        ["YOUR CASE", "policy, fix, program"],
-        ["MODEL", "precise logic"],
-      ],
-      // The engines by name (Dom, 2026-10-19: « on parle pas des outils? »), the same set as the architecture plate.
-      top: ["SOLVER", "every case the model allows"],
-      bottom: ["SECOND CHECK", "independent of the first"],
-      topInset: [["Z3", "SMT solver"], ["BITWUZLA", "bit-precise"], ["SPACER", "loop invariants"], ["CBMC", "C code, bounded"]],
-      bottomInset: [["cvc5", "second solver"], ["IBM COBOL", "real runs"], ["LEAN 4", "gate logic"]],
-      verdict: ["VERDICT", "one of three, always"],
-      seal: ["SEALED", "Ed25519 + ML-DSA-65"],
-      // From the architecture plate (Dom, 2026-10-19: « oui add »).
-      propose: ["AI PROPOSES", "never decides"],
-      recheck: ["RE-CHECK", "fresh solver"],
-      outcomes: [
-        ["HOLDS", "proven in scope"],
-        ["BREAKS", "the exact case"],
-        ["NOT DECIDED", "never a pass"],
-      ],
-      verify: ["VERIFY", "your auditor, offline"],
-      scope: "STATED SCOPE",
-    };
-
-/* The cognitive operating system, in English on every page (Dom, 2026-10-19: « tout en anglais, zero french »). */
-const OS_EN: FlowRail = {
-      k: "Ironproof cognitive operating system",
-      t: "Governs the engineering work behind every check",
-      tagline: "MEMORY · CONTEXT · REASONING · PLANNING",
-      foundation: {
-        label: "FOUNDATION",
-        items: [
-          ["AXIOMS", "proven, conjecture or open"],
-          ["THREE LAWS", "the human decides, truth first"],
-          ["ACTION KERNEL", "a single-use key per action"],
-          ["SIGNED LEDGER", "SHA3 chain, Ed25519 events"],
-        ],
-      },
-      memory: {
-        label: "MEMORY",
-        items: [
-          ["RECALL", "the right memory on every request"],
-          ["PERSISTENT MEMORY", "each decision and lesson, versioned"],
-          ["KNOWLEDGE GRAPH", "rebuilt from the signed ledger"],
-          ["PROMISES", "every next action tracked, kept or open"],
-        ],
-      },
-      learning: {
-        label: "LEARNING",
-        items: [
-          ["OBSTACLE LOG", "each wall noted with its way around"],
-          ["LEARNED RULES", "an error seen 3 times in 14 days"],
-          ["RULE EFFICACY", "weak rules flagged for rewrite"],
-          ["WAGERS", "bets fixed before the result"],
-          ["CORRECTION RATE", "founder corrections, measured weekly"],
-        ],
-      },
-      control: {
-        label: "CONTROL",
-        items: [
-          ["ORCHESTRATOR", "plans, picks the tools, runs them"],
-          ["CLAIM CHECK", "no claim without its command and output"],
-          ["INDEPENDENT REVIEWER", "objects before any risky action"],
-          ["COMMIT CHAIN", "types, secrets, named files only"],
-          ["CHECK HEALTH", "each check seen refusing"],
-        ],
-      },
-      arrows: {
-        constrains: "constrains every step",
-        out: "every result",
-        refusal: "each refusal",
-        rule: "a new rule",
-        recall: "recall",
-        loop: "EVERY REFUSAL BECOMES A RULE · EVERY RULE MEETS THE NEXT CASE",
-      },
-    };
 
 const COPY: L<HowCopy> = {
   en: {
@@ -125,8 +42,6 @@ const COPY: L<HowCopy> = {
         body: "The proof, or the exact case that differs or breaks the rule, sealed with a classical and a post-quantum signature. Built so your auditor can re-run it without us.",
       },
     ],
-    os: OS_EN,
-    flow: FLOW_EN,
   },
   fr: {
     eyebrow: "COMMENT FONCTIONNE NOTRE PLATEFORME",
@@ -149,8 +64,6 @@ const COPY: L<HowCopy> = {
         body: "La preuve, ou le cas précis qui diffère ou qui brise la règle, scellée avec une signature classique et une signature post-quantique. C’est fait pour que votre auditeur la refasse sans nous.",
       },
     ],
-    os: OS_EN,
-    flow: FLOW_EN,
   },
 };
 
@@ -183,14 +96,13 @@ export function PlatformHow({ locale = defaultLocale }: { locale?: Locale }) {
 
 /* The engineering system around the method, moved from the home to
  * /proof-intelligence (Dom, 2026-11-01): it reads as our tooling, not as what a
- * bank buys. Same content, same label. */
+ * bank buys. Since 2026-11-11 it shows the whole architecture with its organs
+ * (cognitive-os-figure.tsx). */
 export function EngineeringSystem({ locale = defaultLocale }: { locale?: Locale }) {
-  const t = pick(COPY, locale);
-
   return (
     <section id="engineering-system" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
       <div className="mx-auto max-w-6xl">
-        <FlowDiagram f={t.flow} rail={t.os} />
+        <CognitiveOsFigure locale={locale} />
       </div>
     </section>
   );
