@@ -4,6 +4,7 @@ import { isLocale } from "@/content";
 import { LandingHeader } from "@/components/landing/landing-header";
 import { FadeUpInit } from "@/components/landing/fade-up-init";
 import { CriticalActionsSections } from "@/components/landing/landing";
+import { DroneFence } from "@/components/landing/drone-fence";
 import { type L, pick } from "@/components/landing/i18n";
 
 /*
@@ -74,6 +75,7 @@ export default async function CriticalActionsPage({ params }: PageProps) {
           <h1 className="metal-shine max-w-3xl font-serif text-4xl font-medium leading-[0.98] sm:text-5xl md:text-7xl">{t.h1}</h1>
           <p className="mt-6 max-w-2xl text-lg font-light text-neutral-300">{t.lead}</p>
         </section>
+        <DroneFence locale={locale} />
         <CriticalActionsSections locale={locale} />
       </main>
       <FadeUpInit />
