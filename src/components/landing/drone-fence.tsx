@@ -111,3 +111,72 @@ export function DroneFence({ locale }: { locale: Locale }) {
     </section>
   );
 }
+
+/*
+ * The same run as a slide under the home page title (Dom, 2026-11-11: « sur
+ * la front première page au lieu de l'animation », the seal, the two cards
+ * and the query removed). Same numbers as the section above; the limits stay
+ * one click away on /critical-actions#drones and are named in the link.
+ */
+type SlideCopy = { eyebrow: string; title: string; titleGold: string; link: string; imageNote: string };
+
+const SLIDE: L<SlideCopy> = {
+  en: {
+    eyebrow: "LATEST RUN · DRONES · PX4 SIMULATION",
+    title: "Three commands tried to fly into a no-fly zone.",
+    titleGold: "Our gate refused all three.",
+    link: "See the run and what it does not show yet",
+    imageNote: "Image: illustration.",
+  },
+  fr: {
+    eyebrow: "DERNIER ESSAI · DRONES · SIMULATION PX4",
+    title: "Trois commandes ont tenté d’entrer dans une zone interdite.",
+    titleGold: "Notre barrière a refusé les trois.",
+    link: "Voir l’essai et ce qu’il ne montre pas encore",
+    imageNote: `Image${NBSP}: illustration.`,
+  },
+};
+
+export function DroneHeroSlide({ locale, href }: { locale: Locale; href: string }) {
+  const t = pick(T, locale);
+  const s = pick(SLIDE, locale);
+  return (
+    <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-14 md:px-14 md:pt-20">
+      <figure className="fade-up">
+        <div className="photo-plate" aria-hidden="true">
+          <Image
+            src="/media/drone-no-fly-wall.jpg"
+            alt=""
+            fill
+            preload
+            fetchPriority="high"
+            sizes="(min-width: 1280px) 1200px, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 45%" }}
+          />
+          <span className="plate-brackets" />
+        </div>
+        <figcaption className="mt-3 text-right text-xs text-neutral-500">{s.imageNote}</figcaption>
+      </figure>
+      <div className="fade-up mt-8 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-14">
+        <div>
+          <p className="seal-label track-mid mb-4 text-xs">{s.eyebrow}</p>
+          <p className="font-serif text-3xl leading-tight text-neutral-100 md:text-5xl">
+            {s.title} <span className="text-[#a07a2c]">{s.titleGold}</span>
+          </p>
+        </div>
+        <ul className="grid gap-3 sm:grid-cols-3">
+          {t.stats.map((st) => (
+            <li key={st.label} className="flex items-center justify-between gap-4 rounded-[6px] border border-white/10 bg-ink/55 px-4 py-3 sm:block sm:py-4">
+              <p className="seal-label track-mid text-[10px]">{st.label}</p>
+              <p className={`whitespace-nowrap font-serif text-3xl sm:mt-2 md:text-4xl ${TONE[st.tone]}`}>{st.value}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <a href={href} className="fade-up track-mid mt-8 inline-flex items-center gap-3 text-xs font-semibold text-neutral-200 underline decoration-white/20 underline-offset-8 transition hover:text-white">
+        {s.link} <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  );
+}
