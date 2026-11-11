@@ -8,7 +8,7 @@
  *
  * No new figure and no new claim. Every sentence restates one already on the
  * site: the North Star (platform-copy.ts), the three verdicts and the limits
- * (research-limits-copy.ts), the seal keys (architecture-plate.tsx), the
+ * (research-limits-copy.ts), the seal keys (cognitive-os-figure.tsx), the
  * status of each application (site-nav, /modernization, /software-security).
  * No competitor is named, and nothing says "nobody else does this".
  *

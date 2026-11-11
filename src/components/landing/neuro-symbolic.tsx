@@ -7,7 +7,7 @@ import { IconCircuit, IconRule } from "@/components/icons";
 import { defaultLocale, type Locale } from "@/content";
 import { pick } from "./i18n";
 import { NEURO_SYMBOLIC_COPY } from "./neuro-symbolic-copy";
-import { ArchitecturePlate } from "./architecture-plate";
+import { CognitiveOsFigure } from "./cognitive-os-figure";
 
 /*
  * "Neuro-symbolic" — the explainer reached from the nav.
@@ -48,12 +48,7 @@ export function NeuroSymbolic({ locale = defaultLocale }: { locale?: Locale }) {
 
         {/* ARCHITECTURE — the whole system, before the explanation */}
         <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24 md:px-14">
-          <figure className="fade-up">
-            <ArchitecturePlate locale={locale} />
-            <figcaption className="mt-5 max-w-3xl font-light leading-relaxed text-neutral-400">
-              {t.archCaption}
-            </figcaption>
-          </figure>
+          <CognitiveOsFigure locale={locale} />
         </section>
 
         {/* 01 — two kinds of intelligence */}
