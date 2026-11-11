@@ -37,16 +37,18 @@ export type HeroCopy = {
 export const HERO_COPY: L<HeroCopy> = {
   en: {
     // The category (Dom, 2026-11-09). Proof-carrying code is Necula and Lee's term (1996), not a brand of ours.
-    eyebrow: "PROOF-CARRYING SOFTWARE ENGINEERING",
-    headline: "Code that carries",
-    headlineEnd: "its proof.",
+    // Dom, 2026-11-11: « we secure with math at speed and rigour, before production or
+    // execution », and Proof Intelligence back on top, for critical infrastructure.
+    eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE",
+    headline: "Secured with math, at machine speed,",
+    headlineEnd: "before it ships or runs.",
     value: "WRITTEN · PROVEN · TESTED · AUDITED · SEALED",
   },
   fr: {
     // The category stays in English, like Proof Intelligence (Dom, 2026-11-09).
-    eyebrow: "PROOF-CARRYING SOFTWARE ENGINEERING",
-    headline: "Du code qui porte",
-    headlineEnd: "sa preuve.",
+    eyebrow: "PROOF INTELLIGENCE POUR LES INFRASTRUCTURES CRITIQUES",
+    headline: "Sécurisé par les maths, à vitesse machine,",
+    headlineEnd: "avant la production ou l’exécution.",
     value: "ÉCRIT · PROUVÉ · TESTÉ · AUDITÉ · SCELLÉ",
   },
 };

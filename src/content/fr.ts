@@ -2,7 +2,7 @@ import type { SiteContent } from "./types";
 
 export const fr: SiteContent = {
   meta: {
-    title: "Ironproof | Du code qui porte sa preuve",
+    title: "Ironproof | Sécurisé par les maths, avant la production ou l’exécution",
     description:
       "Ironproof écrit et vérifie le code critique, et chaque résultat porte sa preuve : le cas précis qui diffère, rejoué sur le vrai compilateur, ou ce qu’on n’a pas pu trancher, dit clairement. Chaque résultat est scellé et vérifiable sans avoir à nous croire.",
     // Open Graph et la carte X/Twitter lisent ceci. Identique à la meta
