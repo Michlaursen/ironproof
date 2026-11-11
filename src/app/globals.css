@@ -4107,3 +4107,24 @@ html.lenis, html.lenis body { height: auto; }
   .thm-tag { font-size: 9px; padding: 5px 7px; }
   .thm-yax { top: 3px; left: 8px; font-size: 8.5px; }
 }
+
+/* Centred hero with a guilloche behind it (Dom, 2026-11-11: « les mêmes proportions
+ * que Code Metal », title in the middle, a security feel, less photograph). */
+.hero-centre { min-height: min(78vh, 760px); justify-content: center; padding-top: 3rem; padding-bottom: 4rem; }
+.hero-centre-title { font-size: clamp(2.75rem, 7.2vw, 6.4rem); line-height: 1.02; }
+.hero-centre-sub { color: var(--graphite); letter-spacing: 0.01em; }
+.hero-guilloche {
+  position: absolute; left: 50%; top: 50%;
+  width: min(1400px, 160vw); aspect-ratio: 1; transform: translate(-50%, -50%);
+  pointer-events: none;
+  /* Edges dissolve into the paper; the centre stays calm under the words. */
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.35) 0%, #000 30%, #000 52%, transparent 70%);
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0.35) 0%, #000 30%, #000 52%, transparent 70%);
+}
+.hero-guilloche-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero-guilloche-turn { animation: guilloche-turn 480s linear infinite; }
+@keyframes guilloche-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .hero-guilloche-turn { animation: none; } }
+@media (max-width: 767px) {
+  .hero-centre { min-height: 0; padding-top: 2.5rem; padding-bottom: 3rem; }
+}

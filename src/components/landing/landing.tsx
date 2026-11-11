@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
 import { HERO_COPY } from "./hero-copy";
+import { HeroGuilloche } from "./hero-guilloche";
 import { DroneHeroSlide } from "./drone-fence";
 import { OneLineFinale } from "./one-line-finale";
 import { LandingHeader } from "./landing-header";
@@ -64,7 +65,6 @@ type Copy = {
     subline: string;
     value: string;
     body: React.ReactNode;
-    boundary: string;
     initiators: string;
     authorized: string;
     unauthorized: string;
@@ -72,7 +72,6 @@ type Copy = {
     refused: string;
     ctaDecide: string;
     ctaSend: string;
-    ctaPilot: string;
     ctaTech: string;
     ctaEvidence: string;
     logoTitle: string;
@@ -231,8 +230,6 @@ const T: L<Copy> = {
           verify independently.
         </>
       ),
-      boundary:
-        "Write: our neuro-symbolic engine writes, translates and fixes software, from a new feature to decades-old COBOL.\nProve: a solver checks every input in the model, not a sample. Every difference it finds is replayed on the real compiler.\nSeal: every result ships signed and post-quantum sealed. Re-check it without trusting us. Where we can’t decide, the report says so first.",
       initiators: "AI agent. API. Script. Person.",
       authorized: "AUTHORIZED",
       unauthorized: "UNAUTHORIZED",
@@ -240,7 +237,6 @@ const T: L<Copy> = {
       refused: "BLOCKED",
       ctaDecide: "WATCH IT DECIDE",
       ctaSend: "SEND US A TRANSLATION",
-      ctaPilot: "START A PILOT",
       ctaTech: "EXPLORE OUR TECHNOLOGY",
       ctaEvidence: "SEE THE EVIDENCE",
       logoTitle: "Ironproof monogram",
@@ -664,8 +660,6 @@ const T: L<Copy> = {
           n’importe qui peut vérifier de façon indépendante.
         </>
       ),
-      boundary:
-        "Écrire\u00a0: notre moteur neuro-symbolique écrit, traduit et corrige le logiciel, d’une nouvelle fonction au COBOL vieux de plusieurs décennies.\nProuver\u00a0: un solveur vérifie chaque entrée du modèle, pas un échantillon. Chaque différence trouvée est rejouée sur le vrai compilateur.\nSceller\u00a0: chaque résultat sort signé et scellé post-quantique. Revérifiez-le sans nous faire confiance. Ce qu’on ne peut pas trancher, le rapport le dit d’abord.",
       initiators: "Agent IA. API. Script. Humain.",
       authorized: "AUTORISÉE",
       unauthorized: "NON AUTORISÉE",
@@ -673,7 +667,6 @@ const T: L<Copy> = {
       refused: "BLOQUÉE",
       ctaDecide: "VOYEZ-LE DÉCIDER",
       ctaSend: "ENVOYEZ-NOUS UNE TRADUCTION",
-      ctaPilot: "DÉMARRER UN PILOTE",
       ctaTech: "DÉCOUVRIR NOTRE TECHNOLOGIE",
       ctaEvidence: "VOIR LES PREUVES",
       logoTitle: "Monogramme Ironproof",
@@ -1154,44 +1147,21 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           * site under them, full width: white marble for the intuition, iron
           * for the rigour, gold where they meet. */}
         <section id="top" className="hero-white relative z-10 overflow-hidden">
-          <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-10 px-6 pt-2 md:grid-cols-2 md:gap-16 md:px-14 md:pt-16">
-            <div className="fade-up min-w-0">
-              {/* The whole category on its own, nothing under it (Dom, 2026-11-01). */}
+          {/* Centred, Code Metal proportions (Dom, 2026-11-11): the title in the middle of
+            * the page, the line under it small, a guilloche behind instead of a photograph.
+            * The Write / Prove / Seal column and its pilot button left the hero; the
+            * header keeps its own pilot button. */}
+          <div className="hero-centre relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center px-6 text-center md:px-14">
+            <HeroGuilloche />
+            <div className="fade-up relative min-w-0">
               <p className="hero-white-eyebrow mb-7">
-                <span className="track-mid block text-sm font-semibold md:text-base">{t.hero.eyebrow}</span>
+                <span className="track-mid block text-xs font-semibold md:text-sm">{t.hero.eyebrow}</span>
               </p>
-              <h1 className="hero-serif hero-white-title font-serif font-normal">
-                {/* One sentence that wraps on its own (Dom, 2026-11-07: « you can verify » sat alone underneath). */}
-                {t.hero.headline} {t.hero.headlineEnd}
+              <h1 className="hero-serif hero-centre-title hero-white-title font-serif font-normal">
+                <span className="block">{t.hero.headline}</span>
+                <span className="block">{t.hero.headlineEnd}</span>
               </h1>
-              {/* What the two verbs apply to, one line (Dom, 2026-11-11). */}
-              <p className="hero-white-lead mt-6 max-w-xl text-lg leading-relaxed md:text-xl">{t.hero.subline}</p>
-            </div>
-            <div className="hero-white-aside fade-up min-w-0 md:pt-14">
-              {/* The buyer's risk first, then what Ironproof does, then the boundary.
-                * The gold value line moved to "What you get", which already says it;
-                * the pilot is the primary action (Dom, 2026-10-16, after the
-                * competitive review). */}
-              <div className="hero-white-lead mb-9 max-w-lg space-y-4 text-base leading-relaxed md:text-lg">
-                {/* Each answer's name in bold, the rest plain (Dom, 2026-10-19: « be more precise »). */}
-                {t.hero.boundary.split("\n").map((ligne) => {
-                  const cut = ligne.indexOf(":");
-                  if (cut < 0) return <p key={ligne}>{ligne}</p>;
-                  return (
-                    <p key={ligne}>
-                      <strong className="font-semibold">{ligne.slice(0, cut)}</strong>
-                      {ligne.slice(cut)}
-                    </p>
-                  );
-                })}
-              </div>
-              <div className="hero-white-actions flex flex-wrap items-center gap-x-8 gap-y-4">
-                <a href={`${r}/pilot`} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
-                  {t.hero.ctaPilot} <span aria-hidden="true">&rarr;</span>
-                </a>
-                {/* One action only, like the Code Metal hero (Dom, 2026-11-07: « trop d'écriture »).
-                  * Sending a translation lives on /modernization; the sealed dossier on /verify. */}
-              </div>
+              <p className="hero-centre-sub mx-auto mt-8 max-w-2xl text-sm leading-relaxed md:text-base">{t.hero.subline}</p>
             </div>
           </div>
           {/* The latest run as a slide, in place of the seal, the two cards and the query
