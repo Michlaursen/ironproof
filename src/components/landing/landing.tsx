@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
-import { HERO_COPY, HERO_ENGINE_COPY } from "./hero-copy";
-import { HeroConnectors } from "./hero-connectors";
-import { HeroRingsVideo } from "./hero-rings-video";
+import { HERO_COPY } from "./hero-copy";
+import { DroneHeroSlide } from "./drone-fence";
 import { OneLineFinale } from "./one-line-finale";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
@@ -1141,7 +1140,6 @@ function SectorRow({ d }: { d: { name: string; actions: readonly string[]; rules
 export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
   const r = locale === defaultLocale ? "" : `/${locale}`;
   const t = pick(T, locale);
-  const eng = pick(HERO_ENGINE_COPY, locale);
 
   return (
     <div className="flex flex-1 flex-col">
@@ -1193,77 +1191,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
               </div>
             </div>
           </div>
-          {/* Three columns that never overlap: the language model, the brain, the
-            * solver and an example dossier (Dom, 2026-10-15: the language model on
-            * iron, the solver on gold, the dossier white, nothing on the brain). */}
-          <div className="hero-white-stage">
-            <HeroConnectors />
-            <div className="hero-stage-side hero-stage-left">
-              <div className="hero-card hero-card-iron">
-                <p className="hero-card-kicker track-mid">{eng.neural}</p>
-                <p className="hero-card-text">{eng.neuralLine}</p>
-              </div>
-            </div>
-            <div className="hero-white-brain-wrap">
-              <div className="hero-white-brain" aria-hidden="true">
-                {/* The three rings (Dom, 2026-11-01): one object, one surface pattern per role.
-                  * They turn (Dom, 2026-11-02: « faut voir l'anneau bouger »): the white ring holds
-                  * its place, iron and gold turn inside it, a 9.5 s loop from Higgsfield (Kling 3.0)
-                  * framed and tinted like the still, interpolated to 96 fps so it stays smooth when
-                  * slowed. hero-rings-video.tsx starts it very slow and speeds it up while
-                  * the page scrolls (Dom, 2026-11-02: « vrm slow si sa bouge sans scroll »); without
-                  * JavaScript the still shows. The still is the first frame of the loop, so
-                  * the lines (hero-connectors.tsx) and reduced motion keep the same picture. */}
-                <Image src="/media/hero-rings-loop-poster.jpg" alt="" fill preload fetchPriority="high" sizes="(min-width: 1024px) 46rem, 100vw" className="object-cover" />
-                <HeroRingsVideo />
-              </div>
-              {/* Phone only: the three roles drawn on the rings (Dom, 2026-10-15:
-                * "faut que les gens comprennent"). Each line takes the colour of its
-                * ring (Dom, 2026-11-01), and symbolic also leads on to proven. */}
-              <div className="hero-map" aria-hidden="true">
-                <svg className="hero-map-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  <polyline points="4,18 22,18 30,21" className="hero-map-line-iron hero-map-line-white" />
-                  <polyline points="96,18 72,18 58,29.5" className="hero-map-line-iron" />
-                  <polyline points="50,88 50,78 54,62" className="hero-map-line-gold" />
-                  {/* The same point of light as on desktop (Dom, 2026-10-16: "je vois pas
-                    * l'animation sur le cell"): it runs neural -> white ring, then symbolic -> iron ring. */}
-                  <polyline points="4,18 22,18 30,21" className="hero-map-spark hero-map-spark-iron" />
-                  <polyline points="96,18 72,18 58,29.5" className="hero-map-spark hero-map-spark-gold" />
-                </svg>
-                {/* Dotted route SYMBOLIC -> PROVEN, anchored to the PROVEN label rather than to
-                  * the image's percentages, so it never runs into a label at any width (Dom, 2026-10-16). */}
-                <span className="hero-map-route" />
-                <span className="hero-map-dot hero-map-dot-iron hero-map-dot-white" style={{ left: "30%", top: "21%" }} />
-                <span className="hero-map-dot hero-map-dot-iron" style={{ left: "58%", top: "29.5%" }} />
-                <span className="hero-map-dot hero-map-dot-gold" style={{ left: "54%", top: "62%" }} />
-                <p className="hero-map-tag hero-map-neural"><b>{eng.map.neural}</b>{eng.map.neuralRole}</p>
-                <p className="hero-map-tag hero-map-symbolic"><b>{eng.map.symbolic}</b>{eng.map.symbolicRole}</p>
-                <p className="hero-map-tag hero-map-proven"><b><span className="hero-dossier-dot" /> {eng.map.proven}</b>{eng.map.provenRole}<span className="hero-map-pq">{eng.pqSeal}</span></p>
-              </div>
-            </div>
-            <div className="hero-stage-side hero-stage-right">
-              <div className="hero-card hero-card-gold">
-                <p className="hero-card-kicker track-mid">{eng.symbolic}</p>
-                <p className="hero-card-text">{eng.symbolicLine}</p>
-                {/* The real shape of a proof, not decoration: assert the negation; unsat means it holds. */}
-                <pre className="hero-card-smt" aria-hidden="true">{"(assert (not P))\n(check-sat)  ; unsat\n∴ P holds"}</pre>
-              </div>
-              {/* An example dossier, labelled as one, that opens the real thing:
-                * /verify checks sealed dossiers in the visitor's own browser. */}
-              <a href={`${r}/verify`} className="hero-dossier">
-                <span className="hero-dossier-pq" aria-hidden="true">{eng.pqSeal}</span>
-                <p className="hero-dossier-tag track-mid">{eng.dossierTag}</p>
-                <p className="hero-dossier-verdict">
-                  <span className="hero-dossier-dot" aria-hidden="true" /> {eng.dossierVerdict}
-                </p>
-                <p className="hero-dossier-scope">{eng.dossierScope}</p>
-                <p className="hero-dossier-seal track-mid">{eng.dossierSeal}</p>
-                <p className="hero-dossier-link track-mid">
-                  {eng.dossierLink} <span aria-hidden="true">&rarr;</span>
-                </p>
-              </a>
-            </div>
-          </div>
+          {/* The latest run as a slide, in place of the seal, the two cards and the query
+            * (Dom, 2026-11-11: « au lieu de l'animation query enlève ce truc et ajoute cette slide »).
+            * The seal and its cards are kept in git history: commit before this one. */}
+          <DroneHeroSlide locale={locale} href={`${r}/critical-actions#drones`} />
         </section>
 
         {/* Four uses, right under the hero, as Code Metal does (Dom, 2026-11-07). */}
