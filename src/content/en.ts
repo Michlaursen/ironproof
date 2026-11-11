@@ -2,7 +2,7 @@ import type { SiteContent } from "./types";
 
 export const en: SiteContent = {
   meta: {
-    title: "Ironproof | Secured with math, before it ships or runs",
+    title: "Ironproof | Prove what holds. Block what breaks.",
     description:
       "Ironproof writes and checks critical code, and every result carries its proof: the exact case that differs, replayed on the real compiler, or a plain statement of what we couldn’t decide. Every result is sealed and can be checked without trusting us.",
     // Open Graph and the X/Twitter card read this. Kept identical to the meta

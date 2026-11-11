@@ -23,6 +23,11 @@ import type { L } from "./i18n";
  * Repositioned 2026-11-09 (Dom, « c sa que on est »): Ironproof writes the code
  * and ships it with its proof. Write, prove, test, audit, seal. The limit is
  * said in the hero itself: where we cannot decide, the report says so.
+ *
+ * Repositioned 2026-11-11 (Dom, « on sen kalice go met sa »): the title says the
+ * two verbs, prove and block; the line under it names what they apply to. "Proof"
+ * holds where the solver decides; where it finds a difference, the exact case is
+ * shown; where it cannot decide, the report says so.
  */
 export type HeroCopy = {
   /** The category, set on its own line so it hits (Dom, 2026-10-16). */
@@ -30,6 +35,8 @@ export type HeroCopy = {
   /** Two clauses: the condition (plain) and the consequence (gold italic). */
   headline: string;
   headlineEnd: string;
+  /** One line under the title: what the two verbs apply to (Dom, 2026-11-11). */
+  subline: string;
   /** The value line right under the title (Dom, 2026-10-15): what every result carries. */
   value: string;
 };
@@ -40,15 +47,17 @@ export const HERO_COPY: L<HeroCopy> = {
     // Dom, 2026-11-11: « we secure with math at speed and rigour, before production or
     // execution », and Proof Intelligence back on top, for critical infrastructure.
     eyebrow: "PROOF INTELLIGENCE FOR CRITICAL INFRASTRUCTURE",
-    headline: "Secured with math, at machine speed,",
-    headlineEnd: "before it ships or runs.",
+    headline: "Prove what holds.",
+    headlineEnd: "Block what breaks.",
+    subline: "Independent proof for critical software, critical actions, and modernization.",
     value: "WRITTEN · PROVEN · TESTED · AUDITED · SEALED",
   },
   fr: {
     // The category stays in English, like Proof Intelligence (Dom, 2026-11-09).
     eyebrow: "PROOF INTELLIGENCE POUR LES INFRASTRUCTURES CRITIQUES",
-    headline: "Sécurisé par les maths, à vitesse machine,",
-    headlineEnd: "avant la production ou l’exécution.",
+    headline: "Prouver ce qui tient.",
+    headlineEnd: "Bloquer ce qui casse.",
+    subline: "Une preuve indépendante pour le logiciel critique, les actions critiques et la modernisation.",
     value: "ÉCRIT · PROUVÉ · TESTÉ · AUDITÉ · SCELLÉ",
   },
 };
