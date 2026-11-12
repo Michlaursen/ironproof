@@ -4025,13 +4025,14 @@ html.lenis, html.lenis body { height: auto; }
 .finale-arm-inner { align-items: center; justify-content: flex-end; }
 .finale-arm-copy { max-width: 25rem; padding: 4rem 0; }
 .finale-arm-line { font-size: clamp(2.4rem, 4.2vw, 4.4rem); line-height: 1.03; color: var(--iron, #24262a); text-wrap: balance; }
-.finale-arm-note { position: absolute; right: 1.25rem; bottom: 1rem; font-size: 0.7rem; color: rgba(36, 38, 42, 0.6); }
+/* Phone: the photo on top, cropped from its left edge so the whole arm and its hand show;
+   the sentence and the button on the paper under it. */
 @media (max-width: 767px) {
-  .finale-arm { min-height: 100svh; }
-  .finale-arm-photo { object-position: 22% 50%; }
-  .finale-arm-veil { background: linear-gradient(180deg, rgba(240, 237, 232, 0) 35%, rgba(240, 237, 232, 0.7) 62%, rgba(244, 242, 238, 0.92) 85%); }
-  .finale-arm-inner { align-items: flex-end; justify-content: flex-start; }
-  .finale-arm-copy { padding: 0 0 4.5rem; }
+  .finale-arm { min-height: 0; flex-direction: column; }
+  .finale-arm-photo { position: relative !important; inset: auto !important; width: 100% !important; height: auto !important; aspect-ratio: 6 / 5; object-position: 0% 50%; }
+  .finale-arm-veil { display: none; }
+  .finale-arm-inner { align-items: flex-start; justify-content: flex-start; }
+  .finale-arm-copy { padding: 2.5rem 0 4.5rem; }
 }
 
 /* Any code, any command (Dom, 2026-11-11): inputs, one gate, three answers, sealed.
