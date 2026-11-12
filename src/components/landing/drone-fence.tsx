@@ -118,26 +118,28 @@ export function DroneFence({ locale }: { locale: Locale }) {
  * and the query removed). Same numbers as the section above; the limits stay
  * one click away on /critical-actions#drones and are named in the link.
  */
-type SlideCopy = { eyebrow: string; title: string; titleGold: string; link: string; imageNote: string };
+type SlideCopy = { eyebrow: string; title: string; titleGold: string; cta: string; link: string; imageNote: string };
 
 const SLIDE: L<SlideCopy> = {
   en: {
-    eyebrow: "LATEST RUN · DRONES · PX4 SIMULATION",
+    eyebrow: "DRONES · PX4 SIMULATION",
     title: "Three commands tried to fly into a no-fly zone.",
     titleGold: "Our gate refused all three.",
-    link: "See the run and what it does not show yet",
+    cta: "START A DRONE PILOT",
+    link: "See the run and its limits",
     imageNote: "Image: illustration.",
   },
   fr: {
-    eyebrow: "DERNIER ESSAI · DRONES · SIMULATION PX4",
+    eyebrow: "DRONES · SIMULATION PX4",
     title: "Trois commandes ont tenté d’entrer dans une zone interdite.",
     titleGold: "Notre barrière a refusé les trois.",
-    link: "Voir l’essai et ce qu’il ne montre pas encore",
+    cta: "DÉMARRER UN PILOTE DRONE",
+    link: "Voir la simulation et ses limites",
     imageNote: `Image${NBSP}: illustration.`,
   },
 };
 
-export function DroneHeroSlide({ locale, href }: { locale: Locale; href: string }) {
+export function DroneHeroSlide({ locale, href, pilotHref }: { locale: Locale; href: string; pilotHref: string }) {
   const t = pick(T, locale);
   const s = pick(SLIDE, locale);
   return (
@@ -170,13 +172,21 @@ export function DroneHeroSlide({ locale, href }: { locale: Locale; href: string 
             <li key={st.label} className="flex items-center justify-between gap-4 rounded-[6px] border border-white/10 bg-ink/55 px-4 py-3 sm:block sm:py-4">
               <p className="seal-label track-mid text-[10px]">{st.label}</p>
               <p className={`whitespace-nowrap font-serif text-3xl sm:mt-2 md:text-4xl ${TONE[st.tone]}`}>{st.value}</p>
+              {/* What the number counts, under it (Dom, 2026-11-11: the figures, read as on /critical-actions). */}
+              <p className="mt-2 hidden text-xs leading-snug text-[#5b5f66] sm:block">{st.note}</p>
             </li>
           ))}
         </ul>
       </div>
-      <a href={href} className="fade-up track-mid mt-8 inline-flex items-center gap-3 text-xs font-semibold text-neutral-200 underline decoration-white/20 underline-offset-8 transition hover:text-white">
-        {s.link} <span aria-hidden="true">&rarr;</span>
-      </a>
+      <div className="fade-up mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+        {/* The offer first, the limits one click away (Dom, 2026-11-11: « dire pilot »). */}
+        <a href={pilotHref} className="hero-white-cta track-mid inline-flex items-center gap-3 rounded-[5px] px-8 py-3.5 text-xs font-semibold">
+          {s.cta} <span aria-hidden="true">&rarr;</span>
+        </a>
+        <a href={href} className="track-mid inline-flex items-center gap-3 text-xs font-semibold text-neutral-200 underline decoration-white/20 underline-offset-8 transition hover:text-white">
+          {s.link} <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
     </div>
   );
 }
