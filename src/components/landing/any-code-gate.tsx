@@ -1,3 +1,4 @@
+import { IronproofMark } from "@/components/ironproof-mark";
 import type { Locale } from "@/content";
 
 /*
@@ -14,6 +15,13 @@ import type { Locale } from "@/content";
  * like the rings at the top of the page (Dom, 2026-11-11: « quelque chose de beau, pas du
  * noir laid comme avant »): the gate is an engraved steel medallion ringed in gold, the
  * seal a gold medallion, the inputs steel plates, the wires gold.
+ *
+ * Second pass (Dom, 2026-11-11: « met moi ça plus sharp, top quality, couleur métallique…
+ * c'est genre 10x moins qualité que le site »): the flow sits on one brushed-steel
+ * instrument plate with a gold hairline frame and four screws; the inputs are gunmetal
+ * tags; both medallions are turned metal (conic light) under a gold bezel; the three
+ * answers carry enamel lamps; the gold wires carry a slow glint; the seal bears the
+ * Ironproof mark with its words engraved round the rim.
  *
  * FRERES-EXAMINES: theorem-scene.tsx (the screen this replaces), flow-diagram.tsx
  * (the method diagram on /proof-intelligence, same three outcomes).
@@ -72,10 +80,16 @@ const COPY: Record<Locale, Copy> = {
   },
 };
 
-const TONE: Record<Copy["outcomes"][number]["tone"], string> = {
+const LAMP: Record<Copy["outcomes"][number]["tone"], string> = {
+  ok: "any-gate-lamp-ok",
+  red: "any-gate-lamp-red",
+  grey: "any-gate-lamp-grey",
+};
+
+const WORD: Record<Copy["outcomes"][number]["tone"], string> = {
   ok: "text-[#2f6b4f]",
   red: "text-[#9b3b30]",
-  grey: "text-[#5b5f66]",
+  grey: "text-[#4e5259]",
 };
 
 /** A small guilloche rosette, the same curve family as the hero rings. */
@@ -93,20 +107,16 @@ function rosettePath(radius: number, amplitude: number, lobes: number): string {
 }
 
 function Engraving({ id, tone }: { id: string; tone: "steel" | "gold" }) {
-  const stroke = tone === "gold" ? "#6e521c" : "#5b5f66";
+  const stroke = tone === "gold" ? "#5e4413" : "#3f434a";
   return (
-    <svg
-      viewBox="-60 -60 120 120"
-      className="any-gate-engraving"
-      aria-hidden="true"
-    >
-      <g fill="none" stroke={stroke} strokeWidth={0.35} opacity={0.55}>
-        <path id={id} d={rosettePath(44, 6, 14)} />
-        {Array.from({ length: 11 }, (_, i) => (
+    <svg viewBox="-60 -60 120 120" className="any-gate-engraving" aria-hidden="true">
+      <g fill="none" stroke={stroke} strokeWidth={0.3} opacity={0.6}>
+        <path id={id} d={rosettePath(46, 5, 18)} />
+        {Array.from({ length: 15 }, (_, i) => (
           <use
             key={i}
             href={`#${id}`}
-            transform={`rotate(${(((i + 1) * 360) / (14 * 12)).toFixed(3)})`}
+            transform={`rotate(${(((i + 1) * 360) / (18 * 16)).toFixed(3)})`}
           />
         ))}
       </g>
@@ -114,8 +124,32 @@ function Engraving({ id, tone }: { id: string; tone: "steel" | "gold" }) {
   );
 }
 
+/** Circumference of the rim path (r = 49 in the 120-unit box): the text is stretched to it exactly. */
+const RIM_LENGTH = 2 * Math.PI * 49 - 1;
+
+/** The seal's words engraved round the rim. */
+function RimText({ id, text }: { id: string; text: string }) {
+  return (
+    <svg viewBox="-60 -60 120 120" className="any-gate-rim" aria-hidden="true">
+      <defs>
+        <path id={id} d="M0,-49 A49,49 0 1,1 -0.01,-49" />
+      </defs>
+      <text className="any-gate-rim-text">
+        <textPath href={`#${id}`} startOffset="0" textLength={RIM_LENGTH} lengthAdjust="spacing">
+          {text}
+        </textPath>
+      </text>
+    </svg>
+  );
+}
+
+function Wire() {
+  return <span className="any-gate-wire" aria-hidden="true" />;
+}
+
 export function AnyCodeGate({ locale }: { locale: Locale }) {
   const t = COPY[locale];
+  const rim = `${t.sealed} · ${t.sealedSub.toUpperCase()} · ${t.sealed} · ${t.sealedSub.toUpperCase()} · `;
   return (
     <div className="any-gate fade-up mt-20">
       <div className="mx-auto max-w-4xl text-center">
@@ -126,37 +160,49 @@ export function AnyCodeGate({ locale }: { locale: Locale }) {
           {t.lead}
         </p>
       </div>
-      <div className="any-gate-flow mt-14">
-        <div className="any-gate-col">
-          <p className="track-mid any-gate-label">{t.inputsLabel}</p>
-          <ul className="any-gate-inputs">
-            {t.inputs.map((x) => (
-              <li key={x}>{x}</li>
+      <div className="any-gate-plate mt-14">
+        <span className="any-gate-screw any-gate-screw-tl" aria-hidden="true" />
+        <span className="any-gate-screw any-gate-screw-tr" aria-hidden="true" />
+        <span className="any-gate-screw any-gate-screw-bl" aria-hidden="true" />
+        <span className="any-gate-screw any-gate-screw-br" aria-hidden="true" />
+        <div className="any-gate-flow">
+          <div className="any-gate-col">
+            <p className="track-mid any-gate-label">{t.inputsLabel}</p>
+            <ul className="any-gate-inputs">
+              {t.inputs.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
+            </ul>
+          </div>
+          <Wire />
+          <div className="any-gate-medal any-gate-medal-steel">
+            <div className="any-gate-face">
+              <Engraving id="ag-steel" tone="steel" />
+              <span className="track-mid any-gate-gate-word">{t.gate}</span>
+              <span className="any-gate-gate-sub">{t.gateSub}</span>
+            </div>
+          </div>
+          <Wire />
+          <ul className="any-gate-outcomes">
+            {t.outcomes.map((o) => (
+              <li key={o.word}>
+                <span className={`any-gate-lamp ${LAMP[o.tone]}`} aria-hidden="true" />
+                <span className={`font-serif text-2xl ${WORD[o.tone]}`}>{o.word}</span>
+                <span className="any-gate-note">{o.note}</span>
+              </li>
             ))}
           </ul>
-        </div>
-        <span className="any-gate-wire" aria-hidden="true" />
-        <div className="any-gate-medal any-gate-medal-steel">
-          <Engraving id="ag-steel" tone="steel" />
-          <span className="track-mid any-gate-gate-word">{t.gate}</span>
-          <span className="any-gate-gate-sub">{t.gateSub}</span>
-        </div>
-        <span className="any-gate-wire" aria-hidden="true" />
-        <ul className="any-gate-outcomes">
-          {t.outcomes.map((o) => (
-            <li key={o.word}>
-              <span className={`font-serif text-2xl ${TONE[o.tone]}`}>
-                {o.word}
-              </span>
-              <span className="any-gate-note">{o.note}</span>
-            </li>
-          ))}
-        </ul>
-        <span className="any-gate-wire" aria-hidden="true" />
-        <div className="any-gate-medal any-gate-medal-gold">
-          <Engraving id="ag-gold" tone="gold" />
-          <span className="track-mid any-gate-gate-word">{t.sealed}</span>
-          <span className="any-gate-gate-sub">{t.sealedSub}</span>
+          <Wire />
+          <div className="any-gate-medal any-gate-medal-gold">
+            <div className="any-gate-face">
+              <Engraving id="ag-gold" tone="gold" />
+              <RimText id="ag-rim" text={rim} />
+              <IronproofMark height={60} className="any-gate-mark" />
+            </div>
+            <span className="sr-only">
+              {t.sealed}: {t.sealedSub}
+            </span>
+          </div>
         </div>
       </div>
     </div>
