@@ -139,9 +139,9 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
             </div>
           ) : null}
         </div>
-        {/* Paper cards tied with ribbon beside a drive: the old program and its rewrite (Dom, 2026-11-01). */}
+        {/* Code engraved in steel, a gold trace touching every line and ending in the Ironproof seal (Dom, 2026-11-11: « une photo qui fait vrm cybersecurity »). */}
         <div className="rewrite-photo" aria-hidden="true">
-          <Image src="/media/app-punchcards.jpg" alt="" fill sizes="(min-width: 1024px) 26rem, 100vw" className="object-cover" />
+          <Image src="/media/app-code-seal.jpg" alt="" fill sizes="(min-width: 1024px) 26rem, 100vw" className="object-cover" />
         </div>
         </div>
         <ol className="verdict-cards fade-up mt-16 grid gap-6 md:grid-cols-3">
