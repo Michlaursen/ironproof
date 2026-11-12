@@ -3797,8 +3797,14 @@ h1 .text-seal, h2 .text-seal, h3 .text-seal { color: #6e521c; }
 /* Punch (Dom, 2026-11-01: "il manque de photo, de border couleur"). */
 /* The engraved shadow painted over the clipped gradient and washed the titles out. */
 .blueprint h2.metal-text { text-shadow: none; }
-.rewrite-top { display: grid; gap: 2.5rem; align-items: start; }
-@media (min-width: 1024px) { .rewrite-top { grid-template-columns: minmax(0, 1fr) 24rem; gap: 4rem; } }
+.rewrite-top { display: grid; gap: 2rem; align-items: start; }
+/* Narrow: title, photo, then the lead. Wide: title and lead on the left, the photo beside them. */
+@media (min-width: 1024px) {
+  .rewrite-top { grid-template-columns: minmax(0, 1fr) 24rem; grid-template-areas: "head photo" "body photo"; column-gap: 4rem; row-gap: 1.5rem; }
+  .rewrite-head { grid-area: head; }
+  .rewrite-body { grid-area: body; }
+  .rewrite-top > .rewrite-photo { grid-area: photo; }
+}
 .rewrite-photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-top: 3px solid var(--gold, #a8843a); box-shadow: 0 28px 50px -30px rgba(36, 38, 42, 0.55); }
 .verdict-cards > li, .why-cards > li {
   padding: 1.75rem;
@@ -4078,5 +4084,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 .hero-guilloche-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
 @media (max-width: 767px) {
-  .hero-centre { min-height: 0; padding-top: 2.5rem; padding-bottom: 3rem; }
+  /* The title and its rings fill the first phone screen; the drone slide starts below it,
+   * as on a wide screen (Dom, 2026-11-11: « sur le cel le drone doit etre plus bas »). */
+  .hero-centre { min-height: calc(100svh - 4.5rem); padding-top: 2.5rem; padding-bottom: 3rem; }
 }
