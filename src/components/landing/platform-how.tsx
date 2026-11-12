@@ -1,7 +1,7 @@
 import { defaultLocale, type Locale } from "@/content";
 import { type L, pick } from "./i18n";
 import { FlowDiagram, type FlowCopy, type FlowRail } from "./flow-diagram";
-import { TheoremScene } from "./theorem-scene";
+import { AnyCodeGate } from "./any-code-gate";
 
 /*
  * How the platform works, on the home page right under "Why Ironproof" (Dom,
@@ -175,7 +175,8 @@ export function PlatformHow({ locale = defaultLocale }: { locale?: Locale }) {
         </ol>
         {/* The method diagram left the home (Dom, 2026-11-07: « l'architecture… c'est ça qu'on enlève »);
           * it stays on /proof-intelligence (EngineeringSystem) and /modernization. */}
-        <TheoremScene />
+        {/* Any code, any command (Dom, 2026-11-11): replaces the Z3 theorem scene. */}
+        <AnyCodeGate locale={locale} />
       </div>
     </section>
   );

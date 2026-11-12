@@ -3,7 +3,7 @@ import { CREDITED_STRIP, PUBLISHED_CVES } from "./credibility";
 import { HERO_COPY } from "./hero-copy";
 import { HeroGuilloche } from "./hero-guilloche";
 import { DroneHeroSlide } from "./drone-fence";
-import { OneLineFinale } from "./one-line-finale";
+import { RoboticsFinale } from "./robotics-finale";
 import { LandingHeader } from "./landing-header";
 import { FadeUpInit } from "./fade-up-init";
 import { AgentScenarios } from "./agent-scenarios";
@@ -1216,11 +1216,10 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
         <PlatformHow locale={locale} />
         <CompanyLine locale={locale} />
 
-        {/* The last screen (Dom, 2026-11-07): a one-line diagram on an engineering sheet, in
-          * iron and gold. Every request passes the gate; what complies runs and is sealed, the
-          * rest never executes. It replaced the dotted « From probably / to provably. » screen,
-          * which itself replaced the bust. */}
-        <OneLineFinale locale={locale} pilotHref={`${r}/pilot`} />
+        {/* The last screen (Dom, 2026-11-11): « From probably / to provably. » over a robot
+          * arm stopped at a gold line, the same visual rule as the drone at the top. It
+          * replaced the one-line diagram, which replaced the dotted screen and the bust. */}
+        <RoboticsFinale locale={locale} pilotHref={`${r}/pilot#request`} />
 
       </main>
 
