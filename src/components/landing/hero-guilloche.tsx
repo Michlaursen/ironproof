@@ -1,15 +1,17 @@
 /*
  * Guilloche behind the hero title (Dom, 2026-11-11: a security feel, drawn
- * rather than photographed; then « enhance the density and quality, metallic
- * grey and gold, more premium »). Guilloche is the engraving on banknotes and
+ * rather than photographed). Guilloche is the engraving on banknotes and
  * passports: many fine curves, each shifted a little, that are hard to copy
  * by hand. Same promise as the seal under every result.
  *
+ * Third pass (Dom, same evening): back to the three rings of the first one,
+ * without the hairlines and the tick bezel; keep the steel and gold; make it
+ * less flat. Each ring is lit like struck metal: the band is blurred into a
+ * height map, a light from the top left puts a highlight on it, and a soft
+ * shadow lifts it off the paper.
+ *
  * One closed curve per ring; the copies are that path rotated, because
- * rotating r = R + a·sin(kθ) by δ equals shifting its phase. A handful of
- * paths and <use> copies keep the page light (no image, no script, no canvas).
- * The metal is a stroke gradient: dark, bright, dark, like light running
- * across brushed steel or gold leaf.
+ * rotating r = R + a·sin(kθ) by δ equals shifting its phase.
  *
  * FRERES-EXAMINES: hero-photo.tsx (photograph, what Dom asked to move away
  * from), hero-rings-video.tsx (three.js rings, a script), proof-seal.tsx (the
@@ -24,111 +26,60 @@ type Ring = {
   amplitude: number;
   /** Integer, so the curve closes on itself. */
   lobes: number;
-  /** Second harmonic: how woven the band looks (0 = plain wave). */
-  weave: number;
   copies: number;
   metal: Metal;
-  opacity: number;
   width: number;
 };
 
-// Outer to inner. The steel rings frame; the gold ring sits closest to the words.
-const STEEL_RINGS: readonly Ring[] = [
+// The three rings of the first version, outer to inner.
+const RINGS: readonly Ring[] = [
   {
-    id: "g-s1",
-    radius: 652,
-    amplitude: 30,
-    lobes: 36,
-    weave: 0.3,
-    copies: 30,
-    metal: "steel",
-    opacity: 0.55,
-    width: 0.45,
-  },
-  {
-    id: "g-s2",
-    radius: 556,
-    amplitude: 40,
-    lobes: 28,
-    weave: 0.45,
-    copies: 32,
-    metal: "steel",
-    opacity: 0.6,
-    width: 0.45,
-  },
-  {
-    id: "g-s3",
-    radius: 446,
-    amplitude: 30,
+    id: "g-outer",
+    radius: 600,
+    amplitude: 44,
     lobes: 22,
-    weave: 0.33,
-    copies: 28,
+    copies: 22,
     metal: "steel",
-    opacity: 0.55,
-    width: 0.4,
-  },
-];
-const GOLD_RINGS: readonly Ring[] = [
-  {
-    id: "g-g1",
-    radius: 336,
-    amplitude: 28,
-    lobes: 18,
-    weave: 0.4,
-    copies: 30,
-    metal: "gold",
-    opacity: 0.85,
-    width: 0.45,
+    width: 0.8,
   },
   {
-    id: "g-g2",
-    radius: 266,
-    amplitude: 14,
-    lobes: 30,
-    weave: 0.25,
+    id: "g-mid",
+    radius: 430,
+    amplitude: 34,
+    lobes: 16,
     copies: 20,
+    metal: "steel",
+    width: 0.75,
+  },
+  {
+    id: "g-inner",
+    radius: 270,
+    amplitude: 26,
+    lobes: 12,
+    copies: 18,
     metal: "gold",
-    opacity: 0.6,
-    width: 0.35,
+    width: 0.75,
   },
 ];
 
-/** Hairlines between the bands, like the rules of an engraved bezel. */
-const STEEL_HAIRLINES = [702, 698, 604, 600, 502, 498, 392] as const;
-const GOLD_HAIRLINES = [386, 382, 298, 294, 236] as const;
+const STEPS = 720;
+const HALF = 700;
 
-const STEPS = 900;
-const HALF = 720;
-
-/** Polar curve r(θ) = R + a·sin(kθ) + w·a·cos(3kθ). */
+/** Polar curve r(θ) = R + a·sin(kθ) + (a/3)·cos(3kθ): the second harmonic gives the woven look. */
 function ringPath(ring: Ring): string {
-  const { radius, amplitude, lobes, weave } = ring;
+  const { radius, amplitude, lobes } = ring;
   const points: string[] = [];
   for (let i = 0; i < STEPS; i += 1) {
     const t = (2 * Math.PI * i) / STEPS;
     const r =
       radius +
       amplitude * Math.sin(lobes * t) +
-      weave * amplitude * Math.cos(3 * lobes * t);
+      (amplitude / 3) * Math.cos(3 * lobes * t);
     points.push(
       `${(r * Math.cos(t)).toFixed(1)} ${(r * Math.sin(t)).toFixed(1)}`,
     );
   }
   return `M${points.join("L")}Z`;
-}
-
-/** Tick marks on the outermost rule, one every 3 degrees, longer every 30. */
-function bezelTicks(): string {
-  const parts: string[] = [];
-  for (let deg = 0; deg < 360; deg += 3) {
-    const t = (deg * Math.PI) / 180;
-    const outer = 712;
-    const inner = deg % 30 === 0 ? 690 : 704;
-    parts.push(
-      `M${(outer * Math.cos(t)).toFixed(1)} ${(outer * Math.sin(t)).toFixed(1)}L${(inner * Math.cos(t)).toFixed(1)} ${(inner * Math.sin(t)).toFixed(1)}`,
-    );
-  }
-  return parts.join("");
 }
 
 function RingCopies({ ring }: { ring: Ring }) {
@@ -139,7 +90,7 @@ function RingCopies({ ring }: { ring: Ring }) {
       fill="none"
       stroke={`url(#g-${ring.metal})`}
       strokeWidth={ring.width}
-      opacity={ring.opacity}
+      filter="url(#g-relief)"
     >
       <path id={ring.id} d={ringPath(ring)} />
       {Array.from({ length: ring.copies - 1 }, (_, i) => (
@@ -153,108 +104,103 @@ function RingCopies({ ring }: { ring: Ring }) {
   );
 }
 
-function Hairlines({
-  radii,
-  metal,
-  opacity,
-}: {
-  radii: readonly number[];
-  metal: Metal;
-  opacity: number;
-}) {
-  return (
-    <g
-      fill="none"
-      stroke={`url(#g-${metal})`}
-      strokeWidth={0.6}
-      opacity={opacity}
-    >
-      {radii.map((r) => (
-        <circle key={r} r={r} />
-      ))}
-    </g>
-  );
-}
-
 /**
  * Metal as light across a surface, in small steps: a stop close to the paper
- * erased whole stretches of lines along a straight edge (seen 2026-11-11), so
- * the brightest stop stays well darker than the paper. One id per metal.
+ * erases stretches of lines along a straight edge (seen 2026-11-11), so the
+ * brightest stop stays well darker than the paper.
  */
-function MetalGradient({ metal }: { metal: Metal }) {
-  if (metal === "steel") {
-    return (
-      <defs>
-        <linearGradient
-          id="g-steel"
-          gradientUnits="userSpaceOnUse"
-          x1={-HALF}
-          y1={-HALF}
-          x2={HALF}
-          y2={HALF}
-        >
-          <stop offset="0.00" stopColor="#50545b" />
-          <stop offset="0.11" stopColor="#7c828a" />
-          <stop offset="0.22" stopColor="#9fa5ad" />
-          <stop offset="0.33" stopColor="#b3b8bf" />
-          <stop offset="0.44" stopColor="#9ba1a9" />
-          <stop offset="0.56" stopColor="#7a8088" />
-          <stop offset="0.67" stopColor="#8f959d" />
-          <stop offset="0.78" stopColor="#a9aeb5" />
-          <stop offset="0.89" stopColor="#848a92" />
-          <stop offset="1.00" stopColor="#50545b" />
-        </linearGradient>
-      </defs>
-    );
-  }
+function Defs() {
   return (
     <defs>
+      <linearGradient
+        id="g-steel"
+        gradientUnits="userSpaceOnUse"
+        x1={-HALF}
+        y1={-HALF}
+        x2={HALF}
+        y2={HALF}
+      >
+        <stop offset="0" stopColor="#3f434a" />
+        <stop offset="0.25" stopColor="#6f757e" />
+        <stop offset="0.45" stopColor="#9aa0a8" />
+        <stop offset="0.6" stopColor="#5f656e" />
+        <stop offset="0.8" stopColor="#8a9098" />
+        <stop offset="1" stopColor="#3f434a" />
+      </linearGradient>
       <linearGradient
         id="g-gold"
         gradientUnits="userSpaceOnUse"
         x1={-HALF}
-        y1={HALF}
+        y1={-HALF}
         x2={HALF}
-        y2={-HALF}
+        y2={HALF}
       >
-        <stop offset="0.00" stopColor="#7a5a1e" />
-        <stop offset="0.11" stopColor="#9a7630" />
-        <stop offset="0.22" stopColor="#b8913f" />
-        <stop offset="0.33" stopColor="#cba65a" />
-        <stop offset="0.44" stopColor="#b8913f" />
-        <stop offset="0.56" stopColor="#94712c" />
-        <stop offset="0.67" stopColor="#a8843a" />
-        <stop offset="0.78" stopColor="#c4a052" />
-        <stop offset="0.89" stopColor="#a07c34" />
-        <stop offset="1.00" stopColor="#7a5a1e" />
+        <stop offset="0" stopColor="#6a4c16" />
+        <stop offset="0.25" stopColor="#9c772c" />
+        <stop offset="0.45" stopColor="#c9a24f" />
+        <stop offset="0.6" stopColor="#8a6624" />
+        <stop offset="0.8" stopColor="#b58e3e" />
+        <stop offset="1" stopColor="#6a4c16" />
       </linearGradient>
+      {/* Struck metal: the band's own shape, blurred, is the height; a light from
+       * the top left lights it; a soft shadow below lifts it off the paper. */}
+      <filter
+        id="g-relief"
+        x="-15%"
+        y="-15%"
+        width="130%"
+        height="130%"
+        colorInterpolationFilters="sRGB"
+      >
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="height" />
+        <feSpecularLighting
+          in="height"
+          surfaceScale="5"
+          specularConstant="1.1"
+          specularExponent="18"
+          lightingColor="#ffffff"
+          result="shine"
+        >
+          <feDistantLight azimuth="225" elevation="42" />
+        </feSpecularLighting>
+        <feComposite
+          in="shine"
+          in2="SourceAlpha"
+          operator="in"
+          result="shineOnLines"
+        />
+        <feComposite
+          in="SourceGraphic"
+          in2="shineOnLines"
+          operator="arithmetic"
+          k1="0"
+          k2="1"
+          k3="0.85"
+          k4="0"
+          result="lit"
+        />
+        <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="soft" />
+        <feOffset in="soft" dx="0" dy="9" result="drop" />
+        <feFlood floodColor="#24262a" floodOpacity="0.22" />
+        <feComposite in2="drop" operator="in" result="shadow" />
+        <feMerge>
+          <feMergeNode in="shadow" />
+          <feMergeNode in="lit" />
+        </feMerge>
+      </filter>
     </defs>
   );
 }
 
 export function HeroGuilloche() {
-  const box = `${-HALF} ${-HALF} ${2 * HALF} ${2 * HALF}`;
   return (
     <div className="hero-guilloche" aria-hidden="true">
-      <svg viewBox={box} className="hero-guilloche-layer">
-        <MetalGradient metal="steel" />
-        <path
-          d={bezelTicks()}
-          fill="none"
-          stroke="url(#g-steel)"
-          strokeWidth={0.6}
-          opacity={0.55}
-        />
-        <Hairlines radii={STEEL_HAIRLINES} metal="steel" opacity={0.6} />
-        {STEEL_RINGS.map((ring) => (
-          <RingCopies key={ring.id} ring={ring} />
-        ))}
-      </svg>
-      {/* The gold turns very slowly on its own layer; still for reduced motion. */}
-      <svg viewBox={box} className="hero-guilloche-layer hero-guilloche-turn">
-        <MetalGradient metal="gold" />
-        <Hairlines radii={GOLD_HAIRLINES} metal="gold" opacity={0.75} />
-        {GOLD_RINGS.map((ring) => (
+      <svg
+        viewBox={`${-HALF} ${-HALF} ${2 * HALF} ${2 * HALF}`}
+        className="hero-guilloche-layer"
+      >
+        <Defs />
+        {RINGS.map((ring) => (
           <RingCopies key={ring.id} ring={ring} />
         ))}
       </svg>

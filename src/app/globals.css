@@ -4122,9 +4122,6 @@ html.lenis, html.lenis body { height: auto; }
   mask-image: radial-gradient(circle at center, rgba(0,0,0,0.35) 0%, #000 30%, #000 52%, transparent 70%);
 }
 .hero-guilloche-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-guilloche-turn { animation: guilloche-turn 480s linear infinite; }
-@keyframes guilloche-turn { to { transform: rotate(360deg); } }
-@media (prefers-reduced-motion: reduce) { .hero-guilloche-turn { animation: none; } }
 @media (max-width: 767px) {
   .hero-centre { min-height: 0; padding-top: 2.5rem; padding-bottom: 3rem; }
 }
