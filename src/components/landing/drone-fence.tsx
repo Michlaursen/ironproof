@@ -115,16 +115,39 @@ export function DroneFence({ locale }: { locale: Locale }) {
 /*
  * The same run as a slide under the home page title (Dom, 2026-11-11: « sur
  * la front première page au lieu de l'animation », the seal, the two cards
- * and the query removed). Same numbers as the section above; the limits stay
- * one click away on /critical-actions#drones and are named in the link.
+ * and the query removed). The three figures left the slide (Dom, 2026-11-11:
+ * « enleve sa… on garde juste le pilot truc et on dit ce que on px faire pour
+ * les drones »); they stay on /critical-actions#drones with their limits.
+ * Each offer below is work already run in ironproof/lab: the fence gate in
+ * front of PX4 (px4_fence), the map of data outputs read from PX4 and
+ * ArduCopter firmware (carte des sorties, manches 1-6), the bounded
+ * SERIAL_CONTROL fix checked by CBMC (px4_fence/serial_control), the sealed
+ * journal checked offline (bench.py).
  */
-type SlideCopy = { eyebrow: string; title: string; titleGold: string; cta: string; link: string; imageNote: string };
+type Offer = { title: string; body: string };
+type SlideCopy = {
+  eyebrow: string;
+  title: string;
+  titleGold: string;
+  offersLabel: string;
+  offers: readonly Offer[];
+  cta: string;
+  link: string;
+  imageNote: string;
+};
 
 const SLIDE: L<SlideCopy> = {
   en: {
     eyebrow: "DRONES · PX4 SIMULATION",
     title: "Three commands tried to fly into a no-fly zone.",
     titleGold: "Our gate refused all three.",
+    offersLabel: "What we can do for your drones",
+    offers: [
+      { title: "Stop the command before the autopilot", body: "Every command that would move the drone is checked against your no-fly zones before the autopilot sees it, then refused or let through." },
+      { title: "Map every data output", body: "From the firmware image alone: every channel the drone sends data on, and what goes out on it. A new output between two versions is flagged." },
+      { title: "Prove a fix closes the flaw", body: "A patch to the flight code is checked against the flaw it claims to close, not only against its tests." },
+      { title: "Seal every decision", body: "Accepted, refused or overridden by a person: each one is recorded, and a third party can check the record offline." },
+    ],
     cta: "START A DRONE PILOT",
     link: "See the run and its limits",
     imageNote: "Image: illustration.",
@@ -133,6 +156,13 @@ const SLIDE: L<SlideCopy> = {
     eyebrow: "DRONES · SIMULATION PX4",
     title: "Trois commandes ont tenté d’entrer dans une zone interdite.",
     titleGold: "Notre barrière a refusé les trois.",
+    offersLabel: "Ce qu’on peut faire pour vos drones",
+    offers: [
+      { title: "Arrêter la commande avant l’autopilote", body: "Chaque commande qui ferait bouger le drone est vérifiée selon vos zones interdites avant que l’autopilote la voie, puis refusée ou laissée passer." },
+      { title: "Cartographier chaque sortie de données", body: `À partir du seul firmware${NBSP}: chaque canal par lequel le drone envoie des données, et ce qui en sort. Une nouvelle sortie entre deux versions est signalée.` },
+      { title: "Prouver qu’un correctif ferme la faille", body: "Un correctif du code de vol est vérifié contre la faille qu’il prétend fermer, pas seulement contre ses tests." },
+      { title: "Sceller chaque décision", body: `Acceptée, refusée ou outrepassée par une personne${NBSP}: chacune est consignée, et un tiers peut vérifier le registre hors ligne.` },
+    ],
     cta: "DÉMARRER UN PILOTE DRONE",
     link: "Voir la simulation et ses limites",
     imageNote: `Image${NBSP}: illustration.`,
@@ -140,7 +170,6 @@ const SLIDE: L<SlideCopy> = {
 };
 
 export function DroneHeroSlide({ locale, href, pilotHref }: { locale: Locale; href: string; pilotHref: string }) {
-  const t = pick(T, locale);
   const s = pick(SLIDE, locale);
   return (
     <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-14 md:px-14 md:pt-20">
@@ -160,23 +189,23 @@ export function DroneHeroSlide({ locale, href, pilotHref }: { locale: Locale; hr
         </div>
         <figcaption className="mt-3 text-right text-xs text-neutral-500">{s.imageNote}</figcaption>
       </figure>
-      <div className="fade-up mt-8 grid gap-8 lg:grid-cols-[1.15fr_1fr] lg:items-end lg:gap-14">
-        <div>
-          <p className="seal-label track-mid mb-4 text-xs">{s.eyebrow}</p>
-          <p className="font-serif text-3xl leading-tight text-neutral-100 md:text-5xl">
-            {s.title} <span className="text-[#a07a2c]">{s.titleGold}</span>
-          </p>
-        </div>
-        <ul className="grid gap-3 sm:grid-cols-3">
-          {t.stats.map((st) => (
-            <li key={st.label} className="flex items-center justify-between gap-4 rounded-[6px] border border-white/10 bg-ink/55 px-4 py-3 sm:block sm:py-4">
-              <p className="seal-label track-mid text-[10px]">{st.label}</p>
-              <p className={`whitespace-nowrap font-serif text-3xl sm:mt-2 md:text-4xl ${TONE[st.tone]}`}>{st.value}</p>
-              {/* What the number counts, under it (Dom, 2026-11-11: the figures, read as on /critical-actions). */}
-              <p className="mt-2 hidden text-xs leading-snug text-[#5b5f66] sm:block">{st.note}</p>
+      <div className="fade-up mt-8 max-w-4xl">
+        <p className="seal-label track-mid mb-4 text-xs">{s.eyebrow}</p>
+        <p className="font-serif text-3xl leading-tight text-neutral-100 md:text-5xl">
+          {s.title} <span className="text-[#a07a2c]">{s.titleGold}</span>
+        </p>
+      </div>
+      <div className="fade-up mt-10">
+        <p className="track-mid pb-4 text-xs text-neutral-400">{s.offersLabel}</p>
+        <ol className="grid border-t border-white/10 sm:grid-cols-2 lg:grid-cols-4">
+          {s.offers.map((o, i) => (
+            <li key={o.title} className="border-b border-white/10 py-5 sm:pr-6 lg:border-b-0">
+              <span className="font-mono text-xs text-[#a07a2c]">{String(i + 1).padStart(2, "0")}</span>
+              <p className="mt-2 font-serif text-xl leading-snug text-neutral-100">{o.title}</p>
+              <p className="mt-2 text-sm font-light leading-relaxed text-neutral-300">{o.body}</p>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
       <div className="fade-up mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
         {/* The offer first, the limits one click away (Dom, 2026-11-11: « dire pilot »). */}
