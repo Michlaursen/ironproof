@@ -126,11 +126,19 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
   return (
     <section id="rewrite-check" className="relative z-10 edge-t px-6 py-28 md:px-14 md:py-32">
       <div className="mx-auto max-w-6xl">
+        {/* The photo right under the title, before the lead (Dom, 2026-11-11: « va en dessous
+          * du title pas dans le milieu de la slide »); on a wide screen it stands beside them. */}
         <div className="rewrite-top fade-up">
-        <div className="min-w-0">
+        <div className="rewrite-head min-w-0">
           <p className="seal-label track-mid mb-5 text-xs">{t.eyebrow}</p>
           <h2 className="metal-text font-serif text-4xl font-medium leading-[1.05] md:text-6xl">{t.title}</h2>
-          <p className="mt-6 max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{t.lead}</p>
+        </div>
+        {/* Code engraved in steel, a gold trace touching every line and ending in the Ironproof seal (Dom, 2026-11-11: « une photo qui fait vrm cybersecurity »). */}
+        <div className="rewrite-photo" aria-hidden="true">
+          <Image src="/media/app-code-seal.jpg" alt="" fill sizes="(min-width: 1024px) 26rem, 100vw" className="object-cover" />
+        </div>
+        <div className="rewrite-body min-w-0">
+          <p className="max-w-3xl text-lg font-light leading-relaxed text-neutral-300 md:text-xl">{t.lead}</p>
           {/* The example right under the lead (Dom, 2026-10-19, review). */}
           {example ? (
             <div className="mt-10 max-w-3xl border-l-2 border-seal/60 pl-6">
@@ -138,10 +146,6 @@ export function RewriteCheck({ locale = defaultLocale }: { locale?: Locale }) {
               <p className="font-serif text-xl leading-snug text-neutral-100 md:text-2xl">{example.ranOn}</p>
             </div>
           ) : null}
-        </div>
-        {/* Code engraved in steel, a gold trace touching every line and ending in the Ironproof seal (Dom, 2026-11-11: « une photo qui fait vrm cybersecurity »). */}
-        <div className="rewrite-photo" aria-hidden="true">
-          <Image src="/media/app-code-seal.jpg" alt="" fill sizes="(min-width: 1024px) 26rem, 100vw" className="object-cover" />
         </div>
         </div>
         <ol className="verdict-cards fade-up mt-16 grid gap-6 md:grid-cols-3">
