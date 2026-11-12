@@ -49,7 +49,7 @@ type HowCopy = {
   why: readonly Item[];
   limitsPre: string;
   limitsLink: string;
-  /** Notes on the photograph: punched cards (the old program) beside a drive (the new one). */
+  /** Notes on the photograph; empty since the code-and-seal plate (2026-11-11): the old notes named the punched cards and the drive. */
   plate: readonly { x: number; y: number; label: string; gold?: boolean }[];
   /** The path of one program, read left to right in the diagram. */
   flow: FlowCopy;
@@ -122,10 +122,7 @@ const COPY: L<HowCopy> = {
     ],
     limitsPre: "What our proofs guarantee, and what they do not: ",
     limitsLink: "read the note",
-    plate: [
-      { x: 10, y: 14, label: "THE PROGRAM YOU RUN TODAY" },
-      { x: 56, y: 18, label: "THE TRANSLATION YOU RECEIVED", gold: true },
-    ],
+    plate: [],
     flow: {
       caption: "The path of one translated program: two independent checks, one verdict, a sealed record.",
       lead: [
@@ -207,10 +204,7 @@ const COPY: L<HowCopy> = {
     ],
     limitsPre: "Ce que nos preuves garantissent, et ce qu’elles ne garantissent pas : ",
     limitsLink: "lire la note (en anglais)",
-    plate: [
-      { x: 10, y: 14, label: "LE PROGRAMME D’AUJOURD’HUI" },
-      { x: 56, y: 18, label: "LA TRADUCTION REÇUE", gold: true },
-    ],
+    plate: [],
     flow: {
       caption: "Le parcours d’un programme traduit : deux vérifications indépendantes, un verdict, un dossier scellé.",
       lead: [
@@ -268,10 +262,10 @@ export function ModernizationHow({ locale = defaultLocale }: { locale?: Locale }
             <Snum>{t.eyebrow}</Snum>
             <h2 className="metal-text font-serif text-3xl font-medium md:text-5xl">{t.title}</h2>
           </div>
-          {/* Punched cards tied with ribbon beside a drive: the old program and
-            * the new one, the same family of objects as the rest of the site. */}
+          {/* Code engraved in steel, a gold trace touching every line and ending
+            * in the Ironproof seal (Dom, 2026-11-11). */}
           <div className="photo-plate photo-plate-wide" aria-hidden="true">
-            <Image src="/media/app-punchcards.jpg" alt="" fill sizes="(min-width: 768px) 600px, 100vw" className="object-cover" style={{ objectPosition: "50% 60%" }} />
+            <Image src="/media/app-code-seal.jpg" alt="" fill sizes="(min-width: 768px) 600px, 100vw" className="object-cover" style={{ objectPosition: "50% 60%" }} />
             <span className="plate-brackets" />
             {t.plate.map((n) => (
               <span
