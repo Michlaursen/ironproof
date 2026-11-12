@@ -96,7 +96,7 @@ function copy(r: string): L<Copy> {
           limits: "Holds where the action can only run through the gate, within the model and bounds the dossier states.",
         },
         {
-          tag: "RESEARCH PILOT",
+          tag: "PILOT · SECURITY FIXES (C)",
           name: "Fix verification (C)",
           question: "Does each fix remove the failure its vulnerability causes?",
           deliver: [
@@ -192,7 +192,7 @@ function copy(r: string): L<Copy> {
           limits: "Vaut là où l’action ne peut s’exécuter qu’à travers la barrière, dans le modèle et les bornes que le dossier énonce.",
         },
         {
-          tag: "PILOTE DE RECHERCHE",
+          tag: "PILOTE · CORRECTIFS DE SÉCURITÉ (C)",
           name: "Vérification de correctifs (C)",
           question: "Chaque correctif supprime-t-il l’échec que cause sa faille ?",
           deliver: [

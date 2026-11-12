@@ -105,6 +105,9 @@ export type PlatformCopy = {
     casesTitle: string;
     casesLead: string;
     cases: readonly { name: string; line: string; example: string; href: string; cta: string }[];
+    /** Under each case, the offer itself (Dom, 2026-11-11: « montrer qu'on est ready plus que prototype »). */
+    pilotCta: string;
+    pilotHref: string;
     alsoCta: string;
     alsoHref: string;
     /** How the gate plugs in, for the CTO's first question. */
@@ -141,11 +144,11 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       {
         num: "02",
         name: "C software security",
-        status: "SAME ENGINE · IN RESEARCH",
+        status: "SAME ENGINE · PILOTS OPEN",
         claim: "A patch says the bug is fixed. We check that it is.",
         risk: "Scanners find the hole and a developer writes the fix. Nobody shows that the fix actually closes it.",
         href: "/software-security",
-        cta: "READ THE RESEARCH",
+        cta: "SEE THE RESULTS",
         body: "Ironproof writes a test that triggers the bug, runs it before and after the fix, and tells you whether the fix closes it, within stated bounds. Each result ships as a dossier you can re-run.",
       },
       {
@@ -224,8 +227,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "SEE HOW WE CHECK IT",
         },
         {
-          name: "Prototype to production",
-          line: "Port a prototype to the language of its target, with proof it returns the same result.",
+          name: "Python to embedded C",
+          line: "Port Python or MATLAB to the language of its chip, with proof it returns the same result.",
           example: "A Python signal-processing step translated to embedded C: the same result on all 140 trillion inputs. One short function, from our own tests.",
           href: "/demo/python-to-c",
           cta: "SEE THE PROOF",
@@ -245,6 +248,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "WATCH IT DECIDE",
         },
       ],
+      pilotCta: "START A PILOT",
+      pilotHref: "/pilot#request",
       waysLead: "Two ways to work with us. The service: we verify your critical code (COBOL, Java, Python, C, Rust), or our engine translates it and compares the translation with the original. The product: critical-action control, installed on your side.",
       alsoLines: [
         "Every critical action checked against your rules before it runs, from an AI agent’s payment to a change on power-grid equipment (NERC CIP-010): allowed when it complies, blocked when it breaks them, and every decision sealed.",
@@ -328,7 +333,7 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
       {
         num: "02",
         name: "Sécurité du logiciel C",
-        status: "MÊME MOTEUR · EN RECHERCHE",
+        status: "MÊME MOTEUR · PILOTES OUVERTS",
         claim: "Un correctif dit que la faille est fermée. Nous vérifions qu’elle l’est.",
         risk: "Les scanneurs trouvent la faille et un développeur écrit le correctif. Personne ne montre que le correctif la ferme vraiment.",
         href: "/fr/software-security",
@@ -411,8 +416,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "VOIR COMMENT ON VÉRIFIE",
         },
         {
-          name: "Du prototype à la production",
-          line: "Portez un prototype vers le langage de sa cible, avec la preuve qu’il rend le même résultat.",
+          name: "Du Python au C embarqué",
+          line: "Portez du Python ou du MATLAB vers le langage de sa puce, avec la preuve qu’il rend le même résultat.",
           example: "Une étape de traitement du signal en Python traduite en C embarqué : le même résultat sur les 140 billions d’entrées. Une seule fonction courte, tirée de nos propres essais.",
           href: "/fr/demo/python-to-c",
           cta: "VOIR LA PREUVE",
@@ -432,6 +437,8 @@ export const PLATFORM_COPY: L<PlatformCopy> = {
           cta: "VOYEZ-LE DÉCIDER",
         },
       ],
+      pilotCta: "DÉMARRER UN PILOTE",
+      pilotHref: "/fr/pilot#request",
       waysLead: "Deux façons de travailler avec nous. Le service : on vérifie votre code critique (COBOL, Java, Python, C, Rust), ou notre moteur le traduit et compare la traduction à l’original. Le produit : le contrôle des actions critiques, installé chez vous.",
       alsoLines: [
         "Chaque action critique vérifiée selon vos règles avant de partir, du paiement d’un agent IA au changement sur un équipement du réseau électrique (norme NERC CIP-010). Conforme, elle passe. Sinon, elle est bloquée. Chaque décision est scellée.",

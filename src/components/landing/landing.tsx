@@ -1167,7 +1167,7 @@ export function Landing({ locale = defaultLocale }: { locale?: Locale }) {
           {/* The latest run as a slide, in place of the seal, the two cards and the query
             * (Dom, 2026-11-11: « au lieu de l'animation query enlève ce truc et ajoute cette slide »).
             * The seal and its cards are kept in git history: commit before this one. */}
-          <DroneHeroSlide locale={locale} href={`${r}/critical-actions#drones`} />
+          <DroneHeroSlide locale={locale} href={`${r}/critical-actions#drones`} pilotHref={`${r}/pilot#request`} />
         </section>
 
         {/* Four uses, right under the hero, as Code Metal does (Dom, 2026-11-07). */}

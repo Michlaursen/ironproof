@@ -134,10 +134,10 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
         </div>
         <ol className="fade-up mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {u.cases.map((c, i) => (
-            <li key={c.name}>
+            <li key={c.name} className="flex flex-col">
               <a
                 href={c.href}
-                className="group flex h-full flex-col rounded-[6px] border border-white/10 bg-ink/60 p-7 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
+                className="group flex flex-1 flex-col rounded-[6px] border border-white/10 bg-ink/60 p-7 shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
                 style={{ borderTop: "3px solid #a8843a" }}
               >
                 <span className="card-photo card-photo-mandate" aria-hidden="true">
@@ -150,6 +150,9 @@ export function UseCases({ locale = defaultLocale }: { locale?: Locale }) {
                 <span className="track-mid mt-6 inline-flex items-center gap-2 text-xs text-neutral-200 transition group-hover:text-white">
                   {c.cta} <span aria-hidden="true" className="transition group-hover:translate-x-1">&rarr;</span>
                 </span>
+              </a>
+              <a href={u.pilotHref} className="track-mid mt-3 flex items-center justify-center gap-2 rounded-[5px] border border-[#a8843a]/60 px-5 py-3 text-xs font-semibold text-neutral-100 transition hover:border-[#a8843a] hover:bg-[#a8843a]/15">
+                {u.pilotCta} <span aria-hidden="true">&rarr;</span>
               </a>
             </li>
           ))}
