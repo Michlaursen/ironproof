@@ -4139,6 +4139,11 @@ html.lenis, html.lenis body { height: auto; }
 .hero-centre { min-height: min(78vh, 760px); justify-content: center; padding-top: 3rem; padding-bottom: 4rem; }
 .hero-centre-title { font-size: clamp(2.75rem, 7.2vw, 6.4rem); line-height: 1.02; }
 .hero-centre-sub { color: var(--graphite); letter-spacing: 0.01em; }
+/* The two small lines read at a glance (Dom, 2026-11-11: « Independent proof … on voit mal, et Proof
+ * Intel aussi »): the line under the title in iron, larger; the eyebrow larger, in the deep text gold. */
+.hero-centre .hero-centre-sub { color: var(--iron); font-size: clamp(1.05rem, 1.5vw, 1.35rem); line-height: 1.5; font-weight: 450; text-wrap: balance; }
+.hero-centre .hero-white-eyebrow { color: #6b4f1c; }
+.hero-centre .hero-white-eyebrow span { font-size: clamp(0.8rem, 1.05vw, 1rem); font-weight: 700; letter-spacing: 0.22em; }
 .hero-guilloche {
   position: absolute; left: 50%; top: 50%;
   width: min(1400px, 160vw); aspect-ratio: 1; transform: translate(-50%, -50%);
