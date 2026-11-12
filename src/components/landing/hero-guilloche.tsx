@@ -16,6 +16,11 @@
  * under the gold ring, and warm light on the paper behind the title
  * (globals.css, .hero-centre::before). Nothing added to the drawing itself.
  *
+ * Fifth pass (Dom, 2026-11-11 ~23 h: « les couleurs sont un peu fuckall »): the gold
+ * of the drawing is brought back to the site's own gold (#a8843a, text gold #7a5c22)
+ * instead of a bright yellow beside it, the halo is quieter, and the steel moves from
+ * a cold blue grey to the site's iron and graphite (#24262a, #5b5f66). Same rings.
+ *
  * One closed curve per ring; the copies are that path rotated, because
  * rotating r = R + a·sin(kθ) by δ equals shifting its phase.
  *
@@ -128,12 +133,12 @@ function Defs() {
         x2={HALF}
         y2={HALF}
       >
-        <stop offset="0" stopColor="#23262b" />
-        <stop offset="0.25" stopColor="#4f555d" />
-        <stop offset="0.45" stopColor="#8b929b" />
-        <stop offset="0.6" stopColor="#3a3f46" />
-        <stop offset="0.8" stopColor="#6d737c" />
-        <stop offset="1" stopColor="#23262b" />
+        <stop offset="0" stopColor="#24262a" />
+        <stop offset="0.25" stopColor="#4b4e54" />
+        <stop offset="0.45" stopColor="#85878b" />
+        <stop offset="0.6" stopColor="#3a3c40" />
+        <stop offset="0.8" stopColor="#5b5f66" />
+        <stop offset="1" stopColor="#24262a" />
       </linearGradient>
       <linearGradient
         id="g-gold"
@@ -143,12 +148,12 @@ function Defs() {
         x2={HALF}
         y2={HALF}
       >
-        <stop offset="0" stopColor="#5a3e0e" />
-        <stop offset="0.25" stopColor="#9a7426" />
-        <stop offset="0.45" stopColor="#e9c46a" />
-        <stop offset="0.6" stopColor="#7d5b1c" />
-        <stop offset="0.8" stopColor="#c39a45" />
-        <stop offset="1" stopColor="#5a3e0e" />
+        <stop offset="0" stopColor="#4a3510" />
+        <stop offset="0.25" stopColor="#7a5c22" />
+        <stop offset="0.45" stopColor="#a8843a" />
+        <stop offset="0.6" stopColor="#6b4f1c" />
+        <stop offset="0.8" stopColor="#957433" />
+        <stop offset="1" stopColor="#4a3510" />
       </linearGradient>
       {/* Struck metal: the band's own shape, blurred, is the height; a light from
        * the top left lights it; a soft shadow below lifts it off the paper. */}
@@ -215,9 +220,9 @@ export function HeroGuilloche() {
         <circle
           r={GOLD_HALO_RADIUS}
           fill="none"
-          stroke="#d9b25a"
+          stroke="#a8843a"
           strokeWidth="60"
-          opacity="0.35"
+          opacity="0.16"
           filter="url(#g-bloom)"
         />
         {RINGS.map((ring) => (
