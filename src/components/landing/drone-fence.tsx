@@ -18,7 +18,6 @@ type Copy = {
   stats: readonly Stat[];
   limitsLabel: string;
   limits: readonly string[];
-  imageNote: string;
 };
 
 const T: L<Copy> = {
@@ -38,7 +37,6 @@ const T: L<Copy> = {
       "It trusts the position it decodes: GPS spoofing is outside its reach.",
       "A real board, a real flight and a customer’s real zones come next.",
     ],
-    imageNote: "Image: illustration.",
   },
   fr: {
     eyebrow: "DRONES · SIMULATION",
@@ -56,7 +54,6 @@ const T: L<Copy> = {
       `Elle se fie à la position qu’elle décode${NBSP}: le leurrage GPS est hors de sa portée.`,
       "Une vraie carte, un vrai vol et les vraies zones d’un client viennent ensuite.",
     ],
-    imageNote: `Image${NBSP}: illustration.`,
   },
 };
 
@@ -87,7 +84,6 @@ export function DroneFence({ locale }: { locale: Locale }) {
           />
           <span className="plate-brackets" />
         </div>
-        <figcaption className="mt-3 text-right text-xs text-neutral-500">{t.imageNote}</figcaption>
       </figure>
       <ul className="fade-up grid gap-4 md:grid-cols-3">
         {t.stats.map((s) => (
@@ -125,6 +121,7 @@ export function DroneFence({ locale }: { locale: Locale }) {
  * journal checked offline (bench.py).
  */
 type Offer = { title: string; body: string };
+// The « Image: illustration » notes left the page (Dom, 2026-11-11: « enlève les écritures image illustration »).
 type SlideCopy = {
   eyebrow: string;
   title: string;
@@ -133,7 +130,6 @@ type SlideCopy = {
   offers: readonly Offer[];
   cta: string;
   link: string;
-  imageNote: string;
 };
 
 const SLIDE: L<SlideCopy> = {
@@ -150,7 +146,6 @@ const SLIDE: L<SlideCopy> = {
     ],
     cta: "START A DRONE PILOT",
     link: "See the run and its limits",
-    imageNote: "Image: illustration.",
   },
   fr: {
     eyebrow: "DRONES · SIMULATION PX4",
@@ -165,7 +160,6 @@ const SLIDE: L<SlideCopy> = {
     ],
     cta: "DÉMARRER UN PILOTE DRONE",
     link: "Voir la simulation et ses limites",
-    imageNote: `Image${NBSP}: illustration.`,
   },
 };
 
@@ -187,7 +181,6 @@ export function DroneHeroSlide({ locale, href, pilotHref }: { locale: Locale; hr
           />
           <span className="plate-brackets" />
         </div>
-        <figcaption className="mt-3 text-right text-xs text-neutral-500">{s.imageNote}</figcaption>
       </figure>
       <div className="fade-up mt-8 max-w-4xl">
         <p className="seal-label track-mid mb-4 text-xs">{s.eyebrow}</p>

@@ -10,8 +10,9 @@ import type { Locale } from "@/content";
  * qui prend toute la place et on écrit par-dessus quelque chose ; ça porte à confusion »):
  * the « From probably / to provably » title, the kicker and the two lead lines are gone.
  * The photo fills the screen; one plain sentence and the pilot button sit over its light
- * side. The note that it is an illustration stays, small, in the corner: we have run no
- * robot yet.
+ * side. The « Image: illustration » note left too (Dom, 2026-11-11: « enlève les écritures
+ * image illustration »). On a phone the photo sits above the sentence, cropped so the
+ * whole arm, hand included, shows (Dom: « on voit pas la main du robot au complet »).
  *
  * FRERES-EXAMINES: drone-fence.tsx (DroneHeroSlide: same photo and image note),
  * one-line-finale.tsx (the screen this replaced).
@@ -20,19 +21,16 @@ import type { Locale } from "@/content";
 type Copy = {
   line: string;
   cta: string;
-  imageNote: string;
 };
 
 const COPY: Record<Locale, Copy> = {
   en: {
     line: "Every action checked before it runs.",
     cta: "START A PILOT",
-    imageNote: "Image: illustration.",
   },
   fr: {
     line: "Chaque action vérifiée avant de s’exécuter.",
     cta: "DÉMARRER UN PILOTE",
-    imageNote: "Image : illustration.",
   },
 };
 
@@ -56,7 +54,6 @@ export function RoboticsFinale({ locale, pilotHref }: { locale: Locale; pilotHre
           </a>
         </div>
       </div>
-      <p className="finale-arm-note">{t.imageNote}</p>
     </section>
   );
 }
