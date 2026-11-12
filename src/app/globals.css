@@ -4143,10 +4143,20 @@ html.lenis, html.lenis body { height: auto; }
   position: absolute; left: 50%; top: 50%;
   width: min(1400px, 160vw); aspect-ratio: 1; transform: translate(-50%, -50%);
   pointer-events: none;
-  /* Edges dissolve into the paper; the centre stays calm under the words. */
-  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, #000 26%, #000 60%, transparent 74%);
-  mask-image: radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, #000 26%, #000 60%, transparent 74%);
+  /* Edges dissolve into the paper. Under the words the rings fade to a ghost, like the clear
+   * field a banknote keeps for its portrait (Dom, 2026-11-11: « l'écriture … un peu fuckall »:
+   * the gold ring ran through the eyebrow, the title and the line under it). */
+  -webkit-mask-image:
+    radial-gradient(ellipse 32% 17% at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 70%, #000 100%),
+    radial-gradient(circle at center, #000 0%, #000 60%, transparent 74%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(ellipse 32% 17% at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 70%, #000 100%),
+    radial-gradient(circle at center, #000 0%, #000 60%, transparent 74%);
+  mask-composite: intersect;
 }
+/* The eyebrow breaks into even lines, never one word alone. */
+.hero-centre .hero-white-eyebrow span { text-wrap: balance; }
 /* Warm light on the paper behind the title, sides a shade darker (« or vivant », Dom 2026-11-11).
  * The bottom fades back to the paper, so the drone slide below meets no seam. */
 .hero-centre::before {
@@ -4162,4 +4172,13 @@ html.lenis, html.lenis body { height: auto; }
   /* The title and its rings fill the first phone screen; the drone slide starts below it,
    * as on a wide screen (Dom, 2026-11-11: « sur le cel le drone doit etre plus bas »). */
   .hero-centre { min-height: calc(100svh - 4.5rem); padding-top: 2.5rem; padding-bottom: 3rem; }
+  /* On a phone the words take more of the rings' width: a wider, taller clear field. */
+  .hero-guilloche {
+    -webkit-mask-image:
+      radial-gradient(ellipse 26% 16% at 50% 48%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 70%, #000 100%),
+      radial-gradient(circle at center, #000 0%, #000 60%, transparent 74%);
+    mask-image:
+      radial-gradient(ellipse 26% 16% at 50% 48%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 70%, #000 100%),
+      radial-gradient(circle at center, #000 0%, #000 60%, transparent 74%);
+  }
 }
