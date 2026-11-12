@@ -10,6 +10,12 @@
  * height map, a light from the top left puts a highlight on it, and a soft
  * shadow lifts it off the paper.
  *
+ * Fourth pass, « or vivant » (Dom, 2026-11-11: « y manque un peu de punch »,
+ * then « ouais go » on option 5): same three rings, darker steel and richer
+ * gold, lines a quarter thicker, stronger light and shadow, a soft gold halo
+ * under the gold ring, and warm light on the paper behind the title
+ * (globals.css, .hero-centre::before). Nothing added to the drawing itself.
+ *
  * One closed curve per ring; the copies are that path rotated, because
  * rotating r = R + a·sin(kθ) by δ equals shifting its phase.
  *
@@ -40,7 +46,7 @@ const RINGS: readonly Ring[] = [
     lobes: 22,
     copies: 22,
     metal: "steel",
-    width: 0.8,
+    width: 1,
   },
   {
     id: "g-mid",
@@ -49,7 +55,7 @@ const RINGS: readonly Ring[] = [
     lobes: 16,
     copies: 20,
     metal: "steel",
-    width: 0.75,
+    width: 0.94,
   },
   {
     id: "g-inner",
@@ -58,11 +64,13 @@ const RINGS: readonly Ring[] = [
     lobes: 12,
     copies: 18,
     metal: "gold",
-    width: 0.75,
+    width: 0.94,
   },
 ];
 
 const STEPS = 720;
+/** Radius of the gold ring, where its halo sits. */
+const GOLD_HALO_RADIUS = 270;
 const HALF = 700;
 
 /** Polar curve r(θ) = R + a·sin(kθ) + (a/3)·cos(3kθ): the second harmonic gives the woven look. */
@@ -120,12 +128,12 @@ function Defs() {
         x2={HALF}
         y2={HALF}
       >
-        <stop offset="0" stopColor="#3f434a" />
-        <stop offset="0.25" stopColor="#6f757e" />
-        <stop offset="0.45" stopColor="#9aa0a8" />
-        <stop offset="0.6" stopColor="#5f656e" />
-        <stop offset="0.8" stopColor="#8a9098" />
-        <stop offset="1" stopColor="#3f434a" />
+        <stop offset="0" stopColor="#23262b" />
+        <stop offset="0.25" stopColor="#4f555d" />
+        <stop offset="0.45" stopColor="#8b929b" />
+        <stop offset="0.6" stopColor="#3a3f46" />
+        <stop offset="0.8" stopColor="#6d737c" />
+        <stop offset="1" stopColor="#23262b" />
       </linearGradient>
       <linearGradient
         id="g-gold"
@@ -135,12 +143,12 @@ function Defs() {
         x2={HALF}
         y2={HALF}
       >
-        <stop offset="0" stopColor="#6a4c16" />
-        <stop offset="0.25" stopColor="#9c772c" />
-        <stop offset="0.45" stopColor="#c9a24f" />
-        <stop offset="0.6" stopColor="#8a6624" />
-        <stop offset="0.8" stopColor="#b58e3e" />
-        <stop offset="1" stopColor="#6a4c16" />
+        <stop offset="0" stopColor="#5a3e0e" />
+        <stop offset="0.25" stopColor="#9a7426" />
+        <stop offset="0.45" stopColor="#e9c46a" />
+        <stop offset="0.6" stopColor="#7d5b1c" />
+        <stop offset="0.8" stopColor="#c39a45" />
+        <stop offset="1" stopColor="#5a3e0e" />
       </linearGradient>
       {/* Struck metal: the band's own shape, blurred, is the height; a light from
        * the top left lights it; a soft shadow below lifts it off the paper. */}
@@ -155,9 +163,9 @@ function Defs() {
         <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="height" />
         <feSpecularLighting
           in="height"
-          surfaceScale="5"
-          specularConstant="1.1"
-          specularExponent="18"
+          surfaceScale="9"
+          specularConstant="1.5"
+          specularExponent="22"
           lightingColor="#ffffff"
           result="shine"
         >
@@ -175,18 +183,22 @@ function Defs() {
           operator="arithmetic"
           k1="0"
           k2="1"
-          k3="0.85"
+          k3="1.15"
           k4="0"
           result="lit"
         />
-        <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="soft" />
-        <feOffset in="soft" dx="0" dy="9" result="drop" />
-        <feFlood floodColor="#24262a" floodOpacity="0.22" />
+        <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="soft" />
+        <feOffset in="soft" dx="0" dy="12" result="drop" />
+        <feFlood floodColor="#24262a" floodOpacity="0.32" />
         <feComposite in2="drop" operator="in" result="shadow" />
         <feMerge>
           <feMergeNode in="shadow" />
           <feMergeNode in="lit" />
         </feMerge>
+      </filter>
+      {/* The gold halo: a wide gold band, blurred, under the gold ring. */}
+      <filter id="g-bloom" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="14" />
       </filter>
     </defs>
   );
@@ -200,6 +212,14 @@ export function HeroGuilloche() {
         className="hero-guilloche-layer"
       >
         <Defs />
+        <circle
+          r={GOLD_HALO_RADIUS}
+          fill="none"
+          stroke="#d9b25a"
+          strokeWidth="60"
+          opacity="0.35"
+          filter="url(#g-bloom)"
+        />
         {RINGS.map((ring) => (
           <RingCopies key={ring.id} ring={ring} />
         ))}

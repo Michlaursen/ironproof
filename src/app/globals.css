@@ -4079,8 +4079,18 @@ html.lenis, html.lenis body { height: auto; }
   width: min(1400px, 160vw); aspect-ratio: 1; transform: translate(-50%, -50%);
   pointer-events: none;
   /* Edges dissolve into the paper; the centre stays calm under the words. */
-  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.35) 0%, #000 30%, #000 52%, transparent 70%);
-  mask-image: radial-gradient(circle at center, rgba(0,0,0,0.35) 0%, #000 30%, #000 52%, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, #000 26%, #000 60%, transparent 74%);
+  mask-image: radial-gradient(circle at center, rgba(0,0,0,0.55) 0%, #000 26%, #000 60%, transparent 74%);
+}
+/* Warm light on the paper behind the title, sides a shade darker (« or vivant », Dom 2026-11-11).
+ * The bottom fades back to the paper, so the drone slide below meets no seam. */
+.hero-centre::before {
+  content: ""; position: absolute; inset: 0 -50vw; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 42% 60% at 50% 48%, rgba(251, 249, 244, 0.95) 0%, rgba(240, 237, 232, 0.5) 45%, rgba(240, 237, 232, 0) 70%),
+    radial-gradient(ellipse 75% 95% at 50% 48%, rgba(36, 38, 42, 0) 55%, rgba(36, 38, 42, 0.09) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
 }
 .hero-guilloche-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
 @media (max-width: 767px) {
